@@ -1,0 +1,67 @@
+{yun:}include file="$wapstyle/header_cont.htm"{/yun} 
+<section>
+  <div class="searchOptions clearfix">
+    <ul class="searchOptions_list">
+      <li class="grade popup" data-pop="grade"><a href="javascript:void(0);" class="searchOptions_list_a"><span class="job_ov">{yun:}if $city_name[$smarty.get.cityid] || $city_name[$smarty.get.provinceid]{/yun}{yun:}$city_name[$smarty.get.cityid]{/yun}{yun:}$city_name[$smarty.get.provinceid]{/yun}{yun:}elseif $city_name[$smarty.get.three_cityid]{/yun}{yun:}$city_name[$smarty.get.three_cityid]{/yun}{yun:}elseif $config.cityid&&$config.sy_web_site=='1'{/yun}{yun:}$city_name[$config.cityid]{/yun}{yun:}else{/yun}区域{yun:}/if{/yun}</span><i class="searchOptions_icon"></i></a></li>
+      <li class="Sorthy popup" data-pop="Sorthy"><a href="javascript:void(0);" class="searchOptions_list_a"><span class="job_ov">{yun:}if $industry_name[$smarty.get.hy]{/yun}{yun:}$industry_name[$smarty.get.hy]|mb_substr:0:6:'gbk'{/yun}{yun:}else{/yun}行业{yun:}/if{/yun}</span><i class="searchOptions_icon"></i></a></li>
+      <li class="Sortpr popup" data-pop="Sortpr"><a href="javascript:void(0);" class="searchOptions_list_a"><span class="job_ov">{yun:}if $comclass_name[$smarty.get.pr]{/yun}{yun:}$comclass_name[$smarty.get.pr]{/yun}{yun:}else{/yun}性质{yun:}/if{/yun}</span><i class="searchOptions_icon"></i></a></li>
+      <li class="Sortmun popup" data-pop="Sortmun" style="border-right:none;"><a href="javascript:void(0);" class="searchOptions_list_a"><span class="job_ov">{yun:}if $comclass_name[$smarty.get.mun]{/yun}{yun:}$comclass_name[$smarty.get.mun]{/yun}{yun:}else{/yun}规模{yun:}/if{/yun}</span><i class="searchOptions_icon"></i></a></li>
+      <input type="hidden" id="searchurl" value="{yun:}$searchurl{/yun}" />
+      <input type="hidden" id="waptype" value="1" />
+    </ul>    
+  </div>
+</section>
+ <div class="clear"></div>
+<div class="warp_content clear">
+  <section>
+    <div class="job_list_content">
+    {yun:}comlist ispage=1 isjob=1 firm=1  hy='auto.hy' pr='auto.pr' mun='auto.mun' provinceid='auto.provinceid' cityid='auto.cityid' three_cityid='auto.three_cityid' keyword='auto.keyword' rec='auto.rec' order=lastupdate limit=20 item=list key=key{/yun} 
+      <div class="com_list_box"> 
+      <a href="{yun:}url m=wap c=company a=show id=$list.uid{/yun}" class="job_list">
+      <div class="com_list_t_box">
+      <div class="com_list_logo_box"><img src="{yun:}if $list.logo{/yun}{yun:}$list.logo{/yun}{yun:}else{/yun}{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_unit_icon{/yun}{yun:}/if{/yun}"  onerror="if($(this).attr('load')!='1'){$(this).attr('load',1);this.src='{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_unit_icon{/yun}';}"></div>
+      <div class="com_list_box_c">
+        <h3>{yun:}$list.name|mb_substr:0:17:'gbk'{/yun}               
+          {yun:}if $list.ratlogo!=""{/yun}<img src="{yun:}$config.sy_weburl{/yun}/{yun:}$list.ratlogo{/yun}"/> {yun:}/if{/yun} 
+			{yun:}if $list.rec{/yun}<img src="{yun:}$style{/yun}/images/firm_icon.png">{yun:}/if{/yun}		  
+          {yun:}if $list.yyzz_status=='1'{/yun}<i class="job_qy_rz_icon"></i>{yun:}/if{/yun} </h3>
+        </div>
+        <div class="com_list_box_js">
+        <span class="com_list_box_js_s com_list_box_js_s_hy"><i class="com_list_box_js_icon com_list_box_js_icon_hy"></i>{yun:}$list.job_hy{/yun}</span> 
+        <span class="com_list_box_js_s"><i class="com_list_box_js_icon com_list_box_js_icon_map"></i>{yun:}$list.job_city_one{/yun}-{yun:}$list.job_city_two{/yun}</span>
+      </div>
+        </div>
+            </a> 
+        <div class="com_list_box_joblist">
+        {yun:}foreach from=$list.joblist item=one key=key{/yun}{yun:}if $key<3{/yun}{yun:}if $key>0{/yun}
+        {yun:}/if{/yun}<a href="{yun:}url m=wap c=job a=view id=$one.id{/yun}" class="com_list_box_joblist_a">{yun:}$one.name{/yun}</a>
+        {yun:}/if{/yun}
+        {yun:}/foreach{/yun}
+        <span class="com_list_box_jobzs">共<em class="com_list_box_jobncor">{yun:}$list.joblist|@count{/yun}</em>个职位</span>
+        </div>
+    
+        </div>
+      {yun:}/comlist{/yun} 
+      </div>
+  </section>
+  {yun:}if $total<=0{/yun}
+  {yun:}if $smarty.get.keyword!="" {/yun}
+  <div class="wap_member_no">没有搜索到企业<div><a class="wap_mb_no_sr" href="{yun:}url m=wap c='company'{/yun}">重新搜索</a></div></div>
+  {yun:}else{/yun}
+  <div class="wap_member_no">暂无企业<div><a class="wap_mb_no_sr" href="{yun:}url m=wap c='company'{/yun}">重新搜索</a></div></div>
+  {yun:}/if{/yun}
+  {yun:}else{/yun}
+  <div class="pages">{yun:}$pagenav{/yun}</div>
+  {yun:}/if{/yun}
+  <div> </div>
+</div>
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/layer/layer.m.js" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/public.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/app/template/wap/js/search.js" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/prefixfree.min.js" language="javascript"></script>
+<link rel="stylesheet" href="{yun:}$config.sy_weburl{/yun}/app/template/wap/css/wap_tck.css" type="text/css">
+<script src="{yun:}$config.sy_weburl{/yun}/app/template/wap/js/demo.js" language="javascript"></script> 
+<link rel="stylesheet" href="{yun:}$config.sy_weburl{/yun}/app/template/wap/css/demo.css" type="text/css">
+{yun:}include file="$wapstyle/publictwo.htm"{/yun}
+{yun:}include file="$wapstyle/footer.htm"{/yun}

@@ -1,0 +1,25 @@
+@charset "gb2312";
+/* CSS Document */
+body {font-size:12px;background:#fff;color:#555;}
+ul {list-style-type:none;}
+a {text-decoration:none;color:#333;}
+a:hover {color:#f60;text-decoration:underline;}
+.clear {clear:both}
+img{border:none;}
+em{ font-style:normal}
+*{margin:0; padding:0;}
+.fl{ float:left;}
+.fr{ float:right;}
+.index_w1000{ width:1000px; margin:0 auto; font-family:Î¢ÈíÑÅºÚ;}
+/*404Ò³Ãæ*/
+.error_box{ position:relative;}
+.error_img{ position: absolute; left:0; top:50px;}
+.error_text{position: absolute; left:340px; top:250px; width:440px;}
+.error_text h3{ width:100%; font-weight:normal; font-size:24px; color:#555; line-height:50px;}
+.error_h{ width:100%; float:left; font-size:14px; color:#999;}
+.error_bth{ height:42px; line-height:42px; background:#ff7300; color:#fff; border:none;font-family:Î¢ÈíÑÅºÚ; text-align:center; padding:0 22px; font-size:14px; margin:36px 20px 0 0;}
+
+
+
+
+

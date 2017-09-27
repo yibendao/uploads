@@ -1,0 +1,236 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link href="images/reset.css" rel="stylesheet" type="text/css" />
+<link href="images/system.css" rel="stylesheet" type="text/css" />
+<link href="images/table_form.css" rel="stylesheet" type="text/css" />
+<script> var weburl = '{yun:}$config.sy_weburl{/yun}';</script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js"></script>
+<script charset="utf-8" src="../js/kindeditor/kindeditor-min.js"></script>
+<script charset="utf-8" src="../js/kindeditor/lang/zh_CN.js"></script>
+<link rel="stylesheet" href="../js/kindeditor/themes/default/default.css" />
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script>
+<script src="js/admin_public.js" language="javascript"></script>
+<link href="images/blue.css" rel="stylesheet">
+<script src="js/icheck.js"></script>
+  <script>
+	$(document).ready(function(){
+	  $('input').iCheck({
+		checkboxClass: 'icheckbox_flat-blue',
+		radioClass: 'iradio_flat-blue'
+	  });
+	});
+function checkform(myform){
+	if (myform.title.value=="")  { 
+	  parent.layer.msg('请填写专题名称！', 2,8);return false;
+	}
+	if (myform.tpl.value=="")  { 
+	  parent.layer.msg('请选择专题模板！', 2,8);return false;
+	}
+	if (myform.pic.value=="")  { 
+	  parent.layer.msg('请选择缩略图！', 2,8);return false;
+	}
+	if (myform.background.value=="")  { 
+	  parent.layer.msg('请选择背景图！', 2,8);return false;
+	}
+	var html = editors.text();
+	if($.trim(html)==""){
+		layer.msg("请输入专题介绍！",2,8);return false;
+	}
+}
+KindEditor.ready(function(K) {
+	var editor = K.editor({
+		allowFileManager : false
+	});
+	K.create('#intro', {
+		themeType : 'default',
+		items : ['justifyleft', 'justifycenter', 'justifyright','insertorderedlist', 'insertunorderedlist',  'subscript','superscript','title','textcolor', 'bgcolor', 'bold','italic', 'underline', 'strikethrough', 'removeformat']		
+		
+	});
+	K('#insertfile').click(function() {
+		editor.loadPlugin('images', function() {
+			editor.plugin.imageDialog({
+				imageUrl : K('#pic_url').val(),
+				clickFn : function(url, title, width, height, border, align) {
+					K('#pic_url').val(url);
+					K('#news_pic').html(url);
+					editor.hideDialog();
+				}
+			});
+		});
+	});
+	K('#insertbackground').click(function() {
+		editor.loadPlugin('images', function() {
+			editor.plugin.imageDialog({
+				imageUrl : K('#background').val(),
+				clickFn : function(url, title, width, height, border, align) {
+					K('#background').val(url);
+					K('#new_background').html(url);
+					editor.hideDialog();
+				}
+			});
+		});
+	});
+});
+</script>
+<title>后台管理</title>
+</head>
+<body class="body_ifm">
+<div class="infoboxp">
+<div class="infoboxp_top_bg"></div>
+<div class="infoboxp_top">
+<h6>添加专题招聘</h6>
+</div>
+
+<div class="admin_table_border">
+<iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe>
+<form name="myform" target="supportiframe" action="index.php?m=special&c=save" method="post" encType="multipart/form-data"  onSubmit="return checkform(this);">
+	<table width="100%" class="table_form" style="background:#fff;">
+    	<tr >
+			<th width="150">专题名称：</th>
+			<td><input class="input-text" type="text" name="title" size="40" value="{yun:}$row.title{/yun}"/></td>
+		</tr>
+         	<tr class="admin_table_trbg" >
+			<th>企业报名上限：</th>
+			<td><input class="input-text" type="text" name="limit" value="{yun:}$row.limit{/yun}" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" /><span class="admin_web_tip">例：最多可有多少家企业报名</span></td>
+		</tr>
+        <tr >
+			<th>企业等级：</th>
+            {yun:}if is_array($qy_rows){/yun}
+            <td>
+            <div class="iradio_flat_height">
+                {yun:}foreach item=v from=$qy_rows{/yun}
+                <input type="checkbox" name="rating[]" value="{yun:}$v.id{/yun}" id="rating_{yun:}$v.id{/yun}" {yun:}if in_array($v.id,$row.rating){/yun}checked{yun:}/if{/yun}>
+                 <span class="iradio_flat_left"><label for="rating_{yun:}$v.id{/yun}">{yun:}$v.name{/yun}</label>&nbsp;&nbsp;</span>
+                {yun:}/foreach{/yun}
+                </div>
+            </td>
+            {yun:}else{/yun}
+              <td>
+                暂无等级，<a href="index.php?m=userconfig&c=comclass" style="color:red;">添加会员等级</a>
+                <input type="hidden" name="rating" value="0">
+                </td>
+            {yun:}/if{/yun}
+		</tr>
+        <tr class="admin_table_trbg">
+			<th>专题模板：</th>
+			<td>
+           
+            
+            
+ 			<div class="yun_admin_select_box zindex100">
+            {yun:}if $row.tpl{/yun}
+                {yun:}foreach from = $file key=key item=ratlist{/yun}
+                    {yun:}if $ratlist==$row.tpl{/yun}
+                    <input type="button" value="{yun:}$ratlist{/yun}" class="yun_admin_select_box_text" id="tpl_name" onClick="select_click('tpl');">
+                    <input name="tpl" type="hidden" id="tpl_val" value="{yun:}$ratlist{/yun}">
+                    {yun:}/if{/yun}
+                {yun:}/foreach{/yun}
+            {yun:}else{/yun}
+                <input type="button" value="请选择" class="yun_admin_select_box_text" id="tpl_name" onClick="select_click('tpl');">
+                <input name="tpl" type="hidden" id="tpl_val" value="">
+            {yun:}/if{/yun}
+            
+            <div class="yun_admin_select_box_list_box dn" id="tpl_select">     
+                {yun:}foreach from = $file key=key item=ratlist{/yun}
+                <div class="yun_admin_select_box_list">
+                    <a href="javascript:;" onClick="select_new('tpl','{yun:}$ratlist{/yun}','{yun:}$ratlist{/yun}')">{yun:}$ratlist{/yun}</a>
+                </div>                    
+                {yun:}/foreach{/yun}
+            </div>
+        </div>
+            </td>
+		</tr>
+        <tr >
+			<th>是否启用：</th>
+			<td>
+            <div class="iradio_flat_height">
+                <input type="radio" name="display" value="1" id="display_1" {yun:}if $row.display=="1"||$row.display==""{/yun}checked{yun:}/if{/yun}>
+                <span class="iradio_flat_left"><label for="display_1">开启</label>&nbsp;&nbsp;</span>
+                <input type="radio" name="display" value="0" id="display_0" {yun:}if $row.display=="0"{/yun}checked{yun:}/if{/yun}>
+                <span class="iradio_flat_left"><label for="display_0">关闭</label>&nbsp;&nbsp;</span>
+                 </div>
+            </td>
+		</tr>
+        <tr class="admin_table_trbg">
+			<th>允许企业报名：</th>
+			<td>
+            <div class="iradio_flat_height">
+             <input type="radio" name="com_bm" value="1" id="com_bm_1" {yun:}if $row.com_bm=="1"||$row.com_bm==""{/yun}checked{yun:}/if{/yun}>
+          <span class="iradio_flat_left"><label for="com_bm_1">开启</label>&nbsp;&nbsp;</span>
+          <input type="radio" name="com_bm" value="0" id="com_bm_0" {yun:}if $row.com_bm=="0"{/yun}checked{yun:}/if{/yun}>
+          <span class="iradio_flat_left"><label for="com_bm_0">关闭</label>&nbsp;&nbsp;</span>
+          </div>
+          
+            </td>
+		</tr>
+        <tr >
+			<th>扣除{yun:}$config.integral_pricename{/yun}：</th>
+			<td>
+             <input class="input-text" type="text" id="php_url" name="integral"  value="{yun:}$row.integral{/yun}" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')"/>
+            </td>
+		</tr>
+        	<tr  class="admin_table_trbg">
+		<th width="120">报名结束时间：</th>
+		<td>
+		<link rel="stylesheet" href="{yun:}$config.sy_weburl{/yun}/js/datepicker/css/font-awesome.min.css" type="text/css">  
+		<script src="{yun:}$config.sy_weburl{/yun}/js/datepicker/foundation-datepicker.min.js"></script> 
+        <input id="etime" class="input-text" type="text" readonly size="20" value="{yun:}$row.etime|date_format:'%Y-%m-%d'{/yun}" name="etime">
+        <script type="text/javascript">
+		$('#etime').fdatepicker({format: 'yyyy-mm-dd',startView:4,minView:2}); 
+        </script>
+          </td>
+	</tr>
+	<tr class="admin_table_trbg" >
+			<th>排序：</th>
+			<td><input class="input-text" type="text" name="sort" value="{yun:}$row.sort{/yun}"/><span class="admin_web_tip">越小越在前!</span></td>
+		</tr>
+     <tr >
+          <th>缩 略 图：</th>
+          <td>
+		  <input name='pic' id="pic_url" type='hidden'/>
+			<input name='ypic' type='hidden' value='{yun:}$row.pic{/yun}'/>
+		  <span id='news_pic'><input type="button" id="insertfile" value="选择图片" /></span></td>
+        </tr>
+	{yun:}if $row.pic{/yun}
+		<tr class="admin_table_trbg">
+          <th>缩略图预览：</th>
+          <td><img src="{yun:}$row.pic{/yun}" style="width:420px;height:155px;"></td>
+        </tr>
+	{yun:}/if{/yun}
+		<tr >
+          <th>背 景 图：</th>
+          <td>
+		  <input name='background' id="background" type='hidden'/>
+			<input name='ybackground' type='hidden' value='{yun:}$row.background{/yun}'/>
+		  <span id='new_background'><input type="button" id="insertbackground" value="选择图片" /></span></td>
+        </tr>
+	{yun:}if $row.background{/yun}
+		<tr class="admin_table_trbg">
+          <th>背景图预览：</th>
+          <td><img src="{yun:}$row.background{/yun}" style="max-height:288px;max-width:288px;"></td>
+        </tr>
+	{yun:}/if{/yun}
+		<tr class="admin_table_trbg">
+		  <th>专题介绍：</th>
+		  <td><textarea id="intro" class="text tips_class" cols="80" rows="3" name="intro">{yun:}$row.intro{/yun}</textarea></td>
+		</tr> 
+		<tr >
+			<td align="center" colspan="2">
+            <input type="hidden" name="pytoken" value="{yun:}$pytoken{/yun}">
+			{yun:}if is_array($row){/yun}
+        	<input type="hidden" name="id" size="40" value="{yun:}$row.id{/yun}"/>
+        	<input class="admin_submit4" type="submit" name="save" value="&nbsp;更 新&nbsp;"  />
+        	{yun:}else{/yun}
+    		<input class="admin_submit4" type="submit" name="save" value="&nbsp;添 加&nbsp;"  />
+     		{yun:}/if{/yun}
+     		<input class="admin_submit4" type="reset" name="reset" value="&nbsp;重 置 &nbsp;" />
+			</td>
+		</tr>
+	</table>
+</form>
+</div>
+</div>
+</body>
+</html>

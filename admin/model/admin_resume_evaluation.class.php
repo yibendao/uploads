@@ -1,0 +1,95 @@
+<?php
+/*
+* $Author Â£ÂºPHPYUNÂ¿ÂªÂ·Â¢ÃÃ…Â¶Ã“
+*
+* Â¹Ã™ÃÃ¸: http://www.phpyun.com
+*
+* Â°Ã¦ÃˆÂ¨Ã‹Ã¹Ã“Ã 2009-2017 Ã‹ÃžÃ‡Â¨Ã¶ÃŽÂ³Â±ÃÃ…ÃÂ¢Â¼Â¼ÃŠÃµÃ“ÃÃÃžÂ¹Â«Ã‹Â¾Â£Â¬Â²Â¢Â±Â£ÃÃ´Ã‹Ã¹Ã“ÃÃˆÂ¨Ã€Ã»Â¡Â£
+*
+* ÃˆÃ­Â¼Ã¾Ã‰Ã¹ÃƒÃ·Â£ÂºÃŽÂ´Â¾Â­ÃŠÃšÃˆÂ¨Ã‡Â°ÃŒÃ¡ÃÃ‚Â£Â¬Â²Â»ÂµÃƒÃ“ÃƒÃ“ÃšÃ‰ÃŒÃ’ÂµÃ”Ã‹Ã“ÂªÂ¡Â¢Â¶Ã¾Â´ÃŽÂ¿ÂªÂ·Â¢Ã’Ã”Â¼Â°ÃˆÃŽÂºÃŽÃÃŽÃŠÂ½ÂµÃ„Ã”Ã™Â´ÃŽÂ·Â¢Â²Â¼Â¡Â£
+ */
+class admin_resume_evaluation_controller extends common{
+
+	function set_search(){
+
+		$lo_time=array('1'=>'½ñÌì','3'=>'×î½üÈýÌì','7'=>'×î½üÆßÌì','15'=>'×î½ü°ëÔÂ','30'=>'×î½üÒ»¸öÔÂ');
+		$search_list[]=array("param"=>"time","name"=>'ÆÀÂÛÊ±¼ä',"value"=>$lo_time);
+		$f_time=array('1'=>'³õ¼¶','2'=>'ÖÐ¼¶','3'=>'¸ß¼¶');
+		$search_list[]=array("param"=>"grade","name"=>'ÆÀ¼ÛµÈ¼¶',"value"=>$f_time);
+		$this->yunset("search_list",$search_list);
+	}
+	function index_action()
+	{
+		$this->set_search();
+
+		$selectSql = 'select a.id,a.com_name,a.grade,a.score,a.created_at,a.content,b.username as uname,c.name as resume_name,d.username as by_username ';
+		$countSql = 'select count(a.id) as num';
+		$from = ' from '.$this->def.'resume_evalution a,';
+		$from .= $this->def.'member b,';
+		$from .= $this->def.'resume_expect c,';
+		$from .= $this->def.'member d ';
+
+		$where=' where a.uid=b.uid and a.by_uid=d.uid and c.id=a.resume_id ';
+		if($_GET['time']){
+			if($_GET['time']=='1'){
+				$where.=" and a.`created_at` >= '".strtotime(date("Y-m-d 00:00:00"))."'";
+			}else{
+				$where.=" and a.`created_at` >= '".strtotime('-'.(int)$_GET['time'].'day')."'";
+			}
+			$urlarr['time']=$_GET['time'];
+		}
+		if($_GET['grade']){
+			$where.=" and a.`grade` = ".$_GET['grade'];
+			$urlarr['grade']=$_GET['grade'];
+		}
+	
+		if($_GET['order'])
+		{
+			$order=$_GET['order'];
+		}else{
+			$order="desc";
+		}
+
+		$page_url['order']=$_GET['order'];
+		$page_url['page']="{{page}}";
+		$pageurl=Url($_GET['m'],$page_url,'admin');
+
+		$selectSql .= $from .' '.$where . ' order by a.id '.$order; 
+		$countSql .= $from .' '.$where; 
+
+        $M=$this->MODEL();
+		$mes_list = $M->get_page_by_sql($selectSql,$countSql,$pageurl);
+	
+		$this->yunset($mes_list);
+		$this->yunset("get_type", $_GET);
+		$this->yuntpl(array('admin/admin_resume_evalution'));
+	}
+
+	function del_action(){
+		$this->check_token();
+	    if($_GET['del']){
+	    	$del=$_GET['del'];
+	    	if($del){
+	    		if(is_array($del)){
+			    	foreach($del as $v){
+			    	   $this->del_member($v);
+			    	}
+					$layer_type='1';
+					$del=implode(",",$del);
+		    	}else{
+		    		 $this->del_member($del);
+					 $layer_type='0';
+		    	}
+				$this->layer_msg("¼òÀúÆÀ¼Û(ID:".$del.")É¾³ý³É¹¦£¡",9,$layer_type,$_SERVER['HTTP_REFERER'],2,1);
+	    	}else{
+				$this->layer_msg("ÇëÑ¡ÔñÄúÒªÉ¾³ýµÄÐÅÏ¢£¡",8,1,$_SERVER['HTTP_REFERER']);
+	    	}
+	    }
+	}
+	function del_member($id)
+	{
+		return $this->obj->DB_delete_all("resume_evalution","`id`='".$id."'" );
+	}
+
+}
+?>

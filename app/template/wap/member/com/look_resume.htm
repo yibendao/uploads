@@ -1,0 +1,66 @@
+{yun:}include file="$wapstyle/member/cheader.htm"{/yun} 
+<section class="wap_member">
+<div class="wap_member_comp_h1"><span>浏览简历</span></div>
+
+{yun:}foreach item=v from=$rows{/yun}
+
+<div class="com_member_hr">
+    <div class="com_member_hr_name"> 
+    <a href="{yun:}url m=wap c=resume a=show id=$v.resume_id{/yun}" class="wap_member_com_name  com_member_hr_cblue">{yun:}$v.name{/yun}</a>
+    </div>
+     <div class="com_member_user_box">
+      <div class="com_member_hr_tj">
+
+	<div class="com_member_hr_p1">
+    <span class="member_c9">年龄：</span>{yun:}if $v.birthday==''{/yun}{yun:}$age-$time{/yun}{yun:}else{/yun}{yun:}$age-$v.birthday{/yun}{yun:}/if{/yun} &nbsp;&nbsp;&nbsp;
+    <span class="member_c9">经验：</span>{yun:}$v.exp{/yun}  &nbsp;&nbsp;&nbsp;
+    <span class="member_c9">学历：</span>{yun:}$v.edu{/yun}
+    <div class="com_member_hr_p1"><span class="member_c9">意向职位：</span>{yun:}$v.jobname{/yun}</div>
+</div>
+</div>
+ <div class="com_member_hr_p1"><span class="member_c9">浏览日期：{yun:}$v.datetime|date_format:'%Y-%m-%d '{/yun}</span></div>
+ 
+ <div class="com_member_hr_cz">
+	<em class="user_size">
+			<a href="javascript:void(0)" onclick="layer_del('确定要删除？','index.php?c=lookresumedel&id={yun:}$v.id{/yun}')"class="yun_member_hr_bth">删除</a>
+		
+	{yun:}if $v.userid_msg==1{/yun}
+		<span class="yun_member_hr_bth yun_member_hr_bth_yq">已邀请</span>
+		{yun:}else{/yun}
+			<a href="index.php?c=yq&uid={yun:}$v.uid{/yun}"  class="yun_member_hr_bth" > 邀请面试</a>
+		{yun:}/if{/yun} 
+	 </em> 
+</div> </div> </div> 
+{yun:}foreachelse{/yun}
+<div class="wap_member_no">
+您暂时还没有浏览过的人才
+<div>
+<a class="wap_member_no_submit" href="{yun:}url m=wap c=resume{/yun}">去搜索人才</a>
+</div>
+</div>
+
+{yun:}/foreach{/yun}
+
+ <script language="javascript" type="text/javascript">
+function talent_pool(uid,eid)
+{
+	$.post(wapurl+"?c=ajax&a=talent_pool",{eid:eid,uid:uid},function(data){
+		if(data=='0'){
+			layermsg('只有企业用户，才可以操作！');
+		}else if(data=='1'){
+			layermsg('加入成功！');
+		}else if(data=='2'){
+			layermsg('该简历已加入到人才库！');
+		}else{
+			layermsg('对不起，操作出错！');
+		}
+	});
+}
+
+</script>
+
+</div>
+
+</section>
+<div class="pages"> {yun:}$pagenav{/yun}</div>
+{yun:}include file="$wapstyle/footer.htm"{/yun} 

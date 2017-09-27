@@ -1,0 +1,120 @@
+
+<div id="wname"  style="display:none; "> 
+	<div class="job_box_div">  
+	   <div class="job_box_inp">
+		        <table cellspacing='1' cellpadding='1' class="admin_examine_table">
+		<tr >
+        <th  width="100">类别选择：</th>
+          <td>
+           <div class="admin_examine_right">
+           <label><span class="add_class_s"><input name='ctype' type='radio' value='1' checked='checked'> 一级分类</span></label>
+           <label><span class="add_class_s"><input name='ctype' type='radio' value='2'> 二级分类</span></label>
+           </div>
+           </td></tr>
+			<tr class='sclass'  style="display:none;">
+            <th>父类：</th>
+            <td>
+                                
+             <div class="yun_admin_select_box zindex100"> {yun:}if $row.nid{/yun}
+                {yun:}foreach item=v from=$position{/yun}
+                  {yun:}if $v.id==$v{/yun}
+                  <input type="button" value="{yun:}$v.name{/yun}" class="yun_admin_select_box_text" id="nid_name" onClick="select_click('nid');">
+                  <input name="nid" type="hidden" id="nid_val" value="{yun:}$v.id{/yun}">
+
+                  {yun:}/if{/yun}
+                  {yun:}/foreach{/yun}
+                  {yun:}else{/yun}
+                  <input type="button" value="请选择" class="yun_admin_select_box_text" id="nid_name" onClick="select_click('nid');">
+                  <input name="nid" type="hidden" id="nid_val" value="0">
+
+                  {yun:}/if{/yun}
+                  <div class="yun_admin_select_box_list_box dn" id="nid_select">{yun:}foreach item=v from=$position{/yun}
+                    <div class="yun_admin_select_box_list"> <a href="javascript:;" onClick="select_new('nid','{yun:}$v.id{/yun}','{yun:}$v.name{/yun}')">{yun:}$v.name{/yun}</a> </div>
+                    {yun:}/foreach{/yun} </div>
+                </div>                                   
+                        </td></tr>
+			<tr><th>类别名称：</th><td><textarea  id='position' class="add_class_textarea" ></textarea>	</td></tr>
+			<tr class='variable'><th>调用变量名：</th><td><textarea id='variable' class="add_class_textarea" ></textarea></td></tr> 
+			<tr><td colspan='2' align="center"><div class="add_class_div"><span class="admin_web_tip">说明：可以添加多条分类（请按回车Enter键换行，一行一个)</span></div></td></tr>
+			<tr><td colspan='2'  align="center"><input class="admin_examine_bth" type="button" value="添加 " onclick="save_class()"/></td></tr>
+		</table> 
+	   </div>
+	</div>
+</div> 
+
+<div id="bname"  style="display:none;"> 
+	<div  class="job_box_div">  
+	   <div class="job_box_inp">
+	  <table cellspacing='1' cellpadding='1' class="admin_examine_table">
+			<tr >  
+            <th width="100">类别选择：</th>
+            <td >
+             <div class="admin_examine_right">
+             <label><span class="add_class_s"><input name='btype' type='radio' value='1' checked='checked'>一级类别</span></label>
+             <label><span class="add_class_s"><input name='btype' type='radio' value='2'>二级类别</span></label>
+             </div>
+            </td>
+            </tr>
+		    <tr class='sclass_2 sclass_3  sclass'  style="display:none;">
+            <th>一级分类：</th>
+            <td>
+                           
+             <div class="yun_admin_select_box zindex100"> {yun:}if $row.keyid{/yun}
+                {yun:}foreach item=one from=$position{/yun}
+                  {yun:}if $one.id==$v{/yun}
+                  <input type="button" value="{yun:}$one.name{/yun}" class="yun_admin_select_box_text" id="keyid_name" onClick="select_click('keyid');">
+                  <input name="keyid" type="hidden" id="keyid_val" value="{yun:}$one.id{/yun}">
+                 
+                  {yun:}/if{/yun}
+                  {yun:}/foreach{/yun}
+                  {yun:}else{/yun}
+                  <input type="button" value="请选择" class="yun_admin_select_box_text" id="keyid_name" onClick="select_click('keyid');">
+                  <input name="keyid" type="hidden" id="keyid_val" value="0">
+                 
+                  {yun:}/if{/yun}
+                  <div class="yun_admin_select_box_list_box dn" id="keyid_select">{yun:}foreach item=one from=$position{/yun}
+                    <div class="yun_admin_select_box_list"> <a href="javascript:;" onClick="select_new('keyid','{yun:}$one.id{/yun}','{yun:}$one.name{/yun}')">{yun:}$one.name{/yun}</a> </div>
+                    {yun:}/foreach{/yun} </div>
+                </div>            
+            </td></tr>		
+			<tr><th>类别名称：</th><td><textarea  id='classname' class="add_class_textarea"></textarea></td></tr>
+ 			<tr><td colspan='2' align="center"><div class="add_class_div"><span class="admin_web_tip">说明：可以添加多条分类（请按回车键换行，一行一个）</span></div></td></tr>
+ 			<tr><td colspan='2' align="center"class='ui_content_wrap'><input class="admin_examine_bth" type="button" value="添加 " onClick="save_bclass()"/></td></tr> 
+		</table> 
+	   </div>
+	</div>
+</div> 
+
+<script type="text/javascript"> 
+$(document).ready(function(){
+	$(".imghide").hover(function(){
+		$(this).find('.class_xg').show();
+	},function(){
+		$(this).find('.class_xg').hide();
+	});
+	$("input[name='ctype']").click(function(){
+		var val=$(this).val();
+		if(val=='1'){
+			$(".variable").show();
+			$(".sclass").hide();
+		}else if(val=='2'){
+			$(".variable").hide();
+			$(".sclass").show();
+		}
+	});
+	$("input[name='btype']").click(function(){
+		var val=$(this).val();  
+		$(".sclass").hide(); 
+		$(".sclass_"+val).show(); 
+	});
+	
+})
+
+$(document).ready(function () {
+    $('body').click(function (evt) {	    
+		 if($(evt.target).parents("#keyid_name").length==0 && evt.target.id != "keyid_name") {
+	       $('#keyid_select').hide();
+	    }
+	});
+})
+</script>

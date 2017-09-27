@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script>
+<script src="js/admin_public.js" language="javascript"></script>
+<link href="images/reset.css" rel="stylesheet" type="text/css" />
+<link href="images/system.css" rel="stylesheet" type="text/css" />
+<link href="images/table_form.css" rel="stylesheet" type="text/css" />
+<title>后台管理</title>
+</head>
+<body class="body_ifm">
+<div class="infoboxp">
+<div class="infoboxp_top_bg"></div>
+<div class="infoboxp_top">
+<span class="admin_title_span">专题招聘管理</span>
+    <a href="index.php?m=special&c=add" class="admin_infoboxp_tj"> 添加专题招聘</a>
+</div>
+
+<div class="table-list">
+  <div class="admin_table_border">
+    <iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe>
+    <form action="index.php" name="myform" method="get" id='myform' target="supportiframe">
+            <input name="m" value="special" type="hidden"/>
+        <input name="c" value="del" type="hidden"/>
+    <input type="hidden" name="pytoken" id='pytoken' value="{yun:}$pytoken{/yun}">
+      <table width="100%">
+        <thead>
+          <tr class="admin_table_top">
+            <th style="width:20px;"><label for="chkall"><input type="checkbox" id='chkAll' onclick='CheckAll(this.form)' /></label></th>
+            <th>编号</th>
+            <th align="left">专题名称</th>
+            <th align="left">企业数量</th>
+            <th align="left">模板</th> 
+            <th>状态</th>
+            <th>排序</th>
+            <th>待审核企业数/企业总数</th>
+            <th class="admin_table_th_bg">操作</th>
+          </tr>
+        </thead>
+        <tbody>
+        
+        {yun:}foreach item=v key=key from=$rows{/yun}
+        <tr align="center"{yun:}if ($key+1)%2=='0'{/yun}class="admin_com_td_bg"{yun:}/if{/yun} id="list{yun:}$v.id{/yun}">
+          <td><input type="checkbox" value="{yun:}$v.id{/yun}" name='del[]' onclick='unselectall()' rel="del_chk" /></td>
+          <td><span>{yun:}$v.id{/yun}</span></td>
+          <td align="left">{yun:}$v.title{/yun}</td>
+          <td align="left">{yun:}$v.limit{/yun}</td>
+          <td align="left">{yun:}$v.tpl{/yun}</td> 
+          <td>
+            {yun:}if $v.display eq 1{/yun}<font color="red">开启</font>{yun:}else{/yun}<font color="blue">关闭</font>{yun:}/if{/yun}
+            </td>
+		<td>{yun:}$v.sort{/yun}</td> 
+        <td>{yun:}$v.booking{/yun}/{yun:}$v.comnum{/yun}</td> 
+        <td>
+		<a href="index.php?m=special&c=com&id={yun:}$v.id{/yun}"class="admin_cz_bj">查看企业</a> |
+        <a href="index.php?m=special&c=add&id={yun:}$v.id{/yun}"class="admin_cz_bj">编辑</a> |
+        <a href="javascript:void(0)" onClick="layer_del('确定要删除？', 'index.php?m=special&c=del&id={yun:}$v.id{/yun}');"class="admin_cz_sc"> 删除</a></td>
+         
+        </tr>
+        {yun:}/foreach{/yun}
+        <tr style="background:#f1f1f1;">
+            <td  align="center"><input type="checkbox" id='chkAll2' onclick='CheckAll2(this.form)' /></td>
+            <td  >
+            <label for="chkAll2">全选</label>&nbsp;
+          <input class="admin_submit4"  type="button" name="delsub" value="删除所选"  onclick="return really('del[]')"/></td>
+		  <td colspan="7" class="digg">{yun:}$pagenav{/yun}</td>
+        </tr>
+          </tbody>
+        
+      </table>
+    </form>
+  </div>
+</div>
+</body>
+</html>

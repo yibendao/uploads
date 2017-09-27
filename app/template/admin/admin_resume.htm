@@ -1,0 +1,278 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script>
+<script src="js/admin_public.js" language="javascript"></script>
+<script>
+function Refreshs(){
+	var codewebarr="";
+	$(".check_all:checked").each(function(){ 
+		if(codewebarr==""){codewebarr=$(this).val();}else{codewebarr=codewebarr+","+$(this).val();}
+	});
+	if(codewebarr==""){
+		parent.layer.msg("请选择要刷新的简历！",2,8);return false;
+	}else{
+		$.post("index.php?m=admin_resume&c=refreshs",{ids:codewebarr,pytoken:$('#pytoken').val()},function(data){
+			parent.layer.msg("批量刷新成功！",2,9,function(){window.location.reload();}); 
+		})
+	}
+}
+function Export(){
+	var codewebarr="";
+	$(".check_all:checked").each(function(){ 
+		if(codewebarr==""){codewebarr=$(this).val();}else{codewebarr=codewebarr+","+$(this).val();}
+	}); 
+	if(codewebarr){
+		$("input[name='ids']").val(codewebarr);
+	}
+	add_class('选择导出字段','650','400','#export','');
+}
+function check_xls(){
+	var type="";
+	$(".type:checked").each(function(){ 
+		if(type==""){type=$(this).val();}else{type=type+","+$(this).val();}
+	});
+	if(type==""){
+		layer.msg("请选择导出字段！",2,8);return false;
+	}  
+	setTimeout(function(){$('.myform').submit()},0);
+	layer.closeAll(); 
+}
+function checkdel(type,status){
+	var codewebarr="";
+	$(".check_all:checked").each(function(){ 
+		if(codewebarr==""){codewebarr=$(this).val();}else{codewebarr=codewebarr+","+$(this).val();}
+	});
+	if(codewebarr==""){
+		parent.layer.msg("请选择简历！",2,8);return false;
+	}else if(type=='top'){
+		if(status!='1'){
+			$('input[name=s]').attr('checked','true');
+		} 
+		resumttop(codewebarr,0);
+	}else{ 
+		$.post("index.php?m=admin_resume&c=rec",{ids:codewebarr,pytoken:$('#pytoken').val(),type:type,status:status},function(data){
+			if(data==0){
+				parent.layer.msg("操作出错，请稍后再试！",2,8);
+			}else{
+				parent.layer.msg("设置成功！",2,9,function(){window.location.reload();});
+			}
+		})
+	}
+}
+$(document).ready(function(){
+	$(".job_name_all").hover(function(){
+		var job_name=$(this).attr('v');
+		if($.trim(job_name)!=''){
+			layer.tips(job_name, this, {guide: 1, style: ['background-color:#5EA7DC; color:#fff;top:-7px', '#5EA7DC']}); 
+			$(".xubox_layer").addClass("xubox_tips_border");
+		} 
+	},function(){
+		var job_name=$(this).attr('v'); 
+		if($.trim(job_name)!=''){
+			layer.closeTips();
+		} 
+	}); 
+})
+function resumttop(id,topday,topdate){
+	if(topdate){
+		$(".top").html(topdate);
+		$(".topdiv").show();
+		$("input[name='eid']").val(id);
+		add_class('简历置顶','290','250','#resumttop','');
+	}else{
+		$("input[name='eid']").val(id);
+		add_class('简历置顶','290','250','#resumttop','');
+	}
+}
+</script>
+<link href="images/reset.css" rel="stylesheet" type="text/css" />
+<link href="images/system.css" rel="stylesheet" type="text/css" />
+<link href="images/table_form.css" rel="stylesheet" type="text/css" />
+<title>后台管理</title>
+</head>
+<body class="body_ifm">
+<div id="export" style="display:none;">
+	<div style=" margin-top:10px;">
+    <div>
+      <form action="index.php?m=admin_resume&c=xls" target="supportiframe" method="post" id="formstatus" class="myform">
+      <input type="hidden" name="pytoken" value="{yun:}$pytoken{/yun}">
+      <input type="hidden" name="where" value="{yun:}$where{/yun}">
+      <input type="hidden" name="ids">
+		<div class="admin_resume_dc">
+			<label><span class="admin_resume_dc_s"><input type="checkbox" class="type" name="rtype[]" value="id"> 简历ID</span></label>
+           <label> <span class="admin_resume_dc_s"><input type="checkbox" class="type" name="rtype[]" value="name"> 简历名称</span></label>
+           <label> <span class="admin_resume_dc_s"><input type="checkbox" class="type" name="type[]" value="uid"> 用户UID</span></label>
+           <label> <span class="admin_resume_dc_s"><input type="checkbox" class="type" name="type[]" value="name"> 姓名</span></label>
+           <label> <span class="admin_resume_dc_s"><input type="checkbox" class="type" name="type[]" value="sex"> 性别</span></label>
+           <label> <span class="admin_resume_dc_s"><input type="checkbox" class="type" name="type[]" value="birthday"> 生日</span></label>
+           <label><span class="admin_resume_dc_s"><input type="checkbox" class="type" name="type[]" value="marriage"> 婚姻</span></label>
+           <label> <span class="admin_resume_dc_s"><input type="checkbox" class="type" name="type[]" value="height"> 身高</span></label>
+           <label><span class="admin_resume_dc_s"><input type="checkbox" class="type" name="type[]" value="nationality"> 民族</span></label>
+           <label> <span class="admin_resume_dc_s"><input type="checkbox" class="type" name="type[]" value="weight"> 体重</span></label>
+           <label> <span class="admin_resume_dc_s"><input type="checkbox" class="type" name="type[]" value="idcard"> 身份证</span></label>
+           <label> <span class="admin_resume_dc_s"><input type="checkbox" class="type" name="type[]" value="telphone"> 手机</span></label>
+           <label><span class="admin_resume_dc_s"><input type="checkbox" class="type" name="type[]" value="telhome"> 座机</span></label>
+    		<label><span class="admin_resume_dc_s"><input type="checkbox" class="type" name="type[]" value="email"> 邮件</span></label>
+			<label><span class="admin_resume_dc_s"><input type="checkbox" class="type" name="type[]" value="edu"> 教育程度</span></label>
+          <label><span class="admin_resume_dc_s"><input type="checkbox" class="type" name="type[]" value="homepage"> 个人主页</span></label>
+			<label><span class="admin_resume_dc_s"><input type="checkbox" class="type" name="type[]" value="address"> 详细地址</span></label>
+          <label>  <span class="admin_resume_dc_s"><input type="checkbox" class="type" name="type[]" value="exp"> 工作经验</span></label>
+         <label> <span class="admin_resume_dc_s"><input type="checkbox" class="type" name="type[]" value="domicile"> 户籍</span></label>
+          <label>  <span class="admin_resume_dc_s"><input type="checkbox" class="type" name="type[]" value="living"> 现居住地</span></label>
+		<label>	<span class="admin_resume_dc_s"><input type="checkbox" class="type" name="type[]" value="description"> 个人说明</span></label>
+          <label>     <span class="admin_resume_dc_s"><input type="checkbox" class="type" name="rtype[]" value="hy"> 意向行业</span></label>
+           <label>    <span class="admin_resume_dc_s"><input type="checkbox" class="type" name="rtype[]" value="job_classid"> 意向职位</span></label>
+			<label><span class="admin_resume_dc_s"><input type="checkbox" class="type" name="rtype[]" value="provinceid"> 省</span></label>
+          <label> <span class="admin_resume_dc_s"><input type="checkbox" class="type" name="rtype[]" value="cityid"> 市</span></label>
+          <label> <span class="admin_resume_dc_s"><input type="checkbox" class="type" name="rtype[]" value="three_cityid"> 县</span></label>
+          <label> <span class="admin_resume_dc_s"><input type="checkbox" class="type" name="rtype[]" value="minsalary,maxsalary"> 薪水</span></label>
+		<label>	<span class="admin_resume_dc_s"><input type="checkbox" class="type" name="rtype[]" value="type"> 工作性质</span></label>
+          <label>   <span class="admin_resume_dc_s"><input type="checkbox" class="type" name="rtype[]" value="report"> 到岗时间</span></label>
+          <label> <span class="admin_resume_dc_s"><input type="checkbox" class="type" name="rtype[]" value="lastdate"> 更新时间</span></label>
+         </div>
+         
+         <div class="admin_resume_dc_p" style=" padding:10px 0;"><span class="admin_resume_dc_n">导出数量：</span><input name='limit' type='text' class="admin_resume_dc_ntext"><span class="admin_web_tip admin_resume_dc_tip">数字太大会导致运行缓慢，请慎重填写。</span></div>
+			<div class="admin_resume_dc_sub" style=" padding-top:10px;">
+            <input type="button" onClick="check_xls();"  value='确认' class="admin_resume_dc_bth1">
+          &nbsp;&nbsp;<input type="button" onClick="layer.closeAll();" class="admin_resume_dc_bth2" value='取消'></div>
+      </form>
+    </div>
+  </div>
+</div>
+ <div id="resumttop"  style="display:none; "> 
+ <div class="admin_com_t_box"> 
+      <form action="index.php?m=admin_resume&c=recommend" target="supportiframe" method="post" id="formstatus"> 
+	  <input type="hidden" name="pytoken" value="{yun:}$pytoken{/yun}">
+		
+        <div class=" admin_com_smbox_list_pd">
+          <span class="admin_com_smbox_span">置顶天数：</span>
+   <input class="admin_com_smbox_text"  value="" name="addday" onKeyUp="this.value=this.value.replace(/[^0-9]/g,'')"><span class="admin_com_smbox_list_s">天</span>    </div>
+   <div class="topdiv" style="display:none">
+          <span class="admin_com_smbox_span">当前结束日期：</span> 
+			<span class="admin_com_smbox_list_s top" style="color:#f60"></span>    
+		</div>
+  <div class="admin_com_smbox_qx_box"> 如需取消置顶简历请单击 <input type="checkbox" name="s" value="1"> 点击确认即可</div>
+   
+    <div class="admin_com_smbox_opt admin_com_smbox_opt_mt"><input type="submit" onclick="loadlayer();" value='确认' id='topsubmit' class="admin_examine_bth"><input type="button" onClick="layer.closeAll();"class="admin_examine_bth_qx"  value='取消'></div>
+    
+ 
+		<input name="eid" type="hidden">
+      </form> 
+</div>
+</div>
+<div class="infoboxp"> 
+<div class="infoboxp_top_bg"></div>
+	<form action="index.php" name="myform" method="get"> 
+    <div class="admin_Filter"> 
+	<input name="m" value="admin_resume" type="hidden"/>
+	<input type="hidden" name="salary" value="{yun:}$smarty.get.salary{/yun}"/>
+	<input type="hidden" name="type" value="{yun:}$smarty.get.type{/yun}"/>
+	<input type="hidden" name="report" value="{yun:}$smarty.get.report{/yun}"/>
+	
+		<span class="complay_top_span fl">简历管理</span>
+		<div class="admin_Filter_span">搜索类型：</div>
+      <div class="admin_Filter_text formselect" did='dkeytype'>
+        <input type="button" {yun:}if $get_type.keytype==''||$get_type.keytype=='1'{/yun} value="简历名称"  {yun:}elseif $get_type.keytype=='2'{/yun} value="用户姓名"  {yun:}elseif $get_type.keytype=='3'{/yun} value="EMAIL" {yun:}elseif $get_type.keytype=='4'{/yun} value="手机号" {yun:}/if{/yun} class="admin_Filter_but" id="bkeytype">
+        <input type="hidden" name="keytype" id="keytype" {yun:}if $get_type.keytype==''||$get_type.keytype=='1'{/yun} value="1"  {yun:}elseif $get_type.keytype=='2'{/yun} value="2"  {yun:}/if{/yun}/>
+        <div class="admin_Filter_text_box" style="display:none" id="dkeytype">
+          <ul> 
+            <li><a href="javascript:void(0)" onClick="formselect('1','keytype','简历名称')">简历名称</a></li>
+			<li><a href="javascript:void(0)" onClick="formselect('2','keytype','用户姓名')">用户姓名</a></li>
+          </ul>
+        </div>
+      </div>
+      
+		  <input type="text" placeholder="输入你要搜索的关键字" value="{yun:}$smarty.get.keyword{/yun}" name="keyword" class="admin_Filter_search">
+		  <input type="submit" name="search" value="搜索" class="admin_Filter_bth"> 
+		  <span class='admin_search_div'>
+		  <div class="admin_adv_search"><div class="admin_adv_search_bth">高级搜索</div></div>  
+ 		  </span>
+		  <a href="index.php?m=admin_resume&c=addresume" class="admin_infoboxp_tj" style="margin-right:5px;"> 添加简历</a>  
+	  </div> 
+	 </form>
+	{yun:}include file="admin/admin_search.htm"{/yun}  
+
+
+  <div class="table-list">
+    <div class="admin_table_border">
+    
+      <iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe>
+      <form action="index.php" target="supportiframe" name="myform" method="get" id='myform'>
+        <input name="m" value="admin_resume" type="hidden"/>
+        <input name="c" value="del" type="hidden"/>
+        <table width="100%">
+          <thead>
+            <tr class="admin_table_top">
+              <th style="width:20px;">
+              <label for="chkall"><input type="checkbox" id='chkAll'  onclick='CheckAll(this.form)'/></label>
+              </th>
+              <th width="60"> {yun:}if $smarty.get.t=="id" && $smarty.get.order=="asc"{/yun} <a href="index.php?m=admin_resume&order=desc&t=id">简历ID<img src="images/sanj.jpg"/></a> {yun:}else{/yun} <a href="index.php?m=admin_resume&order=asc&t=id">简历ID<img src="images/sanj2.jpg"/></a> {yun:}/if{/yun} </th>
+              <th width="100" align="left">简历名称</th>
+			  <th width="100" align="left">用户姓名</th>
+              <th width="150" align="left">意向职位</th>
+              <th align="left">工作地点</th>
+              <th align="left">待遇要求</th>
+              <th align="left">工作性质</th>
+              <th align="left">到岗时间</th>
+              <th> {yun:}if $smarty.get.t=="time" && $smarty.get.order=="asc"{/yun} <a href="index.php?m=admin_resume&order=desc&t=time">更新时间<img src="images/sanj.jpg"/></a> {yun:}else{/yun} <a href="index.php?m=admin_resume&order=asc&t=time">更新时间<img src="images/sanj2.jpg"/></a> {yun:}/if{/yun} </th>
+              <th>来源</th>
+              <th>推荐</th>
+              <th>置顶</th>
+              <th class="admin_table_th_bg">操作</th>
+            </tr>
+          </thead>
+          <tbody>
+          
+          {yun:}foreach item=v key=key from=$rows{/yun}
+          <tr align="center"{yun:}if ($key+1)%2=='0'{/yun}class="admin_com_td_bg"{yun:}/if{/yun} id="list{yun:}$v.id{/yun}">
+            <td><input type="checkbox" value="{yun:}$v.id{/yun}" class="check_all"  name='del[]' onclick='unselectall()' rel="del_chk" /></td>
+            <td align="left" class="td1" style="text-align:center;"><span>{yun:}$v.id{/yun}</span></td>
+            <td class="ud" align="left" ><a href="{yun:}url m=resume c=show id='`$v.id`' look=admin{/yun}" target="_blank" class="admin_cz_sc">{yun:}$v.name{/yun}</a></td>
+			<td class="gd" align="left">{yun:}$v.uname{/yun}</td>
+            <td class="od" align="left">{yun:}if $v.job_post_n{/yun}{yun:}$v.job_post_n{/yun}(<a href="javascript:void(0)" class="job_name_all"  v="{yun:}$v.job_class_name{/yun}"><font color="red">共{yun:}$v.jobnum{/yun}个</font></a>){yun:}/if{/yun}</td>
+           <td class="gd" align="left">{yun:}$v.cityid_n{/yun}</td>
+            <td class="td" align="left">{yun:}if $v.minsalary&&$v.maxsalary{/yun}￥{yun:}$v.minsalary{/yun}-{yun:}$v.maxsalary{/yun}{yun:}else if $v.minsalary{/yun}￥{yun:}$v.minsalary{/yun}以上{yun:}else{/yun}面议{yun:}/if{/yun}</td>
+            <td align="left">{yun:}$v.type_n{/yun}</td>
+            <td align="left">{yun:}$v.report_n{/yun}</td>
+            <td>{yun:}$v.lastupdate|date_format:"%Y-%m-%d"{/yun}</td>
+            <td>{yun:}$source[$v.source]{/yun}</td>
+            <td id="rec_resume{yun:}$v.id{/yun}">{yun:}if $v.rec_resume=="1"{/yun}<a href="javascript:void(0);" onClick="rec_up('index.php?m=admin_resume&c=recommend','{yun:}$v.id{/yun}','0','rec_resume');"><img src="../config/ajax_img/doneico.gif"></a>{yun:}else{/yun}<a href="javascript:void(0);" onClick="rec_up('index.php?m=admin_resume&c=recommend','{yun:}$v.id{/yun}','1','rec_resume');"><img src="../config/ajax_img/errorico.gif"></a>{yun:}/if{/yun}</td>
+            <td id="top{yun:}$v.id{/yun}">
+            	{yun:}if $v.top=="1"&&$v.topdate>time(){/yun}
+            		<a href="javascript:void(0);" onClick="resumttop('{yun:}$v.id{/yun}','{yun:}$v.top_day{/yun}','{yun:}$v.topdate|date_format:"%Y-%m-%d"{/yun}')">
+            		<img src="../config/ajax_img/doneico.gif"></a>
+            	{yun:}else{/yun}
+            		<a href="javascript:void(0);" onClick="resumttop('{yun:}$v.id{/yun}','{yun:}$v.top_day{/yun}')">
+            		<img src="../config/ajax_img/errorico.gif"></a>
+            	{yun:}/if{/yun}
+            </td>
+            <td><a href="{yun:}url m=resume c=show id='`$v.id`' look=admin{/yun}" target="_blank" class="admin_cz_sc">预览</a> | <a href="javascript:void(0)" onClick="layer_del('确认刷新？', 'index.php?m=admin_resume&c=refresh&id={yun:}$v.id{/yun}');" title="刷新" class="admin_cz_sc">刷新</a><br/><a href="index.php?m=admin_resume&c=saveresume&uid={yun:}$v.uid{/yun}&e={yun:}$v.id{/yun}" class="admin_cz_sc">修改</a> | <a href="javascript:void(0)"  onclick="layer_del('确定要删除？', 'index.php?m=admin_resume&c=del&del={yun:}$v.id{/yun}-{yun:}$v.uid{/yun}');"class="admin_cz_sc">删除</a></td>
+          </tr>
+          {yun:}/foreach{/yun}
+        <tr style="background:#f1f1f1;">
+            <td align="center"><input type="checkbox" id='chkAll2' onclick='CheckAll2(this.form)' /></td>
+            <td colspan="6" >
+            <label for="chkAll2">全选</label>&nbsp;
+            <input class="admin_submit4" type="button" name="delsub" value="删除所选" onClick="return really('del[]')" />
+              <input class="admin_submit4" type="button" name="delsub" value="批量刷新" onClick="Refreshs();"/>
+              <input class="admin_submit2" type="button" name="delsub" value="推荐" onClick="checkdel('rec_resume','1');"/>
+              <input class="admin_submit4" type="button" name="delsub" value="取消推荐" onClick="checkdel('rec_resume','0');"/>
+              <input class="admin_submit2" type="button" name="delsub" value="置顶" onClick="checkdel('top','1');"/>
+              <input class="admin_submit4" type="button" name="delsub" value="取消置顶" onClick="checkdel('top','0');"/>
+              <input class="admin_submit2" type="button" name="delsub" value="导出" onClick="Export();" />
+              </td>
+            <td colspan="7" class="digg">{yun:}$pagenav{/yun}</td>
+          </tr>
+            </tbody>
+        </table>
+        <input type="hidden" name="pytoken"  id='pytoken' value="{yun:}$pytoken{/yun}">
+      </form>
+    </div>
+  </div>
+</div> 
+</body>
+</html>

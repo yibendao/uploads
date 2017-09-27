@@ -1,0 +1,572 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<link href="images/reset.css" rel="stylesheet" type="text/css" />
+<link href="images/system.css" rel="stylesheet" type="text/css" />
+<link href="images/table_form.css" rel="stylesheet" type="text/css" />
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script>
+<script src="js/admin_public.js" language="javascript"></script>
+<title>后台管理</title>
+</head>
+<body class="body_ifm">
+<div class="infoboxp">
+<div class="infoboxp_top_bg"></div>
+<div id="subboxdiv" style="width:100%;height:100%;display:none;position:absolute;"></div>
+<div class="infoboxp_top infoboxp_topIjf">
+    <span class="infoboxp_top_span">企业设置</span>
+	<span class="infoboxp_top_span_sz infoboxp_top_span_sz_in " ><a href="index.php?m=admin_comset">{yun:}$config.integral_pricename{/yun}设置</a></span> 
+	<span class="infoboxp_top_span_sz" ><a href="index.php?m=admin_comset&c=set">企业设置</a></span> 
+    <span class="infoboxp_top_span_sz" ><a href="index.php?m=admin_comset&c=rating">套餐设置</a></span> 
+	<span class="infoboxp_top_span_sz"><a href="index.php?m=admin_comset&c=logo">头像设置</a></span> 
+</div>
+<div class="main_tag">
+<div class="clear"></div>
+<div class="tag_box">
+<div>
+<table width="100%" class="table_form">
+  <tr class="admin_table_trbg">
+          <th width="220" bgcolor="#f0f6fb"><span class="admin_bold">参数说明</span></th>
+          <td bgcolor="#f0f6fb"><span class="admin_bold">参数值</span></td>
+    </tr>
+    <tr>
+	<th width="220">发布职位：</th>
+		<td>
+        
+        <div class="yun_admin_select_box yun_admin_select_boxw70  z_index17"> 
+        
+          {yun:}if $config.integral_job_type{/yun} 
+          {yun:}if $config.integral_job_type==1{/yun}
+          <input type="button" value="加" class="yun_admin_select_box_text" id="integral_job_type_name" onClick="select_click('integral_job_type');">
+          <input name="integral_job_type" type="hidden" id="integral_job_type_val" value="1">
+           
+          {yun:}/if{/yun}     
+         
+          {yun:}if $config.integral_job_type==2{/yun}
+          <input type="button" value="减" class="yun_admin_select_box_text" id="integral_job_type_name" onClick="select_click('integral_job_type');">
+          <input name="integral_job_type" type="hidden" id="integral_job_type_val" value="2">
+           
+          {yun:}/if{/yun}
+          
+          {yun:}else{/yun}
+           <input type="button" value="请选择" class="yun_admin_select_box_text" id="integral_job_type_name" onClick="select_click('integral_job_type');">
+          <input name="integral_job_type" type="hidden" id="integral_job_type_val" value="" >
+                             
+          {yun:}/if{/yun}                                                     
+          <div class="yun_admin_select_box_list_box yun_admin_select_box_list_boxw70 dn" id="integral_job_type_select"> 
+            <div class="yun_admin_select_box_list"> <a href="javascript:;" onClick="select_new('integral_job_type','1','加')">加</a> </div>
+            <div class="yun_admin_select_box_list"> <a href="javascript:;" onClick="select_new('integral_job_type','2','减')">减</a> </div>
+            </div>
+           </div> 
+        
+        
+        
+        
+        <input class="input-text" type="text" name="integral_job" id="integral_job" value="{yun:}$config.integral_job{/yun}" size="20" maxlength="255" onKeyUp="this.value=this.value.replace(/[^0-9.]/g,'')"/> {yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun} </td>
+	</tr>
+    <tr class="admin_table_trbg">
+	<th width="220">刷新职位：</th>
+		<td>
+         <div class="yun_admin_select_box yun_admin_select_boxw70  z_index16"> 
+        
+          {yun:}if $config.integral_jobefresh_type{/yun} 
+          {yun:}if $config.integral_jobefresh_type==1{/yun}
+          <input type="button" value="加" class="yun_admin_select_box_text" id="integral_jobefresh_type_name" onClick="select_click('integral_jobefresh_type');">
+          <input name="integral_jobefresh_type" type="hidden" id="integral_jobefresh_type_val" value="1">
+           
+          {yun:}/if{/yun}     
+         
+          {yun:}if $config.integral_jobefresh_type==2{/yun}
+          <input type="button" value="减" class="yun_admin_select_box_text" id="integral_jobefresh_type_name" onClick="select_click('integral_jobefresh_type');">
+          <input name="integral_jobefresh_type" type="hidden" id="integral_jobefresh_type_val" value="2">
+           
+          {yun:}/if{/yun}
+          
+          {yun:}else{/yun}
+           <input type="button" value="请选择" class="yun_admin_select_box_text" id="integral_jobefresh_type_name" onClick="select_click('integral_jobefresh_type');">
+          <input name="integral_jobefresh_type" type="hidden" id="integral_jobefresh_type_val" value="" >
+                             
+          {yun:}/if{/yun}                                                     
+
+      
+
+          <div class="yun_admin_select_box_list_box yun_admin_select_box_list_boxw70 dn" id="integral_jobefresh_type_select"> 
+
+            <div class="yun_admin_select_box_list"> <a href="javascript:;" onClick="select_new('integral_jobefresh_type','1','加')">加</a> </div>
+            <div class="yun_admin_select_box_list"> <a href="javascript:;" onClick="select_new('integral_jobefresh_type','2','减')">减</a> </div>
+            </div>
+           </div> 
+        
+        
+        
+        
+        
+        
+        
+        
+        <input class="input-text" type="text" name="integral_jobefresh" id="integral_jobefresh" value="{yun:}$config.integral_jobefresh{/yun}" size="20" maxlength="255" onKeyUp="this.value=this.value.replace(/[^0-9.]/g,'')"/> {yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun} </td>
+	</tr>
+	
+    <tr class="admin_table_trbg">
+	<th width="220">发布兼职职位：</th>
+		<td>
+       
+         <div class="yun_admin_select_box yun_admin_select_boxw70  z_index14"> 
+        
+          {yun:}if $config.integral_partjob_type{/yun} 
+          {yun:}if $config.integral_partjob_type==1{/yun}
+          <input type="button" value="加" class="yun_admin_select_box_text" id="integral_partjob_type_name" onClick="select_click('integral_partjob_type');">
+          <input name="integral_partjob_type" type="hidden" id="integral_partjob_type_val" value="1">
+           
+          {yun:}/if{/yun}     
+         
+          {yun:}if $config.integral_partjob_type==2{/yun}
+          <input type="button" value="减" class="yun_admin_select_box_text" id="integral_partjob_type_name" onClick="select_click('integral_partjob_type');">
+          <input name="integral_partjob_type" type="hidden" id="integral_partjob_type_val" value="2">
+           
+          {yun:}/if{/yun}
+          
+          {yun:}else{/yun}
+           <input type="button" value="请选择" class="yun_admin_select_box_text" id="integral_partjob_type_name" onClick="select_click('integral_partjob_type');">
+          <input name="integral_partjob_type" type="hidden" id="integral_partjob_type_val" value="" >
+                             
+          {yun:}/if{/yun}                                                     
+          <div class="yun_admin_select_box_list_box yun_admin_select_box_list_boxw70 dn" id="integral_partjob_type_select"> 
+            <div class="yun_admin_select_box_list"> <a href="javascript:;" onClick="select_new('integral_partjob_type','1','加')">加</a> </div>
+            <div class="yun_admin_select_box_list"> <a href="javascript:;" onClick="select_new('integral_partjob_type','2','减')">减</a> </div>
+            </div>
+           </div>  
+        
+        
+        
+        <input class="input-text" type="text" name="integral_partjob" id="integral_partjob" value="{yun:}$config.integral_partjob{/yun}" size="20" maxlength="255" onKeyUp="this.value=this.value.replace(/[^0-9.]/g,'')"/> {yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun} </td>
+	</tr>
+    <tr>
+	<th width="220">刷新兼职职位：</th>
+		<td>
+      
+        
+        <div class="yun_admin_select_box yun_admin_select_boxw70  z_index13"> 
+        
+          {yun:}if $config.integral_partjobefresh_type{/yun} 
+          {yun:}if $config.integral_partjobefresh_type==1{/yun}
+          <input type="button" value="加" class="yun_admin_select_box_text" id="integral_partjobefresh_type_name" onClick="select_click('integral_partjobefresh_type');">
+          <input name="integral_partjobefresh_type" type="hidden" id="integral_partjobefresh_type_val" value="1">
+           
+          {yun:}/if{/yun}     
+         
+          {yun:}if $config.integral_partjobefresh_type==2{/yun}
+          <input type="button" value="减" class="yun_admin_select_box_text" id="integral_partjobefresh_type_name" onClick="select_click('integral_partjobefresh_type');">
+          <input name="integral_partjobefresh_type" type="hidden" id="integral_partjobefresh_type_val" value="2">
+           
+          {yun:}/if{/yun}
+          
+          {yun:}else{/yun}
+           <input type="button" value="请选择" class="yun_admin_select_box_text" id="integral_partjobefresh_type_name" onClick="select_click('integral_partjobefresh_type');">
+          <input name="integral_partjobefresh_type" type="hidden" id="integral_partjobefresh_type_val" value="" >
+                             
+          {yun:}/if{/yun}                                                     
+          <div class="yun_admin_select_box_list_box yun_admin_select_box_list_boxw70 dn" id="integral_partjobefresh_type_select"> 
+            <div class="yun_admin_select_box_list"> <a href="javascript:;" onClick="select_new('integral_partjobefresh_type','1','加')">加</a> </div>
+            <div class="yun_admin_select_box_list"> <a href="javascript:;" onClick="select_new('integral_partjobefresh_type','2','减')">减</a> </div>
+            </div>
+           </div>  
+        
+        
+        
+        
+        <input class="input-text" type="text" name="integral_partjobefresh" id="integral_partjobefresh" value="{yun:}$config.integral_partjobefresh{/yun}" size="20" maxlength="255" onKeyUp="this.value=this.value.replace(/[^0-9.]/g,'')"/> {yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun} </td>
+	</tr>
+  <tr>
+	<th width="220">下载人才简历：</th>
+		<td>
+       
+        
+        <div class="yun_admin_select_box yun_admin_select_boxw70  z_index12"> 
+        
+          {yun:}if $config.integral_down_resume_type{/yun} 
+          {yun:}if $config.integral_down_resume_type==1{/yun}
+          <input type="button" value="加" class="yun_admin_select_box_text" id="integral_down_resume_type_name" onClick="select_click('integral_down_resume_type');">
+          <input name="integral_down_resume_type" type="hidden" id="integral_down_resume_type_val" value="1">
+           
+          {yun:}/if{/yun}     
+         
+          {yun:}if $config.integral_down_resume_type==2{/yun}
+          <input type="button" value="减" class="yun_admin_select_box_text" id="integral_down_resume_type_name" onClick="select_click('integral_down_resume_type');">
+          <input name="integral_down_resume_type" type="hidden" id="integral_down_resume_type_val" value="2">
+           
+          {yun:}/if{/yun}
+          
+          {yun:}else{/yun}
+           <input type="button" value="请选择" class="yun_admin_select_box_text" id="integral_down_resume_type_name" onClick="select_click('integral_down_resume_type');">
+          <input name="integral_down_resume_type" type="hidden" id="integral_down_resume_type_val" value="" >
+                             
+          {yun:}/if{/yun}                                                     
+          <div class="yun_admin_select_box_list_box yun_admin_select_box_list_boxw70 dn" id="integral_down_resume_type_select"> 
+            <div class="yun_admin_select_box_list"> <a href="javascript:;" onClick="select_new('integral_down_resume_type','1','加')">加</a> </div>
+            <div class="yun_admin_select_box_list"> <a href="javascript:;" onClick="select_new('integral_down_resume_type','2','减')">减</a> </div>
+            </div>
+           </div>  
+        
+        
+        
+        
+        
+        <input class="input-text" type="text" name="integral_down_resume" id="integral_down_resume" value="{yun:}$config.integral_down_resume{/yun}" size="20" maxlength="255" onKeyUp="this.value=this.value.replace(/[^0-9.]/g,'')"/> {yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun} </td>
+	</tr>
+	<tr class="admin_table_trbg">
+	<th width="220">发送面试人才：</th>
+		<td>
+       
+        
+        <div class="yun_admin_select_box yun_admin_select_boxw70  z_index11"> 
+        
+          {yun:}if $config.integral_interview_type{/yun} 
+          {yun:}if $config.integral_interview_type==1{/yun}
+          <input type="button" value="加" class="yun_admin_select_box_text" id="integral_interview_type_name" onClick="select_click('integral_interview_type');">
+          <input name="integral_interview_type" type="hidden" id="integral_interview_type_val" value="1">
+           
+          {yun:}/if{/yun}     
+         
+          {yun:}if $config.integral_interview_type==2{/yun}
+          <input type="button" value="减" class="yun_admin_select_box_text" id="integral_interview_type_name" onClick="select_click('integral_interview_type');">
+          <input name="integral_interview_type" type="hidden" id="integral_interview_type_val" value="2">
+           
+          {yun:}/if{/yun}
+          
+          {yun:}else{/yun}
+           <input type="button" value="请选择" class="yun_admin_select_box_text" id="integral_interview_type_name" onClick="select_click('integral_interview_type');">
+          <input name="integral_interview_type" type="hidden" id="integral_interview_type_val" value="" >
+                             
+          {yun:}/if{/yun}                                                     
+          <div class="yun_admin_select_box_list_box yun_admin_select_box_list_boxw70 dn" id="integral_interview_type_select"> 
+            <div class="yun_admin_select_box_list"> <a href="javascript:;" onClick="select_new('integral_interview_type','1','加')">加</a> </div>
+            <div class="yun_admin_select_box_list"> <a href="javascript:;" onClick="select_new('integral_interview_type','2','减')">减</a> </div>
+            </div>
+           </div>  
+        
+        
+        
+        
+        
+        
+        <input class="input-text" type="text" name="integral_interview" id="integral_interview" value="{yun:}$config.integral_interview{/yun}" size="20" maxlength="255" onKeyUp="this.value=this.value.replace(/[^0-9.]/g,'')"/> {yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun} </td>
+	</tr>
+	<tr>
+		<th width="220">发布紧急招聘：</th>
+		<td>
+      
+        <div class="yun_admin_select_box yun_admin_select_boxw70  z_index10"> 
+        
+          {yun:}if $config.com_urgent_type{/yun} 
+          {yun:}if $config.com_urgent_type==1{/yun}
+          <input type="button" value="加" class="yun_admin_select_box_text" id="com_urgent_type_name" onClick="select_click('com_urgent_type');">
+          <input name="com_urgent_type" type="hidden" id="com_urgent_type_val" value="1">
+           
+          {yun:}/if{/yun}     
+         
+          {yun:}if $config.com_urgent_type==2{/yun}
+          <input type="button" value="减" class="yun_admin_select_box_text" id="com_urgent_type_name" onClick="select_click('com_urgent_type');">
+          <input name="com_urgent_type" type="hidden" id="com_urgent_type_val" value="2">
+           
+          {yun:}/if{/yun}
+          
+          {yun:}else{/yun}
+           <input type="button" value="请选择" class="yun_admin_select_box_text" id="com_urgent_type_name" onClick="select_click('com_urgent_type');">
+          <input name="com_urgent_type" type="hidden" id="com_urgent_type_val" value="" >
+                             
+          {yun:}/if{/yun}                                                     
+          <div class="yun_admin_select_box_list_box yun_admin_select_box_list_boxw70 dn" id="com_urgent_type_select"> 
+            <div class="yun_admin_select_box_list"> <a href="javascript:;" onClick="select_new('com_urgent_type','1','加')">加</a> </div>
+            <div class="yun_admin_select_box_list"> <a href="javascript:;" onClick="select_new('com_urgent_type','2','减')">减</a> </div>
+            </div>
+           </div>  
+        
+        
+        <input class="input-text tips_class" type="text" name="com_urgent" id="com_urgent" value="{yun:}$config.com_urgent{/yun}" size="" maxlength="255" onKeyUp="this.value=this.value.replace(/[^0-9.]/g,'')"/> {yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun} / 天</td>
+	</tr>
+	<tr>
+	<th width="220">发布置顶职位：</th>
+		<td>
+         
+        
+       <div class="yun_admin_select_box yun_admin_select_boxw70 z_index9"> 
+        
+          {yun:}if $config.integral_jobtop_type{/yun} 
+          {yun:}if $config.integral_jobtop_type==1{/yun}
+          <input type="button" value="加" class="yun_admin_select_box_text" id="integral_jobtop_type_name" onClick="select_click('integral_jobtop_type');">
+          <input name="integral_jobtop_type" type="hidden" id="integral_jobtop_type_val" value="1">
+           
+          {yun:}/if{/yun}     
+         
+          {yun:}if $config.integral_jobtop_type==2{/yun}
+          <input type="button" value="减" class="yun_admin_select_box_text" id="integral_jobtop_type_name" onClick="select_click('integral_jobtop_type');">
+          <input name="integral_jobtop_type" type="hidden" id="integral_jobtop_type_val" value="2">
+           
+          {yun:}/if{/yun}
+          
+          {yun:}else{/yun}
+           <input type="button" value="请选择" class="yun_admin_select_box_text" id="integral_jobtop_type_name" onClick="select_click('integral_jobtop_type');">
+          <input name="integral_jobtop_type" type="hidden" id="integral_jobtop_type_val" value="" >
+                             
+          {yun:}/if{/yun}                                                     
+          <div class="yun_admin_select_box_list_box yun_admin_select_box_list_boxw70 dn" id="integral_jobtop_type_select"> 
+            <div class="yun_admin_select_box_list"> <a href="javascript:;" onClick="select_new('integral_jobtop_type','1','加')">加</a> </div>
+            <div class="yun_admin_select_box_list"> <a href="javascript:;" onClick="select_new('integral_jobtop_type','2','减')">减</a> </div>
+            </div>
+           </div>   
+        <input class="input-text" type="text" name="integral_job_top" id="integral_job_top" value="{yun:}$config.integral_job_top{/yun}" size="20" maxlength="255" onKeyUp="this.value=this.value.replace(/[^0-9.]/g,'')"/> {yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}/天 </td>
+	</tr>
+	<tr class="admin_table_trbg">
+		<th width="220">发布推荐招聘：</th>
+		<td>
+      
+        <div class="yun_admin_select_box yun_admin_select_boxw70  z_index8"> 
+        
+          {yun:}if $config.com_recjob_type{/yun} 
+          {yun:}if $config.com_recjob_type==1{/yun}
+          <input type="button" value="加" class="yun_admin_select_box_text" id="com_recjob_type_name" onClick="select_click('com_recjob_type');">
+          <input name="com_recjob_type" type="hidden" id="com_recjob_type_val" value="1">
+           
+          {yun:}/if{/yun}     
+         
+          {yun:}if $config.com_recjob_type==2{/yun}
+          <input type="button" value="减" class="yun_admin_select_box_text" id="com_recjob_type_name" onClick="select_click('com_recjob_type');">
+          <input name="com_recjob_type" type="hidden" id="com_recjob_type_val" value="2">
+           
+          {yun:}/if{/yun}
+          
+          {yun:}else{/yun}
+           <input type="button" value="请选择" class="yun_admin_select_box_text" id="com_recjob_type_name" onClick="select_click('com_recjob_type');">
+          <input name="com_recjob_type" type="hidden" id="com_recjob_type_val" value="" >
+                             
+          {yun:}/if{/yun}                                                     
+          <div class="yun_admin_select_box_list_box yun_admin_select_box_list_boxw70 dn" id="com_recjob_type_select"> 
+            <div class="yun_admin_select_box_list"> <a href="javascript:;" onClick="select_new('com_recjob_type','1','加')">加</a> </div>
+            <div class="yun_admin_select_box_list"> <a href="javascript:;" onClick="select_new('com_recjob_type','2','减')">减</a> </div>
+            </div>
+           </div>  
+        
+        <input class="input-text tips_class" type="text" name="com_recjob" id="com_recjob" value="{yun:}$config.com_recjob{/yun}" size="" maxlength="255" onKeyUp="this.value=this.value.replace(/[^0-9.]/g,'')"/> {yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun} / 天</td>
+	</tr>
+	<tr class="admin_table_trbg">
+		<th width="220">发布推荐兼职：</th>
+		<td>
+      
+         <div class="yun_admin_select_box yun_admin_select_boxw70  z_index7"> 
+        
+          {yun:}if $config.com_recpartjob_type{/yun} 
+          {yun:}if $config.com_recpartjob_type==1{/yun}
+          <input type="button" value="加" class="yun_admin_select_box_text" id="com_recpartjob_type_name" onClick="select_click('com_recpartjob_type');">
+          <input name="com_recpartjob_type" type="hidden" id="com_recpartjob_type_val" value="1">
+           
+          {yun:}/if{/yun}     
+         
+          {yun:}if $config.com_recpartjob_type==2{/yun}
+          <input type="button" value="减" class="yun_admin_select_box_text" id="com_recpartjob_type_name" onClick="select_click('com_recpartjob_type');">
+          <input name="com_recpartjob_type" type="hidden" id="com_recpartjob_type_val" value="2">
+           
+          {yun:}/if{/yun}
+          
+          {yun:}else{/yun}
+           <input type="button" value="请选择" class="yun_admin_select_box_text" id="com_recpartjob_type_name" onClick="select_click('com_recpartjob_type');">
+          <input name="com_recpartjob_type" type="hidden" id="com_recpartjob_type_val" value="" >
+                             
+          {yun:}/if{/yun}                                                     
+          <div class="yun_admin_select_box_list_box yun_admin_select_box_list_boxw70 dn" id="com_recpartjob_type_select"> 
+            <div class="yun_admin_select_box_list"> <a href="javascript:;" onClick="select_new('com_recpartjob_type','1','加')">加</a> </div>
+            <div class="yun_admin_select_box_list"> <a href="javascript:;" onClick="select_new('com_recpartjob_type','2','减')">减</a> </div>
+            </div>
+           </div>  
+        
+        <input class="input-text tips_class" type="text" name="com_recpartjob" id="com_recpartjob" value="{yun:}$config.com_recpartjob{/yun}" size="" maxlength="255" onKeyUp="this.value=this.value.replace(/[^0-9.]/g,'')"/> {yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun} / 天</td>
+	</tr>
+
+    
+	<tr class="admin_table_trbg">
+	<th width="220">职位自动刷新：</th>
+		<td>
+     
+        <div class="yun_admin_select_box yun_admin_select_boxw70  z_index5"> 
+        
+          {yun:}if $config.job_auto_type{/yun} 
+          {yun:}if $config.job_auto_type==1{/yun}
+          <input type="button" value="加" class="yun_admin_select_box_text" id="job_auto_type_name" onClick="select_click('job_auto_type');">
+          <input name="job_auto_type" type="hidden" id="job_auto_type_val" value="1">
+           
+          {yun:}/if{/yun}     
+         
+          {yun:}if $config.job_auto_type==2{/yun}
+          <input type="button" value="减" class="yun_admin_select_box_text" id="job_auto_type_name" onClick="select_click('job_auto_type');">
+          <input name="job_auto_type" type="hidden" id="job_auto_type_val" value="2">
+           
+          {yun:}/if{/yun}
+          
+          {yun:}else{/yun}
+           <input type="button" value="请选择" class="yun_admin_select_box_text" id="job_auto_type_name" onClick="select_click('job_auto_type');">
+          <input name="job_auto_type" type="hidden" id="job_auto_type_val" value="" >
+                             
+          {yun:}/if{/yun}                                                     
+          <div class="yun_admin_select_box_list_box yun_admin_select_box_list_boxw70 dn" id="job_auto_type_select"> 
+            <div class="yun_admin_select_box_list"> <a href="javascript:;" onClick="select_new('job_auto_type','1','加')">加</a> </div>
+            <div class="yun_admin_select_box_list"> <a href="javascript:;" onClick="select_new('job_auto_type','2','减')">减</a> </div>
+            </div>
+           </div>  
+
+        <input class="input-text tips_class" type="text" name="job_auto" id="job_auto" value="{yun:}$config.job_auto{/yun}" size="20" maxlength="255" onKeyUp="this.value=this.value.replace(/[^0-9.]/g,'')"/> {yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun} / 天</td>
+	</tr>
+	<tr>
+	<th width="220">设置企业地图：</th>
+		<td>
+       
+        <div class="yun_admin_select_box yun_admin_select_boxw70  z_index4"> 
+        
+          {yun:}if $config.integral_map_type{/yun} 
+          {yun:}if $config.integral_map_type==1{/yun}
+          <input type="button" value="加" class="yun_admin_select_box_text" id="integral_map_type_name" onClick="select_click('integral_map_type');">
+          <input name="integral_map_type" type="hidden" id="integral_map_type_val" value="1">
+           
+          {yun:}/if{/yun}     
+         
+          {yun:}if $config.integral_map_type==2{/yun}
+          <input type="button" value="减" class="yun_admin_select_box_text" id="integral_map_type_name" onClick="select_click('integral_map_type');">
+          <input name="integral_map_type" type="hidden" id="integral_map_type_val" value="2">
+           
+          {yun:}/if{/yun}
+          
+          {yun:}else{/yun}
+           <input type="button" value="请选择" class="yun_admin_select_box_text" id="integral_map_type_name" onClick="select_click('integral_map_type');">
+          <input name="integral_map_type" type="hidden" id="integral_map_type_val" value="" >
+                             
+          {yun:}/if{/yun}                                                     
+          <div class="yun_admin_select_box_list_box yun_admin_select_box_list_boxw70 dn" id="integral_map_type_select"> 
+            <div class="yun_admin_select_box_list"> <a href="javascript:;" onClick="select_new('integral_map_type','1','加')">加</a> </div>
+            <div class="yun_admin_select_box_list"> <a href="javascript:;" onClick="select_new('integral_map_type','2','减')">减</a> </div>
+            </div>
+           </div>  
+        
+        <input class="input-text" type="text" name="integral_map" id="integral_map" value="{yun:}$config.integral_map{/yun}" size="20" maxlength="255" onKeyUp="this.value=this.value.replace(/[^0-9.]/g,'')"/>  {yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun} </td>
+	</tr>
+	<tr class="admin_table_trbg">
+	<th width="220">上传企业横幅：</th>
+		<td>
+        
+        <div class="yun_admin_select_box yun_admin_select_boxw70  z_index3"> 
+        
+          {yun:}if $config.integral_banner_type{/yun} 
+          {yun:}if $config.integral_banner_type==1{/yun}
+          <input type="button" value="加" class="yun_admin_select_box_text" id="integral_banner_type_name" onClick="select_click('integral_banner_type');">
+          <input name="integral_banner_type" type="hidden" id="integral_banner_type_val" value="1">
+           
+          {yun:}/if{/yun}     
+         
+          {yun:}if $config.integral_banner_type==2{/yun}
+          <input type="button" value="减" class="yun_admin_select_box_text" id="integral_banner_type_name" onClick="select_click('integral_banner_type');">
+          <input name="integral_banner_type" type="hidden" id="integral_banner_type_val" value="2">
+           
+          {yun:}/if{/yun}
+          
+          {yun:}else{/yun}
+           <input type="button" value="请选择" class="yun_admin_select_box_text" id="integral_banner_type_name" onClick="select_click('integral_banner_type');">
+          <input name="integral_banner_type" type="hidden" id="integral_banner_type_val" value="" >
+                             
+          {yun:}/if{/yun}                                                     
+          <div class="yun_admin_select_box_list_box yun_admin_select_box_list_boxw70 dn" id="integral_banner_type_select"> 
+            <div class="yun_admin_select_box_list"> <a href="javascript:;" onClick="select_new('integral_banner_type','1','加')">加</a> </div>
+            <div class="yun_admin_select_box_list"> <a href="javascript:;" onClick="select_new('integral_banner_type','2','减')">减</a> </div>
+            </div>
+           </div>  
+        
+        
+        
+        <input class="input-text" type="text" name="integral_banner" id="integral_banner" value="{yun:}$config.integral_banner{/yun}" size="20" maxlength="255" onKeyUp="this.value=this.value.replace(/[^0-9.]/g,'')"/> {yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun} </td>
+	</tr>
+	<tr>
+	<th width="220">认证营业执照：</th>
+		<td>
+       
+        <div class="yun_admin_select_box yun_admin_select_boxw70  z_index2"> 
+        
+          {yun:}if $config.integral_comcert_type{/yun} 
+          {yun:}if $config.integral_comcert_type==1{/yun}
+          <input type="button" value="加" class="yun_admin_select_box_text" id="integral_comcert_type_name" onClick="select_click('integral_comcert_type');">
+          <input name="integral_comcert_type" type="hidden" id="integral_comcert_type_val" value="1">
+           
+          {yun:}/if{/yun}     
+         
+          {yun:}if $config.integral_comcert_type==2{/yun}
+          <input type="button" value="减" class="yun_admin_select_box_text" id="integral_comcert_type_name" onClick="select_click('integral_comcert_type');">
+          <input name="integral_comcert_type" type="hidden" id="integral_comcert_type_val" value="2">
+           
+          {yun:}/if{/yun}
+          
+          {yun:}else{/yun}
+           <input type="button" value="请选择" class="yun_admin_select_box_text" id="integral_comcert_type_name" onClick="select_click('integral_comcert_type');">
+          <input name="integral_comcert_type" type="hidden" id="integral_comcert_type_val" value="" >
+                             
+          {yun:}/if{/yun}                                                     
+          <div class="yun_admin_select_box_list_box yun_admin_select_box_list_boxw70 dn" id="integral_comcert_type_select"> 
+            <div class="yun_admin_select_box_list"> <a href="javascript:;" onClick="select_new('integral_comcert_type','1','加')">加</a> </div>
+            <div class="yun_admin_select_box_list"> <a href="javascript:;" onClick="select_new('integral_comcert_type','2','减')">减</a> </div>
+            </div>
+           </div>  
+        
+        <input class="input-text" type="text" name="integral_comcert" id="integral_comcert" value="{yun:}$config.integral_comcert{/yun}" size="20" maxlength="255" onKeyUp="this.value=this.value.replace(/[^0-9.]/g,'')"/> {yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun} </td>
+	</tr>
+    <tr class="admin_table_trbg">
+		<td colspan="2" align="center">
+        <input class="admin_submit4" id="integral" type="button" name="config" value="提交" />&nbsp;&nbsp;
+        <input class="admin_submit4" type="reset" value="重置" /></td>
+	</tr>
+</table>
+</div>
+
+</div>
+</div>
+</div>
+<input type="hidden" name="pytoken" id='pytoken' value="{yun:}$pytoken{/yun}">
+<script>
+$(function(){
+	$("#integral").click(function(){
+		$.post("index.php?m=admin_comset&c=save",{
+			config : $("#integral").val(),
+			integral_job : $("#integral_job").val(),
+			integral_jobefresh : $("#integral_jobefresh").val(),
+			integral_down_resume : $("#integral_down_resume").val(),
+			integral_interview : $("#integral_interview").val(),
+			com_urgent : $("#com_urgent").val(),
+			com_recjob : $("#com_recjob").val(),
+			integral_com_comments : $("#integral_com_comments").val(),
+			job_auto : $("#job_auto").val(),
+			integral_job_type : $("#integral_job_type_val").val(),
+			integral_job_top : $("#integral_job_top").val(),
+			integral_jobtop_type : $("#integral_jobtop_type_val").val(),
+			integral_jobefresh_type : $("#integral_jobefresh_type_val").val(),
+			integral_down_resume_type : $("#integral_down_resume_type_val").val(),
+			integral_interview_type : $("#integral_interview_type_val").val(),
+			com_urgent_type : $("#com_urgent_type_val").val(),
+			com_recjob_type : $("#com_recjob_type_val").val(),
+			integral_com_comments_type : $("#integral_com_comments_type_val").val(),
+			job_auto_type : $("#job_auto_type_val").val(),
+			integral_map_type : $("#integral_map_type_val").val(),
+			integral_map : $("#integral_map").val(),
+			integral_banner_type : $("#integral_banner_type_val").val(),
+			integral_banner : $("#integral_banner").val(),			
+			integral_comcert_type : $("#integral_comcert_type_val").val(),
+			integral_comcert : $("#integral_comcert").val(),			
+			integral_partjob : $("#integral_partjob").val(),
+			integral_partjobefresh : $("#integral_partjobefresh").val(),
+			integral_partjob_type : $("#integral_partjob_type_val").val(),
+			integral_partjobefresh_type : $("#integral_partjobefresh_type_val").val(),
+			com_recpartjob_type : $("#com_recpartjob_type_val").val(),
+			com_recpartjob : $("#com_recpartjob").val(),
+			pytoken : $("#pytoken").val()
+		},function(data,textStatus){
+			config_msg(data);
+		});
+	});
+})
+</script>
+</body>
+</html>

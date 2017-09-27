@@ -1,0 +1,107 @@
+{yun:}include file="$comstyle/header.htm"{/yun}
+<div class="w1000">
+  <div class="admin_mainbody"> {yun:}include file="$comstyle/left.htm"{/yun}
+    <div class=right_box>
+      <div class=admincont_box>
+       <div class="com_tit"><span class="com_tit_span">企业产品管理</span>	<input  class="com_tit_span_t_sub" onclick="location.href='index.php?c=product&act=add'" type="button" value="添加产品"> 	<form action="index.php" method="get">
+				<div class="news_search">
+				  <input name="c" type="hidden" value="product">
+				 <input name="keyword" type="text" class="news_text" placeholder="请输入产品关键字">
+					<input name="" type="submit" class="news_bth" value="搜索">
+				</div>
+			  </form></div>
+		 
+	   <div class="com_body">
+        <div class="admin_textbox_04">
+        
+          <iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe>
+          <form action="index.php" method="get" target="supportiframe" id='myform'>
+            <input type="hidden" name="c" value="product" />
+            <input type="hidden" name="act" value="del" />
+            <div class=table>
+                 <div id="job_checkbokid">
+                  {yun:}if $rows{/yun}
+                  <div class="job_news_list job_news_list_h1">
+                    <span class="job_news_list_span job_w30">&nbsp;</span>
+                      <span class="job_news_list_span job_w400">产品名称</span>
+                      <span class="job_news_list_span job_w120">添加时间</span>
+                      <span class="job_news_list_span job_w80" style="width:180px;">状态</span>
+                     <span class="job_news_list_span job_w120">操作</span>
+                  </div>
+                  {yun:}/if{/yun}
+                {yun:}foreach item=job from=$rows{/yun}
+                <div class="job_news_list">
+               <span class="job_news_list_span job_w30"><input class="job_news_input" type='checkbox' name="delid[]" value="{yun:}$job.id{/yun}" ></span>
+                 <span class="job_news_list_span job_w400"><a href="{yun:}url m=company c=productshow id='`$uid`' pid='`$job.id`'{/yun}" target="_blank">{yun:}$job.title{/yun}</a></span>
+                  <span class="job_news_list_span job_w120">{yun:}$job.ctime|date_format:'%Y-%m-%d'{/yun}</span>
+                 <span class="job_news_list_span job_w80" style="width:180px;">{yun:}if $job.status=="0"{/yun} <span class="wate_verify">等待审核</span>{yun:}/if{/yun}
+                    {yun:}if $job.status=="1"{/yun} <span class="y_verify">已审核</span>{yun:}/if{/yun}
+                    {yun:}if $job.status=="2"{/yun} <span class="n_verify">未通过</span> | <a href="javascript:;" class="looklist" onclick="show_msg('{yun:}$job.id{/yun}')" style="display:inline">查看原因</a>{yun:}/if{/yun} </span>
+                <span class="job_news_list_span job_w120">
+                <a href="{yun:}url m=company c=productshow id=$uid pid=$job.id{/yun}" target="_blank" class="cblue">预览</a> | 
+                <a href="index.php?c=product&act=edit&id={yun:}$job.id{/yun}" class="cblue">修改</a> | 
+                <a href="javascript:void(0)" onclick="layer_del('确定要删除？', 'index.php?c=product&act=del&id={yun:}$job.id{/yun}')" class="cblue">删除</a></span>
+                </div>
+             
+                {yun:}foreachelse{/yun}
+                {yun:}if $smarty.get.keyword!="" {/yun}
+	<div class="msg_no">没有搜索到相关的企业产品信息。</div>
+                {yun:}else{/yun}
+                  <div class="com_msg_no">
+                 <p>亲爱的用户，目前您还没有上传企业产品信息</p>
+  <p>立即上传产品信息，展示图最佳尺寸：270*180</p>
+               <a href="index.php?c=product&act=add" class="com_msg_no_bth com_submit">点击添加</a>
+                {yun:}/if{/yun}
+                </div>
+                {yun:}/foreach{/yun}
+                </div>
+            </div> 
+          
+		  {yun:}if $rows{/yun}
+			 <div class="com_Release_job_bot">
+		 <span class="com_Release_job_qx"><input id='checkAll'  type="checkbox" onclick='m_checkAll(this.form)'> 全选</span>
+			  <input class=c_btn_02 type="button" name="subdel" value="批量删除" onclick="return really('delid[]');"> 
+			  </span> 
+			</div>    
+			  <div class="diggg">{yun:}$pagenav{/yun}</div>
+			  {yun:}/if{/yun}
+              </form>
+ 
+ <div class="clear"></div>
+              	
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<script>
+function show_msg(id){
+	$.post("index.php?c=product&act=show",{id:id},function(data){
+		if(data){
+			data=eval('('+data+')');
+			$("#msgs").html(data.statusbody);
+			$.layer({
+				type : 1,
+				title :'查看原因', 
+				closeBtn : [0 , true],
+				border : [10 , 0.3 , '#000', true],
+				area : ['400px','200px'],
+				page : {dom :"#showmsg"}
+			});
+		}
+	});
+}
+</script>
+<div id="showmsg"  style="display:none; width: 400px;">
+	<div>
+    <div id="infobox">
+		 <div class="admin_Operating_sh" style="padding:10px; ">
+		<div class="admin_Operating_sh_h1" style="padding:5px;"><div style="height:80px;overflow:auto;" id="msgs"></div></div>
+		<div class="admin_Operating_sub" style="margin-top:10px;"> 
+          &nbsp;&nbsp;<input type="button" id="zxxCancelBtn" onClick="layer.closeAll();" class="cancel_btn" value='确认'></div>
+		</div>
+    </div>
+  </div>
+</div>
+{yun:}include file="$comstyle/footer.htm"{/yun} 

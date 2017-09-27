@@ -1,0 +1,58 @@
+  {yun:}include file="$askstyle/header.htm"{/yun}  
+<div class="answer_con">
+	<div class="content con_answer"> 
+			<div class="left left_con">
+                {yun:}include file="$askstyle/nav.htm"{/yun} 
+        <div class="answer_content fl">
+                     <div class="answer_content_top fl"><span>{yun:}if $uid && ($smarty.get.uid=='' || $smarty.get.uid==$uid){/yun} 我的关注{yun:}elseif $smarty.get.uid{/yun}他的关注{yun:}/if{/yun}</span></div>
+					 <div class="answer_con">	
+               <div class="answer_con">
+			<div class="left_c">
+                    <div class="wt_content_t fl">
+					{yun:}foreach from=$rows item=qlist{/yun}
+                    <div class="ask_anwser_i  ask_anwser_border fl">
+						<div class="ask_anwser_tit fl"><a href="{yun:}url m=ask c=content id='`$qlist.id`'{/yun}" target="_blank">{yun:}$qlist.title{/yun}</a></div>
+						<div class="wt_jl">
+							<span class="gz_icon"><font>{yun:}$qlist.atnnum{/yun}</font>人关注</span>
+							<span class="hd_icon"><font>{yun:}$qlist.answer_num{/yun}</font>个回答</span> 
+							<span class="ll_icon"><font>{yun:}$qlist.visit{/yun}</font>次浏览</span>
+							<span>{yun:}$qlist.add_time|date_format:"%Y-%m-%d %H:%M"{/yun}</span>
+							{yun:}if $uid==$myuid{/yun}
+							<span class="friend_delect"><a href="javascript:void(0)" onclick="layer_del('确定要取消关注？','{yun:}url m=ask c=friend a=attention id=$qlist.id{/yun}')">取消关注</a></span>
+							{yun:}/if{/yun} 
+						</div>
+					</div>
+					{yun:}foreachelse{/yun} 
+					<div class="noresult">
+					<span><a href="{yun:}url m=ask c=index{/yun}#answer">暂无关注问题！</a></span>
+					</div>
+					
+					{yun:}/foreach{/yun} 
+                    </div>
+                    
+					<div class="clear"></div>
+					<div class="pages">{yun:}$pagenav{/yun}</div>
+				</div>
+			
+            </div>
+	          </div>
+                </div>
+					 
+			</div>
+			{yun:}include file="$askstyle/right.htm"{/yun}
+		</div>
+	</div>
+</div>  
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js" type="text/javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script>
+<script src="{yun:}$ask_style{/yun}/js/question.js" type="text/javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/public.js" language="javascript"></script>
+<!--[if IE 6]>
+<script src="{yun:}$config.sy_weburl{/yun}/js/png.js"></script>
+<script>
+DD_belatedPNG.fix('.png,.attention .watch_gz');
+</script>
+<![endif]-->
+<iframe id="supportiframe" name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe>
+{yun:}include file="$askstyle/footer.htm"{/yun}   
+

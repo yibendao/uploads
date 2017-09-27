@@ -1,0 +1,35 @@
+{yun:}include file="$comstyle/header.htm"{/yun}
+<div class="w1000">
+<div class="admin_mainbody"> {yun:}include file="$comstyle/left.htm"{/yun}
+  <link href="{yun:}$comstyle{/yun}/images/index_style.css" type=text/css rel=stylesheet>
+  <div class=right_box>
+    <div class=admincont_box>
+      <div class="com_tit"> 
+		<span class="com_tit_span">发送记录</span> 
+      </div>
+      <div class="com_body">
+        <div class=admin_textbox_04> 
+            <div class=table>  
+                <div class="job_news_list job_news_list_h1"> 
+                <span class="job_news_list_span job_w60" style="padding-right:5px;">编号</span>  
+                 <span class="job_news_list_span job_w370" style="text-align:center;width:500px">发送简历名</span>   
+                <span class="job_news_list_span job_w160" style="text-align:center">发送时间</span>
+                </div>
+                {yun:}foreach  from=$rows  item=v{/yun}
+                <div class="job_news_list">
+				<span class="job_news_list_span job_w60" style="padding-right:5px;">{yun:}$v.id{/yun}</span>  
+                  <span class="job_news_list_span job_w370"  style="width:500px">{yun:}if $v.content{/yun}{yun:}$v.content{/yun}{yun:}else{/yun}未找到合适简历！{yun:}/if{/yun}&nbsp;</span>  
+                  <span class="job_news_list_span job_w160" style="text-align:center">{yun:}$v.time|date_format:"%Y-%m-%d %H:%M"{/yun}</span>  
+				</div>
+                {yun:}foreachelse{/yun}
+                <div class="msg_no">暂无发送记录。 </div>
+                {yun:}/foreach{/yun} 
+            </div>  
+          <div class="clear"></div> 
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 
+</div> 
+{yun:}include file="$comstyle/footer.htm"{/yun}

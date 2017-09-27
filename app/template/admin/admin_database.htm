@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<link href="images/reset.css" rel="stylesheet" type="text/css" />
+<link href="images/system.css" rel="stylesheet" type="text/css" /> 
+<link href="images/table_form.css" rel="stylesheet" type="text/css" />
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js"></script> 
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script>
+<script src="js/admin_public.js" language="javascript"></script> 
+<title>后台管理</title> 
+</head>
+<script>
+function check_backup(){
+	var chk_value =[];    
+	$('input[name="table[]"]:checked').each(function(){    
+		chk_value.push($(this).val());   
+	});   
+	if(chk_value.length==0){
+		parent.layer.msg("请选择要备份的数据！",2,8);return false;
+	}else{
+		parent.layer.confirm("确定备份吗？",function(){
+			parent.layer.closeAll();
+			document.getElementById('myform').submit(); 
+		});
+	} 
+}
+</script>
+<body class="body_ifm">
+<div class="infoboxp">
+    <div class="infoboxp_top_bg"></div>
+    <div class="infoboxp_top infoboxp_topIjf" style="z-index:600;position:relative;">
+    <div class="report_uaer_list">
+         <span class="infoboxp_top_span">数据库管理</span>
+          <a href="index.php?m=database" class="infoboxp_top_span_sz  infoboxp_top_span_sz_in" style="color:#fff">备份数据</a>
+          <a href="index.php?m=database&c=backin">恢复数据</a>
+          </div> 
+    </div>
+
+
+
+<div class="table-list">
+<div class="admin_table_border">
+<iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe> 
+<form action="index.php?m=database&c=backup" name="myform" method="post" target="_self" id='myform'>
+<input type="hidden" name="pytoken" id="pytoken" value="{yun:}$pytoken{/yun}">
+<table width="100%">
+<thead>
+<tr class="admin_table_top">
+<th>类型名称</th>
+<th align="left">表</th>
+<th align="left">数量</th>
+<th>操作</th>
+
+</tr>
+<tbody>
+<tr style="background:#f1f1f1;height:25px">
+	<td align="center" width="30"><input type="checkbox" id='chkAll' onclick='CheckAll(this.form)' /></td>
+    <td colspan="1" width="40">
+    <label for="chkAll">全选</label>&nbsp;
+    </td>
+    <td >分卷大小(KB)：
+	<input name="maxfilesize" value="500" type="text"  class="input-text" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" style="width:180px;height:28px; line-height:28px;"><input name="button" value="备份" type="button" class="admin_submit4" onClick="return check_backup()">
+    </td>
+    <td>
+	
+    </td>
+  </tr>
+  
+  {yun:}foreach item=v key=key from=$table{/yun}
+  <tr align="center" {yun:}if ($key+1)%2=='0'{/yun}class="admin_com_td_bg"{yun:}/if{/yun} id="list{yun:}$v.name{/yun}">
+<td width="100"><input type="checkbox" name="table[]" value="{yun:}$v.name{/yun}"  onclick='unselectall()' style="margin-left:10px;"></td>
+<td width="400" align="left">{yun:}$v.name{/yun}</td>
+<td width="400" align="left">{yun:}$v.num{/yun}条</td>
+<td> 
+<a href="javascript:void(0)"class="admin_cz_sh" onClick="layer.confirm('确定要备份该表？',function(){location.href='index.php?m=database&c=sql&name={yun:}$v.name{/yun}&type=1'});" style="display:inline-block;width:40px;height:20px; line-height:20px; background:#1178c3; text-align:center;color:#fff">备份</a>  
+        <a href="javascript:void(0)"class="admin_cz_bj" onclick="layer_del('',	'index.php?m=database&c=sql&name={yun:}$v.name{/yun}&type=2');"style="display:inline-block;width:40px;height:20px; line-height:20px; background:#1178c3; text-align:center;color:#fff; margin-left:5px;">修复</a>
+        <a href="javascript:void(0)"class="admin_cz_sh" onclick="layer_del('', 'index.php?m=database&c=sql&name={yun:}$v.name{/yun}&type=3');"style="display:inline-block;width:40px;height:20px; line-height:20px; background:#1178c3; text-align:center;color:#fff; margin-left:5px;">优化</a></td>
+
+  </tr>
+ {yun:}/foreach{/yun} 
+ </tbody>
+ </thead>
+  </table>
+
+</form>
+</div>
+</div>
+</div>
+<style>
+	.admin_dbbak_tablelist{position:relative;}
+	.admin_dbbak_operation{position:absolute; background-color:white; border:1px solid red; width:250px;}
+</style>
+</body>
+</html>

@@ -1,0 +1,59 @@
+{yun:}include file="$userstyle/header.htm"{/yun} 
+<script src="{yun:}$config.sy_weburl{/yun}/js/class.public.js" type="text/javascript"></script> 
+<script> 
+</script>
+<div class="yun_user_member_w1100">
+    {yun:}include file="$userstyle/left.htm"{/yun}   
+	<div class="mian_right fltR mt20"> 
+		<div class="member_right_index_h1 fltL"> <span class="member_right_h1_span fltL">简历模板</span> <i class="member_right_h1_icon user_bg"></i></div> 
+			<div class="resume_box_list" style="margin-top:0px;"> 
+				<dl class="compl_list">
+					<dt> <img src="{yun:}$user_style{/yun}/images/mr.png"> </dt>
+					<dd>
+						模板名称：默认模板 <a href="{yun:}url m=resume c=show uid=$uid tmp=2{/yun}" target="_blank">[预览]</a>
+						<div class="compl_list_p">
+							模板价格：<b class="comtpl_b">免费</b>
+						</div>
+						<div>
+							{yun:}if $statis.tpl=='0'{/yun}
+							<div class="compl_list_ysy">使用中</div>
+							{yun:}else{/yun}  
+								<a href="javascript:void(0);" onclick="layer_del('确定试用该模板？', 'index.php?c=resumetpl&act=settpl&id=0');" class="comtpl_submit_sy">使用</a> 
+							{yun:}/if{/yun} 
+						</div>
+					</dd>
+				</dl>
+				<div class="clear"></div>
+				{yun:}foreach from=$rows item=style{/yun} 
+				<dl class="compl_list">
+					<dt> <img alt="{yun:}$style.name{/yun}" src="../{yun:}$style.pic{/yun}"> </dt>
+					<dd>
+						模板名称：{yun:}$style.name{/yun} <a href="{yun:}url m=resume c=show uid=$uid tmp=$style.id{/yun}" target="_blank">[预览]</a>
+						<div class="compl_list_p" id="list_tpl_{yun:}$style.id{/yun}">
+							模板价格：<b class="comtpl_b">
+								{yun:}if $style.price!=0{/yun}
+								{yun:}$style.price{/yun} {yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}
+								{yun:}else{/yun}
+								免费
+								{yun:}/if{/yun}
+							</b>
+						</div>
+						<div>
+							{yun:}if $statis.tpl==$style.id{/yun}
+							<div class="compl_list_ysy">使用中</div>
+							{yun:}else{/yun} 
+								{yun:}if in_array($style.id,$paytpls){/yun}
+									<a href="javascript:void(0);" onclick="layer_del('确定试用该模板？', 'index.php?c=resumetpl&act=settpl&id={yun:}$style.id{/yun}');" class="comtpl_submit_sy">使用</a>
+								{yun:}else{/yun}
+									<a href="javascript:void(0);" onclick="layer_del('购买模板将花费{yun:}$style.price{/yun}{yun:}$config.integral_pricename{/yun}，是否继续？', 'index.php?c=resumetpl&act=pay&id={yun:}$style.id{/yun}');" class="comtpl_submit_gm">购买</a>
+								{yun:}/if{/yun} 
+							{yun:}/if{/yun} 
+						</div>
+					</dd>
+				</dl>
+				<div class="clear"></div>
+				{yun:}/foreach{/yun} 
+			</div>
+		</div> 
+</div> 
+{yun:}include file="$userstyle/footer.htm"{/yun}

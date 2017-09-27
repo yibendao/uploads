@@ -1,0 +1,135 @@
+{yun:}include file="$askstyle/header.htm"{/yun}  
+<div class="content">	
+	<div>
+		<div class="left"> 			
+			<div class="answer">
+				{yun:}if $getinfo.cid{/yun}
+				<div class="left_top">
+					<div class="topic_search_tip">
+					{yun:}qcache classid='auto.cid' limit=1 item=cache name=cache_one{/yun}
+					<dl>
+						<dt><img src="{yun:}$config.sy_weburl{/yun}/{yun:}$cache.pic{/yun}" /></dt> 
+						<dd>
+							<h2>{yun:}$cache.name{/yun}</h2>
+							<p>{yun:}$cache.intro{/yun}</p>
+						</dd>
+					</dl>
+					{yun:}/qcache{/yun}
+					</div>
+				</div>
+				{yun:}/if{/yun}
+				<div class="clear"></div>
+				<div class="answer_tit">
+					<h3>{yun:}if $getinfo.keyword{/yun}关于“{yun:}$getinfo.keyword{/yun}”的问题{yun:}else{/yun}所有问题{yun:}/if{/yun}</h3>
+					<div class="ans_disc">
+						<a {yun:}if $getinfo.order!='answernum'{/yun}class='cur'{yun:}/if{/yun} href="{yun:}url m=ask c=search keyword='`$getinfo.keyword`' cid='`$getinfo.cid`'{/yun}" >按时间</a> |
+						<a {yun:}if $getinfo.order=='answernum'{/yun}class='cur'{yun:}/if{/yun} href="{yun:}url m=ask c=search keyword='`$getinfo.keyword`' cid='`$getinfo.cid`' order=answernum{/yun}">按回答</a>
+					</div>
+				</div>
+				
+				<div class="answer_list">
+					{yun:}qlist item=list name=list keyword='auto.keyword' ispage=1 t_len=20 order='auto.order' cid='auto.cid' limit=10{/yun}
+					<div class="answer_det">
+						<h4>
+							<p><a href="{yun:}$list.url{/yun}" target="_blank" title="{yun:}$list.title{/yun}">{yun:}$list.title{/yun}</a></p>
+							<span class="attention q{yun:}$list.id{/yun}">
+								{yun:}if $list.isatn!='2'&&$list.uid!=$uid{/yun}
+									{yun:}if in_array($list.id,$my_atten){/yun}
+									<a href="javascript:void(0);"  onclick="attention('{yun:}$list.id{/yun}','1','{yun:}url m=ask c=friend a=attention{/yun}');" class="watch_qxgz">取消关注</a>
+									{yun:}else{/yun}
+									<a href="javascript:void(0);" onclick="attention('{yun:}$list.id{/yun}','1','{yun:}url m=ask c=friend a=attention{/yun}');" class="watch_gz" title="关注问题">关注问题</a>
+									{yun:}/if{/yun} 
+								{yun:}/if{/yun}
+							</span>
+						</h4>
+						<dl>
+							<dt><img src="{yun:}$list.pic{/yun}" width='49' height="49"onerror="showImgDelay(this,'{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_friend_icon{/yun}',2);" /></dt>
+							<dd>
+								<p>{yun:}$list.content|strip_tags|mb_substr:0:100:'gbk'{/yun}</p> 
+								<div class="answer_on">
+									<span><font><a href="{yun:}url m=ask c=friend a=myquestion uid='`$list.uid`'{/yun}" TARGET="_blank">{yun:}$list.nickname{/yun}</a></font>发起了话题 </span>&middot;
+									<span><font class="index_num{yun:}$list.id{/yun}">{yun:}$list.atnnum{/yun}</font>人关注 </span>&middot;
+									<span><font>{yun:}$list.answer_num{/yun}</font>个回答 </span>&middot;
+									<span><font>{yun:}$list.visit{/yun}</font>次浏览 </span>&middot;
+									<span>{yun:}$list.add_time|date_format:"%Y-%m-%d %H:%M"{/yun}</span>
+								</div>
+								
+							</dd>
+							<div class="clear"></div>
+						</dl>
+					</div>
+					{yun:}/qlist{/yun}  
+					<div class="clear"></div>
+				</div>
+				{yun:}if $total==0{/yun}
+                <div style="padding:0px 10px 10px 10px;">
+				 <div class="noresult">
+               		 暂时没有提问相关问题 <br>
+                	<span><a href="{yun:}url m=ask c=addquestion{/yun}">抓紧提问吧!</a></span>
+            	</div>	</div>
+				{yun:}else{/yun} 
+				<div class="pages">{yun:}$pagenav{/yun}</div> 
+				{yun:}/if{/yun}  
+			</div>
+		</div>
+		<div class="right">
+			<div class="hot_pro">
+             <div class="ask_tit"><span class="ask_tit_icon_s"><i class="ask_tit_icon"></i>热门问题</span></div>
+		
+				<ul>
+					{yun:}qlist item=hlist name=hlist key=hkey hot=1 order=answernum t_len=20  limit=6{/yun}
+					<li>
+						<span class="{yun:}if $hkey>2{/yun}hot_cur{yun:}/if{/yun}">{yun:}$hkey+1{/yun}</span> 
+						<p><a href="{yun:}$hlist.url{/yun}" target="_blank">{yun:}$hlist.title{/yun}</a></p>
+					</li>
+                    {yun:}qlistelse{/yun}
+                    <dl class="hot_pro_no">
+                    <dt></dt>
+                    <dd>还没有热门问题</dd>
+                    </dl>
+					{yun:}/qlist{/yun} 
+					<div class="clear"></div>
+				</ul>
+			</div>
+			<div class="hot_user">
+            <div class="ask_tit"><span class="ask_tit_icon_s"><i class="ask_tit_icon"></i>热门标签</span></div>
+			
+				<div class="hot_tag_con">
+					{yun:}foreach from=$hotclass key=key item=hclist{/yun}
+					<a href="{yun:}url m=ask c=search cid='`$key`'{/yun}" target="_blank">{yun:}$hclist{/yun}</a>
+					{yun:}/foreach{/yun} 
+				</div>
+			</div>
+			<div class="hot_user">
+                <div class="ask_tit"><span class="ask_tit_icon_s"><i class="ask_tit_icon"></i>本月答人</span></div>
+				{yun:}foreach from=$hotuser item=hulist{/yun}
+				<div class="hot_userdet">
+					<div class="user_det1">
+						<div class="user_mes">
+							<div class="user_pho">
+								<img src="{yun:}$hulist.pic{/yun}" onerror="showImgDelay(this,'{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_friend_icon{/yun}',2);"/>
+							</div>
+							<div class="user_name">
+								<p><a href="{yun:}url m=ask c=friend a=myquestion uid='`$hulist.uid`'{/yun}" TARGET="_blank">{yun:}$hulist.nickname{/yun}</a></p>
+								<span><font>{yun:}$hulist.num{/yun}</font>个回答，<font>{yun:}$hulist.support{/yun}</font>次赞同</span>
+							</div>
+						</div>
+						{yun:}if $hulist.description{/yun}<div class="user_tag">签名：{yun:}$hulist.description{/yun}</div>{yun:}/if{/yun}
+					</div> 
+				</div>
+				{yun:}/foreach{/yun} 
+			</div>
+		</div>
+	</div>
+</div> 
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js" type="text/javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script>
+<script src="{yun:}$ask_style{/yun}/js/question.js" type="text/javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/public.js" language="javascript"></script>
+<!--[if IE 6]>
+<script src="{yun:}$config.sy_weburl{/yun}/js/png.js"></script>
+<script>
+DD_belatedPNG.fix('.png,.attention .watch_gz');
+</script>
+<![endif]-->
+{yun:}include file="$askstyle/footer.htm"{/yun}   

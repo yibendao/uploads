@@ -1,0 +1,438 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link href="images/reset.css" rel="stylesheet" type="text/css" />
+<link href="images/system.css" rel="stylesheet" type="text/css" />
+<link href="images/table_form.css" rel="stylesheet" type="text/css" />
+<script> var weburl = '{yun:}$config.sy_weburl{/yun}';</script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script>
+<script charset="utf-8" src="../js/kindeditor/kindeditor-min.js"></script>
+<script charset="utf-8" src="../js/kindeditor/lang/zh_CN.js"></script>
+<link rel="stylesheet" href="../js/kindeditor/themes/default/default.css" />
+<script src="js/admin_public.js" language="javascript" type="text/javascript"></script> 
+<script language="javascript" type="text/javascript">
+KindEditor.ready(function(K) {
+	var editor = K.editor({
+		allowFileManager : false
+	}); 
+	K('#insertfile').click(function() {
+		editor.loadPlugin('images', function() {
+			editor.plugin.imageDialog({
+				imageUrl : K('#pic_url').val(),
+				clickFn : function(url, title, width, height, border, align) {
+					K('#pic_url').val(url);
+					K('#span_pic_url').html(url);
+					editor.hideDialog();
+				}
+			});
+		});
+	});
+}); 
+  
+
+function createOption(tableNameId){
+
+	var optionArray = $("input[name='option["+tableNameId+"][]']");
+	var optionId = Number(optionArray.length)+1;
+	var oTr=
+		'<tr>'
+			+'<th>选项'+optionId+'：</th>'
+			+'<td><input type="text" name="option['+tableNameId+'][]" size="50" class="input-text"/>分值：<input type="text" name="score['+tableNameId+'][]" class="input-text" size="5"/></td>'
+		+'</tr>'
+	$("#actionTr"+tableNameId).before(oTr);
+	$("#delOption"+tableNameId).css({opacity: "1",filter: "alpha(opacity=100)"});
+}
+
+
+function delOption(tableNameId){
+	var optionArray = $("input[name='option["+tableNameId+"][]']");
+	var scoreArray = $("input[name='score["+tableNameId+"][]']");
+	if(Number(optionArray.length)==Number(scoreArray.length) && Number(optionArray.length) > 1){
+		$("#actionTr"+tableNameId).prev().remove();
+	}else{
+		$("#delOption"+tableNameId).css({opacity: "0.4",filter: "alpha(opacity=40)"});
+	}
+}
+
+function delQuestion(tableNameId){
+	$("table[name='tQuestion["+tableNameId+"]']").remove();
+	$(".showAddQuestionBtn").show();
+}
+
+$(document).ready(function() {
+
+    $(".showAddQuestionBtn").click(function(){
+	    var examid = $("#examid").val();
+		if(!examid){
+		    layer.msg("请先完成上面的试卷添加操作",2,8);return false;
+		}
+		if($("#divSeparat").prev().attr("name")){
+		    var tableNameId=Number(($("#divSeparat").prev().attr("name")).match(/\d+/g))+1; 
+		}else{
+		    var tableNameId=1;
+		}
+		var quesId = Number($("table[name^='tQuestion']").length)+1;
+		var tpl=
+		'<table name="tQuestion['+tableNameId+']" class="table_form" width="100%" border="1px solid #000;">'
+      		+'<tr>'
+            	+'<th width="120" name="th_que_id">问题 '+quesId+'：</th>'
+                +'<td>'
+                	+'<textarea name="question['+tableNameId+']" rows="2" cols="100" class="web_compl_textarea"></textarea> '
+                    +'<input id="createOption'+tableNameId+'" type="button" name="createOption'+tableNameId+'" value="添加选项" class="admin_submit4" onclick="createOption('+tableNameId+')"/> '
+                	+'<input id="delOption'+tableNameId+'" type="button" name="delOption'+tableNameId+'" value="删除选项" class="admin_submit4" onclick="delOption('+tableNameId+')"/> '
+                    +'<input id="delQuestion'+tableNameId+'" type="button" name="delQuestion'+tableNameId+'" value="删除该题" class="admin_submit4" onclick="delQuestion('+tableNameId+')"/> '
+					+'<input id="saveNewQuestion'+tableNameId+'" type="button" name="saveNewQuestion'+tableNameId+'" value="保存该题" class="admin_submit4" onclick="saveNewQuestion('+tableNameId+')"/> '
+                +'</td>'
+            +'</tr>'
+            +'<tr>'
+            	+'<th>选项1：</th>'
+                +'<td><input type="text" name="option['+tableNameId+'][]" size="50" class="input-text"/>分值：<input type="text" name="score['+tableNameId+'][]" class="input-text" size="5"/></td>'
+            +'</tr>'
+             +'<tr>'
+            	+'<th>选项2：</th>'
+                +'<td><input type="text" name="option['+tableNameId+'][]" size="50" class="input-text"/>分值：<input type="text" name="score['+tableNameId+'][]" class="input-text" size="5"/></td>'
+            +'</tr>'
+            +'<tr id="actionTr'+tableNameId+'">'
+        	+'</tr>'
+         +'</table>';
+		 
+		 $("#divSeparat").before(tpl);		
+		 $(".showAddQuestionBtn").hide();
+
+	}); 
+	
+
+	$("input[name^='score']").live("keyup",function(){
+		setNumber(this);
+	});
+	 
+	$(".newcommentbtn").click(function(){
+		var newtr = '<tr>'
+				+'<th>成绩：</th>'
+				+'<td>'
+            	+'<input type="text" size="4" class="input-text" name="fromscore[]" style="width:80px;"/> 分到'
+                +'<input type="text" size="4" name="toscore[]" class="input-text"/style="width:80px;"> 分'
+				+'</td>'
+            	+'<td>评语：</td>'
+            	+'<td><textarea name="comment[]" cols="80" rows="3" class="web_compl_textarea"></textarea></td></tr>';
+		$("#newCommentTr").before(newtr);
+		$("input[name='delcomment']").css({opacity: "1",filter: "alpha(opacity=100)"});
+	});
+	
+	$(".delcommentbtn").click(function(){
+		var commentSet=$("input[name='fromscore[]']");
+		if(commentSet.length<=2){
+			parent.layer.msg('再删就没有啦！',2,8);return false;
+			
+		}else{
+			$("#newCommentTr").prev().remove();
+		}
+	});
+	$("input[name='fromscore[]']").live("keyup",function(){setNumber(this);});
+	$("input[name='toscore[]']").live("keyup",function(){setNumber(this);	});
+	$("input[name='sort']").live("keyup",function(){ this.value = this.value.replace(/([\D]+)|^([0].+)/igm,"");});
+	
+}); 
+ 
+function setNumber(obj){obj.value=obj.value.replace(/([\D]+)|^([0].+)|([\d]{4,})/igm,"");};
+
+function editquestion(id){
+	$("table[name='lookQuestion["+id+"]']").hide();
+	$("table[name='tQuestion["+id+"]']").show();
+}
+function abandonSave(id){
+	$("table[name='lookQuestion["+id+"]']").show();
+	$("table[name='tQuestion["+id+"]']").hide();
+}
+
+function saveQuestion(id){
+	var questid = id;
+	var question = $("textarea[name='question["+id+"]']").val();
+	var option_arr = $("input[name='option["+id+"][]']");
+	var option=new Array();
+	var score_arr = $("input[name='score["+id+"][]']");
+	var score=new Array();
+	for(var i=0; i<option_arr.length; i++){
+		if(option_arr[i].value){
+			option[i] = option_arr[i].value;
+		}
+		if(score_arr[i].value){
+			score[i] = score_arr[i].value;
+		} 
+	}
+	if(question==''||option==''||score==''){
+		layer.msg("问题、选项、分值都不能为空！！",2,8);return false;
+	} 
+	var url="index.php?m=admin_evaluate&c=ajaxsave";
+	var sendinfo={
+		questid:questid,
+		question:question,
+		option:option,
+		score:score,
+		status:"up",
+		pytoken:$("#pytoken").val()
+	};
+	loadlayer();
+	$.post(url,sendinfo,function(data){
+		parent.layer.closeAll();
+		if(data!=1){config_msg(data);}else{location.reload();}
+	});
+}
+function saveNewQuestion(tableNameId){
+	var examid = $("#examid").val();
+	var question = $.trim($("textarea[name='question["+tableNameId+"]']").val());
+	var option_arr = $("input[name='option["+tableNameId+"][]']");
+	var score_arr = $("input[name='score["+tableNameId+"][]']");
+	var option = new Array();
+	var score = new Array();
+	for(var i=0; i<option_arr.length; i++){
+		option[i] = option_arr[i].value;
+		score[i] = score_arr[i].value;
+	};
+	if(question==''||option==''||score==''){
+		layer.msg("问题、选项、分值都不能为空！！",2,8);return false;
+	}
+	var url="index.php?m=admin_evaluate&c=ajaxsave";
+	var sendinfo={
+		examid:examid,
+		question:question,
+		option:option,
+		score:score,
+		status:"savenewquestion",
+		pytoken:$("#pytoken").val()
+	};
+	loadlayer();
+	$.post(url,sendinfo,function(data){
+		parent.layer.closeAll();
+		if(data!=1){config_msg(data);}else{location.reload();}
+	});
+} 
+function checkform(){
+	var examtitle=$.trim($("#examtitle").val());
+	var pic_url=$.trim($("#pic_url").val());
+	var selectgroup=$.trim($("#selectgroup_val").val());
+	var description=$.trim($("#description").val());
+	parent.layer.closeAll();
+	if(pic_url==''){
+		layer.msg('请选择图片！',2,8);return false;
+	}
+	if(selectgroup==''){
+		layer.msg('请选择测评分组！',2,8);return false;
+	}
+	if(examtitle==''){
+		layer.msg('请填写测评名称！',2,8);return false;
+	}
+	var mtype='';
+	$("input[name='fromscore[]']").each(function(){  
+		if($(this).val()==''){
+			mtype=1;
+		}
+	});
+	$("input[name='toscore[]']").each(function(){  
+		if($(this).val()==''){
+			mtype=1; 
+		}
+	});
+	$("textarea[name='comment[]']").each(function(){  
+		if($(this).val()==''){
+			mtype=1; 
+		}
+	});
+	if(mtype!=''){
+		layer.msg('请完善评语管理！',2,8);return false;
+	}
+}
+</script>
+<title>后台管理</title>
+</head>
+<body class="body_ifm">
+
+<div class="infoboxp">
+<div class="infoboxp_top_bg"></div>
+ 
+  <div class="infoboxp_top">
+     <span class="admin_title_span">添加测评试卷</span>
+        <a href="index.php?m=admin_evaluate" class="admin_infoboxp_nav admin_infoboxp_xwlb">测评列表</a>
+          <em class="admin-tit_line"></em>
+        <a href="index.php?m=admin_evaluate&c=group" class="admin_infoboxp_nav admin_infoboxp_lb">类别管理</a>
+  </div>
+  <div class="clear"></div>
+  <div class="admin_table_border">
+    <iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"> </iframe>
+   <form name="myform" target="supportiframe" action="index.php?m=admin_evaluate&c=examupsave" method="post" onsubmit="return checkform();"> 
+      <table class="table_form" width="100%">
+		<tr>
+			<th width="120">缩略图：</th>
+			<td colspan="3">  
+				<span id='news_pic'>{yun:}$info.pic{/yun}</span>	
+				<input type="hidden" class="input-text" name="uplocadpic" value="{yun:}$info.pic{/yun}" id='pic_url'/>
+				<input   type="button" id="insertfile" class="admin_st" value="选择图片" />
+			</td>
+		</tr>
+		{yun:}if $info.pic{/yun} 		
+		<tr>
+			<th width="120">现使用图片：</th>
+			<td colspan="3">  
+				<img src="{yun:}$config.sy_weburl{/yun}/{yun:}$info.pic{/yun}" width='200' height='100'/>
+			</td>
+		</tr> 
+		{yun:}/if{/yun} 
+        <tr>
+          <th width="120">测评试卷分组：</th>
+          <td colspan="3">
+          
+            <div class="yun_admin_select_box zindex100"> {yun:}if $info.keyid{/yun}
+                  {yun:}foreach item=v from=$group_all{/yun}
+                  {yun:}if $info.keyid==$v.id{/yun}
+                  <input type="button" value="{yun:}$v.name{/yun}" class="yun_admin_select_box_text" id="selectgroup_name" onClick="select_click('selectgroup');">
+                  <input name="selectgroup" type="hidden" id="selectgroup_val" value="{yun:}$v.id{/yun}">
+                   
+                  {yun:}/if{/yun}
+                  {yun:}/foreach{/yun}
+                  {yun:}else{/yun}
+                  <input type="button" value="请选择" class="yun_admin_select_box_text" id="selectgroup_name" onClick="select_click('selectgroup');">
+                  <input name="selectgroup" type="hidden" id="selectgroup_val" value="">
+                   
+                  {yun:}/if{/yun}
+                  <div class="yun_admin_select_box_list_box dn" id="selectgroup_select"> {yun:}foreach item=v from=$group_all{/yun}
+                    <div class="yun_admin_select_box_list"> <a href="javascript:;" onClick="select_new('selectgroup','{yun:}$v.id{/yun}','{yun:}$v.name{/yun}')">{yun:}$v.name{/yun}</a> </div>
+                    {yun:}/foreach{/yun} </div>
+                </div>
+            {yun:}if !$group_all{/yun}<span style="font-size:20px; color:red; line-height:34px; display:inline-block">请先添加测评类别</span>{yun:}/if{/yun}
+          </td>
+        </tr> 
+      	<tr>
+        	<th width="120">测评试卷名称：</th>
+            <td colspan="4"><input type="text" id="examtitle" name="examtitle" class="input-text" value="{yun:}$info.name{/yun}"/> <label style="font-size:20px; color:red;">共{yun:}$ask|@count{/yun}道题，{yun:}$fullscore{/yun}分</label></td>
+        </tr>  
+		<tr>
+			<th width="120">试卷排序：</th>
+			<td colspan="3"> 
+				<input type="text" name="sort"  size="5" value="{yun:}$info.sort{/yun}" class="input-text" />
+			</td>
+		</tr> 
+		<tr>
+			<th width="120">试卷属性：</th>
+			<td colspan="3">
+				<input id="top" type="checkbox" {yun:}if $info.top=='1'{/yun}checked="checked"{yun:}/if{/yun} value="1" name="top">
+				<label for="top">首页幻灯</label>
+				<input id="hot" type="checkbox" {yun:}if $info.hot=='1'{/yun}checked="checked"{yun:}/if{/yun} value="1" name="hot">
+				<label for="hot">头条</label>
+				<input id="recommend" type="checkbox" {yun:}if $info.recommend=='1'{/yun}checked="checked"{yun:}/if{/yun} value="1" name="recommend">
+				<label for="recommend">推荐</label> 
+			</td> 
+		</tr> 
+          <tr>
+              <th  width="120">描　　述：</th>
+              <td colspan="3"><textarea name="description" cols="100" rows="3" id='description'  class="add_class_textarea">{yun:}$info.description{/yun}</textarea>
+              </td>
+          </tr>
+		  <tr><td colspan="4"> 
+			
+            
+            <div class='table_form' style="padding: 10px 0 10px 0px;background: #f1f1f1 none repeat scroll 0 0;float:left;width:100%">
+			<span style="float:left; padding-left:10px;"><font style="color:#3a6ea5;line-height:35px;">评语管理</font> </span>
+			<span style="float:left;margin-left:20px;">
+			<a class="admin_infoboxp_nav admin_infoboxp_tj newcommentbtn" href="javascript:void(0)">添加评语</a> 
+			{yun:}if $info.id{/yun}<a class="admin_infoboxp_nav admin_infoboxp_sc delcommentbtn" href="javascript:void(0)">删除评语</a> {yun:}/if{/yun} 
+			</span>
+		</div>  
+		  </td></tr> 
+      {yun:}foreach from=$info.fromscore item=value key=key{/yun}
+	  <tr>
+		  <th width="120">成绩：</th>
+		  <td>
+			  <input type="text" class="input-text" size='4' name="fromscore[]" value="{yun:}$info.fromscore[$key]{/yun}" style="width:80px;"/> 分到 <input type="text" name="toscore[]" class="input-text" size='4' value="{yun:}$info.toscore[$key]{/yun}" style="width:80px;"/> 分
+		   </td>
+		   <td>评语：</td>
+		  <td>
+			<textarea name="comment[]" cols="80" rows="3"  class="web_compl_textarea">{yun:}$info.comment[$key]{/yun}</textarea>
+			
+		  </td>
+	  </tr> 
+      {yun:}/foreach{/yun}
+		<tr id="newCommentTr"> 
+		  <td colspan='3'></td>
+			  <td>
+				{yun:}if $info.id{/yun}	
+				  <input type="submit" value="保存" name="submit" class="admin_submit4"/> 
+				  {yun:}else{/yun}	
+				  <input type="submit" value="下一步" name="submit" class="admin_submit4"/> 
+				  {yun:}/if{/yun}	
+			  </td>
+		</tr>
+      </table>    
+      <input id="pytoken" type="hidden" name="pytoken" value="{yun:}$pytoken{/yun}">
+      <input type="hidden" name="examid" id="examid" value="{yun:}$info.id{/yun}">      
+	</form>   
+	{yun:}if $info.id{/yun}
+		<div class='table_form' style="padding: 10px 0 10px 0px;background: #f1f1f1 none repeat scroll 0 0;float:left;width:100%">
+			<span style="float:left; padding-left:10px;"><font style="color:#3a6ea5;height:31px;line-height:31px;">题目管理</font> </span>
+			<span style="float:left;margin-left:20px;">
+			<a class="admin_infoboxp_nav admin_infoboxp_tj showAddQuestionBtn" style="margin-top:6px;" href="javascript:void(0)">添加题目</a>   
+			</span>
+		</div>     
+    
+      {yun:}foreach from=$ask item=value  key=key{/yun}
+		<table id="lookQuestion[{yun:}$value.id{/yun}]" name="lookQuestion[{yun:}$value.id{/yun}]" class="table_form" width="100%" >
+      		<tr>
+            	<th width="120">问题　{yun:}$key+1{/yun}：</th>
+                <td>{yun:}$value.question{/yun} </td>
+                <td width="240"><input class="admin_eva_exam_xg" type="button" value="修改该题" onClick="editquestion({yun:}$value.id{/yun})"/></td>
+            </tr>
+            {yun:}foreach from=$value.option item=v key=k{/yun}
+            <tr style="display:none;" >
+            	<th>选项{yun:}$k+1{/yun}：</th>
+                <td>{yun:}$ask[$key].option[$k]{/yun}</td>
+                <td>分值：({yun:}$ask[$key].score[$k]{/yun}分)</td>
+            </tr>
+            {yun:}/foreach{/yun}
+		</table>
+   
+     
+		<table id="tQuestion[{yun:}$value.id{/yun}]" name="tQuestion[{yun:}$value.id{/yun}]" class="table_form hidden" width="100%" style=" border:1px solid; display:none;">
+      		<tr>
+            	<th width="120" name="th_que_id">问题　{yun:}$key+1{/yun}：</th>
+                <td>
+                	<textarea id="textarea{yun:}$value.id{/yun}" name="question[{yun:}$value.id{/yun}]" rows="2" cols="100">{yun:}$value.question{/yun}</textarea>
+                    <input id="createOption{yun:}$value.id{/yun}" type="button" name="createOption{yun:}$value.id{/yun}" value="添加选项" class="admin_submit4" onclick="createOption({yun:}$value.id{/yun})"/>
+                	<input id="delOption{yun:}$value.id{/yun}" type="button" name="delOption{yun:}$value.id{/yun}" value="删除选项" class="admin_submit4" onclick="delOption({yun:}$value.id{/yun})"/>
+                    <input id="delQuestion{yun:}$value.id{/yun}" type="button" name="delQuestion{yun:}$value.id{/yun}" value="删除该题" class="admin_submit4" onclick="layer_del('确定要删除？', 'index.php?m=admin_evaluate&c=delquestion&qid={yun:}$value.id{/yun}');" />
+                    <input id="saveQuestion{yun:}$value.id{/yun}" type="button" name="saveQuestion{yun:}$value.id{/yun}" value="更新该题" class="admin_submit4" onclick="saveQuestion({yun:}$value.id{/yun})"/>
+                    <input id="abandonSave{yun:}$value.id{/yun}" type="button" name="abandonSave{yun:}$value.id{/yun}" value="放弃修改" class="admin_submit4" onclick="abandonSave({yun:}$value.id{/yun})"/>
+                </td>
+            </tr>
+          
+            {yun:}foreach from=$value.option item=v key=k{/yun}
+            <tr>
+            	<th>选项{yun:}$k+1{/yun}：</th>
+                <td><input type="text"  class="input-text" name="option[{yun:}$value.id{/yun}][]" value="{yun:}$ask[$key].option[$k]{/yun}" size="50"/>分值：<input type="text" name="score[{yun:}$value.id{/yun}][]" value="{yun:}$ask[$key].score[$k]{/yun}" size='5' class="input-text"/>
+				</td>
+            </tr>
+            {yun:}/foreach{/yun}
+            <tr id="actionTr{yun:}$ask[$key].id{/yun}"></tr>
+      </table>
+      {yun:}/foreach{/yun} 
+      <div id="divSeparat"></div>
+      <table  class="table_form" width="100%"  height="50px" >
+			<tr >
+          		<td colspan="2" align="center">
+                </td>
+        	</tr>
+      </table>
+	{yun:}/if{/yun}
+   </div>
+</div> 
+<div id="divExamInfo"  style="position: fixed; _position:absolute; text-align: center; bottom: 15px; cursor: pointer; right: 40px; border: 1px solid #1178c3;background-color: white; width:84px;">
+<div style="width:100%;height:28px; line-height:28px; background: #1178c3;color:#fff; font-weight:bold;font-size: 12px; ">问题/总分</div>
+<div style="padding:0px 5px; font-size:12px; line-height:25px;">
+    <table>
+    	<tr><td>问题：</td><td>{yun:}$ask|@count{/yun}道</td></tr>
+        <tr><td>总分：</td><td>{yun:}$fullscore{/yun}分</td></tr>
+    </table>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>{yun:}$title{/yun}</title>
+<meta name="keywords" content="{yun:}$keywords{/yun}"/>
+<meta name="description" content="{yun:}$description{/yun}"/>
+<link rel="stylesheet" href="{yun:}$style{/yun}/style/css.css" type="text/css"/>
+<link rel="stylesheet" type="text/css" href="{yun:}$style{/yun}/special/css/css.css"/>
+</head>
+<body>
+{yun:}include file="$tplstyle/header.htm"{/yun}
+<div  class="famous_body" style="width:100%;height:100%;background:#010206 url({yun:}$config.sy_weburl{/yun}{yun:}$info.background{/yun}) no-repeat center top">
+<div class="famous_bg">&nbsp;</div>
+
+<div class="special_cont">
+<div class="famous_top_content">
+<div class="famous_content_t_icon"></div>
+<!--我要报名-->
+ <div class="special_p_cont">
+	<div class="famous_content_p_bor">
+		<div class="famous_content_js"><span class="famous_content_js_span">专题介绍</span><em class="famous_content_js_em"> Presentations</em></div>
+		<div class="famous_content_p">
+			{yun:}$info.intro{/yun}
+		  {yun:}if !$isapply{/yun}
+			<div class="famous_content_p_bth">    
+				我是企业,我想参加招聘
+                {yun:}if $uid{/yun}
+                {yun:}if $usertype=='2'{/yun}
+				<input type='button' value="我要报名" onclick="comapply('{yun:}$info.id{/yun}','{yun:}$info.integral{/yun}','{yun:}url m=special c=apply{/yun}')" class="famous_btn" />
+                {yun:}else{/yun}
+                <input type='button' value="我要报名" onclick="layer.msg('只有企业用户才能报名！',2,8);" class="famous_btn" />
+                {yun:}/if{/yun}
+                {yun:}else{/yun}
+                <input type='button' value="我要报名" onclick="showlogin('2')" class="famous_btn" />
+                {yun:}/if{/yun} 
+			</div>         
+			{yun:}/if{/yun}
+		</div>  
+	</div>
+</div>
+<div class="famous_content_t_icon"></div>
+<div class="famous_content_t_zt"><span class="famous_content_t_zt_span">名企招聘</span><em class="famous_content_t_zt_span_em">  Name recruitment</em></div>
+
+  <ul class="famous_job_list">
+	{yun:}specialcom sid='auto.id' namelen=10 jobnamelen=6 item=clist{/yun}
+	{yun:}if $clist.jobs{/yun}
+    <li> 
+    <div class="famous_job_pic">
+		<a href="{yun:}$clist.comurl{/yun}" target="_blank"><img src="{yun:}$clist.logo{/yun}" width="185" height="75" onerror="showImgDelay(this,'{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_unit_icon{/yun}',2);"/></a>
+        </div>
+			<div class="famous_job_h_name">
+			 <a href="{yun:}$clist.comurl{/yun}" target="_blank">{yun:}$clist.name_n{/yun}</a>
+             </div>
+            <div class="famous_job_l">
+		     {yun:}foreach from=$clist.jobs item=jlist{/yun}
+			 <a href="{yun:}$jlist.joburl{/yun}" target="_blank">{yun:}$jlist.name_n{/yun}</a>
+			{yun:}/foreach{/yun}
+            </div>
+			<div class="famous_job_j_p">公司所在：{yun:}$clist.provinceid{/yun}  {yun:}$clist.cityid{/yun}</div>
+			<div class="famous_job_j_p">所属行业：{yun:}$clist.hyname{/yun}</div>
+			<div class="famous_job_j_p">公司规模：{yun:}$clist.mun{/yun}</div>
+			<div class="famous_job_j_p">公司性质：{yun:}$clist.pr{/yun}</div>
+			<div class="famous_job_j_p"><a href="{yun:}$clist.comurl{/yun}" target="_blank">查看详情>></a></div>
+    </li>
+	{yun:}/if{/yun}
+    {yun:}/specialcom{/yun} 
+    </ul>
+</div>
+</div>
+</div></div>
+<style>
+.foot{ margin-top:0px;}
+</style>
+{yun:}include file="$tplstyle/public_search/login.htm"{/yun}
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script> 
+<script src="{yun:}$config.sy_weburl{/yun}/js/lazyload.min.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/public.js" language="javascript"></script>
+<script src="{yun:}$style{/yun}/js/special.js" language="javascript"></script>
+<!--[if IE 6]>
+<script src="{yun:}$config.sy_weburl{/yun}/js/png.js"></script>
+<script>
+DD_belatedPNG.fix('.png');
+</script>
+<![endif]--> 
+{yun:}include file="$tplstyle/footer.htm"{/yun}

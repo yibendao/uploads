@@ -1,0 +1,46 @@
+{yun:}include file="$comstyle/header.htm"{/yun}
+<div class="w1000">
+  <div class="admin_mainbody"> 
+   {yun:}include file="$comstyle/left.htm"{/yun}
+    <div class=right_box>
+      <div class=admincont_box>
+        <div class="com_tit"><span class="com_tit_span">企业环境展示</span> <input class="com_tit_span_t_sub"   type="button" value="我要上传"  onclick="location.href='index.php?c=show&act=addshow'"/>     </div>
+           <div class="com_body">
+       
+
+        <div class="show_pic fltL">
+          <div id="trlisttwo">
+             <div class="show_pic_list">
+			  {yun:}foreach item=show from=$rows{/yun}   
+				<dl>
+					<dt>
+						<img src=".{yun:}$show.picurl{/yun}" width="220" height="180"/>    
+						<div class="com_show_b_name">{yun:}$show.title{/yun}</div>
+						<div class="compl_list_bg"></div>
+					</dt>
+					<dd style="text-align:center;">
+						<a href=".{yun:}$show.picurl{/yun}" target="_blank" class="cblue">查看</a><span class="com_show_b_line">|</span> 
+						<a href="index.php?c=show&act=showpic&id={yun:}$show.id{/yun}" class="cblue">修改</a><span class="com_show_b_line">|</span> 
+						<a href="javascript:void(0)" onclick="layer_del('确定要删除？', 'index.php?c=show&&act=del&id={yun:}$show.id{/yun}'); " class="cblue">删除</a>
+					</dd>
+				</dl>
+                
+                {yun:}foreachelse{/yun}    
+          <div class="com_msg_no">
+      <p>亲爱的用户，目前您还没有上传企业环境信息，</p>
+  <p>立即上传环境信息,为招聘效果加分！</p>
+    <input class="com_msg_no_bth com_submit"   type="button" value="我要上传"  onclick="location.href='index.php?c=show&act=addshow'"/>     
+
+</div>
+             {yun:}/foreach{/yun}
+			 </div>   
+			</div>
+        </div>
+      </div>
+      <div class="clear"></div>
+      <div class="diggg">{yun:}$pagenav{/yun}</div>
+    </div>
+  </div>
+</div> 
+</div> 
+{yun:}include file="$comstyle/footer.htm"{/yun}

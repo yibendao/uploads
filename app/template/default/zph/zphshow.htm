@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>{yun:}$title{/yun}</title>
+<meta name="keywords" content="{yun:}$keywords{/yun}"/>
+<meta name="description" content="{yun:}$description{/yun}"/>
+<link rel="stylesheet" href="{yun:}$style{/yun}/style/css.css" type="text/css"/>
+<link rel="stylesheet" href="{yun:}$style{/yun}/style/yun_job_fairs.css" type="text/css"/>
+</head>
+<body>
+{yun:}include file="$tplstyle/header.htm"{/yun}
+<div class="yun_content">
+  <div class="current_Location"> 您当前的位置：<a href="{yun:}$config.sy_weburl{/yun}">首页</a> > <a href="{yun:}url m=zph{/yun}">招聘会</a>
+   > {yun:}$Info.title{/yun}</div>
+  <div class="job_fairs fl">
+    <div class="job_fairs_box fl ">
+      <div class="zph_det_tit">
+        <h1>{yun:}$Info.title{/yun}</h1>
+      </div>
+      <div class="job_fairs_box_left fr">
+        <div class="zph_detail">
+          <ul class="job_fairs_box_ul">
+			{yun:}if $Info.organizers!=""{/yun}
+            <li><i class="zph_icon zph_icon_fm"></i><span>主 办 方：</span>{yun:}$Info.organizers{/yun}</li>
+            {yun:}/if{/yun}
+			<li><i class="zph_icon zph_icon_time"></i><span>举办时间：</span>{yun:}$Info.starttime{/yun}至{yun:}$Info.endtime{/yun}</li>
+            {yun:}if $Info.address!=""{/yun}
+			<li><i  class="zph_icon zph_icon_add"></i><span>举办会场：</span>{yun:}$Info.address{/yun}</li>
+			{yun:}/if{/yun}
+			{yun:}if $Info.phone!=""{/yun}
+            <li><i class="zph_icon zph_icon_tel"></i><span>咨询电话：</span>{yun:}$Info.phone{/yun} </li>
+			{yun:}/if{/yun}
+			{yun:}if $Info.user!=""{/yun}
+           <li><i class="zph_icon zph_icon_per"></i><span>联 系 人：</span>{yun:}$Info.user{/yun}</li>
+			{yun:}/if{/yun}
+			{yun:}if $Info.traffic!=""{/yun}
+           <li><i class="zph_icon zph_icon_road"></i><span>交通路线：</span>{yun:}$Info.traffic{/yun}</li>
+			{yun:}/if{/yun}
+          </ul>
+        </div>
+       
+      </div>
+      <div class="job_fairs_box_right fl"> <img src="{yun:}$Info.is_themb{/yun}" width="388" height="220" onerror="showImgDelay(this,'{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_logo{/yun}',2);"> </div>
+     </div>
+  </div>
+  <div class="fairs_introduction fl"> {yun:}if $Info.body{/yun}
+    <div class="fairs_introduction_h1"><span class=" png">招聘会介绍</span></div>
+    <div class="fairs_introduction_p"> {yun:}$Info.body{/yun} </div>
+    {yun:}/if{/yun}
+    {yun:}if $Info.media{/yun}
+    <div class="fairs_introduction_h1"><span class=" png"> 媒体宣传</span></div>
+    <div class="fairs_introduction_p"> {yun:}$Info.media{/yun} </div>
+    {yun:}/if{/yun}
+    {yun:}if $Info.packages{/yun}
+    <div class="fairs_introduction_h1"><span class=" png" >超值服务套餐</span></div>
+    <div class="fairs_introduction_p"> {yun:}$Info.packages{/yun} </div>
+    {yun:}/if{/yun}
+    {yun:}if $Info.booth{/yun}
+    <div class="fairs_introduction_h1"><span class=" png">展位设置方案</span></div>
+    <div class="fairs_introduction_p"> {yun:}$Info.booth{/yun} </div>
+    {yun:}/if{/yun}
+    {yun:}if $Info.participate{/yun}
+    <div class="fairs_introduction_h1"><span class=" png">参与办法</span></div>
+    <div class="fairs_introduction_p"> {yun:}$Info.participate{/yun} </div>
+    {yun:}/if{/yun}
+    {yun:}if $Image_info{/yun}
+    <div class="fairs_introduction_h1"><span class=" png">展会图片</span></div>
+    <div class="fairs_introduction_cc" >
+      <ul class="fairs_introduction_img" id="rolling_img1">
+        {yun:}section name=zph loop=$Image_info{/yun}
+        <li> <a class="image_gall" href="{yun:}$config.sy_weburl{/yun}{yun:}$Image_info[zph].pic{/yun}"> <img src="{yun:}$config.sy_weburl{/yun}{yun:}$Image_info[zph].pic{/yun}" width="215" height="153" onerror="showImgDelay(this,'{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_logo{/yun}',2);"/> </a> </li>
+        {yun:}/section{/yun}
+      </ul>
+    </div>
+  </div>
+  {yun:}/if{/yun} 
+</div>  </div>
+{yun:}include file="$tplstyle/public_search/login.htm"{/yun}
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/lazyload.min.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/public.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/popImage/jquery.popImage.mini.js" language="javascript"></script>
+<script src="{yun:}$style{/yun}/js/ScrollPic.js" language="javascript"></script> 
+<!--[if IE 6]>
+<script src="{yun:}$config.sy_weburl{/yun}/js/png.js"></script>
+<script>
+DD_belatedPNG.fix('.png');
+</script>
+<![endif]-->
+<script language="javascript" type="text/javascript">
+<!--//--><![CDATA[//><!--
+var li_num=$("#rolling_img1 li").length;
+if(li_num>4){
+	var scrollPic_02 = new ScrollPic();
+	scrollPic_02.scrollContId   = "rolling_img1"; 
+	scrollPic_02.arrLeftId      = "LeftArr";
+	scrollPic_02.arrRightId     = "RightArr"; 
+	scrollPic_02.frameWidth     = 1200;
+	scrollPic_02.pageWidth      = 242;
+	scrollPic_02.speed          = 10;
+	scrollPic_02.space          = 10;
+	scrollPic_02.autoPlay       = true;
+	scrollPic_02.autoPlayTime   = 2;
+	scrollPic_02.initialize();
+}
+//--><!]]> 
+$(function(){
+	$("a.image_gall").popImage();
+})
+</script> 
+</div>
+{yun:}include file="$tplstyle/footer.htm"{/yun}

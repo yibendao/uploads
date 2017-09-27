@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<link href="images/reset.css" rel="stylesheet" type="text/css" />
+<link href="images/system.css" rel="stylesheet" type="text/css" />
+<link href="images/table_form.css" rel="stylesheet" type="text/css" />
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script>
+<script src="js/admin_public.js" language="javascript"></script>
+<title>后台管理</title>
+</head>
+<body class="body_ifm">
+<div class="infoboxp">
+  <div class="infoboxp_top_bg"></div>
+  <div id="subboxdiv" style="width:100%;height:100%;display:none;position:absolute;"></div>
+  <div class="main_tag">
+    <div class="admin_table_border">
+      <div>
+        <iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe>
+        <form name="myform" target="supportiframe" action="index.php?m=wx&c=zdaddkeyword" method="post" enctype="multipart/form-data">
+          <table width="100%" class="table_form">
+            <tr class="admin_table_trbg">
+              <th colspan="2" bgcolor="#f0f6fb"><span class="admin_bold">添加规则</span></th>
+            </tr>
+            <tr>
+              <th width="160">规则名：</th>
+              <td><input class="input-text" type="text" name="title" id="title" size="30" value="{yun:}$row.title{/yun}" maxlength="255" ></td>
+            </tr>
+            <tr>
+              <th width="160">关键字：</th>
+              <td><textarea  name="keyword" id="keyword" rows="10" cols='40' maxlength="255" class="wx_search_textarea">{yun:}$row.keyword{/yun}</textarea></td>
+            </tr>
+            <tr>
+              <th width="160">回复：</th>
+              <td><textarea  name="content" id="content" rows="10" cols='40'  maxlength="255" class="wx_search_textarea">{yun:}$row.content{/yun}</textarea></td>
+            </tr>
+            <tr class="admin_table_trbg">
+              <td colspan="2" align="center"><input type="hidden" name="pytoken" id='pytoken' value="{yun:}$pytoken{/yun}"/>
+              {yun:}if $row.id{/yun}
+              <input type="hidden" name="id" id="id" value="{yun:}$row.id{/yun}"/>
+              <input class="admin_submit4" type="submit" name="update" value="修改" />
+              {yun:}else{/yun}                
+              <input class="admin_submit4" type="submit" name="submit" value="提交" />                
+              {yun:}/if{/yun}
+                &nbsp;&nbsp;
+                <input class="admin_submit4" type="reset" value="重置" /></td>
+            </tr>
+          </table>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

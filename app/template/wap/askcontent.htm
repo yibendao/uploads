@@ -1,0 +1,110 @@
+{yun:}include file="$wapstyle/header_cont.htm"{/yun}
+<div class="askct_iss">
+  <div class="askct_iss_ct">
+    <div class="askct_iss_p">
+      <div class="askct_iss_p_ftp">{yun:}$show.title{/yun} </div>
+      {yun:}if $show.qatn!='2'{/yun}
+      <div class="askct_iss_p_rt">
+        {yun:}if $show.qatn=='1'{/yun} <a href="javascript:void(0)"  onclick="attention('{yun:}$show.id{/yun}','1','{yun:}url m=wap c=ask a=attention{/yun}');" class="watch_qxgz">取消关注</a> {yun:}else{/yun}
+        {yun:}if $uid{/yun} <a href="javascript:void(0)"  onclick="attention('{yun:}$show.id{/yun}','1','{yun:}url m=wap c=ask a=attention{/yun}');" class='watch_gz'> + 关注</a> {yun:}else{/yun} <a href="javascript:void(0);" onclick="showlogins('1');" class="watch_gz">+ 关注</a> {yun:}/if{/yun} 
+        {yun:}/if{/yun}
+         </div>{yun:}/if{/yun}
+    </div>
+    <div class="askct_iss_dt">{yun:}$show.content{/yun}</div>
+    <div class="askct_iss_tm">
+      <div class="askct_iss_tm_ft">{yun:}$show.add_time|date_format:"%Y-%m-%d"{/yun}</div>
+      <div class="askct_iss_tm_rt"> <a class="askct_iss_tm_rt_b" {yun:}if $show.uid==$uid{/yun} onclick="layermsg('不能举报自己提出的问题！');"{yun:}else{/yun}onclick="get_show('{yun:}$show.id{/yun}');" {yun:}/if{/yun} href="javascript:void(0)">举报</a> <span class="askct_iss_tm_rt_p">{yun:}$show.atnnum{/yun}人关注</span> </div>
+    </div>
+    {yun:}if $show.useratn!='2'{/yun}
+      <div class="com_pop_up_area">
+          <textarea name="content" id="content" class="com_area" placeholder="请输入您的回答"></textarea>
+       <div class="tw_bx_tit_box_s">
+        <input class="tw_bx_tit" id="authcode" type="text" placeholder="请输入验证码" name="authcode" maxlength="4"/>
+        <div class="tw_img"> <img id="vcode_img" class="authcode" src="{yun:}$config.sy_wapdomain{/yun}/authcode.inc.php" onclick="checkCode('vcode_img');"/> </div>
+      </div>
+          <div class="com_pop_up_bt">
+          <input name='id' type='hidden' value='{yun:}$show.id{/yun}'/>
+          <input name="add" class="com_qd" type="submit" value="提交" onclick="checkanswer('{yun:}$uid{/yun}','vcode_img');">
+          </div>
+
+     </div>
+ {yun:}/if{/yun}
+</div>    
+</div>
+
+<style>
+.askct_com_top_rt .cur{ color:#0d8eb0;}
+</style>
+
+<div class="askct_com">
+  <div class="askct_com_top">
+    <div class="askct_com_top_ft fl">回答</div>
+    <div class="askct_com_top_rt fr"> <a href="{yun:}url m=wap c=ask a=content id='`$show.id`'{/yun}"{yun:}if $smarty.get.orderby!='support'{/yun}class="cur"{yun:}/if{/yun}>按评论时间</a> | <a  href="{yun:}url m=wap c=ask a=content id='`$show.id`' orderby=support{/yun}"{yun:}if $smarty.get.orderby=='support'{/yun}class="cur"{yun:}/if{/yun}>按赞同数</a></div>
+  </div>
+  <div style="clear:both"></div>
+  {yun:}foreach from=$answer item=list{/yun}
+  {yun:}if $list.nickname{/yun}
+  <div style="width:100%;">
+  <div class="askct_com_rs">
+    <div class="askct_com_rs_img"><img src="{yun:}$list.pic{/yun}" width='40'/></div>
+    <div class="askct_com_rs_y">
+      <div class="askct_com_rs_y_x">
+        <div class="askct_com_rs_tit_ft">{yun:}$list.nickname{/yun}&nbsp;</div>
+        <div class="askct_com_rs_tit_rt"> <a class="askct_com_rs_tit_rt_h" href="javascript:void(0)" onclick="get_comment('{yun:}$list.id{/yun}','0','{yun:}url m=wap c=ask a=getcomment{/yun}');"><span id="com_num_{yun:}$list.id{/yun}">{yun:}$list.comment{/yun}</span>评论</a> <a href="javascript:void(0)" onclick="support('{yun:}$list.id{/yun}','{yun:}url m=wap c=ask a=forsupport{/yun}')" class="crit_dz png"><img src="{yun:}$config.sy_weburl{/yun}/app/template/wap/images/zan.png"/ style="margin-right:5px;"><span id="support_num_{yun:}$list.id{/yun}">{yun:}$list.support{/yun}</span></a> </div>
+      </div>
+      <div class="askct_com_rs_y_tm">{yun:}$list.add_time|date_format:"%Y-%m-%d %H:%M"{/yun}</div>
+      <div class="askct_com_rs_y_p">{yun:}$list.content{/yun}</div>
+    
+    </div>
+
+    <div class="pl_menu none review{yun:}$list.id{/yun}" style=" display: none;">
+    <div class="menu_con">
+      <div class="menu_con_p1">
+      <div class="ask_pl_box">
+        <div class="ask_pl_box_tx"> <img src="{yun:}$myinfo.pic{/yun}" width='31' height='31' onerror="showImgDelay(this,'{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_friend_icon{/yun}',2);"/> </div>
+   <div class="menu_p1_nr_t_bor"><input id="comment_{yun:}$list.id{/yun}" type="text" class="menu_p1_nr_t_bor_tetx" placeholder="写下你的评论"/></div>
+          <div class="menu_p1_nrtj" style="text-align:right"> <span aid='{yun:}$list.id{/yun}' class="askct_qxx">取消</span>
+            <input onclick="for_comment('{yun:}$list.id{/yun}','{yun:}$show.id{/yun}','{yun:}url m=wap c=ask a=forcomment{/yun}','{yun:}url m=wap c=ask a=getcomment{/yun}');" type="button" value="发布" class="issue" />
+        </div>
+      </div>
+      <ul class="ask_pl_p"></ul>
+      <div class="clear"></div>
+       </div>
+    </div>
+  </div>
+  </div>
+  </div>
+  
+  {yun:}else{/yun}
+ <div class="wap_member_no"> 暂无问答</div>
+ {yun:}/if{/yun}
+  <div class="pages">{yun:}$pagenav{/yun}</div>
+  {yun:}/foreach{/yun}
+
+<div class="askct_iss_box" id="TB_window" style=" display: none;">
+  <div class="askct_iss_box_ct" id="TB_ajaxContent">
+    <div class="ask_content_boxs_tit">举报该问题</div>
+    <div class="ask_report_top">
+    <input type="hidden" id="reasonid" value="">
+    <div class="ask_content_boxs">
+      <select name="reason" id='reason' onchange="ckReason(this.value)" class="ask_content_boxs_select">   
+       <option value=''>请选择举报原因</option>               
+	    {yun:}foreach from=$reason item=rlist{/yun}				       
+        <option value='{yun:}$rlist.id{/yun}'>{yun:}$rlist.name{/yun}</option>                
+		{yun:}/foreach{/yun}			     
+      </select>     
+      </div>
+    </div>
+    <div class="askct_iss_ty">
+      <input type="button" value="确定" class="tiny_show_tckbox_bth1" onclick="reason('{yun:}url m=wap c=ask a=qrepost{/yun}')"/>
+      <input type="button" value="取消" class="tiny_show_tckbox_bth2" onclick="layer.closeAll();"/>
+      <input type='hidden' value="" id='eid' name='eid'>
+    </div>
+  </div>
+</div> 
+</div>
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/layer/layer.m.js" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/public.js" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/prefixfree.min.js" language="javascript"></script>
+{yun:}include file="$wapstyle/footer.htm"{/yun} 

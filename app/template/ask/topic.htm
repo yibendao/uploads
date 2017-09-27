@@ -1,0 +1,124 @@
+{yun:}include file="$askstyle/header.htm"{/yun} 
+<div class="content">
+	<div>
+		<div class="ask_box_leftsidebar">
+	<div class="ask_index_box " style="margin-top:0px;">
+            <div class="ask_index_box_cont" > 
+				{yun:}if $smarty.get.pid{/yun}
+				{yun:}qcache classid='auto.pid' limit=1 item=cache name=cache_one{/yun}          <div class=" yun_ask_hotpic"style=" padding-bottom:20px;">
+            <div class="yun_ask_hotpic_box">
+					<div class="yun_ask_hotpic_box_pdl">
+                    <dl>
+						<dt><img src="{yun:}$config.sy_weburl{/yun}/{yun:}$cache.pic{/yun}" /></dt>
+
+						<dd>
+							<h2>{yun:}$cache.name{/yun}</h2>
+							<p>{yun:}$cache.intro{/yun}</p>
+
+						</dd>
+					</dl></div></div></div>
+					{yun:}/qcache{/yun}
+					{yun:}else{/yun}
+					{yun:}qcache limit=6 son=1 item=qindex{/yun}
+                    
+                    <dl class="ask_index_list">
+					<dt>	<img class="" src="{yun:}$config.sy_weburl{/yun}/{yun:}$qindex.pic{/yun}" width="60" height="60" /> </dt>
+					<dd>
+					<h3><a href="{yun:}url m=ask c=topic pid='`$qindex.id`'{/yun}"  target="_blank">{yun:}$qindex.name{/yun}</a></h3>
+					{yun:}if $qindex.son{/yun}
+                        
+						<div class="ask_index_list_a">
+							{yun:}foreach from=$qindex.son item=slist{/yun}
+						<a href="{yun:}url m=ask c=search cid='`$slist.id`'{/yun}" target="_blank">{yun:}$slist.name{/yun}</a>
+							{yun:}/foreach{/yun} 
+						</div>
+						{yun:}/if{/yun}
+                        </dd>
+                     </dl>
+				{yun:}/qcache{/yun} 
+					{yun:}/if{/yun}
+					<div class="clear"></div>
+				</div></div>
+		
+			
+			<div class="left_cen">
+                <div class="ask_tit"><span class="ask_tit_icon_s"><i class="ask_tit_icon"></i>热点话题</span></div>
+			
+				{yun:}qclass classid='auto.pid' order=atn item=qlist name=qlist_one{/yun}
+				<div class="hot_topic">
+					<div class="hot_topic_pic"><img src="{yun:}$config.sy_weburl{/yun}/{yun:}$qlist.pic{/yun}" /></div>
+					<div class="hot_topic_det">
+						<div class="cur_top">
+							<div class="top_class">
+								<a href="{yun:}url m=ask c=search cid='`$qlist.id`'{/yun}">{yun:}$qlist.name{/yun}</a> 
+							</div>
+							<span class="att q{yun:}$qlist.id{/yun}">
+							{yun:}if $qlist.isatn=='1'{/yun}				
+								<a href="javascript:void(0)" onclick="attention('{yun:}$qlist.id{/yun}','2','{yun:}url m=ask c=friend a=attention{/yun}');" class="watch_qxgz" title="取消关注">取消关注</a>
+							{yun:}else{/yun}
+                         	   {yun:}if $uid{/yun}
+								<a href="javascript:void(0)" class="watch_gz" onclick="attention('{yun:}$qlist.id{/yun}','2','{yun:}url m=ask c=friend a=attention{/yun}');">+  关注</a>
+                                {yun:}else{/yun}
+                                <a href="javascript:void(0)"  onclick="showlogin('');" class='watch_gz'>+  关注</a>
+                                {yun:}/if{/yun}
+							{yun:}/if{/yun}  </span>
+						</div>
+						{yun:}if $qlist.list{/yun}
+						<ul>
+							{yun:}foreach from=$qlist.list item=qlist_son{/yun}
+							<li>
+								<p><a href="{yun:}$qlist_son.url{/yun}" target="_blank">{yun:}$qlist_son.title{/yun}</a></p>
+								<span>{yun:}$qlist_son.add_time|date_format:"%Y-%m-%d %H:%M"{/yun}</span>
+							</li>
+							{yun:}/foreach{/yun}
+							
+						</ul>
+						{yun:}/if{/yun}
+					</div>
+					<div class="clear"></div>
+				</div>
+			{yun:}/qclass{/yun}
+			</div>
+			
+		</div>
+		<div class="right right_con">
+			<div class="gambit">
+				<div class="gambit_con">
+                  <div class="ask_tit"><span class="ask_tit_icon_s"><i class="ask_tit_icon"></i>话题分类</span></div>
+				
+					<div class="gam_con">
+						{yun:}qcache key=key item=qclasslist name=qcache{/yun}
+						<a href="{yun:}url m=ask c=topic pid='`$qclasslist.id`'{/yun}" {yun:}if ($key=='0'&&$smarty.get.pid<1)||($smarty.get.pid==$qclasslist.id){/yun}class="cur"{yun:}/if{/yun}>{yun:}$qclasslist.name{/yun}</a>
+						{yun:}/qcache{/yun} 
+					</div>
+				</div>
+			</div>        
+			<div class="recom_expert">
+               <div class="ask_tit"><span class="ask_tit_icon_s"><i class="ask_tit_icon"></i>推荐达人</span></div>
+			
+				<div class="recom_con">
+					<ul>
+						{yun:}foreach from=$recom item=rlist{/yun}
+						<li>
+							<a href="{yun:}url m=ask c=friend a=myquestion uid='`$rlist.uid`'{/yun}" target="_blank"><img src="{yun:}$rlist.pic{/yun}" onerror="showImgDelay(this,'{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_friend_icon{/yun}',2);"/></a>
+                            <div class="recom_con_name"><a href="{yun:}url m=ask c=friend a=myquestion uid='`$rlist.uid`'{/yun}" target="_blank">{yun:}$rlist.nickname{/yun}</a></div>
+						</li>
+						{yun:}/foreach{/yun} 
+					</ul>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js" type="text/javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script>
+<script src="{yun:}$ask_style{/yun}/js/question.js" type="text/javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/public.js" language="javascript"></script>
+<!--[if IE 6]>
+<script src="{yun:}$config.sy_weburl{/yun}/js/png.js"></script>
+<script>
+DD_belatedPNG.fix('.png,.attention .watch_gz');
+</script>
+<![endif]-->
+{yun:}include file="$askstyle/footer.htm"{/yun}

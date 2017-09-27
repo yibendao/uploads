@@ -1,0 +1,203 @@
+{yun:}include file="$wapstyle/header_cont.htm"{/yun}
+<link rel="stylesheet" href="{yun:}$config.sy_weburl{/yun}/app/template/wap/css/wap_tck.css" type="text/css">
+<link rel="stylesheet" href="{yun:}$wap_style{/yun}/js/mobiscroll/css/animate.min.css" type="text/css">
+<link rel="stylesheet" href="{yun:}$wap_style{/yun}/js/mobiscroll/css/mobiscroll.css" type="text/css"> 
+<div id="regbaoming">
+  <div class="yun_reg_BasicInfo">
+    <div class="yun_reg_BasicInfo_h1"> <div class="yun_reg_BasicInfo_h1_span yun_text_color">10秒填写简历好工作轻松搞定！</div> <div class="yun_reg_BasicInfo_h1_em">已有账号，<a href="{yun:}url m=wap c=login{/yun}" class="yun_reg_BasicInfo_h1_bth">立即登录</a></div> </div>
+    <div class="yun_reg_BasicInfo_box">
+      <div class="yun_reg_BasicInfo_left">
+        <div class="yun_box_w">
+        <div class="yun_reg_BasicInfo_list"><span class="yun_reg_BasicInfo_s"><i class="yun_reg_BasicInfo_i">*</i>真实姓名：</span>
+          <div class="yun_box_w_rt">
+         <input type="text"  name="uname" id="uname" value="{yun:}$row.uname{/yun}" class="yun_reg_BasicInfo_text " placeholder="请填写真实姓名"/>
+         </div>
+        </div>
+       </div> 
+         <div class="yun_box_w">
+        <div class="yun_reg_BasicInfo_list"><span class="yun_reg_BasicInfo_s"><i class="yun_reg_BasicInfo_i">*</i>性别：</span>
+          <div class="yun_box_w_rt">
+        <div class="yun_reg_BasicInfo_xb_box">
+         <label><span class="yun_reg_BasicInfo_xb_box_s">
+          <input type="radio" name="sex" value="1" {yun:}if $row.sex==1 {/yun} checked{yun:}/if{/yun} class="yun_reg_BasicInfo_xb_ro" />
+          <span class="yun_reg_BasicInfo_xb">男</span>       
+          </span></label>
+            <label><span class="yun_reg_BasicInfo_xb_box_s">
+                  <input type="radio" name="sex" value="2" {yun:}if $row.sex==2 {/yun} checked{yun:}/if{/yun} class="yun_reg_BasicInfo_xb_ro"  />
+          		<span class="yun_reg_BasicInfo_xb">女</span></span> </label>
+          </div>     
+         </div>
+        </div>
+       </div> 
+  
+      <div class="yun_box_w">
+        <div class="yun_reg_BasicInfo_list"> <span class="yun_reg_BasicInfo_s"><i class="yun_reg_BasicInfo_i">*</i>出生年月：</span>
+          <div class="yun_box_w_rt">
+          <div class="yun_reg_BasicInfo_l_r ">
+            <input type="text" onfocus="this.blur();"  value="{yun:}if $row.birthday{/yun} {yun:}$row.birthday{/yun}{yun:}else{/yun}1988-08-08{yun:}/if{/yun}" name="birthday" id="birthday" class="yun_fast_reg_time_text"/> 
+            <i class="yun_fast_reg_time"></i>
+          </div>
+          </div>
+        </div>
+        </div>
+      <div class="yun_box_w">
+        <div class="yun_reg_BasicInfo_list"><span class="yun_reg_BasicInfo_s"><i class="yun_reg_BasicInfo_i">*</i>最高学历：</span>
+          <div class="yun_box_w_rt">
+          <div class="yun_box_w_rt_select">
+          <select id="edu" name="edu">
+          <option value="">请选择最高学历 </option>
+            {yun:}foreach from=$userdata.user_edu item=v{/yun}
+           <option value="{yun:}$v{/yun}" {yun:}if $row.edu==$v{/yun}selected="selected"{yun:}/if{/yun}>{yun:}$userclass_name[$v]{/yun} </option>
+              {yun:}/foreach{/yun}
+          
+          </select>
+          </div>
+        </div>
+        </div>
+        </div>
+      <div class="yun_box_w">
+        <div class="yun_reg_BasicInfo_list"><span class="yun_reg_BasicInfo_s"><i class="yun_reg_BasicInfo_i">*</i>工作经验：</span>
+         <div class="yun_box_w_rt"> 
+           <div class="yun_box_w_rt_select">
+           <select  id="exp" name="exp">
+          <option value="">请选择工作经验 </option>
+           {yun:}foreach from=$userdata.user_word item=v{/yun}
+           <option value="{yun:}$v{/yun}" {yun:}if $row.exp==$v{/yun}selected="selected"{yun:}/if{/yun}>{yun:}$userclass_name[$v]{/yun} </option>
+              {yun:}/foreach{/yun}
+          </select>
+          </div>
+          
+
+        </div>
+        </div>
+        </div>
+      <div class="yun_box_w">
+        <div class="yun_reg_BasicInfo_list"><span class="yun_reg_BasicInfo_s"><i class="yun_reg_BasicInfo_i">*</i>手机号码：</span>
+          <div class="yun_box_w_rt">
+          <input type="text" name="telphone" id="telphone" value="{yun:}$row.telphone{/yun}" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" class="yun_reg_BasicInfo_text" placeholder="请输入手机号码"/>
+         </div>
+        </div>
+       </div> 
+      </div>
+      <div class="yun_box_w">
+        <div class="yun_reg_BasicInfo_list"><span class="yun_reg_BasicInfo_s"><i class="yun_reg_BasicInfo_i">*</i>工作性质：</span>
+          <div class="yun_box_w_rt">
+                 <div class="yun_box_w_rt_select">
+           <select id="type" name="type">
+          <option value="">请选择工作性质 </option>
+              {yun:}foreach from=$userdata.user_type item=v{/yun}
+           <option value="{yun:}$v{/yun}" {yun:}if $row.type==$v{/yun}selected="selected"{yun:}/if{/yun}>{yun:}$userclass_name[$v]{/yun} </option>
+              {yun:}/foreach{/yun}
+          </select>
+          </div>
+        </div>
+       </div></div> 
+      <div class="yun_box_w">
+        <div class="yun_reg_BasicInfo_list"><span class="yun_reg_BasicInfo_s"><i class="yun_reg_BasicInfo_i">*</i>到岗时间：</span>
+          <div class="yun_box_w_rt">
+          <div class="yun_box_w_rt_select">
+           <select id="report" name="report">
+          <option value="">请选择到岗时间 </option>
+            {yun:}foreach from=$userdata.user_report item=v{/yun}
+           <option value="{yun:}$v{/yun}" {yun:}if $row.report==$v{/yun}selected="selected"{yun:}/if{/yun}>{yun:}$userclass_name[$v]{/yun} </option>
+              {yun:}/foreach{/yun}
+          </select>
+          </div>
+        </div>
+        </div>
+        </div>
+      </div>
+      <div class="yun_reg_BasicInfo_bot">
+      <div style="padding:0px 10px;">
+      <input type="hidden" id="jobid" name="jobid" value="{yun:}$job.id{/yun}">
+       <input type="hidden" id="resumeid" name="resumeid" value="{yun:}$smarty.get.id{/yun}">
+        <input type="button" value="立即申请" class="yun_reg_BasicInfo_bth" onclick="checkaddresume();"/>
+      </div></div>
+    </div>
+  </div>
+<script src="{yun:}$config.sy_weburl{/yun}/app/template/wap/js/prefixfree.min.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/layer/layer.m.js" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/public.js" language="javascript"></script> 
+<script src="{yun:}$wap_style{/yun}/js/resume.js" language="javascript"></script> 
+<script src="{yun:}$wap_style{/yun}/js/mobiscroll/mobiscroll_002.js"></script>
+<script src="{yun:}$wap_style{/yun}/js/mobiscroll/mobiscroll.js"></script>
+<script src="{yun:}$wap_style{/yun}/js/mobiscroll/mobiscroll_003.js"></script>
+<script src="{yun:}$wap_style{/yun}/js/jobadd.js" language="javascript"></script>
+<script>
+var wapurl="{yun:}url m=wap{/yun}";
+var weburl="{yun:}$config.sy_weburl{/yun}"
+var backurl='{yun:}url m=wap c=job a=view id=$job.id{/yun}';
+$(function () {
+	var currYear = (new Date()).getFullYear();
+	var opt = {
+		preset: 'date', //日期
+		theme: 'android-ics light', //皮肤样式
+		display: 'modal', //显示方式 
+		mode: 'scroller', //日期选择模式
+		dateFormat: 'yy-mm-dd', // 日期格式
+		setText: '确定', //确认按钮名称
+		cancelText: '取消',//取消按钮名籍我
+		dateOrder: 'yyyymmdd', //面板中日期排列式
+		dayText: '日', monthText: '月', yearText: '年',
+		startYear: currYear - 100, //开始年份
+		endYear: currYear-18 //结束年份
+	};
+	$("#birthday").mobiscroll('setDate', $("#birthday").val(), true).date(opt); 
+});
+function checkaddresume(){
+	var name=$.trim($("#uname").val()+"个人简历");
+	var uname=$.trim($("#uname").val());
+	var sex=$("input[name=sex]:checked").val();
+	var birthday=$.trim($("#birthday").val());
+	var edu=$.trim($("#edu").val());
+	var exp=$.trim($("#exp").val());
+	var telphone=$.trim($("#telphone").val());
+	var type=$.trim($("#type").val());
+	var report=$.trim($("#report").val());
+	var jobid=$.trim($("#jobid").val());
+	var resumeid=$.trim($("#resumeid").val());
+	if(jobid<1){
+		layermsg("职位不存在！");return false;
+	}
+	if(uname==""){
+		layermsg("请填写真实姓名！");return false;
+	}
+	if(sex==''){
+		layermsg("请选择性别！");return false;
+	}
+	if(birthday==""){
+		layermsg("请选择出生年月！");return false;
+	}
+	if(edu==""){
+		layermsg("请选择最高学历！");return false;
+	}
+	if(exp==""){
+		layermsg("请选择工作经验！");return false;
+	}
+	var reg= /^[1][34578]\d{9}$/; //验证手机号码  
+	if(telphone==''){
+		layermsg("请填写手机号码！");return false;
+	}else if(telphone&&!reg.test(telphone)){
+		layermsg("手机号码格式错误！");return false;
+	}
+	var myreg = /^([a-zA-Z0-9\-]+[_|\_|\.]?)*[a-zA-Z0-9\-]+@([a-zA-Z0-9\-]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+	if(type==""){
+		layermsg("请选择工作性质！");return false;
+	}
+	if(report==""){
+		layermsg("请选择到岗时间！");return false;
+	}
+	var jobload=layer_load('执行中，请稍候...');
+	$.post(wapurl+"?c=ajax&a=temporaryresume",{name:name,uname:uname,sex:sex,birthday:birthday,edu:edu,exp:exp,telphone:telphone,type:type,report:report,jobid:jobid,resumeid:resumeid},function(data){ 
+		layer.closeAll();
+		var data=eval('('+data+')');
+		if(data.status==1){
+			layermsg(data.msg,2,function(){location.href=data.url;});return false;
+		}else{
+			layermsg(data.msg);return false;
+		}
+	})
+}
+</script>
+<div class="yun_text_fooeter">{yun:}include file="$wapstyle/footer.htm"{/yun}</div>

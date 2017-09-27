@@ -1,0 +1,142 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link href="images/reset.css" rel="stylesheet" type="text/css" />
+<link href="images/system.css" rel="stylesheet" type="text/css" />
+<link href="images/table_form.css" rel="stylesheet" type="text/css" />
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script>
+<script src="js/admin_public.js" language="javascript"></script>
+<script>var weburl="{yun:}$config.sy_weburl{/yun}";</script>
+<title>后台管理</title>
+<style>
+* {
+	margin: 0;
+	padding: 0;
+}
+body, div {
+	margin: 0;
+	padding: 0;
+}
+</style>
+</head>
+<body class="body_ifm">
+<div class="infoboxp">
+  <div class="infoboxp_top_bg"></div>
+  <div class="infoboxp_top">
+    <h6>店铺招聘</h6>
+  </div>
+  <div class="main_tag" >
+    <div class="tag_box">
+      <iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe>
+      <form target="supportiframe" action="index.php?m=admin_once&c=save" method="post" onSubmit="return check_resume_once()" enctype="multipart/form-data">
+        <table width="100%" class="table_form" style="background:#fff;">
+          <tr>
+            <th>职位名称：</th>
+            <td width="350"><input type="text"  value="{yun:}$row.title{/yun}" name="title" id="title" class="input-text"></td>
+            <th>(店面)名称：</th>
+            <td width="350"><input type="text"  value="{yun:}$row.companyname{/yun}" name="companyname" id="companyname" class="input-text"></td>
+          </tr>
+          <tr  class="admin_table_trbg">
+            <th>有效时间(天)：</th>
+            <td><input class="input-text" type="text" id="edate" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')"  maxlength="3" value="{yun:}if $row.edate>0{/yun}{yun:}$row.edate{/yun}{yun:}else{/yun}0{yun:}/if{/yun}" name="edate"></td>
+            <th>联 系 人：</th>
+            <td><input type="text" id="linkman" name="linkman" value="{yun:}$row.linkman{/yun}" class="input-text"/></td>
+          </tr>
+          <tr>
+            <th>联系电话：</th>
+            <td colspan="3"><input type="text" name="phone" id="phone" value="{yun:}$row.phone{/yun}" class="input-text" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')"/></td>
+          </tr>
+          <tr>
+            <th>工作地点：</th>
+            <td colspan="3"><div class="yun_admin_select_box yun_admin_select_boxw130 z_index11">
+            <input type="button" id="province" onclick="search_show('job_province');" value="{yun:}if $city_name[$row.provinceid]{/yun}{yun:}$city_name[$row.provinceid]{/yun}{yun:}else{/yun}请选择{yun:}/if{/yun}" class="yun_admin_select_box_text">
+            <input type="hidden" id="provinceid" name="provinceid" value="{yun:}$row.provinceid{/yun}" />
+            <div class="yun_admin_select_box_list_box yun_admin_select_box_list_boxw130 dn" style="display:none" id="job_province">
+            {yun:}foreach from=$city_index key=j item=v{/yun}
+              <div class="yun_admin_select_box_list"><a href="javascript:;" onclick="select_city('{yun:}$v{/yun}','province','{yun:}$city_name[$v]{/yun}','cityid','city');"> {yun:}$city_name[$v]{/yun}</a></div>
+              {yun:}/foreach{/yun} </div>
+          </div>
+          <div class="yun_admin_select_box yun_admin_select_boxw130 z_index11">
+            <input type="button" id="cityid" onclick="search_show('job_cityid');" value="{yun:}if $row.cityid{/yun}{yun:}$city_name[$row.cityid]{/yun}{yun:}else{/yun}请选择{yun:}/if{/yun}" class="yun_admin_select_box_text">
+            <input type="hidden" id="cityidid" name="cityid" value="{yun:}$row.cityid{/yun}"/>
+            <div class="yun_admin_select_box_list_box yun_admin_select_box_list_boxw130 dn" style="display:none" id="job_cityid">
+              <div class="yun_admin_select_box_list">{yun:}foreach from=$city_type[$row.provinceid] key=j item=v{/yun} <a href="javascript:;" onclick="select_city('{yun:}$v{/yun}','cityid','{yun:}$city_name[$v]{/yun}','three_city','city');"> {yun:}$city_name[$v]{/yun}</a> {yun:}/foreach{/yun}</div>
+            </div>
+          </div>
+          <div class="yun_admin_select_box yun_admin_select_boxw130 z_index11 {yun:}if $row.three_cityid<1{/yun}dn{yun:}/if{/yun}" id="cityshowth">
+            <input type="button" id="three_city" onclick="three_city_show('job_three_city');" value="{yun:}if $row.three_cityid{/yun}{yun:}$city_name[$row.three_cityid]{/yun}{yun:}else{/yun}请选择{yun:}/if{/yun}" class="yun_admin_select_box_text">
+            <input type="hidden" id="three_cityid" name="three_cityid" value="{yun:}$row.three_cityid{/yun}" />
+            <div class="yun_admin_select_box_list_box yun_admin_select_box_list_boxw130 dn" style="display:none" id="job_three_city">
+              <div class="yun_admin_select_box_list"> {yun:}foreach from=$city_type[$row.cityid] key=j item=val{/yun} <a href="javascript:;" onclick="selects('{yun:}$val{/yun}','three_city','{yun:}$city_name[$val]{/yun}');"> {yun:}$city_name[$val]{/yun}</a> {yun:}/foreach{/yun} </div>
+            </div>
+          </div></td>
+          </tr>
+          <tr>
+            <th>店铺形象：</th>
+            <td colspan="3"><input type="file" id="pic" name="pic" class="input-text">{yun:}if $row.pic{/yun} <img src="{yun:}$config.sy_weburl{/yun}/{yun:}$row.pic{/yun}" width="145" height="35"> {yun:}/if{/yun}</td>
+            
+          </tr>
+          <tr  class="admin_table_trbg">
+            <th>要　　求：</th>
+            <td colspan="3"><textarea id="require" name="require" style="width:500px; height:50px;border:1px solid #ccc; font-size:12px;color:#666">{yun:}$row.require{/yun}</textarea></td>
+          </tr>
+          <tr  class="admin_table_trbg">
+
+            <th>密码：</th>
+            <td colspan="3"><input type="password" name="password" id="password" value="" class="input-text" style='width:100px' onkeyup="this.value=this.value.replace(/^ +| +$/g,'')"/><span class="admin_web_tip">不填写则不修改</span></td>
+          </tr>
+          <tr>
+            <td align="center" colspan="4"> {yun:}if is_array($row){/yun}
+              <input type="hidden" name="id" id="id" value="{yun:}$row.id{/yun}"/>
+              <input type="hidden" name="lasturl" value="{yun:}$lasturl{/yun}">
+              {yun:}/if{/yun}
+              <input class="admin_submit4" type="submit" name="submit" value="&nbsp;保 存&nbsp;" />
+              <input class="admin_submit4" type="reset" name="reset" value="&nbsp;重 置 &nbsp;" /></td>
+          </tr>
+        </table>
+        <input type="hidden" name="pytoken" id="pytoken" value="{yun:}$pytoken{/yun}">
+      </form>
+    </div>
+  </div>
+</div>
+<script>
+function check_resume_once(){ 
+	var id=$("#id").val();
+	var title=$("#title").val();
+	if($.trim(title)==""){ 
+		layer.msg('请填写职位名称', 2, 8);return false; 
+	}	
+	var companyname=$("#companyname").val();
+	if($.trim(companyname)==""){ 
+		layer.msg('请填写(店面)名称', 2, 8);return false; 
+	}
+	var edate=$("input[name=edate]").val();
+	    if(!edate){
+			layer.msg('请填写有效期！', 2, 8);return false;
+	    }
+	var linkman=$("input[name=linkman]").val();
+		if($.trim(linkman)==""){
+			layer.msg('请填写联系人', 2, 8);return false;  
+		}
+	var phone=$.trim($("#phone").val());
+	if(!phone){ 
+		layer.msg('请填写联系电话', 2, 8);return false; 
+	}else{
+		var reg= /^[1][34578]\d{9}$|^([0-9]{3,4}\-)?[0-9]{7,8}$/;   
+		if(!reg.test(phone)){ 
+			layer.msg('联系电话格式错误！', 2, 8);return false;
+		}
+	}
+	if($("input[name=cityid]").val()==''){
+		layer.msg('请选择工作地点', 2, 8);return false;
+	}
+	var require=$("#require").val();
+	if($.trim(require)==""){ 
+		layer.msg('请填写招聘要求', 2, 8);return false;
+	}
+}
+</script>
+</body>
+</html>

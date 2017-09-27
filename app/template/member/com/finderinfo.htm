@@ -1,0 +1,279 @@
+{yun:}include file="$comstyle/header.htm"{/yun}
+{yun:}include file="$tplstyle/public_search/index_search.htm"{/yun}
+<script>
+function getjoblist(id,type,name,son){
+	$("#job_"+type).hide();
+	$("#"+type).val(name);
+	$("#"+type+"id").val(id);
+	if(son){ 
+		$.post(weburl+"/member/index.php?m=ajax&c=getjoblist",{id:id,type:type},function(data){
+		
+			$("#"+son).val('请选择职位类别');
+			$("#"+son+'id').val('');
+			if(son=='job1_son'){
+				$("#job_post").val('请选择职位类别');
+				$("#job1_postid").val('');
+			}
+			$("#job_"+son+" ul").html(data);
+		})
+	}
+}
+function getcitylist(id,type,name,son){ 
+	$("#job_"+type).hide();
+	$("#"+type).val(name);
+	$("#"+type+"id").val(id);
+	
+	if(son){
+		$.post(weburl+"/member/index.php?m=ajax&c=getcitylist",{id:id,type:type},function(data){
+			$("#"+son).val('请选择工作地区');
+			$("#"+son+'id').val('');
+			
+			
+			if(son=='cityid'){
+				$("#three_cityidid").val('');
+				$('#cityshowth').hide();
+				
+			}
+			if(son=='three_cityid'){
+				
+				if(data){
+					$("#three_cityid").val('请选择工作地区');
+					$('#cityshowth').show();
+				}
+			}
+			$("#job_"+son+" ul").html(data);
+		})
+	} 
+}
+function CheckPost(){
+	var minsalary=$.trim($("#minsalary").val());
+	var maxsalary=$.trim($("#maxsalary").val());
+	if(maxsalary){
+		if(parseInt(maxsalary)<=parseInt(minsalary)){
+			layer.msg('最高工资必须大于最低工资！', 2, 8);return false;
+		}
+	}
+}
+</script>
+<div class="w1000">
+  <div class="admin_mainbody">
+  {yun:}include file="$comstyle/left.htm"{/yun}
+    <div class=right_box>
+      <div class=admincont_box>
+               <div class="com_tit"><span class="com_tit_span">搜索器管理</span></div>   
+         <div class="com_body">  
+         
+        <div class=admin_textbox_04>
+          <div style="flaot:left" class="formbox02">
+		<iframe id="supportiframe" name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe>
+		<form action="index.php?c=finder&act=save" method="post" target="supportiframe" name="MyForm"> 
+			<ul class="Finder_box">
+				<li><span class="Finder_span">搜索器名称：</span><input name="name" style="width:250px" type='text' value="{yun:}$info.name{/yun}" class="Finder_span_text"></li>
+				<li><span class="Finder_span">搜索关键字：</span><input name="keyword" style="width:250px" type='text' value="{yun:}$parav.keyword{/yun}" class="Finder_span_text"></li>
+ <li>
+<span class="Finder_span">行业类别：</span>
+<div class="text" >
+<div class="text_seclet text_seclet_cur0 fltL">
+<input id='hy' class="SpFormLBut text_seclet_w250 text_seclet_cur0" type="button"  value="{yun:}if $industry_name[$parav.hy]{/yun}{yun:}$industry_name[$parav.hy]{/yun}{yun:}else{/yun}请选择行业{yun:}/if{/yun}" onclick="search_show('job_hy');">
+<input id="hyid" type="hidden" value="{yun:}$parav.hy{/yun}" name="hy">
+<div id='job_hy' class="cus-sel-opt-panel cus-sel-opt-panel-w250 " style="display:none;">
+<ul class="Search_Condition_box_list">
+{yun:}foreach from=$industry_index item=row{/yun} 
+<li><a onclick="selects('{yun:}$row{/yun}','hy','{yun:}$industry_name[$row]{/yun}');" href="javascript:;"> {yun:}$industry_name[$row]{/yun}</a></li>
+{yun:}/foreach{/yun} 
+</ul>
+</div>
+</div>
+</div>                    
+</li>
+ <li>
+<span class="Finder_span">职位类别：</span>
+<div class="text" >
+<div class="text_seclet text_seclet_cur fltL">
+<input class="SpFormLBut text_seclet_w158" type="button" id='job1' onclick="search_show('job_job1');" value="{yun:}if $job_name[$parav.job1]{/yun}{yun:}$job_name[$parav.job1]{/yun}{yun:}else{/yun}请选择职位类别{yun:}/if{/yun}">
+<input id="job1id" type="hidden" value="{yun:}$parav.job1{/yun}" name="job1">
+<div id='job_job1' class="cus-sel-opt-panel cus-sel-opt-panel-w156 " style="display:none;">
+<ul class="Search_Condition_box_list">
+ {yun:}foreach from=$job_index item=row{/yun} 
+<li><a onclick="getjoblist('{yun:}$row{/yun}','job1','{yun:}$job_name[$row]{/yun}','job1_son');" href="javascript:;">{yun:}$job_name[$row]{/yun}</a></li>
+{yun:}/foreach{/yun} 
+</ul>
+</div>
+</div>
+<div class="text_seclet text_seclet_cur fltL">
+<input class="SpFormLBut text_seclet_w158" type="button" id='job1_son' onclick="search_show('job_job1_son');" value="{yun:}if $job_name[$parav.job1_son]{/yun}{yun:}$job_name[$parav.job1_son]{/yun}{yun:}else{/yun}请选择职位类别{yun:}/if{/yun}">
+<input id="job1_sonid" type="hidden" value="{yun:}$parav.job1_son{/yun}" name="job1_son">
+<div id="job_job1_son" class="cus-sel-opt-panel cus-sel-opt-panel-w156" style="display:none;">
+<ul class="Search_Condition_box_list">
+{yun:}foreach from=$job_type[$parav.job1] item=row{/yun} 
+<li><a onclick="getjoblist('{yun:}$row{/yun}','job1_son','{yun:}$job_name[$row]{/yun}','job_post');" href="javascript:;">{yun:}$job_name[$row]{/yun}</a></li>
+{yun:}/foreach{/yun} 
+</ul>
+</div> 
+</div>
+<div class="text_seclet text_seclet_cur fltL">
+<input class="SpFormLBut text_seclet_w158" type="button" id='job_post' onclick="search_show('job_job_post');" value="{yun:}if $job_name[$parav.job_post]{/yun}{yun:}$job_name[$parav.job_post]{/yun}{yun:}else{/yun}请选择职位类别{yun:}/if{/yun}">
+<input id="job_postid" type="hidden" value="{yun:}$parav.job_post{/yun}" name="job_post">
+<div id="job_job_post" class="cus-sel-opt-panel cus-sel-opt-panel-w156" style="display:none;">
+<ul class="Search_Condition_box_list">
+{yun:}foreach from=$job_type[$parav.job1_son] item=row{/yun} 
+<li><a onclick="getjoblist('{yun:}$row{/yun}','job_post','{yun:}$job_name[$row]{/yun}','');" href="javascript:;">{yun:}$job_name[$row]{/yun}</a></li>
+{yun:}/foreach{/yun}  
+</ul>
+</div>
+</div>
+</div>                    
+</li>
+ <li>
+<span class="Finder_span">工作地区：</span>
+<div class="text" >
+<div class="text_seclet text_seclet_cur2 fltL">
+<input class="SpFormLBut text_seclet_w158" type="button" id='province' onclick="search_show('job_province');" value="{yun:}if $city_name[$parav.provinceid]{/yun}{yun:}$city_name[$parav.provinceid]{/yun}{yun:}else{/yun}请选择工作地区{yun:}/if{/yun}">
+<input id="provinceid" type="hidden" value="{yun:}$parav.provinceid{/yun}" name="provinceid">
+<div id='job_province' class="cus-sel-opt-panel cus-sel-opt-panel-w156 " style="display:none;">
+<ul class="Search_Condition_box_list">
+{yun:}foreach from=$city_index item=row{/yun}
+<li><a onclick="getcitylist('{yun:}$row{/yun}','province','{yun:}$city_name[$row]{/yun}','cityid');" href="javascript:;">{yun:}$city_name[$row]{/yun}</a></li>
+{yun:}/foreach{/yun}   
+</ul>
+</div>
+</div>
+<div class="text_seclet text_seclet_cur2 fltL">
+<input class="SpFormLBut text_seclet_w158" type="button" id='cityid' onclick="search_show('job_cityid');" value="{yun:}if $city_name[$parav.cityid]{/yun}{yun:}$city_name[$parav.cityid]{/yun}{yun:}else{/yun}请选择工作地区{yun:}/if{/yun}">
+<input id="cityidid" type="hidden" value="{yun:}$parav.cityid{/yun}" name="cityid">
+<div id="job_cityid" class="cus-sel-opt-panel cus-sel-opt-panel-w156" style="display:none;">
+<ul class="Search_Condition_box_list">
+{yun:}foreach from=$city_type[$parav.provinceid] item=row{/yun}
+<li><a onclick="getcitylist('{yun:}$row{/yun}','cityid','{yun:}$city_name[$row]{/yun}','three_cityid');" href="javascript:;">{yun:}$city_name[$row]{/yun}</a></li>
+{yun:}/foreach{/yun}   
+</ul>
+</div>
+</div>
+<div class="text_seclet text_seclet_cur2 fltL"  {yun:}if !$parav.three_cityid{/yun}style='display:none;'{yun:}/if{/yun}  id="cityshowth">
+<input class="SpFormLBut text_seclet_w158" type="button" id='three_cityid' onclick="three_city_show('job_three_cityid');" value="{yun:}if $city_name[$parav.three_cityid]{/yun}{yun:}$city_name[$parav.three_cityid]{/yun}{yun:}else{/yun}请选择工作地区{yun:}/if{/yun}">
+<input id="three_cityidid" type="hidden" value="{yun:}$parav.three_cityid{/yun}" name="three_cityid">
+<div id='job_three_cityid' class="cus-sel-opt-panel cus-sel-opt-panel-w156" style="display:none;">
+<ul class="Search_Condition_box_list">
+{yun:}foreach from=$city_type[$parav.cityid] item=row{/yun}
+<li><a onclick="getcitylist('{yun:}$row{/yun}','three_cityid','{yun:}$city_name[$row]{/yun}');" href="javascript:;">{yun:}$city_name[$row]{/yun}</a></li>
+{yun:}/foreach{/yun}   
+</ul>
+</div>
+</div>
+</div>                    
+</li>
+ <li>
+	<span class="Finder_span">薪资待遇：</span>
+	<div class="text" >
+	<div class="text_seclet text_seclet_cur3 fltL">
+	<input id="minsalary" name="minsalary" type="text" size="5" value="{yun:}$parav.minsalary{/yun}" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" class="Finder_span_textw100">
+	<span> - </span>
+	<input id="maxsalary" name="maxsalary" type="text" size="5" value="{yun:}$parav.maxsalary{/yun}" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')"class="Finder_span_textw100">
+	</div>
+	</div>                    
+</li>
+ <li>
+<span class="Finder_span">学历要求：</span>
+<div class="text" >
+<div class="text_seclet text_seclet_cur4 fltL">
+<input class="SpFormLBut text_seclet_w250 text_seclet_cur4"  id='edu' onclick="search_show('job_edu');" type="button"  value="{yun:}if $userclass_name[$parav.edu]{/yun}{yun:}$userclass_name[$parav.edu]{/yun}{yun:}else{/yun}请选择学历要求{yun:}/if{/yun}">
+<input id="eduid" type="hidden" value="{yun:}$parav.edu{/yun}" name="edu">
+<div id='job_edu' class="cus-sel-opt-panel cus-sel-opt-panel-w250 " style="display:none;">
+<ul class="Search_Condition_box_list">
+ {yun:}foreach from=$userdata.user_edu item=edu{/yun}
+<li><a onclick="selects('{yun:}$edu{/yun}','edu','{yun:}$userclass_name[$edu]{/yun}');" href="javascript:;"> {yun:}$userclass_name[$edu]{/yun}</a></li>
+{yun:}/foreach{/yun} 
+</ul>
+</div>
+</div>
+</div>                    
+</li>
+ <li>
+<span class="Finder_span">工作经验：</span>
+<div class="text" >
+<div class="text_seclet text_seclet_cur5 fltL">
+<input class="SpFormLBut text_seclet_w250 text_seclet_cur4"  id='exp' onclick="search_show('job_exp');" type="button"  value="{yun:}if $userclass_name[$parav.exp]{/yun}{yun:}$userclass_name[$parav.exp]{/yun}{yun:}else{/yun}请选择工作经验{yun:}/if{/yun}">
+<input id="expid" type="hidden" value="{yun:}$parav.exp{/yun}" name="exp">
+<div id='job_exp' class="cus-sel-opt-panel cus-sel-opt-panel-w250 " style="display:none;">
+<ul class="Search_Condition_box_list">
+ {yun:}foreach from=$userdata.user_word item=exp{/yun}
+<li><a onclick="selects('{yun:}$exp{/yun}','exp','{yun:}$userclass_name[$exp]{/yun}');" href="javascript:;"> {yun:}$userclass_name[$exp]{/yun}</a></li>
+{yun:}/foreach{/yun} 
+</ul>
+</div>
+</div>
+</div>                    
+</li>
+ <li>
+<span class="Finder_span">性别要求：</span>
+<div class="text" >
+<div class="text_seclet text_seclet_cur6 fltL">
+
+ {yun:}if $parav.sex{/yun}
+    			{yun:}foreach item=v key=j from=$arr_data.sex{/yun}
+                    {yun:}if $j eq $parav.sex{/yun}
+                    <input type="button" value="{yun:}$v{/yun}" class="SpFormLBut text_seclet_w250 text_seclet_cur4" id="sex" onClick="search_show('job_sex');">
+                    <input name="sex" type="hidden" id="sexid" value="{yun:}$j{/yun}"><!--这块后加-->
+                    {yun:}/if{/yun}
+                {yun:}/foreach{/yun}
+            {yun:}else{/yun}
+                <input type="button" value="请选择性别要求" class="SpFormLBut text_seclet_w250 text_seclet_cur4" id="sex" onClick="search_show('job_sex');">
+                <input name="sex" type="hidden" id="sexid" value="">
+            <!--这块后加-->            
+            {yun:}/if{/yun}      
+                
+                  <div id="job_sex" class="cus-sel-opt-panel cus-sel-opt-panel-w250" style="display: none;">
+                    <ul class="Search_Condition_box_list"> 
+                    {yun:}foreach from=$arr_data.sex key=j item=v{/yun}                   
+                    <li><a href="javascript:;" onClick="selects('{yun:}$j{/yun}','sex','{yun:}$v{/yun}')">{yun:}$v{/yun}</a></li>                  
+                    {yun:}/foreach{/yun}                                        
+                    </ul>
+                  </div>
+
+</div> 
+</div>                    
+</li> 
+ <li>
+<span class="Finder_span">到岗时间：</span>
+<div class="text" >
+<div class="text_seclet text_seclet_cur8 fltL">
+<input class="SpFormLBut text_seclet_w250 text_seclet_cur4"  id='report' onclick="search_show('job_report');" type="button"  value="{yun:}if $userclass_name[$parav.report]{/yun}{yun:}$userclass_name[$parav.report]{/yun}{yun:}else{/yun}请选择到岗时间{yun:}/if{/yun}">
+<input id="reportid" type="hidden" value="{yun:}$parav.report{/yun}" name="report">
+<div id='job_report' class="cus-sel-opt-panel cus-sel-opt-panel-w250 " style="display:none;">
+<ul class="Search_Condition_box_list">
+ {yun:}foreach from=$userdata.user_report item=report{/yun}
+<li><a onclick="selects('{yun:}$report{/yun}','report','{yun:}$userclass_name[$report]{/yun}');" href="javascript:;"> {yun:}$userclass_name[$report]{/yun}</a></li>
+{yun:}/foreach{/yun} 
+</ul>
+</div>
+</div>
+</div>                    
+</li>
+ <li>
+<span class="Finder_span">更新时间：</span>
+<div class="text" >
+<div class="text_seclet text_seclet_cur10 fltL">
+<input class="SpFormLBut text_seclet_w250 text_seclet_cur4"  id='uptime' onclick="search_show('job_uptime');" type="button"  value="{yun:}if $uptime[$parav.uptime]{/yun}{yun:}$uptime[$parav.uptime]{/yun}{yun:}else{/yun}请选择更新时间{yun:}/if{/yun}">
+<input id="uptimeid" type="hidden" value="{yun:}$parav.uptime{/yun}" name="uptime">
+<div id='job_uptime' class="cus-sel-opt-panel cus-sel-opt-panel-w250 " style="display:none;">
+<ul class="Search_Condition_box_list">
+ {yun:}foreach from=$uptime item=slist key=key{/yun}
+<li><a onclick="selects('{yun:}$key{/yun}','uptime','{yun:}$slist{/yun}');" href="javascript:;"> {yun:}$slist{/yun}</a></li>
+{yun:}/foreach{/yun} 
+</ul>
+</div>
+</div>
+</div>                    
+</li> 
+<li><span class="Finder_span"></span><input name="id" value="{yun:}$info.id{/yun}" type="hidden"/><input class="btn_01" type="submit" value="保存信息" name="submitBtn"></li>
+
+			</ul>
+		</form>
+	</div> 
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+{yun:}include file="$comstyle/footer.htm"{/yun} 

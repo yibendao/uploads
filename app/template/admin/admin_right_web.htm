@@ -1,0 +1,136 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link href="images/reset.css" rel="stylesheet" type="text/css" />
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js"></script>
+<title>后台管理</title>
+</head>
+<body class="body_ifm">
+{yun:}if $type=="tj"{/yun}
+<div class="admin_atatic_chart fl" id="main2" style="height:300px;"></div>
+   
+    <script src="js/echarts_plain.js"></script>
+    <script type="text/javascript">
+        var myChart = echarts.init(document.getElementById('main2')); 
+        var option = {tooltip : {trigger: 'axis'},legend: {data:['{yun:}$name[0]{/yun}','{yun:}$name[1]{/yun}']},
+    calculable : false,
+    xAxis : [
+        {
+            type : 'category',
+            boundaryGap : false,
+            data : [{yun:}foreach name=foo from=$list item=daylist{/yun}{yun:}if $smarty.foreach.foo.index>0{/yun},{yun:}/if{/yun}'{yun:}$daylist.td{/yun}'{yun:}/foreach{/yun}]
+        }
+    ],
+    yAxis : [{type : 'value',minInterval: 1}],
+    series : [
+        {
+            name:'{yun:}$name[0]{/yun}',
+            type:'line',
+            symbol:'emptyCircle',
+            smooth:false,
+            itemStyle: {
+                normal: {
+                    areaStyle: {
+                        width: 2,
+						color:'rgb(191,227,249)'
+					}
+                }
+            },
+            data:[{yun:}foreach name=foo1 from=$list item=daylist{/yun}{yun:}if $smarty.foreach.foo1.index>0{/yun},{yun:}/if{/yun}{yun:}$daylist.cnt{/yun}{yun:}/foreach{/yun}]
+        }{yun:}if $twolist{/yun},
+		{
+		    name:'{yun:}$name[1]{/yun}',
+            type:'line',
+            symbol:'emptyCircle',
+            smooth:false,
+            itemStyle: {
+                normal: {
+                    areaStyle: {
+                        width: 2,
+						color:'rgb(191,227,249)'
+					}
+                }
+            },
+            data:[{yun:}foreach name=foo2 from=$twolist item=daylist2{/yun}{yun:}if $smarty.foreach.foo2.index>0{/yun},{yun:}/if{/yun}{yun:}$daylist2.cnt{/yun}{yun:}/foreach{/yun}]
+		}
+		{yun:}/if{/yun}
+    ]
+};
+        myChart.setOption(option); 
+    </script>
+    
+{yun:}elseif ($type=="dt"){/yun}
+<ul class="right_web_list">
+{yun:}foreach name=$name from=$list item=v{/yun}
+<li>会员
+
+{yun:}if $v.downtime{/yun}
+{yun:}$v.comusername{/yun}
+{yun:}/if{/yun}
+
+{yun:}if $v.order_time{/yun}
+{yun:}$v.username{/yun}
+{yun:}/if{/yun}
+
+{yun:}if $v.com_name{/yun}
+{yun:}$v.username{/yun}
+{yun:}/if{/yun}
+
+{yun:}if $v.jobid{/yun}
+{yun:}$v.username{/yun}
+{yun:}/if{/yun}
+
+{yun:}if $v.resume_id{/yun}
+{yun:}$v.comusername{/yun}
+{yun:}/if{/yun}
+
+在
+
+{yun:}if $v.downtime{/yun}
+{yun:}if $v.time<60{/yun} <span style="color:red;">{yun:}$v.time{/yun}</span> {yun:}else{/yun}{yun:}$v.time{/yun}{yun:}/if{/yun}
+{yun:}/if{/yun}
+{yun:}if $v.datetime{/yun}
+{yun:}if $v.times<60{/yun} <span style="color:red;">{yun:}$v.times{/yun}</span> {yun:}else{/yun}{yun:}$v.times{/yun}{yun:}/if{/yun}
+{yun:}/if{/yun}
+{yun:}if $v.order_time{/yun}
+{yun:}if $v.timess<60{/yun} <span style="color:red;">{yun:}$v.timess{/yun}</span> {yun:}else{/yun}{yun:}$v.timess{/yun}{yun:}/if{/yun}
+{yun:}/if{/yun}
+
+{yun:}if $v.downtime{/yun}
+下载了{yun:}$v.username{/yun}的简历
+{yun:}/if{/yun}
+
+{yun:}if $v.job_name{/yun}
+{yun:}if $v.eid{/yun}申请了{yun:}else{/yun}收藏了{yun:}/if{/yun}{yun:}$v.job_name{/yun}职位
+{yun:}/if{/yun}
+
+{yun:}if $v.jobid{/yun}
+浏览了{yun:}$v.jobname{/yun}职位
+{yun:}/if{/yun}
+
+{yun:}if $v.resume_id{/yun}
+浏览了{yun:}$v.username{/yun}简历
+{yun:}/if{/yun}
+
+{yun:}if $v.order_time{/yun}
+充值了{yun:}$v.order_price{/yun}
+{yun:}/if{/yun}
+</li>
+{yun:}/foreach{/yun}
+</ul>
+
+{yun:}elseif ($type=="rz"){/yun}
+
+<ul class="right_web_list">
+{yun:}foreach name=$name from=$list item=v{/yun}
+<li>会员{yun:}$v.username{/yun}在
+{yun:}if $v.ctime{/yun}
+{yun:}if $v.time<60{/yun} <span style="color:red;">{yun:}$v.time{/yun}</span> {yun:}else{/yun}{yun:}$v.time{/yun}{yun:}/if{/yun}
+{yun:}/if{/yun}
+{yun:}$v.content{/yun}</li>
+{yun:}/foreach{/yun}
+</ul>
+{yun:}/if{/yun}
+</body>
+</html>

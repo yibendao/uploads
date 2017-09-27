@@ -1,0 +1,114 @@
+{yun:}include file="$comstyle/header.htm"{/yun}
+<div class="w1000">
+<div class="admin_mainbody"> {yun:}include file="$comstyle/left.htm"{/yun}
+  <link href="{yun:}$comstyle{/yun}/images/index_style.css" type=text/css rel=stylesheet>
+  <div class=right_box>
+    <div class=admincont_box>
+      <div class="com_tit">
+       <span class="com_tit_span">兼职报名</span>
+      </div>
+      <div class="com_body">
+        <div class=admin_textbox_04>
+          <iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe>
+          <div class="hr_tip_box">
+          <div class="hr_subMetx">
+			<span class="hr_subMetx_span fltL">兼职名称：</span>
+			<div class="text_seclet text_seclet_cur2 re">
+                <input id="qypr" class="SpFormLBut text_seclet_w250" type="button" onclick="search_show('job_qypr');" {yun:}if $jobname{/yun}value="{yun:}$jobname{/yun}"{yun:}else{/yun}value="全部职位"{yun:}/if{/yun}>
+                <div id="job_qypr" class="cus-sel-opt-panel " style="display: none;">
+                  	<ul class="Search_Condition_box_list">
+                    	<li><a href="index.php?c=partapply&status={yun:}$smarty.get.status{/yun}">全部职位</a></li>
+                  		{yun:}foreach from=$JobList item=one{/yun}
+                        <li> <a href="index.php?c=partapply&jobid={yun:}$one.id{/yun}&status={yun:}$smarty.get.status{/yun}">{yun:}$one.name{/yun}</a> </li>
+						{yun:}/foreach{/yun}
+					</ul>
+                </div>
+              </div>
+			</div>
+            <div class="hr_subMetx"> <span class="hr_subMetx_span fltL">报名状态：</span>
+               <a href="index.php?c=partapply&jobid={yun:}$smarty.get.jobid{/yun}" class="hr_subMetx_a {yun:}if $smarty.get.status==''{/yun}hr_subMetx_cur{yun:}/if{/yun}">不限</a>
+                {yun:}foreach from=$StateList item=one{/yun}
+                <a {yun:}if $smarty.get.status==$one.id{/yun}class="hr_subMetx_cur"{yun:}/if{/yun} href="index.php?c=partapply&jobid={yun:}$smarty.get.jobid{/yun}&status={yun:}$one.id{/yun}">{yun:}$one.name{/yun}</a>
+                {yun:}/foreach{/yun}
+            </div>
+			     
+		  </div>
+          <div class="clear"></div>
+          <form action="{yun:}$now_url{/yun}&act=del" target="supportiframe" method="post" id='myform'> 
+              <div class="clear"></div>
+                {yun:}if $rows{/yun}
+              <div class="job_news_list job_news_list_h1 mt10"> 
+                <span class="job_news_list_span job_w30">&nbsp;</span> 
+                 <span class="job_news_list_span job_w155" style="text-align:left">兼职名称</span> 
+                 <span class="job_news_list_span job_w120" style="text-align:left">姓名</span> 
+                 <span class="job_news_list_span job_w120">手机号码</span> 
+                <span class="job_news_list_span job_w100">性别</span> 
+                <span class="job_news_list_span job_w100">学历</span> 
+                <span class="job_news_list_span job_w120">申请时间</span> 
+                <span class="job_news_list_span job_w100">操作</span> 
+                </div>
+              
+                {yun:}foreach item=v from=$rows{/yun}
+              <div class="job_news_list" style="padding-bottom:18px;"> 
+              <span class="job_news_list_span job_w30" style="padding-right:6px;">
+           <input type="checkbox" name="delid[]" value="{yun:}$v.id{/yun}">
+                  </span>
+                   <span class="job_news_list_span job_w155" style="text-align:left"><a href="{yun:}url m=part c=show id='`$v.jobid`'{/yun}" target="_blank" class="uesr_name_a">{yun:}$v.jobname{/yun}</a></span> 
+                  <span class="job_news_list_span job_w120" style="text-align:left">{yun:}$v.name{/yun}&nbsp;</span>
+                   
+                   <span class="job_news_list_span job_w120">{yun:}$v.telphone{/yun} &nbsp;</span> 
+                   <span class="job_news_list_span job_w100">{yun:}$v.sex{/yun}&nbsp;</span> 
+				   <span class="job_news_list_span job_w100">{yun:}$v.edu{/yun}&nbsp;</span> 
+                   <span class="job_news_list_span job_w120">{yun:}$v.ctime|date_format:'%Y-%m-%d'{/yun} &nbsp;</span> 
+                 <span class="job_news_list_span job_w100">  
+       <a href="javascript:void(0)" onclick="layer_del('确定删除该条信息？', 'index.php?c=partapply&act=del&del={yun:}$v.id{/yun}'); " class="uesr_name_a">删除</a>
+             </span>
+                 <div class="clear"></div>
+                 <div class="com_mem_hr_list_b_b">
+					<span class="com_mem_hr_list_b_c9 ">状态：</span>
+                    <span class="com_mem_hr_list_bj {yun:}if $v.status=='1'{/yun}com_mem_hr_list_bj_cur com_mem_hr_list_red{yun:}/if{/yun}" name='{yun:}$v.id{/yun}' status='1'> 未查看<i class="com_mem_hr_no_icon"></i></span>
+                    <span class="com_mem_hr_list_bj {yun:}if $v.status=='2'{/yun}com_mem_hr_list_bj_cur{yun:}/if{/yun}" name='{yun:}$v.id{/yun}' status='2'> 已查看</span>     
+				   <span class="com_mem_hr_list_bj {yun:}if $v.status=='3'{/yun}com_mem_hr_list_bj_cur{yun:}/if{/yun}" name='{yun:}$v.id{/yun}' status='3'> 已联系  </span>    
+                </div> 
+                   </div>
+              
+              
+        
+                {yun:}/foreach{/yun}
+                <div class="com_Release_job_bot"> <span class="com_Release_job_qx">
+                  <input id='checkAll'  type="checkbox" onclick='m_checkAll(this.form)' class="com_Release_job_qx_check">全选</span>
+                  <INPUT class="c_btn_02" type="button" name="subdel" value="批量删除" onclick="return really('delid[]');">
+                </div>
+                {yun:}else{/yun}
+                <div class="msg_no">您还没有兼职报名信息</div>
+                {yun:}/if{/yun} 
+           
+            <div class="diggg mt10 fltR">{yun:}$pagenav{/yun}</div>
+          </form>
+          <div  class="clear"></div>
+          {yun:}if $rows{/yun}
+          <div class="job_list_tip"> <span class="job_list_tip_span">共有（<span class="f60">{yun:}$total{/yun}</span>）人报名贵公司发布的兼职</span> </div>
+          {yun:}/if{/yun}
+          <div  class="clear"></div> 
+		  <div class="wxts_box wxts_box_mt30">
+			<div class="wxts">温馨提示：</div>
+			1.对于求职者来说即使是被拒绝，也胜过毫无音讯的等待。<br>
+			</div>
+		</div>
+        </div>
+      </div>
+    </div>
+  </div> 
+  </div> 
+<script>
+$(document).ready(function(){
+	$(".com_mem_hr_list_bj").click(function(){
+		var status=$(this).attr('status');
+		var id=$(this).attr('name');
+		$.post("index.php?c=partapply&act=status",{id:id,status:status},function(data){
+			location.reload();
+		});
+	});
+});
+</script>
+{yun:}include file="$comstyle/footer.htm"{/yun}

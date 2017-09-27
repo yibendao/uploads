@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>个人用户管理平台 - {yun:}$config.sy_webname{/yun}</title>
+<meta http-equiv=Content-Type content="text/html; charset=GBK"/>
+<meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
+<meta content="MSHTML 6.00.6000.16939" name="Generator"/>
+<link href="{yun:}$user_style{/yun}/images/m_css.css" type="text/css" rel="stylesheet"/>
+<link href="{yun:}$user_style{/yun}/images/m_header.css" type="text/css" rel="stylesheet"/>
+<script>var weburl = "{yun:}$config.sy_weburl{/yun}";var pricename = "{yun:}$config.integral_pricename{/yun}";</script>
+<script type="text/javascript" src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js"></script>
+{yun:}if $layerv=='5'{/yun}
+<script type="text/javascript" src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.1.8.5.js"></script>
+{yun:}else{/yun}
+<script type="text/javascript" src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js"></script>
+{yun:}/if{/yun}
+<script type="text/javascript" src="{yun:}$config.sy_weburl{/yun}/js/setday.js"></script>
+<script type="text/javascript" src="{yun:}$config.sy_weburl{/yun}/js/member_public.js"></script>
+<script type="text/javascript" src="{yun:}$config.sy_weburl{/yun}/js/public.js"></script>
+</head>
+<body>
+    <div class="yun_user_member_top user_bg">
+    <div class="yun_user_member_w1100">
+    <div class="top_left fltL">欢迎来到{yun:}$config.sy_webname{/yun}！</div>
+      <div class="top_right_re fltR">
+                <div class="top_right">
+                    <div class="yun_topNav fr">
+                        <a class="yun_navMore png" href="javascript:void(0)">网站导航</a>
+                        <div class="yun_webMoredown" style="display:none">
+                            <div class="yun_top_nav_box">
+                             <ul class="yun_top_nav_box_l">
+                             {yun:}navmap key=key item=maplist{/yun}
+                             <li><a href="{yun:}$maplist.url{/yun}" {yun:}if $maplist.eject{/yun} target="_blank"{yun:}/if{/yun}>{yun:}$maplist.name{/yun}</a></li>
+                             {yun:}/navmap{/yun} </ul>
+                                 <ul class="yun_top_nav_box_wx">
+               {yun:}nav item=navlist_app hovclass=nav_list_hover nid=11{/yun}          
+            <li> <a class="move_0{yun:}$navlist_app.sort{/yun}"{yun:}if $navlist_app.eject{/yun} target="_blank"{yun:}/if{/yun} href="{yun:}$config.sy_weburl{/yun}/{yun:}$navlist_app.url{/yun}">{yun:}$navlist_app.name{/yun}</a> </li>
+          {yun:}/nav{/yun}
+                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    {yun:}if $cookie.remind_num>0{/yun}
+                    <div class="header_Remind fr header_Remind_hover" style=" margin-top:6px;">
+                        <em class="header_Remind_em "><i class="header_Remind_msg"></i></em>
+                        <div class="header_Remind_list" style="display:none;"> 
+                            <div class="header_Remind_list_a">
+                                <a href="{yun:}$config.sy_weburl{/yun}/member/index.php?c=msg" class="fl">邀请面试</a>
+                                <span class="header_Remind_list_r fr">({yun:}$cookie.userid_msg{/yun})</span>
+                            </div>
+                          
+                            <div class="header_Remind_list_a">
+                                <a href="{yun:}$config.sy_weburl{/yun}/member/index.php?c=sysnews" class="fl">系统消息 </a>
+                                <span class="header_Remind_list_r fr">({yun:}$cookie.sysmsg1{/yun})</span>
+                            </div>
+                            <div class="header_Remind_list_a">
+                                <a href="{yun:}$config.sy_weburl{/yun}/member/index.php?c=commsg" class="fl">企业回复咨询</a>
+                                <span class="header_Remind_list_r fr">({yun:}$cookie.usermsg{/yun})</span>
+                            </div>
+                        </div>
+                    </div>
+                    {yun:}/if{/yun}
+                    <div class="header_seach_State fltR">
+                        <span class="header_seach_State_name">你好！{yun:}$username{/yun}</span>
+                        <span class="user_m_line">|</span>
+                        <a href="javascript:void(0)" onClick="logout('index.php?act=logout')" class="header_seach_State_a">退出</a>
+                        <span class="user_m_line">|</span>
+                        <a href="{yun:}$config.sy_weburl{/yun}" target="_blank" title='返回网站首页' class="user_m_fanh">返回网站首页</a>
+                        <span class="user_m_line">|</span>
+                    </div>
+                </div>
+            </div>
+    </div>
+    </div>
+    <div class="header">
+        <div class="yun_user_member_w1100">
+            <div class="logo  fltL">
+                <a href="{yun:}$config.sy_weburl{/yun}" target="_blank" title='返回网站首页'>
+                <img alt="{yun:}$config.sy_webname{/yun}" src="{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_member_logo{/yun}" >
+                </a>
+            </div>
+         <ul class="yun_user_member_nav">
+         <li {yun:}if $left==1{/yun}class="yun_user_member_nav_cur"{yun:}/if{/yun}><a href="index.php">个人中心</a></li>
+         <li {yun:}if $left==2{/yun}class="yun_user_member_nav_cur"{yun:}/if{/yun}><a href="index.php?c=resume"> 简历管理</a></li>
+          <li {yun:}if $left==3{/yun}class="yun_user_member_nav_cur"{yun:}/if{/yun}><a href="index.php?c=msg">求职管理</a></li>
+          <li {yun:}if $left==5{/yun}class="yun_user_member_nav_cur"{yun:}/if{/yun}><a href="index.php?c=paylog">财务管理</a></li>
+          <li {yun:}if $left==6{/yun}class="yun_user_member_nav_cur"{yun:}/if{/yun}><a href="index.php?c=binding">账号中心</a></li>
+          </ul>
+        </div>
+    </div>
+    <div class="clear"></div>

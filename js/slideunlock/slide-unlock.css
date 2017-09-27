@@ -1,0 +1,37 @@
+.slideunlock-wrapper{
+    width: 100%;
+    position: relative;
+    margin: 0 auto;
+}
+.slideunlock-slider{
+	padding:0px 20px;
+	height:40px;
+	line-height:40px;
+    position: relative;
+    background-color: #FDEB9C;
+    overflow: hidden;
+    text-align: center;
+	moz-user-select: -moz-none;
+	-moz-user-select: none;
+	-o-user-select:none;
+	-khtml-user-select:none;
+	-webkit-user-select:none;
+	-ms-user-select:none;
+	user-select:none;
+}
+.slideunlock-slider.success{
+    background-color: #E5EE9F;
+}
+.slideunlock-label{
+    width: 40px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    background: #E67E22;
+    z-index: 9;
+    cursor: move;
+}
+.slideunlock-label-tip{
+    z-index: 9;
+}

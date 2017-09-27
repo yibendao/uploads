@@ -1,0 +1,152 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<link href="images/reset.css" rel="stylesheet" type="text/css" />
+<link href="images/system.css" rel="stylesheet" type="text/css" />
+<link href="images/table_form.css" rel="stylesheet" type="text/css" />
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js"></script>
+<script charset="utf-8" src="../js/kindeditor/kindeditor-min.js"></script>
+<script charset="utf-8" src="../js/kindeditor/lang/zh_CN.js"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script>
+<script src="js/admin_public.js" language="javascript"></script>
+<link href="images/blue.css" rel="stylesheet">
+<script src="js/icheck.js"></script>
+  <script>
+	$(document).ready(function(){
+	  $('input').iCheck({
+		checkboxClass: 'icheckbox_flat-blue',
+		radioClass: 'iradio_flat-blue'
+	  });
+	});
+</script>
+<script language="javascript"> 
+KindEditor.ready(function(K) {
+	K.create('#intro', {
+		items : ['source',
+		'bold', 'italic', 'underline',
+		'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+		'insertunorderedlist','emoticons', 'image'],afterBlur:function(){this.sync();} 
+	});
+});
+function checkform(myform){
+	if (myform.name.value==""){
+		parent.layer.msg('请填写奖品名称！', 2, 8);return (false);
+	}
+	if (myform.nid.value==""){
+		parent.layer.msg('请填写奖品类别！', 2, 8);return (false);
+	}
+	if (myform.pic.value=="" && $('#hiddenPic').val()==''){
+		parent.layer.msg('请上传奖品图片！', 2, 8);return (false);
+	}
+	if (myform.integral.value==""){
+		parent.layer.msg('请填写兑换{yun:}$config.integral_pricename{/yun}！', 2, 8);return (false);
+	}
+	if (myform.restriction.value==""){
+		parent.layer.msg('请填写限购数量！', 2, 8);return (false);
+	}
+	if (myform.stock.value==""){
+		parent.layer.msg('请填写库存数量！', 2, 8);return (false);
+	} 
+}
+</script>
+<title>后台管理</title>
+</head>
+<body class="body_ifm">
+<div class="infoboxp">
+  <div class="infoboxp_top_bg"></div>
+  <div class="infoboxp_top">
+    <h6>添加奖品</h6>
+    <div class="infoboxp_right"> <a href=" javascript:history.back(-1);" class="infoboxp_tj">类别列表</a> </div>
+  </div>
+  <div class="admin_table_border">
+    <iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe>
+    <form name="myform" action="index.php?m=reward&c=add" method="post" encType="multipart/form-data"  onSubmit="return checkform(this);" target="supportiframe">
+      <table width="100%" class="table_form" style="background:#fff;">
+        <tr>
+          <th>奖品名称：</th>
+          <td><input class="input-text" type="text" name="name" size="40" value="{yun:}$info.name{/yun}"/></td>
+        </tr>
+        <tr class="admin_table_trbg">
+          <th>奖品类别：</th>          
+          <td>        
+              
+              <div class="yun_admin_select_box zindex100">
+            {yun:}if $info.nid{/yun}
+                {yun:}foreach from=$redeem_index key=j item=v{/yun}
+                    {yun:}if $info.nid==$v{/yun}
+                    <input type="button" value="{yun:}$redeem_name[$v]{/yun}" class="yun_admin_select_box_text" id="nid_name" onClick="select_click('nid');">
+                    <input name="nid" type="hidden" id="nid_val" value="{yun:}$v{/yun}">
+                    {yun:}/if{/yun}
+                {yun:}/foreach{/yun}
+            {yun:}else{/yun}
+                <input type="button" value="请选择" class="yun_admin_select_box_text" id="nid_name" onClick="select_click('nid');">
+                <input name="nid" type="hidden" id="nid_val" value="">
+            {yun:}/if{/yun}
+            
+            <div class="yun_admin_select_box_list_box dn" id="nid_select">     
+                {yun:}foreach from=$redeem_index key=j item=v{/yun}
+                <div class="yun_admin_select_box_list">
+                    <a href="javascript:;" onClick="select_new('nid','{yun:}$v{/yun}','{yun:}$redeem_name[$v]{/yun}')">{yun:}$redeem_name[$v]{/yun}</a>
+                </div>                    
+                {yun:}/foreach{/yun}
+            </div>
+        </div>
+            </td>
+        </tr>
+        <tr>
+          <th>奖品图片：</th>
+          <td><input class="input-text" type="file" name="pic" size="45">
+            {yun:}if $info.pic!=""{/yun}<img src="{yun:}$config.sy_weburl{/yun}/{yun:}$info.pic{/yun}" width="100" height="80">{yun:}/if{/yun}
+			<input type='hidden' id='hiddenPic' value='{yun:}$info.pic{/yun}'>
+			</td>
+        </tr>
+        <tr class="admin_table_trbg">
+          <th>兑换{yun:}$config.integral_pricename{/yun}：</th>
+          <td><input class="input-text" type="text" name="integral" size="20" value="{yun:}$info.integral{/yun}" onkeyup="this.value=this.value.replace(/[^0-9-]/g,'')"/></td>
+        </tr>
+        <tr>
+          <th>限购数量：</th>
+          <td><input class="input-text" type="text" name="restriction" size="20" value="{yun:}$info.restriction{/yun}" onkeyup="this.value=this.value.replace(/[^0-9-]/g,'')"/>
+            0为不限</td>
+        </tr>
+        <tr class="admin_table_trbg">
+          <th>库存数量：</th>
+          <td><input class="input-text" type="text" name="stock" size="20" value="{yun:}$info.stock{/yun}" onkeyup="this.value=this.value.replace(/[^0-9-]/g,'')"/></td>
+        </tr>
+        <tr>
+          <th>简介内容： </th>
+          <td><textarea  id="intro" name="content" style="width:700px;height:300px;">{yun:}$info.content{/yun}</textarea></td>
+        </tr>
+        <tr class="admin_table_trbg">
+          <th>排序：</th>
+          <td><input class="input-text" type="text" name="sort" size="20" value="{yun:}$info.sort{/yun}" onkeyup="this.value=this.value.replace(/[^0-9-]/g,'')"/>
+            越小越在前</td>
+        </tr>
+        <tr >
+          <th>状态：</th>
+          <td>
+          <div class="iradio_flat_height">
+          <input type="radio" name="status" value="1" id="status_1" {yun:}if $info.status!=0{/yun}checked{yun:}/if{/yun}>
+            <span class="iradio_flat_left"><label for="status_1">上架&nbsp;&nbsp;</span>
+            <input type="radio" name="status" value="0" id="status_0" {yun:}if $info.status==0{/yun}checked{yun:}/if{/yun}>
+           <span class="iradio_flat_left"><label for="status_0"> 下架 &nbsp;&nbsp;</span>
+            </div>
+            </td>
+        </tr>
+        <tr class="admin_table_trbg" >
+          <td align="center" colspan="2"> {yun:}if $info.id{/yun}
+            <input type="hidden" name="id" value="{yun:}$info.id{/yun}"/>
+            <input class="admin_submit2" type="submit" name="submit" value="&nbsp;更 新&nbsp;"  />
+            {yun:}else{/yun}
+            <input class="admin_submit2" type="submit" name="submit" value="&nbsp;添 加&nbsp;"  />
+            {yun:}/if{/yun}
+            <input class="admin_submit2" type="reset" name="reset" value="&nbsp;重 置 &nbsp;" /></td>
+        </tr>
+      </table>
+      <input type="hidden" name="pytoken" value="{yun:}$pytoken{/yun}">
+    </form>
+  </div>
+</div>
+</body>
+</html>

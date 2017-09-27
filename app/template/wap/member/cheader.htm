@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312"/>
+<meta http-equiv="Cache-Control" content="no-cache"/>
+<title>{yun:}$config.sy_webname{/yun} -  手机人才网</title>
+<meta http-equiv="keywords" content="人才招聘,网络招聘,wap" />
+<meta http-equiv="description" content="人才招聘网wap网站" />
+<meta content="width=device-width, initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport" />
+<meta name="MobileOptimized" content="240" />
+<meta http-equiv="Expires" content="0" />
+<meta http-equiv="Cache-Control" content="no-cache" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta content="yes" name="apple-mobile-web-app-capable" />
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1, maximum-scale=1, user-scalable=no" />
+<meta name="format-detection" content="telephone=no,email=no"/>
+<link rel="stylesheet" href="{yun:}$config.sy_weburl{/yun}/app/template/wap/css/css.css" type="text/css"/>
+<link rel="stylesheet" href="{yun:}$config.sy_weburl{/yun}/app/template/wap/css/yun_wap_member.css" type="text/css"/>
+<script src="{yun:}$wap_style{/yun}/js/prefixfree.min.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/layer/layer.m.js" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/public.js" language="javascript"></script> 
+</head>
+<body>
+
+
+<header>
+   <div class="header_bg"> <a class="hd-lbtn" href="{yun:}if $backurl{/yun}{yun:}$backurl{/yun}{yun:}else{/yun}javascript:history.back();{yun:}/if{/yun}"><i class="header_top_l iconfont"></i></a>
+    <div class="header_h1">企业用户中心</div>
+    <i class="header_kf" onclick="gwshow()"></i>
+  </div>
+ </header>
+{yun:}if $guweninfo.id{/yun}
+<div style="display:none" id="gwshow" >
+<div class="wap_gw_box" style="top:-150px;">
+<div class="wap_gw_t">招聘顾问</div>
+<div class="wap_gw">
+<div class="wap_gw_pic"><img src="{yun:}$guweninfo.logo{/yun}" style="width:50px;height:50px"></div>
+<div class="">{yun:}$guweninfo.username{/yun}</div>
+<div class="">{yun:}if $guweninfo.qq{/yun}
+<a target="_blank" href="mqqwpa://im/chat?chat_type=wpa&uin={yun:}$guweninfo.qq{/yun}&Site={yun:}$config.sy_webname{/yun}&Menu=yes&version=1&src_type=web&web_src=http://m.haishiit.com/"><img border="0" src="http://wpa.qq.com/pa?p=1:{yun:}$guweninfo.qq{/yun}:12" alt="点击这里给我发消息"></a>
+{yun:}/if{/yun}</div>
+</div>
+<div class="wap_gw_tel">
+<div class="">手机：{yun:}$guweninfo.mobile{/yun}</div>
+<div class="">微信：{yun:}$guweninfo.weixin{/yun}</div>
+<div class="">Q &nbsp;Q：{yun:}$guweninfo.qq{/yun}</div>
+<a href="tel:{yun:}$config.sy_freewebtel{/yun}"><div class="wap_gw_tel_bd"><i class="wap_gw_tel_bd_icon"></i>拨打电话</div></a>
+</div>
+</div>
+</div>
+{yun:}else{/yun}
+
+<div style="display:none" id="gwshow" >
+<div class="wap_gw_box" style="top:-150px;" >
+<div class="wap_gw_t">招聘顾问</div>
+<div class="wap_gw">
+<div class="wap_gw_pic"><img src="{yun:}$guweninfo.logo{/yun}" style="width:50px;height:50px"></div>
+<div class="">网站客服</div>
+<div class="" id="configqq"></div>
+</div>
+<div class="wap_gw_tel">
+<div class="">电话：{yun:}$config.sy_freewebtel{/yun}</div>
+<div class="">手机：{yun:}$config.sy_webmoblie{/yun}</div>
+{yun:}if $config.wx_name{/yun}
+<div class="">微信：{yun:}$config.wx_name{/yun}</div>
+{yun:}/if{/yun}
+<div class="">Q &nbsp;Q：{yun:}$config.sy_qq{/yun}</div>
+<a href="tel:{yun:}$config.sy_freewebtel{/yun}"><div class="wap_gw_tel_bd"><i class="wap_gw_tel_bd_icon"></i>拨打电话</div></a>
+</div>
+</div>
+</div>
+{yun:}/if{/yun}
+<script>
+'{yun:}if !$guweninfo.qq{/yun}'
+var sy_qq='{yun:}$config.sy_qq{/yun}';
+var strs= new Array();
+strs=sy_qq.split(",");
+var qq=strs['0'];
+$("#configqq").html("<a target='_blank' href='mqqwpa://im/chat?chat_type=wpa&uin="+qq+"&Site={yun:}$config.sy_webname{/yun}&Menu=yes&version=1&src_type=web&web_src=http://m.haishiit.com/'><img border='0' src='http://wpa.qq.com/pa?p=1:"+qq+":12' alt='点击这里给我发消息'></a>");
+'{yun:}/if{/yun}'
+function gwshow(){
+	var gwshow=$("#gwshow").html(); 
+	layer.open({
+		type : 1,
+		shadeClose :true,
+		content:gwshow
+	});
+}
+</script>
+<div class="main_member_body">

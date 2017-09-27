@@ -1,0 +1,342 @@
+{yun:}include file="$wapstyle/member/cheader.htm"{/yun}
+<script src="{yun:}$wap_style{/yun}/js/part.js" language="javascript"></script> 
+<script src="{yun:}$wap_style{/yun}/js/mobiscroll/mobiscroll_002.js"></script>
+<script src="{yun:}$wap_style{/yun}/js/mobiscroll/mobiscroll.js"></script>
+<script src="{yun:}$wap_style{/yun}/js/mobiscroll/mobiscroll_003.js"></script>
+<link rel="stylesheet" href="{yun:}$wap_style{/yun}/js/mobiscroll/css/animate.min.css" type="text/css">
+<link rel="stylesheet" href="{yun:}$wap_style{/yun}/js/mobiscroll/css/mobiscroll.css" type="text/css">  
+<script type="text/javascript">
+var weburl='{yun:}$config_wapdomain{/yun}'; 
+function change(){
+	if($("#timetype").attr("checked")!='checked'){ 
+		$("#dline").show();
+		$("#edate").show();
+	}else{ 
+		$("#edate").hide();
+		$("#dline").hide();
+	} 
+} 
+$(function () {
+	var currYear = (new Date()).getFullYear();
+	var opt = {
+		preset: 'date', 
+		theme: 'android-ics light', 
+		display: 'modal',  
+		mode: 'scroller', 
+		dateFormat: 'yy-mm-dd 23:59:59', 
+		setText: '确定', 
+		cancelText: '取消',
+		dateOrder: 'yyyymmdd', 
+		dayText: '日', monthText: '月', yearText: '年',
+		startYear: currYear -18,
+		endYear: currYear+100 
+	};
+	var sopt = {
+		preset: 'date', 
+		theme: 'android-ics light', 
+		display: 'modal', 
+		mode: 'scroller', 
+		dateFormat: 'yy-mm-dd 00:00:00', 
+		setText: '确定', 
+		cancelText: '取消',
+		dateOrder: 'yyyymmdd', 
+		dayText: '日', monthText: '月', yearText: '年',
+		startYear: currYear -18, 
+		endYear: currYear+100 
+	};
+	$("#sdate").mobiscroll('setDate', $("#sdate").val(), true).date(sopt); 
+	$("#edate").mobiscroll('setDate', $("#edate").val(), true).date(opt); 
+	$("#deadline").mobiscroll('setDate', $("#deadline").val(), true).date(opt);  
+});
+$(function(){
+    $('#upAllSelect').click(function(){
+		ischecked = $(this).attr('checked');
+		allcheck = $('input[data-mark="isneed"]');
+		if(ischecked == 'checked'){
+			allcheck.each(function(i){
+				$(this).attr('checked',true);
+			});
+		}else{
+			allcheck.each(function(i){
+				$(this).attr('checked',false);
+			});
+		}		
+	});
+}); 
+</script>
+<section class="wap_member">
+  <div class="wap_member_comp_h1" style="position:relative"><span>新增兼职</span><em class="wap_member_comp_em">以下<font color="#ff0000">*</font> 号为必填项</em></div>
+  
+  <div class="yun_wap_addresume_box">
+    <form action="" method="post" onsubmit="return CheckPost_part();">
+     <div class="yun_wap_addresume_box_group">
+        <div class="yun_wap_addresume_box_label"> 职位名称 <span class="resume-cont_wate_bj">*</span> </div>
+        <div class="yun_wap_addresume_box_control">
+        <input type="text" name="name" id='name' value="{yun:}$row.name{/yun}"  placeholder="职位名称" class="yun_wap_addresume_text">
+        </div>
+      </div>
+       <div class="yun_wap_addresume_box_group">
+        <div class="yun_wap_addresume_box_label"> 工作类型 <span class="resume-cont_wate_bj">*</span> </div>
+        <div class="yun_wap_addresume_box_control">
+          <div class="select"> <span class="txt type">{yun:}if $row.type{/yun}{yun:}$partclass_name[$row.type]{/yun}{yun:}else{/yun}请选择{yun:}/if{/yun}</span>
+         <select name="type" id="typeid" class="textval" onchange="ckpartjob('type')">
+		        <option value="0">请选择</option>
+				{yun:}foreach from=$partdata.part_type key=j item=v{/yun}
+                <option value="{yun:}$v{/yun}" {yun:}if $row.type==$v{/yun}selected="selected"{yun:}/if{/yun}>{yun:}$partclass_name[$v]{/yun}</option>
+                {yun:}/foreach{/yun}
+              </select>
+          </div>
+        </div>
+      </div>
+     <div class="yun_wap_addresume_box_group">
+        <div class="yun_wap_addresume_box_label"> 招聘人数 <span class="resume-cont_wate_bj">*</span> </div>
+        <div class="yun_wap_addresume_box_control">
+              <input type="text" name="number" id='number' value="{yun:}$row.number{/yun}"  placeholder="招聘人数" class="yun_wap_addresume_text">
+        </div>
+      </div>
+
+    
+     
+     <div class="yun_wap_addresume_box_group">
+        <div class="yun_wap_addresume_box_label"> 兼职时间 <span class="resume-cont_wate_bj">*</span> </div>
+        <table class="tjob_timetable" cellpadding="1" cellspacing="1" >
+			<tr>
+				<th>&nbsp;</th>
+				<th>周一</th>
+				<th>周二</th>
+				<th>周三</th>
+				<th>周四</th>
+				<th>周五</th>
+				<th>周六</th>
+				<th>周日</th>
+			</tr>
+			<tr>
+				<th>上午</th>
+				{yun:}foreach from=$morning item=v{/yun}
+				<td><input data-mark='isneed' name='worktime[]' type="checkbox" {yun:}if in_array($v,$row.worktime){/yun}checked="checked"{yun:}/if{/yun}value='{yun:}$v{/yun}'/></td>
+				{yun:}/foreach{/yun}
+			</tr>
+			<tr>
+				<th>下午</th>
+				{yun:}foreach from=$noon item=v{/yun}
+				<td><input data-mark='isneed' name='worktime[]' type="checkbox" {yun:}if in_array($v,$row.worktime){/yun}checked="checked"{yun:}/if{/yun} value='{yun:}$v{/yun}'/></td>
+				{yun:}/foreach{/yun}
+			</tr>
+			<tr>
+				<th>晚上</th>
+				{yun:}foreach from=$afternoon item=v{/yun}
+				<td><input data-mark='isneed' name='worktime[]' type="checkbox" {yun:}if in_array($v,$row.worktime){/yun}checked="checked"{yun:}/if{/yun} value='{yun:}$v{/yun}'/></td>
+				{yun:}/foreach{/yun}
+				  <tr><td colspan="8">	<input id='upAllSelect' type="checkbox" class="com_Release_job_qx_check">全选</td></tr>
+			</tr>
+		</table>
+    </div>
+ <div class="clear"></div>   
+        <div class="clear"></div>
+     <div class="yun_wap_addresume_box_group">
+        <div class="yun_wap_addresume_box_label"> 有&nbsp;&nbsp;效&nbsp;&nbsp;期  <span class="resume-cont_wate_bj">*</span>  </div>
+           <div class="yun_wap_addresume_box_control">
+           <input id="sdate" class="yun_wap_addresume_text" type="text" name="sdate" placeholder="兼职开始日期" value="{yun:}if $row.sdate{/yun}{yun:}$row.sdate|date_format:'%Y-%m-%d 00:00:00'{/yun}{yun:}/if{/yun}">
+           
+            <input id="edate" class="yun_wap_addresume_text" type="text" name="edate" placeholder="兼职结束日期" value="{yun:}if $row.edate{/yun}{yun:}$row.edate|date_format:'%Y-%m-%d 23:59:59'{/yun}{yun:}/if{/yun}" {yun:}if $row.edate==0{/yun}style="display:none"{yun:}/if{/yun}>
+           
+            <input type="checkbox" id="timetype" value="1" name="timetype" {yun:}if $row.edate==0{/yun}checked="checked"{yun:}/if{/yun} onclick="change()"/><label for="timetype">长期招聘</label>       
+         </div>
+    </div>
+	  <div class="yun_wap_addresume_box_group" id="dline" {yun:}if $row.edate==0{/yun}style="display:none"{yun:}/if{/yun}>
+        <div class="yun_wap_addresume_box_label"> 报名截止 <span class="resume-cont_wate_bj">*</span> </div>
+        <div class="yun_wap_addresume_box_control">
+		 <input type="text" name="deadline" id="deadline" value="{yun:}if $row.deadline{/yun}{yun:}$row.deadline|date_format:'%Y-%m-%d 23:59:59'{/yun}{yun:}/if{/yun}" class="yun_wap_addresume_text" onkeyup="this.value=this.value.replace(/[^0-9-]/g,'')" placeholder="报名截止"> 
+        </div>
+      </div>
+      <div class="yun_wap_addresume_box_group">
+        <div class="yun_wap_addresume_box_label"> 性别要求  </div>
+        <div class="yun_wap_addresume_box_control">
+          <div class="select"> <span class="txt sex">
+           {yun:}if $row.sex==1{/yun}{yun:}$arr_data1{/yun}{yun:}else if $row.sex==2{/yun}{yun:}$arr_data1{/yun}{yun:}else if $row.sex==3{/yun}{yun:}$arr_data1{/yun}{yun:}else{/yun}请选择{yun:}/if{/yun}</span>
+              <select name="sex" class="textval" id="sexid" onchange="ckpartjob('sex');">
+			    <option value="0">请选择</option>
+                {yun:}foreach from=$arr_data.sex key=j item=v{/yun}    
+                <option value="{yun:}$j{/yun}"{yun:}if $row.sex==$j{/yun}selected="selected"{yun:}/if{/yun}>{yun:}$v{/yun}</option>
+                {yun:}/foreach{/yun}         
+              
+              </select>  
+          </div>
+        </div>
+      </div>
+        <div class="yun_wap_addresume_box_group">
+        <div class="yun_wap_addresume_box_label"> 兼职薪水 <span class="resume-cont_wate_bj">*</span> </div>
+        <div class="yun_wap_addresume_box_control">
+         <input type="text" name="salary" id='salary' value="{yun:}$row.salary{/yun}" class="yun_wap_addresume_text" style="width:42%;" placeholder="比如：150">
+          <div class="selectOption" style="width:42%; ">
+              <select name="salary_type" id="salary_typeid">
+				{yun:}foreach from=$partdata.part_salary_type key=j item=v{/yun}
+                <option value="{yun:}$v{/yun}" {yun:}if $v==$row.salary_type{/yun}selected="selected"{yun:}/if{/yun}>{yun:}$partclass_name[$v]{/yun}</option>
+                {yun:}/foreach{/yun}
+              </select>
+            </div>
+        </div>   
+         </div>
+            <div class="yun_wap_addresume_box_group">
+        <div class="yun_wap_addresume_box_label"> 结算周期 <span class="resume-cont_wate_bj">*</span> </div>
+        <div class="yun_wap_addresume_box_control">
+          <div class="select"> <span class="txt billing_cycle">{yun:}if $row.billing_cycle{/yun}{yun:}$partclass_name[$row.billing_cycle]{/yun}{yun:}else{/yun}请选择{yun:}/if{/yun}</span>
+				<select name="billing_cycle" id="billing_cycleid" class="textval" onchange="ckpartjob('billing_cycle')">
+				<option value="0">请选择</option>
+				{yun:}foreach from=$partdata.part_billing_cycle key=j item=v{/yun}
+                <option value="{yun:}$v{/yun}" {yun:}if $row.billing_cycle==$v{/yun}selected="selected"{yun:}/if{/yun}>{yun:}$partclass_name[$v]{/yun}</option>
+                {yun:}/foreach{/yun}
+              </select>
+          </div>
+        </div>
+      </div>
+        <div class="yun_wap_addresume_box_group">
+        <div class="yun_wap_addresume_box_label">工作区域 <span class="resume-cont_wate_bj">*</span> </div>
+        <div class="yun_wap_addresume_box_control">
+        
+          <div class="selectOption" style="width:31%">
+ <select name="provinceid" id="provinceid" onchange="checkcity(this.value,'1');"class="textval">
+                <option value="">请选择</option>
+                {yun:}foreach from=$city_index item=v{/yun}
+                <option value="{yun:}$v{/yun}" {yun:}if $row.provinceid==$v{/yun}selected="selected"{yun:}/if{/yun}>{yun:}$city_name[$v]{/yun}</option>
+                {yun:}/foreach{/yun}
+              </select>
+          </div>
+          <div class="selectOption" style="width:31%">
+         <select name="cityid" id="cityid" onchange="checkcity(this.value,'2');"class="textval">
+                <option value="">请选择</option>
+                {yun:}foreach from=$city_type[$row.provinceid] item=v{/yun}
+                <option value="{yun:}$v{/yun}" {yun:}if $row.cityid==$v{/yun}selected="selected"{yun:}/if{/yun}>{yun:}$city_name[$v]{/yun}</option>
+                {yun:}/foreach{/yun}
+              </select>
+          </div>
+          <div class="selectOption"  style="width:31%;{yun:}if !$row.three_cityid{/yun}display:none;{yun:}/if{/yun}"  id="cityshowth">
+     <select name="three_cityid" id="three_cityid"class="textval">
+                <option value="">请选择</option>
+                {yun:}foreach from=$city_type[$row.cityid] item=v{/yun}
+                <option value="{yun:}$v{/yun}" {yun:}if $row.three_cityid==$v{/yun}selected="selected"{yun:}/if{/yun}>{yun:}$city_name[$v]{/yun}</option>
+                {yun:}/foreach{/yun}
+              </select>
+          </div>
+          
+        </div>
+      </div>
+          <div class="yun_wap_addresume_box_group">
+        <div class="yun_wap_addresume_box_label"> 详细地址 <span class="resume-cont_wate_bj">*</span> </div>
+        <div class="yun_wap_addresume_box_control">
+            <input type="text" name="address" id='address' value="{yun:}$row.address{/yun}"  onblur="localsearch('全国');" placeholder="详细地址"class="yun_wap_addresume_text">
+        </div>
+      </div>
+      
+              <div class="yun_wap_addresume_box_group">
+        <div class="yun_wap_addresume_box_label"> 设置地图 <span class="resume-cont_wate_bj">*</span> </div>
+        <div class="yun_wap_addresume_box_control">
+          <div id="map_container" style="width:100%;height:200px; left:0;"></div>
+          <input name="x" id="map_x" type="hidden" value="{yun:}$row.x{/yun}">
+          <input name="y" id="map_y" type="hidden" value="{yun:}$row.y{/yun}">
+        </div>
+      </div>
+      
+             <div class="yun_wap_addresume_box_group">
+        <div class="yun_wap_addresume_box_label"> 联&nbsp;&nbsp;系&nbsp;&nbsp;人 <span class="resume-cont_wate_bj">*</span> </div>
+        <div class="yun_wap_addresume_box_control">
+            <input type="text" name="linkman" id="linkman" value="{yun:}if $row.linkman{/yun}{yun:}$row.linkman{/yun}{yun:}else{/yun}{yun:}$company.linkman{/yun}{yun:}/if{/yun}" placeholder="联系人" class="yun_wap_addresume_text">
+        </div>
+      </div>
+     
+          <div class="yun_wap_addresume_box_group">
+        <div class="yun_wap_addresume_box_label"> 联系手机 <span class="resume-cont_wate_bj">*</span> </div>
+        <div class="yun_wap_addresume_box_control">
+          <input type="text" name="linktel" id="linktel" value="{yun:}if $row.linktel{/yun}{yun:}$row.linktel{/yun}{yun:}else{/yun}{yun:}$company.linktel{/yun}{yun:}/if{/yun}" class="yun_wap_addresume_text" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" placeholder="联系手机">
+      </div>
+       </div>
+       
+			<div class="yun_wap_addresume_box_group" style="background: transparent; border: none;">
+			<input name="id" value="{yun:}$row.id{/yun}" type="hidden"/>
+			<input id="today" value="{yun:}$today{/yun}" type="hidden"/>
+			<input type="submit" name="submit" value="提交操作" class="reinputText2">
+			</div>
+   
+      </form>
+    </div> 
+</section>
+
+
+<script src="{yun:}$wap_style{/yun}/js/ueditor/ueditor.config.js"></script>
+<script src="{yun:}$wap_style{/yun}/js/ueditor/ueditor.all.min.js"></script> 
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak={yun:}$config.map_key{/yun}"></script> 
+<script type="text/javascript" src="{yun:}$config.sy_weburl{/yun}/js/map.js"></script>
+<script>
+	var map=new BMap.Map("map_container");
+	map.centerAndZoom(new BMap.Point(116.404, 39.915), 12);
+	//setLocation('map_container',116.404,39.915,"map_x","map_y");
+	$(document).ready(function() {
+		{yun:}if ($row.x=="" || $row.y=="") && $row.address!=""{/yun}
+			$("#address").val("{yun:}$row.address{/yun}");
+			localsearch('{yun:}if $city_name[$row.cityid]{/yun}{yun:}$city_name[$row.cityid]{/yun}{yun:}else{/yun}全国{yun:}/if{/yun}');
+		{yun:}elseif $row.x!="" && $row.y!=""{/yun}
+			setLocation('map_container',{yun:}$row.x{/yun},{yun:}$row.y{/yun},"map_x","map_y");
+		{yun:}else{/yun}
+			var geolocation = new BMap.Geolocation();
+			geolocation.getCurrentPosition(function (r) {
+			
+	        if (this.getStatus() == BMAP_STATUS_SUCCESS) {
+	            location_r = r;
+				setLocation('map_container',r.point.lng,r.point.lat,"map_x","map_y"); 
+	        }
+	    }, { enableHighAccuracy: true });
+		{yun:}/if{/yun}
+	});
+	var local ;
+	function getLocalResult(){
+		var address=$.trim($("#address").val());
+		var points=local.getResults();
+			var lngLat=points.getPoi(0).point;
+			setLocation('map_container',lngLat.lng,lngLat.lat,"map_x","map_y");
+			document.getElementById("map_x").value=lngLat.lng;
+			document.getElementById("map_y").value=lngLat.lat;
+	}
+	function localsearch(city){
+		if($("#address").val()==""){
+			layermsg('请输入地址！', 2);return false;
+		}
+		local = new BMap.LocalSearch(city, {
+		renderOptions: {
+			map: map,
+			panel : "r-result",
+			autoViewport: true,
+			selectFirstResult: false
+		  },onSearchComplete : getLocalResult
+		});
+		map.centerAndZoom(new BMap.Point(116.404, 39.915), 4);
+		local.search($("#address").val());
+	}
+	function setLocation(id,x,y,xid,yid){
+		
+		var rating,map_control_type,map_control_anchor;
+		if(!x && !y){x='116.404';y='39.915';}
+		var point = new BMap.Point(x,y);
+		var marker = new BMap.Marker(point);
+		var opts = {type:BMAP_NAVIGATION_CONTROL_LARGE}
+		map.enableScrollWheelZoom(true);
+		map.addControl(new BMap.NavigationControl(opts));
+		map.centerAndZoom(point, 15);
+		map.addOverlay(marker);
+		map.addEventListener("click",function(e){
+		   var info = new BMap.InfoWindow('', {width: 260});
+			var projection = this.getMapType().getProjection();
+			var lngLat = e.point;
+			document.getElementById(xid).value=lngLat.lng;
+			document.getElementById(yid).value=lngLat.lat;
+			map.clearOverlays();
+			var point = new BMap.Point(lngLat.lng,lngLat.lat);
+			var marker = new BMap.Marker(point);
+			map.addOverlay(marker);
+		});
+	}  
+	
+var ue = UE.getEditor('description',{
+	toolbars: false,elementPathEnabled:false,wordCount:false,autoHeightEnabled:false
+});  
+</script>
+{yun:}include file="$wapstyle/footer.htm"{/yun} 

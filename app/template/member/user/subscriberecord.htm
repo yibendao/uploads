@@ -1,0 +1,33 @@
+{yun:}include file="$userstyle/header.htm"{/yun}
+<div class="yun_user_member_w1100">
+    {yun:}include file="$userstyle/left.htm"{/yun}
+    <div class="mian_right fltR mt12">
+        <div class="member_right_h1 fltL"><span class="member_right_span fltL">发送记录</span></div>
+        <div class="remindbox01 mt10"> 
+			<div class="resumelistbox01 mt10"> 
+				<div class="resume_box_list">
+				{yun:}if !empty($rows){/yun}
+					<div class="List_Ope List_Title"> 
+						<span class="List_Title_span List_Title_w80">编号</span> 
+						<span class="List_Title_span List_Title_w500">发送职位名</span> 
+						<span class="List_Title_span List_Title_w120">发送时间</span>
+					</div>
+					{yun:}/if{/yun}
+					{yun:}foreach item=v from=$rows{/yun}
+					<div class="List_Ope List_Ope_bor"> 
+						<span class="List_Title_span List_Title_w80">{yun:}$v.id{/yun}</span> 
+						<span class="List_Title_span List_Title_w500">
+							{yun:}if $v.content{/yun}<span class="List_Title_span_com">{yun:}$v.content{/yun}</span> {yun:}else{/yun}未找到合适职位！{yun:}/if{/yun}
+						</span> 
+						<span class="List_Title_span List_Title_w120">{yun:}$v.time|date_format:"%Y-%m-%d %H:%M"{/yun}</span> 
+					</div>
+					{yun:}foreachelse{/yun}
+					<div class="msg_no">暂无发送记录！</div>
+					{yun:}/foreach{/yun} 
+					<div class="diggg" style="width:710px;">{yun:}$pagenav{/yun}</div>
+				</div>
+			</div> 
+        </div>
+    </div>
+</div>
+{yun:}include file="$userstyle/footer.htm"{/yun} 

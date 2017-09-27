@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>{yun:}$title{/yun}</title>
+<meta name="keywords" content="{yun:}$keywords{/yun}"/>
+<meta name="description" content="{yun:}$description{/yun}"/>
+<link rel="stylesheet" href="{yun:}$style{/yun}/style/css.css" type="text/css"/>
+<link  href="{yun:}$style{/yun}/style/map.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+{yun:}include file="$tplstyle/header.htm"{/yun}
+<div class="clear"></div>
+<div class="yun_body">
+  <div class="yun_content">
+  
+    
+    <div class="current_Location com_current_Location png">
+      <div class="fl" >您当前的位置：<a href="{yun:}$config.sy_weburl{/yun}">首页</a> > <span>地图搜索</span> </div>
+    </div>
+  
+  <div class="clear"></div>
+  <div class="yun_map_box">
+    <div class="yun_map_box_h1"><span class="yun_map_box_h1_span">地图搜索</span></div>
+<div id="map-index" class="module-map action-index">
+<div id="website-content" class="wrapper-center">
+  <div id="search">
+    <div id="title">
+    <a class="select" title="job">职位名<i class="triangle"></i></a>
+    <a class="nselect" title="company">公司名</a>
+    </div>
+    <div class="form">
+      <input type="text" name="key" id="keyword"   value=""/>
+      <input type="hidden" name="searchtype" id="searchtype" value="job" />
+      <a id="submitbutton" class="submit yun_bg_color" href="javascript: void(0)">搜索</a> </div>
+    <div style="clear:both;"></div>
+  </div>
+  <div id="map_content">
+    <div id="map">
+      <div id="map-container" class="inner"></div>
+      <div class="map-loader"><img src="{yun:}$style{/yun}/images/map_loader.gif"/></div>
+      <div class="map-loader-box"><img src="{yun:}$style{/yun}/images/map_loader_box.gif"/></div>
+    </div>
+    <div id="list">
+      <div class="inner">
+        <h2>一共找到<span id="count">0</span>个企业</h2>
+        <ul id="content"></ul>
+        <div id="Pagination" class="pagination"></div>
+      </div>
+    </div>
+    <div style="clear:both;"></div>
+  </div>  
+  <div class="clear"></div>
+</div> 
+</div>
+</div></div>
+</div>
+<div class="clear"></div>
+<!--[if IE 6]>
+<script src="{yun:}$config.sy_weburl{/yun}/js/png.js"></script>
+<script>
+DD_belatedPNG.fix('.png');
+</script>
+<![endif]-->
+<script>weburl="{yun:}$config.sy_weburl{/yun}";</script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script> 
+<script src="{yun:}$config.sy_weburl{/yun}/js/lazyload.min.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/public.js" language="javascript"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak={yun:}$config.map_key{/yun}" charset="utf-8"></script>
+<script>
+var getdataurl='{yun:}url m=map c=search{/yun}';
+var marker_icon_url="{yun:}$style{/yun}/images/map_markers.png";
+var marker_icon_blue="{yun:}$style{/yun}/images/map_marker_blue.png";
+var x="{yun:}$config.map_x{/yun}";
+var y="{yun:}$config.map_y{/yun}";
+</script>
+<script src="{yun:}$style{/yun}/js/map.js"></script>
+{yun:}include file="$tplstyle/footer.htm"{/yun}

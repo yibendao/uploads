@@ -1,0 +1,72 @@
+{yun:}include file="$comstyle/header.htm"{/yun}
+<div class="w1000">
+  <div class="admin_mainbody"> 
+  {yun:}include file="$comstyle/left.htm"{/yun} 
+    <script charset="utf-8" src="{yun:}$config.sy_weburl{/yun}/js/kindeditor/kindeditor-min.js"></script> 
+    <script charset="utf-8" src="{yun:}$config.sy_weburl{/yun}/js/kindeditor/lang/zh_CN.js"></script> 
+    <script language="javascript">
+var editor;
+KindEditor.ready(function(K) {
+editor = K.create('textarea[name="body"]', {
+resizeType : 1,
+allowPreviewEmoticons : false,
+allowImageUpload : false,
+items : [
+'bold', 'italic', 'underline',
+'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+'insertunorderedlist']
+});
+});
+</script>
+    <div class=right_box>
+      <div class=admincont_box>         <div class="com_tit"><span class="com_tit_span">添加新闻</span></div>   <div class="com_body">    
+         
+        <div class=admin_textbox_02>
+          <iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe>
+          <form name="MyForm" target="supportiframe" method="post" action="{yun:}$now_url{/yun}&act=save" onsubmit="return CheckPost();">
+            <input name="action" type="hidden" value="save">
+            <ul>
+              <li>
+                <div class=tit><font color="#FF0000">*</font> 新闻标题：</div>
+                <div class=textbox>
+                  <INPUT type="text" size="45" name="title" value="{yun:}$editrow.title{/yun}"class="com_info_text" style="width:280px;">
+                </div>
+              </li>
+              <li>
+                <div class=tit><font color="#FF0000">*</font> 新闻描述：</div>
+                <div class=textbox>
+                  <textarea name="body" id="description" style="height:200px; width:450px;" >{yun:}$editrow.body{/yun}</textarea>
+                </div>
+              </li>
+            </ul>
+            <div class="admin_submit mt10 fltL">
+            <div class=condition>&nbsp;</div>
+            <div class=sub_btn>
+              <input name="id" value="{yun:}$smarty.get.id{/yun}" type="hidden"/>
+              <input class="btn_01" type="submit" name="submitBtn" value=" 提 交 操 作 ">
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+ </div>
+</div>
+</div>
+<script language=javascript>
+function CheckPost(){
+	var html = editor.text();
+	var title=$.trim($("input[name='title']").val());
+	if(title==''){
+		layer.msg('标题不能为空！', 2, 8);return false;
+	}
+	 
+	if(title.length>30){
+		layer.msg('请将标题控制在30字以内！', 2, 8);return false;
+	}
+	if(html==''){
+		layer.msg('内容不能为空！', 2, 8);return false;
+	}
+}
+</script> 
+{yun:}include file="$comstyle/footer.htm"{/yun}

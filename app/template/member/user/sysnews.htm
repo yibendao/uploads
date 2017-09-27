@@ -1,0 +1,43 @@
+{yun:}include file="$userstyle/header.htm"{/yun}
+<div class="yun_user_member_w1100">
+    {yun:}include file="$userstyle/left.htm"{/yun}
+    <div class="mian_right fltR mt20">
+      <div class="member_right_index_h1 fltL"> <span class="member_right_h1_span fltL">系统消息</span> <i class="member_right_h1_icon user_bg"></i></div>
+
+        <div>
+            <div id="gms_showclew"></div>
+            <div class="resume_box_list">
+            {yun:}if !empty($rows){/yun}
+                <div class="List_Ope List_Title ">
+                    <span class="List_Title_span List_Title_w550"><em class="List_Title_span_name">内容</em></span>
+                    <span class="List_Title_span List_Title_w170 List_Title_w170_new">时间</span>
+                    <span class="List_Title_span List_Title_w150">操作</span>
+                </div>
+                {yun:}/if{/yun}
+                {yun:}foreach from=$rows item=item{/yun}
+                <div class="List_Ope List_Ope_bor">
+                    <span class="List_Title_span List_Title_w550">{yun:}$item.content|mb_substr:0:50:'gbk'{/yun}</span>
+                    <span class="List_Title_span List_Title_w170 List_Title_w170_new">{yun:}$item.ctime|date_format:"%Y-%m-%d %H:%M"{/yun}</span>
+                    <span class="List_Title_span List_Title_w150">
+					   <a href="javascript:void(0)" onclick="showsys('{yun:}$item.content{/yun}','{yun:}$item.id{/yun}','{yun:}$item.ctime|date_format:"%Y-%m-%d %H:%M"{/yun}'); "> 查看</a> | 
+                        <a href="javascript:void(0)" onclick="layer_del('确定要删除？','index.php?c=sysnews&act=del&id={yun:}$item.id{/yun}');" class="List_dete  cblue">删除</a>
+                    </span>
+                </div>
+                {yun:}foreachelse{/yun}
+                <div class="msg_no"> 暂无系统消息！ </div>
+                {yun:}/foreach{/yun}
+                <div class="diggg">{yun:}$pagenav{/yun}</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="show" style="display:none;width:100%;">
+	<div class="sys_tm">
+	    <p><i>时间：</i><span id="systime"></span></p>
+	    <p><i>内容：</i><span id="sysshow"></span></p>
+	</div>
+	<div class="sys_bot">
+	<a class="sys_bot_del" href="javascript:void(0)" id="delsys"> 删除</a><a class="sys_bot_qx" href="javascript:void(0)" onclick="layer.closeAll();" class="cblue">返回</a>
+	</div>
+</div>
+{yun:}include file="$userstyle/footer.htm"{/yun}

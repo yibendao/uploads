@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<link href="images/reset.css" rel="stylesheet" type="text/css" />
+<link href="images/system.css" rel="stylesheet" type="text/css" /> 
+<link href="images/table_form.css" rel="stylesheet" type="text/css" /> 
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script>
+<script src="js/admin_public.js" language="javascript"></script> 
+<script charset="utf-8" src="../js/kindeditor/kindeditor-min.js"></script>
+<script charset="utf-8" src="../js/kindeditor/lang/zh_CN.js"></script>
+<script language="javascript">
+<!--
+KindEditor.ready(function(K) {
+	K.create('#content', {
+		items : ['source',
+		'bold', 'italic', 'underline',
+		'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+		'insertunorderedlist','emoticons', 'image'],afterBlur:function(){this.sync();} 
+	});
+});
+function checkform(myform)
+{
+  if (myform.title.value=="") 
+  { 
+	  parent.layer.msg('请填写公告标题！', 2,8);
+      myform.title.focus();
+      return (false);
+  }
+
+  if (myform.keyword.value=="") 
+  { 
+	   parent.layer.msg('请填写公告关键字！', 2,8);
+      myform.keyword.focus();
+      return (false);
+  } 
+    if (myform.description.value=="") 
+  { 
+	  parent.layer.msg('请填写公告描述！', 2,8);
+      myform.description.focus();
+      return (false);
+  }
+}
+//-->
+</script>
+<title>后台管理</title>
+</head>
+<body class="body_ifm">
+<div class="infoboxp">
+<div class="infoboxp_top_bg"></div>
+<div class="infoboxp_top">
+<span class="admin_title_span">添加公告</span>
+<div class="infoboxp_right"><a href="index.php?m=admin_announcement" class="infoboxp_tj">公告列表</a></div>
+</div>
+<div class="admin_table_border">
+<iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe> 
+<form name="myform" target="supportiframe" action="index.php?m=admin_announcement&c=save" method="post" encType="multipart/form-data"  onSubmit="return checkform(this);">
+	<table width="100%" class="table_form" style="background:#fff;">
+		<tr >
+			<th>公告标题：</th>
+			<td><input class="input-text" type="text" name="title" size="40" value="{yun:}$info.title{/yun}"/></td>
+		</tr>
+     	<tr>
+        <th>使用范围：</th>
+        <td><input type="button" value="{yun:}if $info.did{/yun}{yun:}$Dname[$info.did]{/yun}{yun:}else{/yun}总站{yun:}/if{/yun}" class="city_news_but" onClick="add_site('{yun:}$info.did{/yun}','{yun:}$Dname[$info.did]{/yun}');">
+        <input type="hidden" id="did" value="{yun:}$info.did{/yun}" name="did">
+        </td>
+      </tr> 
+	   	<tr class="admin_table_trbg" >
+			<th>关 键 词：</th>
+			<td>
+			 <input class="input-text" type="text" name="keyword" size="50" value="{yun:}$info.keyword{/yun}"/>(多关键字，请用，隔开，请不要为空)
+			</td>
+		</tr>
+    		<tr >
+			<th>描　　述：</th>
+			<td>
+			 <textarea name="description" cols="55" rows="3" class="admin_comdit_textarea">{yun:}$info.description{/yun}</textarea>
+			</td>
+		</tr>
+    	   	<tr class="admin_table_trbg" >
+			<th>公告内容： </th>
+			<td>
+			<textarea  id="content" name="content" cols="100" rows="8" style="width:700px;height:300px;">{yun:}$info.content{/yun}</textarea>
+			</td>
+		</tr>
+
+		<tr>
+			<td align="center" colspan="2">
+            <input type="hidden" name="pytoken" value="{yun:}$pytoken{/yun}">
+			{yun:}if $info.id{/yun}
+        	<input type="hidden" name="id" size="40" value="{yun:}$info.id{/yun}"/>
+            <input type="hidden" name="lasturl" value="{yun:}$lasturl{/yun}">
+        	<input class="admin_submit4" type="submit" name="update" value="&nbsp;更 新&nbsp;"  />
+        	{yun:}else{/yun}
+    		<input class="admin_submit4" type="submit" name="add" value="&nbsp;添 加&nbsp;"  />
+     		{yun:}/if{/yun}
+     		<input class="admin_submit4" type="reset" name="reset" value="&nbsp;重 置 &nbsp;" />
+			</td>
+		</tr>
+        
+	</table>
+	
+</form>
+</div>
+</div>
+{yun:}include file="$adminstyle/checkdomain.htm"{/yun}
+</body>
+</html>

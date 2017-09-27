@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>{yun:}$title{/yun}</title>
+<meta name="keywords" content="{yun:}$keywords{/yun}"/>
+<meta name="description" content="{yun:}$description{/yun}"/>
+<link rel="stylesheet" href="{yun:}$style{/yun}/style/css.css" type="text/css"/>
+</head>
+<body>
+{yun:}include file="$tplstyle/header.htm"{/yun} 
+
+
+<div class="yun_content">
+  <div class="password_content_cont fl m15">
+    <div class="password_content_cpd">
+      <div class="password_content_h1"><i class="password_content_h1_i"></i><span class="password_content_h1_span">认领用户</span></div>
+      <div class="password">
+        <div class="clear"></div>
+        <div class="password_cont">
+      <form action="{yun:}url m=claim c=save{/yun}" name="myform" method="post" id='myform' target="supportiframe" onsubmit="return savepost()">
+          <div class="password_list fl m15">
+            <div class="password_list_left">输入新的用户名：</div>
+            <input type="text" value="" class="password_list_text" name="username" id="username"/>
+          </div>
+          <div class="password_list fl m15">
+            <div class="password_list_left">输入新的密码：</div>
+            <input type="password" value="" class="password_list_text" name="password" id="password"/>
+          </div>
+          <div class="password_list fl m15">
+            <div class="password_list_left">确认新的密码：</div>
+            <input type="password" value="" class="password_list_text" name="passwordconfirm" id="passwordconfirm"/>
+          </div>
+          <div class="password_list fl m15">
+            <div class="password_list_left">&nbsp;</div>
+            <input type="hidden" name="uid" value="{yun:}$smarty.get.uid{/yun}" />
+            <input type="hidden" name="code" value="{yun:}$smarty.get.code{/yun}" />
+            <input type="submit" name="submit" value="提交修改" class="password_list_bth uesr_submit"/>
+          </div>
+        </form>
+        </div>
+        <div class="clear"></div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/lazyload.min.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/public.js" language="javascript"></script>
+<script src="{yun:}$style{/yun}/js/claim.js" language="javascript"></script>
+<!--[if IE 6]>
+<script src="{yun:}$config.sy_weburl{/yun}/js/png.js"></script>
+<script>
+DD_belatedPNG.fix('.png');
+</script>
+<![endif]-->
+<iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" class="none"></iframe>
+{yun:}include file="$tplstyle/footer.htm"{/yun}

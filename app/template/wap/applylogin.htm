@@ -1,0 +1,58 @@
+{yun:}include file="$wapstyle/header_cont.htm"{/yun}
+<link rel="stylesheet" href="{yun:}$config.sy_weburl{/yun}/app/template/wap/css/wap_tck.css" type="text/css">
+<link rel="stylesheet" href="{yun:}$wap_style{/yun}/js/mobiscroll/css/animate.min.css" type="text/css">
+<link rel="stylesheet" href="{yun:}$wap_style{/yun}/js/mobiscroll/css/mobiscroll.css" type="text/css"> 
+<div id="userregdiv">
+<div class="yun_reg_box">
+<div class="yun_reg_list_tip_s">保存成功；离完成只差一步</div>
+<div class="yun_reg_Switching_box">
+<ul class="yun_reg_list">
+<li class="mt20"><em><font color="#FF0000">*</font> 密&nbsp;&nbsp;码：</em> 
+<span id="pass1"><input type="password" class="yun_reg_text"id="reg_password" placeholder="请输入密码"/></span> </li>
+<li class="m10"><em><font color="#FF0000">*</font> 验证码：</em>
+<input  type="text" class="yun_reg_text_yz" maxlength="4" id="reg_authcode" placeholder="请输入验证码"/>
+<img id="vcode_img" class="yun_reg_list_pic" onclick="checkCode('vcode_img');" src="{yun:}$config.sy_wapdomain{/yun}/authcode.inc.php"/>
+</li>
+
+</ul>
+<div class="yun_reg_list_but">
+<input type="hidden" id="resumeid" value="{yun:}$smarty.get.id{/yun}"/>
+<input type="hidden" id="jobid" value="{yun:}$smarty.get.jobid{/yun}"/>
+<input type="button" value="保存" class="yun_reg_submit" onclick="checkreg('vcode_img');"/></div>
+</div>
+</div>
+</div>	
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/layer/layer.m.js" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/public.js" language="javascript"></script> 
+<script>
+var wapurl="{yun:}url m=wap{/yun}";
+var weburl="{yun:}$config.sy_weburl{/yun}"
+function checkreg(img){
+	var password=$("#reg_password").val();
+	var authcode=$("#reg_authcode").val();
+	var resumeid=$("#resumeid").val();
+	var jobid=$("#jobid").val();
+	if(password==""){
+		layermsg("请输入密码！");return false;
+	}else if(password.length<6 || password.length>20 ){
+		layermsg("请输入6至20位密码！");return false;
+	}
+	if(authcode==""){
+		layermsg("请输入验证码！");return false;
+	}
+	var loadi=layer_load('执行中，请稍候...');;
+	$.post(wapurl+"?c=ajax&a=userreg",{password:password,authcode:authcode,resumeid:resumeid,jobid:jobid},function(data){
+		layer.closeAll();
+		var data=eval('('+data+')');
+		if(data.status==1){
+			layermsg(data.msg,2,function(){location.href=data.url;});return false;
+		}else if(data.status==2){
+			layermsg(data.msg, 2,function(){checkCode(img);});return false;
+		}else{
+			layermsg(data.msg, 2,function(){parent.location.reload();});return false;
+		}
+	})
+}
+</script>
+<div class="yun_text_fooeter">{yun:}include file="$wapstyle/footer.htm"{/yun}</div>

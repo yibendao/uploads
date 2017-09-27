@@ -1,0 +1,17 @@
+/* CSS Document */
+*{margin:0; padding:0;}
+.clear{ clear:both;}
+body {font-size:12px;color:#555; font-family:Microsoft Yahei; background:#f8f8f8}
+.w660{ width:660px; margin:140px auto; }
+.err_w500{width:659px; border:1px solid #ddd; float:left; background:#fff }
+.err_h{ font-size:22px;color:#000; font-weight:bold }
+.err_p{ margin-top:15px;}
+.err_none{ font-size:14px;color:#727577;}
+.err_none_s{color:#f6142a}
+.err_b{width:100%; margin-top:30px;}
+.err_b_a{width:130px;height:37px; line-height:37px; text-align:center; font-size:14px;color:#fff; background:#f56e0b;border-radius:2px; display:inline-block; }
+.err_b_a:hover{color:#fff; background:#e06409; text-decoration:none}
+.err_w500_tit{width:100%;height:45px; line-height:45px; background:#1369c0;color:#fff; font-size:16px; text-indent:20px;}
+.err_box{width:100%; float:left}
+.err_left{width:160px;height:160px; background:url(../images/msg_no.png) no-repeat center center; float:left; padding:40px 20px 20px 40px; margin-top:20px;}
+.err_con{width:400px; float:left; padding:60px 10px;}

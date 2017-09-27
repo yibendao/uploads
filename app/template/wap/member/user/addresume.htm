@@ -1,0 +1,245 @@
+{yun:}include file="$wapstyle/member/header.htm"{/yun}
+<link rel="stylesheet" href="{yun:}$config.sy_weburl{/yun}/app/template/wap/css/wap_tck.css" type="text/css">
+<script src="{yun:}$wap_style{/yun}/js/resume.js" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/mobiscroll/mobiscroll_002.js"></script>
+<script src="{yun:}$wap_style{/yun}/js/mobiscroll/mobiscroll.js"></script>
+<script src="{yun:}$wap_style{/yun}/js/mobiscroll/mobiscroll_003.js"></script>
+<link rel="stylesheet" href="{yun:}$wap_style{/yun}/js/mobiscroll/css/animate.min.css" type="text/css">
+<link rel="stylesheet" href="{yun:}$wap_style{/yun}/js/mobiscroll/css/mobiscroll.css" type="text/css"> 
+<script>
+$(function () {
+	var currYear = (new Date()).getFullYear();
+	var opt = {
+		preset: 'date', 
+		theme: 'android-ics light', 
+		display: 'modal',  
+		mode: 'scroller', 
+		dateFormat: 'yy-mm-dd', 
+		setText: '确定', 
+		cancelText: '取消',
+		dateOrder: 'yyyymmdd', 
+		dayText: '日', monthText: '月', yearText: '年',
+		startYear: currYear - 100, 
+		endYear: currYear-18 
+	};
+	$("#birthday").mobiscroll('setDate', $("#birthday").val(), true).date(opt); 
+});
+</script> 
+
+  <div class="main_member_cot_box">
+  <div class="wap_member_comp_h1"><span>快速填写简历</span></div>
+  <div class="yun_wap_addresume_box">
+  <div class="yun_wap_addresume_box_group">
+    <div class="yun_wap_addresume_box_label"> 简历名称 <span class="resume-cont_wate_bj">*</span> </div>
+    <div class="yun_wap_addresume_box_control">
+      <input type="text" name="name" value=""  placeholder="比如：销售总监,销售经理" class="yun_wap_addresume_text">
+    </div>
+  </div>
+  <div class="yun_wap_addresume_box_group">
+    <div class="yun_wap_addresume_box_label"> 从事行业 <span class="resume-cont_wate_bj">*</span> </div>
+    <div class="yun_wap_addresume_box_control">
+      <div class="select"> <span class="txt hy">请选择</span>
+        <select id="hy" name="hy" class="textval" onchange="ckresume('hy')">
+         <option value="">请选择</option>
+           {yun:}foreach from=$industry_index item=v{/yun}
+          <option value="{yun:}$v{/yun}">{yun:}$industry_name[$v]{/yun}</option>
+           {yun:}/foreach{/yun}
+        </select>
+      </div>
+    </div>
+  </div>
+  
+  <div class="yun_wap_addresume_box_group">
+    <div class="yun_wap_addresume_box_label"> 期望职位 <span class="resume-cont_wate_bj">*</span> </div>
+    <div class="yun_wap_addresume_box_control yun_wap_addresume_box_control_after">
+      <input type="hidden" id="job_classid" name="job_classid" class="yun_wap_addresume_text" >
+      <input type="button" id="jobclassbutton" value="请选择" class="yun_wap_addresume_text yun_wap_addresume_text_but" onclick="checkshowjob('job');"/>
+      <div class="job_search_box_jobclass" style="display:none; float:left;width:100%;height:auto; z-index:100; position:absolute; background-color:#FFF;">
+        <ul>
+          {yun:}foreach from=$job_index item=v{/yun}
+          <li style="width:auto;float:left;display:none; list-style-type:none; margin:5px 10px 5px 10px;" class="jobsearchjobclass 0" jobclassid="{yun:}$v{/yun}" parentid="0">{yun:}$job_name[$v]{/yun}</li>
+          {yun:}foreach from=$job_type[$v] item=v1{/yun}
+          <li style="width:auto;float:left;display:none; list-style-type:none; margin:5px 10px 5px 10px;" class="jobsearchjobclass1 {yun:}$v{/yun}" jobclassid="{yun:}$v1{/yun}" parentid="{yun:}$v{/yun}">{yun:}$job_name[$v1]{/yun}</li>
+          {yun:}foreach from=$job_type[$v1] item=v2{/yun}
+          <li style="width:auto;float:left;display:none; list-style-type:none; margin:5px 10px 5px 10px;" class="jobsearchjobclass2 {yun:}$v1{/yun}" jobclassid="{yun:}$v2{/yun}" parentid="{yun:}$v1{/yun}">{yun:}$job_name[$v2]{/yun}</li>
+          {yun:}/foreach{/yun}
+          {yun:}/foreach{/yun}
+          {yun:}/foreach{/yun}
+        </ul>
+      </div>
+    </div>
+  </div>
+  
+  <div class="yun_wap_addresume_box_group">
+    <div class="yun_wap_addresume_box_label"> 期望薪资 <span class="resume-cont_wate_bj">*</span> </div>
+    <div class="yun_wap_addresume_box_control">
+      <div>
+        <span class="txt salary">
+			<input type="text" id="minsalary" name="minsalary" size="5" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" placeholder="例如：5000" class="yun_wap_addresume_xz">
+			<span> - </span>
+			<input type="text" id="maxsalary" name="maxsalary" size="5" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" placeholder="8000"class="yun_wap_addresume_xz">
+			<span> </span>
+		</span>
+      </div>
+    </div>
+  </div>
+  <div class="yun_wap_addresume_box_group">
+    <div class="yun_wap_addresume_box_label"> 期望城市 <span class="resume-cont_wate_bj">*</span> </div>
+    <div class="yun_wap_addresume_box_control">
+      <div class="selectOption" style="width:31%">
+        <select id="provinceid" name="provinceid" onchange="checkcity(this.value,'1');"class="sel_txt sw1 ">
+          <option value="">请选择</option>                   
+           {yun:}foreach from=$city_index item=v{/yun}          
+          <option value="{yun:}$v{/yun}">{yun:}$city_name[$v]{/yun}</option>          
+           {yun:}/foreach{/yun}        
+        </select>
+      </div>
+      <div class="selectOption" style="width:31%">
+        <select  id="cityid" name="cityid" onchange="checkcity(this.value,'2');"class="sel_txt sw1 ">
+          <option value="">请选择</option>          
+           {yun:}foreach from=$city_type[$row.provinceid] item=v{/yun}
+          <option value="{yun:}$v{/yun}">{yun:}$city_name[$v]{/yun}</option>
+           {yun:}/foreach{/yun}              
+        </select>
+      </div>
+      <div class="selectOption"  style="width:31%;{yun:}if !$row.three_cityid{/yun}display:none;{yun:}/if{/yun}"  id="cityshowth">
+        <select id="three_cityid" name="three_cityid"class="sel_txt sw1 ">
+          <option value="">请选择</option>
+           {yun:}foreach from=$city_type[$row.cityid] item=v{/yun}         
+          <option value="{yun:}$v{/yun}">{yun:}$city_name[$v]{/yun}</option>          
+           {yun:}/foreach{/yun}        
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="yun_wap_addresume_box_group">
+    <div class="yun_wap_addresume_box_label"> 工作性质 <span class="resume-cont_wate_bj">*</span> </div>
+    <div class="yun_wap_addresume_box_control">
+      <div class="select"> <span class="txt type">请选择</span>
+        <select id="type" name="type"class="textval" onchange="ckresume('type')"> 
+          <option value="">请选择</option>        
+			{yun:}foreach item=v from=$userdata.user_type{/yun}         
+          <option value="{yun:}$v{/yun}">{yun:}$userclass_name[$v]{/yun}</option>
+           {yun:}/foreach{/yun}        
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="yun_wap_addresume_box_group">
+    <div class="yun_wap_addresume_box_label"> 到岗时间 <span class="resume-cont_wate_bj">*</span> </div>
+    <div class="yun_wap_addresume_box_control">
+      <div class="select"> <span class="txt report">请选择</span>
+        <select id="report" name="report"class="textval" onchange="ckresume('report')">
+          <option value="">请选择</option>
+			{yun:}foreach item=v from=$userdata.user_report{/yun}
+          <option value="{yun:}$v{/yun}">{yun:}$userclass_name[$v]{/yun}</option>
+            {yun:}/foreach{/yun}
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="yun_wap_addresume_box_group">
+    <div class="yun_wap_addresume_box_label"> 求职状态 <span class="resume-cont_wate_bj">*</span> </div>
+    <div class="yun_wap_addresume_box_control">
+      <div class="select"> <span class="txt jobstatus">请选择</span>
+        <select id="jobstatus" name="jobstatus" class="textval" onchange="ckresume('jobstatus')"> 
+          <option value="">请选择</option>
+			{yun:}foreach item=v from=$userdata.user_jobstatus{/yun}
+          <option value="{yun:}$v{/yun}">{yun:}$userclass_name[$v]{/yun}</option>
+            {yun:}/foreach{/yun}        
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="yun_wap_addresume_box_group">
+    <div class="yun_wap_addresume_box_label"> 真实姓名 <span class="resume-cont_wate_bj">*</span> </div>
+    <div class="yun_wap_addresume_box_control">
+      <input type="text" name="uname" id="uname" value="{yun:}$resume.name{/yun}"  placeholder="请填写真实姓名" class="yun_wap_addresume_text">
+    </div>
+  </div>
+  <div class="yun_wap_addresume_box_group">
+    <div class="yun_wap_addresume_box_label"> 性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别 <span class="resume-cont_wate_bj">*</span> </div>
+    <div class="yun_wap_addresume_box_control">
+      <div class="select"> <span class="txt sex">
+        {yun:}if $resume.sex==1{/yun}{yun:}$arr_data1{/yun}{yun:}else if $resume.sex==2{/yun}{yun:}$arr_data1{/yun}{yun:}else if $resume.sex==3{/yun}{yun:}$arr_data1{/yun}{yun:}else{/yun}请选择{yun:}/if{/yun}</span>
+              <select name="sex"class="textval"id="sex" onchange="ckresume('sex');">
+              <option value="">请选择</option>
+                {yun:}foreach from=$arr_data.sex key=j item=v{/yun}    
+                <option value="{yun:}$j{/yun}"{yun:}if $resume.sex==$j{/yun}selected="selected"{yun:}/if{/yun}>{yun:}$v{/yun}</option>
+                {yun:}/foreach{/yun}         
+              
+              </select>
+        
+        
+        
+        
+        
+      </div>
+    </div>
+  </div>
+  <div class="yun_wap_addresume_box_group">
+    <div class="yun_wap_addresume_box_label"> 出生年月 <span class="resume-cont_wate_bj">*</span> </div>
+      <div class="yun_wap_addresume_box_control">
+          <input id="birthday" class="yun_wap_addresume_text" type="text" value="{yun:}$resume.birthday{/yun}" name="birthday"> 
+        </div>
+  </div>
+  <div class="yun_wap_addresume_box_group">
+    <div class="yun_wap_addresume_box_label"> 最高学历 <span class="resume-cont_wate_bj">*</span> </div>
+    <div class="yun_wap_addresume_box_control">
+      <div class="select"> <span class="txt edu">{yun:}if $userclass_name[$resume.edu]{/yun}{yun:}$userclass_name[$resume.edu]{/yun}{yun:}else{/yun}请选择{yun:}/if{/yun}</span>
+        <select id="edu" name="edu" class="textval" onchange="ckresume('edu')">
+           <option value="">请选择</option>
+           {yun:}foreach from=$userdata.user_edu item=v{/yun}
+          <option value="{yun:}$v{/yun}" {yun:}if $resume.edu==$v{/yun}selected="selected"{yun:}/if{/yun}>{yun:}$userclass_name[$v]{/yun}</option>
+           {yun:}/foreach{/yun}
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="yun_wap_addresume_box_group">
+    <div class="yun_wap_addresume_box_label"> 工作经验 <span class="resume-cont_wate_bj">*</span> </div>
+    <div class="yun_wap_addresume_box_control">
+      <div class="select"> <span class="txt exp">{yun:}if $userclass_name[$resume.exp]{/yun}{yun:}$userclass_name[$resume.exp]{/yun}{yun:}else{/yun}请选择{yun:}/if{/yun}</span>
+        <select id="exp" name="exp"class="textval" onchange="ckresume('exp')">
+          <option value="">请选择</option>
+           {yun:}foreach from=$userdata.user_word item=v{/yun}
+          <option value="{yun:}$v{/yun}" {yun:}if $resume.exp==$v{/yun}selected="selected"{yun:}/if{/yun}>{yun:}$userclass_name[$v]{/yun}</option>
+           {yun:}/foreach{/yun}
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="yun_wap_addresume_box_group">
+    <div class="yun_wap_addresume_box_label"> 手机号码 <span class="resume-cont_wate_bj">*</span> </div>
+    <div class="yun_wap_addresume_box_control"> {yun:}if $resume.moblie_status==1{/yun}
+      {yun:}$resume.telphone{/yun} <a href="index.php?c=binding" style="color:red;">重新认证</a>
+      <input type="text" name="telphone" id="telphone" value="{yun:}$resume.telphone{/yun}" style="display:none;">
+      {yun:}else{/yun}
+      <input type="text" name="telphone" id="telphone" value="{yun:}$resume.telphone{/yun}" class="yun_wap_addresume_text">
+      {yun:}/if{/yun} </div>
+  </div>
+  <div class="yun_wap_addresume_box_group">
+    <div class="yun_wap_addresume_box_label"> 联系邮箱 </div>
+    <div class="yun_wap_addresume_box_control"> {yun:}if $resume.email_status==1{/yun}
+      {yun:}$resume.email{/yun}<a href="index.php?c=binding" style="color:red;">重新认证</a>
+      <input type="text" name="email" id="email" value="{yun:}$resume.email{/yun}" style="display:none;" class="yun_wap_addresume_text">
+      {yun:}else{/yun}
+      <input type="text" name="email" id="email" value="{yun:}$resume.email{/yun}"   class="yun_wap_addresume_text">
+      {yun:}/if{/yun} </div>
+  </div>
+  <div class="yun_wap_addresume_box_group">
+    <div class="yun_wap_addresume_box_label"> 现居住地 <span class="resume-cont_wate_bj">*</span> </div>
+    <div class="yun_wap_addresume_box_control">
+      <input type="text" name="living" id="living" value="{yun:}$resume.living{/yun}"  placeholder="比如：苏州-沧浪区" class="yun_wap_addresume_text">
+    </div>
+  </div>
+  <div class="yun_wap_addresume_box_group" style="background: transparent; border: none;">
+    <input type="submit" onclick="kresume();" value="保存" class="reinputText2">
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+
+{yun:}include file="$wapstyle/public.htm"{/yun}
+{yun:}include file="$wapstyle/footer.htm"{/yun} 

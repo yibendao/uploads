@@ -1,0 +1,32 @@
+{yun:}include file="$wapstyle/header_cont.htm"{/yun}
+<div class="yun_content">
+  <div class="yun_mc">
+    <div class="yun_mc_cont">
+      <div class="model-prompt">
+        <div class="yun-img"> <img width="100px;" height="100px;" src="{yun:}$smarty.session.qq.pic{/yun}"> </div>
+        <div class="yun_model-text">
+          <p> 来自QQ的 <b>{yun:}$smarty.session.qq.nickname{/yun}</b> ，你好。 </p>
+          <p>最后一步 ，就可以直接登录{yun:}$config.sy_webname{/yun}啦！</p>
+         
+        </div>
+      </div>
+      <div class="yun-item">
+        <div class="item_list"> <span class="yun_chose_bel"> 选择会员类型： </span> </div>
+        <div class="item_list_sub">
+          <input type="submit" value="个人会员登录 " class="yun_sub_11" onclick="window.location.href='{yun:}url m=wap c=qqconnect a=qqbind usertype=1{/yun}'">
+          <input type="submit" value="企业会员登录" class="yun_sub_12" onclick="window.location.href='{yun:}url m=wap c=qqconnect a=qqbind usertype=2{/yun}'">
+             <input type="submit" value="绑定我的账户" class="yun_sub_13" onclick="window.location.href='{yun:}url m=wap c=login{/yun}'">
+         
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+body{ background:#fff}
+</style>
+<script src="{yun:}$wap_style{/yun}/js/prefixfree.min.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/layer/layer.m.js" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/public.js" language="javascript"></script>
+{yun:}include file="$wapstyle/footer.htm"{/yun}

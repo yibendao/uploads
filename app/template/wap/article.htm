@@ -1,0 +1,124 @@
+{yun:}include file="$wapstyle/header_cont.htm"{/yun}
+<div class="news_in_body">
+<div style="height:50px; position:relative">
+<section>
+<div id="header">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide"><a href="{yun:}url m=wap c=article type=tj{/yun}" {yun:}if $smarty.get.type==tj{/yun}class="swiper-slidea"{yun:}/if{/yun}>推荐</a></div>
+	{yun:}if $newc{/yun}
+		{yun:}foreach from=$newc item=v{/yun}
+		<div class="swiper-slide"><a href="{yun:}url m=wap c=article nid=$v{/yun}" {yun:}if $smarty.get.nid==$v{/yun}class="swiper-slidea"{yun:}/if{/yun}>{yun:}$group_name[$v]{/yun} </a></div>
+		{yun:}/foreach{/yun}
+	{yun:}else{/yun}	
+		{yun:}articleclass item=v{/yun}
+		<div class="swiper-slide"><a href="{yun:}url m=wap c=article nid=$v.id{/yun}" {yun:}if $smarty.get.nid==$v.id{/yun}class="swiper-slidea"{yun:}/if{/yun}>{yun:}$v.name{/yun} </a></div>
+		{yun:}/articleclass{/yun}
+	{yun:}/if{/yun}	
+  </div>
+</div>
+</section>
+<a class="news_nav_box_more" href="{yun:}url m=wap c=article a=channels{/yun}">+</a>
+</div>
+  	  <section class="search_cont">  
+	  <form method="get" action="index.php">
+		<input name='m' value="wap" type="hidden">
+		<input name='c' value="article" type="hidden">
+      <div class="formFiled">
+        <input type="text" value="{yun:}$smarty.get.keyword{/yun}" id="keyword" name="keyword" class="input_search" placeholder="请输入文章关键字">
+        <input type="submit" value=" " class="input_btn"> <i class="input_btn_icon iconfont"></i>
+      </div>
+    </form>  </section>  
+<section class="news_in_cont" id="fontshow">
+
+{yun:}article  nid='auto.nid' keyword='auto.keyword' type='auto.type' ispage=1 urlstatic=1 limit=10  t_len=30 item=item{/yun}    
+    <a href="{yun:}url m=wap c=article a=show id=$item.id{/yun}">
+    <div class="news_in_list">
+   <div class="news_in_list_box">
+   <div class="news_in_list_box_left">
+    <h2>{yun:}$item.title{/yun}</h2>
+    <div class="news_in_list_w65"{yun:}if !$item.s_thumb{/yun}style="width:100%"{yun:}/if{/yun}>
+   <div class="news_in_list_p"> {yun:}$item.description|mb_substr:0:47:'gbk'{/yun}</div>
+   <div class="news_in_list_date">
+   <span class="news_in_eye_n"><i class="news_in_eye"></i>{yun:}$item.hits{/yun}</span>
+   <span class="news_in_eye_n"><i class="news_in_date"></i>{yun:}$item.time{/yun}</span></div>
+   </div>
+
+        {yun:}if $item.s_thumb{/yun}<div class="news_in_cont_img"><img src="{yun:}$config.sy_weburl{/yun}/{yun:}$item.s_thumb{/yun}" width="120" height="80"></div>{yun:}/if{/yun}   </div>
+        </div>
+         </div></a>
+    {yun:}/article{/yun}
+      {yun:}if $total<=0{/yun}
+      {yun:}if $smarty.get.keyword!="" {/yun}
+      <div class="wap_member_no">没有搜索到资讯<div><a class="wap_mb_no_sr" href="{yun:}url m=wap c='article'{/yun}">重新搜索</a></div></div>
+      {yun:}else{/yun}
+      <div class="wap_member_no">暂无资讯<div><a class="wap_mb_no_sr" href="{yun:}url m=wap c='article'{/yun}">重新搜索</a></div></div>
+      {yun:}/if{/yun}
+      {yun:}else{/yun}
+   <div class="pages">{yun:}$pagenav{/yun}
+      {yun:}/if{/yun}</div>
+   <div class="clear"></div>
+   <div>
+   </div>
+</section>
+<div class="clear"></div>
+</div>
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/layer/layer.m.js" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/public.js" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/prefixfree.min.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/app/template/wap/js/search.js" language="javascript"></script>
+ <script src="{yun:}$wap_style{/yun}/js/swiper.min.js"></script>
+ <script type="text/javascript">
+  function zhankaiShouqi(control){ 
+	$(control).parent().find('.news_Category_a:gt(6)').slideToggle();
+	$(control).parent().find('.news_Category_line:gt(6)').slideToggle();
+	if($(control).html()=='更多'){
+		$(control).html('收起');
+	}else{
+		$(control).html('更多');
+		
+	}
+}
+window.onload = function() {
+  var mySwiper1 = new Swiper('#header',{
+	  freeMode : true,
+	  slidesPerView : 'auto',
+  });
+}
+$(function() { 
+	var $keyword = $("#keyword").val(); 
+	setHeightKeyWord('fontshow', $keyword, 'Red', true);
+}); 
+function setHeightKeyWord(id, keyword, color, bold) { 
+	if (keyword == "") 
+	return; 
+	var tempHTML = $("#" + id).html(); 
+	var htmlReg = new RegExp("\<.*?\>", "i"); 
+	var arrA = new Array(); 
+	for (var i = 0; true; i++) { 
+	var m = htmlReg.exec(tempHTML); 
+	if (m) { 
+	arrA[i] = m; 
+	} 
+	else { 
+	break; 
+	} 
+	tempHTML = tempHTML.replace(m, "[[[[" + i + "]]]]"); 
+	} 
+	var replaceText 
+	if (bold) 
+	replaceText = "<b style='color:" + color + ";'>$1</b>"; 
+	else 
+	replaceText = "<font style='color:" + color + ";'>$1</font>"; 
+	var arrayWord = keyword.split(','); 
+	for (var w = 0; w < arrayWord.length; w++) { 
+	var r = new RegExp("(" + arrayWord[w].replace(/[(){}.+*?^$|\\\[\]]/g, "\\$&") + ")", "ig"); 
+	tempHTML = tempHTML.replace(r, replaceText); 
+	} 
+	for (var i = 0; i < arrA.length; i++) { 
+	tempHTML = tempHTML.replace("[[[[" + i + "]]]]", arrA[i]); 
+	} 
+	$("#" + id).html(tempHTML); 
+}
+ </script>
+{yun:}include file="$wapstyle/footer.htm"{/yun} 

@@ -1,0 +1,182 @@
+{yun:}include file="$wapstyle/member/header.htm"{/yun}
+<div class="wap_member_comp_h1"><span>简历管理</span></div>
+<div class="rsm_box" style="padding:0px 10px 10px ;"> 
+
+
+{yun:}foreach item=resume from=$rows{/yun}
+  <div class="rsm_list">
+  
+    <div class="rsm_top"> 
+    <i class="rsm_top_gjicon"></i>
+     <a href="{yun:}url m=wap c=resume a=show id=$resume.id{/yun}">
+      <div class="rsm_name">{yun:}$resume.name{/yun}</div> </a> 
+      <div class=""><span class="rsm_name_s">刷新：</span>{yun:}$resume.lastupdate|date_format:'%Y-%m-%d'{/yun} <span class="rsm_name_s rsm_name_s_l">被浏览：</span>{yun:}$resume.hits{/yun} </div>
+    
+      </div>
+      
+       <div class="rsm_sch">
+       
+      <div class="rsm_schedule"> <span class="rsm_schedule_wr">简历完整度：</span> <span class="rsm_schedule_b">
+      <i style="width:{yun:}$resume.integrity{/yun}%;"></i></span> <span class="rsm_schedule_s">{yun:}$resume.integrity{/yun}%</span> 
+      </div>
+      
+	  {yun:}if $resume.defaults==1{/yun} 
+      <div class="rsm_state"> 
+	  <span class="rsm_schedule_wr">简历状态：</span><a href="index.php?c=privacy">  {yun:}if $defjob.status==2{/yun} 保密{yun:}else{/yun}公开{yun:}/if{/yun}<span class="rsm_schedule_set">设置</span></a>
+      </div>
+    
+      
+        {yun:}/if{/yun} 
+        <div class="rsm_state"> 
+	   <span class="rsm_schedule_wr">相似职位：</span>
+	    <a href="index.php?c=likejob&id={yun:}$resume.id{/yun}" >查看详情</a> 
+      </div>
+                    <div class="rsm_state" style="padding-bottom:10px;"> 
+	   <span class="rsm_schedule_wr">简历置顶：</span>
+      <a href="javascript:void(0)" onclick="resumetop('{yun:}$resume.id{/yun}','{yun:}$resume.topdate{/yun}','{yun:}$resume.name{/yun}')">{yun:}if $resume.top==1&&$resume.topdatetime gt 0{/yun}<font color="#FF0000">已置顶 </font>{yun:}else{/yun}置顶简历 {yun:}/if{/yun}</a>
+            </div>
+     {yun:}if ($resume.edu==0 || $resume.training==0 || $resume.skill==0 || $resume.work==0 || $resume.project==0 || $resume.other==0) && !$resume.doc{/yun}
+      <div class="member_index_resume_msg">
+      
+        <div class="member_index_resume_msg_r">
+          <div class="member_index_resume_msg_r_t"> 您还有以下资料没有填写 <span class="member_index_resume_msg_span">（为了更快的找到工作，建议您立即完善简历！）</span> </div>
+		  {yun:}if $resume.work==0{/yun}<a href="index.php?c=rinfo&eid={yun:}$resume.id{/yun}&type=work" class="member_index_resume_msg_a">+ 工作经历</a>{yun:}/if{/yun}
+          {yun:}if $resume.edu==0{/yun}<a href="index.php?c=rinfo&eid={yun:}$resume.id{/yun}&type=edu" class="member_index_resume_msg_a">+ 教育经历</a>{yun:}/if{/yun}
+          {yun:}if $resume.training==0{/yun}<a href="index.php?c=rinfo&eid={yun:}$resume.id{/yun}&type=training" class="member_index_resume_msg_a">+ 培训经历</a>{yun:}/if{/yun}
+          {yun:}if $resume.skill==0{/yun}<a href="index.php?c=rinfo&eid={yun:}$resume.id{/yun}&type=skill" class="member_index_resume_msg_a">+ 职业技能</a>{yun:}/if{/yun}
+          {yun:}if $resume.project==0{/yun}<a href="index.php?c=rinfo&eid={yun:}$resume.id{/yun}&type=project" class="member_index_resume_msg_a">+ 项目经历</a>{yun:}/if{/yun}
+          {yun:}if $resume.other==0{/yun}<a href="index.php?c=rinfo&eid={yun:}$resume.id{/yun}&type=other" class="member_index_resume_msg_a">+ 其他信息</a>{yun:}/if{/yun} 
+		  {yun:}if $defjob.description==''{/yun}<a href="index.php?c=addresumeson&eid={yun:}$resume.id{/yun}&type=desc" class="member_index_resume_msg_a">+ 自我评价</a>{yun:}/if{/yun}</div>
+      </div>
+      
+      {yun:}/if{/yun} 
+       </div> 
+
+    <div class="rsm_cz">
+      <dl onclick="layer_del('','index.php?c=resumeset&update={yun:}$resume.id{/yun}');">
+        <dt><i class="rsg_cion yun_iconfont_sx"></i></dt>
+        <dd>刷新</dd>
+      </dl>
+      <dl>
+        <a href="index.php?c=modify&eid={yun:}$resume.id{/yun}" class="wap_member_msg_jl_sc">
+        <dt><i class="rsg_cion yun_iconfont_xg"></i></dt>
+        <dd>修改</dd>
+        </a>
+      </dl>
+      {yun:}if $resume.defaults!="1"{/yun}
+      <dl onclick="layer_del('','index.php?c=resumeset&def={yun:}$resume.id{/yun}');">
+        <dt><i class="rsg_cion rsg_cion_mr yun_iconfont_mr"></i></dt>
+        <dd>默认简历</dd>
+      </dl>
+      {yun:}else{/yun}
+      <dl>
+        <dt><i class="rsg_cion yun_iconfont_ymr"></i></dt>
+        <dd>已默认</dd>
+      </dl>
+      {yun:}/if{/yun}
+      <dl onclick="layer_del('确定要删除？','index.php?c=resumeset&del={yun:}$resume.id{/yun}');">
+        <dt><i class="rsg_cion yun_iconfont_sc"></i></dt>
+        <dd>删除</dd>
+      </dl>
+    </div>
+    
+    
+    
+  </div>
+  {yun:}/foreach{/yun}
+  <div class="mt10">{yun:}if $maxnum>0{/yun}<a href="index.php?c=addresume" class="rsm_cj">创建简历</a>{yun:}else{/yun}<a href="javascript:void(0)" onclick="layermsg('你的简历数已经达到系统设置的简历数了');return false;" class="rsm_cj">创建简历</a>{yun:}/if{/yun}</div>
+</div>
+</div>
+
+
+
+
+<div id="resumetop" style="display:none;width: 300px;">
+  <div class="admin_Operating_sh" style="height:300px;padding:10px;width:280px; ">
+    <div class="stick_msg fl"><i class="stick_msg_c">置顶简历：</i><i class="stick_msg_tit" id="resumename"></i></div>
+    <div class="stick_msg fl"><i class="stick_msg_c">置顶结束时间：</i><span class="stick_msg_c" id='topdate'></span></div>
+    <div class="stick_tm fl">
+      <div class="stick_tm_ft fl"><i class="stick_msg_c">置顶时长：</i></div>
+      <ul class="stick_tm_box fl">
+        <lable for="dis1">
+          <li>
+            <input type="radio" class="stick_tm_box_radio" value="1"  name="dis" onclick="cktop('1','{yun:}$config.integral_resume_top{/yun}')"/>
+            <span class="stick_tm_box_time" onclick="cktopspan('1','{yun:}$config.integral_resume_top{/yun}')">1天</span> </li>
+        </lable>
+        <lable for="dis3">
+          <li>
+            <input type="radio" class="stick_tm_box_radio" value="3" name="dis" onclick="cktop('3','{yun:}$config.integral_resume_top{/yun}')"/>
+            <span class="stick_tm_box_time"onclick="cktopspan('3','{yun:}$config.integral_resume_top{/yun}')">3天</span> </li>
+        </lable>
+        <lable for="dis7">
+          <li>
+            <input type="radio" class="stick_tm_box_radio" value="7"  name="dis" onclick="cktop('7','{yun:}$config.integral_resume_top{/yun}')"/>
+            <span class="stick_tm_box_time"onclick="cktopspan('7','{yun:}$config.integral_resume_top{/yun}')">7天</span> </li>
+        </lable>
+        <lable for="dis15">
+          <li>
+            <input type="radio" class="stick_tm_box_radio" value="15"  name="dis" onclick="cktop('15','{yun:}$config.integral_resume_top{/yun}')"/>
+            <span class="stick_tm_box_time"onclick="cktopspan('15','{yun:}$config.integral_resume_top{/yun}')">15天</span> </li>
+        </lable>
+        <lable for="dis30">
+          <li>
+            <input type="radio" class="stick_tm_box_radio" value="30"  name="dis" onclick="cktop('30','{yun:}$config.integral_resume_top{/yun}')"/>
+            <span class="stick_tm_box_time"onclick="cktopspan('30','{yun:}$config.integral_resume_top{/yun}')">30天</span> </li>
+        </lable>
+      </ul>
+    </div>
+    <div class="stick_rage fl"> <span><i class="stick_msg_c">应付{yun:}$config.integral_pricename{/yun}：</i><em class="stick_msg_j" id="price">0</em>{yun:}$config.integral_priceunit{/yun}</span> <br/>
+      <span><i class="stick_msg_c">您当前可用{yun:}$config.integral_pricename{/yun}：</i><em class="stick_msg_jf">{yun:}$statis.integral{/yun}</em>{yun:}$config.integral_priceunit{/yun}</span> </div>
+    <div class="stick_rage_bt fl">
+      <input type="hidden" name="eid" value="">
+      <input class="stick_rage_bt_but" type="submit" onclick="rtop()" value="确定支付"/>
+    </div>
+  </div>
+</div>
+
+
+<script>
+function checkdef(eid){
+	$.post("index.php?c=resume",{type:"def_job",eid:eid},function(data){ 
+	})
+}
+
+
+
+function resumetop(eid,date,name){
+	$("input[name='eid']").val(eid);
+	$("#topdate").html(date);
+	$("#resumename").html(name);
+	var tophtml=$("#resumetop").html();
+	$('#resumetop').html('');
+	layer.open({
+		type : 1,
+		title :'简历置顶', 
+		closeBtn : [0 , true],
+		border : [10 , 0.3 , '#000', true],
+		area : ['300px','250px'],
+		content : tophtml,
+		cancel:function(){
+					$('#resumetop').html(tophtml);
+				}
+	});
+}
+
+function cktopspan(day,price){
+	var disval=$('input[name="dis"]:checked ').val();
+	if(disval&&day!=disval){
+		$("input[name=dis][value="+disval+"]").attr("checked",false);
+	}
+	$("input[name=dis][value="+day+"]").attr("checked",true);
+	var needs=day*price;
+	$("#price").html(needs);
+}
+
+
+function cktop(day,price){
+	var needs=day*price;
+	$("#price").html(needs);
+}
+
+</script> 
+{yun:}include file="$wapstyle/footer.htm"{/yun} 

@@ -1,0 +1,62 @@
+{yun:}include file="$wapstyle/header_cont.htm"{/yun}
+<section>
+  <div class="">
+    <div class="user_contnet_box ">
+      <div class="com_show_t1">
+        <h2>{yun:}$row.username{/yun}</h2>
+      </div>
+      <div class="com_show_t2">意向职位：{yun:}$row.job{/yun}<span class="com_show_l" style="top:6px;">{yun:}$row.time|date_format:"%Y-%m-%d"{/yun}</span></div>
+      <div class="com_show_t2" style="padding-top:0px;">浏览：{yun:}$row.hits{/yun}</div>
+    </div>
+  </div>
+</section>
+<section>
+  <div class="mt10">
+    <div class="user_contnet_box ">
+      <div class="wap_title"><span class="">基本信息</span></div>
+      <ul class="user_contnet_ul">
+        <li class="com_show_li"><span class="user_contnet_info_n">工作年限：</span>{yun:}$userclass_name[$row.exp]{/yun}</li>
+        
+        <li class="com_show_li"><span class="user_contnet_info_n">联系电话：</span>{yun:}if $config.user_wjl_link=='1' && !$smarty.cookies.uid{/yun} <a href='{yun:}url m=wap c=login usertype=2{/yun}'><font color='red'>登录后查看联系电话</font></a> {yun:}else{/yun}{yun:}$row.mobile{/yun}{yun:}/if{/yun}</li>
+      </ul>
+    </div>
+  </div>
+</section>
+<section>
+  <div class="mt10">
+    <div class="user_contnet_box ">
+      <div class="wap_title"><span class="">自我介绍</span></div>
+      {yun:}$row.production{/yun} </div>
+  </div>
+</section>
+<section>
+  <div class="mt10">
+    <div class="user_contnet_box ">
+      <div class="wap_title"><span class="">管理信息</span></div>
+      <div class="tiny_tag">只有发布者本人才可以操作</div>
+      <div style="width:100%; text-align:center"> <a href="javascript:;" onclick="checkshowjob('tiny'); $('#tinyid').val('{yun:}$row.id{/yun}'); $('#tiny_password').val(''); $('#operation_type').val('refresh');" class="tiny_cz_sx">刷新</a> <a href="javascript:;" onclick="checkshowjob('tiny'); $('#tinyid').val('{yun:}$row.id{/yun}'); $('#tiny_password').val(''); $('#operation_type').val('edit');" class="tiny_cz_sx">修改</a> <a href="javascript:;" onclick="checkshowjob('tiny'); $('#tinyid').val('{yun:}$row.id{/yun}'); $('#tiny_password').val(''); $('#operation_type').val('remove');" class="tiny_cz">删除 </a> </div>
+    </div>
+  </div>
+</section>
+</div>
+<!--修改填写密码-->
+<div class="tiny_show_tckbox" style="position:absolute;left:50%;bottom:220px; margin-left:-85px; z-index:10000;display:none;" id="tinylist">
+  <div class="tiny_show_tckbox_h1"><span>修改填写密码</span></div>
+  <div class="tiny_show_tckbox_cont">
+    <div class="tiny_show_tckbox_cont_p">请输入添加时的密码</div>
+    <div class="tiny_show_tckbox_p">
+      <input type="password" value="" id="tiny_password" class="tiny_show_tckbox_text">
+    </div>
+    <div class="tiny_show_tckbox_bth">
+      <input type="submit" value="确定" class="tiny_show_tckbox_bth1" onclick="checkTinyPassword($('#tinyid').val());" />
+      <input type="submit" value="取消" class="tiny_show_tckbox_bth2" onclick="layer.closeAll();" />
+      <input type="hidden" value="" name="operation_type" id="operation_type" />
+      <input type="hidden" value="" name="tinyid" id="tinyid" />
+    </div>
+  </div>
+</div>
+<script src="{yun:}$wap_style{/yun}/js/prefixfree.min.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/layer/layer.m.js" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/public.js" language="javascript"></script>
+{yun:}include file="$wapstyle/footer.htm"{/yun} 

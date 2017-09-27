@@ -1,0 +1,215 @@
+@charset "gb2312";
+/* CSS Document */
+*{ margin:0; padding:0}
+body{ font-size:14px; font-family:Î¢ÈíÑÅºÚ;}
+.resume_bg_c{ background:#f8f8f8; font-size:14px; }
+ul,li{ list-style:none}
+em{ font-style:normal}
+img{ vertical-align:middle}
+a{color:#000; text-decoration:none}
+a:hover{ text-decoration:underline}
+.yun_resume_content{width:800px; margin:0 auto}
+.yun_resume_new_content{width:720px; float:left; }
+.yun_resume_header{width:100%; float:left; padding:20px 0; position:relative}
+.yun_resume_logo{width:; float:left}
+.yun_resume_logo_zt{ float:right; position:absolute;right:0px;bottom:10px;}
+.yun_resume_logo_zt_n{ color:#f60;}
+.yun_resume_logo_zt_list{ display:inline-block; padding:0px 20px;}
+.yun_resume_operation_p{width:100%; float:left; padding:10px 0;}
+.yun_resume_resumename{ float:left}
+.yun_resume_resumename_c{color:#06F; padding-left:10px}
+.yun_resume_resumename_name{ float:left}
+.yun_resume_resumename_qh{ float:left; padding-left:50px;}
+
+.yun_resume_box{width:720px;border:1px solid #ddd; float:left;padding:40px; background:#fff}
+.yun_resume_info{width:100%; padding:0px 0px 30px 0; float:left; position:relative}
+.yun_resume_photo{ position:absolute;right:0px;top:0px; z-index:9}
+.yun_resume_photo_bg{ width:80px;height:100px;background:url(../images/user_photo_bg.png) no-repeat; position:absolute;right:0px;top:0px; z-index:10}
+.yun_resume_photo_xg{ text-align:center}
+.yun_resume_name_bj{ font-size:12px;color:#33F; font-weight:normal; margin-left:10px;}
+.yun_resume_name{ font-size:20px; font-weight:bold; padding-bottom:10px;}
+.yun_resume_p{ padding:10px 0;}
+.yun_resume_info_line{color:#999; font-size:12px; padding:0px 8px; display:inline-block}
+.yun_resume_job_intention{width:100%; float:left}
+.yun_resume_h1{width:100%;height:40px; line-height:40px;border-bottom:1px solid #ddd; float:left}
+.yun_resume_h1_s{ font-size:16px; font-weight:bold; display:inline-block; padding-left:30px; position:relative}
+.yun_resume_h1_icon{width:25px;height:25px; display:inline-block; position:absolute;left:0px;top:7px;}
+.yun_resume_h1_iconjl{ background:url(../images/yun_resume_iconjl.png) no-repeat}
+.yun_resume_h1_iconyx{ background:url(../images/yun_resume_iconyx.png) no-repeat}
+.yun_resume_h1_iconjy{ background:url(../images/yun_resume_iconjy.png) no-repeat}
+.yun_resume_h1_iconpx{ background:url(../images/yun_resume_iconpx.png) no-repeat}
+.yun_resume_h1_iconjn{ background:url(../images/yun_resume_iconjn.png) no-repeat}
+.yun_resume_h1_iconxm{ background:url(../images/yun_resume_iconxm.png) no-repeat}
+.yun_resume_h1_iconry{ background:url(../images/yun_resume_iconry.png) no-repeat}
+.yun_resume_h1_iconqt{ background:url(../images/yun_resume_iconqt.png) no-repeat}
+.yun_resume_h1_iconpj{ background:url(../images/yun_resume_iconpj.png) no-repeat}
+.yun_resume_h1_iconlx{ background:url(../images/yun_resume_iconlx.png) no-repeat}
+.yun_resume_h1_iconfj{ background:url(../images/yun_resume_iconfj.png) no-repeat}
+.yun_resume_tabulation{width:100%; float:left; position:relative}
+.yun_resume_handle{ position:absolute;right:0px;top:0px;}
+.yun_resume_handle a{color:#33F; margin-left:10px;}
+.yun_resume_job_intention_list{width:100%; padding:20px 0; float:left; position:relative}
+.yun_resume_job_intention_list li{width:360px;line-height:30px;float:left}
+.yun_resume_job_intention_list .yun_resume_job_intention_list_end{width:100%}
+.yun_resume_exp_list{width:100%; float:left;margin-top:20px; line-height:26px; position:relative}
+.yun_resume_exp_r{ padding-left:150px;}
+.yun_resume_exp_timt{width:200px; position:absolute;left:0px;top:0px;}
+.yun_resume_exp_name{ font-weight:bold}
+.yun_resume_exp_name_job{ display:inline-block; margin-left:20px;}
+.resume_right_box{width:185px;border:1px solid #dadada; float:right; margin-top:30px;}
+.resume_right_box_tit{width:100%;height:33px; line-height:33px; background:#f2f2f2}
+.resume_right_box_tit ul li{width:92px; text-align:center; float:left}
+.resume_right_box_tit ul .resume_right_box_tit_cur{ background:#fff;}
+.resumestatebox02 .cont{ padding-left:10px; padding-right:10px; padding-top:10px;}
+.resumestatebox02 .cont .bar { background:#dfdfdf;float: left; height: 9px;border-radius:20px; overflow: hidden;width: 153px; margin-top:5px;}
+.resumestatebox02 .cont .bar .play {background:#32a56b;float: left;height:9px;border-radius:20px;overflow: hidden;}
+.resumestatebox02 .cont .value B { color:#32a56b; font-weight:normal;font-size: 14px;height: auto;overflow: hidden;padding-left: 10px;}
+.bar{ float:left}
+.yun_integrity_degree_list{width:155px; float:left; padding:0px 15px 15px 15px;}
+.yun_integrity_degree_list li{width:100%; float:left;height:35px; line-height:35px;}
+.integrity_degree_name{ float:left;color:#1e5494}
+.integrity_degree{ float:right}
+.yun_template_box{width:100%; font-size:14px;}
+.yun_template_box li{width:100%; text-align:center; margin-top:10px;}
+.yun_template_box li img{border:1px solid #ddd}
+.yun_template_box  .yun_template_cur img{border:2px solid #C60}
+.resume_table_bg{background-color: #c9c9c9; color: #3c3c3c; table-layout: fixed;}
+.resume_table_bg td{font-size: 14px; line-height: 22px; word-break: break-all; word-wrap: break-word; -webkit-font-smoothing: antialiased; font-family: 'lucida Grande', Verdana, 'Microsoft YaHei';padding: 12px 14px; background:#fff}
+
+.resume_table_bg_nt{ margin-top:-1px;}
+.resume_introduce_list{ line-height:25px;width:100%;}
+.resume_bold{ font-weight:bold; margin-left:20px;}
+.resume_introduce{}
+.resume_table_blod{ font-weight:bold; }
+.resume_skill{width:100%; float:left; margin-top:10px;}
+.resume_skill li{width:697px;  float:left; margin-top:10px;line-height:30px;border-left:3px solid #e8e8e8; padding-left:20px; position:relative}
+.resume_skill_table li{width:575px;}
+.resume_skill li .resume_skill_icon{width:9px;height:9px; background:#e8e8e8;border-radius:50%; display:inline-block; position:absolute;left:-6px;top:10px;}
+.yun_resume_joblist_works{width:100%}
+.yun_resume_joblist_works li{width:170px; float:left; margin-top:10px; margin-right:10px; position:relative}
+.yun_resume_job_intentiont_list{width:100%; padding:0px 0; float:left; position:relative}
+.yun_resume_job_intentiont_list li{width:100%;line-height:30px;float:left}
+.yun_resume_job_intentiont_list_wl li{width:330px;}
+.yun_resume_job_intentiont_list_wl .yun_resume_job_intention_list_end{width:100%}
+.yun_resume_handle_bg{ background:#f8f8f8}
+.yun_resume_tebleadd_to{width:100%; float:left; padding:20px 0;}
+.yun_resume_tebleadd_to a{width:600px; border:1px dashed #ddd; padding:10px 0; text-align:center;color:#33F;display:block; font-weight:bold}
+.yun_resume_tebleadd_to a:hover{background:#1178c3;color:#fff; text-decoration:none}
+.yun_resume_color{color:#33F; margin-left:10px;}
+
+.yun_resume_popup_box{}
+.yun_resume_popup{width:100%; float:left;border-bottom:1px solid #ddd; padding-bottom:20px;}
+.yun_resume_popup_list{width:100%; margin-top:20px; float:left}
+.yun_resume_popup_name{width:100px; text-align:right; float:left; line-height:28px;}
+.yun_resume_popup_text{display: block;width: 374px;height: 14px;margin: 0;padding: 7px 0 7px 8px;background-color: #fff;border: 1px solid #c3c3c3;border-top: 1px solid #7c7c7c;border-left: 1px solid #9a9a9a;font-size: 14px;line-height: 16px;_line-height: 18px;color: #000;box-shadow: inset 0 1px 0 #d4d4d4;-webkit-font-smoothing: antialiased; float:left}
+.yun_resume_popup_textw90{width:140px;height:28px; text-align:left; cursor:pointer}
+.yun_resume_popup_list_box{width:140px; position:relative; float:left; margin-right:8px;cursor:pointer}
+.yun_resume_popup_bot{width:100%; padding:10px 0; background:#f8f8f8}
+.yun_resume_popup_time{ float:left; display:block; padding:0px 5px;line-height:28px}
+.yun_resume_popup_date{color:#999; position:absolute;right:5px;top:0px; line-height:30px;}
+.yun_resume_popup_checkbox{width:13px;height:13px; float:left; margin-top:10px; margin-left:5px;}
+.infor_textarea{display: block;width: 374px;margin: 0;padding: 7px 0 7px 8px;background-color: #fff;border: 1px solid #c3c3c3;border-top: 1px solid #7c7c7c;border-left: 1px solid #9a9a9a;font-size: 14px;line-height: 16px;color: #000;box-shadow: inset 0 1px 0 #d4d4d4;-webkit-font-smoothing: antialiased;}
+.yun_resume_add_to{width:100%; float:left; padding:20px 0; }
+.yun_resume_add_to a{margin: 0 29px;padding: 9px 0;display: block;height: 15px;line-height: 14px;line-height: 15px\9;text-align: center;color: #1e5494;border: 1px dashed #ddd;}
+.yun_resume_popup_chose_box{width:382px;height:28px; line-height:28px;border: 1px solid #c3c3c3;border-top: 1px solid #7c7c7c;border-left: 1px solid #9a9a9a; position:relative; float:left; cursor:pointer}
+.yun_resume_popup_chose_box_text{width:376px;height:28px; line-height:28px;border:none; text-align:left; text-indent:10px; background:#fff url(../images/yun_select.jpg) no-repeat 360px center}
+.yun_resume_popup_chose_box_city{width:119px; margin-right:10px;}
+.yun_resume_popup_chose_box_text_city{width:119px;background:#fff url(../images/yun_select.jpg) no-repeat 100px center}
+.yun_resume_popup_chose_cont{width:382px;border:1px solid #c3c3c3; position:absolute;bottom:29px;left:-1px; background:#fff;cursor:pointer}
+.yun_resume_popup_chose_cont a{ display:block;width:370;height:28px; line-height:28px; padding-left:12px;}
+.yun_resume_popup_chose_cont a:hover{ background:#f8f8f8}
+.yun_resume_popup_upp{width:380px; overflow:hidden; padding-top:5px;}
+.yun_resume_popup_pj{ padding:20px;}
+.eva_ex{font-size:14px; padding-bottom:10px;}
+.eva_ex_tit{width:100%;height:16px;line-height:16px;background:url(../images/eva_01.png) no-repeat left;}
+.eva_ex_tit a{position:relative;margin-left:25px;color:#3266cd;}
+.eva_ex_tit a:hover{text-decoration:underline;}
+.eva_ex_list{position:absolute;margin-top:3px;}
+.eva_ex_list_bx{border-radius:10px;margin-top:10px;position:relative;width:410px;height:204px;border:1px solid #ddd;background:#fbfbfb;}
+.eva_ex_list_bx_img{position:absolute;top:-12px;left:44px;width:20px;height:12px;background:url(../images/eva_02.png) no-repeat;}
+.eva_ex_list_ct{padding:0px 20px;}
+.ct_cs{float:left;line-height:1.5em;margin-top:25px;}
+.ct_cs span{width:100%;float:left;}
+.ct_cs span.ct_cs_tit{font-weight:bold;} 
+.yun_resume_popup_bt{color:#F30; padding-right:5px;}
+.yun_resume_popup_chose_cont_city{width:119px;}
+.yun_info_sex{ float:left; display:inline-block;width:60px; cursor:pointer; margin-top:5px;}
+.usericon_sex{width:28px;height:28px; display:block; float:left; margin-right:8px;}
+.usericon_sex1{ background:url(../images/yun_info_sex_icon.png) no-repeat 0 0;}
+.yun_info_sex_cur .usericon_sex1{background:url(../images/yun_info_sex_icon.png) no-repeat -29px 0;}
+.usericon_sex2{ background:url(../images/yun_info_sex_icon.png) no-repeat 0px -29px;}
+.yun_info_sex_cur .usericon_sex2{ background:url(../images/yun_info_sex_icon.png) no-repeat -29px -29px;}
+.yun_resume_three_box{width:100%; float:left; background:#f5f5f5;}
+.yun_resume_three_left{width:240px; float:left}
+.yun_resume_three_right{width:530px; padding:0px 15px; min-height:850px; float:right; background:#fff;}
+.yun_resume_three_photo{width:80px; margin:40px auto 0}
+.yun_resume_three_name{width:100%; font-size:32px; font-weight:bold; text-align:center; padding:15px 0;}
+.yun_resume_three_l_list{}
+.yun_resume_three_l_span{ padding-left:45px; line-height:30px; position:relative; display:inline-block}
+.yun_resume_three_l_span_icon{width:15px;height:15px; display:inline-block;  position:absolute;left:20px;top:6px;}
+.yun_resume_three_l_span_icon_a{background:url(../images/yun-resume_t_icon1.png) no-repeat;}
+.yun_resume_three_l_span_icon_b{background:url(../images/yun-resume_t_icon2.png) no-repeat;}
+.yun_resume_three_l_span_icon_c{background:url(../images/yun-resume_t_icon3.png) no-repeat;}
+.yun_resume_three_l_span_icon_d{background:url(../images/yun-resume_t_icon4.png) no-repeat;}
+.yun_resume_three_l_span_icon_e{background:url(../images/yun-resume_t_icon5.png) no-repeat;}
+.yun_resume_three_l_span_icon_f{background:url(../images/yun-resume_t_icon6.png) no-repeat;}
+.yun_resume_three_l_span_icon_g{background:url(../images/yun-resume_t_icon7.png) no-repeat;}
+.yun_resume_three_l_span_icon_sg{background:url(../images/yun-resume_t_icon8.png) no-repeat;}
+.yun_resume_three_l_span_e{ display:inline-block; margin-right:10px;}
+.yun_resume_three_l_p{ padding:0px 20px 0px 25px; line-height:25px;}
+.yun_resume_box_three{width:800px;border:1px solid #ddd; float:left; padding:0px;}
+.yun_resume_three_h1{width:100%; float:left; font-size:16px; font-weight:bold; padding-top:20px; }
+.yun_resume_three_h1_s{  display:inline-block}
+.resume_skill_three{width:100%; float:left; margin-top:10px;}
+.resume_skill_three li{width:100%;  float:left; margin-top:10px;line-height:30px; position:relative}
+.yun_resume_exp_name_date{ display:inline-block; margin-right:10px; font-weight:normal}
+.yun_resume_job_three_list{ width:100%; float:left; padding-top:10px;line-height:26px;}
+.yun_resume_operation{ position:fixed;right:100px;top:200px; _position:absolute}
+.yun_resume_operation_box{width:140px;border:1px solid #ddd; background:#fff;}
+.yun_resume_operation_box_h1{width:100%; padding:10px 0; text-align:center;border-bottom:1px solid #ddd; background:#f8f8f8; font-size:16px; }
+.vita_Opera_cz_list{width:100%;height:40px; position:relative; overflow:hidden}
+.yun_resume_cz_sub{ background:#fff;border:none;width:100%; line-height:40px;font-size:15px;color:#000; cursor:pointer; text-align:left; text-indent:50px; display:block}
+.yun_resume_cz_sub:hover{ background:#f8f8f8}
+.yun_resume_cz_sub_cor{color:#f60}
+.vita_Opera_cz_list_icon{width:28px;height:28px; display:block; position:absolute;left:10px;top:8px; }
+.vita_Opera_cz_list_icon_xz{background:url(../images/yun_resume_xz.png) no-repeat}
+.vita_Opera_cz_list_icon_sc{background:url(../images/yun_resume_sc.png) no-repeat}
+.vita_Opera_cz_list_icon_yq{background:url(../images/yun_resume_ms.png) no-repeat}
+.vita_Opera_cz_list_icon_dy{background:url(../images/yun_resume_dy.png) no-repeat}
+.vita_Opera_cz_list_icon_fx{background:url(../images/yun_resume_fx.png) no-repeat}
+.yun_resume_foot{ line-height: 25px;color: #816e74;margin-top: 10px; width:100%; padding:10px 0;text-align:center}
+.clear{ clear:both}
+.expext_yl_box_bth{width:100%; position:fixed;bottom:0px;left:0px; background:rgba(0,0,0,0.5); text-align:center; padding:10px 0;}
+.expext_yl_box_bth .expext_yl_box_sub{width:176px;height:42px; line-height:42px; text-align:center; background:#f60;border-radius:3px; display:inline-block;color:#fff; font-size:16px; text-decoration:none;}
+.yun_resume_header_hf{width:150px; background:#fce6e9; position:absolute;bottom:-300px;right:40px; text-align:center; padding:10px 0;border-radius:5px;}
+.yun_resume_header_hf_n{width:; font-size:24px;color:#f60; padding-top:10px;}
+.resume_ans{width:150px; background:#fce6e9; position:absolute;bottom:-120px;right:40px; text-align:center; padding:10px 0;border-radius:3px;}
+.resume_ans  .yun_resume_header_hf_n{width:; font-size:24px;color:#f60; padding-top:10px;}
+.one_vita_Intention{width:100%;padding:6px 0; float:left}
+.fairs_introduction_p {font-size:14px;line-height:25px;color:#282828;padding:20px 0 20px 0px;}
+.fairs_introduction_img li {width:210px;float:left;border:1px solid #e2e2e2;background:#fff;padding:2px; margin-right:10px; margin-top:10px;}
+.fairs_introduction_img li img {display:block}
+.re_touch{width:100%; float:left; padding:20px 0; text-align:center; font-size:14px;}
+.re_touch a{color:#F33; text-decoration:underline}
+.resume_bthxz{ display:inline-block;width:80px;height:30px; background:#f60;color:#fff; line-height:30px; text-align:center}
+.resume_bthxz:hover{ background:#F30;color:#fff; text-decoration:none}
+.yun_resume_joblist_mt20{ margin-top:20px;width:100%; float:left}
+.resume_beizu_bth{ display:inline-block;width:80px;height:30px; background:#f60;color:#fff; line-height:30px; text-align:center;border:none; cursor:pointer}
+.myresume_rl{ font-size:14px; font-weight:normal; margin-left:10px;color:#F60}
+.yun_resume_zt_p{width:100%; float:left; line-height:30px;}
+.resume_sub_yq{width:110px;height:33px;border:none; cursor:pointer; background:#f60;color:#fff;}
+.resume_table table{}
+.resume_table table td{ padding:10px; line-height:30px;}
+.resume_job_tag{ background:#faf3eb; margin-right:5px; display:inline-block; padding:0px 18px 0px 5px; line-height:23px;border:1px solid #fbd7c3; position:relative; white-space:nowrap; font-size:12px;color:#f60}
+.resume_job_tag_icon{width:6px;height:6px;border:1px solid #fbd7c3;  border-radius:50%; background:#fff; display:inline-block; position:absolute;right:5px;top:8px; overflow:hidden}
+.resume_user_bq{background:#FFC url(../images/yxz.png) no-repeat right bottom;padding:0px 11px;cursor:default;height:28px;line-height:28px;border:1px solid #FC9;  display:inline-block; margin-right:5px; margin-top:5px;}
+.yun_resume_jobtime{ margin-left:50px;color:#f00; background:url(../images/resumetime.png) no-repeat left center; padding-left:22px}
+.yun_resume_jobtime4{ font-weight:normal;color:#f00; font-size:14px; margin-left:30px; background:url(../images/resumetime.png) no-repeat left center; padding-left:22px}
+.yun_resume_jobtime5{color:#f00; font-size:14px; margin-left:150px; background:url(../images/resumetime.png) no-repeat left center; padding-left:22px}
+.yun_resume_exp_name_zy{ margin-left:50px;}
+.two_vita_ewm_box{width:100%; float:left;padding:10px 0; text-align:center; margin-top:10px;}
+.two_vita_ewm_box_p{width:100%; text-align:center; line-height:30px;}
+.resume_Intention{width:330px;height:30px; line-height:30px; float:left ; margin-top:5px;}
+.resume_touch_box{width:100%; float:left; padding-top:20px; min-height:180px;_height:180px; position:relative}
+.resume_show_wx{width:120px; position:absolute;right:10px;top:30px; text-align:center}
+.resume_show_wx_p{ padding-top:5px;}

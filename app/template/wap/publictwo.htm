@@ -1,0 +1,217 @@
+<script>
+	$(document).ready(function(){
+		$("#resume").submit(function(e){
+			var min = $("#minresume").val();
+			var max = $("#maxresume").val();
+			if(min && max && parseInt(max) < parseInt(min)){
+				$("#minresume").val(max);
+				$("#maxresume").val(min);
+			}
+		});
+	});
+	$(document).ready(function(){
+		$("#job").submit(function(e){
+			var min = $("#minjob").val();
+			var max = $("#maxjob").val();
+			if(min && max && parseInt(max) < parseInt(min)){
+				$("#minjob").val(max);
+				$("#maxjob").val(min);
+			}
+		});
+	});	
+</script>
+
+<div class="Category-eject">
+    <ul class="Category-w" id="jobone">
+    {yun:}foreach item=v from=$job_index{/yun}
+        <li class="qc{yun:}$v{/yun}" onclick="Categorytw('{yun:}$v{/yun}','{yun:}$job_name[$v]{/yun}','jobone')">{yun:}$job_name[$v]{/yun}</li>
+     {yun:}/foreach{/yun} 
+    </ul>
+    <ul class="Category-t" id="jobone_son">                
+    </ul>
+    <ul class="Category-s" id="job_post">           
+    </ul>
+</div>
+
+<div class="grade-eject">
+    <ul class="grade-w" id="provinceid">
+        {yun:}foreach item=v from=$city_index{/yun}
+        <li class="qc{yun:}$v{/yun}" onclick="grade1('{yun:}$v{/yun}','{yun:}$city_name[$v]{/yun}','provinceid')">{yun:}$city_name[$v]{/yun}</li>
+        {yun:}/foreach{/yun} 
+    </ul>
+    <ul class="grade-t" id="cityid"> 
+          
+    </ul>
+      <ul class="grade-s" id="three_cityid">
+          
+    </ul>
+  
+</div>
+
+ <div class="Sortexp-eject Sortexp-height">
+    <ul class="Sortexp-Sortexp" id="Sortexp-Sortexp">   
+        {yun:}foreach from=$userdata.user_word item=v{/yun}
+        <li><a href="{yun:}searchurl m=wap c=resume exp=$v untype='exp'{/yun}">{yun:}$userclass_name[$v]{/yun}</a></li>
+        {yun:}/foreach{/yun}
+    </ul>
+</div>
+
+ <div class="Gengduos-eject">
+    <form action="{yun:}$config_wapdomain{/yun}/index.php" method="get" id="resume">
+	<input type="hidden" name="c" value="{yun:}if $smarty.get.c{/yun}{yun:}$smarty.get.c{/yun}{yun:}else{/yun}resume{yun:}/if{/yun}"/>
+    <ul class="Gengduos-w" id="Gengduos">   
+       <li tab_name="Gengduohyt"><a href="javascript:void(0);">行业类别<em id="gdshy">&nbsp;&nbsp;{yun:}$industry_name[$smarty.get.hy]{/yun}</em></a></li>
+       <li tab_name="Gengduoedut"><a href="javascript:void(0);">学历要求<em id="gdsedu">&nbsp;&nbsp;{yun:}$userclass_name[$smarty.get.edu]{/yun}</em></a></li>
+       <li tab_name="Gengduoreportt"><a href="javascript:void(0);">到岗时间<em id="gdsreport">&nbsp;&nbsp;{yun:}$userclass_name[$smarty.get.report]{/yun}</em></a></li>
+       <li tab_name="Gengduouptimet"><a href="javascript:void(0);">更新日期<em id="gdsuptime">&nbsp;&nbsp;{yun:}$uptime[$smarty.get.uptime]{/yun}</em></a></li>
+       <li tab_name="Gengduotagt"><a href="javascript:void(0);">个人标签<em id="gdstag">&nbsp;&nbsp;{yun:}$userclass_name[$smarty.get.tag]{/yun}</em></a></li>
+	   <li>薪资待遇：
+       		<input type="text" size="5" name="minsalary" id="minresume" placeholder="1999" value="{yun:}$smarty.get.minsalary{/yun}" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" class="salary_text">
+       		<span> - </span>
+       		<input type="text" size="5" name="maxsalary" id="maxresume" placeholder="2999" value="{yun:}$smarty.get.maxsalary{/yun}" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')"class="salary_text">
+       </li> 
+      <li class="search_bth_box">
+			<input type="hidden" name="hy" id="gdshyi" value="{yun:}$smarty.get.hy{/yun}"/>
+			<input type="hidden" name="edu" id="gdsedui" value="{yun:}$smarty.get.edu{/yun}"/>
+			<input type="hidden" name="report" id="gdsreporti" value="{yun:}$smarty.get.report{/yun}"/>
+			<input type="hidden" name="uptime" id="gdsuptimei" value="{yun:}$smarty.get.uptime{/yun}"/>
+			<input type="hidden" name="tag" id="gdstagi" value="{yun:}$smarty.get.tag{/yun}"/>
+       		<input type="submit" value="确定"class="search_bth"><input type="button" onclick="lihide('Gengduos-eject')" value="取消"class="search_bthqx">
+       </li> 	 
+    </ul>
+	</form>
+     <ul class="Gengduos-t" id="Gengduohyt" style="display:block;">
+      {yun:}foreach from=$industry_index item=v{/yun}				
+        <li tab_name="gdshy" data="{yun:}$v{/yun}">{yun:}$industry_name[$v]{/yun} </li>
+       {yun:}/foreach{/yun}
+    </ul>
+	<ul class="Gengduos-t" id="Gengduoedut" style="display:none;">
+     {yun:}foreach from=$userdata.user_edu item=v{/yun}			
+        <li tab_name="gdsedu" data="{yun:}$v{/yun}">{yun:}$userclass_name[$v]{/yun}</li>
+       {yun:}/foreach{/yun}
+    </ul>
+     <ul class="Gengduos-t" id="Gengduoreportt" style="display:none;">
+     {yun:}foreach from=$userdata.user_report item=v{/yun}			
+        <li tab_name="gdsreport" data="{yun:}$v{/yun}">{yun:}$userclass_name[$v]{/yun}</li>
+       {yun:}/foreach{/yun}
+    </ul>
+     <ul class="Gengduos-t" id="Gengduouptimet" style="display:none;">
+     {yun:}foreach from=$uptime key=key item=v{/yun}		
+        <li tab_name="gdsuptime" data="{yun:}$key{/yun}">{yun:}$v{/yun}</li>
+       {yun:}/foreach{/yun}
+    </ul>
+     <ul class="Gengduos-t" id="Gengduotagt" style="display:none;">
+     {yun:}foreach from=$userdata.user_tag item=v{/yun}			
+        <li tab_name="gdstag" data="{yun:}$v{/yun}">{yun:}$userclass_name[$v]{/yun}</li>
+       {yun:}/foreach{/yun}
+    </ul>    	
+</div>
+
+ <div class="Sort-eject Sort-height">
+    <ul class="Sort-Sort" id="Sort-Sort">   
+       {yun:}foreach from=$comdata.job_exp item=v{/yun}
+        <li><a href="{yun:}searchurl m=wap c=job exp=$v untype='exp'{/yun}">{yun:}$comclass_name[$v]{/yun}</a></li>
+        {yun:}/foreach{/yun}
+    </ul>
+</div>
+ <div class="Gengduoj-eject">
+   <form action="{yun:}$config_wapdomain{/yun}/index.php" method="get" id="job">
+    <input type="hidden" name="c" value="job"/>
+    <ul class="Gengduoj-w" id="Gengduoj">   
+    <div class="job_list_chlose ">
+    <span {yun:}if $smarty.get.urgent==''&&$smarty.get.rec==''{/yun}class="job_list_chlose_a "{yun:}/if{/yun} ><a  href="{yun:}url m=wap c=job{/yun}" ><i class="job_list_chlose_c">所有职位</i></a></span>
+          <span {yun:}if $smarty.get.urgent{/yun}class="job_list_chlose_a "{yun:}/if{/yun} >
+          <a class="search_icon" href="{yun:}url m=wap c=job urgent=1{/yun}"><i class="job_list_chlose_c">紧急职位</i></a>
+     </span>
+          <span {yun:}if $smarty.get.rec{/yun}class="job_list_chlose_a "{yun:}/if{/yun} >
+          <a class="search_icon" href="{yun:}url m=wap c=job rec=1{/yun}{yun:}$v.rec=1{/yun}"><i class="job_list_chlose_c">推荐职位</i></a>
+          </span>
+		<input type="hidden" value="1" id="search"/>
+		</div>
+
+       <li tab_name="Gengduohy"><a href="javascript:void(0);">行业类别<em id="gdjhy">&nbsp;&nbsp;{yun:}$industry_name[$smarty.get.hy]{/yun}</em></a></li>
+       <li tab_name="Gengduopr"><a href="javascript:void(0);">公司性质<em id="gdjpr">&nbsp;&nbsp;{yun:}$comclass_name[$smarty.get.pr]{/yun}</em></a></li>
+       <li tab_name="Gengduonum"><a href="javascript:void(0);">公司规模<em id="gdjnum">&nbsp;&nbsp;{yun:}$comclass_name[$smarty.get.num]{/yun}</em></a></li>
+       <li tab_name="Gengduoedu"><a href="javascript:void(0);">学历要求<em id="gdjedu">&nbsp;&nbsp;{yun:}$comclass_name[$smarty.get.edu]{/yun}</em></a></li>    
+       <li tab_name="Gengduouptime"><a href="javascript:void(0);">更新日期<em id="gdjuptime">&nbsp;&nbsp;{yun:}$uptime[$smarty.get.uptime]{/yun}</em></a></li>      
+       <li>薪资待遇：
+       		<input type="text" size="5" name="minsalary" id="minjob" placeholder="1999" value="{yun:}$smarty.get.minsalary{/yun}" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')"class="salary_text">
+       		<span> - </span>
+       		<input type="text" size="5" name="maxsalary" id="maxjob" placeholder="2999" value="{yun:}$smarty.get.maxsalary{/yun}" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')"class="salary_text">
+       </li> 
+       <li class="search_bth_box">
+			<input type="hidden" name="hy" id="gdjhyi" value="{yun:}$smarty.get.hy{/yun}"/>
+			<input type="hidden" name="pr" id="gdjpri" value="{yun:}$smarty.get.pr{/yun}"/>
+			<input type="hidden" name="num" id="gdjnumi" value="{yun:}$smarty.get.num{/yun}"/>
+			<input type="hidden" name="edu" id="gdjedui" value="{yun:}$smarty.get.edu{/yun}"/>
+			<input type="hidden" name="uptime" id="gdjuptimei" value="{yun:}$smarty.get.uptime{/yun}"/>
+       		<input type="submit" value="确定" class="search_bth"><input type="button" onclick="lihide('Gengduoj-eject')" value="取消" class="search_bthqx">
+       </li> 	   
+    </ul>
+	</form>
+     <ul class="Gengduoj-t" id="Gengduohy" style="display:block;">
+     {yun:}foreach from=$industry_index item=v{/yun}				
+        <li tab_name="gdjhy" data="{yun:}$v{/yun}">{yun:}$industry_name[$v]{/yun}</li>
+       {yun:}/foreach{/yun}
+    </ul>
+    <ul class="Gengduoj-t" id="Gengduopr" style="display:none;">
+     {yun:}foreach from=$comdata.job_pr item=v{/yun}				
+        <li tab_name="gdjpr" data="{yun:}$v{/yun}">{yun:}$comclass_name[$v]{/yun}</li>
+       {yun:}/foreach{/yun}
+    </ul>
+      <ul class="Gengduoj-t" id="Gengduonum" style="display:none;">
+     {yun:}foreach from=$comdata.job_mun item=v{/yun}			
+        <li tab_name="gdjnum" data="{yun:}$v{/yun}">{yun:}$comclass_name[$v]{/yun}</li>
+       {yun:}/foreach{/yun}
+    </ul>
+     <ul class="Gengduoj-t" id="Gengduoedu" style="display:none;">
+     {yun:}foreach from=$comdata.job_edu item=v{/yun}			
+        <li tab_name="gdjedu" data="{yun:}$v{/yun}">{yun:}$comclass_name[$v]{/yun}</li>
+       {yun:}/foreach{/yun}
+    </ul>
+     <ul class="Gengduoj-t" id="Gengduouptime" style="display:none;">
+     {yun:}foreach from=$uptime key=key item=v{/yun}		
+        <li tab_name="gdjuptime" data="{yun:}$key{/yun}">{yun:}$v{/yun}</li>
+       {yun:}/foreach{/yun}
+    </ul> 
+</div>
+
+    <div class="Sorthy-eject Sorthy-height">
+    <ul class="Sorthy-Sorthy" id="Sorthy-Sorthy">   
+    {yun:}foreach from=$industry_index item=v{/yun}
+    <li><a href="{yun:}searchurl m=wap c=company hy=$v untype='hy'{/yun}">{yun:}$industry_name[$v]{/yun}</a></li>
+    {yun:}/foreach{/yun}
+    </ul>
+    </div>
+
+    <div class="Sortpr-eject Sortpr-height">
+    <ul class="Sortpr-Sortpr" id="Sortpr-Sortpr">   
+    {yun:}foreach from=$comdata.job_pr item=v{/yun}
+    <li><a href="{yun:}searchurl m=wap c=company pr=$v untype='pr'{/yun}">{yun:}$comclass_name[$v]{/yun}</a></li>
+    {yun:}/foreach{/yun}
+    </ul>
+    </div>
+
+    <div class="Sortmun-eject Sortmun-height">
+    <ul class="Sortmun-Sortmun" id="Sortmun-Sortmun">   
+    {yun:}foreach from=$comdata.job_mun item=v{/yun}
+    <li><a href="{yun:}searchurl m=wap c=company mun=$v untype='mun'{/yun}">{yun:}$comclass_name[$v]{/yun}</a></li>
+    {yun:}/foreach{/yun}
+    </ul>
+    </div>
+
+    <div class="Sorttype-eject Sorttype-height">
+    <ul class="Sorttype-Sorttype" id="Sorttype-Sorttype">   
+    {yun:}foreach from=$partdata.part_type item=v{/yun}
+    <li><a href="{yun:}searchurl m=wap c=part type=$v untype='type'{/yun}">{yun:}$partclass_name[$v]{/yun}</a></li>
+    {yun:}/foreach{/yun}
+    </ul>
+    </div>
+
+    <div class="Sortcycle-eject Sortcycle-height">
+    <ul class="Sortcycle-Sortcycle" id="Sortcycle-Sortcycle">   
+    {yun:}foreach from=$partdata.part_billing_cycle item=v{/yun}
+    <li><a href="{yun:}searchurl m=wap c=part cycle=$v untype='cycle'{/yun}">{yun:}$partclass_name[$v]{/yun}</a></li>
+    {yun:}/foreach{/yun}
+    </ul>
+    </div>

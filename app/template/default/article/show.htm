@@ -1,0 +1,202 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>{yun:}$title{/yun}</title>
+<meta name="keywords" content="{yun:}$keywords{/yun}"/>
+<meta name="description" content="{yun:}$description{/yun}"/>
+<link rel="stylesheet" href="{yun:}$style{/yun}/style/css.css" type="text/css"/>
+<link rel="stylesheet" href="{yun:}$style{/yun}/style/news.css" type="text/css"/>
+</head>
+<body>
+{yun:}include file="$tplstyle/header.htm"{/yun}
+<div class="clear"></div>
+<div class="yun_content">
+  <div class="current_Location  png"> 您当前的位置：<a href="{yun:}$config.sy_weburl{/yun}">首页</a> > <a href="{yun:}url m=article{/yun}">职场资讯</a> > <a href="{yun:}url m=article c=list nid='`$Info.nid`'{/yun}">{yun:}$Info.news_class{/yun}</a></div>
+  <div class="zx_cont_inner">
+    <div class="wrap">
+      <div class="zx_show_cont fl">
+        <div class="zx_cont_main">
+          <h1 class="zx_show_cont_h1" {yun:}if $Info.color{/yun}style="color:{yun:}$Info.color{/yun}"{yun:}/if{/yun}>{yun:}$Info.title{/yun}</h1>
+          <div class="zx_main_source">
+			<span class="zx_main_source_r"><em>来源：</em>{yun:}if $Info.source{/yun}{yun:}$Info.source|mb_substr:0:16:'gbk'{/yun}{yun:}else{/yun}{yun:}$config.sy_webname{/yun}{yun:}/if{/yun}</span>
+			<span class="zx_main_source_r"><em>时间：</em>{yun:}$Info.datetime|date_format:"%Y-%m-%d"{/yun}</span>
+			<span class="zx_main_source_r"><em>作者：</em>{yun:}if $Info.author{/yun}{yun:}$Info.author|mb_substr:0:16:'gbk'{/yun}{yun:}else{/yun}{yun:}$config.sy_webname{/yun}{yun:}/if{/yun}</span>              
+			<span class="zx_main_source_r"><em>浏览量：</em>
+				<script language="javascript" src="{yun:}$config.sy_weburl{/yun}/index.php?m=index&c=GetHits&id={yun:}$Info.id{/yun}">
+				</script>
+			</span>
+			
+          </div>
+          <div class="zx_art_content"> {yun:}$Info.content{/yun}  </div>
+          <div style="padding:20px 0;">
+           <span class="sour_share fl"><em class="fl" style="line-height:28px;">分享到：</em>
+         
+		
+			<div class="pyshare bdsharebuttonbox bdshare-button-style0-16" data-tag="share_1">
+				<a class="li s1 bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+				<a class="li s2 bds_renren" data-cmd="renren" title="分享到人人网"></a>
+				<a class="li s3 bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+				<a class="li s4 bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a>
+				<a class="li s5 bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+				<a class="li s6 bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+				<div class="clear"></div>
+			</div>
+			</div>
+		  
+				</span>
+            <div class="zx_well_flip"> 
+			{yun:}if !empty($Info.next){/yun} <span>上一篇： <a title="{yun:}$Info.next.title{/yun}" href="{yun:}$Info.next.url{/yun}">{yun:}$Info.next.title{/yun}</a> </span> {yun:}/if{/yun}
+			
+			{yun:}if !empty($Info.last){/yun} <span>下一篇： <a title="{yun:}$Info.last.title{/yun}" href="{yun:}$Info.last.url{/yun}">{yun:}$Info.last.title{/yun}</a></span> {yun:}/if{/yun}
+              
+              <div class="clear"></div>
+              
+            </div>
+            <div class="zx_well_with">
+              <div class="zx_with_recom">相关推荐</div>
+              <div class="zx_with_list">
+                <ul style="width:100%">
+                  {yun:}foreach from=$Info.like item=about{/yun}
+                  <li style="width:310px;float:left"><a title="{yun:}$about.title{/yun}" href="{yun:}$about.url{/yun}">{yun:}$about.title|mb_substr:0:16:'gbk'{/yun}</a></li>
+                  {yun:}/foreach{/yun}
+                </ul>               
+                <div class="clear"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <div class="zx_inner_right fr">
+	  
+      <div class="zx_rig_rom">
+        <div class="zx_article">
+          <div class="zx_art_tit"><i class="Company_h1_line yun_bg_color"></i>分类浏览</div>
+          <div class="zx_fl_cont"  id="news_nav">
+           {yun:}articleclass r_list=1 item=v{/yun}
+            <div class="zx_fl_list">
+            <a href="{yun:}$v.url{/yun}" class="zx_fl_list_a">{yun:}$v.name{/yun}</a>
+            <div class="zx_fl_list_box">
+            <div class="zx_fl_list_t_fl">
+            <div class="zx_fl_list_box_h1">  <a href="{yun:}$v.url{/yun}">{yun:}$v.name{/yun}</a></div>
+            {yun:}foreach item=val from=$v.r_list{/yun}
+            <a href="{yun:}$val.url{/yun}"  class="zx_fl_list_t_fl_a">{yun:}$val.name{/yun}</a>
+            {yun:}/foreach{/yun}
+            </div>
+            </div>
+              </div>
+             {yun:}/articleclass{/yun}
+            <div class="clear"></div>
+          </div>
+        </div>  </div>
+        <div class="zx_rig_rom">
+          <div class="zx_article">
+            <div class="zx_art_tit"><i class="Company_h1_line yun_bg_color"></i>推荐文章</div>
+			{yun:}article limit=1 type=tj pic=1 t_len=7  urlstatic=1 key=key item=news_jian{/yun}  
+              {yun:}if $news_jian{/yun}
+              <div class="zx_art_hot"> 
+              <dl>
+                <dt><a href="{yun:}$news_jian.url{/yun}"><img src="{yun:}$config.sy_weburl{/yun}/{yun:}$news_jian.newsphoto{/yun}" style="width:84px; height:63px;" /></a></dt>
+                <dd>
+                  <div class="art_fanfu"><a href="{yun:}$news_jian.url{/yun}">{yun:}$news_jian.title{/yun}</a></div>
+                  <div class="art_xq">{yun:}$news_jian.description|mb_substr:0:22:'gbk'{/yun}</div>
+                </dd>
+              </dl>
+			  <div class="clear"></div>
+            </div>
+              {yun:}/if{/yun}
+		  {yun:}/article{/yun}
+              
+            <div class="zx_art_list">
+              <ul>
+                {yun:}article limit=6 order=hits t_len=17 urlstatic=1 key=key item=news_hits{/yun}
+                {yun:}if $key=='0'&& empty($news_hits){/yun}
+                <li>暂无文章</li>
+                {yun:}else{/yun}
+                <li><a href="{yun:}$news_hits.url{/yun}">{yun:}$news_hits.title{/yun}</a></li>
+                {yun:}/if{/yun} 
+                {yun:}/article{/yun}
+              </ul>
+            </div>
+            <div class="clear"></div>
+          </div>
+          <div class="zx_article">
+            <div class="zx_art_tit"><i class="Company_h1_line yun_bg_color"></i>最新文章</div>
+              {yun:}article limit=1 pic=1 t_len=7 d_len=24 urlstatic=1 item=indexnews1 key=key name=indexnews1{/yun}
+              {yun:}if $smarty.foreach.indexnews1.index==0{/yun}
+            <div class="zx_art_hot">
+              <dl>
+                <dt><a href="{yun:}$indexnews1.url{/yun}"><img src="{yun:}$config.sy_weburl{/yun}/{yun:}$indexnews1.newsphoto{/yun}" width="84" height="63" /></a></dt>
+                <dd>
+                  <div class="art_fanfu"><a href="{yun:}$indexnews1.url{/yun}">{yun:}$indexnews1.title{/yun}</a></div>
+                  <div class="art_xq">{yun:}$indexnews1.description{/yun}..</div>
+                </dd>
+              </dl>
+              <div class="clear"></div>
+            </div>
+              {yun:}/if{/yun}
+              {yun:}/article{/yun}
+            <div class="zx_art_list">
+              <ul>
+                  {yun:}article limit=6 t_len=16 d_len=24 urlstatic=1   item=indexnews2{/yun}
+                <li><a href="{yun:}$indexnews2.url{/yun}" target="_blank">{yun:}$indexnews2.title{/yun}</a></li>
+                  {yun:}/article{/yun}
+              </ul>
+            </div>
+            <div class="clear"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="clear"></div>
+  </div>
+
+</div>
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/lazyload.min.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/public.js" language="javascript"></script>
+<!--[if IE 6]>
+<script src="{yun:}$config.sy_weburl{/yun}/js/png.js"></script>
+<script>
+DD_belatedPNG.fix('.png');
+</script>
+<![endif]-->
+<script type="text/javascript"> 
+$(function() {
+	//分类浏览
+	 var sfEls = $("#news_nav").find("div");
+	 for (var i=0; i<sfEls.length; i++) {
+		  sfEls[i].onmouseover=function() {
+		  this.className+=(this.className.length>0? " ": "") + "zx_fl_list_hover";
+		  }
+		  sfEls[i].onMouseDown=function() {
+		  this.className+=(this.className.length>0? " ": "") + "zx_fl_list_hover";
+		  }
+		  sfEls[i].onMouseUp=function() {
+		  this.className+=(this.className.length>0? " ": "") + "zx_fl_list_hover";
+		  }
+		  sfEls[i].onmouseout=function() {
+		  this.className=this.className.replace(new RegExp("( ?|^)zx_fl_list_hover\\b"),"");
+		  }
+	 }
+});
+</script>
+<!--------shareJS--------->
+<script>
+	window._bd_share_config = {
+		common : {
+			bdText : '{yun:}$title{/yun}',
+			bdDesc : '{yun:}$description{/yun}',	
+			bdUrl : '{yun:}url m=article c=show id=$Info.id{/yun}',
+			bdPic : '{yun:}if $Info.newsphoto{/yun} {yun:}$config.sy_weburl{/yun}/{yun:}$Info.newsphoto{/yun}{yun:}else{/yun}{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_logo{/yun}{yun:}/if{/yun}'
+		},
+		share : [{
+			"tag" : "share_1",
+			"bdSize" : 24,
+			"bdCustomStyle":'{yun:}$style{/yun}/style/share.css'
+		}]
+	}
+	with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+<!--------shareJS END--------->
+{yun:}include file="$tplstyle/footer.htm"{/yun}

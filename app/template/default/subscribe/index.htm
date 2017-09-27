@@ -1,0 +1,162 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>{yun:}$title{/yun}</title>
+<meta name=keywords content="{yun:}$keywords{/yun}"/>
+<meta name=description content="{yun:}$description{/yun}"/>
+<link rel="stylesheet" type="text/css" href="{yun:}$style{/yun}/style/css.css"/>
+</head>
+<body style="background:#f8f8f8">
+{yun:}include file="$tplstyle/header.htm"{/yun}
+
+<div class="container">
+<div class="current_Location com_current_Location png">
+      <div class="fl">您当前的位置：<a href="{yun:}$config.sy_weburl{/yun}">首页</a> &gt; <span>订阅</span> </div>
+    </div>
+    <div class="subscribe_cont">
+    <div class="subscribe_cont_h1">
+    <span class="subscribe_cont_h1_p yun_text_color">筛选下面的订阅条件，实现精准匹配的个性化定制</span>我们帮你挑工作，挑人才！
+    </div>
+<iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" class="none"></iframe>
+<form name="myform" id="myform" method="post" target="supportiframe"  action="" onsubmit="return checksub();">
+{yun:}if $uid{/yun}
+<input name='type' value="{yun:}if $usertype=='1'{/yun}1{yun:}else{/yun}2{yun:}/if{/yun}" type="hidden"/> 
+{yun:}else{/yun}
+<div class="subscribe_cont_list">.
+<span class="subscribe_cont_list_name">订阅类型：</span>
+<span class="post_read_chose post_read_chose_w70"><input type="radio" value="1" name="type" checked="checked" class="post_read_radio" id="subjob"><label for="subjob">订阅职位</lable></span> 
+<span class="post_read_chose  post_read_chose_w70"><input type="radio" value="2" name="type" class="post_read_radio"id="subresume"><label for="subresume">订阅简历</lable></span> 
+</div>
+{yun:}/if{/yun}
+<div class="subscribe_cont_list"><span class="subscribe_cont_list_name">职位类别：</span>
+<div class="post_read_text post_read_text_re10">
+<input type="button" value="{yun:}if $job_name[$info.job1]{/yun}{yun:}$job_name[$info.job1]{/yun}{yun:}else{/yun}请选择{yun:}/if{/yun}" class="post_read_button" id="button_job1" onclick="check_class('job1');"/>
+<input type="hidden" name="job1" value="{yun:}$info.job1{/yun}" />
+<div class="post_read_text_box none" id="job1">
+<ul class="post_read_text_box_list">
+{yun:}foreach item=v key=key from=$job_index{/yun}
+<li><a href="javascript:check_input('{yun:}$v{/yun}','{yun:}$job_name[$v]{/yun}','job1');">{yun:}$job_name[$v]{/yun}</a></li>
+{yun:}/foreach{/yun}
+</ul>
+</div>
+</div>
+<div class="post_read_text post_read_text_re10" id="job1_son_list">
+<input type="button" value="{yun:}if $job_name[$info.job1_son]{/yun}{yun:}$job_name[$info.job1_son]{/yun}{yun:}else{/yun}请选择{yun:}/if{/yun}" class="post_read_button" id="button_job1_son" onclick="check_class('job1_son');"/>
+<input type="hidden" name="job1_son" value="{yun:}$info.job1_son{/yun}" />
+<div class="post_read_text_box post_read_text_box_198 none" id="job1_son">
+<ul class="post_read_text_box_list">
+{yun:}foreach item=v key=key from=$job_type[$info.job1]{/yun}
+<li><a href="javascript:check_input('{yun:}$v{/yun}','{yun:}$job_name[$v]{/yun}','job1_son');">{yun:}$job_name[$v]{/yun}</a></li>
+{yun:}/foreach{/yun}
+</ul>
+</div>
+</div>
+<div class="post_read_text post_read_text_re10" id="job_post_list">
+<input type="button" value="{yun:}if $job_name[$info.job_post]{/yun}{yun:}$job_name[$info.job_post]{/yun}{yun:}else{/yun}请选择{yun:}/if{/yun}" class="post_read_button" id="button_job_post" onclick="check_class('job_post');"/>
+<input type="hidden" name="job_post" value="{yun:}$info.job_post{/yun}" />
+<div class="post_read_text_box post_read_text_box_395 none" id="job_post">
+<ul class="post_read_text_box_list">
+{yun:}foreach item=v key=key from=$job_type[$info.job1_son]{/yun}
+<li><a href="javascript:check_input('{yun:}$v{/yun}','{yun:}$job_name[$v]{/yun}','job_post');">{yun:}$job_name[$v]{/yun}</a></li>
+{yun:}/foreach{/yun}
+</ul>
+</div>
+</div>
+
+</div>
+<div class="subscribe_cont_list"><span class="subscribe_cont_list_name">所在城市：</span>
+<div class="post_read_text post_read_text_re9">
+<input type="button" value="{yun:}if $city_name[$info.provinceid]{/yun}{yun:}$city_name[$info.provinceid]{/yun}{yun:}else{/yun}请选择{yun:}/if{/yun}" class="post_read_button" id="button_provinceid" onclick="check_class('provinceid');"/>
+<input type="hidden" name="provinceid" value="{yun:}$info.provinceid{/yun}" />
+<div class="post_read_text_box none" id="provinceid">
+<ul class="post_read_text_box_list">
+{yun:}foreach item=v key=key from=$city_index{/yun}
+<li><a href="javascript:check_input('{yun:}$v{/yun}','{yun:}$city_name[$v]{/yun}','provinceid');">{yun:}$city_name[$v]{/yun}</a></li>
+{yun:}/foreach{/yun}
+</ul>
+</div>
+</div>
+<div class="post_read_text post_read_text_re9" id="cityid_list">
+<input type="button" value="{yun:}if $city_name[$info.cityid]{/yun}{yun:}$city_name[$info.cityid]{/yun}{yun:}else{/yun}请选择{yun:}/if{/yun}" class="post_read_button" id="button_cityid" onclick="check_class('cityid');"/>
+<input type="hidden" name="cityid" value="{yun:}$info.cityid{/yun}" />
+<div class="post_read_text_box post_read_text_box_198 none" id="cityid">
+<ul class="post_read_text_box_list">
+{yun:}foreach item=v from=$city_type[$info.provinceid]{/yun}
+<li><a href="javascript:check_input('{yun:}$v{/yun}','{yun:}$city_name[$v]{/yun}','cityid');">{yun:}$city_name[$v]{/yun}</a></li>
+{yun:}/foreach{/yun}
+</ul>
+</div>
+</div>
+<div class="post_read_text post_read_text_re9 {yun:}if $info.three_cityid<1{/yun}none{yun:}/if{/yun}" id="three_cityid_list">
+<input type="button" value="{yun:}if $city_name[$info.three_cityid]{/yun}{yun:}$city_name[$info.three_cityid]{/yun}{yun:}else{/yun}请选择{yun:}/if{/yun}" class="post_read_button" id="button_three_cityid" onclick="check_class('three_cityid');"/>
+<input type="hidden" name="three_cityid" value="{yun:}$info.three_cityid{/yun}" />
+<div class="post_read_text_box post_read_text_box_395 none" id="three_cityid">
+<ul class="post_read_text_box_list">
+{yun:}foreach item=v from=$city_type[$info.cityid]{/yun}
+<li><a href="javascript:check_input('{yun:}$v{/yun}','{yun:}$city_name[$v]{/yun}','three_cityid');">{yun:}$city_name[$v]{/yun}</a></li>
+{yun:}/foreach{/yun}
+</ul>
+</div>
+</div>
+</div>
+<div class="subscribe_cont_list"><span class="subscribe_cont_list_name">月薪范围：</span>
+	<div>
+		<input type="text" id="minsalary" name="minsalary" size="5" value="{yun:}$info.minsalary{/yun}" class="sub_xz_text" />
+		<span class="sub_xz_text_line">-</span>
+		<input type="text" id="maxsalary" name="maxsalary" size="5" value="{yun:}$info.maxsalary{/yun}"class="sub_xz_text" />
+	</div>
+</div>
+<div class="subscribe_cont_list"><span class="subscribe_cont_list_name">更新时间：</span>
+<div class="post_read_text_big post_read_text_re3">
+<input type="button" value="{yun:}if $cycle_time[$info.cycle_time]{/yun}{yun:}$cycle_time[$info.cycle_time]{/yun}{yun:}else{/yun}请选择{yun:}/if{/yun}" class="post_read_button_big" id="button_cycle_time" onclick="check_class('cycle_time');"/>
+<input type="hidden" name="cycle_time" value="{yun:}$info.cycle_time{/yun}" />
+<div class="post_read_text_box none" id="cycle_time">
+<ul class="post_read_text_box_list">
+{yun:}foreach from=$cycle_time key=key item=clist{/yun}
+<li><a href="javascript:check_input('{yun:}$key{/yun}','{yun:}$clist{/yun}','cycle_time');">{yun:}$clist{/yun}</a></li>
+{yun:}/foreach{/yun} 
+</ul>
+</div>
+</div>
+
+</div>
+{yun:}if $email.email_status=='0'||!$email.email{/yun}
+<div class="subscribe_cont_list"><span class="subscribe_cont_list_name">接收邮箱：</span>
+<input  class="post_read_valid" type="text" value="{yun:}if $info.email{/yun}{yun:}$info.email{/yun}{yun:}elseif $email.email{/yun}{yun:}$email.email{/yun}{yun:}else{/yun}请输入接收邮箱{yun:}/if{/yun}" name="email" onblur="if(this.value==''){this.value='请输入接收邮箱'}" onclick="if(this.value=='请输入接收邮箱'){this.value=''}"/>
+<div class="subscribe_cont_tips">
+我们会严格按照您订阅的条件给您发送邮件，并对您的个人信息绝对保密。</div></div>
+{yun:}else{/yun}
+<div class="subscribe_cont_list"><span class="subscribe_cont_list_name">接收邮箱：</span>
+<input type="hidden" value="{yun:}$email.email{/yun}" name="email"/> 
+<span class="info_email_ok" style="float:left;line-height:38px">{yun:}$email.email{/yun}</span>
+<a style="color:#1178c3;line-height:38px;margin-left:10px" href="{yun:}$config.sy_weburl{/yun}/member/index.php?c=binding">重新认证</a>
+</div>
+{yun:}/if{/yun}
+<div class="subscribe_cont_list"><span class="subscribe_cont_list_name">发送周期：</span>
+<input type="hidden" id="timeid" name="time" value="{yun:}$info.time{/yun}" />
+<span class="m_name_tag {yun:}if $info.time==1{/yun}m_name_tag01{yun:}/if{/yun} time" onclick="ck_box('1','time')" id="time1">每天 </span> 
+<span class="m_name_tag {yun:}if $info.time==3{/yun}m_name_tag01{yun:}/if{/yun} time" onclick="ck_box('3','time')" id="time3">3天 </span> 
+<span class="m_name_tag {yun:}if $info.time==7{/yun}m_name_tag01{yun:}/if{/yun} time" onclick="ck_box('7','time')" id="time7">7天</span> 
+</div>
+<div class="subscribe_cont_bth">
+<div class="subscribe_cont_list"><span class="subscribe_cont_list_name">&nbsp;</span>
+<input name='sid' type='hidden' value='{yun:}$info.id{/yun}'/>
+<input type="submit" name="submit" value="订阅"  class="post_read_bth1"/>
+<input type="button" value="重置" onclick="clear_form();" class="post_read_bth2"/></div>
+</div>
+</form>
+</div>
+</div>    
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script>
+<script src="{yun:}$style{/yun}/js/subscribe.js"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/public.js"></script> 
+<script src="{yun:}$config.sy_weburl{/yun}/js/member_public.js"></script>
+<!--[if IE 6]>
+<script src="{yun:}$config.sy_weburl{/yun}/js/png.js"></script>
+<script>
+DD_belatedPNG.fix('.png');
+</script>
+<![endif]-->
+{yun:}include file="$tplstyle/footer.htm"{/yun} 

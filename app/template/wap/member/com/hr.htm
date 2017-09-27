@@ -1,0 +1,97 @@
+{yun:}include file="$wapstyle/member/cheader.htm"{/yun} 
+<section class="wap_member">
+<div class="wap_member_comp_h1"><span>应聘简历</span></div>
+{yun:}foreach item=v from=$rows{/yun}
+<div class="com_member_hr">
+<div class="com_member_hr_name">
+<a href="{yun:}url m=wap c=resume a=show id=$v.eid{/yun}" class="wap_member_com_name com_member_hr_cblue">{yun:}$v.name{/yun} {yun:}if $v.is_browse=='1'{/yun}<i class="hr_rusume_new">新</i>{yun:}/if{/yun}</a> 
+{yun:}if $v.height_status==2{/yun} <i class="hr_gj"></i>{yun:}/if{/yun}
+<a href="{yun:}url m=wap c=resume a=show id=$v.eid{/yun}" class="wap_member_com_lokr">查看简历</a> 
+<span class="com_member_hr_date">
+
+</span>
+</div>
+<div class="com_member_user_box">
+<div class="com_member_hr_tj">
+<div class="com_member_hr_p1">
+    <span class="member_c9">性别：</span>{yun:}$v.sex{/yun}  &nbsp;&nbsp;&nbsp;
+	<span class="member_c9">经验：</span><span class="">{yun:}$v.exp{/yun}</span>   &nbsp;&nbsp;&nbsp;
+	<span class="member_c9">学历：</span><span class="">{yun:}$v.edu{/yun}</span>
+</div>
+<div class="com_member_hr_p1">
+<span class="member_c9">意向职位：</span><em style="color:#C00">{yun:}$v.jobname{/yun}</em>
+</div>
+</div>
+
+<div class="com_member_hr_p1">
+<span class="member_c9">申请职位：</span>{yun:}$v.job_name{/yun}
+</div>
+<div class="com_member_hr_p1">
+<span class="member_c9">申请日期：</span>{yun:}$v.datetime|date_format:"%Y-%m-%d"{/yun}
+</div>
+<div class="com_member_hr_p5">标记状态：
+<span class="com_member_hr_cz_zt" style="width:70px; vertical-align:middle">
+
+             <em class="info_bh_box">
+<select onchange="layer_del('', 'index.php?c=hrset&id={yun:}$v.id{/yun}&browse=' + this.value);"class="info_selectname" >
+	<option value="1" {yun:}if $v.is_browse=='1'{/yun}selected{yun:}/if{/yun}>未查看</option> 
+    <option value="2" {yun:}if $v.is_browse=='2'{/yun}selected{yun:}/if{/yun}>已查看  </option> 
+    <option value="3" {yun:}if $v.is_browse=='3'{/yun}selected{yun:}/if{/yun}>等待通知</option>   
+    <option value="4" {yun:}if $v.is_browse=='4'{/yun}selected{yun:}/if{/yun}>拒绝面试</option>  
+    <option value="5" {yun:}if $v.is_browse=='5'{/yun}selected{yun:}/if{/yun}>无法联系</option> 
+</select>
+       </em>
+            
+</span>
+{yun:}if $v.is_browse!=4{/yun} 
+	{yun:}if $v.userid_msg==1{/yun}
+		{yun:}if $v.is_browse==5{/yun}
+		<span class="wap_member_post_list_zt ap_member_post_list_zt_no">无法联系</span>
+		{yun:}else{/yun}
+		<span class="wap_member_post_list_zt ap_member_post_list_zt_zt">邀请面试</span>
+		{yun:}/if{/yun}
+	{yun:}else{/yun}
+		 {yun:}if $v.is_browse=='1'{/yun}
+			<span class="wap_member_post_list_zt">未查看 </span>
+		{yun:}elseif $v.is_browse=='2'{/yun}
+			<span class="wap_member_post_list_zt ap_member_post_list_zt_gq">已查看 </span>
+		{yun:}elseif $v.is_browse=='3'{/yun}
+			<span class="wap_member_post_list_zt ap_member_post_list_zt_zt">等待通知 </span>
+		{yun:}elseif $v.is_browse=='5'{/yun}
+			<span class="wap_member_post_list_zt ap_member_post_list_zt_no">无法联系</span>
+		{yun:}/if{/yun}
+	{yun:}/if{/yun}
+{yun:}else{/yun}
+	<span class="wap_member_post_list_zt ap_member_post_list_zt_bf">拒绝面试</span> 
+{yun:}/if{/yun}
+
+
+</div>
+<div class="yun_member_bth">
+<a href="javascript:void(0)" onclick="layer_del('确定要删除？','index.php?c=delhr&id={yun:}$v.id{/yun}')" class="yun_member_sub  yun_member_bth1"style="width:32%" >删除</a>
+{yun:}if $v.is_browse!=4{/yun} 
+{yun:}if $v.userid_msg!=1{/yun}
+<a href="javascript:void(0)" onclick="invite('{yun:}url m=wap c=ajax a=indexajaxresume{/yun}','{yun:}$v.uid{/yun}')" class="yun_member_sub  yun_member_bth2" style="width:32%">邀请面试</a>
+<a href="javascript:void(0)" onclick="layer_del('', 'index.php?c=hrset&id={yun:}$v.id{/yun}&browse=4')" class="yun_member_sub  yun_member_bth3"style="width:32%">拒绝面试</a>
+{yun:}/if{/yun}
+{yun:}/if{/yun}
+
+
+<input type="hidden" id="uid" value="{yun:}$v.uid{/yun}">
+</div>
+</div>
+</div>
+{yun:}foreachelse{/yun}
+<div class="wap_member_no">
+您暂时还没有申请职位的人才
+<div>
+<a class="wap_member_no_submit" href="{yun:}url m=wap c=resume{/yun}">去搜索人才</a>
+</div>
+</div>
+{yun:}/foreach{/yun}
+
+
+
+</section>
+<div class="pages"> {yun:}$pagenav{/yun}</div>
+{yun:}include file="$wapstyle/footer.htm"{/yun} 

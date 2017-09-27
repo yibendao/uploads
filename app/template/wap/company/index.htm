@@ -1,0 +1,175 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>{yun:}$headertitle{/yun}</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui"/>
+<link rel="stylesheet" href="{yun:}$company_style{/yun}/css/jquery.fullPage.css"/> 
+<link type="text/css" href="{yun:}$company_style{/yun}/css/rusume.css" rel="stylesheet"/>
+<link type="text/css" href="{yun:}$company_style{/yun}/icon/iconfont.css" rel="stylesheet"/> 
+</head>
+<body>
+<div id="dowebok">
+<section class="section company_one">
+   <div class="company_logo">{yun:}if $row.logo{/yun}<img src="{yun:}$row.logo{/yun}" width="185" height="75"  onerror="if($(this).attr('load')!='1'){$(this).attr('load',1);this.src='{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_unit_icon{/yun}';}"/>{yun:}else{/yun}<img src="{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_unit_icon{/yun}" width="185" height="75">{yun:}/if{/yun}</div>
+   <div class="company_name">{yun:}$row.name{/yun}</div>
+  <i class="company_one_icon3"></i>
+   <i class="company_one_icon"></i>
+   <i class="company_one_icon2"></i>
+    <div class="company_one_bg"><img src="{yun:}$company_style{/yun}/images/bg1_bg.png"></div>
+      <div class="company_end"><i class="company_end_icon iconfont"></i></div>
+  </section>
+ <section class="section">
+ <div class="company_tit">
+ <div class="company_tit_icon iconfont"></div>
+ <div class="company_tit_e"> Essential Information</div>
+ <div class="company_tit_p">基本信息</div>
+ </div>
+       <div class="section_img"></div>
+    <div class="section_bor"></div>
+   <div class="section_ears"></div>
+<div class="company_one_p1"><span class="company_one_p1_s">地区：{yun:}$city_name[$row.provinceid]{/yun}</span></div>
+<div class="company_one_p2"><span class="company_one_p2_s">规模：{yun:}$comclass_name[$row.mun]{/yun}</span></div>
+<div class="company_one_p3"><span class="company_one_p3_s">性质：{yun:}$comclass_name[$row.pr]{/yun}</span></div>
+<div class="company_one_p4"><span class="company_one_p4_s"style="font-size:14px;">创办：{yun:}$row.sdate{/yun}</span></div>
+  <div class="company_one_p5"><span class="company_one_p5_s">行业：{yun:}$industry_name[$row.hy]{/yun}</span></div>
+      <div class="company_end"><i class="company_end_icon iconfont"></i></div>
+  </section>
+ 
+ <section class="section">
+ <div class="company_tit">
+  <div class="company_tit_icon iconfont"></div>
+ <div class="company_tit_e">Enterprise Profile</div>
+ <div class="company_tit_p">企业简介</div>
+ </div> 
+  <div class="company_about"><div class="company_about_cont">{yun:}$row.content|mb_substr:0:200:'gbk'{/yun}{yun:}if strlen($row.content) gt 200{/yun}...{yun:}/if{/yun}</div> </div>
+   <div class="company_job_more"><a href="{yun:}url m=wap c=company a=show id=$row.uid{/yun}#content">详情介绍>> </a></div>
+ <div class="company_end"><i class="company_end_icon iconfont"></i></div>
+ </section>
+ {yun:}if $show{/yun}
+ <section class="section">
+ <div class="company_tit">
+  <div class="company_tit_icon iconfont"></div>
+ <div class="company_tit_e">Corporate Environment</div>
+ <div class="company_tit_p">企业环境</div>
+ </div>
+  {yun:}foreach item=v key=key from=$show{/yun}
+   <div class="slide">
+ <div class="section_photo_con">
+ <img src="{yun:}$v.picurl{/yun}"/>
+   <div class="section_photo_p"> {yun:}$v.title{/yun}</div></div>
+ 
+   </div>
+    {yun:}/foreach{/yun}
+      <div class="company_end"><i class="company_end_icon iconfont"></i></div>
+ 
+  </section> 
+  {yun:}/if{/yun}
+    <section class="section">
+ <div class="company_tit">
+ <div class="company_tit_icon iconfont"></div>
+ <div class="company_tit_e">Recruitment Post</div>
+ <div class="company_tit_p">招聘职位</div>
+ </div>
+  <div class="section_job_con">
+   <div class="company_job_box">
+    {yun:}joblist item=jlist uid='auto.id' limit=2{/yun}
+
+
+ <div class="company_job">
+ <a href="{yun:}url m=wap c=job a=view id=$jlist.id{/yun}">
+
+
+<div class="company_job_name">{yun:}$jlist.name{/yun}  {yun:}$jlist.job_city_one{/yun} {yun:}$jlist.job_city_two{/yun} {yun:}$jlist.job_city_three{/yun}</div>
+
+<div class="company_job_salary"><span class="company_job_xz">薪资：{yun:}if $jlist.job_salary==''||$jlist.job_salary=='不限'||$jlist.job_salary=='面议'{/yun}{yun:}else{/yun}￥{yun:}/if{/yun}{yun:}$jlist.job_salary{/yun}</span>经验：{yun:}$jlist.job_exp{/yun} </div>
+<i class="company_job_icon iconfont"></i>
+</a>
+  </div> 
+    
+ {yun:}/joblist{/yun} 
+  </div>  
+ <div class="company_job_more"><a href="{yun:}url m=wap c=company a=show id=$row.uid{/yun}#job">查看更多职位>> </a></div>
+   </div>  
+       <div class="company_end"><i class="company_end_icon iconfont"></i></div>
+  </section> 
+  <section class="section">
+   <div class="company_tit">
+ <div class="company_tit_icon iconfont"></div>
+ <div class="company_tit_e">Contact Information</div>
+ <div class="company_tit_p">联系方式</div>
+ </div>
+  <div class="company_tit_p_touch_cont">
+
+ 
+{yun:}if $look_msg=="1"{/yun}
+<div class="company_tit_p_touch_l_p">您还没有登录，登录后才可以查看联系方式！</div>
+<div class="company_tit_p_touch_l_c"><a href="{yun:}url m=wap c=login{/yun}" class="company_tit_p_touch_log">立即登录</a><a href="{yun:}url m=wap c=register usrtype=1 type=1{/yun}" class="company_tit_p_touch_reg">立即注册</a></div>
+{yun:}elseif $look_msg=="2"{/yun}
+<div class="company_tit_p_touch_l_p">只有个人用户才可以查看联系方式！</div>
+{yun:}elseif $look_msg=="4"{/yun}
+<div class="company_tit_p_touch_l_p">企业没有开放联系信息！</div>
+{yun:}elseif $look_msg=="3"{/yun}
+<div class="company_tit_p_touch_l_p">您还没有创建简历，不能查看联系方式！</div>
+{yun:}else{/yun}
+	{yun:}if $row.linkman{/yun}
+	<div class="company_tit_p_touch">
+	 <span class="company_tit_p_touch_s">联&nbsp;系&nbsp;人：</span>
+	 <span class="company_tit_p_touch_r">{yun:}$row.linkman{/yun}</span>
+	 </div>
+	 {yun:}/if{/yun}
+	 {yun:}if $row.linktel{/yun}
+	 <div class="company_tit_p_touch">
+	 <span class="company_tit_p_touch_s">联系电话：</span>
+	 <span class="company_tit_p_touch_r">{yun:}$row.linktel{/yun}</span>
+	 </div>
+	 {yun:}/if{/yun}
+	 {yun:}if $row.linkmail{/yun}
+	 <div class="company_tit_p_touch">
+	 <span class="company_tit_p_touch_s">联系邮件：</span>
+	 <span class="company_tit_p_touch_r">{yun:}$row.linkmail{/yun}</span> 
+	 </div>
+	 {yun:}/if{/yun}
+	 {yun:}if $row.address{/yun}
+	 <div class="company_tit_p_touch"> 
+	 <span class="company_tit_p_touch_s">联系地址：</span>
+	 <span class="company_tit_p_touch_r">{yun:}$row.address{/yun} </span>
+	 </div>
+	 {yun:}/if{/yun}
+{yun:}/if{/yun}
+</div>
+
+      <div class="company_end"><i class="company_end_icon iconfont"></i></div>
+   
+  </section>
+ <section class="section">
+  
+ <div class="company_tit">
+ <div class="company_tit_icon iconfont"></div>
+ <div class="company_tit_e">Contact Information</div>
+ <div class="company_tit_p">其他联系方式</div>
+ </div>
+    <ul class="section_touch_ul">
+<li><a href="{yun:}url m=wap c=company a=show id=$row.uid{/yun}#tel"><i class="section_touch_icon iconfont"></i>查看详细信息</a></li>
+<li><a href="{yun:}url m=wap c=company a=show id=$row.uid{/yun}#job"><i class="section_touch_icon  iconfont"></i>查看招聘职位</a></li>
+<li><a href="{yun:}$config.sy_weburl{/yun}/wap"><i class="section_touch_icon  iconfont"></i>查看{yun:}$config.sy_webname{/yun}</a></li>
+</ul>
+     <div class="section_nav">
+      <div class="section_nav_line"></div>
+      <div class="section_nav_line_r"></div>
+    </div>
+  </section>
+</div>
+
+<div style='margin:0 auto;width:0px;height:0px;overflow:hidden;'><img src="{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_wx_sharelogo{/yun}"></div>
+<script src="{yun:}$company_style{/yun}/js/jquery-1.8.3.min.js"></script>
+<script src="{yun:}$company_style{/yun}/js/jquery.fullPage.min.js"></script>
+<script>
+$(function(){
+	$('#dowebok').fullpage({
+		normalScrollElements: '.myDiv'
+	});
+});
+</script>
+</body>
+</html>

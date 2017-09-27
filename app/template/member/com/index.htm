@@ -1,0 +1,396 @@
+{yun:}include file="$comstyle/header.htm"{/yun}
+<script>
+function Close(id){
+	$("#"+id).hide();
+	$("#bg").hide();
+}
+function Next(){
+	$("#one_tip").hide();
+	$("#two_tip").show();
+}
+function Close_yds() {       
+	 $("#shuaxin").hide(); 
+	 $("#bg").hide();      
+}
+function break_job(num){
+	if(num=='0'){ 
+		layer.confirm('每个正常职位将扣除{yun:}$config.integral_jobefresh{/yun}{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}，确定要刷新？',function(){
+			layer.load('执行中，请稍候...',0);
+			$.post("{yun:}$config.sy_weburl{/yun}/member/index.php?m=ajax&c=Refresh_job",{},function(data){
+				layer.closeAll();
+				if(data==1){
+					layer.msg("职位刷新成功！",2,9,function(){location.reload();});
+				}else{
+					layer.msg(data,2,8);
+				}
+			})
+		}); 
+	}else{
+		layer.load('执行中，请稍候...',0);
+		$.post("{yun:}$config.sy_weburl{/yun}/member/index.php?m=ajax&c=Refresh_job",{},function(data){
+			layer.closeAll();
+			if(data==1){
+				layer.msg("职位刷新成功！",2,9,function(){location.reload();});
+			}else{
+				layer.msg(data,2,8);
+			}
+		})
+	}
+}
+</script>
+<div class="w1000"> 
+<div style="position:relative; z-index:1005">
+  <div class="Description_Layer"> 
+    <div class="Tip_Information" id="one_tip" {yun:}if $company.hy!=""{/yun}style="display:none"{yun:}/if{/yun}>
+      <div class="Tip_Information_cont">
+        <div class="re">
+          <div class="Tip_Information_close" onclick="Close('one_tip');"></div>
+        </div>
+        <div class="Tip_Information_p">
+          <p>{yun:}if $company.name{/yun}
+       {yun:}$company.name{/yun}{yun:}else{/yun}{yun:}$username{/yun}{yun:}/if{/yun}，您已成功注册企业账号！</p><p><span class="tip_wt">有问题可拨打客服电话：<em>{yun:}$config.sy_freewebtel{/yun}</em> </span><a class="tip_fk" href="{yun:}url m=advice{/yun}" target="_blank">点击这里在线反馈</a></p>
+        </div>
+        <div class="Tip_Information_bot"><a class="tip_ws" href="{yun:}$config.sy_weburl{/yun}/member/?c=info" >完善企业资料</a> </div>
+      </div>
+    </div> 
+    <div class="Recruitment_Layer" id="two_tip"  style="display:none">
+      <div class="Tip_Information">
+        <div>
+          <div class="Tip_Information_gl"></div>
+          <div class="Tip_Information_jt2"></div>
+          <div class="Recruitment_fb"></div>
+        </div>
+        <div class="Tip_Information_cont">
+          <div class="re">
+            <div class="Tip_Information_close" onclick="Close('two_tip');"></div>
+          </div>
+          <div class="Tip_Information_p">明确招聘需求，细化招聘条件，精准锁定人才！ </div>
+          <div class="Tip_Information_bot"><a href="javascript:Close('two_tip');" class="Tip-next">知道了</a> </div>
+        </div>
+      </div>
+    </div>
+  </div>    </div> 
+  
+<div class="com_m_index_left">
+<div class="com_m_index_info">
+<div class="com_m_index_logo">  <a href="index.php?c=uppic"><img src=".{yun:}$company.logo{/yun}" width="185" height="75" onerror="showImgDelay(this,'{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_unit_icon{/yun}','2')"/>
+<i class="com_m_index_logo_xg"></i></a></div>
+<div class="com_m_index_comname">{yun:}if $company.name{/yun}
+       {yun:}$company.name{/yun}{yun:}else{/yun}
+        <a href="index.php?c=info" style="color:#f60; text-decoration:underline">您还未完善企业信息，点击完善！</a>
+        {yun:}/if{/yun}</div> 
+        <div class="clear"></div>
+<div class="com_m_index_rz_box">
+{yun:}if $company.email_status=="1"{/yun} 
+	   <a title="邮件已验证" href="index.php?c=binding" class="com_m_index_rz_box_a">
+       <div class="com_m_index_rz_p"><i class="rz_icon rz_yx2"></i>已验证</div></a>
+		{yun:}else{/yun}  
+		<a title="邮件未验证" href="index.php?c=binding" class="com_m_index_rz_box_a">
+         <div class="com_m_index_rz_p"><i class="rz_icon rz_yx"></i>未验证</div></a>
+		{yun:}/if{/yun}
+		{yun:}if $company.moblie_status=="1"{/yun} 
+		<a title="手机已验证" href="index.php?c=binding" class="com_m_index_rz_box_a">
+        <div class="com_m_index_rz_p"><i class="rz_icon rz_sj2"></i>已验证</div></a>
+		{yun:}else{/yun} 
+		<a title="手机未验证" href="index.php?c=binding" class="com_m_index_rz_box_a">
+        <div class="com_m_index_rz_p"><i class="rz_icon rz_sj"></i>未验证</div></a>
+		{yun:}/if{/yun}
+		{yun:}if $company.yyzz_status=="1"{/yun} 
+		<a title="营业执照已验证" href="index.php?c=binding" id="biza" class="com_m_index_rz_box_a">
+        <div class="com_m_index_rz_p"><i class="rz_icon rz_zz2"></i>已验证</div></a> {yun:}else{/yun} 
+		<a title="营业执照未验证" href="index.php?c=binding" id="biza" class="com_m_index_rz_box_a">
+        <div class="com_m_index_rz_p"><i class="rz_icon rz_zz"></i>未验证</div></a> {yun:}/if{/yun} 
+</div>
+<div class="clear"></div>
+  <div class="com_m_index_logintime">上次登录时间：{yun:}$member.login_date|date_format:'%Y-%m-%d %H:%M'{/yun} </div>      
+    <div class="com_m_index_eye"><span class="com_m_index_eye_s">{yun:}$company.hits{/yun} 次浏览</span><span class="com_m_index_gz">{yun:}$company.ant_num{/yun} 次关注</span> </div>   
+       <div class="clear"></div> 
+    <div class="com_index_bj_box">
+  <div class="com_index_bj"><a href="index.php?c=info"><i class="com_index_bjicon com_index_bjiconbj"></i>编辑资料</a></div>
+  <div class="com_index_bj"><a href="{yun:}url  m=company c=show id='`$uid`'{/yun}" target="_blank"> <i class="com_index_bjicon com_index_bjiconyl"></i>预览主页</a></div>
+  <div class="com_index_bj com_index_bjend"><a href="index.php?c=comtpl"><i class="com_index_bjicon com_index_bjiconsz"></i>模板设置</a></div>
+
+    </div>    
+</div>
+<div class="com_index_sign">{yun:}sign{/yun}</div>
+
+
+
+{yun:}if $guweninfo.id{/yun}
+<div class="com_index_kf">
+<div class="com_m_index_h1"><span class="com_m_index_h1_s">招聘顾问</span></div>
+<div class="com_index_kf_box">
+<div class="com_index_kf_box_user">
+<div class="com_index_kf_box_user_photo"><img src="{yun:}$guweninfo.logo{/yun}" style="width:64px;height:64px"></div>
+<div class="com_index_kf_box_username">{yun:}$guweninfo.username{/yun}</div>
+<div class="">
+{yun:}if $guweninfo.qq{/yun}
+<a target="_blank" href="tencent://message/?uin={yun:}$guweninfo.qq{/yun}&Site={yun:}$config.sy_webname{/yun}&Menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=1:{yun:}$guweninfo.qq{/yun}:12" alt="点击这里给我发消息"></a>
+{yun:}/if{/yun}</div>
+</div>
+<div class="com_index_kf_p">电话：{yun:}$guweninfo.mobile{/yun}</div>
+<div class="com_index_kf_p">微信：{yun:}$guweninfo.weixin{/yun}</div>
+<div class="com_index_kf_p">Q Q：{yun:}$guweninfo.qq{/yun}</div>
+<div class="com_index_kf_p">
+	{yun:}if $atn.uid{/yun}
+	<a href="javascript:void(0)" class="com_index_kf_dz">已点赞</a>
+	{yun:}else{/yun}
+	<a href="javascript:void(0)" onclick="zan('{yun:}$guweninfo.id{/yun}');" class="com_index_kf_dz">点赞</a>
+	{yun:}/if{/yun}
+    {yun:}if is_array($report)&& !$report.result{/yun}
+    <a href="index.php?c=report&act=show"  class="com_index_kf_ts">已投诉</a>
+    {yun:}else{/yun}
+	<a href="javascript:void(0)" onclick="reportgw('{yun:}$guweninfo.id{/yun}','投诉顾问');"  class="com_index_kf_ts">投诉</a>
+    {yun:}/if{/yun}</div>
+</div>
+</div>
+
+{yun:}else{/yun}
+<div class="com_index_kf">
+<div class="com_m_index_h1"><span class="com_m_index_h1_s">招聘顾问</span></div>
+<div class="com_index_kf_box">
+<div class="com_index_kf_box_user">
+<div class="com_index_kf_box_user_photo"><img src="{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_guwen{/yun}" style="width:64px;height:64px"></div>
+<div class="com_index_kf_box_username">网站客服</div>
+<div class="">
+{yun:}if $kfqq{/yun}
+<a target="_blank" href="tencent://message/?uin={yun:}$kfqq{/yun}&Site={yun:}$config.sy_webname{/yun}&Menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=1:{yun:}$kfqq{/yun}:12" alt="点击这里给我发消息"></a>
+{yun:}/if{/yun}
+</div>
+</div>
+<div class="com_index_kf_p">电话：{yun:}$config.sy_freewebtel{/yun}</div>
+<div class="com_index_kf_p">手机：{yun:}$config.sy_webmoblie{/yun}</div>
+<div class="com_index_kf_p">Q  Q：{yun:}$kfqq{/yun}</div>
+{yun:}if $config.wx_name{/yun}<div class="com_index_kf_p">微信公众号：{yun:}$config.wx_name{/yun}</div>{yun:}/if{/yun}
+</div>
+</div>
+
+{yun:}/if{/yun}
+{yun:}if $config.sy_wx_qcode!=''{/yun}
+<div class="left_index_wx">
+<div class="left_index_wx_img"><img src="{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_wx_qcode{/yun}" width="140" height="140"></div>
+<div class="left_index_wx_p1">手机挑人才!</div>
+<div class="left_index_wx_p">微信扫一扫,招聘更简单</div>
+</div>
+{yun:}/if{/yun}
+
+
+</div>
+<div class="com_m_index_right">
+  	{yun:}if !$company.name{/yun}        
+  	<div class="com_index_Prompt fltL">
+  		<span class="com_index_Prompt_tip fltL">您公司的资料还未填写完整，暂时还不可以发职位哦</span>
+		<a href="{yun:}$config.sy_weburl{/yun}/member/?c=info" class="com_index_Prompt_ws cblue fltR">完善资料>></a>
+	</div>
+    {yun:}/if{/yun}
+    {yun:}if $company.yyzz_status!="1"{/yun}
+   	<div class="com_index_Prompt fltL">
+   		<span class="com_index_Prompt_tip fltL">您公司还没进行营业执照认证，可能会影响您的招聘效果哦</span>
+        <a href="{yun:}$config.sy_weburl{/yun}/member/?c=binding" class="com_index_Prompt_ws cblue fltR">立即认证>></a>
+   	</div>
+    {yun:}/if{/yun}
+<div class="com_m_index_data">
+<ul>
+
+<li>
+<a href="index.php?c=hr" class="com_m_index_data_box">
+<div class="com_m_index_data_iconbg com_m_index_data_iconbg1"><i class="com_m_index_data_icon"></i></div>
+<div class="com_m_index_data_name">收到简历</div>
+<div class="com_m_index_data_n">{yun:}$des_resume{/yun}</div>
+<div class="com_m_index_data_bth">未查看 <span class="f60">{yun:}$de_resume{/yun}</span></div>
+</a></li>
+<li><a href="index.php?c=down"  class="com_m_index_data_box"><div class="com_m_index_data_iconbg com_m_index_data_iconbg2"><i class="com_m_index_data_icon"></i></div>
+<div class="com_m_index_data_name">下载简历</div>
+<div class="com_m_index_data_n">{yun:}$down_resume{/yun}</div>
+<div class="com_m_index_data_bth">还可下载  <span class="f60">{yun:}if $statis.vip_etime>time()||$statis.vip_etime=="0"{/yun}{yun:}if $statis.rating_type==1{/yun}{yun:}$statis.down_resume{/yun}{yun:}else{/yun}不限{yun:}/if{/yun}{yun:}else{/yun}0{yun:}/if{/yun}</span></div>
+</a></li>
+<li class="com_m_index_data_end">
+<div class="com_m_index_data_end_job">
+<a href="index.php?c=job&w=1">
+<div class="com_m_index_data_iconbg com_m_index_data_iconbg3"><i class="com_m_index_data_icon"></i></div>
+<div class="com_m_index_data_name">职位管理</div>
+<div class="com_m_index_data_n">{yun:}$normal_job_num{/yun}</div>
+</a>
+<div class="com_m_index_data_fbbth">	
+<a href="javascript:void(0);" onclick="jobadd_url('{yun:}$addjobnum{/yun}','{yun:}$config.integral_job{/yun}','{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}');return false;">发布职位</a></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="com_m_index_vip">
+<div class="com_m_index_h1"><span class="com_m_index_h1_s">我的服务</span></div>
+<div class="com_m_index_vip_box">
+ 当前是：<span class="f60">  
+	{yun:}if $statis.vip_etime < time() && $statis.vip_etime != 0{/yun}
+		{yun:}if $config.com_vip_done == 0{/yun}
+			[非会员] 
+		{yun:}else if $config.com_vip_done == 1{/yun}
+ 			[{yun:}$statis.rating_name{/yun}]
+		{yun:}/if{/yun}
+	{yun:}else{/yun}
+		[{yun:}$statis.rating_name{/yun}]
+	{yun:}/if{/yun}  </span>
+   {yun:}if $statis.rating!='3'&&$days{/yun} &nbsp;&nbsp;&nbsp;
+		到期天数：<span class="f60 ">{yun:}$days{/yun}天</span>&nbsp;&nbsp;&nbsp;
+		会员到期时间：<span class="f60">{yun:}$statis.vip_etime|date_format:'%Y-%m-%d'{/yun} </span>
+	{yun:}else if $statis.rating== 0{/yun} &nbsp;&nbsp;&nbsp;
+		会员服务期限：<span class="f60 ">已到期</span>&nbsp;&nbsp;&nbsp;
+		会员到期时间：<span class="f60">{yun:}$statis.vip_etime|date_format:'%Y-%m-%d'{/yun} </span>
+	{yun:}/if{/yun}
+   <a href="index.php?c=right" class="com_m_index_vip_a">升级</a> 
+   <a href="index.php?c=paylogtc" class="com_m_index_vip_a">套餐详情</a> 
+   <a href="index.php?c=right&act=added" target="_blank" class="com_m_index_vip_a">增值包</a>
+   <div style="padding-top:10px">
+   <span >我的{yun:}$config.integral_pricename{/yun}：</span>
+	<span class="f60 bold" id="integral">{yun:}$statis.integral{/yun}</span> 
+	{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}  
+	<a href='index.php?c=pay&type=integral' class="com_m_index_vip_a" target="_blank">充值</a>
+	<a href="index.php?c=paylog&consume=ok" class="com_m_index_vip_a">明细</a>
+	<a href="index.php?c=integral" class="com_m_index_vip_a"> 如何获取{yun:}$config.integral_pricename{/yun}？</a> 
+        </div>
+        </div>
+<div class="com_m_index_vip_fw">
+ <a href="index.php?c=right"><dl><dt><i class="com_m_index_vip_fw_icon"></i></dt><dd class="com_m_index_vip_tfw_t">招聘套餐服务</dd><dd>升级vip，抢占招聘先机</dd></dl></a>
+ <a href="index.php?c=job&w=1"> <dl><dt class="com_m_index_vip_zd"><i class="com_m_index_vip_zd_icon"></i></dt><dd class="com_m_index_vip_tfw_t">招聘置顶服务</dd><dd>让人才更容易发现你的招聘</dd></dl></a>
+   <a href="#"  onclick="return jobshuaxin('{yun:}$jobsbid{/yun}');"><dl><dt class="com_m_index_vip_g"><i class="com_m_index_vip_g_icon"></i></dt><dd class="com_m_index_vip_tfw_t">招聘职位刷新服务</dd><dd>提升职位排名，提高招聘效率</dd></dl></a>
+
+   </div> 
+</div> 
+
+<script type="text/javascript">
+function jobshuaxin(id){
+	{yun:}if $shuaxuanjobs{/yun}
+	var i={yun:}$des_shuaxuanjobs{/yun};
+			var num="{yun:}$config.integral_jobefresh{/yun}";
+			var breakmsg = '本次共刷新'+i+'个职位,需扣除'+i+'个刷新数量,或消耗'+(num*i)+'{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}！';
+			layer.confirm(breakmsg,function(){
+				$.post("{yun:}$config.sy_weburl{/yun}/member/index.php?m=ajax&c=Position_job",{idk:i,ids:id},function(data){
+					if(data==1){
+						layer.msg("刷新成功！",2,9,function(){window.location.reload();});
+					}else{
+						layer.msg(data,2,8);
+					}
+				})
+	});
+	{yun:}else{/yun}
+		layer.msg('您暂无发布的职位！', 2, 8);
+	{yun:}/if{/yun}
+}
+
+
+</script>    
+        
+<div class="com_m_index_resume">
+<div class="com_m_index_h1"><span class="com_m_index_h1_s">简历速配</span><a href="index.php?c=attention_me" class="com_m_index_h1_s_a" target="_blank">查看关注我公司的人才>></a></div>
+ {yun:}userlist where='auto.userwhere' limit=12 item=ulist{/yun}
+		 <div class="com_index_rue_list fltL mt10">
+			<dl>
+			<dt>             
+           <a href="{yun:}url m=resume c=show id='`$ulist.id`'{/yun}" target="_blank" title="{yun:}$ulist.username_n{/yun}"> <img src="{yun:}$ulist.photo{/yun}" width="50" height="62px" />  <i class="pic_icombg"></i>    </a>     
+			</dt>
+			 <dd>
+			 <strong><a class=" blod" href="{yun:}url m=resume c=show id='`$ulist.id`'{/yun}" target="_blank" title="{yun:}$ulist.username_n{/yun}">{yun:}$ulist.username_n{/yun}</a></strong>
+			 <div class="com_index_rue_list_js">{yun:}$ulist.edu_n{/yun}学历<i class="com_index_rue_listline">|</i>{yun:}$ulist.exp_n{/yun}经验</div>
+               <div class="com_index_rue_list_city"><em class="com_index_rue_list_xz ">{yun:}$ulist.job_city_one{/yun}-{yun:}$ulist.job_city_two{/yun}</em>   </div>
+			 </dd>
+			 </dl>
+			 <div class="com_index_rue_list_yx"><span class="com_index_rue_list_yx_s">意向职位：</span><span class="comn_index_user">{yun:}$ulist.job_post|mb_substr:0:14:'gbk'{/yun}</span></div>
+		</div> 
+		   {yun:}/userlist{/yun}
+		   {yun:}if empty($ulist){/yun}
+			 <div class="msg_no">暂时未匹配到合适的简历 </div> 
+		   {yun:}/if{/yun} 
+</div>
+
+</div></div>
+</div>
+
+<div id="shuaxin" style="display:none;">
+<div class="sx_pd">
+<div class="sx_top">
+<dl>
+   <dt></dt>
+   <dd>
+       <div>今天还没刷新，刷新职位将<em class="sx_bot_or">职位排名提前</em><br/>让人才更容易看到你，<em class="sx_bot_or">提高职位申请率！</em></div>
+       <div class="sx_top_t">
+            <em class="sx_top_t_tt">刷新前请确认以下信息准确完整：</em>           
+            <p>联系电话：{yun:}$company.linktel{/yun}</p>
+            <p>上次刷新时间：{yun:}$jobs.lastupdate|date_format:"%Y-%m-%d %H:%M:%S"{/yun}</p>
+            <p>招聘职位：{yun:}$jobs.name{/yun} </p>
+       </div>
+    </dd>
+</dl>
+</div>
+</div>
+<div class="sx_bot">
+     <a class="sx_bot_sx" href="javascript:void(0)" onclick="jobrefresh({yun:}$jobs.id{/yun});">刷新</a>
+     <a class="sx_bot_qx" href="javascript:layer.closeAll();">取消</a>
+</div>
+
+</div>
+<div id="{yun:}$guweninfo.id{/yun}" style="display:none;">
+  <div class="Binding_pop_box" style="padding:10px;width:330px;height:200px; background:#fff;">
+    <div class="Binding_pop_box_msg">您要投诉的顾问是：{yun:}$guweninfo.username{/yun}</div>
+    <div class="popjb_tip">为了能够给您提供高质量的服务，反馈具体情况，我们会第一时间给您答复！</div>
+      
+      <div class="">
+     	 <textarea id="reason" name="reason" class="popjb_text"></textarea>
+      </div>
+      <div class="Binding_pop_sub" style="margin-top:15px;"> <span class="Binding_pop_box_list_left">&nbsp;</span>
+        <input class="com_pop_bth_qd" onclick="reportSub('index.php?c=report')" type="button" value="确定">
+		<input type='hidden' value="{yun:}$guweninfo.id{/yun}" id='eid' name='eid'> 
+        <input class="com_pop_bth_qx" type="button" value="取消" onclick="layer.closeAll();">
+      </div>
+  </div>
+</div>
+<script type="text/javascript">
+{yun:}if $company.hy!="" && $jobs.name!="" && $jobs.lastupdate<$time && $smarty.cookies.jobrefresh!='1'{/yun}
+	$.layer({
+		type : 1,
+		title : '刷新职位',
+		closeBtn : [0 , true],
+		border : [10 , 0.3 , '#000', true],
+		area : ['500px','320px'],
+		page : {dom :"#shuaxin"}
+	});
+	
+{yun:}/if{/yun}
+
+function reportgw(eid,title){
+	$.layer({
+		type : 1,
+		title :title,
+		closeBtn : [0 , true],
+		border : [10 , 0.3 , '#000', true],
+		area : ['350px','auto'],
+		page : {dom :"#"+eid}
+	});
+}
+function reportSub(url){
+	var reason=$("#reason").val();
+	var eid=$("#eid").val();
+	if(reason==''){
+		layer.msg('请填写投诉内容！', 2, 8);return false;
+	}
+	$.post(url,{reason:reason,eid:eid},function(data){ 
+		layer.closeAll();
+		if(data=='0'){
+			layer.msg('投诉失败！', 2, 8);
+		}else if(data=='1'){
+			layer.msg('投诉成功！', 2, 9,function(){window.location.reload();});
+		}else if(data=='2'){			
+			layer.msg('已投诉成功，等待管理员回复！', 2, 8);
+		}
+	});
+}
+function zan(id){
+	$.post("index.php?m=ajax&c=guwenZan",{id:id},function(data){ 
+		if(data=='2'){
+			layer.msg('请不要重复点赞！', 2, 8);
+		}else if(data=='1'){
+			layer.msg('点赞成功！',2,9,function(){window.location.reload();});
+		}
+	});
+}
+</script>
+{yun:}include file="$comstyle/footer.htm"{/yun}

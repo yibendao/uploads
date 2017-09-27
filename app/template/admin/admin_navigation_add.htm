@@ -1,0 +1,201 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<link href="images/reset.css" rel="stylesheet" type="text/css" />
+<link href="images/system.css" rel="stylesheet" type="text/css" />
+<link href="images/table_form.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="{yun:}$config.sy_weburl{/yun}/js/jscolor/jscolor.js"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script>
+<script src="js/admin_public.js" language="javascript"></script>
+<script charset="utf-8" src="../js/kindeditor/kindeditor-min.js"></script>
+<link href="images/blue.css" rel="stylesheet">
+<script src="js/icheck.js"></script>
+  <script>
+	$(document).ready(function(){
+	  $('input').iCheck({
+		checkboxClass: 'icheckbox_flat-blue',
+		radioClass: 'iradio_flat-blue'
+	  });
+	});
+</script>
+<script language="javascript">
+KindEditor.ready(function(K) { 
+	var colorpicker;
+	K('#colorpicker').bind('click', function(e) {
+		e.stopPropagation();
+		if (colorpicker) {
+			colorpicker.remove();
+			colorpicker = null;
+			return;
+		}
+		var colorpickerPos = K('#colorpicker').pos();
+		colorpicker = K.colorpicker({
+			x : colorpickerPos.x,
+			y : colorpickerPos.y + K('#colorpicker').height(),
+			z : 19811214,
+			selectedColor : 'default',
+			noColor : '无颜色',
+			click : function(color) {
+				K('#color').val(color);
+				$('#color + font').css('color', color);
+				colorpicker.remove();
+				colorpicker = null;
+			}
+		});
+	});
+	K(document).click(function() {
+		if (colorpicker) {
+			colorpicker.remove();
+			colorpicker = null;
+		}
+	});
+});
+</script>
+<title>后台管理</title>
+</head>
+<body class="body_ifm">
+<div class="infoboxp">
+<div class="infoboxp_top_bg"></div>
+  <div class="infoboxp_top">
+      <span class="complay_top_span fl">添加导航</span>
+	
+	<a href=" javascript:history.back(-1);" class="admin_infoboxp_tj admin_infoboxp_xwlb">导航列表</a> 
+	
+  </div>
+  <div class="admin_table_border">
+    <iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe>
+    <form name="myform" target="supportiframe" action="index.php?m=navigation&c=save" method="post" encType="multipart/form-data"  onSubmit="return checkform(this);">
+      <table width="100%" class="table_form" style="background:#fff;">
+        <tr >
+          <th width="120">导航类别：</th>
+          <td>
+            <div class="yun_admin_select_box" style="z-index:110;">
+            {yun:}if $types.nid{/yun}
+				{yun:}foreach item=v from=$type{/yun}
+                   {yun:}if $v.id eq $types.nid{/yun}
+                    <input type="button" value="{yun:}$v.typename{/yun}" class="yun_admin_select_box_text" id="nid_name" onClick="select_click('nid');">
+                    <input name="nid" type="hidden" id="nid_val" value="{yun:}$v.id{/yun}">
+                    {yun:}/if{/yun}
+                {yun:}/foreach{/yun}
+            {yun:}else{/yun}
+                <input type="button" value="请选择" class="yun_admin_select_box_text" id="nid_name" onClick="select_click('nid');">
+                <input name="nid" type="hidden" id="nid_val" value="">
+            {yun:}/if{/yun}
+            
+            <div class="yun_admin_select_box_list_box dn" id="nid_select">     
+				{yun:}foreach item=v from=$type{/yun}
+                <div class="yun_admin_select_box_list">
+                    <a href="javascript:;" onClick="select_new('nid','{yun:}$v.id{/yun}','{yun:}$v.typename{/yun}')">{yun:}$v.typename{/yun}</a>
+                </div>                    
+                {yun:}/foreach{/yun}
+            </div>
+        </div>
+           <a href="index.php?m=navigation&c=group" class="admin_nav_fl">添加分类</a></td>
+        </tr>
+        <tr class="admin_table_trbg" >
+          <th>导航名称：</th>
+          <td><input class="input-text" type="text" name="name" size="40" value="{yun:}$types.name{/yun}"/>
+          <input type="hidden" name='color' id="color" value="" /></td>
+        </tr>
+        <tr class="admin_table_trbg" >
+          <th>导航链接：</th>
+          <td><input class="input-text" type="text" name="url" size="50" value="{yun:}$types.url{/yun}"/>
+            <span class="admin_web_tip"></span></td>
+        </tr>
+        <tr >
+          <th>伪静态链接：</th>
+          <td><input class="input-text" type="text" name="furl" size="50" value="{yun:}$types.furl{/yun}"/>
+            <span class="admin_web_tip"></span>
+            </td>
+        </tr>
+        <tr class="admin_table_trbg" >
+          <th>导航类型：</th>
+          <td>
+            <div class="yun_admin_select_box zindex100">
+            {yun:}if $types.type=='2'{/yun}
+                    <input type="button" value="外部链接" class="yun_admin_select_box_text" id="type_name" onClick="select_click('type');">
+                    <input name="type" type="hidden" id="type_val" value="2">
+            {yun:}else{/yun}
+                <input type="button" value="站内链接" class="yun_admin_select_box_text" id="type_name" onClick="select_click('type');">
+                <input name="type" type="hidden" id="type_val" value="1">
+            {yun:}/if{/yun}
+            
+            <div class="yun_admin_select_box_list_box dn" id="type_select">     
+                <div class="yun_admin_select_box_list">
+                    <a href="javascript:;" onClick="select_new('type','1','站内链接')">站内链接</a>
+                </div>      
+                <div class="yun_admin_select_box_list">
+                    <a href="javascript:;" onClick="select_new('type','2','外部链接')">外部链接</a>
+                </div>                   
+            </div>
+        </div>
+            <span class="admin_web_tip" style="float:left; line-height:34px; display:inline-block">站内链接如：job/  外部链接如：http://www.phpyun.com/job/</span></td>
+        </tr>
+        <tr >
+          <th>排　　序：</th>
+          <td><input class="input-text" type="text" name="sort" size="5" value="{yun:}$types.sort{/yun}"/></td>
+        </tr>
+        <tr class="admin_table_trbg" >
+          <th>弹出窗口：</th>
+          <td>
+          <div class="iradio_flat_height">
+            <input type="radio" name="eject" value="1" id="eject_1" {yun:}if $types.eject=='1'{/yun}checked=checked {yun:}/if{/yun}>
+           <span class="iradio_flat_left"><label for="eject_1">新窗口</label>&nbsp;&nbsp;</span>
+            <input type="radio" name="eject" value="0"  id="eject_2" {yun:}if $types.eject!='1'{/yun}checked=checked{yun:}/if{/yun}>
+            <span class="iradio_flat_left"><label for="eject_2">原窗口 </label></span>
+            </div></td>
+        </tr>
+        <tr >
+          <th>状　　态：</th>
+          <td>
+          <div class="iradio_flat_height">
+            <input type="radio" name="model" value="hot" id="model_hot" {yun:}if $types.model=='hot'{/yun}checked=checked {yun:}/if{/yun}> 
+            <span class="iradio_flat_left"><label for="model_hot">热</label>&nbsp;&nbsp;</span>
+            <input type="radio" name="model" value="new" id="model_new" {yun:}if $types.model=='new'{/yun}checked=checked{yun:}/if{/yun}> 
+            <span class="iradio_flat_left"><label for="model_new">新</label>&nbsp;&nbsp;</span>
+            <input type="radio" name="model" value="" id="model_n" {yun:}if $types.model==''{/yun}checked=checked{yun:}/if{/yun}> 
+            <span class="iradio_flat_left"><label for="model_n">无</label>&nbsp;&nbsp;</span>
+            </div>
+            </td>
+        </tr>
+        <tr >
+          <th>加　　粗：</th>
+          <td>
+          <div class="iradio_flat_height">
+          <input type="radio" name="bold" value="1" id="bold_y" {yun:}if $types.bold=='1'{/yun}checked=checked{yun:}/if{/yun}>
+            <span class="iradio_flat_left"><label for="bold_y">是</label>&nbsp;&nbsp;</span>
+            <input type="radio" name="bold" value="0" id="bold_n" {yun:}if $types.bold!='1'{/yun}checked=checked{yun:}/if{/yun}>
+            <span class="iradio_flat_left"><label for="bold_n">否</label>&nbsp;&nbsp;</span>
+            </div>
+            </td>
+        </tr>
+        <tr >
+          <th>显　　示：</th>
+          <td>
+          <div class="iradio_flat_height">
+          <input type="radio" name="display" value="1" id="display_y" {yun:}if $types.display=='1'{/yun}checked=checked {yun:}/if{/yun}>
+            <span class="iradio_flat_left"><label for="display_y">是</label>&nbsp;&nbsp;</span>
+            <input type="radio" name="display" value="0" id="display_n" {yun:}if $types.display!='1'{/yun}checked=checked{yun:}/if{/yun}>
+           <span class="iradio_flat_left"><label for="display_n"> 否</label>&nbsp;&nbsp;</span>
+            
+             </div></td>
+        </tr>
+        <tr class="admin_table_trbg" >
+          <td align="center" colspan="2"> {yun:}if $types.id{/yun}
+            <input type="hidden" name="id" size="40" value="{yun:}$types.id{/yun}"/>
+            <input type="hidden" name="lasturl" value="{yun:}$lasturl{/yun}">
+            <input class="admin_submit4" type="submit" name="update" value="&nbsp;更 新&nbsp;"  />
+            {yun:}else{/yun}
+            <input class="admin_submit4" type="submit" name="add" value="&nbsp;添 加&nbsp;"  />
+            {yun:}/if{/yun}
+            <input class="admin_submit4" type="reset" name="reset" value="&nbsp;重 置 &nbsp;" /></td>
+        </tr>
+      </table>
+	  <input type="hidden" name="pytoken" value="{yun:}$pytoken{/yun}">
+    </form>
+  </div>
+</div>
+</body>
+</html>

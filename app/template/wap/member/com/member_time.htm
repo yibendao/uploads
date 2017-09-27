@@ -1,0 +1,56 @@
+{yun:}include file="$wapstyle/member/cheader.htm"{/yun} 
+<section class="wap_member">
+<div class="wap_member_rReceive">
+<div class="wap_member_rReceive_t">尊敬的企业用户：</div>
+<div class="">您当前是：<font color="#f60">
+				{yun:}if $statis.vip_etime < time() && $statis.vip_etime != 0{/yun}
+			 		{yun:}if $config.com_vip_done == 0{/yun}
+			 			非会员 
+					{yun:}else if $config.com_vip_done == 1{/yun}
+ 						{yun:}$statis.rating_name{/yun}
+			 		{yun:}/if{/yun}
+			 	{yun:}else{/yun}
+					{yun:}$statis.rating_name{/yun}
+			 	{yun:}/if{/yun}</font></div> 
+<div class="">服务期限：{yun:}$statis.vip_stime|date_format:'%Y-%m-%d'{/yun} -- {yun:}if $statis.vip_etime==0{/yun}永久{yun:}else{/yun}{yun:}$statis.vip_etime|date_format:'%Y-%m-%d'{/yun}{yun:}/if{/yun}</div> 
+</div>
+
+<ul class="member_ms_tc">
+	<li><a href="index.php?c=rating">套餐会员</a>	</li>
+	<li class="member_ms_tc_cur"><a href="index.php?c=time">时间会员</a>	</li>
+    <li><a href="index.php?c=added">增值包</a>	</li>
+</ul>
+
+<div class="wap_member_Receive">
+{yun:}foreach from=$rows item=v{/yun}
+<div class="wap_member_pay_c wap_member_pay_plist">
+	<div class="wp_m_tcm">
+	<span class="wap_member_jb_name">{yun:}$v.name{/yun}</span>   
+	<form action="index.php?c=pay" method="post">
+		<input type="hidden" name="usertype" value="price"/>
+		<input type="hidden" name="id" value="{yun:}$v.id{/yun}"/>
+		<input type='submit' class="wap_member_paygm" value='立即购买' >
+	</form>	 
+	</div>
+	<div>套餐价格：
+		<span class="wap_m_jg">
+			{yun:}if $v.time_start < time()&& $v.time_end > time(){/yun}
+				￥{yun:}$v.yh_price{/yun}
+			{yun:}else{/yun}
+	        	 ￥{yun:}$v.service_price{/yun}
+	        {yun:}/if{/yun}
+	    </span>
+	    	{yun:}if $v.time_start < time()&& $v.time_end > time(){/yun}
+                  		<i class="serve_zz_h_nmb_tcjg">￥{yun:}$v.service_price{/yun}</i>
+            {yun:}/if{/yun}/
+		<span>{yun:}if $v.service_time>0{/yun}{yun:}$v.service_time{/yun}天{yun:}else{/yun}永久{yun:}/if{/yun}</span>
+	</div>
+	<div>套餐内容：时间模式会员，有效时间内，发布职位、下载简历等操作不受限制！</div>
+
+</div>
+{yun:}foreachelse{/yun}
+<div class="wap_member_no">		没有时间会员服务</div>
+{yun:}/foreach{/yun} 
+</div>
+</section>
+{yun:}include file="$wapstyle/footer.htm"{/yun} 

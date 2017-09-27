@@ -1,0 +1,97 @@
+{yun:}include file="$wapstyle/header_cont.htm"{/yun}
+<link rel="stylesheet" href="{yun:}$config.sy_weburl{/yun}/app/template/wap/css/demo.css" type="text/css">
+<link rel="stylesheet" href="{yun:}$config.sy_weburl{/yun}/app/template/wap/css/wap_tck.css" type="text/css">
+<section> 
+  <div class="searchOptions clearfix">
+    <ul class="searchOptions_list">
+      <li class="grade popup" data-pop="grade"><a href="javascript:void(0);" class="searchOptions_list_a"><span class="job_ov">{yun:}if $city_name[$smarty.get.cityid] || $city_name[$smarty.get.provinceid]{/yun}{yun:}$city_name[$smarty.get.cityid]{/yun}{yun:}$city_name[$smarty.get.provinceid]{/yun}{yun:}elseif $city_name[$smarty.get.three_cityid]{/yun}{yun:}$city_name[$smarty.get.three_cityid]{/yun}{yun:}elseif $config.cityid&&$config.sy_web_site=='1'{/yun}{yun:}$city_name[$config.cityid]{/yun}{yun:}else{/yun}区域{yun:}/if{/yun}</span><i class="searchOptions_icon"></i></a></li>
+      <li class="Category popup" data-pop="Category"><a href="javascript:void(0);" class="searchOptions_list_a"><span class="job_ov">{yun:}if $jobname{/yun}{yun:}$jobname{/yun}{yun:}else{/yun}意向{yun:}/if{/yun}</span><i class="searchOptions_icon"></i></a></li>
+      <li class="Sortexp popup" data-pop="Sortexp"><a href="javascript:void(0);" class="searchOptions_list_a"><span class="job_ov">{yun:}if $userclass_name[$smarty.get.exp]{/yun}{yun:}$userclass_name[$smarty.get.exp]{/yun}{yun:}else{/yun}经验{yun:}/if{/yun}</span><i class="searchOptions_icon"></i></a></li>
+      <li class="Gengduos popup" data-pop="Gengduos" style="border:none"><a href="javascript:void(0);" class="searchOptions_list_a">更多<i class="searchOptions_icon"></i></a></li>
+      <input type="hidden" id="searchurl" value="{yun:}$searchurl{/yun}" />
+      <input type="hidden" id="waptype" value="1" />
+    </ul>  
+</div>
+</section>
+<div class="clear"></div>
+<section>
+  <div class="warp_content clear"> 
+  <div class="job_list_content"> 
+  {yun:}userlist limit=20 edu='auto.edu' exp='auto.exp' sex='auto.sex' uptime='auto.uptime' keyword='auto.keyword' hy='auto.hy' minsalary='auto.minsalary' maxsalary='auto.maxsalary' report='auto.report' three_cityid='auto.three_cityid' provinceid='auto.provinceid' cityid='auto.cityid' jobin='auto.jobin' type='auto.type' tag='auto.tag' order=topdate post_len=14 ispage=1 islt=4 item=user{/yun}
+    <div class="user_list_cont"> <a href="{yun:}url m=wap c=resume a=show id=$user.id{/yun}" class="user_list_b">
+      <div class="user_list">
+  <aside class="user_tj_photo"> {yun:}if $user.photo!=""{/yun} <img src="{yun:}$user.photo{/yun}"> {yun:}else{/yun} <img src="{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_member_icon{/yun}"> {yun:}/if{/yun} </aside>
+        <h3><span class="c288">{yun:}if in_array($user.id,$eid){/yun}{yun:}$user.uname{/yun}{yun:}else{/yun}{yun:}$user.username_n{/yun}{yun:}/if{/yun}</span>
+        {yun:}if $user.topdate>time(){/yun}<i class="user_icon_zd">置顶</i> {yun:}/if{/yun}        
+        <span class="resume_t_date">        
+        {yun:}if $user.redtime==1 || $user.time=='昨天'{/yun}
+          <span style="color:red;">{yun:}$user.time{/yun}</span>
+          {yun:}else{/yun}
+          {yun:}$user.time{/yun}
+          {yun:}/if{/yun}
+         </span>        
+        </h3>
+       <aside class="user_list_p">   
+       <span class="user_city_n">{yun:}$user.job_city_one{/yun}-{yun:}$user.job_city_two{/yun}</span>
+       <i class="user_list_p_line">|</i>
+       <span class="user_list_jy_p">{yun:}$user.exp_n{/yun}经验</span>
+       <i class="user_list_p_line">|</i>
+    	 {yun:}$user.edu_n{/yun}学历
+       </aside> 
+       <aside class="user_list_pyxjob"> <em class="user_p_ov"><span class="user_list_j">意向职位：</span><span class="
+user_list_yxjob">{yun:}$user.job_post_n{/yun}</span></em> </aside>      
+     </div>
+      </a> </div>
+    {yun:}/userlist{/yun} </div>
+  {yun:}if $total<=0{/yun}
+  {yun:}if $smarty.get.keyword!="" {/yun}
+  <div class="wap_member_no">没有搜索到人才<div><a class="wap_mb_no_sr" href="{yun:}url m=wap c='resume'{/yun}">重新搜索</a></div></div>
+  {yun:}else{/yun}
+  <div class="wap_member_no">暂无人才<div><a class="wap_mb_no_sr" href="{yun:}url m=wap c='resume'{/yun}">重新搜索</a></div></div>
+  {yun:}/if{/yun}
+  {yun:}else{/yun} 
+  <div class="pages">{yun:}$pagenav{/yun}</div> 
+  {yun:}/if{/yun} </div>
+</div>
+ {yun:}if $total<=0{/yun}
+<section>
+<div class="index_wap_tit" style="margin-top:0px;"><i class="index_wap_tit_icon"></i><span class="index_wap_tit_s">为你推荐</span></div>
+{yun:}userlist limit=3 post_len=18 rec_resume=1 item=userrec{/yun}
+<div class="user_list_cont" style="margin-top:0px; margin-bottom:10px;"> 
+<div class="user_list">
+<aside class="user_tj_photo">  
+<a href="{yun:}url m=wap c=resume a=show id=$userrec.id{/yun}" class="user_list_b">
+<img src="{yun:}$userrec.photo{/yun}" width="80" height="100" onerror="showImgDelay(this,'{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_member_icon{/yun}',2);"/></a>
+</aside>
+        <h3><span class="c288"><a href="{yun:}$userrec.user_url{/yun}">{yun:}if in_array($userrec.id,$eid){/yun}{yun:}$userrec.uname{/yun}{yun:}else{/yun}{yun:}$userrec.username_n{/yun}{yun:}/if{/yun}</a></span>            
+        <span class="resume_t_date">        
+        {yun:}if $userrec.redtime==1 || $userrec.time=='昨天'{/yun}
+        	<span style="color:red;">{yun:}$userrec.time{/yun}</span>
+        {yun:}else{/yun}
+        	{yun:}$userrec.time{/yun}
+        {yun:}/if{/yun}
+         </span>        
+        </h3>
+       <aside class="user_list_p">   
+       <span class="user_city_n">{yun:}$userrec.job_city_one{/yun}-{yun:}$userrec.job_city_two{/yun}</span>
+       <i class="user_list_p_line">|</i>
+       <span class="user_list_jy_p">{yun:}$userrec.exp_n{/yun}</span>
+       <i class="user_list_p_line">|</i>
+       {yun:}$userrec.edu_n{/yun}学历
+       </aside> 
+       <aside class="user_list_pyxjob"> <em class="user_p_ov"><span class="user_list_j">意向职位：</span>
+       <span class="user_list_yxjob">{yun:}$userrec.job_post_n{/yun}</span></em> </aside>      
+     </div>
+ </div>
+{yun:}/userlist{/yun}
+</section>
+{yun:}/if{/yun}
+
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/layer/layer.m.js" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/public.js" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/prefixfree.min.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/app/template/wap/js/search.js" language="javascript"></script> 
+<script src="{yun:}$config.sy_weburl{/yun}/app/template/wap/js/demo.js" language="javascript"></script> 
+{yun:}include file="$wapstyle/publictwo.htm"{/yun}
+{yun:}include file="$wapstyle/footer.htm"{/yun}

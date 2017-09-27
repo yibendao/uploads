@@ -1,0 +1,35 @@
+{yun:}include file="$wapstyle/header_cont.htm"{/yun}
+{yun:}include file="$wapstyle/nav.htm"{/yun} 
+{yun:}qlist item=list uid='auto.uid' ispage=1 t_len=20  limit=10{/yun}
+<div class="askfriend_ct">
+  <div class="question_tit"><a href="{yun:}url m=wap c=ask a=content id='`$list.id`'{/yun}">{yun:}$list.title|mb_substr:0:88:'gbk'{/yun}</a></div>
+  <div class="question_gz"> 
+  <span class="ask_question_n"><i class="ask_question_n_icon"></i><em class="ask_question_n_s">{yun:}$list.atnnum{/yun}</em>人关注</span> 
+  <span class="ask_question_n"><i class="ask_question_n_icon ask_question_n_icon_hd"></i><em class="ask_question_n_s">{yun:}$list.answer_num{/yun}</em>个回答</span> 
+  <span class="ask_question_n"><i class="ask_question_n_icon ask_question_n_icon_ly"></i><em class="ask_question_n_s">{yun:}$list.visit{/yun}</em>次浏览</span> 
+  </div>
+  <div class="question_mm">
+    <div class="ask_question_tm">{yun:}$list.add_time|date_format:"%Y-%m-%d %H:%M"{/yun}</div>
+    {yun:}if $uid==$list.uid{/yun}
+    <div class="question_de"><a href="javascript:void(0)" onclick="layer_del('确定要删除该提问？','{yun:}url m=wap c=ask a=delask id=$list.id{/yun}')">删除</a></div>
+    {yun:}/if{/yun}
+  </div>
+</div>
+{yun:}/qlist{/yun}     
+
+{yun:}if $total==0{/yun}
+<div class="noresult">
+{yun:}if $uid==$myuid{/yun}
+您还没有发起任何话题，抓紧提问吧！
+<a href="{yun:}url m=wap c=ask a=addquestion {/yun}"  class="wap_mb_no_sr" style="color:#fff;">我要提问</a>
+{yun:}else{/yun}
+他还没有发起话题！
+{yun:}/if{/yun}</div>
+{yun:}else{/yun} 
+<div class="pages">{yun:}$pagenav{/yun}</div> 
+{yun:}/if{/yun} 
+<script src="{yun:}$wap_style{/yun}/js/prefixfree.min.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/layer/layer.m.js" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/public.js" language="javascript"></script>
+{yun:}include file="$wapstyle/footer.htm"{/yun}

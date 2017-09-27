@@ -1,0 +1,114 @@
+<script>
+var weburl="{yun:}$config.sy_weburl{/yun}",integral_pricename='{yun:}$config.integral_pricename{/yun}',pricename='{yun:}$config.integral_pricename{/yun}',code_web='{yun:}$config.code_web{/yun}',code_kind='{yun:}$config.code_kind{/yun}';</script>
+
+<div class="top">
+  <div class="top_cot">
+    <div class="top_cot_content">
+      <div class="top_left fl">
+        <div class="yun_welcome fl">欢迎来到{yun:}$config.sy_webname{/yun}！</div>
+       </div>
+      <div class="top_right_re fr">
+        <div class="top_right">
+        
+          <div class="yun_topNav fr"> 
+		  <a class="yun_navMore" href="javascript:;">网站导航</a>
+            <div class="yun_webMoredown none">
+              <div class="yun_top_nav_box"> 
+			  <ul class="yun_top_nav_box_l">
+             {yun:}navmap key=key item=maplist{/yun}
+                  <li><a href="{yun:}$maplist.url{/yun}" {yun:}if $maplist.eject{/yun} target="_blank"{yun:}/if{/yun}>{yun:}$maplist.name{/yun}</a></li>
+                {yun:}/navmap{/yun}
+                 </ul>
+                <ul class="yun_top_nav_box_wx">
+               {yun:}nav item=navlist_app hovclass=nav_list_hover nid=11{/yun}          
+            <li> <a class="move_0{yun:}$navlist_app.sort{/yun}"{yun:}if $navlist_app.eject{/yun} target="_blank"{yun:}/if{/yun} href="{yun:}$config.sy_weburl{/yun}/{yun:}$navlist_app.url{/yun}">{yun:}$navlist_app.name{/yun}</a> </li>
+          {yun:}/nav{/yun}
+                </ul>
+                
+                </div>
+            </div>
+          </div> 
+            <span class="fr"><a href="{yun:}$config.sy_weburl{/yun}/wap" class="wap_icon" target="_blank">手机版</a><i class="htop_line">|</i><a href="{yun:}url m=subscribe{/yun}" target="_blank" class="top_dy">订阅</a><i class="htop_line_two">|</i></span>
+            <script language='JavaScript' src='{yun:}url m=ajax c=RedLoginHead{/yun}'></script> 
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="hp_head">
+<div class="w1200">
+     <div class="hp_head_ft fl">
+          <div class="hp_head_ft_logo fl"><a href="{yun:}$config.sy_weburl{/yun}" title="{yun:}$config.sy_webname{/yun}最新招聘求职信息"><img  src="{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_logo{/yun}" alt="{yun:}$config.sy_webname{/yun}"/></a></div>
+          {yun:}if $config.sy_web_site=='1'{/yun}
+          <div class="hp_head_ft_city fl">
+               <script language='JavaScript' src='{yun:}url m=ajax c=Site{/yun}'></script>
+          </div>
+          {yun:}/if{/yun}
+     </div>
+     <div class="hp_head_search fr">
+            <form action="{yun:}if !$config.sy_jobdir{/yun}index.php{yun:}else{/yun}{yun:}url m=job{/yun}{yun:}/if{/yun}" method="get" onsubmit="return search_keyword(this);"  id="index_search_form">
+            <input type="hidden" {yun:}if  !$config.sy_jobdir{/yun}name="m"{yun:}/if{/yun} value="job" id="m" />
+        <input type="hidden" name="c" value="search" id="search" />
+          <div class="hp_head_search_job fl">
+               <span class="hp_head_search_job_b" id="search_name">职位</span>
+               <div class="index_header_seach_find_list yunHeaderSearch_list_box none">
+               <a href="javascript:void(0)" onclick="top_search('job', '找工作', '{yun:}url m=job{/yun}', '{yun:}$config.sy_job_web{/yun}', '{yun:}$config.sy_jobdir{/yun}'); $('#search').attr('name', 'c');">找工作</a> <a href="javascript:void(0)" onclick="top_search('resume', '找人才', '{yun:}url m=resume{/yun}', '{yun:}$config.sy_resume_web{/yun}', '{yun:}$config.sy_resumedir{/yun}'); $('#search').attr('name', 'c');"> 找人才</a> 
+               <a href="javascript:void(0)" onclick="top_search('tiny', '普工简历', '{yun:}url m=tiny{/yun}', '{yun:}$config.sy_tiny_web{/yun}', '{yun:}$config.sy_tinydir{/yun}'); $('#search').attr('name', '');">普工简历</a> 
+               <a href="javascript:void(0)" onclick="top_search('article', '新闻', '{yun:}url m=article{/yun}', '{yun:}$config.sy_article_web{/yun}', '{yun:}$config.sy_articledir{/yun}');" class="none">新闻</a> 
+               <a href="javascript:void(0)" onclick="top_search('once', '店铺招聘', '{yun:}url m=once{/yun}', '{yun:}$config.sy_once_web{/yun}', '{yun:}$config.sy_oncedir{/yun}'); $('#search').attr('name', '');">店铺招聘</a> </div>
+                              
+          </div>
+          <div class="fl">
+          <input class="hp_head_search_text fl" type="text" name="keyword" value="{yun:}$smarty.get.keyword{/yun}" placeholder="请输入关键字">
+          <input class="hp_head_search_sr fl" type="submit" value="搜索"/>
+          </div>
+          </form>
+     </div>
+</div>
+</div>
+<div class="hp_nav">
+<div class="w1200">
+     <ul>
+      {yun:}nav item=navlist hovclass=nav_list_hover nid=1{/yun}
+          <li class="{yun:}$navlist.navclass{/yun}"> <a href="{yun:}$navlist.url{/yun}" {yun:}if $navlist.eject{/yun} target="_blank"{yun:}/if{/yun} class="png"> {yun:}$navlist.name{/yun} </a>
+            {yun:}if $navlist.model=="new"{/yun}
+             <div class="nav_icon nav_icon_new">  <img src="{yun:}$style{/yun}/images/new.gif"> </div>
+             {yun:}elseif $navlist.model=="hot"{/yun} 
+              <div class="nav_icon nav_icon_hot"> <img src="{yun:}$style{/yun}/images/hotn.gif">  </div>
+             {yun:}/if{/yun}
+          </li>
+          {yun:}/nav{/yun}
+     </ul>
+</div>
+</div>
+{yun:}if $config.sy_header_fix=='1'{/yun} 
+
+<div class="header_fixed yun_bg_color none" id="header_fix">
+  <div class="header_fixed_cont">
+    <ul class="header_fixed_list">
+      {yun:}nav item=nlist hovclass=header_fixed_list_cur nid=1{/yun}
+      <li class="{yun:}$nlist.navclass{/yun}"><a href="{yun:}$nlist.url{/yun}" {yun:}if $nlist.eject{/yun} target="_blank"{yun:}/if{/yun}>{yun:}$nlist.name{/yun}</a></li>
+      {yun:}/nav{/yun}
+      {yun:}nav item=nalist hovclass=header_fixed_list_cur nid=5{/yun}
+      <li class="{yun:}$nalist.navclass{/yun}"><a href="{yun:}$nalist.url{/yun}">{yun:}$nalist.name{/yun}</a></li>
+      {yun:}/nav{/yun}
+    </ul>
+    <div class="header_fixed_login">
+    {yun:}if !$username{/yun}
+      <div class="header_fixed_login_l" style="display:block"> <a href="{yun:}url m=login{/yun}" style="color:#fff"><span class="header_fixed_login_dl"  did="login" style="background:none;"> 登录 </span></a>|<span class="header_fixed_login_dl" did="register"> 注册
+        <div class="header_fixed_reg_box none" id="register_t"> <a href="{yun:}url m=register usertype=1 type=1{/yun}" class="header_fixed_login_a">个人注册</a> <a href="{yun:}url m=register usertype=2 type=1{/yun}" class="header_fixed_login_a">企业注册</a> </div>
+        </span> </div>
+      {yun:}else{/yun}
+      <div class="header_fixed_login_after">
+        <div class="header_fixed_login_after_cont"> <span class="header_fixed_login_after_name">{yun:}$username{/yun}</span>
+          <div class="header_fixed_reg_box header_fixed_reg_box_ye none"> <a href="{yun:}$config.sy_weburl{/yun}/member/index.php" class="header_fixed_login_a">进入会员中心</a> <a href="javascript:void(0)" onclick="logout('{yun:}$config.sy_weburl{/yun}/index.php?c=logout')" class="header_fixed_login_a">退出登录</a> </div>
+        </div>
+      </div>
+      {yun:}/if{/yun}
+      
+      </div>
+    <div class="header_fixed_close"><a href="javascript:;" onclick="$('#header_fix').remove();" rel="nofollow">关闭</a></div>
+  </div>
+</div>
+
+{yun:}/if{/yun}

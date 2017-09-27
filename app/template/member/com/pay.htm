@@ -1,0 +1,56 @@
+{yun:}include file="$comstyle/header.htm"{/yun}
+<div class="w1000">
+<div class="admin_mainbody"> 
+<style>.my_table_msg th{ text-align:right}</style>
+{yun:}include file="$comstyle/left.htm"{/yun}
+  <div class=right_box>
+    <div class=admincont_box>
+      <div class="com_tit"><span class="com_tit_span">  {yun:}if $smarty.get.type=="vip"{/yun}购买会员{yun:}else{/yun}购买{yun:}$config.integral_pricename{/yun}{yun:}/if{/yun}</span></div>
+      <div class="com_body">
+        <div class='admin_note_pay2'>  
+          
+          <div class="admin_note2">
+            <iframe id="fdingdan"  name="fdingdan" onload="returnmessage('fdingdan');" style="display:none"></iframe>
+
+            <form name="alipayment" target="fdingdan" action="index.php?c=pay&act=dingdan" method="post" onsubmit="return pay_form('请输入充值数量！');">
+			  <table width="100%" border="0" cellspacing="0" cellpadding="0"  class="com_pay_table">
+                <tr>
+                  <th height="30" width="170">填写您要充值的{yun:}$config.integral_pricename{/yun}<span class="com_pay_table_pay_s">*</span></th>
+                  <td><input type="hidden" name="pay_type" value="{yun:}$smarty.post.usertype{/yun}" />
+                    <input type="text" name="price_int" id="price_int" size="20" value="0" int="{yun:}$config.integral_proportion{/yun}" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" maxlength='6' class="com_pay_table_pay_text">
+                    当前比例：1元={yun:}$config.integral_proportion{/yun}{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun} {yun:}if $config.integral_min_recharge>0{/yun}，单次最低充值{yun:}$config.integral_min_recharge{/yun}{yun:}$config.integral_pricename{/yun}。{yun:}/if{/yun}</td>
+                </tr>
+                <tr>
+                  <th height="30">所需金额<span class="com_pay_table_pay_s">*</span></th>
+                  <td><span id="span_com_vip_price">0</span>元
+                    <input type="hidden" name="price" size="10"  id="com_vip_price"></td>
+                </tr>
+                <tr>
+                  <th height="30">备注信息<span class="com_pay_table_pay_s"></span></th>
+                  <td><textarea name="remark" id='remark' wrap="physical"  class="bank_textarea"></textarea>
+                    <p style="line-height:23px;">(请备注你的姓名及其联系方式)</p></td>
+                </tr>
+             
+                <tr>
+                  <th>&nbsp;</th>
+                  <td height="40"><div style="padding:10px;"><input  type="submit" value="下一步" name=nextstep class="btn_01"></div></td>
+                </tr> 
+				</table>
+			</form>
+			</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<script>
+var weburl="{yun:}$config.sy_weburl{/yun}";
+{yun:}if $smarty.get.id&&$smarty.get.type=='vip'{/yun}
+$(document).ready(function(){
+	check_rating_coupon('{yun:}$smarty.get.id{/yun}');
+});
+{yun:}/if{/yun}
+</script> 
+<input name='integral_min_recharge' value="{yun:}$config.integral_min_recharge{/yun}" type="hidden"/>
+{yun:}include file="$comstyle/footer.htm"{/yun}

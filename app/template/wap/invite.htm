@@ -1,0 +1,65 @@
+{yun:}include file="$wapstyle/header_cont.htm"{/yun} 
+<div class="post_content">
+<div class="invite_jobadd">
+
+<input name="uid" id="uid" value="{yun:}$smarty.get.uid{/yun}" type="hidden">
+
+<form name="myform"  method="post" action="">
+
+       <div class="com_box_yq" id='job_box' >
+        <dl class="com_box_yq_dl">
+          <dt>
+			<span class="city_01">面试职位：</span>
+		  </dt>
+          <dd>
+           <div class="yq_in_selectOption" style="width:99%">
+           <select id='jobname'>
+          	{yun:}foreach from=$joblist item=one{/yun}
+            <option value="{yun:}$one.name{/yun}##{yun:}$one.id{/yun}" {yun:}if $one.id==$smarty.get.jobid{/yun}selected="selected"{yun:}/if{/yun}>{yun:}$one.name{/yun}</option>
+            {yun:}/foreach{/yun}
+          </select>
+          </div>
+          </dd>
+        </dl>
+		<dl class="com_box_yq_dl">
+          <dt>
+			<span class="city_01">联系人：</span>
+          <dd> <input   id='linkman' value='{yun:}$com.linkman{/yun}' class="job_invite_text">
+</dd>
+        </dl>
+        <dl class="com_box_yq_dl">
+          <dt>
+			<span class="city_01">联系电话：</span>
+          <dd>  <input id='linktel' value='{yun:}$com.linktel{/yun}' class="job_invite_text"></dd>
+		  </dt>
+        </dl>
+		<dl class="com_box_yq_dl">
+          <dt>
+			<span class="city_01">面试时间：</span>
+          <dd><input id='intertime' value='{yun:}$inviteinfo.intertime{/yun}' class="job_invite_text"></dd>
+		  </dt>
+        </dl>
+		<dl class="com_box_yq_dl">
+          <dt>
+			<span class="city_01">面试地址：</span><dd><input id='address' value='{yun:}$com.address{/yun}' class="job_invite_text"></dd>
+		  </dt>
+        </dl>
+		<dl class="com_box_yq_dl">
+			<dt><span class="city_01">面试备注：</span><dd><textarea id="content"  class="job_invite_textarea">{yun:}$inviteinfo.content{/yun}</textarea></dd>
+		</dl>
+      <dl class="com_box_yq_dl" id="resume_job" style=" margin-top:0px;">
+      <dd>  <input type="hidden" value="{yun:}$Info.id{/yun}" id="eid">
+		<input type="hidden" value="{yun:}$Info.uid{/yun}" id="uid">
+		<input type="hidden" id="username" value="{yun:}$Info.name{/yun}"> 
+		<input class="job_invite_bth" id="click_invite" type="button" value="邀请面试"  ></dd>
+    </dl>
+  
+</div>
+ 
+</form>
+</div>
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/layer/layer.m.js" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/public.js" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/prefixfree.min.js" language="javascript"></script>
+{yun:}include file="$wapstyle/footer.htm"{/yun}

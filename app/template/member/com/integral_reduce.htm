@@ -1,0 +1,49 @@
+{yun:}include file="$comstyle/header.htm"{/yun}
+<div class="w1000">
+  <div class="admin_mainbody">
+    <style>
+.my_table_msg th{ text-align:right}
+</style>
+    {yun:}include file="$comstyle/left.htm"{/yun}
+    <div class=right_box>
+      <div class=admincont_box>
+       <div class="job_list_tit">
+         <ul class="">
+         <li {yun:}if $smarty.get.c=="integral"{/yun}class="job_list_tit_cur"{yun:}/if{/yun}><a href="index.php?c=integral">{yun:}$config.integral_pricename{/yun}任务</a></li>
+       <li {yun:}if $smarty.get.c=="integral_reduce"{/yun}  class="job_list_tit_cur"{yun:}/if{/yun} ><a href="index.php?c=integral_reduce">{yun:}$config.integral_pricename{/yun}规则</a></li>
+       <li {yun:}if $smarty.get.c=="reward_list"{/yun}  class="job_list_tit_cur"{yun:}/if{/yun} ><a href="index.php?c=reward_list">{yun:}$config.integral_pricename{/yun}兑换</a></li>
+         </ul>
+         </div>
+        <div class="com_body">
+          <div class="integral_cont">
+            <ul class="integral_cont_list">
+              <li> <span class="integral_cont_list_span">发布职位</span> <span class="integral_cont_list_span_c" style="border:none"> 消费 <b>{yun:}$config.integral_job{/yun}</b> {yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun} </span> </li>
+              <li> <span class="integral_cont_list_span">刷新职位</span> <span class="integral_cont_list_span_c" style="border:none"> 消费 <b>{yun:}$config.integral_jobefresh{/yun}</b> {yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun} </span> </li>
+              <li> <span class="integral_cont_list_span">发布兼职</span> <span class="integral_cont_list_span_c" style="border:none"> 消费 <b>{yun:}$config.integral_partjob{/yun}</b> {yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun} </span> </li>
+              <li> <span class="integral_cont_list_span">刷新兼职</span> <span class="integral_cont_list_span_c" style="border:none"> 消费 <b>{yun:}$config.integral_partjobefresh{/yun}</b> {yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun} </span> </li>
+              <li> <span class="integral_cont_list_span">下载人才简历</span> <span class="integral_cont_list_span_c" style="border:none"> 消费 <b>{yun:}$config.integral_down_resume{/yun}</b> {yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun} </span> </li>
+              <li> <span class="integral_cont_list_span">发送面试人才</span> <span class="integral_cont_list_span_c" style="border:none"> 消费 <b>{yun:}$config.integral_interview{/yun}</b> {yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun} </span> </li>
+			 
+              <li> <span class="integral_cont_list_span">发布紧急招聘</span> <span class="integral_cont_list_span_c" style="border:none"> 消费 <b>{yun:}$config.com_urgent{/yun}</b> {yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}  / 天 </span> </li>
+              <li> <span class="integral_cont_list_span">发布推荐招聘</span> <span class="integral_cont_list_span_c" style="border:none"> 消费 <b>{yun:}$config.com_recjob{/yun}</b> {yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}  / 天 </span> </li>
+              <li> <span class="integral_cont_list_span">企业评论管理</span> <span class="integral_cont_list_span_c" style="border:none"> 消费 <b>{yun:}$config.integral_com_comments{/yun}</b> {yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}  / 月 </span> <span class="integral_cont_list_span_r"></span> </li>
+              <li> <span class="integral_cont_list_span">职位自动刷新</span> <span class="integral_cont_list_span_c" style="border:none"> 消费 <b>{yun:}$config.job_auto{/yun}</b> {yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}  / 天 </span> </li>
+			   
+              {yun:}if $config.integral_question_type==2{/yun}
+              <li> <span class="integral_cont_list_span">发布问题</span> <span class="integral_cont_list_span_c" style="border:none">消费 <b>{yun:}$config.integral_question{/yun}</b>{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}</span></li>
+              {yun:}/if{/yun}
+              {yun:}if $config.integral_answer_type==2{/yun}
+              <li> <span class="integral_cont_list_span">回答问题</span> <span class="integral_cont_list_span_c" style="border:none">消费 <b>{yun:}$config.integral_answer{/yun}</b>{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}</span></li>
+              {yun:}/if{/yun}
+              {yun:}if $config.integral_answerpl_type==2{/yun}
+              <li> <span class="integral_cont_list_span">评论回答</span> <span class="integral_cont_list_span_c" style="border:none">消费 <b>{yun:}$config.integral_answerpl{/yun}</b>{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}</span></li>
+              {yun:}/if{/yun}
+             
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{yun:}include file="$comstyle/footer.htm"{/yun}

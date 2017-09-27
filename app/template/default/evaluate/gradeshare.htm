@@ -1,0 +1,179 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>{yun:}$title{/yun}</title>
+<meta name="keywords" content="{yun:}$keywords{/yun}"/>
+<meta name="description" content="{yun:}$description{/yun}"/>
+<link rel="stylesheet" href="{yun:}$style{/yun}/style/css.css"type="text/css"/>
+<link rel="stylesheet" type="text/css" href="{yun:}$style{/yun}/style/evaluate.css"/>
+</head>
+<body>
+{yun:}include file="$tplstyle/header.htm"{/yun}
+<div class="clear"></div>
+<div class="cp_content">
+<div class="wrap">
+<div class="current_Location  png">您当前的位置：<a href="{yun:}$config.sy_weburl{/yun}">首页</a>  >  <span>测评</span></div>
+<div class="cp_defen_left fl">
+<div class="cp_left_defen">
+<div class="cp_defen_pic"></div>
+	<div class="cp_defen_ceshi">
+    	<div class="cp_ceshi_bt">{yun:}$exambase.name{/yun}</div>
+        <div class="cp_ceshi_sy c6">本测试 <em>{yun:}$exambase.num{/yun}</em> 题，<em>{yun:}$exambase.visits{/yun}</em>人访问过<span>|</span><em>{yun:}$exambase.comnum{/yun}</em>条评论</div>
+        <div class="cp_ceshi_df">
+            <div class="cp_df_zb fl">您的测评得分:<em>{yun:}$info.grade{/yun}分</em></div>
+         </div>
+    </div>
+    <div class="cp_defen_fenx">
+    	<div class="cp_fenx_bt"><span>测试结果分析</span></div>
+        <div class="cp_fenx_nr c6">{yun:}$comment{/yun}</div>
+    	<div class="cp_fenx_bt"><span>所有结果分析</span></div>
+        <div class="cp_jg_box c6">
+        {yun:}foreach from=$exambase.fromscore item=v key=key{/yun}
+ <div class="cp_jg_box_list">
+        <div class="cp_jg_box_list_tit">成绩：<span style="color:#C30; font-size:30px;">{yun:}$exambase.fromscore[$key]{/yun}</span> 分到 <span style="color:#C30; font-size:30px;">{yun:}$exambase.toscore[$key]{/yun}</span> 分</div>
+        <div class="cp_jg_box_list_p">评语：{yun:}$exambase.comment[$key]{/yun}</div></div>
+        {yun:}/foreach{/yun}</div>
+     <div class="cp_defen_liu">
+     <div class="fl">说准你了吗？不如分享给朋友看看他们是什么样的吧</div>
+     <span>
+		  <div class="complay_h1_share">
+              <span >
+                  <div class="bdsharebuttonbox">
+                      <a href="#" class="bds_more" data-cmd="more"></a>
+                      <a title="分享到QQ空间" href="#" class="bds_qzone" data-cmd="qzone"></a>
+                      <a title="分享到新浪微博" href="#" class="bds_tsina" data-cmd="tsina"></a>
+                      <a title="分享到腾讯微博" href="#" class="bds_tqq" data-cmd="tqq"></a>
+                      <a title="分享到人人网" href="#" class="bds_renren" data-cmd="renren"></a>
+                      <a title="分享到微信" href="#" class="bds_weixin" data-cmd="weixin"></a>
+                  </div>
+              </span>
+          </div>
+     </span>
+     </div>
+    <div class="cp_defen_gd"><a href="{yun:}url m=evaluate c=morelist{/yun}" class="cp_gd_gd01" >更多人才测评</a></div>
+</div>
+<div style="clear:both"></div>
+	<div class="cp_defen_call">
+	<div class="cp_fenx_bt"><span>发表留言：</span></div>
+	<div class="cp_call_fb">
+		<form name="myform" target="supportiframe"  action="{yun:}url m=evaluate c=exampaper a=message{/yun}" method="post" onsubmit="return gradely();">
+		<div class="cp_bao" style="padding-top:16px;"><textarea id="grademessage" name="message" class="cp_fb_textarea" placeholder="输入发表内容"  onblur="if(this.value==''){this.value='输入发表内容'}" onclick="if(this.value=='输入发表内容'){this.value=''}" value="输入发表内容"></textarea></div>
+		<div class="cp_fb_ly">
+			<!--span>还有500字</span-->
+			<input name='examid' type="hidden" value='{yun:}$exambase.id{/yun}'/>
+			<input  name="submit" class="cp_ly_button" type="submit" value="发表留言">
+		</div>
+		</form>
+	</div>
+	<div class="clear"></div>
+	<div id="leaveMessageList" class="cp_call_qt01">
+		{yun:}foreach from=$rows  item=rlist key=key{/yun}
+		<div class="cp_call_qt">
+			<div class="cp_qt_pic fl">
+			{yun:}if $rlist.name&&$rlist.usertype{/yun}
+			<a href="{yun:}url m=ask c=friend a=myquestion uid=$rlist.uid{/yun}" target="_blank"><img src="{yun:}$rlist.pic{/yun}" width="40" height="50" onerror="showImgDelay(this,'{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_friend_icon{/yun}',2);"/></a>
+			{yun:}else{/yun}
+			<img src="{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_friend_icon{/yun}" width="40" height="50" onerror="showImgDelay(this,'{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_friend_icon{/yun}',2);"/>
+			{yun:}/if{/yun}
+			</div>
+			<div class="cp_qt_yb fl">
+				<div class="cp_yb_name">
+					{yun:}if $rlist.name&&$rlist.usertype{/yun}
+					<a href="{yun:}url m=ask c=friend a=myquestion uid=$rlist.uid{/yun}" target="_blank">{yun:}$rlist.name{/yun}</a>
+					{yun:}else{/yun}
+					访客
+					{yun:}/if{/yun}
+				</div>
+				<div class="cp_yb_dzy">{yun:}$rlist.message{/yun}</div>
+				<div class="cp_yb_time c9">{yun:}$rlist.ctime|date_format:"%Y-%m-%d %H:%M"{/yun}</div>
+			</div>
+		</div>   
+		{yun:}foreachelse{/yun} 
+		<div class="cp_call_qt">
+			<div class="cp_qt_pic fl"></div>
+			<div class="cp_qt_yb fl">
+				<div class="cp_yb_name"></div>
+				<div class="cp_yb_dzy">暂无留言</div>
+				<div class="cp_yb_time c9"></div>
+			</div>
+		</div>  
+		{yun:}/foreach{/yun} 
+	</div>
+	<div class="clear"></div> 
+	</div> 
+</div>
+<div class="pages"> {yun:}$pagenav{/yun}</div>
+<div class="clear"></div>
+</div>
+
+<div class="cp_content_right fr">
+<div class="cp_right_bao">
+	<div class="cp_bao_recom">
+        <div class="cp_recom_tit">测评推荐</div>
+        <div class="cp_recom_list">
+            <ul>
+              {yun:}foreach from=$recom item=item key=key{/yun}
+              <li><a href="{yun:}url m=evaluate c=exampaper titleid='`$item.id`' gid='`$item.keyid`'{/yun}">{yun:}$item.name{/yun}</a><span class="cp_recom_list_s">{yun:}$item.visits{/yun}</span></li>
+              {yun:}/foreach{/yun}
+            </ul>
+        </div>
+    </div>
+    <div class="cp_bao_recom" style="margin-top:11px;">
+        <div class="cp_recom_tit">个人记录</div>
+        <div class="cp_recom_list">
+            <ul>
+              {yun:}foreach from=$list item=item key=key{/yun}
+              <li><a href="{yun:}url m=evaluate c=exampaper titleid='`$item.examid`'{/yun}">{yun:}$item.name{/yun}</a><span class="cp_recom_list_s">{yun:}$item.grade{/yun}分</span></li> 
+              {yun:}/foreach{/yun}
+            </ul>
+        </div>
+    </div>
+	
+    <div class="cp_bao_join">
+        <div class="cp_recom_tit">他们也参加了测评</div>
+        <div class="cp_join_list">
+            <ul>
+			{yun:}foreach from=$examinee item=elist{/yun}
+            <li><a href="{yun:}url m=ask c=friend a=myquestion uid=$elist.uid{/yun}" target="_blank"><img src="{yun:}$elist.pic{/yun}" width="48" height="48" onerror="showImgDelay(this,'{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_friend_icon{/yun}',2);"/></a><div style="width:42px; height:20px; overflow:hidden; text-overflow:clip; white-space:nowrap; margin-top:5px; text-align:center">{yun:}$elist.nickname{/yun}</div></li>
+			{yun:}/foreach{/yun} 
+            </ul>
+        </div>
+    </div>
+
+
+</div>
+</div>
+
+</div>
+<div class="clear"></div>
+</div>
+<div class="clear"></div>
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js"	language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js"	language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/lazyload.min.js"	language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/public.js"	language="javascript"></script> 
+<script type="text/javascript" src="{yun:}$style{/yun}/js/evaluate.js"></script>
+<!--[if IE 6]>
+<script src="{yun:}$config.sy_weburl{/yun}/js/png.js"></script>
+<script>
+DD_belatedPNG.fix('.png');
+</script>
+<![endif]-->
+<script>
+  window._bd_share_config={
+	  "common":{
+		  "bdSnsKey":{},
+		  "bdText":"我在 {yun:}$config.sy_webname{/yun} 测试《{yun:}$exambase.name{/yun}》得到了{yun:}$info.grade{/yun}分，评语：{yun:}$comment{/yun}",
+		  "bdMini":"2",
+		  "bdUrl":'{yun:}$config.sy_weburl{/yun}',
+		  "bdPic":"{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_logo{/yun}",
+		  "bdStyle":"0",
+		  "bdSize":"24"
+	  },
+	  "share":{}
+  };
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+<iframe id="supportiframe" name="supportiframe" onload="returnmessage('supportiframe');" class="none"></iframe>
+{yun:}include file="$tplstyle/footer.htm"{/yun}

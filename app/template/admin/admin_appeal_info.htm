@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<link href="images/reset.css" rel="stylesheet" type="text/css" />
+<link href="images/system.css" rel="stylesheet" type="text/css" />
+<link href="images/table_form.css" rel="stylesheet" type="text/css" />
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script>
+<script src="js/admin_public.js" language="javascript"></script>
+<title>后台管理</title>
+</head>
+<body class="body_ifm">
+<div class="infoboxp">
+  <div class="infoboxp_top_bg"></div>
+  <div class="infoboxp_top">
+    <h6>用户信息</h6>
+  </div>
+  <div class="main_tag" >
+    <div class="tag_box">
+      <table width="100%" class="table_form" style="background:#fff; font-size:14px;">  
+      <tr class="admin_table_trbg">
+			<th width="120">用户名：</th>
+			<td><div class="yun_admin_divh">{yun:}$info.username{/yun}</div></td></tr>
+		{yun:}if $info.usertype=='2'{/yun}	
+		<tr class="admin_table_trbg">
+			<th width="120">企业名称：</th>
+			<td><div class="yun_admin_divh">{yun:}$user.name{/yun}</div></td></tr>	
+		{yun:}else{/yun}
+		<tr class="admin_table_trbg">
+			<th width="120">姓名：</th>
+			<td><div class="yun_admin_divh">{yun:}$user.name{/yun}</div></td></tr>	
+			{yun:}if $info.usertype=='1'{/yun}
+			<tr class="admin_table_trbg">
+			<th width="120">身份证号：</th>
+			<td><div class="yun_admin_divh">{yun:}$user.idcard{/yun}</div></td></tr>
+			{yun:}/if{/yun}
+		{yun:}/if{/yun}
+        <tr >
+          <th>电话：</th>
+          <td><div class="yun_admin_divh">{yun:}$info.moblie{/yun}&nbsp;&nbsp;&nbsp;{yun:}if $user.moblie_status=='1'{/yun}<font color="#F60">已认证</font>{yun:}/if{/yun}</div></td>
+        </tr>
+        <tr >
+          <th>邮箱：</th>
+          <td><div class="yun_admin_divh">{yun:}$info.email{/yun}&nbsp;&nbsp;&nbsp;{yun:}if $user.email_status=='1'{/yun}<font color="#F60">已认证</font>{yun:}/if{/yun}</div></td>
+        </tr>
+		{yun:}if $info.usertype=='1'{/yun}
+		<tr >
+          <th>身份证：</th>
+          <td><div class="yun_admin_divh">{yun:}if $user.idcard_status=='1'{/yun}<font color="#F60">已认证</font>{yun:}else{/yun}未认证{yun:}/if{/yun}</div></td>
+        </tr>
+		{yun:}else{/yun}
+		<tr >
+          <th>执照：</th>
+          <td><div class="yun_admin_divh">{yun:}if $user.yyzz_status=='1'{/yun}<font color="#F60">已认证</font>{yun:}else{/yun}未认证{yun:}/if{/yun}</div></td>
+        </tr>
+		{yun:}/if{/yun}
+        <tr class="admin_table_trbg">
+          <th>注册时间：</th>
+          <td><div class="yun_admin_divh">{yun:}$info.reg_date|date_format:"%Y-%m-%d"{/yun}</div></td>
+        </tr>
+		<tr class="admin_table_trbg">
+          <th>登录次数：</th>
+          <td><div class="yun_admin_divh">{yun:}$info.login_hits{/yun}</div></td>
+        </tr> 
+		<tr class="admin_table_trbg">
+          <th>最近登录时间：</th>
+          <td><div class="yun_admin_divh">{yun:}$info.login_date|date_format:"%Y-%m-%d"{/yun}</div></td>
+        </tr> 
+		{yun:}if $info.usertype=='1'{/yun}
+		<tr class="admin_table_trbg">
+          <th>现居住地：</th>
+          <td><div class="yun_admin_divh">{yun:}$user.address{/yun}</div></td>
+        </tr> 
+		{yun:}elseif $info.usertype=='2'{/yun}
+		<tr class="admin_table_trbg">
+          <th>公司地址：</th>
+          <td><div class="yun_admin_divh">{yun:}$user.address{/yun}</div></td>
+        </tr> 
+		{yun:}/if{/yun}
+		<tr class="admin_table_trbg">
+		<th>操作：</th>
+		<td><div class="yun_admin_divh">{yun:}if $info.appealstate==1{/yun}<a href="javascript:void(0)" onClick="layer_del('确定申诉已完成？', 'index.php?m=admin_appeal&c=success&id={yun:}$info.uid{/yun}');"class="admin_cz_sc">确认</a>&nbsp;|&nbsp;<a href="javascript:void(0)" class="admin_com_cz" onClick="resetpw('{yun:}$info.username{/yun}','{yun:}$info.uid{/yun}');">重置密码</a>&nbsp;|&nbsp;{yun:}/if{/yun}<a href="javascript:void(0)" onClick="layer_del('确定要删除？', 'index.php?m=admin_appeal&c=del&id={yun:}$info.uid{/yun}');"class="admin_cz_sc">删除</a></div></td>
+		</tr>
+      </table>
+    </div>
+  </div>
+  <input type="hidden" name="pytoken"  id='pytoken'  value="{yun:}$pytoken{/yun}">
+</div>
+</body>
+</html>

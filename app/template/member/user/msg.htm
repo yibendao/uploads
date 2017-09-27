@@ -1,0 +1,131 @@
+{yun:}include file="$userstyle/header.htm"{/yun}
+<div class="yun_user_member_w1100"> {yun:}include file="$userstyle/left.htm"{/yun}
+  <div class="mian_right fltR mt20">
+  
+   <div class="member_right_index_h1 fltL"> <span class="member_right_h1_span fltL">我的职位</span> <i class="member_right_h1_icon user_bg"></i></div>
+      <div id="gms_showclew"></div>
+     
+        <div id="" class="resume_box_list" > 
+          <div class="job_list_tit"> <ul class="">
+	<li {yun:}if $smarty.get.c=='msg'{/yun}class="job_list_tit_cur"{yun:}/if{/yun}><a href="index.php?c=msg">面试通知</a>{yun:}if $msgnum{/yun}<i class="left_sidebar_leftmune_icon">{yun:}$msgnum{/yun}</i>{yun:}/if{/yun}</li>
+      <li {yun:}if $smarty.get.c=='job'{/yun}class="job_list_tit_cur"{yun:}/if{/yun}><a href="index.php?c=job">申请的职位</a></li>
+      <li {yun:}if $smarty.get.c=='favorite'{/yun}class="job_list_tit_cur"{yun:}/if{/yun}><a href="index.php?c=favorite">职位收藏</a></li>
+      <li {yun:}if $smarty.get.c=='look_job'{/yun}class="job_list_tit_cur"{yun:}/if{/yun}><a href="index.php?c=look_job">浏览的职位 </a></li>
+
+	</ul> <i class="member_right_h1_icon user_bg"></i></div>
+        
+        
+        {yun:}if !empty($rows){/yun}
+          <div class="List_Ope List_Title "> 
+          
+          <span class="List_Title_span List_Title_w360 pd15">面试职位</span> 
+          <span class="List_Title_span List_Title_w80">邀请时间</span> 
+            <span class="List_Title_span msg_zt_czw310">面试状态操作</span>
+          <span class="List_Title_span List_Title_w90">操作</span> 
+          </div>
+          {yun:}/if{/yun}
+          {yun:}foreach item=log from=$rows{/yun}
+          <div class="List_Ope msg_joblist"> 
+		  <div class="List_Title_span List_Title_w360 pd15"> 
+		  {yun:}if $log.type==0{/yun} 
+			<a href="{yun:}url m=job c=comapply id='`$log.jobid`'{/yun}" target="_blank" class="List_Title_span_com">{yun:}$log.jobname{/yun}</a> 
+		  {yun:}/if{/yun}
+          <div class="msg_com_mt5"><a href="{yun:}url m=company c=show id='`$log.fid`'{/yun}" target="_blank" class="cor3">{yun:}$log.fname{/yun}</a> </div> </div> 
+		  <div class="List_Title_span List_Title_w80"><span class="msg_zt_s">{yun:}$log.datetime|date_format:'%Y-%m-%d'{/yun}</span></div> 
+          <div class="List_Title_span msg_zt_czw310">
+         	
+           {yun:}if $log.is_browse=="1"{/yun} 
+			<span class="sg_zt_czw_zt"><font color="#f60">尚未回复</font> </span>
+		
+			{yun:}elseif $log.is_browse=="2"{/yun} 
+			
+			<span class="sg_zt_czw_zt"><font color="#666">已查看</font> </span>
+			
+			{yun:}elseif $log.is_browse=="3"{/yun} 
+			
+			<span class="msg_zt_s"><font color="#008000">已同意面试</font>  </span>
+            
+			
+			{yun:}elseif $log.is_browse=="4"{/yun} 
+			<span class="msg_zt_s"><font color="#FF00000">已拒绝面试</font> </span>
+			
+			{yun:}/if{/yun}
+            {yun:}if $log.is_browse!="3"&&$log.is_browse!="4"{/yun} 
+            <span class="sg_zt_czw_zt_box">
+			 <a href="javascript:void(0);" onclick="layer_del('您确定要屏蔽该公司并删除该邀请？','index.php?c=msg&act=shield&id={yun:}$log.id{/yun}');" class="msg_zt_cz">屏蔽企业</a>
+			
+			<a href="javascript:void(0);" onclick="layer_del('确定要拒绝面试邀请？', 'index.php?c=msg&act=inviteset&id={yun:}$log.id{/yun}&browse=4')" class="msg_zt_cz">拒绝面试</a>
+		
+			<a href="javascript:void(0);" onclick="layer_del('确定要同意面试邀请？', 'index.php?c=msg&act=inviteset&id={yun:}$log.id{/yun}&browse=3')" class="msg_zt_cz">同意面试</a> 
+			</span>
+		  {yun:}/if{/yun}
+            </div>
+            
+		  <div class="List_Title_span List_Title_w90"> 
+    <span class="msg_zt_s"> <a href="javascript:getcont('{yun:}$log.id{/yun}');"class="cblue">查看</a> <span class="u_new_resume_bot_line">|</span>
+		  <a href="javascript:void(0);" onclick="layer_del('您确定要删除？', 'index.php?c=msg&act=del&id={yun:}$log.id{/yun}'); " class="cblue">删除</a> </span>
+		  </div>
+
+         
+          </div>
+          {yun:}foreachelse{/yun}
+          <div class="msg_no">
+            <p>亲爱的用户，目前您暂未收到面试通知，</p>
+            <p>想要获得更多的面试机会，立即投递简历，敬候佳音！</p>
+            <a href="{yun:}url m=job{/yun}" target="_blank" class="msg_no_sq uesr_submit">立即投递简历>></a> </div>
+          {yun:}/foreach{/yun} </div>
+        <div class="diggg">{yun:}$pagenav{/yun}</div>
+      </div>
+    </div>
+<div id="getcont" style="width:100%; display:none;">
+ <div class="aud_face">
+   <div class="audition_list"><span class="audition_list_span"></span></div>
+   <div  style="padding:10px;">
+   <div class="invitation_user">尊敬的 <span class="invitation_user_name">{yun:}$realmsgname{/yun}</span> 您好!</div>
+
+ <div class="invitation_cont">
+ &nbsp;&nbsp;&nbsp;&nbsp;经过人力资源部的初步筛选,我们认为您基本具备 <i class="invitation_cont_job"  id="jobname"></i> 岗位的任职资格，因此正式邀请您来我公司参加面试。
+ 
+</div>
+<div class="invitation_cont_tip">具体详见如下：</div>
+<div class="invitation_cont_p"><span class="invitation_cont_pn">【面试时间】</span><em class="audition_list_e" id="intertime"></em>&nbsp;</div>
+<div class="invitation_cont_p"><span class="invitation_cont_pn">【面试地址】</span><em class="audition_list_e" id="address"></em>&nbsp;</div>
+<div class="invitation_cont_p"><span class="invitation_cont_pn">【联系方式】</span><em class="audition_list_e" id="linkman"></em> ( TEL：<em class="invitation_cont_tel" id="linktel"></em> )</div>
+<div class="invitation_cont_p"><span class="invitation_cont_pn">【面试备注】</span><em class="" id="content"></em>&nbsp;</div>
+</div>
+<div class="invitation_cont_jy">
+<div class="invitation_cont_d">特此邀请&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+<div class="invitation_cont_d"><em class="" id="comname"></em>&nbsp;&nbsp;&nbsp;&nbsp;</div>
+<div class="invitation_cont_d"><em class="" id="datetime"></em>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+</div>
+</div>
+</div>
+<script>
+    function getcont(id) {
+        $.post("index.php?c=msg&act=ajax", { id: id }, function (data) {
+            var data = eval('(' + data + ')');
+            $("#comname").html(data.comname);
+            $("#jobname").html(data.jobname);
+            $("#linkman").html(data.linkman);
+            $("#linktel").html(data.linktel);
+            $("#intertime").html(data.intertime);
+            $("#address").html(data.address);
+            if(data.content){
+				$("#content").html(data.content);
+			}else{
+				$("#content").html('&nbsp');
+			}
+            $("#datetime").html(data.datetime);
+            $.layer({
+                type: 1,
+                title: '面试邀请函',
+                shade: [0],
+                closeBtn: [0, true],
+                border: [10, 0.3, '#000', true],
+                area: ['600px', 'auto'],
+                page: { dom: "#getcont" }
+            });
+        })
+    }
+</script> 
+{yun:}include file="$userstyle/footer.htm"{/yun}

@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>{yun:}$title{/yun}</title>
+<meta name="keywords" content="{yun:}$keywords{/yun}"/>
+<meta name="description" content="{yun:}$description{/yun}"/>
+<link rel="stylesheet" href="{yun:}$style{/yun}/style/css.css" type="text/css"/>
+<link rel="stylesheet" type="text/css" href="{yun:}$style{/yun}/special/css/css.css"/>
+<link rel="stylesheet" href="{yun:}$style{/yun}/style/news.css" type="text/css"/>
+</head>
+<body>
+{yun:}include file="$tplstyle/header.htm"{/yun}
+<div class="clear"></div>
+<div class="yun_content">
+<div class="current_Location "> 您当前的位置：<a href="{yun:}$config.sy_weburl{/yun}">首页</a> &gt; 专题招聘 </div>
+<div class="speial_list_cont">
+<div class="speial_list_cont_pd"><div class="speial_list_cont_h1"><span>特色专题</span></div></div>
+<div class="speial_list_cont_w1000">
+
+<div class="clear"></div>
+{yun:}special limit=10  item=row{/yun}
+<div class="pic-txt">
+<a href="{yun:}url m=special c=show id='`$row.id`'{/yun}"   target="_blank">
+<img width="530" height="155" src="{yun:}$config.sy_weburl{/yun}/{yun:}$row.pic{/yun}"/> </a>
+<div class="txt">
+<div class="tit"><a href="{yun:}url m=special c=show id='`$row.id`'{/yun}"   target="_blank">{yun:}$row.title{/yun}</a></div>
+<div class="info">
+<span class="date"><i class="ico-date"></i>{yun:}$row.etime|date_format:'%Y-%m-%d'{/yun}</span>
+<span class="entrance"><a href="{yun:}url m=special c=show id='`$row.id`'{/yun}"   target="_blank">进入专题&gt;&gt;</a></span>
+</div>
+</div>
+</div>
+ {yun:}specialelse{/yun}
+ <div class="clear"></div>
+ <div class="special_notip">
+<div class="special_notip_img"><img src="{yun:}$style{/yun}/images/search-no.gif"></div>
+<div class="special_notip_p">抱歉，还没有专题招聘的相关信息</div>
+
+</div>
+ {yun:}/special{/yun}
+
+
+
+</div>
+</div>
+</div>
+
+<!--尾部导航-->
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script> 
+<script src="{yun:}$config.sy_weburl{/yun}/js/lazyload.min.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/public.js" language="javascript"></script>
+<!--[if IE 6]>
+<script src="{yun:}$config.sy_weburl{/yun}/js/png.js"></script>
+<script>
+DD_belatedPNG.fix('.png');
+</script>
+<![endif]--> 
+  {yun:}include file="$tplstyle/footer.htm"{/yun}

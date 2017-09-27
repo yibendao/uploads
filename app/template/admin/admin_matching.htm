@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link href="images/reset.css" rel="stylesheet" type="text/css" />
+<link href="images/system.css" rel="stylesheet" type="text/css" /> 
+<link href="images/table_form.css" rel="stylesheet" type="text/css" />
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script> 
+<script src="js/admin_public.js"></script>
+<script> 
+function directs(name){
+	var chk_value =[];    
+	$('input[name="'+name+'"]:checked').each(function(){    
+		chk_value.push($(this).val());   
+	}); 	
+	if(chk_value.length==0){ 
+		parent.layer.msg("请选择要推送的简历！",2,8);return false;		
+	}else{		
+		parent.layer.confirm("确定推荐吗？",function(){ 
+			parent.layer.closeAll();
+			var length = chk_value.length;
+			$.layer({
+ 				type : 1,
+				title : false,
+				closeBtn : [0 , false],  
+				border : [10 , 0.3 , '#000', true],
+				area : ['150px','50px'],
+				page : {html : '<font style=\'float: left;font-size: 14px; height: 50px;line-height: 50px;text-align: center;width: 150px;\'>发送进度：<span id=\'send_num\'>0</span>/<span>'+length+'</span></font>'}
+			}); 			
+			if(length>0){ 
+			
+				for(var i=0;i<length;i++){					
+					var resumeid = chk_value[i];
+					var uid=$("#comuid"+resumeid).attr("date"); 
+
+					send_recom_email(uid,'{yun:}$smarty.get.id{/yun}',resumeid,length);  
+
+				}
+
+				setTimeout(function () {layer.closeAll();parent.layer.msg("发送完成！", 2,9,function(){location.reload();});return false;}, 1000); 
+			}
+			
+		});
+	} 
+} 
+function send_recom_email(comid,jobid,eid,uid,type){
+	$.ajax({
+		async: false, 
+		url: 'index.php?m=admin_company&c=directrecom&id='+jobid+'&comid='+comid+'&eid='+eid +'&uid='+uid +'&'+ new Date().getTime(),
+		type: 'GET',
+		dataType: "json",
+		timeout: 6000, 
+		success: function(json){ 
+
+			if(type=='0'){
+				parent.layer.msg(json.msg, 2, Number(json.type),function(){location.reload();});return false;
+			}else if(type>0&&Number(json.type)=='9'){ 
+				var send_num=$("#send_num").html();
+				$("#send_num").html(parseInt(send_num)+parseInt(1));return true;
+			} 
+		}
+	});
+}
+</script> 
+<title>后台管理</title>
+</head>
+<body class="body_ifm"> 
+<div class="infoboxp">
+<div class="infoboxp_top_bg"></div> 
+  <div class="admin_Filter">
+    <span class="complay_top_span fl">匹配简历</span> 
+  </div>
+  <div class="table-list">
+  <div class="admin_table_border"> 
+      <form action="index.php?m=reward&c=del" name="myform" method="post"  target="supportiframe" id='myform'>
+    <input type="hidden" name="pytoken" id='pytoken' value="{yun:}$pytoken{/yun}">
+    <input type="hidden" name="comid"  value="{yun:}$comid{/yun}">
+      <table width="100%">
+        <thead>
+        	<tr class="admin_table_top">
+             <th><label for="chkall"><input type="checkbox" id='chkAll'  onclick='CheckAll(this.form)'/></label></th>
+            <th>简历编号</th> 
+            <th align="left">姓名</th>
+            <th align="left" width="50%">期望职位</th>
+            <th align="left">工作地区</th>
+			<th class="admin_table_th_bg">操作</th>
+			</tr>
+        </thead>
+        <tbody>
+        {yun:}foreach item=v key=key from=$resumes{/yun}
+        <tr align="center">
+          <td><input type="checkbox" date="{yun:}$comid{/yun}" id='comuid{yun:}$v.id{/yun}' value="{yun:}$v.id{/yun}" class="check_all"  name='del[]' onclick='unselectall()' rel="del_chk" /></td>
+          <td class="td1" style="text-align:center;"><span>{yun:}$v.id{/yun}</span></td> 
+          <td class="ud" align="left"><a href="{yun:}url m=resume c=show id='`$v.id`' look=admin{/yun}" target="_blank" class="admin_cz_sc">{yun:}$v.uname{/yun}</a></td>
+          <td class="ud" align="left">{yun:}$v.job_name{/yun}</td>
+          <td class="ud" align="left">{yun:}$city_name[$v.provinceid]{/yun} - {yun:}$city_name[$v.cityid]{/yun}</td>
+          <td>
+          <a href="javascript:void(0);" class="status admin_cz_sh"  onclick="send_recom_email('{yun:}$comid{/yun}','{yun:}$smarty.get.id{/yun}','{yun:}$v.id{/yun}','{yun:}$v.uid{/yun}','0')">推送</a></td>
+        </tr>
+        {yun:}foreachelse{/yun}
+		<tr align="center"><td colspan="8">暂无合适简历</td></tr>
+        {yun:}/foreach{/yun}
+        <tr style="background:#f1f1f1;">
+			<td align="center"><label for="chkall2"><input type="checkbox" id='chkAll2' onclick='CheckAll2(this.form)' /></label></td>
+          <td colspan="3" > 
+		  <label for="chkAll2">全选</label>
+            <input class="admin_submit4" type="button" name="delsub" value="批量推荐" onClick="directs('del[]');" />
+            &nbsp;&nbsp;</td>
+          <td colspan="5" class="digg">{yun:}$pagenav{/yun}</td>
+        </tr>
+          </tbody>
+      </table> 
+      </form>
+  </div>
+</div> 
+</div> 
+</body>
+</html>

@@ -1,0 +1,98 @@
+{yun:}include file="$wapstyle/member/header.htm"{/yun}
+<div class="wap_member_comp_h1"><span>隐私设置</span></div>
+<div class="clear"></div>
+<div class="set_status_box">
+<div class="set_status_box_tip">提示：设置为公开时,企业才能搜索到默认简历</div>
+<dl class="set-status">
+  <dd  {yun:}if $resume.status==1{/yun}class="cur"{yun:}/if{/yun}> <div class="set_status_p1">我正在找工作<br>希望企业关注我</div> <a href="javascript:void(0)" onclick="layer_del('', 'index.php?c=up&status=1');" ><i class="i1"></i>公开</a> <em class="yes"></em> <em class="arr-bottom"></em> </dd>
+  <dd  {yun:}if $resume.status==2{/yun}class="cur"{yun:}/if{/yun}> <div class="set_status_p1">目前没找工作<br>不希望企业关注我</div> <a href="javascript:void(0)" onclick="layer_del('', 'index.php?c=up&status=2');" ><i class="i2"></i>保密</a> <em class="yes"></em> <em class="arr-bottom"></em> </dd>
+</dl>
+{yun:}if $resume.status==1{/yun}
+<div class="blacklist">
+  <p class="yun_usertitle"> <span>企业屏蔽</span> <span class="blacklist_tip">我不希望某些企业搜索到我</span></p>
+ 
+  <ul class="blacklistcom clearfix" id="company_blench">
+  
+    {yun:}foreach from=$rows item=log{/yun}
+    <li><a href="javascript:void(0)" class="close" onclick="layer_del('您确定要取消屏蔽？', 'index.php?c=del&id={yun:}$log.id{/yun}');">x</a><a class="wap_cy" href="{yun:}url m=company c=show id='`$log.p_uid`'{/yun}" target="_blank">{yun:}$log.com_name{/yun}</a></li>
+    {yun:}/foreach{/yun}
+    <li><div class="pages">{yun:}$pagenav{/yun}</div></li>
+    
+  </ul>
+   <div class="blacklistcom_cz"> <a href="javascript:void(0)" onclick="addblack()" class="blacklistcom_cz_a">+添加</a> 
+    {yun:}if $rows{/yun}
+	<a id="clearcontent" href="javascript:void(0)" onclick="layer_del('您确定要清空记录？', 'index.php?c=delall');" class="blacklistcom_cz_a blacklistcom_cz_a_qk"><i class="d"></i>清空</a></div>
+	{yun:}else{/yun}
+		<a id="clearcontent" href="javascript:void(0)" onclick="layer_del('暂无企业清空');" class="blacklistcom_cz_a blacklistcom_cz_a_qk"><i class="d"></i>清空</a></div>
+    {yun:}/if{/yun}
+</div>
+{yun:}else{/yun}
+<div class="blacklist" id="company_no_list">当前设置下，任何企业都无法搜索到或查看您的简历</div>
+{yun:}/if{/yun}
+</div>
+<div id="blacklist" style="display:none">
+<div class="black_text_box">
+<input id="name" class="black_text" type="text"  placeholder="请输入要屏蔽的公司名称">
+<input type="button" value="搜索" class="black_sumit" onclick="searchcom()">
+</div>
+<div class="Blacklist_box"  style="height:200px; width:300px; ">
+<form action="index.php?c=save" method="get" >
+<div class="alert-compt-list_h1">
+<label id="select" class="fltR">
+<input id="checkAll" type="checkbox" onclick="m_checkAll(this.form)">全选</label>
+&nbsp;&nbsp;请在下方选择您要屏蔽的公司 </div>
+<ul style="height:170px"></ul>
+<div class="black_submit_cont">
+</div>
+</form>
+</div>
+</div>
+<style>.layermend{display:none}</style>
+<script>
+function addblack(){
+	blacklist=$("#blacklist").html();
+	$("#blacklist").html('');
+   $(".Blacklist_box>form>ul").html("");
+    $("#name").val('');	
+	layer.open({
+		type : 1,
+		title : '搜索企业',
+		btn: ['确定', '取消'],
+		no: function(){location.reload();},
+		yes: function(){ckaddblack();},
+		shadeClose:false,
+		border : [10 , 0.3 , '#000', true],
+		area : ['300px','320px'],
+		content : blacklist
+	});
+}
+function searchcom(){
+    var name=$.trim($("#name").val());
+	if(name==''){
+		layermsg('请输入搜索的公司名称！', 2, 8);return false;
+	}else{
+		var i=layer.open({type:2,content:'执行中，请稍候...'});
+		$.post(wapurl+"member/index.php?c=searchcom",{name:name},function(data){
+			layer.close(i);
+			$(".Blacklist_box>form>ul").html(data);		
+		});
+	} 
+}
+function ckaddblack(){
+	var chk_value=[];
+	$('input[name="buid[]"]:checked').each(function(){
+		chk_value.push($(this).val());
+	});
+	if(chk_value.length==0){
+		layermsg("请选择要屏蔽的公司！",2,8,function(){addblack()});return false;
+	}else{
+		layer_load('执行中，请稍候...');
+		layer.closeAll();
+		$.post(wapurl+"/member/index.php?c=save",{buid:chk_value},function(data){
+			var data=eval('('+data+')');
+			layermsg(data.msg, 2,function(){location.reload();});return false; 
+		});
+	}
+}
+</script>
+{yun:}include file="$wapstyle/footer.htm"{/yun} 

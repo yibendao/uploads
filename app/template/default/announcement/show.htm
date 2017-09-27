@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>{yun:}$title{/yun}</title>
+<META name="keywords" content="{yun:}$keywords{/yun}">
+<META name="description" content="{yun:}$description{/yun}">
+<link rel="stylesheet" href="{yun:}$style{/yun}/style/css.css" type="text/css">
+<!--[if IE 6]>
+<script src="{yun:}$config.sy_weburl{/yun}/js/png.js"></script>
+<script>
+DD_belatedPNG.fix('.png');
+</script>
+<![endif]--> 
+<link rel="stylesheet" href="{yun:}$style{/yun}/style/yun_job_fairs.css" type="text/css">
+<link href="{yun:}$style{/yun}/style/news.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+{yun:}include file="$tplstyle/header.htm"{/yun}
+
+<div class="yun_content">
+   <div class="current_Location icon"> 您当前的位置：<a href="{yun:}$config.sy_weburl{/yun}">首页</a> > <a href="{yun:}url m=announcement{/yun}">网站公告</a> </div>
+     
+  <div class="zx_cont_inner">
+    <div class="wrap">
+    <div class="zx_show_cont fl">
+        <div class="zx_cont_main">
+          <h1>{yun:}$Info.title{/yun}</h1>
+          <div class="zx_main_source">
+            <div>
+      {yun:}$Info.datetime|date_format:"%Y-%m-%d"{/yun} 
+            </div>
+          </div>
+          <div class="zx_art_content">
+{yun:}$Info.content{/yun}
+</div>
+            <div class="zx_well_flip"> {yun:}if !empty($Info.last){/yun} <span>上一篇： <a title="{yun:}$Info.last.title{/yun}" href="{yun:}$Info.last.url{/yun}">{yun:}$Info.last.title|mb_substr:0:20:'GBK'{/yun}</a></span> {yun:}/if{/yun}
+              {yun:}if !empty($Info.next){/yun} <span>下一篇： <a title="{yun:}$Info.next.title{/yun}" href="{yun:}$Info.next.url{/yun}">{yun:}$Info.next.title|mb_substr:0:20:'GBK'{/yun}</a> </span> {yun:}/if{/yun}
+              <div class="clear"></div>
+            </div>
+     
+          </div>
+      </div>
+      <div class="zx_inner_right fr">
+        <div class="zx_rig_rom">
+          <div class="zx_article">
+            <div class="zx_art_tit"><i class="Company_h1_line"></i>推荐文章</div>
+            <div class="zx_art_hot"> {yun:}article limit=1 type=tj pic=1 t_len=7  urlstatic=1 key=key item=news_jian{/yun} 
+              {yun:}if $key=='0'&& empty($news_jian){/yun}
+              <div>暂无推荐</div>
+              {yun:}else{/yun}
+              <dl>
+                <dt><a href="{yun:}$news_jian.url{/yun}"><img src="{yun:}$config.sy_weburl{/yun}/{yun:}$news_jian.newsphoto{/yun}" style="width:84px; height:63px;" /></a></dt>
+                <dd>
+                  <div class="art_fanfu"><a href="{yun:}$news_jian.url{/yun}">{yun:}$news_jian.title{/yun}</a></div>
+                  <div class="art_xq">{yun:}$news_jian.description|mb_substr:0:22:'gbk'{/yun}</div>
+                </dd>
+              </dl>
+              {yun:}/if{/yun}
+              {yun:}/article{/yun}
+              <div class="clear"></div>
+            </div>
+            <div class="zx_art_list">
+              <ul>
+                {yun:}article limit=6 order=hits t_len=17 urlstatic=1 key=key item=news_hits{/yun}
+                {yun:}if $key=='0'&& empty($news_hits){/yun}
+                <li>暂无文章</li>
+                {yun:}else{/yun}
+                <li><a href="{yun:}$news_hits.url{/yun}">{yun:}$news_hits.title{/yun}</a></li>
+                {yun:}/if{/yun} 
+                {yun:}/article{/yun}
+              </ul>
+            </div>
+            <div class="clear"></div>
+          </div>
+          <div class="zx_article">
+            <div class="zx_art_tit"><i class="Company_h1_line"></i>最新文章</div>
+              {yun:}article rec=1 limit=1 pic=1 t_len=7 d_len=24 urlstatic=1 order=hits item=indexnews1 key=key{/yun}
+              {yun:}if $key<=1{/yun}
+              <div class="zx_art_hot">
+                  <dl>
+                      <dt><a href="{yun:}$indexnews1.pic.0.url{/yun}"><img src="{yun:}$config.sy_weburl{/yun}/{yun:}$indexnews1.pic.0.newsphoto{/yun}" width="84" height="63" /></a></dt>
+                      <dd>
+                          <div class="art_fanfu"><a href="{yun:}$indexnews1.pic.0.url{/yun}">{yun:}$indexnews1.pic.0.title{/yun}</a></div>
+                          <div class="art_xq">{yun:}$indexnews1.pic.0.description{/yun}..</div>
+                      </dd>
+                  </dl>
+                  <div class="clear"></div>
+              </div>
+              {yun:}/if{/yun}
+              {yun:}/article{/yun}
+            <div class="zx_art_list">
+              <ul>
+                  {yun:}article limit=10 t_len=16 d_len=24 urlstatic=1 order=hits item=indexnews2{/yun}
+                  <li><a href="{yun:}$indexnews2.url{/yun}" target="_blank">{yun:}$indexnews2.title{/yun}</a></li>
+                  {yun:}/article{/yun}
+              </ul>
+            </div>
+            <div class="clear"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="clear"></div>
+  </div>
+    
+</div>
+
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script> 
+<script src="{yun:}$config.sy_weburl{/yun}/js/lazyload.min.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/public.js" language="javascript"></script>
+{yun:}include file="$tplstyle/footer.htm"{/yun}

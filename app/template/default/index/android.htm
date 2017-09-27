@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>{yun:}$title{/yun}</title>
+<meta name="keywords" content="{yun:}$keywords{/yun}"/>
+<meta name="description" content="{yun:}$description{/yun}"/>
+<link rel="stylesheet" href="{yun:}$client{/yun}/style/css.css" type="text/css"/>
+</head>
+<body>
+{yun:}include file="$tplstyle/client_header.htm"{/yun}
+<div class="android_ban">
+  <div class="android_ban_980">
+    <div class="android_ban_left">
+      <div class="android_ban_t"><img src="{yun:}$client{/yun}/images/ad_img1.png" class="png"></div>
+      <div class="android_ban_b"><img src="{yun:}$client{/yun}/images/ad_img2.png" class="png"></div>
+    </div>
+    <div class="android_ban_r"><img src="{yun:}$client{/yun}/images/ad_img3.png" class="png"></div>
+  </div>
+</div>
+<div class="android_content">
+  <div class="android_ban_top">用户界面全新设计，风格统一美观，菜单整合优化，操作便捷，运行更流畅</div>
+  <div class="android_ban_p1">职位搜索简单易用，不用担心错过机会，高级搜索全新升级，满足多样化需求，理想职位轻松应聘</div>
+  <div style="clear:both"></div>
+  <div class="main-wrap" style="filter:alpha(opacity=100);">
+    <div class="main_ad_img_c">
+      <div class="main_ad_img"></div>
+      <div class="main_ad_img2"></div>
+      <div class="main_ad_img3"></div>
+    </div>
+    <div id="slide-box"> <b class="corner"></b>
+      <div class="slide-content" id="J_slide">
+        <div style="position: relative;" class="wrap">
+          <ul style="position: absolute; width: 1806px;" class="ks-switchable-content">
+            <li style="display: block; float: left;"><a href="###" target="_blank"><img src="{yun:}$client{/yun}/images/01.jpg"></a></li>
+            <li style="display: block; float: left;"><a href="###" target="_blank"><img src="{yun:}$client{/yun}/images/02.jpg"></a></li>
+            <li style="display: block; float: left;"><a href="###" target="_blank"><img src="{yun:}$client{/yun}/images/03.jpg"></a></li>
+            <li style="display: block; float: left;"><a href="###" target="_blank"><img src="{yun:}$client{/yun}/images/04.jpg"></a></li>
+            <li style="display: block; float: left;"><a href="###" target="_blank"><img src="{yun:}$client{/yun}/images/05.jpg"></a></li>
+            <li style="display: block; float: left;"><a href="###" target="_blank"><img src="{yun:}$client{/yun}/images/06.jpg"></a></li>
+          </ul>
+        </div>
+        <div class="ks-switchable-triggers"> <a class="prev" id="J_prev" href="javascript:void(0);"> <b class="corner"></b><span>&#8249;</span><b class="corner"></b></a> <a class="next" id="J_next" href="javascript:void(0);"> <b class="corner"></b><span>&#8250;</span><b class="corner"></b></a> </div>
+      </div>
+      <b class="corner"></b> </div>
+  </div>
+</div>
+<div class="android_bot" style="height:247px;">
+  <div class="android_bot_cont">
+    <div class="android_bot_left" style="width:100%;height:247px;">
+    <div style="width:360px; float:left">
+      <div class="android_bot_h1">安卓客户端下载</div>
+      <div class="android_bot_bth"><a href="###"><img src="{yun:}$client{/yun}/images/and_bth1.jpg"></a></div>
+      </div>
+      <div style="width:300px; float:left; margin-top:60px;">
+      <div class="android_bot_bth_p">更新时间：2014年03月03日<br>
+        软件容量：2.31M<br>
+        支持系统：安卓2.3及以上. <br>
+      </div>
+      <div class="android_bot_ewm" ><img src="{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_androidu_qcode{/yun}" width="132" height="132"></div>
+    </div>
+ </div>
+  </div>
+</div>
+<script src="{yun:}$client{/yun}/js/tbhb.js" type="text/javascript"></script>
+<!--[if IE 6]>
+<script src="js/png.js"></script>
+<script>
+DD_belatedPNG.fix('.png,.main_ad_img,.main_ad_img1,.main_ad_img2,.main_ad_img3');
+</script>
+<![endif]-->
+<script type="text/javascript">
+	var D=YAHOO.util.Dom, E=YAHOO.util.Event;
+
+	KISSY().use("*", function(S) {
+		var el = D.get('J_slide'),
+			activeIndex = parseInt(el.getAttribute('data-active-index')) || 0;
+
+		var carousel = new S.Carousel(el, {
+			hasTriggers: false,
+			navCls: 'ks-switchable-nav',
+			contentCls: 'ks-switchable-content',
+			activeTriggerCls: 'current',
+			effect: "scrollx",
+			steps: 2,
+			viewSize: [602],
+			activeIndex: activeIndex
+		});
+		
+		E.on('J_prev', 'click', carousel.prev, carousel, true);
+		E.on('J_next', 'click', carousel.next, carousel, true);
+	});
+
+	KISSY().use("*", function(S) {
+		var el = D.get('J_shoppingGuide');
+		if(!el){
+			return;
+		}
+		var	activeIndex = parseInt(el.getAttribute('data-active-index')) || 0;
+
+		var carousel = new S.Carousel(el, {
+			navCls: 'ks-switchable-nav',
+			contentCls: 'ks-switchable-content',
+			activeTriggerCls: 'current',
+			effect: "scrollx",
+			steps: 4,
+			viewSize: [720],
+			activeIndex: activeIndex
+		});
+		
+		E.on('J_shoppingGuidePrev', 'click', carousel.prev, carousel, true);
+		E.on('J_shoppingGuideNext', 'click', carousel.next, carousel, true);
+	});
+</script>
+{yun:}include file="$tplstyle/client_footer.htm"{/yun}

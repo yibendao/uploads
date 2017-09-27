@@ -1,0 +1,256 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link href="images/reset.css" rel="stylesheet" type="text/css" />
+<link href="images/system.css" rel="stylesheet" type="text/css" />
+<link href="images/table_form.css" rel="stylesheet" type="text/css" />
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script>
+<script src="js/admin_public.js" language="javascript"></script>
+<link rel="stylesheet" href="{yun:}$config.sy_weburl{/yun}/js/datepicker/css/font-awesome.min.css" type="text/css">
+<script src="{yun:}$config.sy_weburl{/yun}/js/datepicker/foundation-datepicker.min.js"></script>
+<title>后台管理</title>
+<style>
+* {
+	margin: 0;
+	padding: 0;
+}
+body, div {
+	margin: 0;
+	padding: 0;
+}
+</style>
+</head>
+<body class="body_ifm">
+<div class="infoboxp">
+  <div class="infoboxp_top_bg"></div>
+  <div class="infoboxp_top">
+    <h6>会员信息</h6>
+  </div>
+  <div class="main_tag" >
+    <div class="tag_box">
+      <iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe>
+      <form name="myform" target="supportiframe" action="index.php?m=user_member&c=edit" method="post" enctype="multipart/form-data">
+        <table width="100%" class="table_form table_form_thr" style="background:#fff;">
+          <tr>
+            <td colspan="4" bgcolor="#f0f6fb"><div class="admin_bold">账号信息</div></td>
+          </tr>
+          <tr>
+            <th width="140">用户名：</th>
+            <td width="300"><input type="text"  value="{yun:}$com_info.username{/yun}" name="username" id="username" class="admin_comedity_text">
+              <a href="javascript:;" onClick="editname('{yun:}$com_info.username{/yun}');" class="admin_comedity_text_a">修改用户名</a></td>
+            <th width="160">密码：</th>
+            <td ><input type="text" value="" name="password" class="admin_comedity_text">
+              <span class="admin_web_tip">不修改请留空!</span></td>
+          </tr>
+          <tr>
+            <td colspan="4" bgcolor="#f0f6fb"><div class="admin_bold">基本资料</div></td>
+          </tr>
+          <tr>
+            <th>姓名：</th>
+            <td><input name="name" type="text" maxlength="50" class="admin_comedity_text" value="{yun:}$row.name{/yun}"/></td>
+            <th>性别：</th>
+            <td>
+              
+              <div class="yun_admin_select_box z_index100">   
+              {yun:}if $row.sex{/yun}
+    			{yun:}foreach item=v key=j from=$arr_data.sex{/yun}
+                    {yun:}if $j eq $row.sex{/yun}
+                    <input type="button" value="{yun:}$v{/yun}" class="yun_admin_select_box_text" id="user_sex_name" onClick="select_click('user_sex');">
+                    <input name="sex" type="hidden" id="user_sex_val" value="{yun:}$j{/yun}">
+                    {yun:}/if{/yun}
+                {yun:}/foreach{/yun}
+            {yun:}else{/yun}
+                <input type="button" value="请选择" class="yun_admin_select_box_text" id="user_sex_name" onClick="select_click('user_sex');">
+                <input name="sex" type="hidden" id="user_sex_val" value="">
+                        
+            {yun:}/if{/yun}            
+            <div class="yun_admin_select_box_list_box dn" id="user_sex_select"> 
+              <div class="yun_admin_select_box_list"> 
+              {yun:}foreach from=$arr_data.sex key=j item=v{/yun}
+              <a href="javascript:;" onClick="select_new('user_sex','{yun:}$j{/yun}','{yun:}$v{/yun}')">{yun:}$v{/yun}</a>              
+              {yun:}/foreach{/yun}              
+               </div>
+               </div>
+          </div>
+              
+              
+              
+              
+              
+              
+              </td>
+          </tr>
+          <tr>
+            <th>出生年月：</th>
+            <td  colspan="3"><input name="birthday" id="birthday"  type="text" maxlength="50" value="{yun:}$row.birthday{/yun}" class="input-text" />
+              <script type="text/javascript">
+		$('#birthday').fdatepicker({format: 'yyyy-mm-dd',startView:4,minView:2});   
+        </script></td>
+          </tr>
+          <tr class="admin_table_trbg">
+            <th>工作经验：</th>
+            <td><div class="yun_admin_select_box zindex100"> {yun:}if $row.exp{/yun}
+                {yun:}foreach from=$userdata.user_word key=j item=v{/yun}
+                {yun:}if $row.exp==$v{/yun}
+                <input type="button" value="{yun:}$userclass_name[$v]{/yun}" class="yun_admin_select_box_text" id="user_exp_name" onClick="select_click('user_exp');">
+                <input name="exp" type="hidden" id="user_exp_val" value="{yun:}$v{/yun}">
+                 
+                {yun:}/if{/yun}
+                {yun:}/foreach{/yun}
+                {yun:}else{/yun}
+                <input type="button" value="请选择" class="yun_admin_select_box_text" id="user_exp_name" onClick="select_click('user_exp');">
+                <input name="exp" type="hidden" id="user_exp_val" value="0">
+                 
+                {yun:}/if{/yun}
+                <div class="yun_admin_select_box_list_box dn" id="user_exp_select"> {yun:}foreach from=$userdata.user_word key=j item=v{/yun}
+                  <div class="yun_admin_select_box_list"> <a href="javascript:;" onClick="select_new('user_exp','{yun:}$v{/yun}','{yun:}$userclass_name[$v]{/yun}')">{yun:}$userclass_name[$v]{/yun}</a> </div>
+                  {yun:}/foreach{/yun} </div>
+              </div></td>
+            <th>教育程度：</th>
+            <td><div class="yun_admin_select_box zindex100"> {yun:}if $row.edu{/yun}
+                {yun:}foreach from=$userdata.user_edu key=j item=v{/yun}
+                {yun:}if $row.edu==$v{/yun}
+                <input type="button" value="{yun:}$userclass_name[$v]{/yun}" class="yun_admin_select_box_text" id="user_edu_name" onClick="select_click('user_edu');">
+                <input name="edu" type="hidden" id="user_edu_val" value="{yun:}$v{/yun}">
+                 
+                {yun:}/if{/yun}
+                {yun:}/foreach{/yun}
+                {yun:}else{/yun}
+                <input type="button" value="请选择" class="yun_admin_select_box_text" id="user_edu_name" onClick="select_click('user_edu');">
+                <input name="edu" type="hidden" id="user_edu_val" value="0">
+                 
+                {yun:}/if{/yun}
+                <div class="yun_admin_select_box_list_box dn" id="user_edu_select"> {yun:}foreach from=$userdata.user_edu key=j item=v{/yun}
+                  <div class="yun_admin_select_box_list"> <a href="javascript:;" onClick="select_new('user_edu','{yun:}$v{/yun}','{yun:}$userclass_name[$v]{/yun}')">{yun:}$userclass_name[$v]{/yun}</a> </div>
+                  {yun:}/foreach{/yun} </div>
+              </div></td>
+          </tr>
+          <tr  class="admin_table_trbg">
+            <th>联系手机：</th>
+            <td><input type="text" value="{yun:}$com_info.moblie{/yun}" name="moblie" class="input-text">
+              <font color="gray"></font></td>
+            <th>E-mail：</th>
+            <td><input type="text" value="{yun:}$com_info.email{/yun}" name="email" class="input-text">
+              <font color="gray"></font></td>
+          </tr>
+          <tr>
+            <th>户籍所在地：</th>
+            <td><input name="domicile" type="text" class="input-text" maxlength="255" size="40" value="{yun:}$row.domicile{/yun}"  /></td>
+            <th>现居住地：</th>
+            <td><input name="living" type="text" class="input-text" maxlength="255" size="40" value="{yun:}$row.living{/yun}"  /></td>
+          </tr>
+          <tr>
+            <th>婚姻状况：</th>
+            <td><div class="yun_admin_select_box z_index2"> {yun:}if $row.marriage{/yun}
+                {yun:}foreach from=$userdata.user_marriage key=j item=v{/yun}
+                {yun:}if $row.marriage==$v{/yun}
+                <input type="button" value="{yun:}$userclass_name[$v]{/yun}" class="yun_admin_select_box_text" id="user_marriage_name" onClick="select_click('user_marriage');">
+                <input name="marriage" type="hidden" id="user_marriage_val" value="{yun:}$v{/yun}">
+                 
+                {yun:}/if{/yun}
+                {yun:}/foreach{/yun}
+                {yun:}else{/yun}
+                <input type="button" value="请选择" class="yun_admin_select_box_text" id="user_marriage_name" onClick="select_click('user_marriage');">
+                <input name="marriage" type="hidden" id="user_marriage_val" value="0">
+                 
+                {yun:}/if{/yun}
+                <div class="yun_admin_select_box_list_box dn" id="user_marriage_select"> {yun:}foreach from=$userdata.user_marriage key=j item=v{/yun}
+                  <div class="yun_admin_select_box_list"> <a href="javascript:;" onClick="select_new('user_marriage','{yun:}$v{/yun}','{yun:}$userclass_name[$v]{/yun}')">{yun:}$userclass_name[$v]{/yun}</a> </div>
+                  {yun:}/foreach{/yun} </div>
+              </div></td>
+            <th>身高：</th>
+            <td><input type="text" name="height" class="admin_comedity_text" value="{yun:}$row.height{/yun}" size="10" onKeyUp="this.value=this.value.replace(/[^0-9.]/g,'')"/>
+              CM </td>
+          </tr>
+          <tr class="admin_table_trbg">
+            <th>民族：</th>
+            <td><input type="text" name="nationality" class="admin_comedity_text"  value="{yun:}$row.nationality{/yun}" size="15"/></td>
+            <th>体重：</th>
+            <td><input type="text" name="weight" class="admin_comedity_text" value="{yun:}$row.weight{/yun}" size="12" onKeyUp="this.value=this.value.replace(/[^0-9.]/g,'')"/>
+              kg </td>
+          </tr>
+          <tr>
+            <th>证件号码：</th>
+            <td><input name="idcard" type="text" size="30" class="input-text" maxlength="20" value="{yun:}$row.idcard{/yun}" onKeyUp="this.value=this.value.replace(/[^0-9Xx.]/g,'')"/></td>
+            <th>座机：</th>
+            <td><input name="telhome" type="text" size="30" class="input-text" value="{yun:}$row.telhome{/yun}" onKeyUp="this.value=this.value.replace(/[^0-9-.]/g,'')"/></td>
+          </tr>
+          <tr class="admin_table_trbg">
+            <th >详细地址：</th>
+            <td ><input name="address" type="text" class="input-text" maxlength="255" size="40" value="{yun:}$row.address{/yun}"  /></td>
+            <th>个人主页/博客：</th>
+            <td><input name="homepage" type="text" class="input-text" maxlength="255" size="40" value="{yun:}$row.homepage{/yun}"  /></td>
+          </tr>
+          <tr class="admin_table_trbg">
+            <th >QQ：</th>
+            <td colspan="4"><input name="qq" type="text" class="input-text" value="{yun:}$row.qq{/yun}"  /></td>
+          </tr>
+          <tr class="admin_table_trbg">    
+            <th width="160">个人二维码：</th>
+                <td colspan="4"><input  type="file"  name="wxewm" class="input-text input_text_bg">
+                {yun:}if $row.wxewm{/yun}
+                <img src="{yun:}$config.sy_weburl{/yun}{yun:}$row.wxewm{/yun}" width="100" height="100">
+                {yun:}/if{/yun}
+                </td>
+           </tr>
+          <tr>
+          <tr class="admin_table_trbg">
+            <th>自我介绍：</th>
+            <td colspan="3"><textarea name="description" id="description" class="admin_comdit_textarea">{yun:}$row.description{/yun}</textarea></td>
+          </tr>
+          <tr>
+            <td colspan="4" bgcolor="#f0f6fb"><div class="admin_bold">其他信息</div></td>
+          </tr>
+          <tr  class="admin_table_trbg"> {yun:}if is_array($com_info){/yun}
+            <th>最近登录时间：</th>
+            <td><div class="yun_admin_divh">{yun:}$com_info.login_date|date_format:'%Y-%m-%d'{/yun}<font color="gray"></font></div></td>
+            {yun:}/if{/yun}
+            
+            {yun:}if is_array($com_info){/yun}
+            <th>注册时间：</th>
+            <td><div class="yun_admin_divh">{yun:}$com_info.reg_date|date_format:'%Y-%m-%d'{/yun}<font color="gray"></font></div></td>
+            {yun:}/if{/yun} </tr>
+          <tr> {yun:}if is_array($com_info){/yun}
+            <th>注册IP：</th>
+            <td><div class="yun_admin_divh">{yun:}$com_info.reg_ip{/yun}<font color="gray"></font></div></td>
+            {yun:}/if{/yun}
+            
+            
+            {yun:}if is_array($com_info){/yun}
+            <th>登录IP：</th>
+            <td><div class="yun_admin_divh">{yun:}$com_info.login_ip{/yun}<font color="gray"></font></div></td>
+            {yun:}/if{/yun} </tr>
+          <tr> <font color="gray"></font> {yun:}if is_array($com_info){/yun}
+            <th>登录次数：</th>
+            <td><div class="yun_admin_divh">{yun:}$com_info.login_hits{/yun}<font color="gray"></font></div></td>
+            {yun:}/if{/yun} </tr>
+          <tr>
+            <th>状态：</th>
+            <td colspan="3"><label><span class="admin_radio_box">
+                <input type="radio" {yun:}if $com_info.status=='1'{/yun}checked{yun:}/if{/yun} name="status" value="1"class="admin_radio_box_r">
+                正常</span></label>
+              <label><span class="admin_radio_box">
+                <input type="radio" readonly {yun:}if $com_info.status=='2'{/yun}checked{yun:}/if{/yun} name="status" value="2"class="admin_radio_box_r">
+                锁定</span></label>
+              <font color="gray"></font></td>
+          </tr>
+          <tr>
+            <td align="center" colspan="4"> {yun:}if is_array($com_info){/yun}
+              <input type="hidden" name="uid" id="uid" value="{yun:}$com_info.uid{/yun}" />
+              <input type="hidden" name="lasturl" value="{yun:}$lasturl{/yun}">
+              <input class="admin_submit4" type="submit" name="com_update" value="&nbsp;修 改&nbsp;" />
+              {yun:}else{/yun}
+              <input class="admin_submit4" type="submit" name="com_add" value="&nbsp;添 加&nbsp;" />
+              {yun:}/if{/yun}
+              <input class="admin_submit4" type="reset" name="reset" value="&nbsp;重 置 &nbsp;" /></td>
+          </tr>
+        </table>
+        <input type="hidden" name="pytoken" id="pytoken" value="{yun:}$pytoken{/yun}">
+      </form>
+    </div>
+  </div>
+</div>
+</body>
+</html>

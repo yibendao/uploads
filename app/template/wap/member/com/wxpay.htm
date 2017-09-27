@@ -1,0 +1,70 @@
+{yun:}include file="$wapstyle/member/cheader.htm"{/yun}
+<section class="wap_member">
+  <div class="wap_member_comp_h1" style="position:relative"><span>微信支付</span></div>
+  <div class="yun_wap_addresume_box" > 
+
+    
+    <form name='alipayment' onSubmit="return CheckForm(this);" action="index.php?c=pay" method="post">
+		
+      <div class="yun_wap_addresume_box_group" style="background: transparent; border: none;">
+	  {yun:}if $wxpay{/yun}
+        <input type="button" value="微信支付" class="reinputText2" id="wxpay">
+	  {yun:}/if{/yun}
+
+	   {yun:}if $alipay{/yun}
+        <input type="button" value="支付宝支付" class="reinputText2" id="alipay">
+	  {yun:}/if{/yun}
+	
+      </div>
+    </form>
+    </div>
+  </div>
+</section>
+
+<script src="{yun:}$wap_style{/yun}/js/wx.sdk.js" language="javascript"></script>
+<script>
+	var id = '{yun:}$id{/yun}';
+	
+	
+  
+	function jsApiCall()
+	{
+	
+		
+		WeixinJSBridge.invoke(
+			'getBrandWCPayRequest',
+			{yun:}$jsApiParameters{/yun},
+			function(res){
+
+				if(res.err_msg == "get_brand_wcpay_request:ok" ) {
+					layermsg('支付成功！',2,function(){location.href = 'index.php?c=com';});
+				}else{
+					layermsg(res.err_code+res.err_desc+res.err_msg,2,function(){location.href = 'index.php?c=pay';});	
+				}
+				
+			}
+		);
+			
+		
+		
+	}
+	$(document).ready(function(){
+	
+		
+		
+		if (typeof WeixinJSBridge == "undefined"){
+			if( document.addEventListener ){
+				document.addEventListener('WeixinJSBridgeReady', jsApiCall, false);
+			}else if (document.attachEvent){
+				document.attachEvent('WeixinJSBridgeReady', jsApiCall); 
+				document.attachEvent('onWeixinJSBridgeReady', jsApiCall);
+			}
+		}else{
+			jsApiCall();
+		}
+	
+		
+	});
+</script>
+
+{yun:}include file="$wapstyle/footer.htm"{/yun} 

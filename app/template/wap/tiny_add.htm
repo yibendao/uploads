@@ -1,0 +1,123 @@
+{yun:}include file="$wapstyle/header_cont.htm"{/yun}
+<div class="post_content" style="padding-top:0px;">
+  <div class="resume-cont" style="margin-top:0px;">
+    <div class="resume-cont_zk" style="padding-top:0px; background:#fff; padding:10px;">
+      <form action="{yun:}$config_wapdomain{/yun}/index.php?c=tiny&a=add" method="post" onsubmit="return cktiny(this)">
+        <div class="resume-cont_wate">
+          <dl class="resume-cont_wate_list">
+            <dt>姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名<span class="x_cor">*</span></dt>
+            <dd>
+              <input type="text" name="username" value="{yun:}$row.username{/yun}" class="reinputText">
+            </dd>
+          </dl>
+          <dl class="resume-cont_wate_list">
+            <dt>性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别<span class="x_cor">*</span></dt>
+            <dd>
+            <div class="tiny_sex_box">
+            <input type="hidden" id="sex" name="sex" value="{yun:}$row.sex{/yun}" /> 
+             {yun:}foreach from=$arr_data.sex key=j item=v{/yun}    
+           <span class="yun_info_sex {yun:}if $row.sex==$j{/yun}yun_info_sex_cur{yun:}/if{/yun}" id="sex{yun:}$j{/yun}" onclick="checksex('{yun:}$j{/yun}')"><i class="usericon_sex usericon_sex{yun:}$j{/yun}"></i>{yun:}$v{/yun}</span>
+           
+            {yun:}/foreach{/yun}    
+           
+           
+           </div>
+            
+            </dd>
+          </dl>
+          <dl class="resume-cont_wate_list">
+            <dt>联系手机<span class="x_cor">*</span></dt>
+            <dd>
+              <input type="text" name="mobile" value="{yun:}$row.mobile{/yun}" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" class="reinputText">
+            </dd>
+          </dl>
+          <dl class="resume-cont_wate_list">
+            <dt>工作年限<span class="x_cor">*</span></dt>
+            <dd>
+              <div class="mLeft12 relative">
+                <div class="selectOption_sex">
+                  <select name="exp" id='exp'>   
+                   <option value="">请选择</option>                 
+				    {yun:}foreach from=$userdata.user_word item=user_word{/yun}                    
+                    <option value="{yun:}$user_word{/yun}" {yun:}if $row.exp==$user_word{/yun}selected="select"{yun:}/if{/yun}>{yun:}$userclass_name[$user_word]{/yun}</option>
+				    {yun:}/foreach{/yun} 
+                  </select>
+                </div>
+              </div>
+            </dd>
+          </dl>
+          <dl class="resume-cont_wate_list">
+            <dt>想要找？<span class="x_cor">*</span></dt>
+            <dd>
+              <input type="text" name="job" id="job" value="{yun:}$row.job{/yun}" class="reinputText" placeholder="填写工作名称，如：服装厂操作工">
+            </dd>
+          </dl>
+          <dl class="resume-cont_wate_list">
+            <dt>自我介绍</dt>
+            <dd>
+              <textarea id="production" class="once_textAreaMsg tip" placeholder="请填写你擅长的工作，例如：电机熟练工，能吃苦耐劳" name="production">{yun:}$row.production{/yun}</textarea>
+            </dd>
+          </dl>
+		  {yun:}if $row.id==''{/yun} 
+          <dl class="resume-cont_wate_list">
+            <dt>设置密码<span class="x_cor">*</span></dt>
+            <dd>
+              <input type="password" name="password" onkeyup="this.value=this.value.replace(/^ +| +$/g,'')" class="reinputText reinputText_w100">
+              <span class="once_cont_wate_list_tips">密码可用于刷新/修改/删除此信息</span>
+            </dd>
+          </dl> 
+		  {yun:}else{/yun}
+		  <dl class="resume-cont_wate_list">
+            <dt>密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码<span class="x_cor">*</span></dt>
+            <dd>
+              <input type="password" name="password" onkeyup="this.value=this.value.replace(/^ +| +$/g,'')" class="reinputText reinputText_w100"> 
+            </dd>
+          </dl> 
+          {yun:}/if{/yun}
+		  {yun:}if strpos($config.code_web,"店铺招聘")!==false{/yun}
+		 
+		  {yun:}if $config.code_kind==3{/yun}	
+			<dl class="resume-cont_wate_list">
+          <dt>安全验证<span class="x_cor">*</span></dt>
+          <dd>
+          	 
+				<div id="mask"></div>
+				<div id="popup-captcha-mobile" data-id='subreg' data-type='click'></div>
+				<input type='hidden' id="popup-submit">
+           </dd>
+        </dl>
+			<style>
+            .geetest_holder.geetest_wind{    min-width: 160px;}
+            </style>
+				{yun:}else{/yun}
+
+		<dl class="resume-cont_wate_list">
+          <dt>验证码：<span class="x_cor">*</span></dt>
+          <dd>
+            <input type="text" name="checkcode" id="checkcode"  class="reinputText reinputText_w100">
+			 <div class="fast_img">
+              <img id="vcode_img" class="authcode" src="{yun:}$config.sy_wapdomain{/yun}/authcode.inc.php" onclick="checkCode('vcode_img');"/>
+              <input type="hidden" id="code_kind" value="1" />
+              </div>
+          </dd>
+        </dl>
+
+         
+			
+			{yun:}/if{/yun}
+		{yun:}/if{/yun}
+          <dl class="resume-cont_wate_list mt10">
+              <input type='hidden' name="id" value="{yun:}$row.id{/yun}">
+              <input type="submit" name="submit" value="发布简历"  class="inputSubmit" >
+           
+          </dl>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<script src="{yun:}$wap_style{/yun}/js/prefixfree.min.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/layer/layer.m.js" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/public.js" language="javascript"></script>
+<div class="yun_text_fooeter">{yun:}include file="$wapstyle/footer.htm"{/yun} </div>

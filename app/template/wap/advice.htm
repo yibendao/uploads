@@ -1,0 +1,80 @@
+{yun:}include file="$wapstyle/header_cont.htm"{/yun}
+<div class=" company_msg_pl">
+ <div class="advice_list_h1">您的建议让我们每天变的更好</div>
+  <div class="advice_list_p">用户您好，请将您的意见、想法、建议或投诉内容告诉我们，以帮助我们为全体用户提供更加优质的服务。我们将在第一时间及时回复您的反馈，如您的问题比较紧急，请致电服务热线!
+ </div> <div >客服热线：{yun:}$config.sy_freewebtel{/yun} </div>
+  </div>
+ 
+ 
+ <div class="advice_box">
+<div class="advice_list"><span class="advice_list_s">意见类型</span>
+<span class="advice_list_fs "  data-code="1">建议</span>
+<span class="advice_list_fs"  data-code="2">意见</span>
+<span class="advice_list_fs"  data-code="3">求助</span>
+<span class="advice_list_fs"  data-code="4">投诉</span>
+ <input type="hidden" name="infotype"   />
+</div>
+<div class="advice_list"><span class="advice_list_s">联系人</span><input class="advice_list_text" name="username" id="username" type="text" placeholder="请输入您的姓名" value=""  ></div>
+<div class="advice_list"><span class="advice_list_s">联系手机</span><input class="advice_list_text" name="moblie" id="moblie" type="text" placeholder="请输入手机号" value="" ></div>
+<div class="advice_list"><span class="advice_list_s">反馈内容</span><textarea class="advice_list_textarea" id="content" name="content" data-id="{yun:}$id{/yun}"></textarea></div>
+<div class="advice_list"><span class="advice_list_s">验证码</span>
+<input class="zx_yx_input" id="msg_CheckCode" type="text" placeholder="请输入验证码" value="" maxlength="4" name="authcode">
+		<img class="advice_list_yzm" id="vcode_imgs" src="{yun:}$config.sy_wapdomain{/yun}/authcode.inc.php" onclick="checkCode('vcode_imgs');"></div>
+<div class="advice_list_but">	<input class="program_reply_pl" type="submit" name="submit" value="提交" onclick="advice('vcode_imgs');" ></div>
+</div>
+<input type="hidden" id="code_kind" value="1" />
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/layer/layer.m.js" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/public.js" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/prefixfree.min.js" language="javascript"></script>
+<script>
+
+$(document).ready(function(){
+	$("#username,#telphone,#content,#txt_CheckCode").focus(function(){
+		var txValue = $(this).val();
+		if( txValue == this.defaultValue){$(this).val("");}
+	});
+    $('.advice_list_fs').click(function(event) {
+        $('.advice_list_fs').each(function(index, el) {
+            $(this).removeClass('advice_list_fs_cur');
+        });
+        $(this).addClass('advice_list_fs_cur');
+        $('input[name="infotype"]').val($(this).data('code'));
+		
+
+    });
+});
+function advice(img){
+	var infotype=$.trim($('input[name="infotype"]').val());
+	var content=$.trim($("#content").val());
+	var username=$.trim($("#username").val());
+	var moblie=$.trim($("#moblie").val());
+    var authcode=$.trim($("#msg_CheckCode").val());
+    var reg= /^[1][034578]\d{9}$/;
+	if(infotype==''){layermsg("请选择意见类型",2,8);return false;}
+	if(username==""){layermsg('联系人不能空!',2,8);return false;}
+	if(moblie==""){layermsg('联系手机不能为空!',2,8);return false;}else if(!reg.test(moblie)){layermsg('手机格式错误!',2,8);return false}
+	if(content==""){layermsg('反馈内容不能为空!',2,8);return false;}
+	if(authcode==""){layermsg('验证码不能为空!',2,8);return false;}
+    $.post(wapurl+"/index.php?c=advice&a=saveadd",{infotype:infotype,content:content,username:username,moblie:moblie,authcode:authcode},function(data){
+        if(data=="0"){
+            layermsg('验证码错误!',2,function(){checkCode(img)});return false;
+        }else if(data=="2"){
+            layermsg('请选择意见类型!',2,function(){checkCode(img)});return false;
+        }else if(data=="3"){
+            layermsg('请填写联系人姓名!',2,function(){checkCode(img)});return false;
+        }else if(data=="4"){
+            layermsg('请填写联系手机!',2,function(){checkCode(img)});return false;
+        }else if(data=="5"){
+            layermsg('请填写反馈内容!',2,function(){checkCode(img)});return false;
+        }else if(data=="6"){
+            layermsg('请填写验证码!',2,function(){checkCode(img)});return false;
+        }else if(data==1){
+            layermsg('提交成功,感谢你的反馈！',2,function(){window.location.href='index.php?c=advice'});return false;
+        }else{
+        	 layermsg('提交失败，请重新填写！',2,function(){window.location.href='index.php?c=advice'});return false;
+        }
+    });	
+}
+</script>
+{yun:}include file="$wapstyle/footer.htm"{/yun}

@@ -1,0 +1,15 @@
+<div class="answer_left_sidebar fl">
+  <div class="answer_left_sidebar_tit">{yun:}if $uid && ($smarty.get.uid=='' || $smarty.get.uid==$uid){/yun} 我的消息{yun:}elseif $smarty.get.uid{/yun}他的消息{yun:}/if{/yun}</div>
+  <ul>
+  {yun:}if $uid && ($smarty.get.uid=='' || $smarty.get.uid==$uid){/yun} 
+    <li  {yun:}if $smarty.get.a=='myquestion'{/yun}class="answer_left_cur"{yun:}/if{/yun}>{yun:}if $smarty.get.type=='types'{/yun}<i class="answer_left_line"></i>{yun:}/if{/yun} <a href="{yun:}if $uid{/yun}{yun:}url m=ask c=friend a=myquestion  uid=$uid{/yun}{yun:}else{/yun}{yun:}url m=login{/yun}{yun:}/if{/yun}">我的提问</a></li>
+    <li {yun:}if $smarty.get.a=='myanswer'{/yun}class="answer_left_cur"{yun:}/if{/yun}><span ><a href="{yun:}if $uid{/yun}{yun:}url m=ask c=friend a=myanswer  uid=$uid{/yun}{yun:}else{/yun}{yun:}url m=login{/yun}{yun:}/if{/yun}">我的回答</a></span></li>
+    <li {yun:}if $smarty.get.a=='attenquestion'{/yun}class="answer_left_cur"{yun:}/if{/yun}><span ><a href="{yun:}if $uid{/yun}{yun:}url m=ask c=friend a=attenquestion  uid=$uid{/yun}{yun:}else{/yun}{yun:}url m=login{/yun}{yun:}/if{/yun}">我的关注</a></span> </li>
+    {yun:}elseif $smarty.get.uid{/yun}
+     <li  {yun:}if $smarty.get.a=='myquestion'{/yun}class="answer_left_cur"{yun:}/if{/yun}>{yun:}if $smarty.get.type=='types'{/yun}<i class="answer_left_line"></i>{yun:}/if{/yun} <a href="{yun:}if $uid{/yun}{yun:}url m=ask c=friend a=myquestion  uid=$smarty.get.uid{/yun}{yun:}else{/yun}{yun:}url m=login{/yun}{yun:}/if{/yun}">他的提问</a></li>
+    <li {yun:}if $smarty.get.a=='myanswer'{/yun}class="answer_left_cur"{yun:}/if{/yun}><span ><a href="{yun:}if $uid{/yun}{yun:}url m=ask c=friend a=myanswer  uid=$smarty.get.uid{/yun}{yun:}else{/yun}{yun:}url m=login{/yun}{yun:}/if{/yun}">他的回答</a></span></li>
+    <li {yun:}if $smarty.get.a=='attenquestion'{/yun}class="answer_left_cur"{yun:}/if{/yun}><span ><a href="{yun:}if $uid{/yun}{yun:}url m=ask c=friend a=attenquestion  uid=$smarty.get.uid{/yun}{yun:}else{/yun}{yun:}url m=login{/yun}{yun:}/if{/yun}">他的关注</a></span> </li>
+    
+    {yun:}/if{/yun}
+  </ul>
+</div>

@@ -1,0 +1,39 @@
+@charset "gb2312";
+/* CSS Document */
+*{ margin:0; padding:0;}
+a{ text-decoration:none;color:#555}
+ul ,li{ list-style:none}
+.clear{ clear:both}
+.yun_tck {width: 620px;height:440px; float:left; background:#fff; }
+.yun_tck_tit{width:100%;height:42px; background:#ececec; position:relative}
+.yun_tck_tit_span{ font-size:16px; line-height:42px; display:inline-block; padding-left:10px;}
+.yun_tck_tit_close{ position:absolute;right:15px;top:10px;}
+.yun_tck .yun_tck_title {width:100%; float:left; padding:10px 0;}
+.yun_tck_title_box{ padding:0px 10px;}
+.yun_tck_tit_xz{width:100%; float:left}
+.yun_tit_selected{width:100%; float:left }
+.yun_tck_tit_xz_l{ float:left}
+.yun_tck_tit_xz_r{ float:left;color:#999; font-size:12px;}
+.yun_tit_selected .selected {min-height: 26px;}
+.yun_tit_selected .selected li {float: left;margin-top:6px; margin-right:5px;}
+.yun_tit_selected .selected li a {background: url(../images/pickpad.gif) no-repeat left top ;cursor: default;float: left;height: 20px;line-height: 20px;margin: 0 2px;padding-left: 8px;white-space: nowrap;}
+.yun_tit_selected .selected li .delete {background: url(../images/pickpad.gif) no-repeat right top ;cursor: pointer;display: inline-block;height: 20px;margin-left: 6px;text-indent: -99999px;width: 20px;}
+.yun_tit_selected .selected li a:hover {background-position: left bottom;color: #333333;text-decoration:none}
+.yun_tit_selected .selected li a:hover .delete { background-position: right bottom;} 
+.yun_tck .yun_tck_con .yun_tck_con_list {margin: 0 5px;float: left;width: 188px;height: 253px;border:1px solid #d9d9d9;display: inline}
+.yun_tck_con .lst3 i.yun_tck_con_icon {display: none}
+.yun_tck_con ul {height: 100%;overflow: auto}
+.yun_tck .yun_tck_con .yun_tck_con_list li {height: 26px;line-height: 26px;overflow: hidden;padding: 0 7px;color: #666}
+.yun_tck .yun_tck_con .yun_tck_con_list li {padding: 0 15px;cursor: pointer;}
+.yun_tck .yun_tck_con .yun_tck_con_list li input {vertical-align: middle;_vertical-align: -2px;_margin-top: 3px}
+.yun_tck .yun_tck_con .yun_tck_con_list li.cur {color: #E95A5A;font-weight: bold}
+.yun_tck .group ul.subselect li {padding-left: 28px}
+.yun_tck .group ul.subselect .first {padding-left: 7px}
+.yun_tck .yun_tck_con .yun_tck_con_list li.cu, .yun_tck .yun_tck_con .yun_tck_con_list li.hover, .yun_tck .yun_tck_con .yun_tck_con_list li:hover {background: #E5E9F2}
+.yun_tck .yun_tck_con .yun_tck_con_list li i {float: right;line-height: 26px;font-size: 12px}
+.yun_tck .actions {margin: 20px 0;text-align: center;display: block;}
+.yun_tck .actions button {margin: 0 3px}
+.button_a {width:60px;display:inline-block; font-family:Î¢ÈíÑÅºÚ;height: 28px;background:#ccc;border:none;color:#333; margin-right:10px; cursor:pointer}
+
+.button_a_red {background:#2483bb;color:#fff}
+.yun_tck .yun_tck_con .yun_tck_con_list .selected{ font-weight:bold; color:red;}

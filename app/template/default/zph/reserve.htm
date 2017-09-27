@@ -1,0 +1,235 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>{yun:}$title{/yun}</title>
+<meta name="keywords" content="{yun:}$keywords{/yun}"/>
+<meta name="description" content="{yun:}$description{/yun}"/>
+<link rel="stylesheet" href="{yun:}$style{/yun}/style/css.css" type="text/css"/>
+<link rel="stylesheet" href="{yun:}$style{/yun}/style/yun_job_fairs.css" type="text/css"/>
+</head>
+<body>
+{yun:}include file="$tplstyle/header.htm"{/yun}
+<div class="yun_content">
+  <div class="current_Location"> 您当前的位置：<a href="{yun:}$config.sy_weburl{/yun}">首页</a> > <a href="{yun:}url m=zph{/yun}">招聘会</a> > 在线预订</div>
+  <div class="job_fairs fl">
+    <div class="job_fairs_box fl ">
+      <div class="zph_det_tit">
+        <h2>{yun:}$Info.title{/yun}</h2>
+      </div>
+      <div class="job_fairs_box_left fr">
+        <div class="zph_detail">
+          <ul class="job_fairs_box_ul">
+           <li><i class="zph_icon zph_icon_fm"></i><span>主 办 方：</span>{yun:}$Info.organizers{/yun}</li>
+           <li><i class="zph_icon zph_icon_time"></i><span>举办时间：</span>{yun:}$Info.starttime{/yun}至{yun:}$Info.endtime{/yun}</li>
+           <li><i class="zph_icon zph_icon_add"></i><span>举办会场：</span>{yun:}$Info.address{/yun}</li>
+            <li><i class="zph_icon zph_icon_tel"></i><span>咨询电话：</span>{yun:}$Info.phone{/yun} </li>
+            <li><i class="zph_icon zph_icon_per"></i><span>联 系 人：</span>{yun:}$Info.user{/yun}</li>
+          <li><i class="zph_icon zph_icon_road"></i><span>交通路线：</span>{yun:}$Info.traffic{/yun}</li>
+          </ul>
+        </div>
+        <div class="job_fairs_sub car_order_con " style="padding-top:0px;">
+          <input id="zph_etime" value='{yun:}$Info.etime{/yun}' type="hidden"/>
+          <input id="zph_stime" value='{yun:}$Info.stime{/yun}' type="hidden"/>
+        </div>
+      </div>
+      <div class="job_fairs_box_right fl"> <img src="{yun:}$Info.is_themb{/yun}" width="388" height="220" onerror="showImgDelay(this,'{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_logo{/yun}',2);"> </div>
+      {yun:}if $Info.stime<'0' && $Info.etime>'0'{/yun}
+      <div class="job_fairs_In fairs_Status png" >预定中</div>
+      {yun:}elseif $Info.etime<'0'{/yun}
+      <div class="job_fairs_end fairs_Status png" >已举办</div>
+      {yun:}else{/yun}
+      <div class="job_fairs_nostart fairs_Status png" >已开始</div>
+      {yun:}/if{/yun} </div>
+  </div>
+  
+  <div class="fairs_introduction fl">
+    {yun:}if $space.pic{/yun}
+    <div class="fairs_introduction_h1"> <span class=" png">招聘会展位图</span> </div>
+    <div class="fairs_display"> <img src="{yun:}$config.sy_weburl{/yun}/{yun:}$space.pic{/yun}"  class="png" /> </div>
+    {yun:}/if{/yun}
+    <div class="fairs_introduction_h1"> <span class=" png">招聘会展位在线预订</span> </div>  
+    <div class="job_fairs_main  fl" >
+      <div class="fairs_title fl">
+        <div class="fairs_title_h fl">招聘会展位预定</div>
+        <div class="fairs_title_list fl">
+          <dl class="fairs_title_items fl">
+            <dt><img src="{yun:}$style{/yun}/images/fairs_no.png" /></dt>
+            <dd>不可预定</dd>
+          </dl>
+          <dl class="fairs_title_items fl">
+            <dt><img src="{yun:}$style{/yun}/images/fairs_have.png"/></dt>
+            <dd>已被预定</dd>
+          </dl>
+          <dl class="fairs_title_items fl">
+            <dt><img src="{yun:}$style{/yun}/images/fairs_can.png"/></dt>
+            <dd>可以预定</dd>
+          </dl>
+          <dl class="fairs_title_items fl">
+            <dt><img src="{yun:}$style{/yun}/images/fairs_start.png"/></dt>
+            <dd>审核中</dd>
+          </dl>
+        </div>
+      </div>
+      {yun:}foreach item=v from=$spacelist{/yun}
+      <div class="fairs_display_con fl">
+        <div class="fairs_display_left fl"> {yun:}$v.name{/yun} </div>
+        <div class="fairs_display_right fl">
+          <div class="fairs_display_list fl">
+          {yun:}foreach item=val key=key from=$v.list{/yun}
+            <div class="fairs_disp_a fairs_disp_position" aid="{yun:}$val.id{/yun}">
+              
+              {yun:}if in_array({yun:}$val.id{/yun},$reserved){/yun}
+              <dl class="fairs_disp_items fl">
+              <dt><img src="{yun:}$style{/yun}/images/fairs_no.png"/></dt>
+                <dd>{yun:}$val.name{/yun} </dd>
+              </dl>
+              {yun:}elseif $val.comstatus==0 ||  $val.comstatus==1{/yun}
+              <dl class="fairs_disp_items fl">
+               	{yun:}if $val.comstatus==0{/yun}
+                <dt><img src="{yun:}$style{/yun}/images/fairs_start.png"/></dt>
+                {yun:}else{/yun}
+                <dt><img src="{yun:}$style{/yun}/images/fairs_have.png"/></dt>
+                {yun:}/if{/yun}
+                <dd>{yun:}$val.name{/yun} </dd>
+              </dl>
+              <div class="order_two none" id="showstatus{yun:}$val.id{/yun}"> 
+					<h4><a href="{yun:}url m=company c=show id=$val.uid{/yun}" target="_blank"> {yun:}$val.comname|mb_substr:0:14:'gbk'{/yun} </a>已预订</h4>
+					<div class="vip_zph_list" >
+                    <div class="vip_zph_list_t"> 参加的职位：</div>
+    					{yun:}foreach item=value from=$val.joblist{/yun}
+    	        		<div class="vip_menutwo_list">
+                        <a href="{yun:}url m=job c=comapply id=$value.id{/yun}"  target="_blank" class="vip_menutwo_list_a">{yun:}$value.name{/yun}</a>
+                        <span class="vip_menutwo_list_date">({yun:}$value.lastupdate|date_format:"%Y-%m-%d"{/yun})</span></div>
+		                 {yun:}/foreach{/yun}
+		        	</div>
+                    
+                    
+              </div> 
+              {yun:}elseif $val.comstatus=="-1"||  $val.comstatus==2{/yun}
+              <dl class="fairs_disp_items fl" onclick="clickzph('{yun:}$val.id{/yun}','{yun:}$Info.id{/yun}','{yun:}$val.price{/yun}{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}');">
+                <dt><img src="{yun:}$style{/yun}/images/fairs_can.png"/></dt>
+                <dd>{yun:}$val.name{/yun} </dd>
+              </dl>
+              <div class="order_two none" id="showstatus{yun:}$val.id{/yun}">
+                <h4>雇主状态可预订</h4>
+                <div class="vip_zph_n_box">
+               <div class="vip_zph_n"> 展位号：{yun:}$val.name{/yun}</div>
+               <div class="vip_zph_money">展位价格：{yun:}$val.price{/yun}{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun} </div>
+               <div class="vip_zph_yd"><a href="javascript:void(0);" onclick="clickzph('{yun:}$val.id{/yun}','{yun:}$Info.id{/yun}','{yun:}$val.price{/yun}{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}');">立即预订</a></div>
+                  
+                </div>
+              </div>
+              {yun:}/if{/yun}
+
+              
+            </div>
+            {yun:}if ($key+1)%18==0{/yun}
+           </div><div class="fairs_display_list fl">
+           {yun:}/if{/yun}
+          {yun:}/foreach{/yun}
+          </div>
+          
+        </div>
+      </div>
+      {yun:}/foreach{/yun}
+      <div class="clear"></div>
+      
+      <div id="TB_window"  class="Corporate_box none">
+        <div id="error_zph" class="error_zph"></div>
+        <div id="TB_ajaxContent" class="Corporate_box_cont" style="padding:10px;">
+        <input id="bid" value="0" type="hidden"/>
+        <input id="zid" value="{yun:}$Info.id{/yun}" type="hidden"/>
+          <div class="zph_tck_box_close">参与的招聘会名称：</div>
+          <div class="zph_tck_box_bg" style="padding:5px; margin-top:5px; "> <span id="zph_name">{yun:}$Info.title{/yun}</span> </div>
+          <div class="zph_tck_box_close_post">
+            <div style="width:100%"><span style="color:#666">展位价格：</span><span id="zph_price"></span></div>
+            <div style="width:100%"><span style="color:#666">时间：</span>{yun:}$Info.starttime{/yun}至{yun:}$Info.endtime{/yun}</div>
+            <div style="width:100%"> <span style="color:#666">地点：</span>{yun:}$Info.address{/yun}</div>
+            <div class="zph_tck_box_close">选择参与招聘会的职位：</div>
+            <div id="joblist" class="zph_tck_post" style="padding-bottom:5px;"></div>
+          </div>
+          <div class="Corporate_box_subs fl">
+            <div style="width:200px;margin:0 auto;">
+            <input type='button' value="提交" onclick="submitzph()" class="Corporate_box_bth fl"/>
+            <input id="usertype" value="{yun:}$usertype{/yun}" type="hidden"/>
+            <div id="zphaddjob" style="width:100px;float:left;"></div> </div>
+            </div>
+        </div>
+      </div>
+      
+      
+      <div class="fairs_explain fl">
+        <p>展位说明：{yun:}$space.content{/yun}</p>
+      </div>
+    </div>
+  </div>
+  <div class="fairs_introduction fl"> {yun:}if $Info.body{/yun}
+    <div class="fairs_introduction_h1"><span class=" png">招聘会介绍</span></div>
+    <div class="fairs_introduction_p"> {yun:}$Info.body{/yun} </div>
+    {yun:}/if{/yun}
+    {yun:}if $Info.media{/yun}
+    <div class="fairs_introduction_h1"><span class=" png"> 媒体宣传</span></div>
+    <div class="fairs_introduction_p"> {yun:}$Info.media{/yun} </div>
+    {yun:}/if{/yun}
+    {yun:}if $Info.packages{/yun}
+    <div class="fairs_introduction_h1"><span class=" png" >超值服务套餐</span></div>
+    <div class="fairs_introduction_p"> {yun:}$Info.packages{/yun} </div>
+    {yun:}/if{/yun}
+    {yun:}if $Info.booth{/yun}
+    <div class="fairs_introduction_h1"><span class=" png">展位设置方案</span></div>
+    <div class="fairs_introduction_p"> {yun:}$Info.booth{/yun} </div>
+    {yun:}/if{/yun}
+    {yun:}if $Info.participate{/yun}
+    <div class="fairs_introduction_h1"><span class=" png">参与办法</span></div>
+    <div class="fairs_introduction_p"> {yun:}$Info.participate{/yun} </div>
+    {yun:}/if{/yun}
+    {yun:}if $Image_info{/yun}
+    <div class="fairs_introduction_h1"><span class=" png">展会图片</span></div>
+    <div class="fairs_introduction_p" >
+      <ul class="fairs_introduction_img" id="rolling_img1">
+        {yun:}foreach item=zph from=$Image_info{/yun}
+        <li> <a class="image_gall" href="{yun:}$config.sy_weburl{/yun}{yun:}$zph.pic{/yun}"> <img src="{yun:}$config.sy_weburl{/yun}{yun:}$zph.pic{/yun}" width="215" height="153" /> </a> </li>
+        {yun:}/foreach{/yun}
+      </ul>
+    </div>
+  </div>
+  {yun:}/if{/yun} 
+ 
+</div>     </div>
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/lazyload.min.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/public.js" language="javascript"></script>
+<script src="{yun:}$style{/yun}/js/zph.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/popImage/jquery.popImage.mini.js" language="javascript"></script>
+<script src="{yun:}$style{/yun}/js/ScrollPic.js" language="javascript"></script> 
+<!--[if IE 6]>
+<script src="{yun:}$config.sy_weburl{/yun}/js/png.js"></script>
+<script>
+DD_belatedPNG.fix('.png');
+</script>
+<![endif]-->
+<script language="javascript" type="text/javascript">
+<!--//--><![CDATA[//><!--
+var li_num=$("#rolling_img1 li").length;
+if(li_num>4){
+	var scrollPic_02 = new ScrollPic();
+	scrollPic_02.scrollContId   = "rolling_img1"; 
+	scrollPic_02.arrLeftId      = "LeftArr";
+	scrollPic_02.arrRightId     = "RightArr"; 
+	scrollPic_02.frameWidth     = 1200;
+	scrollPic_02.pageWidth      = 242;
+	scrollPic_02.speed          = 10;
+	scrollPic_02.space          = 10;
+	scrollPic_02.autoPlay       = true;
+	scrollPic_02.autoPlayTime   = 2;
+	scrollPic_02.initialize();
+}
+//--><!]]> 
+$(function(){
+	$("a.image_gall").popImage();
+})
+</script>
+{yun:}include file="$tplstyle/public_search/login.htm"{/yun} 
+{yun:}include file="$tplstyle/footer.htm"{/yun}

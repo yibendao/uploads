@@ -1,0 +1,87 @@
+{yun:}include file="$wapstyle/header_cont.htm"{/yun}
+<section>
+  <div class="">
+    <div class="job_fair_contnet_box ">
+      <div class="com_show_t1">
+        <h2 style="width:90%">
+        
+        {yun:}$Info.title{/yun}
+        </h2></div>
+       <div class="job_fair_state_show_time">举办时间：{yun:}$Info.starttime{/yun} 至 {yun:}$Info.endtime{/yun}</div>
+
+    </div>
+  </div>
+</section>
+
+       
+<section>
+  <div class="mt10">
+    <div class="user_contnet_box ">
+      <div class="wap_title"><span class="">基本信息</span></div>
+      <ul class="zph_show_list">
+ <li><i class="zph_show_list_icon zph_show_list_icon_zb"></i>{yun:}$Info.organizers{/yun}</li>
+ <li><i class="zph_show_list_icon zph_show_list_icon_hc"></i>{yun:}$Info.address{/yun}</li>
+ <li><i class="zph_show_list_icon zph_show_list_icon_dh"></i>{yun:}$Info.phone{/yun}</li>
+ <li><i class="zph_show_list_icon zph_show_list_icon_user"></i>{yun:}$Info.user{/yun}</li>
+ <li><i class="zph_show_list_icon zph_show_list_icon_bus"></i>{yun:}$Info.traffic{/yun}</li>
+
+      </ul>
+    </div>
+  </div>
+</section>
+
+{yun:}if $Info.body{/yun}
+<section>
+ <div class="mt10">
+    <div class="user_contnet_box ">
+      <div class="wap_title"><span class="">招聘会介绍</span></div>
+    {yun:}$Info.body{/yun} 
+    </div>
+  </div>
+</section>
+ {yun:}/if{/yun}
+
+{yun:}if $Info.media{/yun}
+<section>
+  <div class="mt10">
+    <div class="user_contnet_box ">
+      <div class="wap_title"><span class="">媒体宣传</span></div>
+{yun:}$Info.media{/yun}    </div>
+  </div>
+</section>
+{yun:}/if{/yun}
+    {yun:}if $Info.packages{/yun}
+
+
+<section>
+  <div class="mt10">
+    <div class="user_contnet_box ">
+      <div class="wap_title"><span class="">超值服务套餐</span></div>
+{yun:}$Info.packages{/yun}</div>
+  </div>
+</section>
+{yun:}/if{/yun}
+    {yun:}if $Info.booth{/yun}
+<section>
+  <div class="mt10">
+    <div class="user_contnet_box ">
+      <div class="wap_title"><span class="">展位设置方案</span></div>
+{yun:}$Info.booth{/yun}</div>
+  </div>
+</section>
+{yun:}/if{/yun}
+    {yun:}if $Info.participate{/yun}
+
+<section>
+<div class="mt10">
+    <div class="user_contnet_box ">
+      <div class="wap_title"><span class="">参与办法</span></div>
+{yun:}$Info.participate{/yun}</div>
+  </div>
+</section>
+ {yun:}/if{/yun}
+<script src="{yun:}$wap_style{/yun}/js/prefixfree.min.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/layer/layer.m.js" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/public.js" language="javascript"></script>
+{yun:}include file="$wapstyle/footer.htm"{/yun} 

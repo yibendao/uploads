@@ -1,0 +1,235 @@
+{yun:}include file="$comstyle/header.htm"{/yun}
+<link href="{yun:}$comstyle{/yun}/images/reset.css" type=text/css rel=stylesheet>
+<script src="{yun:}$com_style{/yun}/js/echarts_plain.js"></script>
+<div class="w1000">
+<div class="admin_mainbody"> {yun:}include file="$comstyle/left.htm"{/yun}
+  <div class=right_box>
+    <div class=admincont_box >
+      <div class="com_tit"><span class="com_tit_span">招聘分析</span></div>
+      <div class="com_body"> 
+        <div class="com_stat fl">
+          <div class="com_stat_top fl">
+          <form method="get" action="index.php">
+          <input type="hidden" name="c" value="tongji" />
+            <div class="com_stat_tit fl com_stat_ti_z">
+              <input class="SpFormLBut text_seclet_w158" type="button" onclick="search_show('job_jobid');" {yun:}if $smarty.get.jobid{/yun}value="{yun:}$jobname{/yun}"{yun:}else{/yun}value="全部职位"{yun:}/if{/yun} id="jobid">
+              <input type="hidden" id="jobidid" name="jobid"  {yun:}if $smarty.get.jobid{/yun} value="{yun:}$smarty.get.jobid{/yun}"{yun:}/if{/yun}/>
+              <ul id="job_jobid" class="com_stat_job" style="display:none">
+              <li> <a href="javascript:;" onclick="selects('','jobid','全部职位');">全部职位</a> </li>
+                {yun:}foreach from=$JobList item=one{/yun}
+                <li> <a href="javascript:;" onclick="selects('{yun:}$one.id{/yun}','jobid','{yun:}$one.name{/yun}');">{yun:}$one.name{/yun}</a> </li>
+                {yun:}/foreach{/yun}
+              </ul>
+            </div>
+            <div class="com_stat_tit fl com_stat_ti_z">
+              <input class="SpFormLBut text_seclet_w158" type="button" onclick="search_show('job_type');" {yun:}if $smarty.get.type{/yun}value="{yun:}$tjtype[$smarty.get.type]{/yun}"{yun:}else{/yun}value="统计类型"{yun:}/if{/yun} id="type">
+              <input type="hidden" id="typeid" name="type"  {yun:}if $smarty.get.type{/yun} value="{yun:}$smarty.get.type{/yun}"{yun:}/if{/yun}/>
+              <ul class="com_stat_job" id="job_type" style="display:none">
+              <li> <a href="javascript:;" onclick="selects('','type','统计类型');">统计类型</a> </li>
+                {yun:}foreach from=$tjtype item=v key=key{/yun}
+                <li> <a href="javascript:;" onclick="selects('{yun:}$key{/yun}','type','{yun:}$v{/yun}');">{yun:}$v{/yun}</a> </li>
+                {yun:}/foreach{/yun}
+              </ul>
+            </div>
+                <input id="sdate" class="tongji_info_text" type="text" readonly="" size="15" value="{yun:}$sdate|date_format:'%Y-%m-%d'{/yun}" name="sdate">
+               <link rel="stylesheet" href="{yun:}$config.sy_weburl{/yun}/js/datepicker/css/font-awesome.min.css" type="text/css">  
+				<script src="{yun:}$config.sy_weburl{/yun}/js/datepicker/foundation-datepicker.min.js"></script> 
+                <input id="edate" class="tongji_info_text" type="text" readonly="" size="15" value="{yun:}$edate|date_format:'%Y-%m-%d'{/yun}" name="edate">
+                <script type="text/javascript">
+				var checkin = $('#sdate').fdatepicker({
+					format: 'yyyy-mm-dd',startView:4,minView:2
+				}).on('changeDate', function (ev) {
+					if (ev.date.valueOf() > checkout.date.valueOf()) {
+						var newDate = new Date(ev.date)
+						newDate.setDate(newDate.getDate() + 1);
+						checkout.update(newDate);
+					}
+					checkin.hide();
+					$('#edate')[0].focus();
+				}).data('datepicker');
+				var checkout = $('#edate').fdatepicker({
+					format: 'yyyy-mm-dd',startView:4,minView:2,
+					onRender: function (date) {
+						return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
+					}
+				}).on('changeDate', function (ev) {
+					checkout.hide();
+				}).data('datepicker'); 
+				</script>
+                
+            <input type="submit" value="搜索" class="tongji_info_text_sub"/>
+            </form>
+          </div>
+          <div class="tongj_box">
+          <div class="tongj_list"><div class="tongj_list_name">日期</div><div class="tongj_list_b">总计<span class="tongj_list_b_n">{yun:}$days{/yun}</span>天</div></div>
+          <div class="tongj_list"><div class="tongj_list_name"> 邀请次数</div><div class="tongj_list_b">总计<span class="tongj_list_b_n">{yun:}$useridmsg{/yun}</span>次</div></div>
+          <div class="tongj_list"><div class="tongj_list_name"> 邀请成功率</div><div class="tongj_list_b"><span class="tongj_list_b_n">{yun:}$cgl{/yun}</span>%</div></div>
+          <div class="tongj_list tongj_list_last"><div class="tongj_list_name"> 总投递人数</div><div class="tongj_list_b">总计<span class="tongj_list_b_n">{yun:}$tdnum{/yun}</span>人</div></div>
+          </div>
+          <div class="com_stat_main fl">
+			{yun:}if $piename{/yun}
+            <div class="com_stat_main_item fl">
+              <div class="com_stat_h fl"><i class="Company_h1_line fl"></i><span class="com_stat_title fl">{yun:}$tjtype[$smarty.get.type]{/yun}简历投递</span></div>
+              <div class="com_stat_con fl">
+                 <div class="admin_atatic_chart fl" id="main3" style="width:700px;height:400px;"></div>
+              </div>
+            </div>
+            {yun:}/if{/yun}
+            <div class="com_stat_main_item fl">
+              <div class="com_stat_h fl"><i class="Company_h1_line fl"></i><span class="com_stat_title fl">简历投递</span><a class="com_sta_list fr" href="index.php?c=hr">进入列表页</a></div>
+              <div class="com_stat_con fl"> 
+				 <div class="admin_atatic_chart fl" id="main" style="width:780px;height:300px;"></div>
+                 <div class="admin_atatic_chart fl" style="width:780px; text-align:center">提示：您还可以按:{yun:}foreach from=$tjtype item=v key=key{/yun}&nbsp;<a href="index.php?c=tongji&type={yun:}$key{/yun}">{yun:}$v{/yun}</a>{yun:}/foreach{/yun}方式查询</div>
+              </div>
+            </div>
+
+            <div class="com_stat_main_item fl">
+              <div class="com_stat_h fl"><i class="Company_h1_line fl"></i><span class="com_stat_title fl">职位被浏览</span><a class="com_sta_list fr" href="index.php?c=look_job">进入列表页</a></div>
+              <div class="com_stat_con fl"> 
+				 <div class="admin_atatic_chart fl" id="main2" style="width:780px;height:300px;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<script> 
+ r myChart = echarts.init(document.getElementById('main')); 
+option = {
+    tooltip : {
+        trigger: 'axis'
+    },
+    legend: {
+        data:['简历投递']
+    },
+    toolbox: {
+        show : false,
+        feature : {
+            mark : {show: true},
+            dataView : {show: true, readOnly: false},
+            magicType : {show: true, type: ['line', 'bar', 'stack', 'tiled']},
+            restore : {show: true},
+            saveAsImage : {show: true}
+        }
+    },
+    calculable : true,
+    xAxis : [
+        {
+            type : 'category',
+            boundaryGap : false,
+            data : [{yun:}foreach name=foo from=$list item=daylist{/yun}{yun:}if $smarty.foreach.foo.index>0{/yun},{yun:}/if{/yun}'{yun:}$daylist.td{/yun}'{yun:}/foreach{/yun}]
+        }
+    ],
+    yAxis : [
+        {
+            type : 'value'
+        }
+    ],
+    series : [
+        {
+            name:'简历投递',
+            type:'line',
+            stack: '总量',
+            data:[{yun:}foreach name=foo2 from=$list item=daylist2{/yun}{yun:}if $smarty.foreach.foo2.index>0{/yun},{yun:}/if{/yun}{yun:}$daylist2.cnt{/yun}{yun:}/foreach{/yun}]
+        }
+    ]
+};
+        myChart.setOption(option);  
+ var myChart2 = echarts.init(document.getElementById('main2')); 
+option2 = {
+    tooltip : {
+        trigger: 'axis'
+    },
+    legend: {
+        data:['职位被浏览']
+    },
+    toolbox: {
+        show : false,
+        feature : {
+            mark : {show: true},
+            dataView : {show: true, readOnly: false},
+            magicType : {show: true, type: ['line', 'bar', 'stack', 'tiled']},
+            restore : {show: true},
+            saveAsImage : {show: true}
+        }
+    },
+    calculable : true,
+    xAxis : [
+        {
+            type : 'category',
+            boundaryGap : false,
+            data : [{yun:}foreach name=foo from=$looklist item=loooklist{/yun}{yun:}if $smarty.foreach.foo.index>0{/yun},{yun:}/if{/yun}'{yun:}$loooklist.td{/yun}'{yun:}/foreach{/yun}]
+        }
+    ],
+    yAxis : [
+        {
+            type : 'value'
+        }
+    ],
+    series : [
+        {
+            name:'职位被浏览',
+            type:'line',
+            stack: '总量',
+            data:[{yun:}foreach name=foo2 from=$looklist item=loooklist2{/yun}{yun:}if $smarty.foreach.foo2.index>0{/yun},{yun:}/if{/yun}{yun:}$loooklist2.cnt{/yun}{yun:}/foreach{/yun}]
+        }
+    ]
+};                    
+        myChart2.setOption(option2);  
+		
+		 var myChart3 = echarts.init(document.getElementById('main3'));
+		 option3 = {
+    title : {
+        text: '{yun:}$piename{/yun}',
+        subtext: '',
+        x:'center'
+    },
+    tooltip : {
+        trigger: 'item',
+        formatter: "{a} <br/>{b} : {c} ({d}%)"
+    },
+    legend: {
+        orient : 'vertical',
+        x : 'left',
+        data:[{yun:}foreach name=foopie from=$pielist item=plist{/yun}{yun:}if $smarty.foreach.foopie.index>0{/yun},{yun:}/if{/yun}'{yun:}$plist.fields{/yun}'{yun:}/foreach{/yun}]
+    },
+    toolbox: {
+        show : false,
+        feature : {
+            mark : {show: true},
+            dataView : {show: true, readOnly: false},
+            magicType : {
+                show: true, 
+                type: ['pie', 'funnel'],
+                option: {
+                    funnel: {
+                        x: '25%',
+                        width: '50%',
+                        funnelAlign: 'left',
+                        max: 1548
+                    }
+                }
+            },
+            restore : {show: true},
+            saveAsImage : {show: true}
+        }
+    },
+    calculable : true,
+    series : [
+        {
+            name:'投放类型统计',
+            type:'pie',
+            radius : '55%',
+            center: ['50%', '60%'],
+            data:[
+			{yun:}foreach name=foopie from=$pielist item=plist{/yun}{yun:}if $smarty.foreach.foopie.index>0{/yun},{yun:}/if{/yun}{value:'{yun:}$plist.num{/yun}', name:'{yun:}$plist.fields{/yun}'}{yun:}/foreach{/yun}
+            ]
+        }
+    ]
+};
+myChart3.setOption(option3);  
+</script>
+{yun:}include file="$comstyle/footer.htm"{/yun}

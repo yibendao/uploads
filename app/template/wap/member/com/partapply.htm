@@ -1,0 +1,63 @@
+{yun:}include file="$wapstyle/member/cheader.htm"{/yun} 
+<section class="wap_member">
+<div class="wap_member_comp_h1"><span>兼职报名</span></div>
+{yun:}foreach item=v from=$rows{/yun}
+<div class="com_member_hr">
+<div class="com_member_hr_name">
+<a href="{yun:}url m=wap c=resume a=show id=$v.resumeid{/yun}" class="wap_member_com_name com_member_hr_cblue">{yun:}$v.username{/yun}</a> 
+
+<span class="com_member_hr_date">
+{yun:}if $v.status=='1'{/yun}
+<span class="wap_member_post_list_zt">未查看 </span>
+{yun:}elseif $v.status=='2'{/yun}
+<span class="wap_member_post_list_zt ap_member_post_list_zt_gq">已查看 </span>
+{yun:}elseif $v.status=='3'{/yun}
+<span class="wap_member_post_list_zt ap_member_post_list_zt_zt">已联系 </span>
+{yun:}/if{/yun}
+</span>
+</div>
+
+<div class="com_member_user_box">
+<div class="com_member_hr_tj">
+<div class="com_member_hr_p1">
+<span class="member_c9">性别：</span>{yun:}$v.sex{/yun}&nbsp;&nbsp;&nbsp;
+<span class="member_c9">年龄：</span>{yun:}$v.age{/yun}岁&nbsp;&nbsp;&nbsp;
+<span class="member_c9">学历：</span>{yun:}$v.edu{/yun}&nbsp;&nbsp;&nbsp;
+</div>  <div class="com_member_hr_p1"> <span class="member_c9">手机号码：{yun:}$v.moblie{/yun}</span></div>
+</div>
+<div class="com_member_hr_p1">
+<span class="member_c9">申请兼职：</span>
+<a href="{yun:}url m=wap c=part a=show id=$v.jobid{/yun}" class="wap_m_post_user">
+<span class="com_member_hr_cblue">{yun:}$v.job_name{/yun} </span>
+</a> 
+</div>
+<div class="com_member_hr_p1"><span class="member_c9">申请时间：</span>{yun:}$v.ctime|date_format:"%Y-%m-%d"{/yun}
+</div>
+
+</div>
+<div class="com_member_hr_cz"><em><a href="javascript:void(0)" onclick="isdel('index.php?c=partapply&del={yun:}$v.id{/yun}')" class="yun_member_det">删除</a></em>   
+标记状态：
+<span class="com_member_hr_cz_zt">
+<select onchange="layer_del('', 'index.php?c=partapply&id={yun:}$v.id{/yun}&status=' + this.value);">
+	<option value="1" {yun:}if $v.status=='1'{/yun}selected{yun:}/if{/yun}>未查看</option> 
+    <option value="2" {yun:}if $v.status=='2'{/yun}selected{yun:}/if{/yun}>已查看  </option> 
+    <option value="3" {yun:}if $v.status=='3'{/yun}selected{yun:}/if{/yun}>已联系</option>    
+</select>
+</span>
+</div>
+
+</div>
+
+{yun:}foreachelse{/yun}
+<div class="wap_member_no">
+暂时还没有兼职报名信息
+<div>
+</div>
+</div>
+{yun:}/foreach{/yun}
+
+</div>
+
+</section>
+<div class="pages"> {yun:}$pagenav{/yun}</div>
+{yun:}include file="$wapstyle/footer.htm"{/yun} 

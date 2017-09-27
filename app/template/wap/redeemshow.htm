@@ -1,0 +1,71 @@
+{yun:}include file="$wapstyle/header_cont.htm"{/yun}
+    <div class="product_img"><img width="262px" height="201px" src="{yun:}$config.sy_weburl{/yun}/{yun:}$row.pic{/yun}"/></div>
+    <div class="intro">
+         <div class="intro_tit">{yun:}$row.name{/yun}</div>
+         <div class="intro_jf">
+              <dl>
+                  <dt><img width="18px;" height="18px;" src="{yun:}$wap_style{/yun}/images/cir.png"/></dt>
+                  <dd class="jf_fen"><em>{yun:}$row.integral{/yun}</em> {yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}</dd>
+                  <dd class="jf_yu">剩余库存:{yun:}$row.stock{/yun}件（限购数量：{yun:}if $row.restriction=="0"{/yun}不限{yun:}else{/yun}{yun:}$row.restriction{/yun}件{yun:}/if{/yun}）</dd>
+              </dl>
+         </div>
+         {yun:}if $row.stock!="0"{/yun}
+          <form action="index.php" method="get" onsubmit="return checkform_redeem_show();">
+          <input type="hidden" value="redeem" name="c" />
+          <input type="hidden" name="a" value="dh"/>
+          <input type="hidden" name="id" value="{yun:}$row.id{/yun}"/>
+          <input type="hidden" id="uid" value="{yun:}$uid{/yun}"/>
+          <input type="hidden" id="stock" value="{yun:}$row.stock{/yun}"/>
+          <input type="hidden" id="restriction" value="{yun:}$row.restriction{/yun}"/>
+         <div class="intro_nb_wr">
+              <span class="infor_nb_sh">购买数量</span>
+              <div class="intro_bt">
+                   <span class="sub fl"><input class="sub_infor_b" id="min" name="" type="button" value="﹣" /></span>
+                   <span class="bx_but fl"><input class="intro_nb_bx" id="num" name="num" type="text" value="1" /></span>
+                   <span class="plus fl"><input  class="sub_infor_b" style="margin-left:13px;" id="add" name="" type="button" value="+" /></span>
+              </div>
+              <div class="infro_but">
+                  {yun:}if $uid{/yun}<div style="background-color:#FFF; padding: 0px 2px; width:60%;line-height:35px;float:left;text-align:left; color:#666">您当前总{yun:}$config.integral_pricename{/yun}：<i style="color:#e30000;">{yun:}$statis.integral{/yun}</i> {yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}</div><input type="hidden" id="memberintegral" value="{yun:}$statis.integral{/yun}" /><input type="hidden" id="redeemintegral" value="{yun:}$row.integral{/yun}" />{yun:}/if{/yun}
+                  <input class="intro_but_dh fl" type="submit" value="我要兑换"/>
+              </div>
+         </div>
+         </form>
+          {yun:}else{/yun}
+          商品下架
+         {yun:}/if{/yun}
+    </div>
+    <div class="pr_scr">
+         <div class="pr_scr_tit">礼品详情</div>
+         <div class="pr_src_ct">
+         {yun:}if $row.content{/yun}
+            <div class="rem_show_c">{yun:}$row.content{/yun}</div>
+           {yun:}else{/yun} 
+           <div class="wap_member_no">暂无详情内容</div> 
+           {yun:}/if{/yun} 
+         </div>
+    </div> 
+<script src="{yun:}$wap_style{/yun}/js/prefixfree.min.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/layer/layer.m.js" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/public.js" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/redeem.js" language="javascript"></script>
+<script language="javascript" type="text/javascript">
+$(function(){
+    var t = $("#num");  
+    $("#add").click(function(){       
+        t.val(parseInt(t.val())+1)  
+        setTotal();  
+    })  
+    $("#min").click(function(){
+		if(t.val()>0){
+        t.val(parseInt(t.val())-1)  		
+        setTotal(); 
+		}   
+    })   
+    function setTotal(){  
+        $("#integral").html((parseInt(t.val())*"{yun:}$row.integral{/yun}").toFixed(2));  
+    }  
+    setTotal();  
+}) 
+</script>  
+{yun:}include file="$wapstyle/footer.htm"{/yun} 

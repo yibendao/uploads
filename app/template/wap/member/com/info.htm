@@ -1,0 +1,263 @@
+{yun:}include file="$wapstyle/member/cheader.htm"{/yun} 
+<script src="{yun:}$wap_style{/yun}/js/jobadd.js" language="javascript"></script> 
+<script>var weburl='{yun:}$config_wapdomain{/yun}';</script>  
+<script src="{yun:}$wap_style{/yun}/js/ueditor/ueditor.config.js"></script>
+<script src="{yun:}$wap_style{/yun}/js/ueditor/ueditor.all.min.js"></script> 
+<script src="{yun:}$wap_style{/yun}/js/mobiscroll/mobiscroll_002.js"></script>
+<script src="{yun:}$wap_style{/yun}/js/mobiscroll/mobiscroll.js"></script>
+<script src="{yun:}$wap_style{/yun}/js/mobiscroll/mobiscroll_003.js"></script>
+<link rel="stylesheet" href="{yun:}$wap_style{/yun}/js/mobiscroll/css/animate.min.css" type="text/css">
+<link rel="stylesheet" href="{yun:}$wap_style{/yun}/js/mobiscroll/css/mobiscroll.css" type="text/css"> 
+<script language="javascript"> 
+function ckcom(type){
+	var val=$("#"+type).find("option:selected").text();
+	$('.'+type).html(val);
+}
+$(function () {
+	var currYear = (new Date()).getFullYear();
+	var opt = {
+		preset: 'date', 
+		theme: 'android-ics light', 
+		display: 'modal',  
+		mode: 'scroller', 
+		dateFormat: 'yy-mm-dd', 
+		setText: '确定', 
+		cancelText: '取消',
+		dateOrder: 'yyyymmdd', 
+		dayText: '日', monthText: '月', yearText: '年',
+		endYear: currYear 
+	};
+	$("#sdate").mobiscroll('setDate', $("#sdate").val(), true).date(opt);  
+});
+</script>
+<section class="wap_member">
+  <div class="wap_member_comp_h1" style="position:relative"><span>完善基本资料</span><em class="wap_member_comp_em">以下<font color="#ff0000">*</font> 号为必填项</em></div>
+  <div class="yun_wap_addresume_box">
+    <form method="post" action="" onsubmit="return checkinfo(this);" enctype="multipart/form-data">
+      <div class="yun_wap_addresume_box_group">
+        <div class="yun_wap_addresume_box_label"> 企业全称 <span class="resume-cont_wate_bj">*</span> </div>
+        <div class="yun_wap_addresume_box_control">
+          <input type="text" name="name" id='name' value="{yun:}$row.name{/yun}" placeholder="请填写企业全称" class="yun_wap_addresume_text">
+        </div>
+      </div>
+      <div class="yun_wap_addresume_box_group">
+        <div class="yun_wap_addresume_box_label"> 从事行业 <span class="resume-cont_wate_bj">*</span> </div>
+        <div class="yun_wap_addresume_box_control">
+          <div class="select"> <span class="txt hy">{yun:}if $row.hy{/yun}{yun:}$industry_name[$row.hy]{/yun}{yun:}else{/yun}请选择{yun:}/if{/yun}</span>
+            <select name="hy" id='hy' class="textval" onchange="ckcom('hy')">
+			 <option value="">请选择</option>
+			  {yun:}foreach item=v from=$industry_index{/yun}             
+              <option value="{yun:}$v{/yun}" {yun:}if $row.hy==$v{/yun}selected="selected"{yun:}/if{/yun}>{yun:}$industry_name[$v]{/yun}</option>              
+              {yun:}/foreach{/yun}                        
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="yun_wap_addresume_box_group">
+        <div class="yun_wap_addresume_box_label"> 企业性质 <span class="resume-cont_wate_bj">*</span> </div>
+        <div class="yun_wap_addresume_box_control">
+          <div class="select"> <span class="txt pr">{yun:}if $row.pr{/yun}{yun:}$comclass_name[$row.pr]{/yun}{yun:}else{/yun}请选择{yun:}/if{/yun}</span>
+            <select name="pr" id='pr' class="textval" onchange="ckcom('pr')">
+			<option value="">请选择</option>
+			  {yun:}foreach item=v from=$comdata.job_pr{/yun}
+              <option value="{yun:}$v{/yun}" {yun:}if $row.pr==$v{/yun}selected="selected"{yun:}/if{/yun}>{yun:}$comclass_name[$v]{/yun}</option>
+              {yun:}/foreach{/yun}
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="yun_wap_addresume_box_group">
+        <div class="yun_wap_addresume_box_label"> 企业规模 <span class="resume-cont_wate_bj">*</span> </div>
+        <div class="yun_wap_addresume_box_control">
+          <div class="select"> <span class="txt mun">{yun:}if $row.mun{/yun}{yun:}$comclass_name[$row.mun]{/yun}{yun:}else{/yun}请选择{yun:}/if{/yun}</span>
+            <select name="mun" id="mun"class="textval" onchange="ckcom('mun')">
+			<option value="">请选择</option>
+			  {yun:}foreach item=v from=$comdata.job_mun{/yun}
+              <option value="{yun:}$v{/yun}" {yun:}if $row.mun==$v{/yun}selected="selected"{yun:}/if{/yun}>{yun:}$comclass_name[$v]{/yun}</option>
+              {yun:}/foreach{/yun}
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="yun_wap_addresume_box_group">
+        <div class="yun_wap_addresume_box_label">所在城市 <span class="resume-cont_wate_bj">*</span> </div>
+        <div class="yun_wap_addresume_box_control">
+          <div class="selectOption" style="width:31%">
+            <select name="provinceid" id="provinceid" onchange="checkcity(this.value,'1');">
+              <option value="">请选择</option>
+                {yun:}foreach from=$city_index item=v{/yun}
+              <option value="{yun:}$v{/yun}" {yun:}if $row.provinceid==$v{/yun}selected="selected"{yun:}/if{/yun}>{yun:}$city_name[$v]{/yun}</option>
+                {yun:}/foreach{/yun}
+            </select>
+          </div>
+          <div class="selectOption" style="width:31%">
+            <select name="cityid" id="cityid" onchange="checkcity(this.value,'2');">
+              <option value="">请选择</option>
+                {yun:}foreach from=$city_type[$row.provinceid] item=v{/yun}
+              <option value="{yun:}$v{/yun}" {yun:}if $row.cityid==$v{/yun}selected="selected"{yun:}/if{/yun}>{yun:}$city_name[$v]{/yun}</option>
+                {yun:}/foreach{/yun}
+            </select>
+          </div>
+          <div class="selectOption none" style="width:31%;{yun:}if $row.three_cityid<1{/yun}display:none;{yun:}/if{/yun}"  id="cityshowth">
+            <select name="three_cityid" id="three_cityid">
+              <option value="">请选择</option>                            
+                {yun:}foreach from=$city_type[$row.cityid] item=v{/yun}                              
+              <option value="{yun:}$v{/yun}" {yun:}if $row.three_cityid==$v{/yun}selected="selected"{yun:}/if{/yun}>{yun:}$city_name[$v]{/yun}</option>                            
+                {yun:}/foreach{/yun}
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="yun_wap_addresume_box_group">
+        <div class="yun_wap_addresume_box_label"> 企业地址 <span class="resume-cont_wate_bj">*</span> </div>
+        <div class="yun_wap_addresume_box_control">
+          <input type="text" name="address" id='address' value="{yun:}$row.address{/yun}" placeholder="请填写企业地址" class="yun_wap_addresume_text">
+        </div>
+      </div>
+      <div class="yun_wap_addresume_box_group">
+        <div class="yun_wap_addresume_box_label"> 联&nbsp;&nbsp;系&nbsp; 人 <span class="resume-cont_wate_bj">*</span> </div>
+        <div class="yun_wap_addresume_box_control">
+          <input type="text" name="linkman" value="{yun:}$row.linkman{/yun}" placeholder="请填写" class="yun_wap_addresume_text">
+        </div>
+      </div>
+      
+      <div class="yun_wap_addresume_box_group">
+        <div class="yun_wap_addresume_box_label"> 联系手机 <span class="resume-cont_wate_bj">*</span> </div>
+        <div class="yun_wap_addresume_box_control"> {yun:}if $row.moblie_status==1{/yun}
+          {yun:}$row.linktel{/yun} <a href="index.php?c=binding" style="color:red;">重新认证</a>
+          <input type="text" name="linktel" id="linktel" value="{yun:}$row.linktel{/yun}" style="display:none;">
+          {yun:}else{/yun}
+          <input type="text" name="linktel" id="linktel" value="{yun:}$row.linktel{/yun}" class="yun_wap_addresume_text" placeholder="联系手机">
+          {yun:}/if{/yun} </div>
+      </div>
+	  <div class="yun_wap_addresume_box_group">
+        <div class="yun_wap_addresume_box_label"> 联系电话 </div>
+        <div class="yun_wap_addresume_box_control">
+          <input type="text" value="{yun:}$row.phone{/yun}" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" name="phone" id="phone" placeholder="区号"class="yun_wap_addtel_a">
+          <input type="text" value="{yun:}$row.phonetwo{/yun}" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" name="phonetwo" id="phonetwo" placeholder="座机号"class="yun_wap_addtel_b">
+          <input type="text"  name="phonethree" id='phonethree' onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" value="{yun:}$row.phonethree{/yun}" placeholder="分机号"class="yun_wap_addtel_c">
+        </div>
+      </div>
+      <div class="yun_wap_addresume_box_group">
+        <div class="yun_wap_addresume_box_label"> 企业简介 <span class="resume-cont_wate_bj">*</span> </div>
+        <div class="yun_wap_addresume_box_control">
+          <textarea class="textAreaMsg tip" id="content" name="content" placeholder="请输入企业简介描述500字以内">{yun:}$row.content{/yun}</textarea>
+        </div>
+      </div>
+      <div class="info-table-value"><a class="iconfont form-show-btn" href="javascript:void(0)" id="showInfo" onclick="showInfo()">展开选填信息</a></div>
+      <div class="yun_wap_xtbox" style="display:none">
+      <input type="hidden" id="shownum" value="1">
+		 <div class="yun_wap_addresume_box_group">
+          <div class="yun_wap_addresume_box_label">创办日期</div>
+          <div class="yun_wap_addresume_box_control">
+            <input type="text" id="sdate" name="sdate" value="{yun:}$row.sdate{/yun}" class="yun_wap_addresume_text" placeholder="请选择"> </div>
+        </div>
+        <div class="yun_wap_addresume_box_group">
+          <div class="yun_wap_addresume_box_label">注册资金</div>
+          <div class="yun_wap_addresume_box_control">
+
+          <div class="selectOption" style="width:60px;">
+			<select name='moneytype'>
+
+				<option value='1' {yun:}if $row.moneytype==1{/yun}selected{yun:}/if{/yun}>人民币</option>
+				<option value='2' {yun:}if $row.moneytype==2{/yun}selected{yun:}/if{/yun}>美元</option> 
+			  </select>
+              </div>
+            <input type="text" id="money" name="money" value="{yun:}$row.money{/yun}" class="yun_wap_addtel_a"  onKeyUp="this.value=this.value.replace(/[^0-9]/g,'')" placeholder="注册资金">
+            <span class="moneyname">{yun:}if $row.moneytype==1{/yun}万{yun:}else{/yun}万{yun:}/if{/yun}</span> </div>
+        </div>
+        <div class="yun_wap_addresume_box_group">
+          <div class="yun_wap_addresume_box_label">邮政编码</div>
+          <div class="yun_wap_addresume_box_control">
+            <input type="text" id="zip" name="zip" value="{yun:}$row.zip{/yun}" class="yun_wap_addresume_text" placeholder="邮政编码">
+          </div>
+        </div>
+        <div class="yun_wap_addresume_box_group">
+          <div class="yun_wap_addresume_box_label">联系人职称</div>
+          <div class="yun_wap_addresume_box_control">
+            <input type="text" id="linkjob" name="linkjob" value="{yun:}$row.linkjob{/yun}" class="yun_wap_addresume_text" placeholder="例如：经理/主任">
+          </div>
+        </div>
+        <div class="yun_wap_addresume_box_group">
+        <div class="yun_wap_addresume_box_label"> 招聘邮箱  </div>
+        <div class="yun_wap_addresume_box_control"> {yun:}if $row.email_status==1{/yun}
+          {yun:}$row.linkmail{/yun}<a href="index.php?c=binding" style="color:red;">重新认证</a>
+          <input type="text" name="linkmail" id="linkmail" value="{yun:}$row.linkmail{/yun}" style="display:none;">
+          {yun:}else{/yun}
+          <input type="text" name="linkmail" id='linkmail' value="{yun:}$row.linkmail{/yun}" class="yun_wap_addresume_text" placeholder="招聘邮箱">
+          {yun:}/if{/yun} </div>
+      	</div>
+        <div class="yun_wap_addresume_box_group">
+          <div class="yun_wap_addresume_box_label">联 系 QQ</div>
+          <div class="yun_wap_addresume_box_control">
+            <input type="text" id="linkqq" name="linkqq" value="{yun:}$row.linkqq{/yun}"class="yun_wap_addresume_text" maxlength='12' onKeyUp="this.value=this.value.replace(/[^0-9]/g,'')" placeholder="联系QQ">
+          </div>
+        </div>
+        <div class="yun_wap_addresume_box_group">
+          <div class="yun_wap_addresume_box_label">企业网址</div>
+          <div class="yun_wap_addresume_box_control">
+            <input type="text" id="website" name="website" value="{yun:}$row.website{/yun}" class="yun_wap_addresume_text" placeholder="企业网址">
+          </div>
+        </div>
+        <div class="yun_wap_addresume_box_group">
+          <div class="yun_wap_addresume_box_label">公交站点</div>
+          <div class="yun_wap_addresume_box_control">
+            <textarea class="textAreaMsg tip" id="busstops" name="busstops" placeholder="公交站点" style="height:80px;border:1px solid #ddd">{yun:}$row.busstops{/yun}</textarea>
+          </div>
+        </div>
+        <div class="yun_wap_addresume_box_group">
+        <div class="yun_wap_addresume_box_label"> 联系方式  </div>
+        <div class="yun_wap_addresume_box_control">
+          <div class="select"> <span class="txt infostatus">{yun:}if $row.infostatus==1{/yun}公开{yun:}elseif $row.infostatus==2{/yun}不公开{yun:}else{/yun}请选择{yun:}/if{/yun}</span>
+            <select name="infostatus" id="infostatus"class="textval" onchange="ckcom('infostatus')">
+              <option value="1" {yun:}if $row.infostatus==1{/yun}selected="selected"{yun:}/if{/yun}>公开</option>
+              <option value="2" {yun:}if $row.infostatus==2{/yun}selected="selected"{yun:}/if{/yun}>不公开</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="yun_wap_addresume_box_group">
+          <div class="yun_wap_addresume_box_label">公司二维码</div>
+          <div class="yun_wap_addresume_box_control">
+           <div class="yun_wap_addresume_box_ewm">
+         <i class="user_ewm_photo_img"></i>
+          <span class="user_ewm_photo_b"> 公司二维码</span>
+          
+            <input type="file" id="comqcode" name="comqcode"   class="user_ewm_photo_b_file">
+          </div>        </div>
+        </div>
+        {yun:}if $row.comqcode{/yun}
+        <div class="yun_wap_addresume_box_group">
+          <div class="yun_wap_addresume_box_label"></div>
+          <div class="yun_wap_addresume_box_control">
+            <img src="{yun:}$row.comqcode{/yun}" width="100" height="100">
+          </div>
+        </div>
+        {yun:}/if{/yun}
+      </div>
+      <div class="yun_wap_addresume_box_group" style="background: transparent; border: none;">
+        <input type="submit" name="submit" value="保存" class="reinputText2">
+      </div>
+    </form>
+  </div>
+  </div>
+</section>
+<div class="clear"></div>
+<script type="text/javascript">
+var ue = UE.getEditor('content',{
+	toolbars: false,elementPathEnabled:false,wordCount:false,autoHeightEnabled:false
+}); 
+function showInfo(){
+	shownum=$("#shownum").val();
+	if(shownum=='1'){
+		$('.yun_wap_xtbox').toggle();
+		$("#showInfo").html('收起选填信息');
+		$("#shownum").val('2');
+	}else if(shownum=='2'){
+		$('.yun_wap_xtbox').toggle();
+		$("#showInfo").html('展开选填信息');
+		$("#shownum").val('1');
+	}
+}
+</script>
+{yun:}include file="$wapstyle/footer.htm"{/yun} 

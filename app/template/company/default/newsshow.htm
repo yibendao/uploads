@@ -1,0 +1,243 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>{yun:}$title{/yun}</title>
+<meta name="keywords" content="{yun:}$keywords{/yun}" />
+<meta name="description" content="{yun:}$description{/yun}" />
+<link rel="stylesheet" href="{yun:}$style{/yun}/style/css.css" type="text/css" />
+<link rel="stylesheet" href="{yun:}$com_style{/yun}/images/comapply.css" type="text/css" />
+</head>
+<body>
+{yun:}include file="$tplstyle/header.htm"{/yun}
+<div class="yun_content">
+	<div class="current_Location png"> 您当前的位置：<a href="{yun:}$config.sy_weburl{/yun}">首页</a> > <a href="{yun:}url m=company{/yun}">企业列表</a> > <span>企业详情 </span></div>
+	<div></div>
+        <div class="com_show_topbox">
+<div class="com_show_topleft">
+<div class="com_show_toplogo">
+<img src="{yun:}$com.logo{/yun}"  width="185" height="75" onerror="showImgDelay(this,'{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_unit_icon{/yun}',2);" alt="{yun:}$com.name{/yun}"/>
+</div>
+</div>
+<div class="com_show_topcont">
+<div class="com_show_comname"><h1 class="com_show_comname_n">{yun:}$com.name|mb_substr:0:20:'gbk'{/yun}   </h1>
+ {yun:}if $usertype=='1'{/yun}
+				{yun:}if $isatn.id{/yun} 
+				<a href="javascript:void(0)" onclick="atn('{yun:}$com.uid{/yun}','{yun:}url m=ajax c=atn_company{/yun}')" id='atn_{yun:}$com.uid{/yun}' class="com_show_comgzqx">- 取消关注</a> 
+				{yun:}else{/yun}
+				<a href="javascript:void(0)" onclick="atn('{yun:}$com.uid{/yun}','{yun:}url m=ajax c=atn_company{/yun}')" id='atn_{yun:}$com.uid{/yun}' class="com_show_comgz">关注</a> 
+				{yun:}/if{/yun}
+            {yun:}else{/yun} 
+                {yun:}if $uid{/yun}
+                <a href="javascript:void(0)" onclick="layer.msg('只有个人用户才能关注', 2, 8)" class="com_show_comgz">+ 关注</a> 
+                {yun:}else{/yun}
+                <a href="javascript:void(0)" onclick="showlogin('1');" class="com_show_comgz">+ 关注</a> 
+                {yun:}/if{/yun} 
+            {yun:}/if{/yun} 
+                    {yun:}if $ComMember.source==6 && $ComMember.claim==0 && $ComMember.email!=""{/yun}
+           <a href="javascript:claim('{yun:}url m=ajax c=claim uid=$com.uid{/yun}');" class="com_show_comgz">认领</a>
+        {yun:}/if{/yun} </div>
+<div class="com_show_cominfo">
+{yun:}if $com.hy_info{/yun}<span class="com_show_cominfo_s"><i class="com_show_cominfo_icon  com_show_cominfo_icon_hy"></i>{yun:}$com.hy_info{/yun}</span>{yun:}/if{/yun}
+{yun:}if $com.provinceid{/yun}<span class="com_show_cominfo_s"><i class="com_show_cominfo_icon  com_show_cominfo_icon_city"></i>{yun:}$com.provinceid{/yun} </span>   {yun:}/if{/yun}     
+{yun:}if $com.pr_info{/yun}<span class="com_show_cominfo_s"><i class="com_show_cominfo_icon  com_show_cominfo_icon_xz"></i>{yun:}$com.pr_info{/yun} </span>{yun:}/if{/yun}          
+{yun:}if $com.mun_info{/yun}<span class="com_show_cominfo_s "><i class="com_show_cominfo_icon  com_show_cominfo_icon_rs"></i>{yun:}$com.mun_info{/yun} </span> {yun:}/if{/yun}         
+{yun:}if $com.money{/yun}<span class="com_show_cominfo_s"><i class="com_show_cominfo_icon  com_show_cominfo_icon_zj"></i>注资{yun:}$com.money{/yun}万 </span>{yun:}/if{/yun}
+{yun:}if $com.sdate{/yun}<span class="com_show_cominfo_s"><i class="com_show_cominfo_icon  com_show_cominfo_icon_time"></i>{yun:}$com.sdate{/yun}创办</span>{yun:}/if{/yun}
+</div>
+<div class="com_show_info_sj_box">
+<div class="com_show_info_sj">
+<div class="com_show_info_sj_list com_show_info_sj_list_frist"><span class="com_show_info_sj_list_n">{yun:}$com.hits{/yun}</span>访问次数 </div>         
+<div class="com_show_info_sj_list"><span class="com_show_info_sj_list_n">{yun:}$pl_num{/yun}</span>公司评价数 </div>          
+<div class="com_show_info_sj_list"><span class="com_show_info_sj_list_n">{yun:}$com.ant_num{/yun}</span>公司关注数</div>
+<div class="com_show_info_sj_list com_show_info_sj_list_sq"><span class="com_show_info_sj_list_n">{yun:}$sq_num{/yun}</span>公司职位申请数  </div>         
+<div class="com_show_info_sj_list com_show_info_sj_list_end"><span class="com_show_info_sj_list_n">{yun:}$pre{/yun}%</span>简历平均回复率</div>
+</div>
+</div>
+</div>
+<div class="com_show_topright">
+<img src="{yun:}url m=ajax c=pubqrcode toc=company toa=show toid=$com.uid{/yun}" width="120" height="120">
+<div class="com_show_topright_fx">分享到朋友圈</div>
+</div>
+</div>
+
+<div class="con_show_left">
+<div class="con_show_left_box">
+<div class="Company_post_msg" id="company" data-slide='1'><i class="Company_h1_line yun_bg_color"></i><i class="Company_h1_line_bor"></i><span class="Company_co">公司新闻</span></div>
+			 <div style="width:100%; padding:20px 0; text-align:center; font-size:18px;">    {yun:}$NewsInfo.title{/yun}</div>
+				<div class="firm_det_con"> {yun:}$NewsInfo.body{/yun} </div>
+</div>
+</div>
+<div class="con_show_right">
+<div class="con_show_right_box">
+
+
+
+<div class="com_aut">
+  {yun:}if $com.email_status=="1"{/yun} 
+ <dl class="com_aut_list"><dt> <img src="{yun:}$com_style{/yun}images/rz_yx2.png" alt="邮箱未认证" title="邮箱已认证" class="png" />  </dt><dd>邮箱已认证</dd></dl>
+      {yun:}else{/yun} 
+<dl class="com_aut_list"><dt><img src="{yun:}$com_style{/yun}images/rz_yx.png" alt="邮箱未认证" title="邮箱未认证" class="png" />  </dt><dd>邮箱未认证</dd></dl>  {yun:}/if{/yun}
+        {yun:}if $com.moblie_status=="1"{/yun} 
+<dl class="com_aut_list"><dt><img src="{yun:}$com_style{/yun}images/rz_sj2.png" alt="手机未认证" title="手机已认证" class="png" />  </dt><dd>手机已认证</dd></dl>
+        {yun:}else{/yun} 
+<dl class="com_aut_list"><dt><img src="{yun:}$com_style{/yun}images/rz_sj.png" alt="手机未认证" title="手机未认证" class="png" />  </dt><dd>手机未认证</dd></dl>{yun:}/if{/yun}
+        {yun:}if $com.yyzz_status=="1"{/yun} 
+<dl class="com_aut_list"><dt> <img src="{yun:}$com_style{/yun}images/rz_zz2.png" alt="执照未认证" title="执照已认证" class="png" /> </dt><dd>执照已认证</dd></dl> {yun:}else{/yun} 
+<dl class="com_aut_list"><dt><img src="{yun:}$com_style{/yun}images/rz_zz.png" alt="执照未认证" title="执照未认证" class="png" />  </dt><dd>执照未认证</dd></dl>
+        {yun:}/if{/yun}
+        </div>
+</div>
+<div class="con_show_right_box">
+<div class="Company_post_msg"><i class="Company_h1_line yun_bg_color"></i><i class="Company_h1_line_bor"></i><span class="Company_co">联系方式</span></div>
+<div class="com_show_touch">
+ {yun:}if $looktype=="1"{/yun}
+  <div class="com_show_touch_list"> 
+          {yun:}if $com.linkman{/yun}<div class="com_show_touch_p"><i class="com_show_touch_p_icon com_show_touch_user"></i>{yun:}$com.linkman{/yun}</div>{yun:}/if{/yun}
+          {yun:}if $com.linkjob{/yun}<div class="com_show_touch_p"><i class="com_show_touch_p_icon com_show_touch_zw"></i>{yun:}$com.linkjob{/yun}</div>{yun:}/if{/yun}
+          {yun:}if $com.linkphone{/yun}<div class="com_show_touch_p"><i class="com_show_touch_p_icon com_show_touch_dh"></i>{yun:}$com.linkphone{/yun}</div>{yun:}/if{/yun}
+          {yun:}if $com.linktel{/yun}<div class="com_show_touch_p"><i class="com_show_touch_p_icon com_show_touch_sj"></i>{yun:}image number=$com.linktel uid=$com.uid action=linktel{/yun}</div>{yun:}/if{/yun}
+          {yun:}if $com.linkmail{/yun}<div class="com_show_touch_p"><i class="com_show_touch_p_icon com_show_touch_yx"></i>{yun:}$com.linkmail{/yun}</div> {yun:}/if{/yun}
+          {yun:}if $com.linkqq{/yun}<div class="com_show_touch_p"><i class="com_show_touch_p_icon com_show_touch_qq"></i>{yun:}$com.linkqq{/yun}</div>{yun:}/if{/yun}
+          {yun:}if $com.zip{/yun}<div class="com_show_touch_p"><i class="com_show_touch_p_icon com_show_touch_yb"></i>{yun:}$com.zip{/yun}</div>{yun:}/if{/yun}
+          {yun:}if $com.website{/yun}<div class="com_show_touch_p"><i class="com_show_touch_p_icon com_show_touch_web"></i>{yun:}$com.website{/yun}</div>{yun:}/if{/yun} 
+          {yun:}if $com.busstops{/yun}<div class="com_show_touch_p"><i class="com_show_touch_p_icon com_show_touch_bus"></i>{yun:}$com.busstops{/yun}</div>{yun:}/if{/yun}
+          {yun:}if $com.address{/yun} <div class="com_show_touch_p"><i class="com_show_touch_p_icon com_show_touch_add"></i>{yun:}$com.address{/yun}</div> {yun:}/if{/yun}
+          {yun:}if $com.comqcode{/yun} <div class="com_show_touch_p"><img src="{yun:}$com.comqcode{/yun}" width="120" height="120"></div> {yun:}/if{/yun}
+           </div>
+ {yun:}else{/yun}
+ 	{yun:}if $looktype=="3" || $looktype=="2"|| $looktype=="5"{/yun} 
+      <div class="com_show_touch_login_box">
+        <div class="com_show_touch_login"> 
+        <div class="com_show_touch_login_p">{yun:}$look_msg{/yun}</div>
+        </div>
+      </div>
+       {yun:}elseif $looktype=="6"{/yun} 
+       <div class="com_show_touch_login_box">
+        <div class="com_show_touch_login"> 
+        <div class="com_show_touch_login_p">{yun:}$look_msg{/yun}</div>
+        <div class="com_show_touch_login_bth">
+         <a href="{yun:}$config.sy_weburl{/yun}/member/index.php?c=expect" class="com_show_touch_dl">创建简历</a> </div> </div>
+      </div>
+       {yun:}elseif $looktype=="4"{/yun} 
+        <div class="com_show_touch_login_box">
+        <div class="com_show_touch_login"> 
+        <div class="com_show_touch_login_p">{yun:}$look_msg{/yun}</div>
+        <div class="com_show_touch_login_bth">
+       <a class="com_show_touch_dl" href="javascript:void(0);" onclick="showlogin('1');">立即登录</a> 
+       <a class="com_show_touch_reg" href="{yun:}url m=register usertype=1 type=1{/yun}">立即注册</a> </div> </div>
+      </div>
+	  {yun:}/if{/yun} 
+   {yun:}/if{/yun}
+   
+         </div>
+         </div>
+   <div class="con_show_right_box">
+   <div class="Company_post_msg"><i class="Company_h1_line yun_bg_color"></i><i class="Company_h1_line_bor"></i><span class="Company_co">企业地图</span></div>
+      <div class="com_show_lmap">
+        {yun:}if $com.y!='' && $com.x!=''{/yun}
+        <div class="frc_map" id="company_baidu_map">
+          <div id="maps_container" style="width:218px;height:155px;"></div>
+        </div>
+        <div class="frc_map_look"> <a href="javascript:showmap('map_show');">查看完整地图</a></div>
+        {yun:}else{/yun}
+        <div class="firm_tips_no"> 该企业还未设置地图!</div>
+        {yun:}/if{/yun}
+</div>
+</div>
+
+<div class="con_show_right_box">
+<div class="Company_post_msg"><i class="Company_h1_line yun_bg_color"></i><i class="Company_h1_line_bor"></i><span class="Company_co">企业新闻</span></div>
+ {yun:}if !empty($NewsList){/yun}
+          <ul class="com_show_news">
+            {yun:}foreach from=$NewsList item=row{/yun}
+            <li>
+              <p><a href="{yun:}url m=company c=newsshow id=$com.uid nid=$row.id{/yun}" target="_blank">{yun:}$row.title{/yun}</a></p>
+            </li>
+            {yun:}/foreach{/yun}
+          </ul>
+          {yun:}else{/yun}
+     <div class="clear"></div>
+         <div class="firm_tips_no">  该企业还没有发布新闻信息!</div>
+         
+          {yun:}/if{/yun} 
+
+</div>
+
+
+<div class="con_show_right_box">
+<div class="Company_post_msg"><i class="Company_h1_line yun_bg_color"></i><i class="Company_h1_line_bor"></i><span class="Company_co">看过此公司的人还看过</span></div>
+<ul class="com_show_other_box">
+ {yun:}foreach from=$lookcom item=v{/yun}
+<li><div class="com_show_other"><a href="{yun:}url m=company c=show id=$v.com_id{/yun}">{yun:}$v.comname{/yun} </a> </div><a href="{yun:}url m=company c=show id=$v.com_id{/yun}" class=""><span class="com_show_other_cor">{yun:}$v.jobnum{/yun}个在招职位</span></a></li>
+{yun:}/foreach{/yun}
+</ul>
+</div>
+</div>
+
+</div>
+<div class="clear"></div>
+<div class="commpay_Comment">
+  <div id="huifu{yun:}$v.id{/yun}" class="none">
+    <form action="index.php" method="post" onsubmit="return check_huifu('{yun:}$v.id{/yun}');">
+      <div class="Comment_w608">
+        <textarea class="Comment_textarea_hf" tip-text="说两句吧```" id="reply{yun:}$v.id{/yun}" name="content"></textarea>
+        <input type="hidden" name="id" value="{yun:}$v.id{/yun}" />
+      </div>
+      <div class="Comment_w608">
+        <input class="program_reply" type="submit" name="submit2" value="回复" />
+      </div>
+    </form>
+  </div>
+  <div class="clear"></div>
+  <div id="map_show" class="none">
+    <div id="map_container" style="width:580px;height:350px;"></div>
+  </div>
+</div>
+
+
+<div class="clear"></div>
+<div id="map_show" class="none">
+<div id="map_container" style="width:580px;height:350px;"></div>
+</div>
+<div class="clear"></div>
+
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/lazyload.min.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/public.js" language="javascript"></script>
+<!--[if IE 6]>
+<script src="{yun:}$config.sy_weburl{/yun}/js/png.js"></script>
+<script>
+DD_belatedPNG.fix('.png');
+</script>
+<![endif]-->
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak={yun:}$config.map_key{/yun}" charset="utf-8"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/map.js" language="javascript"></script>
+<script>
+$(function () {
+    {yun:}if $com.y!='' && $com.x!=''{/yun}
+	getmapnoshowcont_diffDomains('maps_container', "{yun:}$com.x{/yun}", "{yun:}$com.y{/yun}", "map_x", "map_y",'company_baidu_map');
+	{yun:}/if{/yun}
+	$(".firm_post").hover(function () {
+		$(this).find(".firm_post_right").show();
+	}, function () {;
+		$(this).find(".firm_post_right").hide();
+	});
+   
+});
+function showmap(id) {
+	$.layer({
+		type: 1,
+		title: '地图展示',
+		closeBtn: [0, true],
+		offset: ['100px', ''],
+		border: [10, 0.3, '#000', true],
+		area: ['580px', 'auto'],
+		page: { dom: "#" + id }
+	});
+	getmapshowcont('map_container', "{yun:}$com.x{/yun}", "{yun:}$com.y{/yun}", "{yun:}$com.name{/yun}", "{yun:}$com.address{/yun}");
+}
+</script>
+{yun:}include file="$tplstyle/public_search/login.htm"{/yun} 
+{yun:}include file="$tplstyle/footer.htm"{/yun}

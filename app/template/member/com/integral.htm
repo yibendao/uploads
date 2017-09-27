@@ -1,0 +1,90 @@
+{yun:}include file="$comstyle/header.htm"{/yun}
+<div class="w1000">
+  <div class="admin_mainbody">
+    <style>
+.my_table_msg th{ text-align:right}
+</style>
+    {yun:}include file="$comstyle/left.htm"{/yun}
+    <div class=right_box>
+      <div class=admincont_box>
+      <div class="job_list_tit">
+         <ul class="">
+         <li {yun:}if $smarty.get.c=="integral"{/yun}class="job_list_tit_cur"{yun:}/if{/yun}><a href="index.php?c=integral">{yun:}$config.integral_pricename{/yun}任务</a></li>
+       <li {yun:}if $smarty.get.c=="integral_reduce"{/yun}  class="job_list_tit_cur"{yun:}/if{/yun} ><a href="index.php?c=integral_reduce">{yun:}$config.integral_pricename{/yun}规则</a></li>
+       <li {yun:}if $smarty.get.c=="reward_list"{/yun}  class="job_list_tit_cur"{yun:}/if{/yun} ><a href="index.php?c=reward_list">{yun:}$config.integral_pricename{/yun}兑换</a></li>
+         </ul>
+         </div>
+    <div class="com_body">
+          <div class="integral_cont">
+            <ul class="integral_cont_list">
+              <li> <span class="integral_cont_list_span"><i class="mb_con_icon mb_con_icon_w"></i>完善基本资料</span> <span class="integral_cont_list_span_c"> 完善基本资料，可获得<b>{yun:}$config.integral_userinfo{/yun}</b>{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun} </span> <span class="integral_cont_list_span_r"> {yun:}if $statusList.baseInfo{/yun}
+                已完善
+                {yun:}else{/yun} <a href="index.php?c=info" 
+						target="_blank" class="integral_cont_list_a">立即完善</a> {yun:}/if{/yun} </span> </li>
+              <li> <span class="integral_cont_list_span"><i class="mb_con_icon mb_con_icon_s"></i>上传企业logo</span> <span class="integral_cont_list_span_c"> 上传头像，可获得<b>{yun:}$config.integral_avatar{/yun}</b>{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun} </span> <span class="integral_cont_list_span_r"> {yun:}if $statusList.logo{/yun}
+                已上传
+                {yun:}else{/yun} <a href="index.php?c=uppic" 
+							target="_blank"  class="integral_cont_list_a">上传logo</a> {yun:}/if{/yun} </span> </li>
+              <li> <span class="integral_cont_list_span"><i class="mb_con_icon mb_con_icon_y"></i>邀请朋友注册</span> <span class="integral_cont_list_span_c"> 邀请朋友注册，可获得<b>{yun:}$config.integral_invite_reg{/yun}</b>{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun} </span> <span class="integral_cont_list_span_r"><a href="{yun:}url m=invitereg{/yun}"
+					target="_blank" class="integral_cont_list_a">现在就邀请</a></span> </li>
+              <li> <span class="integral_cont_list_span"><i class="mb_con_icon mb_con_icon_d"></i>每天第一次登录</span> <span class="integral_cont_list_span_c"> 每天第一次登录，可获得 <b>{yun:}$config.integral_login{/yun}</b>{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun} </span><span class="integral_cont_list_span_r"> 今日已登录  </span>   </li>
+			  <li> <span class="integral_cont_list_span"><i class="mb_con_icon mb_con_icon_qd"></i>每日签到</span> <span class="integral_cont_list_span_c"> 每天签到，可获得 <b>{yun:}$config.integral_signin{/yun}</b>{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun} </span>
+			  <span class="integral_cont_list_span_r"> 
+			  {yun:}if $statusList.signin{/yun}
+                今日已签到
+                {yun:}else{/yun} 
+				<a href="index.php" target="_blank"  class="integral_cont_list_a">去签到</a> {yun:}/if{/yun} </span> 
+			  </li>
+              <li> <span class="integral_cont_list_span"><i class="mb_con_icon mb_con_icon_rzd"></i>认证电子邮箱</span> <span class="integral_cont_list_span_c"> 认证电子邮箱，可获得 <b>{yun:}$config.integral_emailcert{/yun}</b>{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun} </span> <span class="integral_cont_list_span_r"> {yun:}if $statusList.emailChecked{/yun}
+                已验证
+                {yun:}else{/yun} <a href="index.php?c=binding" 
+							target="_blank"  class="integral_cont_list_a">邮箱认证</a> {yun:}/if{/yun} </span> </li>
+              <li> <span class="integral_cont_list_span"><i class="mb_con_icon mb_con_icon_n"></i>认证手机号码</span> <span class="integral_cont_list_span_c"> 认证手机号码，可获得 <b>{yun:}$config.integral_mobliecert{/yun}</b>{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}</span> <span class="integral_cont_list_span_r"> {yun:}if $statusList.phoneChecked{/yun}
+                已验证
+                {yun:}else{/yun} <a href="index.php?c=binding" 
+							target="_blank"  class="integral_cont_list_a">手机验证</a> {yun:}/if{/yun} </span> </li>
+              <li> <span class="integral_cont_list_span"><i class="mb_con_icon mb_con_icon_fb"></i>设置企业地图</span> <span class="integral_cont_list_span_c"> 设置企业地图，可获得 <b>{yun:}$config.integral_map{/yun}</b>{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}</span> <span class="integral_cont_list_span_r"> {yun:}if $statusList.map{/yun}
+                已设置
+                {yun:}else{/yun} <a href="index.php?c=map" 
+							target="_blank"  class="integral_cont_list_a">设置地图</a> {yun:}/if{/yun} </span> </li>
+             {yun:}if $config.integral_banner_type=='1'{/yun}
+              <li> <span class="integral_cont_list_span"><i class="mb_con_icon mb_con_icon_hf"></i>上传企业横幅</span> <span class="integral_cont_list_span_c"> 上传企业横幅，可获得 <b>{yun:}$config.integral_banner{/yun}</b>{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}</span> <span class="integral_cont_list_span_r"> {yun:}if $statusList.banner{/yun}
+                已上传
+                {yun:}else{/yun} <a href="index.php?c=banner" 
+							target="_blank" class="integral_cont_list_a">上传横幅</a>{yun:}/if{/yun}</span></li>
+              {yun:}/if{/yun}
+              <li> <span class="integral_cont_list_span"><i class="mb_con_icon mb_con_icon_pr"></i>认证营业执照</span> <span class="integral_cont_list_span_c"> 认证营业执照，可获得 <b>{yun:}$config.integral_comcert{/yun}</b>{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}</span> <span class="integral_cont_list_span_r"> {yun:}if $statusList.yyzz{/yun}
+                已验证
+                {yun:}else{/yun} <a href="index.php?c=binding" 
+							target="_blank" class="integral_cont_list_a">认证营业执照</a> {yun:}/if{/yun} </span> </li>
+              {yun:}if $config.integral_question_type==1{/yun}
+        	{yun:}if $statusList.question{/yun}
+        <li> <span class="integral_cont_list_span"><i class="mb_con_icon mb_con_icon_fw"></i>发布问题</span> <span class="integral_cont_list_span_c"> 发布问题，可获得 <b>{yun:}$config.integral_question{/yun}</b>{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}</span> <span class="integral_cont_list_span_r"><a href="{yun:}url m=ask c=addquestion {/yun}" 
+					target="_blank"  class="integral_cont_list_a">发布问题</a></span> </li>
+              {yun:}else{/yun}
+              <li> <span class="integral_cont_list_span"><i class="mb_con_icon mb_con_icon_fw"></i>发布问题</span> <span class="integral_cont_list_span_c"> 发布问题，可获得 <b>{yun:}$config.integral_question{/yun}</b>{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}</span> <span class="integral_cont_list_span_r"> 已发布</span></li>
+              {yun:}/if{/yun}
+        {yun:}/if{/yun}
+        {yun:}if $config.integral_answer_type==1{/yun}
+        	{yun:}if $statusList.answer{/yun}
+        <li> <span class="integral_cont_list_span"><i class="mb_con_icon mb_con_icon_rp"></i>回答问题</span> <span class="integral_cont_list_span_c"> 回答问题，可获得 <b>{yun:}$config.integral_answer{/yun}</b>{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}</span> <span class="integral_cont_list_span_r"><a href="{yun:}url m=ask {/yun}#last-question" 
+              target="_blank"  class="integral_cont_list_a">回答问题</a></span> </li>
+              {yun:}else{/yun}
+              <li> <span class="integral_cont_list_span"><i class="mb_con_icon mb_con_icon_rp"></i>回答问题</span> <span class="integral_cont_list_span_c"> 回答问题，可获得 <b>{yun:}$config.integral_answer{/yun}</b>{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}</span> <span class="integral_cont_list_span_r">已回答</span> </li>
+              {yun:}/if{/yun}
+        {yun:}/if{/yun}
+        {yun:}if $config.integral_answerpl_type==1{/yun}
+        	{yun:}if $statusList.answerpl{/yun}
+			<li> <span class="integral_cont_list_span"><i class="mb_con_icon mb_con_icon_ph"></i>评论回答</span> <span class="integral_cont_list_span_c"> 评论回答，可获得 <b>{yun:}$config.integral_answerpl{/yun}</b>{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}</span> <span class="integral_cont_list_span_r"><a href="{yun:}url m=ask {/yun}#last-question"  target="_blank"  class="integral_cont_list_a">评论回答</a></span> </li>
+               {yun:}else{/yun}
+              <li> <span class="integral_cont_list_span"><i class="mb_con_icon mb_con_icon_ph"></i>评论回答</span> <span class="integral_cont_list_span_c"> 评论回答，可获得 <b>{yun:}$config.integral_answerpl{/yun}</b>{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}</span> <span class="integral_cont_list_span_r">已评论</span> </li>
+              {yun:}/if{/yun}
+        {yun:}/if{/yun}      
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{yun:}include file="$comstyle/footer.htm"{/yun}

@@ -1,0 +1,99 @@
+{yun:}include file="$comstyle/header.htm"{/yun}
+<div class="w1000">
+<div class="admin_mainbody"> {yun:}include file="$comstyle/left.htm"{/yun}
+  <link href="{yun:}$comstyle{/yun}/images/index_style.css" type=text/css rel=stylesheet>
+  <div class=right_box>
+    <div class=admincont_box>
+      <div class="com_tit"> <span class="com_tit_span">关注我的人才</span>
+        <form action="index.php" method="get">
+        <div class="news_search">
+          <input name="c" type="hidden" value="attention_me">
+          <input name="keyword" type="text" class="news_text" placeholder="请输入简历关键字" value="{yun:}$smarty.get.keyword{/yun}">
+          <input name="" type="submit" class="news_bth" value="搜索">
+        </div>
+        </form>
+      </div>
+      <div class="com_body">
+        <div class=admin_textbox_04>
+          <iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe>
+          <form action="{yun:}$now_url{/yun}&act=del" target="supportiframe" method="post" id='myform'>
+            <div class=table>
+              <div id="job_checkbokid" >
+              {yun:}if !empty($rows){/yun}
+                <div class="job_news_list job_news_list_h1"> 
+                    <span class="job_news_list_span job_w30" style="padding-right:5px;">&nbsp;</span> 
+                    <span class="job_news_list_span job_w120" style="text-align:left">姓名</span>
+                     <span class="job_news_list_span job_w190">求职意向</span>  
+                    <span class="job_news_list_span job_w100">工作经验</span> 
+                    <span class="job_news_list_span job_w120">期望薪资</span> 
+                    <span class="job_news_list_span job_w100">关注时间</span> 
+                    <span class="job_news_list_span job_w150" style="text-align:center">操作</span>
+                </div>
+                {yun:}foreach  from=$rows  item=v{/yun}
+                <div class="job_news_list"> 
+				<span class="job_news_list_span job_w30" style="padding-right:5px;">&nbsp;</span> 
+                 <span class="job_news_list_span job_w120" style="text-align:left">  
+                   <a href="{yun:}url m=resume c=show id='`$v.id`'{/yun}"  class="com_Release_name" target=_blank>{yun:}$v.username{/yun}&nbsp;</a></span> 
+                  <span class="job_news_list_span job_w190"><span class="yxjob_name">{yun:}$v.jobname{/yun}&nbsp;</span></span> 
+                 <span class="job_news_list_span job_w100">{yun:}$v.exp{/yun}&nbsp;</span> 
+                   <span class="job_news_list_span job_w120">{yun:}if $v.minsalary&&$v.maxsalary{/yun}￥{yun:}$v.minsalary{/yun}-{yun:}$v.maxsalary{/yun}{yun:}else if $v.minsalary{/yun}￥{yun:}$v.minsalary{/yun}以上{yun:}else{/yun}面议{yun:}/if{/yun}&nbsp;</span> 
+                  <span class="job_news_list_span job_w100">{yun:}$v.time|date_format:'%Y-%m-%d'{/yun}</span> 
+                   <span class="job_news_list_span job_w150" style="text-align:center"> 
+					{yun:}if $v.userid_msg==1{/yun} <font color="red">已邀请</font> {yun:}else{/yun} <a href="javascript:;" uid="{yun:}$v.uid{/yun}" username="{yun:}$v.username{/yun}" class="sq_resume uesr_name_a" style="position:relative;">邀请面试</a> {yun:}/if{/yun} 
+				   </span> 
+				 </div>
+                {yun:}/foreach{/yun}
+                <div>
+                  <div class="com_Release_job_bot"> 
+                  </div>
+                  <div class="diggg">{yun:}$pagenav{/yun}</div>
+                </div>
+                {yun:}elseif $smarty.get.keyword!="" {/yun}
+                <div class="msg_no">没有搜索关注我企业的人才。 </div>
+                {yun:}else{/yun}
+                 <div class="msg_no">亲爱的用户，目前还没有人才关注您。
+                   <p>您可以主动邀请人才面试</p>
+                   <a href="{yun:}url m=resume{/yun}" class="com_msg_no_bth com_submit">我要主动找人才</a></div>
+                   
+                {yun:}/if{/yun} </div>
+            </div>
+            <div> </div>
+          </form>
+          <div class="clear"></div>
+          <div class="infoboxp22" id="infobox" style="display:none; ">
+            <div>
+              <form action="index.php?c=talent_pool&act=remark" method="post" id="formstatus" target="supportiframe">
+                <input name="id" value="0" type="hidden">
+                <div class="jb_infobox" style="width: 100%;">
+                  <textarea id="remark" style="width:310px;margin:5px" name="remark" class="hr_textarea"></textarea>
+                </div>
+                <div class="jb_infobox" style="width: 100%;">
+                  <button type="submit" name='submit' value='1' class="submit_btn" style="margin-left:80px;">确认</button>
+                  &nbsp;&nbsp;
+                  <button type="button"   class="cancel_btn">取消</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<script> 
+function remark(id,remark){
+	$("input[name=id]").val(id);
+	$("#remark").val(remark);
+	$.layer({
+		type : 1,
+		title :'备注', 
+		closeBtn : [0 , true],
+		border : [10 , 0.3 , '#000', true],
+		area : ['320px','160px'],
+		page : {dom :"#infobox"}
+	});
+} 
+</script>
+{yun:}include file="$comstyle/yqms.htm"{/yun}
+{yun:}include file="$comstyle/footer.htm"{/yun}

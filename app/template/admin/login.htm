@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link href="images/admin.css" rel="stylesheet" type="text/css" />
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<script src="../js/jquery-1.8.0.min.js"></script>
+<script src="../js/layer/layer.min.js" language="javascript"></script>
+<script src="js/admin_public.js" language="javascript"></script>
+<script src="http://static.geetest.com/static/tools/gt.js"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/geetest/pc.js" type="text/javascript"></script>
+<script>
+var weburl="{yun:}$config.sy_weburl{/yun}",code_web='{yun:}$config.code_web{/yun}',code_kind='{yun:}$config.code_kind{/yun}';
+function checkform(){
+	if($('#username').val()==''){
+		layer.msg('请填写管理员账户！', 2, 8);return false;  
+	}
+	if($('#password').val()==''){
+		layer.msg('请填写登录密码！', 2, 8);return false;  
+	}
+	var codesear=new RegExp('后台登录');
+	if(codesear.test(code_web)){
+
+		if(code_kind==1){
+			authcode=$("#ipt_code").val();
+			if(authcode==''){
+				layer.msg('请填写验证码！', 2, 8);return false;  
+			}
+		}else if(code_kind==3){
+			var geetest_challenge = $('input[name="geetest_challenge"]').val();
+			var geetest_validate = $('input[name="geetest_validate"]').val();
+			var geetest_seccode = $('input[name="geetest_seccode"]').val();
+			if(geetest_challenge =='' || geetest_validate=='' || geetest_seccode==''){
+				$("#popup-submit").trigger("click");
+				layer.msg('请点击按钮进行验证！', 2, 8);return false;  
+			}
+		}
+	}
+	return true;
+}
+function checkCode(id){
+	document.getElementById(id).src=weburl+"/app/include/authcode.inc.php?"+Math.random();
+}
+</script>
+<title>{yun:}$config.sy_webname{/yun} - 后台管理中心</title>
+</head>
+<body>
+<div class="admin_logo_bg">
+<div class="logoin_top"></div>
+<div class="logoin_cont">
+<div class="login_box">
+<div class="logoin_c">
+<div class="logoin_logo"><img src="images/logoin_logo.png"></div>
+<div class="logoin_title"><div class=""><img src="images/logo_t.png"></div></div>
+	<div class="login_iptbox">
+	<iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe>
+	<form action="" method="post" target="supportiframe" autocomplete="off" id='sublogin' onsubmit='return checkform();'>
+    <ul class="logoin_list">
+		<li><span class="admin_login_s"><label for="username">用户名：</label></span><input type="text" class="ipt" size="10" name="username" id="username" value="" /></li>
+		<li><span class="admin_login_s"><label for="password">密&nbsp; 码：</label></span><input type="password" class="ipt" name="password" id="password" value="" /></li>
+       	{yun:}if strpos($config.code_web,"后台登录")!==false{/yun}
+
+
+		  <li>
+
+	   {yun:}if $config.code_kind==3{/yun}	
+		
+		<span class="admin_login_s"><label for="username">验&nbsp; 证：</label></span>
+        <div class="admin_verification"><div id="popup-captcha" data-id='sublogin' data-type='submit'></div>
+		<input type='hidden' id="popup-submit">
+        </div>
+		{yun:}else{/yun}
+		
+		<span class="admin_login_s"><label for="code">验证码：</label></span>
+		<input type="text" id="ipt_code" class="ipt_code" name="authcode" value="" />
+        <img src="{yun:}$config.sy_weburl{/yun}/app/include/authcode.inc.php" align="absmiddle" id='vcode_imgs' onclick="checkCode('vcode_imgs');">
+		
+		
+		{yun:}/if{/yun}
+		 </li>
+	    {yun:}/if{/yun}        
+		<li><span class="admin_login_s">&nbsp;</span><input type="submit" class="admin_login_sub" name="login_sub"  value="登录" /><input type="reset" class="admin_login_sub admin_login_sub1" name="login_sub" value="重置" /></li>
+      </ul>
+	  <input type="hidden" name="pytoken" value="{yun:}$pytoken{/yun}">
+	</form>
+	</div>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

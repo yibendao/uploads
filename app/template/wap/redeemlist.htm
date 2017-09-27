@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312"/>
+<meta http-equiv="Cache-Control" content="no-cache"/>
+<title>{yun:}$title{/yun} -  手机人才网</title>
+<meta http-equiv="keywords" content="{yun:}$keywords{/yun},wap" />
+<meta http-equiv="description" content="{yun:}$description{/yun}" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-compatible"content="IE=edge"/>
+<meta name="viewport" content="width=device-width" initial-scale="1"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1, maximum-scale=1, user-scalable=no" />
+<meta name="format-detection" content="telephone=no,email=no"/>
+<meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=2.0, user-scalable=no, width=device-width"/>
+<link rel="stylesheet" href="{yun:}$config.sy_weburl{/yun}/app/template/wap/css/job.css" type="text/css"/>
+<link rel="stylesheet" href="{yun:}$config.sy_weburl{/yun}/app/template/wap/css/style.css" type="text/css"/>
+<link rel="stylesheet" href="{yun:}$config.sy_weburl{/yun}/app/template/wap/css/css.css" type="text/css"/>
+</head>
+<body> 
+<div class="">
+<div class="body_wap">
+<header class="header_h">
+<div class="header_fixed">
+   <div class="header">
+    <div class="header_bg"> <a class="hd-lbtn" href="{yun:}url m=wap c=redeem{/yun}"><i class="header_top_l"></i></a>
+       <div class="header_h1"> 
+	  
+   <div class="header_p_z"> {yun:}$headertitle{/yun}</div>
+	
+	</div>
+
+     </div>
+  </div>
+    </div>
+ </header>
+   </div>
+</div>
+<div class="wap_list_nav">
+     <div class="nav_ft fl">   
+         商品分类
+          <div class="nav_ft_list" style="display:none;">
+               <ul>
+					<li class="{yun:}if $smarty.get.id==''{/yun}current{yun:}/if{/yun}"><a href="{yun:}url m=wap c=redeem a=list{/yun}">全部</a></li>
+               		{yun:}foreach item=v from=$redeem_index{/yun}
+					<li class="{yun:}if $smarty.get.id==$v{/yun}current{yun:}/if{/yun}"><a href="{yun:}searchurl m=wap c=redeem a=list id=$v untype='id'{/yun}">{yun:}$redeem_name[$v]{/yun}</a></li>
+                   {yun:}/foreach{/yun}
+               </ul>
+          </div>
+     </div>
+     <div class="nav_rt fr">   
+        排序方式
+          <div class="nav_rt_list" style="display:none;">
+               <ul>
+                   <li class="{yun:}if $smarty.get.t=='sdate'{/yun}current{yun:}/if{/yun}"><a href="{yun:}url m=wap c=redeem a=list order=desc t=sdate{/yun}">默认排序</a></li>
+                   <li class="{yun:}if $smarty.get.t=='sort'{/yun}current{yun:}/if{/yun}"><a href="{yun:}url m=wap c=redeem a=list order=desc t=sort{/yun}">人气</a></li>
+                   <li class="{yun:}if $smarty.get.t=='integral'{/yun}current{yun:}/if{/yun}"><a href="{yun:}url m=wap c=redeem a=list order=desc t=integral{/yun}">{yun:}$config.integral_pricename{/yun}</a></li>
+               </ul>
+          </div>
+     </div>
+</div>
+{yun:}foreach item=val key=jj from=$rows{/yun}
+<a href="{yun:}url m=wap c=redeem a=show id='`$val.id`'{/yun}">
+<div class="wap_list_ct">
+     <dl>
+        <dt><img width="80px" height="80px" src="{yun:}$config.sy_weburl{/yun}/{yun:}$val.pic{/yun}" /></dt>
+        <dd class="wap_list_ct_ve">{yun:}$val.name{/yun}</dd>
+        <dd class="wap_list_ct_fn">所需{yun:}$config.integral_pricename{/yun}：<em>{yun:}$val.integral{/yun}</em>{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}</dd>
+     </dl>
+</div>
+</a>
+{yun:}foreachelse{/yun}
+<div class="wap_member_no">暂无商品信息<div><a class="wap_mb_no_sr" href="{yun:}url m=wap c=redeem a=list{/yun}">重新搜索</a></div></div>
+{yun:}/foreach{/yun}
+ <div class="pages" style="margin-top:10px;">{yun:}$pagenav{/yun}</div>
+<script src="{yun:}$wap_style{/yun}/js/prefixfree.min.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/layer/layer.m.js" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/public.js" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/redeem.js" language="javascript"></script>
+{yun:}include file="$wapstyle/footer.htm"{/yun} 

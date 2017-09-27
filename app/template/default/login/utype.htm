@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>{yun:}$title{/yun}</title>
+<meta name="keywords" content="{yun:}$keywords{/yun}"/>
+<meta name="description" content="{yun:}$description{/yun}"/>
+<link rel="stylesheet" href="{yun:}$style{/yun}/style/css.css" type="text/css"/>
+</head>
+<body>
+{yun:}include file="$tplstyle/header.htm"{/yun}
+
+<div class="jh_main">
+	<div class="jh_main_name">{yun:}$smarty.cookies.username{/yun}，您好！</div>
+	<div class="jh_wel">
+		<span class="jh_wel_con">欢迎来到<i>{yun:}$config.sy_webname{/yun}</i>，您是首次登录，请先选择您合适的<em>会员身份</em>。</span>
+	</div>
+	<div class="jh_content">
+		<div class="jh_con">
+			<div class="jh_con_det">
+				<div class="jh_con_detcon">
+					<div class="jh_con_det_name">求职者</div>
+					<p>通过人才市场、报媒、网络收集各个行业低高端职位招聘,为您打造一个全方位的求职平台。为求职者提供最新最全的招聘信息。</p>
+					<a href="{yun:}url m=login c=setutype usertype=1{/yun}">立即进入</a>
+				</div>
+			</div>
+			<div class="jh_con_qiu png">求</div>
+		</div>
+		<div class="jh_con">
+			<div class="jh_con_det">
+				<div class="jh_con_detcon">
+					<div class="jh_con_det_name">招聘企业</div>
+					<p>我们免费提供企业黄页，包括公司招聘、地址、电话等企业信息大全。海量的人才信息，一站式专业人力资源服务。</p>
+					<a href="{yun:}url m=login c=setutype usertype=2{/yun}">立即进入</a>
+				</div>
+			</div>
+			<div class="jh_con_qiu jh_con_pin png">聘</div>
+		</div>
+	</div>
+</div>
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script>
+<!--[if IE 6]>
+<script src="{yun:}$config.sy_weburl{/yun}/js/png.js"></script>
+<script>
+DD_belatedPNG.fix('.png');
+</script>
+<![endif]-->
+{yun:}include file="$tplstyle/footer.htm"{/yun}

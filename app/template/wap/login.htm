@@ -1,0 +1,101 @@
+{yun:}include file="$wapstyle/header_cont.htm"{/yun}
+<div class="login_body">
+
+ <section class="list">
+  <article>
+	   {yun:}if $wxid && ($wxnickname || $wxpic){/yun}
+      <div class="lg_at">
+          <dl>
+              <dt><img style="width:75px;height:75px;border-radius:50px;" src="{yun:}$wxpic{/yun}"/></dt>
+              <dd class="lg_at_tit">{yun:}$wxnickname{/yun}</dd>
+              <dd class="lg_at_cr">您已登录微信账号</dd>
+          </dl>
+     </div>
+     <div class="lg_bd">
+          <div class="lg_bd_z">绑定已有账号</div>
+          <div class="lg_bd_r">如果您还没有会员账号，<a href="{yun:}url m=wap c=register{/yun}">请先注册！</a></div>
+     </div>
+	{yun:}/if{/yun}
+    <div class=" ">
+    <div class="login_body_cont">
+      <form action="{yun:}$config_wapdomain{/yun}/index.php?c=login" method="post" onsubmit="return mlogin(this);">
+        <input name="usertype" type="hidden" value="{yun:}$smarty.get.usertype{/yun}"/>
+        <input name="wxid" type="hidden" value="{yun:}$smarty.get.wxid{/yun}"/>
+        {yun:}if $smarty.get.job{/yun}<input name="job" type="hidden" value="{yun:}$smarty.get.job{/yun}"/>{yun:}/if{/yun}
+        <dl class="forminputitem">
+          <dd>
+            <div class="c inputitem_w">
+              <i class="reg_icon_font login_icon_n1 "></i>
+              <input name="username" type="text" id="username" value="{yun:}$smarty.get.username{/yun}" placeholder="邮箱/手机号/用户名" class="inputitemtxt"/>
+            </div>
+          </dd>
+          <dd>
+            <div class="c ico_eye_close inputitem_w">
+            <i class="reg_icon_font login_icon_n2 "></i>
+              <input name="password" type="password" id="password"  class="inputitemtxt" placeholder="请输入密码" />
+              <em class="viewpwd" id="showPwd" onclick="showPwd(this)"></em> </div>
+          </dd>
+		  {yun:}if strpos($config.code_web,"前台登录")!==false{/yun}
+			  <dd>
+			  {yun:}if $config.code_kind==3{/yun}	
+			<!---geetest----->
+			<div id="mask"></div>
+			<div id="popup-captcha-mobile" data-id='sublogin' data-type='click'></div>
+			<input type='hidden' id="popup-submit"/>
+
+				{yun:}else{/yun}
+				
+	            <div class="c ico_name inputitem_w">
+                    <i class="reg_icon_font login_icon_n8 "></i>
+	              <input class="inputitemtxt" placeholder="填写验证码" name="checkcode" id="checkcode" type="text" maxlength="4"/>
+                   <div class="rg_img">
+                   <img id="vcode_img" class="authcode" src="{yun:}$config.sy_wapdomain{/yun}/authcode.inc.php" onclick="checkCode('vcode_img');"/>
+                   <input type="hidden" id="code_kind" value="1" />
+                   </div>
+	            </div>
+			
+				{yun:}/if{/yun}
+				</dd>
+			 {yun:}/if{/yun}
+          <dd>
+          <div class="login_body_xc"> <span class="photochk">
+            <input type="checkbox" name="longLogin" id="longLogin" class="inputChk">
+            <em class="blue">下次自动登录</em> </span> <a href="{yun:}url m=wap c=forgetpw{/yun}" class="getpwd">忘记密码</a>
+            </div>
+             </dd>
+          <dd>
+		  {yun:}if $checkurl!="{yun:}url m=wap c=forgetpw{/yun}"{/yun}
+          <input type="hidden" name="checkurl" value="{yun:}$checkurl{/yun}" />
+		  {yun:}/if{/yun}
+            <input type="submit" name="submit" id="sublogin"  value="登录" class="inputSubmit"/>
+          </dd>
+        </dl>
+      </form>
+    </div>    </div>
+    {yun:}if $config.sy_qqlogin==1 || $config.sy_sinalogin==1 || $config.wx_rz==1{/yun}
+    <div class="login_other">
+    <span class="login_other_span">其他方式登录</span>
+	 {yun:}if $config.sy_sinalogin==1{/yun}
+    <a href="{yun:}url m=sinaconnect{/yun}" title="sina" class="login_other_icon login_other_xl"><i class="iconfont_sina"></i></a>
+	 {yun:}/if{/yun}
+	  {yun:}if $config.sy_qqlogin==1{/yun}
+    <a href="{yun:}$config.sy_weburl{/yun}/qqlogin.php" title="QQ"   class="login_other_icon login_other_qq"><i class="iconfont_qq"></i></a>
+	 {yun:}/if{/yun}
+{yun:}if $config.wx_rz==1{/yun}
+         <a href="{yun:}url m=wap c=wxconnect{/yun}" title="wx"   class="login_other_icon login_other_wx"><i class="iconfont_wx"></i></a>
+ {yun:}/if{/yun}
+    </div>
+	{yun:}/if{/yun}
+  </article>
+
+ 
+    
+</section>
+</div>
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/layer/layer.m.js" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/public.js" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/prefixfree.min.js" language="javascript"></script>
+<script src="http://static.geetest.com/static/tools/gt.js"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/geetest/mobile.js" type="text/javascript"></script>
+{yun:}include file="$wapstyle/footer.htm"{/yun}

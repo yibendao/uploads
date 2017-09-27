@@ -1,0 +1,46 @@
+{yun:}include file="$userstyle/header.htm"{/yun}
+<div class="yun_user_member_w1100">
+    {yun:}include file="$userstyle/left.htm"{/yun}
+   <div class="mian_right fltR mt20">
+            <div class="member_right_index_h1 fltL"> <span class="member_right_h1_span fltL">我的评论</span> <i class="member_right_h1_icon user_bg"></i></div>
+   
+        <div>
+            <div id="gms_showclew"></div>
+            <div class="resume_box_list">
+            {yun:}if !empty($rows){/yun}
+                <div class="List_Ope List_Title ">
+                    <span class="List_Title_span comsg_w280">企业名称 </span>
+                    <span class="List_Title_span comsg_w280">反馈内容</span>
+                    <span class="List_Title_span List_Title_w170">反馈时间</span>
+                    <span class="List_Title_span comsg_w95">操作</span>
+                </div>
+                {yun:}/if{/yun}
+                {yun:}foreach from=$rows item=item{/yun}
+                <div class="List_Ope List_Ope_bor">
+                    <span class="List_Title_span comsg_w280"> <a href="{yun:}url  m=company c=show id='`$item.cuid`'{/yun}" target="_blank" title="{yun:}$item.com_name{/yun}" class="List_Ope_a">{yun:}$item.com_name|mb_substr:0:20:'gbk'{/yun} </a> &nbsp;</span>
+                    <span class="List_Title_span comsg_w280">{yun:}$item.content|mb_substr:0:30:'gbk'{/yun}</span>
+                    <span class="List_Title_span List_Title_w170">{yun:}$item.ctime|date_format:"%Y-%m-%d %H:%M"{/yun}</span>
+                    <span class="List_Title_span comsg_w95">
+                        <a href="javascript:void(0)" onclick="layer_del('确定要删除？','index.php?c=pl&act=del&id={yun:}$item.id{/yun}');" class="List_dete">删除</a>
+                    </span>
+                    {yun:}if $item.reply{/yun}
+                    <div class="List_Title_content List_Title_content_Advisory_bor">
+                        <em class="List_Title_content_Advisory_r2">
+                            <span class="List_Title_conten_tit">回复时间：</span>{yun:}$item.reply_time|date_format:"%Y-%m-%d %H:%M"{/yun}
+                        </em>
+                        <span class="List_Title_conten_tit List_Title_conten_tit_cor">企业回复：</span>
+                        {yun:}$item.reply{/yun}
+                    </div>
+                    {yun:}/if{/yun}
+                </div>
+                {yun:}foreachelse{/yun}
+                <div class="msg_no">
+                    暂无评论信息！
+                </div>
+                {yun:}/foreach{/yun}
+                <div class="diggg">{yun:}$pagenav{/yun}</div>
+            </div>
+        </div>
+    </div>
+</div>
+{yun:}include file="$userstyle/footer.htm"{/yun}

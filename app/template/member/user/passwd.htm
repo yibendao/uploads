@@ -1,0 +1,30 @@
+{yun:}include file="$userstyle/header.htm"{/yun}
+<div class="yun_user_member_w1100"> 
+{yun:}include file="$userstyle/left.htm"{/yun}
+
+          <div class="mian_right fltR mt20">
+            <div class="member_right_index_h1 fltL"> <span class="member_right_h1_span fltL">修改密码</span> <i class="member_right_h1_icon user_bg"></i></div>
+    
+
+  <div class="clear"></div>
+  <div id="">
+    
+    <FORM name='MyForm'  action='' target="supportiframe" method="post"  onsubmit="return Showsub1();">
+      <div class="passwd_list mt10">
+       <div class="yj_tw_list"><span class="yj_tw_list_name">原始密码：</span><input type="password" id="oldpassword" name="oldpassword" class="yj_tw_list_text"/><em id="msg_oldpassword">填写您的原始密码！</em></div>
+       
+              <div class="yj_tw_list"><span class="yj_tw_list_name">新密码：</span>   <input type="password" id="password" name="password" class="yj_tw_list_text"/><em id="msg_password">新密码格式为 6-20个字符！</em></div>
+        <ul>
+               
+              <div class="yj_tw_list"><span class="yj_tw_list_name">确认密码：</span>   <input type="password" id="repassword" name="repassword" class="yj_tw_list_text"/><em id="msg_repassword">请再次确认您的新密码！</em></div>
+               <div class="yj_tw_list"><span class="yj_tw_list_name">&nbsp;</span>  <input type="hidden" value="1" name="usertype" />
+            <input type="submit" name="submit" class="yj_tw_list_bth" value="保存" ></div>
+        
+   
+        
+      </div>
+    </form>
+  </div>
+</div>
+</div>
+{yun:}include file="$userstyle/footer.htm"{/yun}

@@ -1,0 +1,58 @@
+  
+{yun:}include file="$askstyle/header.htm"{/yun}  
+<div class="answer_con">
+	<div class="content con_answer"> 
+		<div class="content_hot ">
+			<div class="left left_con">
+               {yun:}include file="$askstyle/nav.htm"{/yun} 
+        <div class="answer_content fl">
+          <div class="answer_content_top fl"><span>{yun:}if $uid && ($smarty.get.uid=='' || $smarty.get.uid==$uid){/yun} 我的回答{yun:}elseif $smarty.get.uid{/yun}他的回答{yun:}/if{/yun}</span></div>
+		  <div class="">
+		   <div class=" ">
+			<div class="">
+					
+                    <div class="wt_content_t fl">
+						{yun:}foreach from=$rows item=alist{/yun}
+						<div class="ask_anwser_items fl">
+						<div class="ask_anwser_title fl"><a href="{yun:}url m=ask c=content id='`$alist.qid`'{/yun}" target="_blank">{yun:}$alist.title{/yun}</a></div>
+						<div class="ask_anwser_on_t">
+						<div class="ask_anwser_tra"></div>
+						{yun:}$alist.content{/yun}<font color="#999" style="padding-left:30px;">{yun:}$alist.add_time|date_format:"%Y-%m-%d"{/yun}</font>
+						{yun:}if $uid==$alist.uid{/yun}
+									<span class="friend_delect" style="float:right"><a href="javascript:void(0)" onclick="layer_del('确定要删除该提问？','{yun:}url m=ask c=friend a=delask type=1 id=$alist.id{/yun}')">删除</a></span>
+									{yun:}/if{/yun}
+						</div>
+						</div>
+						{yun:}foreachelse{/yun}  
+						<div class="noresult">
+						<span>
+						<a class="noresult_cr" href="{yun:}url m=ask c=index{/yun}#answer">暂无数据！</a>
+						</span>
+						</div>
+						{yun:}/foreach{/yun}  
+                    </div>
+                   
+					<div class="clear"></div>
+					<div class="pages">{yun:}$pagenav{/yun}</div> 
+				</div>	
+		     </div>
+	         </div>
+            </div>
+			</div>
+			{yun:}include file="$askstyle/right.htm"{/yun}
+		</div>
+	</div>
+</div>  
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js" type="text/javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script>
+<script src="{yun:}$ask_style{/yun}/js/question.js" type="text/javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/public.js" language="javascript"></script>
+<!--[if IE 6]>
+<script src="{yun:}$config.sy_weburl{/yun}/js/png.js"></script>
+<script>
+DD_belatedPNG.fix('.png,.attention .watch_gz');
+</script>
+<![endif]-->
+<iframe id="supportiframe" name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe>
+{yun:}include file="$askstyle/footer.htm"{/yun}   
+

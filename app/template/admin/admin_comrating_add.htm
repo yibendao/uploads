@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<link href="./images/reset.css" rel="stylesheet" type="text/css" />
+<link href="./images/system.css" rel="stylesheet" type="text/css" />
+<link href="./images/table_form.css" rel="stylesheet" type="text/css" /> 
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script>
+<script src="js/admin_public.js" language="javascript"></script>
+<title></title>
+</head>
+<body class="body_ifm">
+<div class="infoboxp">
+<div class="infoboxp_top_bg"></div>
+<div class="infoboxp_top" style="z-index:600;position:relative;">	
+	<div class="report_uaer_list"><span class="infoboxp_top_span">会员等级</span>
+	 <a href="index.php?m=admin_comrating" >等级设置</a>
+	 <a href="index.php?m=admin_comrating&c=server" class="report_uaer_list_on">增值服务</a> 
+	</div> 
+  </div> 
+<div class="admin_Prompt">
+<div class="admin_Prompt_span">
+    <b>提示：</b>企业会员增值包等级关乎您的收入问题，请添加后编辑增值包套餐，谨慎修改并注意整体的合理性。
+</div>
+<div class="admin_Prompt_close"></div></div>
+<div class="infoboxp_top">
+	<h6>添加企业会员增值包</h6>
+</div>
+<div style=" background: #FFFFFF; border: 1px solid #DCE3ED;">
+<div class="">
+<iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe> 
+<form name="myform" target="supportiframe" action="index.php?m=admin_comrating&c=save" method="post" id="myform" onSubmit="return checkform();">
+<input type="hidden" name="pytoken" id='pytoken' value="{yun:}$pytoken{/yun}">
+<table width="100%" class="table_form table_form_thr" style="background:#fff;">
+    <tr>
+        <th align="right" width="150">增值包名称：</th>
+        <td>
+        <input type="text" name="name" id="name" class="input-text tips_class" size="30">
+        <span class="admin_web_tip">如：下载增值包</span>
+        </td>
+        <th align="right">状态：</th>
+        <td>          
+            <input type="radio" name="display" value="1" id="RadioGroup1_0" {yun:}if $row.display==1{/yun}checked{yun:}/if{/yun}>
+            <label for="RadioGroup1_0">启用</label>
+            <input type="radio" name="display" value="0" id="RadioGroup1_1" {yun:}if $row.display==0{/yun}checked{yun:}/if{/yun}>
+            <label for="RadioGroup1_1">不启用</label>
+			<span class="admin_web_tip">前台是否可见</span>
+        </td>
+    </tr>  
+<tr class="admin_table_trbg">
+<td colspan="4" align="center">
+	<input name="id" type="hidden" value="{yun:}$row.id{/yun}">
+	<input class="admin_submit4" name="useradd" type="submit" value="提交" id="dosubmit">
+</td>
+ </table>
+ </form>
+</div>
+</div>
+</div>
+<script> 
+function checkform(){
+	if($("#name").val()==""){
+		parent.layer.msg("增值包名称不能为空",2,8);
+		return false;
+	}
+}
+$(".tips_class").hover(function(){ 
+	var msg_id=$(this).attr('id'); 
+	var msg=$('#'+msg_id+' + font').html();
+	if($.trim(msg)!=''){
+		layer.tips(msg, this, {
+		guide: 1, 
+		style: ['background-color:#5EA7DC; color:#fff;top:-7px', '#5EA7DC']
+		}); 
+		$(".xubox_layer").addClass("xubox_tips_border");
+	} 
+},function(){
+	var msg_id=$(this).attr('id');
+	var msg=$('#'+msg_id+' + font').html();
+	if($.trim(msg)!=''){
+		layer.closeTips();
+	} 
+});
+</script>
+</body>
+</html>

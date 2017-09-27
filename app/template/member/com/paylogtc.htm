@@ -1,0 +1,117 @@
+{yun:}include file="$comstyle/header.htm"{/yun}
+<div class="w1000">
+  <div class="admin_mainbody"> {yun:}include file="$comstyle/left.htm"{/yun}
+    <div class=right_box>
+      <div class=admincont_box>
+        <div class="com_tit"><span class="com_tit_span">我的会员</span></div>
+        <div class="com_body">
+          <div class="com_pay_balance">
+            <div class="com_pay_balance_left">
+              <div class="com_pay_balance_tit">尊敬的企业用户</div>
+              <div class=""> 您当前是：<span class="f60">
+				{yun:}if $statis.vip_etime < time() && $statis.vip_etime != 0{/yun}
+			 		{yun:}if $config.com_vip_done == 0{/yun}
+			 			非会员
+					{yun:}else if $config.com_vip_done == 1{/yun}
+ 						{yun:}$statis.rating_name{/yun}
+			 		{yun:}/if{/yun}
+			 	{yun:}else{/yun}
+					{yun:}$statis.rating_name{/yun}
+			 	{yun:}/if{/yun}</span></div>
+              <div class=""> 服务期限为：{yun:}$statis.vip_stime|date_format:'%Y-%m-%d'{/yun} - {yun:}if $statis.vip_etime==0{/yun}永久{yun:}else{/yun}{yun:}$statis.vip_etime|date_format:'%Y-%m-%d'{/yun}{yun:}/if{/yun}</div>
+            </div>
+            <div class="com_pay_balance_right">
+              <div class="com_pay_balance_right_jf"> 可用{yun:}$config.integral_pricename{/yun}：<span class="f60">{yun:}$statis.integral{/yun}</span>{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}</div>
+              <div class="">已消费{yun:}$config.integral_pricename{/yun}：<span class="f60">{yun:}$integral{/yun}</span> {yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun} <a href="index.php?c=paylog&consume=ok" title="明细"  class="com_pay_balance_a">明细</a><a href="index.php?c=pay&type=integral" title="账户充值" class="com_pay_balance_a">充值</a> <a href="index.php?c=right" title="查看特权"  class="com_pay_balance_a">查看特权</a></div>
+              <div class=""></div>
+            </div>
+          </div>
+          <div class="com_pay_balance_box">
+            <div class="com_pay_balance_data">
+              <div class="com_pay_balance_data_q">
+                <div class="com_pay_balance_data_n">{yun:}if $statis.rating_type=='2'{/yun}不限{yun:}else{/yun}{yun:}$statis.job_num{/yun}{yun:}/if{/yun}</div>
+                <div class="com_pay_balance_data_name">可发布职位</div>
+              </div>
+              <div class="com_pay_balance_data_p mt10">套餐数：{yun:}if $statis.rating_type=='2'{/yun}会员有效期内不限{yun:}else{/yun}{yun:}$rating.job_num{/yun}{yun:}/if{/yun}</div>
+              <div class="com_pay_balance_data_p">
+              	{yun:}if $rating.job_num-$statis.job_num>=0{/yun}
+              		已发布：{yun:}$rating.job_num-$statis.job_num{/yun}
+              	{yun:}else if $rating.job_num-$statis.job_num<0{/yun}
+              		增值服务：{yun:}$statis.job_num-$rating.job_num{/yun}
+              	{yun:}/if{/yun}
+              </div>
+              
+              <div class="com_pay_balance_data_bth">
+              	<a href="javascript:void(0);" onclick="jobadd_url('{yun:}$addjobnum{/yun}','{yun:}$config.integral_job{/yun}','{yun:}$config.integral_pricename{/yun}');return false;" class="com_pay_balance_data_btha">发布职位</a></div>
+            </div>
+            <div class="com_pay_balance_box">
+              <div class="com_pay_balance_data com_pay_balance_data_xz">
+                <div class="com_pay_balance_data_q">
+                  <div class="com_pay_balance_data_n">{yun:}if $statis.rating_type=='2'{/yun}不限{yun:}else{/yun}{yun:}$statis.down_resume{/yun} {yun:}/if{/yun}</div>
+                  <div class="com_pay_balance_data_name">可下载简历</div>
+                </div>
+                <div class="com_pay_balance_data_p mt10">套餐数：{yun:}if $statis.rating_type=='2'{/yun}会员有效期内不限{yun:}else{/yun}{yun:}$rating.resume{/yun}{yun:}/if{/yun}</div>
+                <div class="com_pay_balance_data_p">
+                	{yun:}if $rating.resume-$statis.down_resume>=0{/yun}
+                		已下载：{yun:}$rating.resume-$statis.down_resume{/yun}
+                	{yun:}else if $rating.resume-$statis.down_resume<0{/yun}
+                		增值服务:{yun:}$statis.down_resume-$rating.resume{/yun}
+                	{yun:}/if{/yun}
+                </div>
+                <div class="com_pay_balance_data_bth"><a  href="index.php?c=down" class="com_pay_balance_data_btha">查看</a></div>
+              </div>
+              <div class="com_pay_balance_box">
+                <div class="com_pay_balance_data com_pay_balance_data_yq">
+                  <div class="com_pay_balance_data_q">
+                    <div class="com_pay_balance_data_n">{yun:}if $statis.rating_type=='2'{/yun}不限{yun:}else{/yun}{yun:}$statis.invite_resume{/yun} {yun:}/if{/yun}</div>
+                    <div class="com_pay_balance_data_name">可邀请面试</div>
+                  </div>
+                  <div class="com_pay_balance_data_p mt10">套餐数：{yun:}if $statis.rating_type=='2'{/yun}会员有效期内不限{yun:}else{/yun}{yun:}$rating.interview{/yun}{yun:}/if{/yun}</div>
+                  <div class="com_pay_balance_data_p">
+                  	{yun:}if $rating.interview-$statis.invite_resume>=0{/yun}
+                  		已邀请：{yun:}$rating.interview-$statis.invite_resume{/yun}
+                  	{yun:}else if $rating.interview-$statis.invite_resume<0{/yun}
+                  		增值服务：{yun:}$statis.invite_resume-$rating.interview{/yun}
+                  	{yun:}/if{/yun}
+                  </div>
+                  <div class="com_pay_balance_data_bth">
+                    {yun:}if $config.com_search==1{/yun}<a href="index.php?c=resume" class="com_pay_balance_data_btha">搜人才</a>{yun:}/if{/yun}
+                    </div>
+                </div>
+                <div class="com_pay_balance_list">
+                  <div class="com_pay_balance_list_h1">刷新职位</div>
+                  <div class="com_pay_balance_list_zs">套餐数：{yun:}if $statis.rating_type=='2'{/yun}会员有效期内不限{yun:}else{/yun}{yun:}$rating.breakjob_num{/yun}{yun:}/if{/yun}</div>
+                  <div class="com_pay_balance_list_p"><i class="com_body_pay_list_sl_iocn"></i><i class="com_body_pay_list_sl_iocn"></i>
+                  {yun:}if $rating.breakjob_num-$statis.breakjob_num >= 0{/yun}
+                  	已使用：{yun:}$rating.breakjob_num-$statis.breakjob_num{/yun}
+                  {yun:}else if $rating.breakjob_num-$statis.breakjob_num < 0{/yun}
+                  	增值服务：{yun:}$statis.breakjob_num-$rating.breakjob_num{/yun}
+                  {yun:}/if{/yun}
+                  </div>
+                  <div class="com_pay_balance_list_p"><i class="com_body_pay_list_sl_iocn com_body_pay_list_sl_iocn_sy"></i>剩余：{yun:}if $statis.rating_type=='2'{/yun}会员有效期内不限{yun:}else{/yun}{yun:}$statis.breakjob_num{/yun}{yun:}/if{/yun}</div>
+                </div>
+                <div class="com_pay_balance_list">
+                  <div class="com_pay_balance_list_h1">发布兼职职位</div>
+                  <div class="com_pay_balance_list_zs">套餐数：{yun:}if $statis.rating_type=='2'{/yun}会员有效期内不限{yun:}else{/yun}{yun:}$rating.part_num{/yun}{yun:}/if{/yun}</div>
+                  <div class="com_pay_balance_list_p"><i class="com_body_pay_list_sl_iocn"></i>
+                  	{yun:}if $rating.part_num-$statis.part_num>=0{/yun}
+                  		已使用：{yun:}$rating.part_num-$statis.part_num{/yun}
+                  	{yun:}else if $rating.part_num-$statis.part_num<0{/yun}
+                  		增值服务：{yun:}$statis.part_num-$rating.part_num{/yun}
+                  	{yun:}/if{/yun}
+                  </div>
+                  <div class="com_pay_balance_list_p"><i class="com_body_pay_list_sl_iocn com_body_pay_list_sl_iocn_sy"></i>剩余：{yun:}if $statis.rating_type=='2'{/yun}会员有效期内不限{yun:}else{/yun}{yun:}$statis.part_num{/yun}{yun:}/if{/yun}</div>
+                </div>
+               
+               
+               
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{yun:}include file="$comstyle/footer.htm"{/yun} 

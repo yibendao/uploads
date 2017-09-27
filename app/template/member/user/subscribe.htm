@@ -1,0 +1,65 @@
+{yun:}include file="$userstyle/header.htm"{/yun}
+<div class="yun_user_member_w1100">
+    {yun:}include file="$userstyle/left.htm"{/yun}
+      <div class="mian_right fltR mt20">
+            <div class="member_right_index_h1 fltL"> <span class="member_right_h1_span fltL">订阅管理</span> <i class="member_right_h1_icon user_bg"></i> <div class="fr"><a class="Available_bth" href="{yun:}url m=subscribe{/yun}">立即订阅</a></div></div>
+
+       
+        <div class="remindbox01 mt10">
+            <div id="gms_showclew"></div>
+            <form action="index.php" method="get" target="supportiframe" id='myform'>
+                <input type="hidden" name="c" value="subscribe" />
+                <input type="hidden" name="act" value="del" />
+                <div class="resumelistbox01 mt10">
+                
+                    <div class="resume_box_list">
+                    {yun:}if !empty($rows){/yun}
+                        <div class="List_Ope List_Title">
+                            <span class="List_Title_span List_Title_span_n">&nbsp;</span>
+                            <span class="List_Title_span List_Title_w290">职位类别</span>
+                            <span class="List_Title_span List_Title_w130 ">所在城市</span>
+                            <span class="List_Title_span List_Title_w100">月薪范围</span>
+                            <span class="List_Title_span List_Title_w80">发送周期</span>
+                            <span class="List_Title_span List_Title_w80">订阅认证</span>
+                            <span class="List_Title_span List_Title_w140">操作</span>
+                        </div>
+                        {yun:}/if{/yun}
+                        {yun:}foreach item=v from=$rows{/yun}
+                        <div class="List_Ope List_Ope_bor">
+                            <span class="List_Title_span List_Title_span_n"><input type=checkbox name="del[]" value="{yun:}$v.id{/yun}" class="List_Title_span_check" style="margin-top:3px;"></span>
+                            <span class="List_Title_span List_Title_w290 ">
+                                <span class="List_Title_span_com">{yun:}$v.jobname{/yun}</span>
+                               &nbsp;
+                            </span>
+                            <span class="List_Title_span  List_Title_w130">&nbsp;{yun:}$v.city_name{/yun}</span>
+                            <span class="List_Title_span List_Title_w100 ">&nbsp;{yun:}if $v.minsalary&&$v.maxsalary{/yun}￥{yun:}$v.minsalary{/yun}-{yun:}$v.maxsalary{/yun}{yun:}else if $v.minsalary{/yun}￥{yun:}$v.minsalary{/yun}以上{yun:}else{/yun}面议{yun:}/if{/yun}</span>
+							<span class="List_Title_span List_Title_w80 ">&nbsp;{yun:}$v.time{/yun}天</span>
+                            <span class="List_Title_span List_Title_w80 ">&nbsp;{yun:}if $v.status=='1'{/yun}已认证{yun:}else{/yun}未认证{yun:}/if{/yun}</span>
+                            <span class="List_Title_span List_Title_w140"> 
+								<a href="index.php?c=subscribe&act=record&id={yun:}$v.id{/yun}" class="List_dete cblue">发送记录</a>
+                                <a href="{yun:}url m=subscribe id='`$v.id`'{/yun}" class="List_dete cblue" target="_blank"> 修改</a>
+                                <a href="javascript:void(0)" onclick="layer_del('确定要删除？','index.php?c=subscribe&act=del&id={yun:}$v.id{/yun}');" class="List_dete cblue"> 删除</a>
+                            </span> 
+                        </div>
+                        {yun:}foreachelse{/yun}
+                        <div class="msg_no">
+              			<p>亲爱的用户，您还没有订阅职位哦，想要获得更多工作机会</p>
+              			<p>立即订阅职位吧！</p>
+              			<a href="{yun:}url m=subscribe{/yun}" target="_blank"class="msg_no_sq uesr_submit">立即去订阅>></a>
+              			</div>
+                        {yun:}/foreach{/yun}
+                        {yun:}if $rows{/yun}
+                        <div class="List_Ope List_Ope_bg">
+                            <span class="List_Title_span List_Title_span_n"><input id="checkAll" type="checkbox" onclick="m_checkAll(this.form)" class="List_Title_span_check_n mt5">
+                            </span>
+                            <input type="button" name="subdel" value="批量删除" onclick="return really('del[]');" class="Bulk_Delete uesr_submit">
+                        </div>
+                        <div class="diggg" style="width:710px;">{yun:}$pagenav{/yun}</div>
+                        {yun:}/if{/yun}
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{yun:}include file="$userstyle/footer.htm"{/yun} 

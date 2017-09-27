@@ -1,0 +1,166 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>{yun:}$title{/yun}</title>
+<meta name="keywords" content="{yun:}$keywords{/yun}"/>
+<meta name="description" content="{yun:}$description{/yun}"/>
+<link rel="stylesheet" href="{yun:}$style{/yun}/style/css.css" type="text/css"/>
+<link rel="stylesheet" href="{yun:}$style{/yun}/style/comapply.css" type="text/css"/>
+</head>
+<body style="background:#f8f8f8">
+{yun:}include file="$tplstyle/header.htm"{/yun}
+<style>
+body{ overflow-x:hidden}
+#contentDiv ul li {
+    list-style:none;
+}
+.td_title1 {
+	color: #222;
+}
+.td04 {
+	COLOR: #00659c;
+	TEXT-INDENT: 0px
+}
+.mail{ padding-top:20px; margin-bottom:20px;}
+.mail li{height:37px; line-height:35px;}
+.mail li span{width:330px; text-align:right; display:block; float:left}
+.zhiw1{width:1200px; background:#fff;font-size:12px;}
+.zhiw{width:1200px; background:#fff;font-size:12px; float:left; list-style:none; font-size:14px;color:#666;}
+.zhiw li{width:380px; line-height:33px; float:left; margin-left:20px;_margin-left:10px; list-style:none;white-space: normal; word-break: break-all;
+
+}.content{ margin-top:10px;}
+ul{ padding:0; margin:0;}
+.job_r_sq{ display:inline-block; padding:10px 30px; background:#f60;color:#fff; }
+.job_r_sq:hover{color:#fff}
+</style>
+<div style="clear:both"></div>
+<div style="width:1200px; margin:0 auto">
+  <div style="width:100%; margin:10px auto 0; padding:20px 0px; ">
+    <div style="width:100%;margin:0 auto;">
+      <div style="width:100%;font-size:14px;height:300px; margin-bottom:10px; background:#fff;">
+        <div style="line-height:40px; line-height:40px;color:#fff; text-indent:10px; background:#2c81d6; font-size:16px; font-family:'microsoft yahei';">推荐职位给好友</div>
+        <ul class="mail">
+          <li style="margin-top:10px;"><span><font color="red">*</font> 朋友的E-mail：</span>
+            <input type="text" id="femail" value="" name="femail" style="border:1px solid #ccc;width:400px;height:35px; line-height:35px;" />
+          </li>
+          <li style="margin-top:10px;"><span><font color="red">*</font> 朋友对您的昵称：</span>
+            <input type="text" id="myemail"  value="" name="myemail" style="border:1px solid #ccc;width:300px;height:35px; line-height:35px;" />
+            <i style="font-size:12px; display:inline-block;height:37px; vertical-align:top; font-style:normal;color:#666">让朋友知道是您推荐的职位，与其他垃圾邮件推广职位区分</i></li>
+          <li style="margin-top:10px;height:70px;"><span><font color="red">*</font> 验证码：</span>
+            <input id="authcode" type="text" tabindex="3"  style="width:60px; float:left; margin-top:5px; margin-right:5px; border:1px solid #ccc;width:80px;height:35px; line-height:35px;" maxlength="4" name="authcode"/>
+            <img id="vcode_img" src="{yun:}$config.sy_weburl{/yun}/app/include/authcode.inc.php" />&nbsp;
+            <a href="javascript:void(0);" onclick="checkCode('vcode_img');">看不清?</a> 
+            </li>
+          <li><span>&nbsp;</span>
+            <input type="button" onClick="sendjob('vcode_img');" value="发送"  style="width:160px;height:40px; background:#F6572F;color:#fff; cursor:pointer;font-family:'microsoft yahei'; font-size:16px;border:none;"/>
+          </li>
+        </ul>
+      </div>
+      <div style="width:100%;font-size:14px; margin-top:20px;">
+        <div style="line-height:40px; line-height:40px;color:#fff; text-indent:10px; background:#2c81d6; font-size:16px; font-family:'microsoft yahei';">推荐职位: <a href="{yun:}url m=com c=comapply id='`$Info.id`'{/yun}"  target="_blank" style="color:#fff;">{yun:}$Info.name{/yun}</a> </div>
+        <ul class="zhiw" style="padding-top:20px; padding-bottom:20px;">
+          {yun:}if $Info.job_number{/yun}<li>招聘人数：{yun:}$Info.job_number{/yun} </li>{yun:}/if{/yun}
+          {yun:}if $Info.job_edu{/yun}<li>学历要求：{yun:}$Info.job_edu{/yun}</li>{yun:}/if{/yun}
+          {yun:}if $Info.job_age{/yun}<li>年龄要求：{yun:}$Info.job_age{/yun}</li>{yun:}/if{/yun}
+          {yun:}if $Info.job_type{/yun}<li>职位类型：{yun:}$Info.job_type{/yun}</li>{yun:}/if{/yun}
+        
+          {yun:}if $Info.job_exp{/yun}<li>经验要求：{yun:}$Info.job_exp{/yun} </li>{yun:}/if{/yun}
+          <li>薪资待遇：{yun:}if $Info.minsalary&&$Info.maxsalary{/yun}￥{yun:}$Info.minsalary{/yun}-{yun:}$Info.maxsalary{/yun}{yun:}else if $Info.minsalary{/yun}￥{yun:}$Info.minsalary{/yun}以上{yun:}else{/yun}面议{yun:}/if{/yun} </li>
+          {yun:}if $uid{/yun}
+          {yun:}if $usertype==1{/yun}
+          <li>电子信箱：<a href="{yun:}url m=job c=comapply id='`$Info.id`'{/yun}"  target="_blank">查看</a></li>
+          <li>联系电话：<a href="{yun:}url m=job c=comapply id='`$Info.id`'{/yun}"  target="_blank">查看</a> </li> 
+            {yun:}else{/yun}
+          <li>电子信箱：<a href="javascript:void(0)" onclick="notuser()" >登录网站后查看</a></li>
+          <li>联系电话：<a href="javascript:void(0)" onclick="notuser()">登录网站后查看</a> </li>
+        {yun:}/if{/yun}
+          {yun:}else{/yun}
+          <li>电子信箱：<a href="javascript:void(0)" onclick="showlogin('1');" >登录网站后查看</a></li>
+          <li>联系电话：<a href="javascript:void(0)" onclick="showlogin('1');">登录网站后查看</a> </li>
+         {yun:}/if{/yun}
+          <li>工作地点：{yun:}$Info.job_city_one{/yun}{yun:}$Info.job_city_two{/yun}</li>
+          <li>有效期至：{yun:}$Info.edate|date_format:'%Y年%m月%d日'{/yun}</li>
+          <li style="width:95%">{yun:}if $Info.lang_info!=''{/yun}语言要求：{yun:}$Info.lang_info{/yun}{yun:}/if{/yun} </li>
+          <li style="width:95%;">{yun:}if $Info.welfare_ifno!=''{/yun}福利待遇：{yun:}$Info.welfare_info{/yun}{yun:}/if{/yun} </li>
+       
+          <li style="width:90%; position:relative; padding-left:70px;"><span style="position:absolute;left:0px;top:0px;">职位描述：</span>{yun:}$Info.description{/yun}</li>
+        </ul>
+        <div style="padding-bottom:20px;width:100%; float:left; background:#fff">
+        <table width="100%"  border="0"  cellpadding="6"  cellspacing="0">
+          <tbody>
+            <tr bgcolor="#FFFFFF">
+              <td height="30"  align="center"> <a id="sq_job" href="{yun:}url m=job c=comapply id=$Info.id{/yun}" class="job_r_sq">申请职位</a> 
+                
+               <a href="{yun:}url m=company c=show id='`$Info.uid`'{/yun}"  target="_blank"  style="display:inline-block;height:37px; line-height:37px; vertical-align:top;">[查看该公司其他职位 ] </a></td>
+            </tr>
+          </tbody>
+        </table> 
+        </div>
+          </div>
+        <div style="width:100%; margin-top:20px; float:left; background:#fff;">
+          <div style="line-height:40px; line-height:40px;color:#fff; text-indent:10px; background:#2c81d6; font-size:16px; font-family:'microsoft yahei';">公司简介：{yun:}$Info.com_name{/yun}</div>
+          <ul class="zhiw" style="padding-top:20px; float:left; ">
+            <li>{yun:}if $Info.job_hy!=''{/yun}从事行业：{yun:}$Info.job_hy{/yun} {yun:}/if{/yun}</li>
+            <li>{yun:}if $Info.job_pr!=''{/yun}企业性质：{yun:}$Info.job_pr{/yun}{yun:}/if{/yun} </li>
+            <li>{yun:}if $Info.job_mun!=''{/yun}企业规模：{yun:}$Info.job_mun{/yun} {yun:}/if{/yun}</li>
+            <li>{yun:}if $Info.sdate!=''{/yun}创办时间：{yun:}$Info.sdate{/yun}{yun:}/if{/yun} </li>
+            <li>{yun:}if $Info.linkman!=''{/yun}联 系 人：{yun:}$Info.linkman{/yun}{yun:}/if{/yun} </li>
+            <li>{yun:}if $Info.zip!=''{/yun}邮政编码： {yun:}$Info.zip{/yun}{yun:}/if{/yun}</li>
+            <li>{yun:}if $Info.website!=''{/yun}公司主页：{yun:}$Info.website{/yun}{yun:}/if{/yun}</li>
+            
+            <li style="width:95%">{yun:}if $Info.address!=''{/yun}公司地址：{yun:}$Info.address{/yun}{yun:}/if{/yun}</li>
+            <li style="width:95%">{yun:}if $Info.content!=''{/yun}公司简介：</li>
+          </ul>
+          <div style="font-size:14px; line-height:33px; padding:0 20px 20px 20px; width:984px;"> {yun:}$Info.content{/yun} {yun:}/if{/yun}</div>
+        </div> 
+        <div class="clear"></div>
+      </div>
+    </div>
+  </div>
+  <div id="notuser" style="width:350px;" class="none">
+<div class="job_user_box">
+<div class="job_user_name" style="margin-top:10px;">{yun:}$usertypemsg{/yun}</div>
+<div class="job_user_name_tip" style="margin-top:10px;margin-bottom:15px;padding:0;">请登录个人用户</div>
+<div style="margin-bottom:20px;"><a href="javascript:void(0)" onclick="layer.closeAll()" class="job_user_box_hn">忽略</a><a href="javascript:void(0)" style="margin-left:10px;" onclick="switching('{yun:}url c=logout{/yun}')" class="job_user_box_qh">切换账户</a></div>
+</div>
+</div>
+  <script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/lazyload.min.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/public.js" language="javascript"></script>
+<script src="{yun:}$style{/yun}/js/company.js" type="text/javascript"></script> 
+<!--[if IE 6]>
+<script src="{yun:}$config.sy_weburl{/yun}/js/png.js"></script>
+<script>
+DD_belatedPNG.fix('.png,.index_logoin,.index_logoin_current,.nav_list,.fairs_Status,.fairs_Status,.logoin_qybj,.logoin_grbj,.logoin_Shadow_right,.logoin_Shadow_left,.whitebg,.micro_resume_fast,.nav_list_hover a,#bg,.left_comapply_cont li,.icon2,.nav_list .nav_list_hover em,.Fast_right_icon_l,.Fast_right_icon_r,.index_logoin_after,.logoin_after em,.logoin_after_su2,.logoin_after_su1,.hbg,.pagination li a,.firm_post_list,.Auction_tit,.yun_title,.Recommended_tit,.Com_Search_Results_r ul .All_post_h1_act,.sButtonBlock a.closeButton,.Comment_list_top,.icon,.yun_wap_m_bg,.micro_box,.fast_issuance');
+</script>
+<![endif]-->
+<script>
+function sendjob(img){
+	var femail = $("#femail").val();
+	var myemail = $("#myemail").val();
+	var authcode = $("#authcode").val();
+	var html =  $("#html").html();
+	var id = "{yun:}$Info.id{/yun}";
+
+	if(femail=="" || myemail=="" || authcode==""){
+		layer.msg('请完整填写信息！', 2, 8);return false;  
+	}
+	layer.load('执行中，请稍候...',0);
+	$.post("{yun:}url m=job c=recommend{/yun}",{femail:femail,myemail:myemail,authcode:authcode,id:id},function(data){
+		layer.closeAll();
+		checkCode(img);
+		if(data==1){ 
+			layer.msg('邮件发送成功！', 2,9,function(){location.reload();});return false;	
+		}else if(data==""){ 	
+			layer.msg('未知错误，请联系管理员！', 2,8);
+		}else{ 
+			layer.msg(data, 2,8);
+		}
+		return false;
+	});
+}
+</script>
+ {yun:}include file="$tplstyle/public_search/login.htm"{/yun} 
+{yun:}include file="$tplstyle/footer.htm"{/yun}

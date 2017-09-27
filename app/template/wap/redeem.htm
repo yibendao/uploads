@@ -1,0 +1,88 @@
+{yun:}include file="$wapstyle/header_cont.htm"{/yun}
+<style>
+.tips{display:none;}
+</style>
+<div class="wap_store">
+      <div id="ad" class="flexslider">
+		<ul class="slides">
+		{yun:}adlist classid=34 item="lunbo" key=key{/yun}
+		<li><a href="{yun:}$lunbo.src{/yun}" ><img src="{yun:}$lunbo.pic{/yun}" width='100%'/></a></li>
+		{yun:}/adlist{/yun}
+		</ul>
+	</div> 
+    
+    <div class="clear"></div>
+     <div class="wap_store_ps">
+          <div class="wap_store_ps_ft"><img src="{yun:}$config.sy_weburl{/yun}/app/template/wap/images/wap_ps.png"/></div>
+          <div class="wap_store_ps_rt">
+               <div class="wap_store_ps_rt_wr" style="height:35px;overflow:hidden;">
+                <ul>
+        		{yun:}foreach item=v key=j from=$lipin{/yun}
+        		<li>
+                   <div>{yun:}$v.username{/yun} 会员 花了 <b style="color:#093">{yun:}$v.integral{/yun}</b> {yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}</div>
+                   <div> 兑换了<i><a href="{yun:}url m=wap c=redeem a=show id='`$v.gid`'{/yun}" target="_blank" style="color:#f60">{yun:}$v.name{/yun}</a></i> </div>
+               </li>
+               {yun:}/foreach{/yun}
+			   </ul>
+               </div>
+          </div>
+     </div>
+     <div class="wap_recommend fl">
+          <div class="wap_recommend_head">
+               <div class="head_left"><i class="head_left_icon fl"></i><span>推荐商品</span></div>
+               <div class="head_right"><a href="{yun:}url m=wap c=redeem a=list {/yun}">更多 &gt;&gt;</a></div>
+          </div>
+          <div class="wap_recommend_ct">
+          {yun:}foreach item=val key=jj from=$recommended{/yun}
+               <div class="ct_product fl" style="width:33%">
+               <a href="{yun:}url m=wap c=redeem a=show id='`$val.id`'{/yun}">
+                    <dl>
+                        <dt><img src="{yun:}$config.sy_weburl{/yun}/{yun:}$val.pic{/yun}"width="80" height="80"/></dt>
+                        <dd class="pr_nm">{yun:}$val.name|mb_substr:0:5:'gbk'{/yun}</dd>
+                        <dd class="pr_score">{yun:}$val.integral{/yun}{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}</dd>
+                    </dl>
+                    </a>
+               </div>
+          {yun:}/foreach{/yun}
+         </div>
+         
+     </div>
+     <div class="wap_recommend fl">
+          <div class="wap_recommend_head">
+               <div class="head_left"><i class="head_left_icon fl"></i><span>热门兑换</span></div>
+               <div class="head_right"><a href="{yun:}url m=wap c=redeem a=list {/yun}">更多 &gt;&gt;</a></div>
+          </div>
+          <div class="wap_recommend_ct">
+               {yun:}foreach item=val key=jj from=$remen{/yun}
+               <div class="ct_product fl" style="width:33%">
+                <a href="{yun:}url m=wap c=redeem a=show id='`$val.id`'{/yun}">
+                    <dl>
+                        <dt><img src="{yun:}$config.sy_weburl{/yun}/{yun:}$val.pic{/yun}"width="80" height="80"/></dt>
+                        <dd class="pr_nm">{yun:}$val.name|mb_substr:0:5:'gbk'{/yun}</dd>
+                        <dd class="pr_score">{yun:}$val.integral{/yun}{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}</dd>
+                    </dl>
+                    </a>
+               </div>
+          {yun:}/foreach{/yun}
+         </div>
+     </div>   
+</div>
+<script src="{yun:}$wap_style{/yun}/js/prefixfree.min.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/layer/layer.m.js" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/public.js" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/redeem.js" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/jquery.flexslider-min.js"></script>
+<script type="text/javascript">
+$(function() {
+	$(".flexslider").flexslider({
+		slideshowSpeed: 3000, //展示时间间隔ms
+		animationSpeed: 3000, //滚动时间ms
+		touch: true //是否支持触屏滑动(比如可用在手机触屏焦点图)
+	});
+	marquee("2000",".wap_store_ps_rt_wr ul");
+
+});
+
+</script>
+{yun:}include file="$wapstyle/footer.htm"{/yun} 

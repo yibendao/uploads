@@ -1,0 +1,129 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>{yun:}$title{/yun}</title>
+<meta name="keywords" content="{yun:}$keywords{/yun}"/>
+<meta name="description" content="{yun:}$description{/yun}"/>
+<link rel="stylesheet" href="{yun:}$style{/yun}/style/css.css" type="text/css"/>
+<link rel="stylesheet" href="{yun:}$style{/yun}/style/yun_seach.css" type="text/css"/>
+</head>
+<body>
+{yun:}include file="$tplstyle/header.htm"{/yun}
+<div class="yun_body">
+  <div class="yun_content">
+    <div class="current_Location icon"> 您当前的位置：<a href="{yun:}$config.sy_weburl{/yun}">首页</a> > <a href="{yun:}url m=job{/yun}">找工作</a></div>
+    <div class="clear"></div>
+    <div class="search_Looking_work">
+    <form method="get" action='{yun:}if !$config.sy_jobdir{/yun}index.php{yun:}else{/yun}{yun:}url m=job{/yun}{yun:}/if{/yun}' onsubmit="return search_keyword(this,'请输入职位名称的关键字：例如会计');">
+    {yun:}if  !$config.sy_jobdir{/yun}<input type="hidden" name="m" value="job" />{yun:}/if{/yun}
+    <input type="hidden" name="c" value="search" />
+      <div class="search_Look_left">
+        <input type="text" id="jobkeyword" name="keyword" value="请输入职位名称的关键字：例如会计" onclick="if(this.value=='请输入职位名称的关键字：例如会计'){this.value=''}" onblur="if(this.value==''){this.value='请输入职位名称的关键字：例如会计'}" class="search_Look_text placeholder">
+      </div>
+      <input type="submit" value="搜索" class="search_submit">
+     </form>
+    </div>
+    <div class="search_Look_tag"> 关键字：
+{yun:}key limit=8 recom=1 type=3 item=top_key{/yun} <a href="{yun:}$top_key.url{/yun}" target="_blank">{yun:}$top_key.key_name{/yun}</a> {yun:}/key{/yun}
+     </div>
+    <div class="clear"></div>
+   
+    <div class="maincenter">
+      <div id="sortBox">
+        <div class="search_menuBox">
+          <ul>
+            <li class="search_cur" id="typejob" onmousemove="searchtype('job');">职位招聘</li>
+            <li id="typehy" onmousemove="searchtype('hy');">行业招聘</li>
+            <li id="typecity" onmousemove="searchtype('city');">地区招聘</li>
+          </ul>
+        </div>
+        <div class="contentBox">
+          
+        <div class="contentBox_cont none" id="type_hy">
+        <div class="Industry_list">
+        {yun:}foreach item=v from=$industry_index{/yun}
+        <a href="{yun:}listurl type=hy v=$v{/yun}">{yun:}$industry_name[$v]{/yun}</a>
+        {yun:}/foreach{/yun}
+        </div>
+        </div>
+         
+          <div class="contentBox_cont" id="type_job" style="display:block">
+          {yun:}foreach item=v from=$job_index{/yun}
+            <div class="Category_tit">
+              <h2>{yun:}$job_name[$v]{/yun}</h2>
+            </div>
+            <div class="layout">
+              {yun:}foreach item=val from=$job_type[$v]{/yun}
+              <dl>
+                <dt><a target="_blank" href="{yun:}listurl t=index type=job1_son job1=$v job1_son=$val{/yun}">{yun:}$job_name[$val]{/yun}</a> <a href="javascript:showtype('{yun:}$val{/yun}');" class="spread " id="job_{yun:}$val{/yun}">[展开]</a></dt>
+                <dd id="job{yun:}$val{/yun}">
+                {yun:}foreach item=value from=$job_type[$val]{/yun}
+                <a target="_blank" href="{yun:}listurl t=index type=job_post job1=$v job1_son=$val job_post=$value{/yun}"> {yun:}$job_name[$value]{/yun}</a>
+                {yun:}/foreach{/yun}
+                </dd>
+              </dl>
+              {yun:}/foreach{/yun}
+            </div>
+            {yun:}/foreach{/yun}
+
+          </div>
+          
+          <div class="contentBox_cont none" id="type_city">
+            {yun:}foreach item=v from=$city_index{/yun}
+            <dl class="yun_search_city_list">
+              <dt>{yun:}$city_name[$v]{/yun}</dt>
+              <dd>
+              {yun:}foreach item=val from=$city_type[$v]{/yun}
+              <a href="{yun:}listurl type=city v=$val{/yun}" target="_blank">{yun:}$city_name[$val]{/yun}</a>
+              {yun:}/foreach{/yun}
+              </dd>
+            </dl>
+			{yun:}/foreach{/yun}
+
+          </div>
+         
+        </div>
+      </div>
+    </div>
+ 
+    <div class="search_post_jj">
+      <div class="search_post_jj_h1"><span>推荐职位</span></div>
+      <ul class="search_post_list">
+        {yun:}joblist bid=1 order=xuanshang item=joblist limit=8{/yun}
+        <li><span> <a class="yun_Looking_work_post_name" target="_blank" href="{yun:}url m=job c=comapply id='`$joblist.id`'{/yun}">{yun:}$joblist.name{/yun}</a> <i>{yun:}$joblist.job_city_one{/yun} {yun:}$joblist.job_city_two{/yun}</i></span> <span> 薪资待遇： <em>{yun:}$joblist.job_salary{/yun}</em>  </span> <span> <a href="{yun:}url m=company c=show id='`$joblist.uid`'{/yun}" style="width:205px" target="_blank">{yun:}$joblist.com_name{/yun}</a> </span> </li>
+        {yun:}/joblist{/yun}
+
+      </ul>
+    </div>
+  </div>
+</div>
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script> 
+<script src="{yun:}$config.sy_weburl{/yun}/js/lazyload.min.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/public.js" language="javascript"></script>
+<!--[if IE 6]>
+<script src="{yun:}$config.sy_weburl{/yun}/js/png.js"></script>
+<script>
+DD_belatedPNG.fix('.png,');
+</script>
+<![endif]--> 
+<script>
+function searchtype(id){
+	$(".search_cur").removeClass("search_cur");
+	$("#type"+id).addClass("search_cur");
+	$(".contentBox_cont").hide();
+	$("#type_"+id).show();
+}
+function showtype(id){
+	$("#job"+id).addClass('current');
+	$("#job_"+id).html('[收起]');
+	$("#job_"+id).attr('href','javascript:hidetype(\''+id+'\');');
+}
+function hidetype(id){
+	$("#job"+id).removeClass('current');
+	$("#job_"+id).html('[展开]');
+	$("#job_"+id).attr('href','javascript:showtype(\''+id+'\');');
+} 
+</script>
+{yun:}include file="$tplstyle/footer.htm"{/yun}

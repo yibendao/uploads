@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>{yun:}$title{/yun}</title>
+<meta name=keywords content="{yun:}$keywords{/yun}"/>
+<meta name=description content="{yun:}$description{/yun}"/>
+<link href="{yun:}$ask_style{/yun}/style/style.css" type="text/css" rel="stylesheet" />
+<script>
+var weburl="{yun:}$config.sy_weburl{/yun}",integral_pricename='{yun:}$config.integral_pricename{/yun}',pricename='{yun:}$config.integral_pricename{/yun}',code_web='{yun:}$config.code_web{/yun}',code_kind='{yun:}$config.code_kind{/yun}';</script>
+</head>
+<body>
+<div class="top_lietou">
+  <div class="top_cot">
+    <div class="top_cot_content">
+      <div class="top_left fl">
+        <div class="yun_welcome fl">欢迎来到{yun:}$config.sy_webname{/yun}！</div>
+      </div>
+      <div class="top_right_re fr">
+        <div class="top_right">
+          <div class="yun_topNav fr"> 
+		  <a class="yun_navMore" href="javascript:;">网站导航</a>
+           <div class="yun_webMoredown none">
+              <div class="yun_top_nav_box"> 
+			  <ul class="yun_top_nav_box_l">
+              {yun:}navmap key=key item=maplist{/yun}
+                  <li><a href="{yun:}$maplist.url{/yun}" {yun:}if $maplist.eject{/yun} target="_blank"{yun:}/if{/yun}>{yun:}$maplist.name{/yun}</a></li>
+                {yun:}/navmap{/yun} 
+                 </ul>
+                <ul class="yun_top_nav_box_wx">
+               {yun:}nav item=navlist_app hovclass=nav_list_hover nid=11{/yun}          
+            <li> <a class="move_0{yun:}$navlist_app.sort{/yun}"{yun:}if $navlist_app.eject{/yun} target="_blank"{yun:}/if{/yun} href="{yun:}$config.sy_weburl{/yun}/{yun:}$navlist_app.url{/yun}">{yun:}$navlist_app.name{/yun}</a> </li>
+          {yun:}/nav{/yun}
+                </ul>
+                
+                </div>
+            </div>
+          </div> 
+           <script language='JavaScript' src='{yun:}url m=ajax c=RedLoginHead{/yun}'></script> 
+        </div>
+      </div>
+    </div>
+  </div>
+</div>	
+ <div class="clear"></div>
+<div class="ask_header">
+<div class="ask_header_cont">
+<div class="logo fl"><a href="{yun:}$config.sy_weburl{/yun}"><img class="png" src="{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_logo{/yun}" /></a></div>
+<div class="search">
+		<div class="search_con">
+			<div class="seek">
+				<form action="index.php" name="myform" method="get" target="_blank" autocomplete="off" onsubmit="return asksearch();">
+				<div class="seek_con">
+					<div class="seek_det">  
+						{yun:}if  !$config.sy_askdir{/yun}<input name='m' type='hidden' value='ask'/>{yun:}/if{/yun}
+						<input name='c' type='hidden' value='search'/>
+						<input type="text" name='keyword' id="askkeyword" placeholder="请输入问题关键字" class="txt" autocomplete="off"  onblur="if(this.value==''){this.value='请输入问题关键字'}" onclick="if(this.value=='请输入问题关键字'){this.value=''}" value="请输入问题关键字"/>
+						<span class="icon"></span>
+					</div>
+					<div class="seek_sear"><input type="submit" class="btn"  value="搜一下"/></div>
+				</div>
+				</form>
+				<div class="seek_menu">
+					<ul> 
+						<span class="searchli"></span>
+						<li class="option">搜索：<a href="#" target="_blank"></a></li>
+						<li class="me_quiz"><span>
+						{yun:}if $uid{/yun}
+							<a href="{yun:}url m=ask c=addquestion{/yun}" target="_blank">我要提问</a>
+						{yun:}else{/yun}
+							<a href="javascript:void(0);" onclick="showlogin('');">我要提问</a>
+						{yun:}/if{/yun}</span>
+						</li>
+					</ul>
+				</div>
+			</div>
+            <div class="header_ask_ask">
+        {yun:}if $uid{/yun}
+				<a href="{yun:}url m=ask c=addquestion{/yun}" target="_blank">我要提问</a>
+			{yun:}else{/yun}
+				<a href="javascript:void(0);" onclick="showlogin('');">我要提问</a>
+			{yun:}/if{/yun}
+	</div>
+		</div>
+	</div>
+</div>
+
+</div>
+<div class="ask_header_nav">
+	<div class="ask_header_nav_cont"> 
+		<ul> 
+			<li {yun:}if $navtype==''{/yun}class="cur"{yun:}/if{/yun}><a href="{yun:}url m=ask{/yun}">首页</a></li>
+			<li {yun:}if $navtype=='topic'{/yun}class="cur"{yun:}/if{/yun}><a href="{yun:}url m=ask c=topic{/yun}">话题</a></li>
+			<li {yun:}if $navtype=='hotweek'{/yun}class="cur"{yun:}/if{/yun}><a href="{yun:}url m=ask c=hotweek{/yun}">一周热点</a></li>	 
+			{yun:}if $uid && ($smarty.get.uid=='' || $smarty.get.uid==$uid){/yun} 
+			<li {yun:}if $smarty.get.c=='friend'{/yun}class="cur"{yun:}/if{/yun}><a href="{yun:}url m=ask c=friend a=myquestion type='types' uid=$uid{/yun}">我的主页</a></li> 
+			{yun:}elseif $smarty.get.uid{/yun}
+			<li {yun:}if $smarty.get.c=='friend'{/yun}class="cur"{yun:}/if{/yun}><a href="{yun:}url m=ask c=friend a=myquestion uid=$smarty.get.uid{/yun}">他的主页</a></li>
+			{yun:}/if{/yun}
+			<li><a href="{yun:}$config.sy_weburl{/yun}">进入人才网首页</a></li>
+		</ul> 
+	</div>
+</div>
+<div class="clear"></div> 

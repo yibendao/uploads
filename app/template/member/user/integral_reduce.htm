@@ -1,0 +1,27 @@
+{yun:}include file="$userstyle/header.htm"{/yun}
+<div class="yun_user_member_w1100"> {yun:}include file="$userstyle/left.htm"{/yun}
+     <div class="mian_right fltR mt20">
+      <div class="member_right_index_h1 fltL"> <span class="member_right_h1_span fltL">{yun:}$config.integral_pricename{/yun}管理</span> <i class="member_right_h1_icon user_bg"></i></div>
+    <div class="integral_cont">  <div class="job_list_tit"> <ul class="">
+	<li ><a href="index.php?c=integral">{yun:}$config.integral_pricename{/yun}任务</a></li>
+      <li class="job_list_tit_cur"><a href="index.php?c=integral_reduce">{yun:}$config.integral_pricename{/yun}规则</a></li>
+ <li><a href="index.php?c=reward_list">{yun:}$config.integral_pricename{/yun}兑换</a></li>
+	</ul> 
+    </div>
+      <ul class="integral_cont_list">
+        <li> <span class="integral_cont_list_span">简历置顶</span> <span class="integral_cont_list_span_c" style="border:none"> 消费 <b>{yun:}$config.integral_resume_top{/yun}</b> {yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun} / 天 </span> </li>
+        {yun:}if $config.integral_question_type==2{/yun}
+        <li> <span class="integral_cont_list_span">发布问题</span> <span class="integral_cont_list_span_c" style="border:none">消费 <b>{yun:}$config.integral_question{/yun}</b>{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}</span></li>
+        {yun:}/if{/yun}
+        {yun:}if $config.integral_answer_type==2{/yun}
+        <li> <span class="integral_cont_list_span">回答问题</span> <span class="integral_cont_list_span_c" style="border:none">消费 <b>{yun:}$config.integral_answer{/yun}</b>{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}</span></li>
+        {yun:}/if{/yun}
+        {yun:}if $config.integral_answerpl_type==2{/yun}
+        <li> <span class="integral_cont_list_span">评论回答</span> <span class="integral_cont_list_span_c" style="border:none">消费 <b>{yun:}$config.integral_answerpl{/yun}</b>{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}</span></li>
+        {yun:}/if{/yun}
+       
+      </ul>
+    </div>
+  </div>
+</div>
+{yun:}include file="$userstyle/footer.htm"{/yun}

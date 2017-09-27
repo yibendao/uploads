@@ -1,0 +1,243 @@
+{yun:}include file="$userstyle/header.htm"{/yun}
+<div class="yun_user_member_w1100">
+    {yun:}include file="$tplstyle/public_search/index_search.htm"{/yun}
+    <link href="{yun:}$user_style{/yun}/images/yun_tck.css" type=text/css rel=stylesheet>
+    <script charset="utf-8" src="../js/kindeditor/kindeditor-min.js"></script>
+    <script charset="utf-8" src="../js/kindeditor/lang/zh_CN.js"></script>
+    <script src="{yun:}$config.sy_weburl{/yun}/data/plus/city.cache.js" type="text/javascript"></script>
+    <script src="{yun:}$config.sy_weburl{/yun}/js/search.js" type="text/javascript"></script>
+	<script src="{yun:}$config.sy_weburl{/yun}/js/class.public.js" type="text/javascript"></script>
+	<script src="{yun:}$config.sy_weburl{/yun}/data/plus/job.cache.js" type="text/javascript"></script>
+	<link rel="stylesheet" href="{yun:}$style{/yun}/style/class.public.css" type="text/css">
+
+    <script language="javascript">
+        var editor;
+        KindEditor.ready(function (K) {
+            editor = K.create('textarea[name="doc"]', {
+                resizeType: 1,
+                allowPreviewEmoticons: false,
+                allowImageUpload: false,
+                items: [
+                    'bold', 'italic', 'underline',
+                    'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+                    'insertunorderedlist']
+            });
+        });
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .cus_h70 {
+            height: 70px;
+        }
+    </style>
+    <div class="widemainbody">
+        
+        <div class="expectt_left fltL">
+            <form name="MyForm" action='index.php?c=expectq&act=save' method="POST" target="supportiframe" onsubmit="return Checkexpectq();">
+            <div class="expectt_left_tit"><span class="expectt_left_tit_s">黏贴简历</span><em class="expectt_left_tit_em"><font color="#FF0000">*</font> 号项为必填项</em></div>
+       
+                <div class="formbox02">
+                    <ul>
+                        <li>
+                            <div class="name"><font color="#FF0000">*</font> 简历名称：</div>
+                            <div class="text">
+                                <input name="name" type="text" value="{yun:}$row.name{/yun}" maxlength="100" id='name' class="info_text" />
+                            </div>
+                        </li>
+                        <li>
+                            <div class="name"> <font color="#FF0000">*</font> 期望从事行业：</div>
+                            <div class="text">
+                                <div class="text_seclet text_seclet_cur" style="z-index:400">
+                                <div class="yun_uesr_text">
+                                    <input class="SpFormLBut text_seclet_w250 " type="button" {yun:}if $row.hy{/yun} value="{yun:}$industry_name[$row.hy]{/yun}" {yun:}else{/yun} value="请选择行业" {yun:}/if{/yun} id="hy" onclick="search_show('job_hy');">
+                                    <input type="hidden" id="hyid" name="hy" {yun:}if $row.hy {/yun} value="{yun:}$row.hy{/yun}"{yun:}/if{/yun}/>
+                                    <div class="cus_sel_opt_panel cu_sel_opt_panel_w200" style="display:none; z-index:301" id="job_hy">
+                                        <ul>
+                                            {yun:}foreach item=v from=$industry_index key=k{/yun}
+                                            <li><a href="javascript:;" onclick="selects('{yun:}$v{/yun}','hy','{yun:}$industry_name[$v]{/yun}');"> {yun:}$industry_name[$v]{/yun}</a></li>
+                                            {yun:}/foreach{/yun}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                        </li>
+                       <li>
+                        <div class="name"><b>*</b> 期望职位：</div>
+                        <div class="text" style="width:400px; overflow:hidden">
+                           <div class="yun_uesr_text yun_uesr_textw380">
+                            <input type="button" {yun:}if $job_classname{/yun}value="{yun:}$job_classname{/yun}"{yun:}else{/yun} value=" 请选择 "{yun:}/if{/yun}style=" float:left;" class="expect_textw380" onclick="index_job(5,'#workadds_job','#job_class','left:100px;top:100px; position:absolute;');" id="workadds_job" >
+                            <input name='job_classid' id='job_class' {yun:}if $row.job_classid {/yun} value="{yun:}$row.job_classid{/yun}"{yun:}/if{/yun} type='hidden' />
+                            </div>
+                        </div>
+                    </li>
+                        <li>
+                            <div class="name"> <font color="#FF0000">*</font> 期望工作地点：</div>
+                            <div class="text">
+                                
+                                <div class="text_seclet text_seclet_cur fltL">
+                                   <div class="yun_uesr_text">
+                                    <input class="SpFormLBut text_seclet_w250" type="button" {yun:}if $row.provinceid{/yun} value="{yun:}$city_name[$row.provinceid]{/yun}" {yun:}else{/yun}value="请选择"{yun:}/if{/yun} id="province" onclick="search_show('job_province');">
+                                    <input type="hidden" id="provinceid" name="provinceid" value="{yun:}$row.provinceid{/yun}" />
+                               
+                                    <div class="cus_sel_opt_panel cu_sel_opt_panel_w200" style="display:none" id="job_province">
+                                        <div style="width:100%;  overflow:auto; overflow-x:hidden">
+                                            <ul class="Search_Condition_box_list">
+                                                {yun:}foreach from=$city_index key=j item=v{/yun}
+                                                <li><a href="javascript:;" onclick="select_city('{yun:}$v{/yun}','province','{yun:}$city_name[$v]{/yun}','citys','city');"> {yun:}$city_name[$v]{/yun}</a></li>
+                                                {yun:}/foreach{/yun}
+                                            </ul>
+                                        </div>
+                                    </div>     </div>
+                                </div>
+                                <div class="text_seclet text_seclet_cur fltL" style="margin-left:5px; margin-right:5px;">
+                                   <div class="yun_uesr_text">
+                                    <input class="SpFormLBut text_seclet_w250" type="button" {yun:}if $row.cityid{/yun} value="{yun:}$city_name[$row.cityid]{/yun}" {yun:}else{/yun}value="请选择"{yun:}/if{/yun} id="citys" onclick="search_show('job_citys');">
+                                    <input type="hidden" id="citysid" name="cityid" value="{yun:}$row.cityid{/yun}" />
+                                    <div class="cus_sel_opt_panel cu_sel_opt_panel_w200" style="display:none" id="job_citys">
+                                        <ul class="Search_Condition_box_list">
+                                            {yun:}foreach from=$city_type[$row.provinceid] key=j item=v{/yun}
+                                            <li><a href="javascript:;" onclick="select_city('{yun:}$v{/yun}','citys','{yun:}$city_name[$v]{/yun}','three_city','city');"> {yun:}$city_name[$v]{/yun}</a></li>
+                                            {yun:}/foreach{/yun}
+                                        </ul>
+                                    </div>
+                                </div>
+                                </div>
+                                <div class="text_seclet text_seclet_cur fltL" {yun:}if $row.three_cityid<1{/yun}style="display:none;"{yun:}/if{/yun} id="cityshowth">
+                                   <div class="yun_uesr_text">
+                                    <input class="SpFormLBut text_seclet_w250" type="button" {yun:}if $row.three_cityid{/yun} value="{yun:}$city_name[$row.three_cityid]{/yun}" {yun:}else{/yun}value="请选择"{yun:}/if{/yun} id="three_city" onclick="three_city_show('job_three_city');">
+                                    <input type="hidden" id="three_cityid" name="three_cityid" value="{yun:}$row.three_cityid{/yun}" />
+                                    <div class="cus_sel_opt_panel cu_sel_opt_panel_w200" style="display:none" id="job_three_city">
+                                        <ul class="Search_Condition_box_list">
+                                            {yun:}foreach from=$city_type[$row.cityid] key=j item=v{/yun}
+                                            <li><a href="javascript:;" onclick="selects('{yun:}$v{/yun}','three_city','{yun:}$city_name[$v]{/yun}');"> {yun:}$city_name[$v]{/yun}</a></li>
+                                            {yun:}/foreach{/yun}
+                                        </ul>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="name"><font color="#FF0000">*</font> 薪资待遇：</div>
+                            <div class="text">
+                                <div class="text_seclet text_seclet_cur2">
+                                 <div>
+                                    <input type="text" size="5" {yun:}if $row.minsalary{/yun} value="{yun:}$row.minsalary{/yun}" {yun:}/if{/yun}  id="minsalary" name="minsalary" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" class=" info_textw100" placeholder="最低薪资"/>
+                                   	<span class="info_textw100line">-</span>
+                                    <input type="text" size="5" {yun:}if $row.maxsalary{/yun} value="{yun:}$row.maxsalary{/yun}" {yun:}/if{/yun}  id="maxsalary" name="maxsalary" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" class=" info_textw100"  placeholder="最高薪资"/>
+                                </div>
+                            </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="name"> <font color="#FF0000">*</font> 期望工作性质：</div>
+                            <div class="text">
+                                <div class="text_seclet text_seclet_cur3 re">
+                                 <div class="yun_uesr_text">
+                                    <input class="SpFormLBut text_seclet_w250" type="button" {yun:}if $row.type{/yun} value="{yun:}$userclass_name[$row.type]{/yun}" {yun:}else{/yun} value="请选择工作性质" {yun:}/if{/yun}  id="type" onclick="search_show('job_type');">
+                                    <input type="hidden" id="typeid" name="type" {yun:}if $row.type {/yun} value="{yun:}$row.type{/yun}"{yun:}/if{/yun} />
+                                    <div class="cus_sel_opt_panel cu_sel_opt_panel_w200 cus_h70" style="display:none" id="job_type">
+
+                                        <ul class="Search_Condition_box_list">
+                                            {yun:}foreach from=$userdata.user_type key=j item=v{/yun}
+                                            <li><a href="javascript:;" onclick="selects('{yun:}$v{/yun}','type','{yun:}$userclass_name[$v]{/yun}');"> {yun:}$userclass_name[$v]{/yun}</a></li>
+                                            {yun:}/foreach{/yun}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="name"> <font color="#FF0000">*</font> 到岗时间：</div>
+                            <div class="text">
+                                <div class="text_seclet text_seclet_cur4">
+                                 <div class="yun_uesr_text">
+                                    <input class="SpFormLBut text_seclet_w250" type="button" {yun:}if $row.report{/yun} value="{yun:}$userclass_name[$row.report]{/yun}" {yun:}else{/yun} value="请选择到岗时间" {yun:}/if{/yun}  id="report" onclick="search_show('job_report');">
+                                    <input type="hidden" id="reportid" name="report" {yun:}if $row.report{/yun} value="{yun:}$row.report{/yun}"{yun:}/if{/yun} />
+                                    <div class="cus_sel_opt_panel cu_sel_opt_panel_w200" style="display:none" id="job_report">
+                                        <ul class="Search_Condition_box_list">
+                                            {yun:}foreach from=$userdata.user_report key=j item=v{/yun}
+                                            <li><a href="javascript:;" onclick="selects('{yun:}$v{/yun}','report','{yun:}$userclass_name[$v]{/yun}');"> {yun:}$userclass_name[$v]{/yun}</a></li>
+                                            {yun:}/foreach{/yun}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="name"> <font color="#FF0000">*</font> 求职状态：</div>
+                            <div class="text">
+                                <div class="text_seclet text_seclet_cur3" style="z-index:50">
+                                 <div class="yun_uesr_text">
+                                    <input class="SpFormLBut text_seclet_w250" type="button" {yun:}if $row.jobstatus{/yun} value="{yun:}$userclass_name[$row.jobstatus]{/yun}" {yun:}else{/yun} value="请选择求职状态" {yun:}/if{/yun}  id="jobstatus" onclick="search_show('job_jobstatus');">
+                                    <input type="hidden" id="jobstatusid" name="jobstatus" {yun:}if $row.jobstatus{/yun} value="{yun:}$row.jobstatus{/yun}"{yun:}/if{/yun} />
+                                    <div class="cus_sel_opt_panel cu_sel_opt_panel_w200" style="display:none" id="job_jobstatus">
+                                        <ul class="Search_Condition_box_list">
+                                            {yun:}foreach from=$userdata.user_jobstatus key=j item=v{/yun}
+                                            <li><a href="javascript:;" onclick="selects('{yun:}$v{/yun}','jobstatus','{yun:}$userclass_name[$v]{/yun}');"> {yun:}$userclass_name[$v]{/yun}</a></li>
+                                            {yun:}/foreach{/yun}
+                                        </ul>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="name"> 黏贴简历内容：</div>
+                            <div class="text">
+                                <textarea name="doc" id="content" style="width:500px;height:160px;">{yun:}$row.doc{/yun}</textarea>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="name">&nbsp;</div>
+                            <div class="text">
+                                <input name="eid" type="hidden" value="{yun:}$smarty.get.e{/yun}" />
+                                <input type="submit" name="submit" value=" 保 存" class="Verification_sc_bth2 uesr_submit" />
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+        <div class="w920 fltR">
+            <div class="w190  fltR">
+                <div class="resumestatebox01 mt8">
+                    <h2><span>黏贴简历说明</span></h2>
+                    <div class="resumestatebox02 mt8">
+                        <div class="cont">
+                            <div class="value_p">
+                                快速黏贴简历只需选择基本求职意向，然后复制已有简历到内容框中即可！
+                                <hr size="1" />
+                                我们并不推荐这种方式，因为我们提供了更加规范的简历格式，一份漂亮的简历可以体现一个人的做事态度，直接影响你的求职成功率！
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script language=javascript>
+    function Checkexpectq() {
+        if ($.trim($("#name").val()) == '') { layer.msg('请填写简历名称', 2, 8); return false;}
+        if ($.trim($("#job_class").val()) == '') { layer.msg('请选择期望职位', 2, 8);  return false;}
+        if ($.trim($("#hyid").val()) == '') { layer.msg('请选择期望行业', 2, 8);  return false;}
+        if ($.trim($("#provinceid").val()) == '') {layer.msg('请选择工作地点', 2, 8);  return false; }
+        var min = $.trim($("#minsalary").val());
+        var max = $.trim($("#maxsalary").val());
+	    if (min == ''||min=='0') {layer.msg('请填写薪资待遇', 2, 8);  return false; }
+	    if (max&&parseInt(max)<=parseInt(min)) {layer.msg('最高薪资必须大于最低薪资', 2, 8);  return false; }
+        if ($.trim($("#typeid").val()) == '') {layer.msg('请选择工作性质', 2, 8);  return false; }
+		if ($.trim($("#reportid").val()) == '') {layer.msg('请选择到岗时间', 2, 8);  return false; }
+		if ($.trim($("#jobstatusid").val()) == '') {layer.msg('请选择求职状态', 2, 8);  return false; }
+      
+        layer.load('执行中，请稍候...', 0);
+    }
+</script>
+{yun:}include file="$userstyle/footer.htm"{/yun}

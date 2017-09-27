@@ -1,0 +1,72 @@
+{yun:}include file="$comstyle/header.htm"{/yun}
+<div class="w1000">
+  <div class="admin_mainbody"> {yun:}include file="$comstyle/left.htm"{/yun}
+<script>
+function checknum(){
+	var time=$("#buy_time").val();
+	var integral=$("#integral").val();
+	$("#integral_buy").val(time*integral);
+	$("#span_integral_buy").html(time*integral+'{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}');
+}
+</script>
+    <div class=right_box>
+      <div class=admincont_box>
+         <div class="com_tit"><span class="com_tit_span"> 购买广告位</span><span class=remind></span></div>
+      <div class="com_body">
+		<iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe>
+		
+        <div class="admin_note2">
+        <form name='alipayment' action="index.php?c=buysave" method='post' enctype="multipart/form-data" target="supportiframe" id='myform'>
+          <table width="100%" border="0" cellspacing="1" cellpadding="0" style="font-size:12px;"class="my_table_msg my_table_msg_g_ad"> 
+              <input type="hidden" name="type" value="ad" />
+              <input type="hidden" name="aid" value="{yun:}$smarty.get.id{/yun}" />
+              <input type="hidden" name="unit_buy" value="{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}" />
+              <input type="hidden" id="integral" name="integral" value="{yun:}$row.integral_buy{/yun}">
+              <tr>
+                <th height="36">广告类别：</th>
+                <td>{yun:}$row.class_name{/yun}
+                  <input type="hidden" name="adname" value="{yun:}$row.class_name{/yun}" class="com_info_text"></td>
+              </tr>
+              <tr>
+                <th height="36">广告名称：</th>
+                <td><input type="text" name="ad_name" value="{yun:}$ad.ad_name{/yun}" id='ad_name'  class="com_info_text"></td>
+              </tr>
+              <tr>
+                <th height="36">广告效果图：</th>
+                <td><input type="file" name="pic_url" value="{yun:}$ad.pic_url{/yun}" id='pic_url'  class="com_info_text"></td>
+              </tr>
+              <tr>
+                <th height="36">广告链接：</th>
+                <td><input type="text" name="pic_src" value="{yun:}$row.href{/yun}" style="width:200px;" id='pic_src'  class="com_info_text"></td>
+              </tr>
+              <tr>
+                <th height="36">购买时间：</th>
+                <td><input id="buy_time" type="text" name="buy_time" value="1"  onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" style="width:40px;" onblur="checknum();"  class="com_info_text">
+                 <em style=" float:left; line-height:30px;"> 月</em></td>
+              </tr>
+              <tr>
+                <th height="36">购买费用:</th>
+                <td><span id="span_integral_buy" >{yun:}$row.integral_buy{/yun}{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}</span>
+                  <input type="hidden" name="integral_buy" id='integral_buy' value="{yun:}$row.integral_buy{/yun}" ></td>
+              </tr>
+              <tr>
+                <td>&nbsp;</td>
+                <td><p style=" width:430px;border:1px solid #FF6600; padding:5px; background-color:#FDF2CC; color:#393939; line-height:20px; margin:10px 0px;">您还有{yun:}if !$statis.integral{/yun}0{yun:}else{/yun}{yun:}$statis.integral_format{/yun}{yun:}/if{/yun}{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}</p></td>
+              </tr>
+              <tr>
+                <th>&nbsp;</th>
+                <td height="40">
+               <input type="hidden" name="banksub" value="提交"/>
+                    <input type="button"  onclick="buyad();"value="确认订单" class="btn_01">
+                 
+              </td>
+              </tr> 
+          </table>
+		  </form>
+        </div>
+        </div>
+        </div>
+    </div>
+  </div>
+</div>
+{yun:}include file="$comstyle/footer.htm"{/yun}

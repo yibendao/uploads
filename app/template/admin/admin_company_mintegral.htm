@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link href="images/reset.css" rel="stylesheet" type="text/css" />
+<link href="images/system.css" rel="stylesheet" type="text/css" />
+<link href="images/table_form.css" rel="stylesheet" type="text/css" />
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script>
+<script src="js/admin_public.js" language="javascript"></script>
+<title>后台管理</title>
+</head>
+<body class="body_ifm">
+<div class="infoboxp"><div class="infoboxp_top_bg"></div> 
+  <div class="admin_Filter">
+    <span class="complay_top_span fl">{yun:}$config.integral_pricename{/yun}记录</span> 
+  </div>
+  <div class="table-list">
+    <div class="admin_table_border">
+        <table width="100%">
+          <thead>
+            <tr class="admin_table_top">
+              <th>
+			  {yun:}if $smarty.get.t=="id" && $smarty.get.order=="asc"{/yun}
+			  <a href="{yun:}searchurl m=admin_company c=mintegral order=desc t=id untype='order,t'{/yun}">流水单号<img src="images/sanj.jpg"/></a>
+              {yun:}else{/yun}
+              <a href="{yun:}searchurl m=admin_company c=mintegral order=asc t=id untype='order,t'{/yun}">流水单号<img src="images/sanj2.jpg"/></a>
+              {yun:}/if{/yun}
+			  </th>
+              <th align="left">{yun:}$config.integral_pricename{/yun}</th>
+              <th align="left">状态</th>
+              <th align="left">备注</th>
+              <th>
+			   {yun:}if $smarty.get.t=="pay_time" && $smarty.get.order=="asc"{/yun}
+			  <a href="{yun:}searchurl m=admin_company c=mintegral order=desc t=pay_time untype='order,t'{/yun}">时间<img src="images/sanj.jpg"/></a>
+              {yun:}else{/yun}
+              <a href="{yun:}searchurl m=admin_company c=mintegral order=asc t=pay_time untype='order,t'{/yun}">时间<img src="images/sanj2.jpg"/></a>
+              {yun:}/if{/yun}
+			  </th>
+            </tr>
+          </thead>
+          <tbody>
+          {yun:}foreach item=v key=key from=$list{/yun}
+          <tr align="center"{yun:}if ($key+1)%2=='0'{/yun}class="admin_com_td_bg"{yun:}/if{/yun} id="list{yun:}$v.id{/yun}">
+            <td align="left" class="td1" style="text-align:center;"><span>{yun:}$v.id{/yun}</span></td>
+            <td align="left"><span>{yun:}$v.order_price{/yun}</span></td>
+            <td align="left"><span>{yun:}$arr_data.paystate[$v.pay_state]{/yun}</span></td>
+            <td align="left"><span>{yun:}$v.pay_remark{/yun}</span></td>
+            <td>{yun:}$v.pay_time|date_format:"%Y-%m-%d"{/yun}</td>
+          </tr>
+          {yun:}/foreach{/yun}
+		  <tr style="background:#f1f1f1;">
+            <td colspan="5" class="digg">{yun:}$pagenav{/yun}</td>
+          </tr>
+            </tbody>
+        </table>
+    </div>
+  </div>
+</div>
+</body>
+</html>

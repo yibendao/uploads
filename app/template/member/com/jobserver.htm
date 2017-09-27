@@ -1,0 +1,411 @@
+<script>
+function jingjia(id,xsdate){
+	$("#wnameid").val(id);
+	var height="350px";
+	if(xsdate!='0'){
+		$("#xsdiv").show();
+		$('#xstime').html('<font color="red">'+xsdate+'</font>');
+		height='400px';
+	}
+	$.layer({
+		type : 1,
+		title : '职位置顶',
+		closeBtn : [0 , true],
+		border : [10 , 0.3 , '#000', true],
+		area : ['500px',height],
+        page : {dom : '#wname'}
+	});
+}
+function rec(id,rectime){
+	$("#recid").val(id);
+	var height="350px";
+	if(rectime!='0'){
+		$("#recdiv").show();
+		$('#rectime').html('<font color="red">'+rectime+'</font>');
+		height='400px';
+	}
+	$.layer({
+		type : 1,
+		title : '推荐职位',
+		closeBtn : [0 , true],
+		border : [10 , 0.3 , '#000', true],
+		area : ['480px',height],
+		page : {dom : '#recom'}
+	});
+}
+function urgent(id,urgenttime){
+	$("#urgentid").val(id);
+	var height="350px";
+	if(urgenttime&&urgenttime!=0){
+	    $("#udiv").show();
+		$('#utime').html('<font color="red">'+urgenttime+'</font>');
+		height='400px';
+	}
+	$.layer({
+		type : 1,
+		title : '紧急招聘',
+		move:false,
+		closeBtn : [0 , true],
+		border : [10 , 0.3 , '#000', true],
+		area : ['480px',height],
+		page : {dom : '#urgent'}
+	});
+}
+function autojobs(name,id,date){
+    var height="350px";
+	if(id){
+		var chk_value=id;
+		var i=1;
+	}else{
+		var chk_value =[];
+		var i=0;
+		$('input[name="'+name+'"]:checked').each(function(){
+			chk_value.push($(this).val());
+			i++;
+		}); 
+	} 
+	if(i>0){ 
+		$("input[name='synalljob']").attr('checked',false);
+		$("#jobautoids").val(chk_value);
+		$("#jobautobuysdate").hide();
+		$(".synalljob").hide();
+		if(date){
+			$("#rdiv").show();
+		    $('#rtime').html('<font color="red">'+date+'</font>');
+			height='400px';
+		}
+		if(id){
+			$(".synalljob").show();
+		}
+		$.layer({
+			type : 1,
+			move:false,
+			title : '预约自动刷新', 
+			border : [10 , 0.3 , '#000', true],
+			area : ['480px',height],
+			page : {dom : '#jobautobuys'}
+		})
+	}else{
+		layer.msg("请选择要自动刷新的职位！",2,8);return false;
+	}
+}
+function showneed(){
+	var cdays=$("input[name=xsdays]:checked").val();
+	var cxsdays=$("#cxsdays").val();
+	if(cdays){
+		var xs=$("#myxs").val();
+		var need=xs*cdays;
+		$("#xsneed").html(need);
+		var all=$("#xsall").html();
+		if (all<need){
+			$("#xspay").show();
+		}
+	}
+	if(cxsdays){
+		var xs=$("#myxs").val();
+		var need=xs*cxsdays;
+		$("#xsneed").html(need);
+		var all=$("#xsall").html();
+		if (all<need){
+			$("#xspay").show();
+		}
+	}
+}
+$(document).ready(function(){ 
+	$(".job_tck_list").click(function(){
+		var cron = $(this).attr('data-cron');
+		var name = $(this).attr('data-name');
+		$("#autotype").val(cron);
+		$(".job_box_in").html(name);
+		$(".job_tck_box_pot").hide();
+	});
+	$(".job_box_in").click(function(e){
+		$(".job_tck_box_pot").toggle();
+	});
+	$(document).bind("click",function(e){
+		if(e.target.className != 'job_box_in'){
+			$(".job_tck_box_pot").hide();
+		}
+	}); 
+	$("input[name='xsdays']").click(function(){
+		var days=$(this).val();
+		var xs=$("#myxs").val();
+		var need=xs*days;
+		$("#xsneed").html(need);
+		var all=$("#xsall").html();
+		if (all<need){
+			$("#xspay").show();
+		}else{
+			$("#xspay").hide();
+		}
+	});
+	$("input[name='recdays']").click(function(){
+		var days=$(this).val();
+		var rec=$("#myrec").val();
+		var need=rec*days;
+		$("#recneed").html(need);
+		var all=$("#recall").html();
+		if (all<need){
+			$("#recpay").show();
+		}else{
+	       $("#recpay").hide();
+	    }
+	});
+	$("input[name='udays']").click(function(){
+		var days=$(this).val();
+		var u=$("#myu").val();
+		var need=u*days;
+		$("#uneed").html(need);
+		var all=$("#uall").html();
+		if (all<need){
+			$("#upay").show();
+		}else{
+			$("#upay").hide();
+		}
+	});
+	$("input[name='rdays']").click(function(){
+		var days=$(this).val();
+		var r=$("#myr").val();
+		var need=r*days;
+		$("#rneed").html(need);
+		var all=$("#rall").html();
+		if (all<need){
+			$("#rpay").show();
+		}else{
+	        $("#rpay").hide();
+	    }
+	});
+	$("input[name='xsdays']").click(function(){
+		var days=$(this).val();
+		var r=$("#myxs").val();
+		var need=r*days;
+		$("#xsneed").html(need);
+		var all=$("#rall").html();
+		if (all<need){
+			$("#xspay").show();
+		}else{
+	        $("#xspay").hide();
+	    }
+	});
+}); 
+function checkXs(){
+	var xs=$("#myxs").val();
+	var cdays=$("#cxsdays").val();
+	if(cdays==''){
+		cdays=0;
+	}
+	var need=xs*cdays;
+	$("#xsneed").html(need);
+	var all=$("#xsall").html();
+	if (all<need){
+		$("#xspay").show();
+	}else{
+	    $("#xspay").hide();
+	}
+}
+function checkRec(){
+	var rec=$("#myrec").val();
+	var cdays=$("#crecdays").val();
+	var need=rec*cdays;
+	$("#recneed").html(need);
+	var all=$("#recall").html();
+	if (all<need){
+		$("#recpay").show();
+	}else{
+	    $("#recpay").hide();
+	}
+}
+function checkU(){
+	var u=$("#myu").val();
+	var cdays=$("#cudays").val();
+	var need=u*cdays;
+	$("#uneed").html(need);
+	var all=$("#uall").html();
+	if (all<need){
+		$("#upay").show();
+	}else{
+	    $("#upay").hide();
+	}
+}
+function checkUp(){
+	var r=$("#myr").val();
+	var cdays=$("#crdays").val();
+	var need=r*cdays;
+	$("#rneed").html(need);
+	var all=$("#rall").html();
+	if (all<need){
+		$("#rpay").show();
+	}else{
+	    $("#rpay").hide();
+	}
+}
+function dayclean(){
+    $(".job_recom_time_zdy").val('');
+}
+function radioclean(obj){
+    $("input[name='recdays']").attr("checked",false);
+	$("input[name='xsdays']").attr("checked",false);
+	$("input[name='udays']").attr("checked",false);
+	$("input[name='rdays']").attr("checked",false);
+	if(obj==''){
+	    $(".job_recom_list_jobtime_s").html('0');
+	}
+}
+function Numbers(e)
+{
+var keynum
+var keychar
+var numcheck
+
+if(window.event) 
+	{
+	keynum = e.keyCode
+	}
+else if(e.which)
+	{
+	keynum = e.which
+	}
+	if(parseInt(keynum)!=8){
+	    keychar = String.fromCharCode(keynum)
+		numcheck = /\d/
+		return numcheck.test(keychar)
+	}
+}
+</script>
+<div id="recom"  style="display:none; width:480px; ">
+<div class="job_recom_box">
+<form action='index.php?c=job&act=opera' target="supportiframe" method="post" id='recomf'>
+<div class="job_recom_list">
+<span class="job_recom_s job_recom_s_mt">推荐时长：</span>
+<div class="job_recom_list_jobtime">
+<label><span class="job_recom_time"><input type="radio" name="recdays" value="1" onclick="dayclean()" checked="checked">1天</span></label> 
+<label><span class="job_recom_time"><input type="radio" name="recdays" value="3" onclick="dayclean()">3天</span> </label> 
+<label><span class="job_recom_time"><input type="radio" name="recdays" value="7" onclick="dayclean()">7天</span> </label> 
+<label><span class="job_recom_time"><input type="radio" name="recdays" value="15" onclick="dayclean()">15天</span></label>  
+<label><span class="job_recom_time"><input type="radio" name="recdays" value="30" onclick="dayclean()">30天</span></label>  
+<input type="text" value="" class="job_recom_time_zdy" id="crecdays" name="crecdays" onclick="radioclean(this.value)" onkeyup="checkRec();" onkeypress="return Numbers(event)" placeholder="自定义"/><span class="job_recom_time_zdy_t">天</span>
+</div>
+</div>
+<div class="job_recom_list">
+<span class="job_recom_s">所需{yun:}$config.integral_pricename{/yun}：</span>
+<div class="job_recom_list_jobtime"><div class="job_recom_list_jobtime_money"><span id="recneed" class="job_recom_list_jobtime_s">{yun:}$config.com_recjob{/yun}</span>{yun:}$config.integral_priceunit{/yun}</div></div>
+</div>
+<div class="job_recom_list" id="recdiv" style="display:none">
+<span class="job_recom_s">到期时间：</span>
+<div class="job_recom_list_jobtime"><span id="rectime" class="job_recom_list_tip_s"></span></div>
+</div>
+<div class="job_recom_list_tip_box">
+<div class="job_recom_list_tip">我的{yun:}$config.integral_pricename{/yun}：<span id="recall" class="job_recom_list_tip_s">{yun:}$statis.integral{/yun}</span> {yun:}$config.integral_priceunit{/yun}<span id="recpay" style="display:none"><span class="job_recom_list_tip_c">请先充值后购买</span><a href="index.php?c=pay" class="job_recom_list_jobm_cz">立即充值</a></span></div>
+</div>
+<div class="job_recom_listbth">
+<input type="hidden" id="myrec" value="{yun:}$config.com_recjob{/yun}"/>
+<input type="hidden" name="recid" id="recid" value=""/>
+<input type="submit" value="确定" class="job_recom_listsub">
+<div class="job_recom_listtel">客服电话：{yun:}$config.sy_freewebtel{/yun}</div></div>
+</form>
+</div>
+</div>
+<div id="wname"  style="display:none; ">
+ <div class="job_recom_box">
+ <div class="job_recom_box_js">  
+ <form action='index.php?c=job&act=opera' target="supportiframe" method="post" id='wnameidf'>
+ 
+<div class="job_recom_list">
+<span class="job_recom_s job_recom_s_mt">置顶时长：</span>
+<div class="job_recom_list_jobtime">
+<label><span class="job_recom_time"><input type="radio" name="xsdays" value="1" onclick="dayclean()" checked="checked"/>1天</span></label> 
+<label><span class="job_recom_time"><input type="radio" name="xsdays" value="3" onclick="dayclean()"/>3天</span> </label> 
+<label><span class="job_recom_time"><input type="radio" name="xsdays" value="7" onclick="dayclean()"/>7天</span> </label> 
+<label><span class="job_recom_time"><input type="radio" name="xsdays" value="15" onclick="dayclean()"/>15天</span></label>  
+<label><span class="job_recom_time"><input type="radio" name="xsdays" value="30" onclick="dayclean()"/>30天</span></label>  
+<input type="text" value="" class="job_recom_time_zdy" id="cxsdays" name="cxsdays" onclick="radioclean(this.value)" onkeyup="checkXs();" onkeypress="return Numbers(event)" placeholder="自定义"/><span class="job_recom_time_zdy_t">天</span>
+</div>
+
+</div>
+<div class="job_recom_list">
+<span class="job_recom_s">所需{yun:}$config.integral_pricename{/yun}：</span>
+<div class="job_recom_list_jobtime"><div class="job_recom_list_jobtime_money"><span id="xsneed" class="job_recom_list_jobtime_s">{yun:}$config.integral_job_top{/yun}</span>{yun:}$config.integral_priceunit{/yun}</div></div>
+</div>
+<div class="job_recom_list" id="xsdiv" style="display:none">
+<span class="job_recom_s">到期时间：</span>
+<div class="job_recom_list_jobtime"><span id="xstime" class="job_recom_list_tip_s"></span></div>
+</div>
+<div class="job_recom_list_tip_box">
+<div class="job_recom_list_tip">我的{yun:}$config.integral_pricename{/yun}：<span id="xsall" class="job_recom_list_tip_s">{yun:}$statis.integral{/yun}</span> {yun:}$config.integral_priceunit{/yun}<span id="xspay" style="display:none"><span class="job_recom_list_tip_c">请先充值后购买</span><a href="index.php?c=pay" class="job_recom_list_jobm_cz">立即充值</a></span></div>
+</div>
+<div class="job_recom_listbth">
+<input type="hidden" name="wnameid" id="wnameid" value=""/>
+<input type="hidden" id="myxs" value="{yun:}$config.integral_job_top{/yun}"/>
+<input type="submit" value="确定" class="job_recom_listsub"><div class="job_recom_listtel">客服电话：{yun:}$config.sy_freewebtel{/yun}</div>
+</div>
+</form>
+</div>
+</div>
+</div>
+<div id="urgent"  style="display:none; ">
+ <div class="job_recom_box">
+<form action='index.php?c=job&act=opera' target="supportiframe" method="post" id='urgentf'>
+<div class="job_recom_list">
+<span class="job_recom_s job_recom_s_mt">紧急天数：</span>
+<div class="job_recom_list_jobtime">
+<label><span class="job_recom_time"><input type="radio" name="udays" value="1" onclick="dayclean()" checked="checked">1天</span></label> 
+<label><span class="job_recom_time"><input type="radio" name="udays" value="3" onclick="dayclean()">3天</span> </label> 
+<label><span class="job_recom_time"><input type="radio" name="udays" value="7" onclick="dayclean()">7天</span> </label> 
+<label><span class="job_recom_time"><input type="radio" name="udays" value="15" onclick="dayclean()">15天</span></label>  
+<label><span class="job_recom_time"><input type="radio" name="udays" value="30" onclick="dayclean()">30天</span></label>  
+<input type="text" value="" class="job_recom_time_zdy" id="cudays" name="cudays" onclick="radioclean(this.value)" onkeyup="checkU();" onkeypress="return Numbers(event)" placeholder="自定义"><span class="job_recom_time_zdy_t">天</span>
+</div>
+
+</div>
+<div class="job_recom_list">
+<span class="job_recom_s">所需{yun:}$config.integral_pricename{/yun}：</span>
+<div class="job_recom_list_jobtime"><div class="job_recom_list_jobtime_money"><span id="uneed" class="job_recom_list_jobtime_s">{yun:}$config.com_urgent{/yun}</span>{yun:}$config.integral_priceunit{/yun}</div></div>
+</div>
+<div class="job_recom_list" id="udiv" style="display:none">
+<span class="job_recom_s">到期时间：</span>
+<div class="job_recom_list_jobtime"><span id="utime" class="job_recom_list_tip_s"></span></div>
+</div>
+<div class="job_recom_list_tip_box">
+<div class="job_recom_list_tip">我的{yun:}$config.integral_pricename{/yun}：<span id="uall" class="job_recom_list_tip_s">{yun:}$statis.integral{/yun}</span> {yun:}$config.integral_priceunit{/yun}<span id="upay" style="display:none"><span class="job_recom_list_tip_c">请先充值后购买</span><a href="index.php?c=pay" class="job_recom_list_jobm_cz">立即充值</a></span></div>
+</div>
+<div class="job_recom_listbth">
+<input type="hidden" id="myu" value="{yun:}$config.com_urgent{/yun}"/>
+<input type="hidden" name="urgentid" id="urgentid" value=""/>
+<input type="submit" value="确定" class="job_recom_listsub">
+<div class="job_recom_listtel">客服电话：{yun:}$config.sy_freewebtel{/yun}</div></div>
+</form>
+</div>
+</div>
+<div class="job_tck_box" id="jobautobuys" style="display:none;">
+ <div class="job_recom_box">
+<form action='index.php?c=job&act=buyautojob' target="supportiframe" method="post" id='buyautojob'>
+<div class="job_recom_list">
+<span class="job_recom_s job_recom_s_mt">自动刷新：</span>
+<div class="job_recom_list_jobtime">
+<label><span class="job_recom_time"><input type="radio" name="rdays" value="1" onclick="dayclean()" checked="checked">1天</span></label> 
+<label><span class="job_recom_time"><input type="radio" name="rdays" value="3" onclick="dayclean()">3天</span> </label> 
+<label><span class="job_recom_time"><input type="radio" name="rdays" value="7" onclick="dayclean()">7天</span> </label> 
+<label><span class="job_recom_time"><input type="radio" name="rdays" value="15" onclick="dayclean()">15天</span></label>  
+<label><span class="job_recom_time"><input type="radio" name="rdays" value="30" onclick="dayclean()">30天</span></label>  
+<input type="text" value="" class="job_recom_time_zdy" id="crdays" name="crdays" onclick="radioclean(this.value)" onkeyup="checkUp();" onkeypress="return Numbers(event)" placeholder="自定义"><span class="job_recom_time_zdy_t">天</span>
+</div>
+</div>
+<div class="job_recom_list">
+<span class="job_recom_s">所需{yun:}$config.integral_pricename{/yun}：</span>
+<div class="job_recom_list_jobtime"><div class="job_recom_list_jobtime_money"><span id="rneed" class="job_recom_list_jobtime_s">{yun:}$config.job_auto{/yun}</span>{yun:}$config.integral_priceunit{/yun}</div></div>
+</div>
+<div class="job_recom_list" id="rdiv" style="display:none">
+<span class="job_recom_s">到期时间：</span>
+<div class="job_recom_list_jobtime"><span id="rtime" class="job_recom_list_tip_s"></span></div>
+</div>
+<div class="job_recom_list_tip_box">
+<div class="job_recom_list_tip">我的{yun:}$config.integral_pricename{/yun}：<span id="rall" class="job_recom_list_tip_s">{yun:}$statis.integral{/yun}</span>{yun:}$config.integral_priceunit{/yun}<span id="rpay" style="display:none"><span class="job_recom_list_tip_c">请先充值后购买</span><a href="index.php?c=pay" class="job_recom_list_jobm_cz">立即充值</a></span></div>
+</div>
+<div class="job_recom_listbth">
+<input type="hidden" id="myr" value="{yun:}$config.job_auto{/yun}"/>
+<input type="hidden" name="jobautoids" id="jobautoids"/>
+<input type="submit" value="确定" class="job_recom_listsub">
+<div class="job_recom_listtel">客服电话：{yun:}$config.sy_freewebtel{/yun}</div></div>
+</form>
+</div>
+</div> 

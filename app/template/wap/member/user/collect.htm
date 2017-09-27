@@ -1,0 +1,31 @@
+{yun:}include file="$wapstyle/member/header.htm"{/yun}
+<div class="main_member_cot_box">
+  <div class="wap_member_comp_h1"><span>收藏的职位</span></div>
+  {yun:}foreach item=v from=$rows{/yun}
+  <div class="com_member_hr">
+    <div class="com_member_hr_name"> 
+    	{yun:}if $v.type==1{/yun} 
+    		<a href="{yun:}url m=wap c=job a=view id=$v.job_id{/yun}" class="wap_member_com_name  com_member_hr_cblue">{yun:}$v.job_name|mb_substr:0:16:'gbk'{/yun}</a> 
+    	 {yun:}/if{/yun} </div>
+    <div class="user_member_box">
+      <aside>{yun:}$v.com_name{/yun}</aside>
+      <div class="com_member_hr_p1"><span class="member_c9">收藏时间：</span>{yun:}$v.datetime|date_format:"%Y-%m-%d"{/yun}</div>
+    </div>
+    <div class="com_member_hr_cz"> <a href="javascript:void(0)" onclick="isdel('index.php?c=collect&del={yun:}$v.id{/yun}')" class="yun_member_hr_bth">删除</a> 
+    	{yun:}if $v.type==1{/yun} 
+    		<a href="{yun:}url m=wap c=job a=view id=$v.job_id{/yun}" class="yun_member_hr_bth">查看详情</a> 
+    	{yun:}/if{/yun} 
+    </div>
+  </div>
+  {yun:}foreachelse{/yun}
+  <div class="wap_member_no">
+    <div class="wap_member_no_p1">
+	<div>没有收藏过职位</div>
+	<div><a class="wap_member_no_search" href="{yun:}url m=wap c=job{/yun}">去搜索相关职位</a></div>
+	</div>
+  </div>
+  {yun:}/foreach{/yun} </div>
+<div class="pages"> {yun:}$pagenav{/yun}</div>
+</div>
+</div>
+{yun:}include file="$wapstyle/footer.htm"{/yun} 

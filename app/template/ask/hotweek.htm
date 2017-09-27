@@ -1,0 +1,98 @@
+{yun:}include file="$askstyle/header.htm"{/yun} 
+<div class="content "> 
+	<div class="content_hot">
+		<div class="ask_box_leftsidebar left_con">  <div class="ask_tit"><span class="ask_tit_icon_s"><i class="ask_tit_icon"></i>一周热点</span></div>
+			<div class="answer_list hot_list">
+             
+				{yun:}qlist hot=7 order=answernum item=list ispage=1 t_len=20  limit=10{/yun}
+				<div class="answer_det">
+					<h4>
+						<a href="{yun:}$list.url{/yun}" target="_blank" title="{yun:}$list.title{/yun}" >{yun:}$list.title{/yun}</a>
+					</h4>
+					<dl>
+						<dt><img src="{yun:}$list.pic{/yun}" onerror="showImgDelay(this,'{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_friend_icon{/yun}',2);"/></dt>
+						<dd>
+							
+							<div class="answer_on">
+									<p>{yun:}$list.content|strip_tags|mb_substr:0:100:'gbk'{/yun}</p>
+								<div class="wt_jl " >
+                                 <div class="clear"></div>
+								<div style="width:100%; float:left">	<span class="answer_per"><font><a href="{yun:}url m=ask c=friend a=myquestion  uid='`$list.uid`'{/yun}" TARGET="_blank">{yun:}$list.nickname|mb_substr:0:8:'gbk'{/yun}</a></font> 发起了话题 </span>
+                                    <span class="attention q{yun:}$list.id{/yun}" style="margin-top:3px; float:right">
+								{yun:}if $list.isatn!='2'{/yun}
+									{yun:}if in_array($list.id,$my_atten){/yun}
+									<a href="javascript:void(0);" class="watch_qxgz" onclick="attention('{yun:}$list.id{/yun}','1','{yun:}url m=ask c=friend a=attention{/yun}');" >取消关注</a>
+									{yun:}else{/yun}
+                                        {yun:}if $uid{/yun}
+                                        <a href="javascript:void(0);" class="watch_gz" onclick="attention('{yun:}$list.id{/yun}','1','{yun:}url m=ask c=friend a=attention{/yun}');">关注问题</a>
+                                        {yun:}else{/yun}
+                                        <a href="javascript:void(0)"  onclick="showlogin('');" class='watch_gz'>关注问题</a>
+                                        {yun:}/if{/yun}
+									{yun:}/if{/yun} 
+								{yun:}/if{/yun}
+							</span>
+                            </div>
+                            <div class="clear"></div>
+								<div style="width:100%; float:left"><span class="gz_icon"><font class="index_num{yun:}$list.id{/yun}">{yun:}$list.atnnum{/yun}</font>人关注</span>
+                                    
+									<span class="hd_icon"><font>{yun:}$list.answer_num{/yun}</font>个回答</span>
+									<span class="ll_icon"><font>{yun:}$list.visit{/yun}</font>次浏览</span>
+									<span class="time_icon">{yun:}$list.add_time|date_format:"%Y-%m-%d %H:%M"{/yun}</span>
+								</div></div>
+							</div>
+							
+						</dd>
+						<div class="clear"></div>
+					</dl>
+				</div>
+				{yun:}/qlist{/yun}  
+				{yun:}if $total==0{/yun}
+			<div class="noresult png" >您还没有任何问题，抓紧提问吧！</div>
+				{yun:}else{/yun} 
+				<div class="pages">{yun:}$pagenav{/yun}</div>
+				{yun:}/if{/yun}  
+				<div class="clear"></div>
+			</div> 
+		</div>
+		<div class="right right_rem">
+			<div class="gambit">
+                <div class="ask_tit"><span class="ask_tit_icon_s"><i class="ask_tit_icon"></i>话题分类</span></div>
+				<div class="gambit_con">
+                          
+					
+					<div class="gam_con">
+						{yun:}qcache key=key item=qclasslist name=qcache{/yun}
+						<a href="{yun:}url m=ask c=topic id='`$qclasslist.id`'{/yun}">{yun:}$qclasslist.name{/yun}</a>
+						{yun:}/qcache{/yun} 
+					</div>
+				</div>
+			</div>        
+			<div class="recom_expert">
+             <div class="ask_tit"><span class="ask_tit_icon_s"><i class="ask_tit_icon"></i>推荐达人</span></div>
+				<div class="recom_con">
+					<ul>
+						{yun:}foreach from=$recom item=rlist{/yun}
+						<li>
+							<a href="{yun:}url m=ask c=friend a=myquestion  uid='`$rlist.uid`'{/yun}" target="_blank"><img src="{yun:}$rlist.pic{/yun}" onerror="showImgDelay(this,'{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_friend_icon{/yun}',2);"/></a>
+                            <div class="recom_con_name"><a href="{yun:}url m=ask c=friend a=myquestion uid='`$rlist.uid`'{/yun}" target="_blank">{yun:}$rlist.nickname{/yun}</a></div>
+						</li>
+						{yun:}/foreach{/yun} 
+					</ul>
+				</div>
+			</div>
+            
+		</div>
+	<div class="clear"></div>
+	</div>
+</div>  
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js" type="text/javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script>
+<script src="{yun:}$ask_style{/yun}/js/question.js" type="text/javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/public.js" language="javascript"></script>
+<!--[if IE 6]>
+<script src="{yun:}$config.sy_weburl{/yun}/js/png.js"></script>
+<script>
+DD_belatedPNG.fix('.png,.attention .watch_gz');
+</script>
+<![endif]-->
+{yun:}include file="$askstyle/footer.htm"{/yun}

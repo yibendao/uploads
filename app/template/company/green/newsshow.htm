@@ -1,0 +1,125 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>{yun:}$title{/yun}</title>
+<link rel="stylesheet" type="text/css" href="{yun:}$com_style{/yun}/images/style.css" />
+</head>
+
+<body style="background:#f0f0f0">
+
+<div class="c_w_header">
+  <div class="c_header_tou01">
+    <div class="wrap">
+      <div class="c_tou01_huany">
+        <div class="c_huany_xt fl">{yun:}$com.name{/yun}欢迎您！</div>
+      </div>
+    </div>
+  </div>
+   <div class="black_bg" >
+  <div class="black_banner" ><img  src="{yun:}$banner.pic{/yun}" onerror="showImgDelay(this,'{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_banner{/yun}',2);"> </div></div>
+  <div class="black_cont">
+  <div class="black_cont_cominfo">
+  <div class="balck_logo"><img src="{yun:}$com.logo{/yun}" width="185" height="75" onerror="showImgDelay(this,'{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_unit_icon{/yun}',2);" />
+  </div>
+  <div class="black_cont_cominfo_right">
+  <div class="black_cont_cominfo_nb">
+  <h1 class="black_cont_cominfo_name">{yun:}$com.name{/yun}</h1> 
+   {yun:}if $ComMember.source==6 && $ComMember.claim==0 && $ComMember.email!=""{/yun}
+        <a href="javascript:claim('{yun:}url m=ajax c=claim uid=$com.uid{/yun}');">认领</a>
+        {yun:}/if{/yun}
+  {yun:}if $usertype=='1'{/yun}
+			  {yun:}if $isatn.id{/yun} 
+			  <a href="javascript:void(0)" onclick="atn('{yun:}$com.uid{/yun}','{yun:}url m=ajax c=atn_company{/yun}')" id='atn_{yun:}$com.uid{/yun}' class="wrap_l_name_gz">取消关注</a> 
+			  {yun:}else{/yun} 
+			  <a href="javascript:void(0)" onclick="atn('{yun:}$com.uid{/yun}','{yun:}url m=ajax c=atn_company{/yun}')" id='atn_{yun:}$com.uid{/yun}' class="wrap_l_name_gz">关注</a> 
+			  {yun:}/if{/yun}
+          {yun:}else{/yun} 
+            {yun:}if $uid{/yun}
+            <a href="javascript:void(0)" onclick="layer.msg('只有个人用户才能关注', 2,8)" class="wrap_l_name_gz">关注</a> 
+            {yun:}else{/yun}
+            <a href="javascript:void(0)" onclick="showlogin('1');" class="wrap_l_name_gz">关注</a> 
+            {yun:}/if{/yun} 
+		  {yun:}/if{/yun}
+          已有<font id="antnum{yun:}$com.uid{/yun}">{yun:}$com.ant_num{/yun}</font>人关注
+          </div>
+  <div class="">
+  {yun:}if $com.email_status=="1"{/yun} 
+  <div class="rz_list"><img src="{yun:}$com_style{/yun}images/rz_yx2.png" alt="邮箱未认证" title="邮箱已认证" class="png" /> 
+  已认证</div>
+  {yun:}else{/yun}
+  <div class="rz_list"> <img src="{yun:}$com_style{/yun}images/rz_yx.png" alt="邮箱未认证" title="邮箱未认证" class="png" />
+   未认证</div>
+    {yun:}/if{/yun}
+        {yun:}if $com.moblie_status=="1"{/yun} 
+     <div class="rz_list">   <img src="{yun:}$com_style{/yun}images/rz_sj2.png" alt="手机未认证" title="手机已认证" class="png" />
+        已认证</div>
+         {yun:}else{/yun} 
+      <div class="rz_list">   <img src="{yun:}$com_style{/yun}images/rz_sj.png" alt="手机未认证" title="手机未认证" class="png" />
+         未认证 </div>
+         {yun:}/if{/yun}
+        {yun:}if $com.yyzz_status=="1"{/yun}
+      <div class="rz_list">   <img src="{yun:}$com_style{/yun}images/rz_zz2.png" alt="执照未认证" title="执照已认证" class="png" /> 
+        已认证</div>
+        {yun:}else{/yun} 
+      <div class="rz_list">  <img src="{yun:}$com_style{/yun}images/rz_zz.png" alt="执照未认证" title="执照未认证" class="png" /> 
+          未认证 </div>
+        {yun:}/if{/yun}
+       </div>
+  </div>
+  </div>
+     <div class="wx_share_fx">
+        <div class="wx_share_fx_img"><img src="{yun:}url m=ajax c=pubqrcode toc=company toa=show toid=$com.uid{/yun}" width="120" height="120"></div>
+        </div>  
+    <div class="black_cont_bg"></div>
+   </div>
+   <div class="clear"></div>
+      <div class="black_com_w980">
+   <div class="black_com_box">
+      <div class="black_com_box_left">
+  <div class="black_com_box_tit"><span class="black_com_box_tit_s">企业新闻</span></div>
+   <div class="black_com_box_js">   <div class="blue_p_h1"> {yun:}$NewsInfo.title{/yun}</div>
+                    <div class="c_about_nr"> {yun:}$NewsInfo.body{/yun} </div> 
+
+          </div>
+   </div>
+            <div class="black_com_box_right">
+			   <div class="black_com_box_tit"><span class="black_com_box_tit_s">投递查看</span></div>
+			   <div class="black_com_lookreseme"><div class="black_com_lookreseme_n"><span class="black_com_lookreseme_n_n">{yun:}$pre{/yun}</span>%</div>简历回复率</div>
+				   <div class="black_com_lookms"><div class="black_com_lookreseme_n"><span class="black_com_lookreseme_n_n">{yun:}$invite_resume{/yun}</span></div>邀请面试</div>
+			   <div class="black_com_box_tit"><span class="black_com_box_tit_s">基本信息</span></div>
+			   <div class="black_com_box_right_info">
+			   <div class="c_nr_hy"><em>行业</em><span>{yun:}$com.hy_info{/yun}</span></div>
+			   <div class="c_nr_hy"><em>性质</em><span>{yun:}$com.pr_info{/yun}</span></div>
+			   <div class="c_nr_hy"><em>规模</em><span>{yun:}$com.mun_info{/yun}</span></div>
+			   <div class="c_nr_hy"><em>地区</em><span>{yun:}$com.provinceid{/yun}</span></div>
+			  {yun:}if $com.money{/yun}<div class="c_nr_hy"><em>注资</em>{yun:}$com.money{/yun}万</div>{yun:}/if{/yun}
+			  {yun:}if $com.sdate{/yun}<div class="c_nr_hy"><em>创办</em>{yun:}$com.sdate{/yun}</div>{yun:}/if{/yun}
+					   
+			   </div>
+			   </div>
+      </div>
+    </div>
+    
+
+<div class="clear"></div>
+<script>
+var weburl="{yun:}$config.sy_weburl{/yun}",integral_pricename='{yun:}$config.integral_pricename{/yun}',pricename='{yun:}$config.integral_pricename{/yun}',code_web='{yun:}$config.code_web{/yun}',code_kind='{yun:}$config.code_kind{/yun}';</script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/public.js" language="javascript"></script>
+ <script src="{yun:}$config.sy_weburl{/yun}/js/popImage/jquery.popImage.mini.js" language="javascript"></script>
+<script>
+$(function () {
+	$("a.image_gall").popImage();
+	$('.c_zj02_list li').click(function () {
+		$(this).addClass('c_zj02_curr').siblings().removeClass('c_zj02_curr');
+	});
+});
+</script>
+{yun:}include file="$tplstyle/public_search/login.htm"{/yun} 
+<iframe id="supportiframe" name="supportiframe" onload="returnmessage('supportiframe');" class="none"></iframe>
+
+{yun:}include file="$tplstyle/footer.htm"{/yun}
+    
+    

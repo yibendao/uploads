@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<link href="images/reset.css" rel="stylesheet" type="text/css" />
+<link href="images/system.css" rel="stylesheet" type="text/css" />
+<link href="images/table_form.css" rel="stylesheet" type="text/css" />
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script>
+<script src="js/admin_public.js" type="text/javascript"></script>
+<title>后台管理</title>
+</head>
+<body class="body_ifm">
+<div class="infoboxp" style="position:relative;">
+<div class="infoboxp_top_bg"></div>
+<div id="subboxdiv" style="width:100%;height:100%;display:none;position:absolute; z-index:10000"></div>
+<div class="main_tag" >
+<div class="admin_h1_bg"> 
+<span class="infoboxp_top_span infoboxp_top_wz">都需招聘平台简历同步</span>
+
+</div>
+<div class="tag_box">
+
+
+<div class="">
+    <table width="100%" class="table_form">
+    <tr class="admin_table_trbg">
+    <th width="160" bgcolor="#f0f6fb"><span class="admin_bold">参数说明</span></th>
+    <td bgcolor="#f0f6fb"><span class="admin_bold">参数值</span></td>
+          
+</tr>
+     <tr>
+		<th width="160">可同步有效简历数：</th>
+		<td><div class="yun_admin_divh">{yun:}$resCount{/yun}</div></td>
+       
+		<input type="hidden" id="resCount" value="{yun:}$resCount{/yun}">
+	</tr>
+	<tr class="admin_table_trbg">
+		<th width="160">同步基数：</th>
+		<td><input class="input-text tips_class" type="text"  id="crmlimit" value="10" size="40" maxlength="255"/><font color="gray" style="display:none">每次同步简历数量，建议设置为500以内，不宜过大</font></td>
+        
+	</tr>
+
+        <tr>
+            <td colspan="2" align="center">
+            <input class="admin_submit4" id="sync" type="button" name="sync" value="开始同步" />&nbsp;&nbsp;
+            <input class="admin_submit4" type="reset" value="重置" /></td>
+			<input type="hidden" name="pytoken" id="pytoken" value="{yun:}$pytoken{/yun}">
+        </tr>
+    </table>
+</div>
+
+</div>
+</div>
+<script>
+var $switchtag = $("div.main_tag ul li");
+$switchtag.click(function(){
+	$(this).addClass("on").siblings().removeClass("on");
+	var index = $switchtag.index(this);
+	$("div.tag_box > div")
+		.eq(index).show()
+		.siblings().hide();
+});
+
+$(".tips_class").hover(function(){
+
+	var msg_id=$(this).attr('id');
+	var msg=$('#'+msg_id+' + font').html();
+	if($.trim(msg)!=''){
+		layer.tips(msg, this, {
+		guide: 1,
+		style: ['background-color:#F26C4F; color:#fff;top:-7px', '#F26C4F']
+		});
+	}
+},function(){
+	var msg_id=$(this).attr('id');
+	var msg=$('#'+msg_id+' + font').html();
+	if($.trim(msg)!=''){
+		layer.closeTips();
+	}
+});
+
+$(function(){
+	$("#config").click(function(){
+		$.post("index.php?m=config&c=save",{
+			config : $("#config").val(),
+			crmname : $("#crmname").val(),
+			crmpronid : $("#crmpronid").val(),
+			pytoken : $("#pytoken").val(),
+			crmkey : $("#crmkey").val()
+		},function(data,textStatus){
+			config_msg(data); return false;
+		});
+	});
+	$("#sync").click(function(){
+		var ii = parent.layer.load('数据传输中,请不要关闭或刷新页面！',0);
+		var count = '{yun:}$resCount{/yun}';
+		var limit = $('#crmlimit').val();
+		psotcrm(ii,count,limit);
+	});
+});
+
+function psotcrm(ii,count,limit,page,synckey){
+	$.post("index.php?m=resumesync&c=sync",{
+			count : count,
+			page : page,
+			pytoken : $("#pytoken").val(),
+			synckey : synckey,
+			limit : limit
+		},function(data){
+			var info = eval('('+data+')');
+			if(info['state']=='0'){
+				parent.layer.close(ii);
+				parent.layer.alert('数据同步成功！', 9);
+				window.location.href='index.php?m=resumesync';
+			}else if(info['state']=='1'){
+				parent.layer.close(ii);
+				var allcount = $('#resCount').val();
+			
+				var ii = parent.layer.load('数据已传输 '+info['count']+'条，请耐心等待！<br> 本次同步 重复 '+info['readynum'],0);
+				psotcrm(ii,allcount,limit,info['page'],info['synckey']);
+			}else{
+				parent.layer.close(ii);
+				if(info['error']){
+					parent.layer.alert(info['error'], 8);
+				}else{
+					parent.layer.alert('数据同步失败', 8);
+				}
+				
+				window.location.href='index.php?m=resumesync';
+			}
+		});
+}
+</script>
+</div>
+</body>
+</html>

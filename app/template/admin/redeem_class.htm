@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js"></script> 
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script>
+<script src="js/admin_public.js" language="javascript"></script>  
+<link href="images/reset.css" rel="stylesheet" type="text/css" />
+<link href="images/system.css" rel="stylesheet" type="text/css" /> 
+<link href="images/table_form.css" rel="stylesheet" type="text/css" />
+<title>后台管理</title>
+</head>
+<body class="body_ifm">
+{yun:}include file="$adminstyle/add_class.htm"{/yun}
+<span id="temp"></span>
+<div class="infoboxp"><div class="infoboxp_top_bg"></div>
+ <div class="infoboxp_top">
+<span class="admin_title_span">商品类别管理</span>
+<a  href="javascript:void(0)" onClick="add_class('商品类别','450','310','#bname','index.php?m=redeem_class&c=save')" class="admin_infoboxp_tj">添加类别</a>
+</div>
+<iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe> 
+<div class="table-list">
+<div class="admin_table_border">
+<form action="index.php?m=redeem_class&c=del" method="post" id='myform' target="supportiframe">  
+<table width="100%">
+	<thead>
+		<tr class="admin_table_top">
+		<th width="50"><label for="chkall"> <input type="checkbox" id='chkAll' onclick='CheckAll(this.form)' /></label></th>
+		<th>编号</th>
+		<th align="left">商品名称<span class="clickup">(点击修改)</span></th>
+        <th width="100">商品排序</th>
+		<th width="180" class="admin_table_th_bg">操作</th>
+	</tr>
+	</thead>
+	<tbody>	
+    {yun:}if empty($id){/yun}
+	{yun:}foreach item=v key=key from=$position{/yun}
+	<tr align="center"{yun:}if ($key+1)%2=='0'{/yun}class="admin_com_td_bg"{yun:}/if{/yun} id="list{yun:}$v.id{/yun}">
+   		<td width="50"><input type="checkbox" value="{yun:}$v.id{/yun}" name='del[]' onclick='unselectall()' rel="del_chk" /></td>
+		<td class="ud">{yun:}$v.id{/yun}</td>
+		<td class="ud imghide" align="left">一级分类：
+        <span onClick="checkname('{yun:}$v.id{/yun}');" id="name{yun:}$v.id{/yun}" style="cursor:pointer;">{yun:}$v.name{/yun}</span>
+        <input class="input-text hidden" type="text" id="inputname{yun:}$v.id{/yun}"value="{yun:}$v.name{/yun}" onBlur="subname('{yun:}$v.id{/yun}','index.php?m=redeem_class&c=ajax');"/>
+        <img class="" style="padding-left:5px;cursor:pointer;" title="" src="images/xg.png" onClick="checkname('{yun:}$v.id{/yun}');">
+        </td>
+       
+        <td class="imghide"><span onClick="checksort('{yun:}$v.id{/yun}');" id="sort{yun:}$v.id{/yun}" style="cursor:pointer;">{yun:}$v.sort{/yun}</span>
+        <input class="input-text hidden citysort" type="text" id="input{yun:}$v.id{/yun}" size="10" value="{yun:}$v.sort{/yun}" onBlur="subsort('{yun:}$v.id{/yun}','index.php?m=redeem_class&c=ajax');"/>
+        <img class="" style="padding-left:5px;cursor:pointer;" title="" src="images/xg.png" onClick="checksort('{yun:}$v.id{/yun}');"></td>
+		<td class="ud">
+            <A href="index.php?m=redeem_class&c=up&id={yun:}$v.id{/yun}" class="admin_cz_sc">分类管理</A> | 
+            <A href="javascript:void(0)" onClick="layer_del('确定要删除？', 'index.php?m=redeem_class&c=del&delid={yun:}$v.id{/yun}');" class="admin_cz_sc">删除</a>
+        </td>
+	</tr>
+    {yun:}/foreach{/yun}
+    {yun:}/if{/yun}
+	{yun:}if $id{/yun}
+	<tr align="center" id="list{yun:}$onejob.id{/yun}">
+   		<td width="50"><input type="checkbox" value="{yun:}$onejob.id{/yun}" name='del[]' onclick='unselectall()' rel="del_chk" /></td>
+		<td class="ud" width="60">{yun:}$onejob.id{/yun}</td>
+		<td  align="left">一级分类：<span onClick="checkname('{yun:}$onejob.id{/yun}');" id="name{yun:}$onejob.id{/yun}" style="cursor:pointer;">{yun:}$onejob.name{/yun}</span><input class="input-text hidden" type="text" id="inputname{yun:}$onejob.id{/yun}"value="{yun:}$onejob.name{/yun}" onBlur="subname('{yun:}$onejob.id{/yun}','index.php?m=redeem_class&c=ajax');"/>
+		<img class="" style="padding-left:5px;cursor:pointer;" title="" src="images/xg.png" onClick="checkname('{yun:}$onejob.id{/yun}');">
+        </td>
+        <td><span onClick="checksort('{yun:}$onejob.id{/yun}');" id="sort{yun:}$onejob.id{/yun}" style="cursor:pointer;">{yun:}$onejob.sort{/yun}</span><input class="input-text hidden" type="text" id="input{yun:}$onejob.id{/yun}" size="10" value="{yun:}$onejob.sort{/yun}" onBlur="subsort('{yun:}$onejob.id{/yun}','index.php?m=redeem_class&c=ajax');"/>
+		<img class="" style="padding-left:5px;cursor:pointer;" title="" src="images/xg.png" onClick="checksort('{yun:}$onejob.id{/yun}');">
+		</td>
+		<td class="ud" width="180"><A href="javascript:void(0)" onClick="layer_del('确定要删除？', 'index.php?m=redeem_class&c=del&delid={yun:}$onejob.id{/yun}');" class="admin_cz_sc">删除</a></td>
+	</tr>
+	{yun:}foreach item=two from=$twojob{/yun}
+	<tr align="center" id="list{yun:}$two.id{/yun}">
+    	<td width="50"><input type="checkbox" value="{yun:}$two.id{/yun}" name='del[]' onclick='unselectall()' rel="del_chk" /></td>
+		<td class="ud">{yun:}$two.id{/yun}</td>
+		<td  align="left">&nbsp;
+       ┗<span onClick="checkname('{yun:}$two.id{/yun}');" id="name{yun:}$two.id{/yun}" style="cursor:pointer;">{yun:}$two.name{/yun}</span>
+        <input class="input-text hidden" type="text" id="inputname{yun:}$two.id{/yun}"value="{yun:}$two.name{/yun}" onBlur="subname('{yun:}$two.id{/yun}','index.php?m=redeem_class&c=ajax');"/>
+		<img class="" style="padding-left:5px;cursor:pointer;" title="" src="images/xg.png" onClick="checkname('{yun:}$two.id{/yun}');"/>
+		</td>
+        <td><span onClick="checksort('{yun:}$two.id{/yun}');" id="sort{yun:}$two.id{/yun}" style="cursor:pointer;">{yun:}$two.sort{/yun}</span>
+        <input class="input-text hidden" type="text" id="input{yun:}$two.id{/yun}" size="10" value="{yun:}$two.sort{/yun}" onBlur="subsort('{yun:}$two.id{/yun}','index.php?m=redeem_class&c=ajax');"/>
+		<img class="" style="padding-left:5px;cursor:pointer;" title="" src="images/xg.png" onClick="checksort('{yun:}$two.id{/yun}');"/>
+		</td>
+		<td class="ud"><A href="javascript:void(0)" onClick="layer_del('确定要删除？', 'index.php?m=redeem_class&c=del&delid={yun:}$two.id{/yun}');"class="admin_cz_sc">删除</a> </td>
+	</tr>
+	
+	{yun:}/foreach{/yun}
+	{yun:}/if{/yun}
+    <tr style="background: #f1f1f1;">
+     <td align="center"><input type="checkbox" id='chkAll2' onclick='CheckAll2(this.form)' /></td>
+      <td colspan="4">
+      <label for="chkAll2">全选</label>&nbsp;
+      <input class="admin_submit4"  type="button" name="delsub" value="删除所选"  onclick="return really('del[]')"/></td>
+    </tr>
+	</tbody>
+</table>
+<input type="hidden" name="pytoken" id="pytoken" value="{yun:}$pytoken{/yun}">
+</form>
+</div>
+</div>
+</div> 
+</body>
+</html>

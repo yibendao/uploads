@@ -1,0 +1,41 @@
+{yun:}include file="$wapstyle/member/header.htm"{/yun} 
+
+<ul class="wap_member_userjf">
+<li><div class="wap_member_comjf_n">{yun:}$statis.integral{/yun}{yun:}$config.integral_priceunit{/yun}</div>可用{yun:}$config.integral_pricename{/yun}</li>
+<li> <div class="wap_member_comjf_n">{yun:}$statis.allprice{/yun}{yun:}$config.integral_priceunit{/yun}</div>已消费{yun:}$config.integral_pricename{/yun}</li>
+<li class="wap_member_userjf_h">  <a href="index.php?c=pay" class="wap_member_userjf_bth">充值</a></li>
+</ul>
+
+
+<section class="main_member_cot_box">
+<ul class="member_ms">
+	<li class="member_ms_cur"><a href="index.php?c=paylog">充值记录</a>	</li>
+	<li><a href="index.php?c=consume">消费记录</a>	</li>
+</ul>
+<div class="wap_member_post_list">
+{yun:}foreach item=log from=$rows{/yun}
+{yun:}assign var="state" value=$log.order_state{/yun}
+{yun:}assign var="type" value=$log.order_type{/yun}
+<div class="com_member_hr">
+<div class="user_member_box">
+<div class="com_member_hr_p1"><span class="member_c9">充值单号：</span>{yun:}$log.order_id{/yun}</div>
+<div class="com_member_hr_p1"><span class="member_c9">订单类型：</span>{yun:}if $log.type==1{/yun}购买会员{yun:}elseif $log.type=='2'{/yun}{yun:}$config.integral_pricename{/yun}充值{yun:}elseif $log.type=='3'{/yun}银行转帐{yun:}elseif $log.type=='4'{/yun}金额充值{yun:}elseif $log.type=='5'{/yun}购买增值包{yun:}elseif $log.type=='6'{/yun}课程订购{yun:}/if{/yun}</div>
+<div class="com_member_hr_p1"><span class="member_c9">支付形式：</span>{yun:}if $type{/yun}{yun:}$arr_data.pay.$type{/yun}{yun:}else{/yun}手动{yun:}/if{/yun}</div>
+<div class="com_member_hr_p1"><span class="member_c9">充值金额：</span>{yun:}$log.order_price{/yun}</div>
+<div class="com_member_hr_p1"><span class="member_c9">支付状态：</span>{yun:}$arr_data.paystate.$state{/yun}</div>
+<div class="com_member_hr_p1"><span class="member_c9">时间：</span>{yun:}$log.order_time|date_format:"%Y-%m-%d %H:%M:%S"{/yun}</div>
+{yun:}if $log.order_remark{/yun}<div class="com_member_hr_p1"><span class="member_c9">备注：</span>{yun:}$log.order_remark{/yun}</div>{yun:}/if{/yun}
+</div>
+{yun:}if $log.order_state=='1' && $log.order_type!='bank'{/yun}
+<div class="com_member_hr_cz">
+<a href="index.php?c=pay&id={yun:}$log.id{/yun}"  class="yun_member_hr_bth">去付款</a> 
+<a href="javascript:void(0)" onclick="layer_del('确定要取消该订单吗？','index.php?c=delpaylog&id={yun:}$log.id{/yun}')" class="yun_member_hr_bth">取消充值</a> 
+</div>{yun:}/if{/yun}
+</div>
+{yun:}foreachelse{/yun}
+<div class="wap_member_no">暂无相关信息</div>
+{yun:}/foreach{/yun}
+</div>
+</section>
+<div class="pages"> {yun:}$pagenav{/yun}</div>
+{yun:}include file="$wapstyle/footer.htm"{/yun} 

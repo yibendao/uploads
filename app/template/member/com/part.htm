@@ -1,0 +1,191 @@
+{yun:}include file="$comstyle/header.htm"{/yun}
+<script src="{yun:}$com_style{/yun}/js/part.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/class.public.js" type="text/javascript"></script>
+<link rel="stylesheet" href="{yun:}$style{/yun}/style/class.public.css" type="text/css" />
+<div class="w1000">
+  <div class="admin_mainbody"> {yun:}include file="$comstyle/left.htm"{/yun}
+    <div class=right_box>
+      <div class=admincont_box>
+          <div class="job_list_tit">
+ <ul class="">
+<li {yun:}if $smarty.get.c=="part"{/yun} class="job_list_tit_cur"{yun:}/if{/yun}><a href="index.php?c=part" title="全部兼职">全部兼职</a></li>
+<li {yun:}if $smarty.get.w=="1"{/yun}class="job_list_tit_cur"{yun:}/if{/yun}><a href="index.php?c=partok&w=1" title="招聘中的兼职">招聘中的兼职</a></li>
+<li {yun:}if $smarty.get.w=="0"{/yun} class="job_list_tit_cur"{yun:}/if{/yun}><a href="index.php?c=partok&w=0" title="待审核的兼职">待审核的兼职</a></li>
+<li {yun:}if $smarty.get.w=="3"{/yun} class="job_list_tit_cur"{yun:}/if{/yun}><a href="index.php?c=partok&w=3" title="未通过的兼职">未通过的兼职</a></li>
+<li {yun:}if $smarty.get.w=="2"{/yun} class="job_list_tit_cur"{yun:}/if{/yun}><a href="index.php?c=partok&w=2" title="过期的兼职">过期的兼职</a></li>
+</ul>
+    </div>
+           <div class="com_body">
+           {yun:}if $rows{/yun}
+          <div class="lt_tip">贵公司还可以发布（<span class="f60">{yun:}if $statis.vip_etime>time() || $statis.vip_etime=="0"{/yun}{yun:}if $statis.rating_type==1{/yun}{yun:}$statis.part_num{/yun}{yun:}else{/yun}不限{yun:}/if{/yun}{yun:}else{/yun}0{yun:}/if{/yun}</span>）条兼职信息
+            <input class="fb_Com_xz" onclick="jobadd_url('{yun:}$addpartjobnum{/yun}','{yun:}$config.integral_partjob{/yun}','{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}','part');" type="button" value="新增兼职" name="input">
+            
+          </div>
+          {yun:}/if{/yun}
+        <div class="clear"></div>
+        <div class="com_Release_job">
+          <iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe>
+          <form action="index.php" target="supportiframe" method="get" id='myform'>
+          <input type="hidden" name="c" value="part" />
+               <input type="hidden" name="act" value="del" />
+            {yun:}foreach item=list from=$rows{/yun}
+            
+            
+            <div class="com_m_job_list">
+              <div class="job_list_list">
+                <div class="job_list_list_left">
+                 <div class="com_m_job_list_t">
+                <div class="com_m_job_lis_xz">
+                <input type="checkbox" name="del[]" value="{yun:}$list.id{/yun}" class="com_job_list_check">
+                </div>
+                <div class="com_m_job_list_jobname">
+                 <a href="{yun:}url m=part c=show id='`$list.id`'{/yun}" class="com_m_job_list_jobname_a cblue" target="_blank">{yun:}$list.name{/yun}</a>
+             {yun:}if $list.rec_time>time(){/yun}<span class="com_ytj">已推荐</span>{yun:}/if{/yun}
+             </div>
+                </div> 
+                   <div class="com_m_job_lis_j"><a href="index.php?c=partapply&jobid={yun:}$list.id{/yun}"><span class="job_list_list_left_name">兼职报名：</span><strong class="job_list_list_left_u">{yun:}$list.applynum{/yun}</strong></a> <span class="job_list_list_left_name" style="margin-left:30px;">浏览量：</span><strong class="job_list_list_left_u">{yun:}$list.hits{/yun}</strong>
+                   {yun:}if $list.rec_time>time(){/yun}
+                   <span class="job_list_list_left_name" style="margin-left:30px;">推荐到期时间：</span><strong class="job_list_list_left_u"><font color="red">{yun:}$list.rec_time|date_format:'%Y-%m-%d'{/yun}</font></strong>
+                   {yun:}/if{/yun}                   
+                   </div>
+        
+              <div class="com_m_job_list_jobdate">有效期：{yun:}if $list.edate>0{/yun}{yun:}$list.edate|date_format:'%Y-%m-%d'{/yun}{yun:}else{/yun}长期招聘{yun:}/if{/yun} {yun:}if $list.deadline gt 0{/yun}<span style="margin-left:20px;">报名截止时间：{yun:}$list.deadline|date_format:'%Y-%m-%d'{/yun}</span>{yun:}/if{/yun}<span style="margin-left:20px;">更新时间：{yun:}$list.lastupdate|date_format:'%Y-%m-%d'{/yun}</span></div>
+                </div>
+                <div class="job_list_extension" style="padding-top:10px;">
+                <a href="javascript:void(0);" onclick="rec('{yun:}$list.id{/yun}','{yun:}if $list.rec_time{/yun}{yun:}$list.rec_time|date_format:'%Y-%m-%d'{/yun}{yun:}else{/yun}0{yun:}/if{/yun}')" class="com_part_tj_sub">推荐</a>
+                </div>
+                 <div class="job_list_operation">
+                        
+						<a href="index.php?c=partadd&id={yun:}$list.id{/yun}" class="uesr_name_a">修改</a>
+                        &nbsp;<a  onclick="layer_del('确定要删除？', 'index.php?c=part&act=del&id={yun:}$list.id{/yun}');" href="javascript:void(0)" class="uesr_name_a">删除</a>&nbsp;
+                        {yun:}if $statis.vip_etime>time() || $statis.vip_etime=="0"{/yun}
+                        {yun:}if $statis.rating_type==1{/yun}
+                        {yun:}if $statis.breakpart_num>0{/yun} <a href="javascript:void(0)" onclick="layer_del('刷新职位数还剩余{yun:}$statis.breakpart_num{/yun}个！确认刷新？', 'index.php?c=partok&act=opera&up={yun:}$list.id{/yun}');">刷新</a> {yun:}else{/yun}
+                        {yun:}if $config.com_integral_online==1{/yun} <a href="javascript:void(0)" onclick="layer_del('本次刷新需扣除{yun:}$config.integral_partjobefresh{/yun}{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}！确认刷新？', 'index.php?c=partok&act=opera&up={yun:}$list.id{/yun}');">刷新</a> {yun:}else{/yun} <a  href="javascript:void(0)" onclick="job_refresh();"  title="刷新">刷新</a> {yun:}/if{/yun}
+                        {yun:}/if{/yun}
+                        {yun:}else{/yun} <a  href="javascript:void(0)" onclick="layer_del('确定刷新该职位么？', 'index.php?c=partok&act=opera&up={yun:}$list.id{/yun}');">刷新</a> {yun:}/if{/yun}
+                        {yun:}else{/yun}
+                        {yun:}if $config.com_integral_online==1{/yun} <a href="javascript:void(0)" onclick="layer_del('本次刷新需扣除{yun:}$config.integral_partjobefresh{/yun}{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}！确认刷新？', 'index.php?c=partok&act=opera&up={yun:}$list.id{/yun}');">刷新</a> {yun:}else{/yun} <a  href="javascript:void(0)" onclick="job_refresh();"  title="刷新">刷新</a> {yun:}/if{/yun}
+                        {yun:}/if{/yun}
+                        {yun:}if $list.deadline!=0{/yun}
+                        <a href="javascript:void(0);" onclick="gotime('{yun:}$list.id{/yun}','{yun:}$list.deadline|date_format:'%Y-%m-%d'{/yun}')" title="延期">延期</a>
+                        {yun:}/if{/yun} 
+                </div>      
+            </div>
+                    </div>
+            {yun:}foreachelse{/yun}
+            <div class="msg_no"><p>暂无相关兼职</p><a href="javascript:;" onclick="jobadd_url('{yun:}$addpartjobnum{/yun}','{yun:}$config.integral_partjob{/yun}','{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}','part');" class="com_msg_no_bth com_submit">点击添加兼职</a></div>
+            {yun:}/foreach{/yun}
+                {yun:}if !empty($rows){/yun}
+				<div class="com_Release_job_bot"> 
+					<span class="com_Release_job_qx">
+						<input id='checkAll' type="checkbox" onclick='m_checkAll(this.form)' class="com_Release_job_qx_check">全选
+					</span>
+                    
+                    <INPUT class="c_btn_02 c_btn_02_w110" type="button" value="批量刷新职位" onclick="return Refresh('del[]');">
+					<INPUT class="c_btn_02 c_btn_02_w110" type="button" value="批量删除" onclick="return really('del[]');">
+                     
+				</div>
+                {yun:}/if{/yun}
+                 <div  class="clear"></div>
+				<div class="diggg">{yun:}$pagenav{/yun}</div> 
+        </form>
+        <div  class="clear"></div>
+          
+      <div class="wxts_box wxts_box_mt30">
+        <div class="wxts">温馨提示：</div>
+        1、如贵公司要快速招聘人才，建议升级会员，获取更多的展示机会，以帮助您快速找到满意的人才。 <br>        2、请贵公司保证职位信息的真实性、合法性，并及时更新职位信息，如被举报或投诉，确认发布的信息违反相关规定后，本站将会关闭贵公司的招聘服务，敬请谅解！ </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+</div>
+
+<!--推荐职位弹出框-->
+<div id="recom"  style="display:none;">
+ <div class="paet_tj_box">
+    <div class="paet_tj_tip">
+      <p>参加推荐职位，一天需要 <font color="red">{yun:}$config.com_recpartjob{/yun}</font> {yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}！</p>
+      <p id="rectime"></p>
+    </div>
+    <form action='index.php?c=partok&act=opera' target="supportiframe" method="post" id='recomf'>
+      <input type="hidden" name="recid" id="recid" value=""/>
+      <div class="job_box_inp" >
+       <span class="fltL">推荐天数：</span>
+        <input name="day" value="" class="com_info_text placeholder" type="text" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" style="width:130px;"/>
+        <span class="fltL box_infobox_span">天</span> </div>
+      <span class="job_box_botton" style="width:100%; position:relative"> <a class="job_box_yes job_box_botton2" href="javascript:void(0);" onclick="setTimeout(function(){$('#recomf').submit()},0);" style="top:30px">确定</a> </span>
+    </form>
+  </div>  </div>
+<!--延期天数弹出框-->
+<div id="gotime"  style="display:none; width:230px; ">
+  <div class="" >
+    <div class="job_box_msg" style="margin-left:10px;_margin-left:5px; padding:3px;border:none; background:#f8f8f8">
+      <p id="gotime_edate"></p>
+    </div>
+    <form action='index.php?c=partok&act=opera' target="supportiframe" method="post" id='gotimef'>
+      <input type="hidden" name="gotimeid" id="gotimeid" value=""/>
+      <div class="job_box_inp"  style="padding:10px 5px 5px 20px"> <span style="float:left; margin-right:0px;">延期天数：</span>
+        <input name="day" value="" class="com_info_text placeholder" type="text" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" style="width:100px;"/>
+        <span class="fltL box_infobox_span" style="padding-left:10px;">天</span> </div>
+      <span class="job_box_botton" style="width:100%;"> <a class="job_box_yes job_box_botton2" href="javascript:void(0);" onclick="setTimeout(function(){$('#gotimef').submit()},0);">确定</a> </span>
+    </form>
+  </div>
+</div>
+<!--延期天数弹出框end-->
+
+
+
+<script>
+function rec(id,rectime){
+	$("#recid").val(id);
+	if(rectime!='0'){
+		$('#rectime').html('当前职位推荐到期时间：<font color="red">'+rectime+'</font>');
+	}
+	$.layer({
+		type : 1,
+		title : '推荐职位',
+		closeBtn : [0 , true],
+		border : [10 , 0.3 , '#000', true],
+		area : ['340px','250px'],
+		page : {dom : '#recom'}
+	});
+}
+function Refresh(name){
+	var chk_value =[];
+	var i=0;
+	$('input[name="'+name+'"]:checked').each(function(){
+		chk_value.push($(this).val());
+		i++;
+	});
+	if(chk_value.length==0){
+		layer.msg("请选择要刷新的职位！",2,8);return false;
+	}else{
+		var num="{yun:}$config.integral_partjobefresh{/yun}";
+		var breakmsg = '本次共刷新'+i+'个职位,需扣除'+i+'个刷新数量,或消耗'+(num*i)+'{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}！';
+		layer.confirm(breakmsg,function(){
+			$.post("{yun:}$config.sy_weburl{/yun}/member/index.php?m=ajax&c=Refresh_part",{ids:chk_value},function(data){
+				if(data==1){
+					layer.msg("刷新成功！",2,9,function(){window.location.reload();});
+				}else{
+					layer.msg(data,2,8);
+				}
+			})
+		});
+	}
+}
+
+$(document).ready(function(){
+	$(".job_cz").hover(function(){
+		var aid=$(this).attr("aid");
+		$("#czlist"+aid).show();
+		$(".job_cz_hover").attr("class","");
+		$("#czlist_"+aid).attr("class","job_cz_hover");
+	},function(){
+		var aid=$(this).attr("aid");
+		$("#czlist"+aid).hide();
+	})
+})
+</script>
+{yun:}include file="$comstyle/footer.htm"{/yun}

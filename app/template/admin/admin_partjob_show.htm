@@ -1,0 +1,474 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js"></script>
+<script src="js/check_public.js"></script>
+<script src="js/admin_public.js"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script>
+<script charset="utf-8" src="../js/kindeditor/kindeditor-min.js"></script>
+<script charset="utf-8" src="../js/kindeditor/lang/zh_CN.js"></script>
+<script language="javascript">
+var editor;
+var editors;
+KindEditor.ready(function(K){
+	editor = K.create('#content',{
+		resizeType : 1,
+		allowPreviewEmoticons : false,
+		allowImageUpload : false,
+		items : ['source',
+		'bold', 'italic', 'underline',
+		'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+		'insertunorderedlist','emoticons'] 
+	});
+});
+var weburl="{yun:}$config.sy_weburl{/yun}";
+$(function(){
+    $('#upAllSelect').click(function(){
+		ischecked = $(this).attr('checked');
+		allcheck = $('input[data-mark="isneed"]');
+		if(ischecked == 'checked'){
+			allcheck.each(function(i){
+				$(this).attr('checked',true);
+			});
+		}else{
+			allcheck.each(function(i){
+				$(this).attr('checked',false);
+			});
+		}		
+	});
+});
+function CheckPost_part(){
+	if($.trim($("#name").val())==""||$("#name").val()==$("#name").attr('placeholder')){
+		layer.msg("请输入兼职名称！",2,8);return false;
+	}
+	if($.trim($("#typeid").val())==""&&$.trim($("#part_type_val").val())==""){
+		layer.msg("请选择兼职类型！",2,8);return false;
+	}
+	if($.trim($("#number").val())<1 ||$("#number").val()==$("#number").attr('placeholder')){
+		layer.msg("请输入招聘人数！",2,8);return false;
+	}
+	var chk_value =[];
+	$('input[name="worktime[]"]:checked').each(function(){
+		chk_value.push($(this).val());
+	});
+	if(chk_value.length==0){
+		layer.msg("请选择兼职时间！",2,8);return false;
+	}
+	var sdate=$("#sdate").val();
+	var edate=$("#edate").val();
+	var today=$("#today").val();
+	var timetype=$("input[name='timetype']:checked").val();
+	if(timetype){
+		if(sdate==""||sdate==$("#sdate").attr('placeholder')){
+			layer.msg("请选择开始日期！",2,8);return false;
+		}
+	}else{
+		if(sdate=="" ||sdate==$("#sdate").attr('placeholder')){
+			layer.msg("请选择开始日期！",2,8);return false;
+		} 
+		if(edate==""||edate==$("#edate").attr('placeholder')){
+			layer.msg("请选择结束日期！",2,8);return false;
+		} 
+		if(toDate(edate).getTime()<toDate(sdate).getTime() || toDate(edate).getTime()<toDate(today).getTime()){
+			layer.msg("请正确选择工作日期！",2,8);return false;
+		}
+	}	
+	if(!timetype){
+		var end=$("#deadline").val();
+		var st=toDate(today).getTime();
+		var ed=toDate(end).getTime();
+		if(end==''||end==$("#deadline").attr('placeholder')){
+			layer.msg("请选择报名截止时间！",2,8);return false;
+		}else if(ed<=st){ 
+			layer.msg("报名截止时间不能小于当前时间！",2,8);return false;
+		}			
+	}
+	if($.trim($("#salary").val())==""||$.trim($("#salary").val())<1 ||$("#salary").val()==$("#salary").attr('placeholder')){
+		layer.msg("请输入薪资水平！",2,8);return false;
+	}
+	if($.trim($("#salary_typeid").val())=="" && $.trim($("#user_salary_val").val())==""){
+		layer.msg("请选择薪水类型！",2,8);return false;
+	}
+	
+	if($.trim($("#billing_cycleid").val())=="" && $.trim($("#user_billing_val").val())==""){
+		layer.msg("请选择结算周期！",2,8);return false;
+	}
+	var html = editor.text();
+	if($.trim(html)==""){
+		layer.msg("请输入兼职内容！",2,8);return false;
+	}
+	if($.trim($("#cityidid").val())==""){
+		layer.msg("请选择工作地点！",2,8);return false;
+	}	
+	if($.trim($("#address").val())==""||$("#address").val()==$("#address").attr('placeholder')){
+		layer.msg("请输入详细地址！",2,8);return false;
+	}
+	if($.trim($("#map_x").val())==""||$.trim($("#map_y").val())==""){
+		layer.msg("请选择地图！",2,8);return false;
+	}		
+	if($.trim($("#linkman").val())==""||$("#linkman").val()==$("#linkman").attr('placeholder')){
+		layer.msg("请输入联系人！",2,8);return false;
+	}
+	if($.trim($("#linktel").val())==""||$("#linktel").val()==$("#linktel").attr('placeholder')){
+		layer.msg("请输入联系手机！",2,8);return false;
+	}
+	var iftelphone = isjsMobile($.trim($("#linktel").val()));
+	if(iftelphone==false){layer.msg('请正确填写联系手机！',2,8);return false;}
+}
+function change(){
+	if($("#timetype").attr("checked")=='checked'){
+		$("#edate").hide();
+		$("#dline").hide();
+	}else{
+	    $("#dline").show();
+		$("#edate").show();
+	}
+}
+</script>
+<link href="images/reset.css" rel="stylesheet" type="text/css" />
+<link href="images/system.css" rel="stylesheet" type="text/css" />
+<link href="images/table_form.css" rel="stylesheet" type="text/css" />
+<style>
+* {
+	margin: 0;
+	padding: 0;
+}
+body, div {
+	margin: 0;
+	padding: 0;
+}
+</style>
+<title>后台管理</title>
+</head>
+<body class="body_ifm">
+<div class="infoboxp">
+  <div class="infoboxp_top_bg"></div>
+  <div class="infoboxp_top">
+    <h6>兼职职位详情</h6>
+  </div>
+  <div class="admin_table_border">
+    <iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe>
+    <form action="" target="supportiframe" method="post" onsubmit="return CheckPost_part();">
+      <table width="100%" class="table_form" style="background:#fff;">
+        <input type="hidden" name="pytoken" value="{yun:}$pytoken{/yun}"/>
+        {yun:}if $show.id{/yun}
+        <tr >
+          <th>招聘编号：</th>
+          <td><div class="yun_admin_divh">{yun:}$show.id{/yun}</div></td>
+        </tr>
+        {yun:}/if{/yun}
+        <tr class="admin_table_trbg" >
+          <th>招聘名称：</th>
+          <td><input type="text" name="name" id="name" class="input-text" size="30" value="{yun:}$show.name{/yun}"></td>
+        </tr>
+        <tr  >
+          <th>工作类型：</th>
+          <td><div class="yun_admin_select_box z_index15"> {yun:}if $show.type{/yun}
+              {yun:}foreach from=$partdata.part_type key=j item=v{/yun}
+              {yun:}if $show.type==$v{/yun}
+              <input type="button" value="{yun:}$partclass_name[$v]{/yun}" class="yun_admin_select_box_text" id="part_type_name" onClick="select_click('part_type');">
+              <input name="type" type="hidden" id="part_type_val" value="{yun:}$v{/yun}">
+               
+              {yun:}/if{/yun}
+              {yun:}/foreach{/yun}
+              {yun:}else{/yun}
+              <input type="button" value="请选择" class="yun_admin_select_box_text" id="part_type_name" onClick="select_click('part_type');">
+              <input name="type" type="hidden" id="part_type_val" value="">
+               
+              {yun:}/if{/yun}
+              <div class="yun_admin_select_box_list_box dn" id="part_type_select"> {yun:}foreach from=$partdata.part_type key=j item=v{/yun}
+                <div class="yun_admin_select_box_list"> <a href="javascript:;" onClick="select_new('part_type','{yun:}$v{/yun}','{yun:}$partclass_name[$v]{/yun}')">{yun:}$partclass_name[$v]{/yun}</a> </div>
+                {yun:}/foreach{/yun} </div>
+            </div></td>
+        </tr>
+		 <tr class="admin_table_trbg" >
+          <th width="120">招聘人数：</th>
+          <td><input type="text" name="number" id="number" class="input-text" size="10" value="{yun:}$show.number{/yun}"></td>
+        </tr>
+        <tr >
+          <th width="120">兼职时间：</th>
+          <td><table class="tjob_timetable" style="float:left" >
+			<tr>
+				<th>&nbsp;</th>
+				<th>周一</th>
+				<th>周二</th>
+				<th>周三</th>
+				<th>周四</th>
+				<th>周五</th>
+				<th>周六</th>
+				<th>周日</th>
+			</tr>
+			<tr>
+				<th>上午</th>
+				{yun:}foreach from=$morning item=v{/yun}
+				<td><input data-mark='isneed' name='worktime[]' type="checkbox" {yun:}if in_array($v,$show.worktime){/yun}checked="checked"{yun:}/if{/yun}value='{yun:}$v{/yun}'/></td>
+				{yun:}/foreach{/yun}
+			</tr>
+			<tr>
+				<th>下午</th>
+				{yun:}foreach from=$noon item=v{/yun}
+				<td><input data-mark='isneed' name='worktime[]' type="checkbox" {yun:}if in_array($v,$show.worktime){/yun}checked="checked"{yun:}/if{/yun} value='{yun:}$v{/yun}'/></td>
+				{yun:}/foreach{/yun}
+			</tr>
+			<tr>
+				<th>晚上</th>
+				{yun:}foreach from=$afternoon item=v{/yun}
+				<td><input data-mark='isneed' name='worktime[]' type="checkbox" {yun:}if in_array($v,$show.worktime){/yun}checked="checked"{yun:}/if{/yun} value='{yun:}$v{/yun}'/></td>
+				{yun:}/foreach{/yun}
+			</tr>
+			 <tr><td colspan="8">	<input id='upAllSelect' type="checkbox" class="com_Release_job_qx_check"> 全选</td></tr>
+		</table>
+
+		</td>
+        </tr>
+		<tr class="admin_table_trbg">
+          <th width="120">兼职有效期：</th>
+          <td><link rel="stylesheet" href="{yun:}$config.sy_weburl{/yun}/js/datepicker/css/font-awesome.min.css" type="text/css"/>
+            <script src="{yun:}$config.sy_weburl{/yun}/js/datepicker/foundation-datepicker.min.js"></script>
+            <input id="sdate" class="part_text_time" type="text" readonly size="15" value="{yun:}$show.sdate|date_format:'%Y-%m-%d'{/yun}" name="sdate">
+            <input id="edate" class="part_text_time" type="text" readonly size="15" value="{yun:}$show.edate|date_format:'%Y-%m-%d'{/yun}" name="edate" {yun:}if $show.edate==0{/yun}style="display:none"{yun:}/if{/yun}/>
+            <script type="text/javascript">
+		  var checkin = $('#sdate').fdatepicker({
+			format: 'yyyy-mm-dd',startView:4,minView:2 
+		}).on('changeDate', function (ev) {
+			if (ev.date.valueOf() > checkout.date.valueOf()) {
+				var newDate = new Date(ev.date)
+				newDate.setDate(newDate.getDate() + 1);
+				checkout.update(newDate);
+			}
+			checkin.hide();
+			$('#edate')[0].focus();
+		}).data('datepicker');
+		var checkout = $('#edate').fdatepicker({
+			format: 'yyyy-mm-dd',startView:4,minView:2,
+			onRender: function (date) {
+				return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
+			}
+		}).on('changeDate', function (ev) {
+			checkout.hide();
+		}).data('datepicker');    
+        </script>
+            <input type="checkbox" value='1' id="timetype" name="timetype" class="" {yun:}if $show.edate==0{/yun}checked="checked"{yun:}/if{/yun} onclick="change()"/>
+            长期招聘 </td>
+        </tr>
+		<tr class="admin_table_trbg" id="dline" {yun:}if $show.edate==0{/yun}style="display:none"{yun:}/if{/yun}>
+          <th width="120">报名截止：</th>
+          <td><input id="deadline" class="input-text" type="text" readonly size="15" value="{yun:}$show.deadline|date_format:'%Y-%m-%d'{/yun}" name="deadline">
+            <script type="text/javascript">
+		  $('#deadline').fdatepicker({format: 'yyyy-mm-dd',startView:4,minView:2});  
+        </script></td>
+        </tr>
+        <tr class="admin_table_trbg" >
+          <th width="120">薪　　水：</th>
+          <td><input type="text" name="salary" id="salary" class="input-text" size="10" value="{yun:}$show.salary{/yun}" style="float:left;width:100px; margin-right:10px;">
+            <div class="yun_admin_select_box yun_admin_select_boxw130 z_index13"> {yun:}if $show.salary_type{/yun}
+              {yun:}foreach from=$partdata.part_salary_type key=j item=v{/yun}
+              {yun:}if $show.salary_type==$v{/yun}
+              <input type="button" value="{yun:}$partclass_name[$v]{/yun}" class="yun_admin_select_box_text" id="user_salary_name" onClick="select_click('user_salary');">
+              <input name="salary_type" type="hidden" id="user_salary_val" value="{yun:}$v{/yun}">
+               
+              {yun:}/if{/yun}
+              {yun:}/foreach{/yun}
+              {yun:}else{/yun}
+              <input type="button" value="请选择" class="yun_admin_select_box_text" id="user_salary_name" onClick="select_click('user_salary');">
+              <input name="salary_type" type="hidden" id="user_salary_val" value="0">
+               
+              {yun:}/if{/yun}
+              <div class="yun_admin_select_box_list_box yun_admin_select_box_list_boxw130 dn" id="user_salary_select"> 
+			  {yun:}foreach from=$partdata.part_salary_type key=j item=v{/yun}
+                <div class="yun_admin_select_box_list"> <a href="javascript:;" onClick="select_new('user_salary','{yun:}$v{/yun}','{yun:}$partclass_name[$v]{/yun}')">{yun:}$partclass_name[$v]{/yun}</a> </div>
+                {yun:}/foreach{/yun} </div>
+            </div></td>
+        </tr>
+        <tr  >
+          <th width="120">薪资结算：</th>
+          <td><div class="yun_admin_select_box z_index12"> 
+		      {yun:}if $show.billing_cycle{/yun}
+              {yun:}foreach from=$partdata.part_billing_cycle key=j item=v{/yun}
+              {yun:}if $show.billing_cycle==$v{/yun}
+              <input type="button" value="{yun:}$partclass_name[$v]{/yun}" class="yun_admin_select_box_text" id="user_billing_name" onClick="select_click('user_billing');">
+              <input name="billing_cycle" type="hidden" id="user_billing_val" value="{yun:}$v{/yun}">
+               
+              {yun:}/if{/yun}
+              {yun:}/foreach{/yun}
+              {yun:}else{/yun}
+              <input type="button" value="请选择" class="yun_admin_select_box_text" id="user_billing_name" onClick="select_click('user_billing');">
+              <input name="billing_cycle" type="hidden" id="user_billing_val" value="0">
+               
+              {yun:}/if{/yun}
+              <div class="yun_admin_select_box_list_box dn" id="user_billing_select"> 
+			    {yun:}foreach from=$partdata.part_billing_cycle key=j item=v{/yun}
+                <div class="yun_admin_select_box_list"> <a href="javascript:;" onClick="select_new('user_billing','{yun:}$v{/yun}','{yun:}$partclass_name[$v]{/yun}')">{yun:}$partclass_name[$v]{/yun}</a> </div>
+                {yun:}/foreach{/yun} </div>
+            </div></td>
+        </tr>
+		<tr class="具体要求" >
+          <th width="120">工作内容：</th>
+          <td><textarea  name="content" style="width:600px; height:200px;" id="content">{yun:}$show.content{/yun}</textarea></td>
+        </tr>
+		<tr >
+          <th width="120">性　　别：</th>
+          <td>
+          <div class="yun_admin_select_box z_index14">   
+              {yun:}if $show.sex{/yun}
+    			{yun:}foreach item=v key=j from=$arr_data.sex{/yun}
+                    {yun:}if $j eq $show.sex{/yun}
+                    <input type="button" value="{yun:}$v{/yun}" class="yun_admin_select_box_text" id="job_sex_name" onClick="select_click('job_sex');">
+                    <input name="sex" type="hidden" id="job_sex_val" value="{yun:}$j{/yun}">
+                    {yun:}/if{/yun}
+                {yun:}/foreach{/yun}
+            {yun:}else{/yun}
+                <input type="button" value="请选择" class="yun_admin_select_box_text" id="job_sex_name" onClick="select_click('job_sex');">
+                <input name="sex" type="hidden" id="job_sex_val" value="">
+                        
+            {yun:}/if{/yun}            
+            <div class="yun_admin_select_box_list_box dn" id="job_sex_select"> 
+              <div class="yun_admin_select_box_list"> 
+              {yun:}foreach from=$arr_data.sex key=j item=v{/yun}
+              <a href="javascript:;" onClick="select_new('job_sex','{yun:}$j{/yun}','{yun:}$v{/yun}')">{yun:}$v{/yun}</a>              
+              {yun:}/foreach{/yun}              
+               </div>
+               </div>
+          </div>
+          </td>
+        </tr>
+        <tr class="admin_table_trbg">
+          <th>工作地点：</th>
+          <td>
+            <div class="yun_admin_select_box yun_admin_select_boxw130 z_index11">
+            <input type="button" id="province" onclick="search_show('job_province');" value="{yun:}if $city_name[$show.provinceid]{/yun}{yun:}$city_name[$show.provinceid]{/yun}{yun:}else{/yun}请选择{yun:}/if{/yun}" class="yun_admin_select_box_text">
+            <input type="hidden" id="provinceid" name="provinceid" value="{yun:}$show.provinceid{/yun}" />
+            <div class="yun_admin_select_box_list_box yun_admin_select_box_list_boxw130 dn" style="display:none" id="job_province"> {yun:}foreach from=$city_index key=j item=v{/yun}
+              <div class="yun_admin_select_box_list"><a href="javascript:;" onclick="select_city('{yun:}$v{/yun}','province','{yun:}$city_name[$v]{/yun}','cityid','city');"> {yun:}$city_name[$v]{/yun}</a></div>
+              {yun:}/foreach{/yun} </div>
+          </div>
+          <div class="yun_admin_select_box yun_admin_select_boxw130 z_index11">
+            <input type="button" id="cityid" onclick="search_show('job_cityid');" value="{yun:}if $show.cityid{/yun}{yun:}$city_name[$show.cityid]{/yun}{yun:}else{/yun}请选择{yun:}/if{/yun}" class="yun_admin_select_box_text">
+            <input type="hidden" id="cityidid" name="citysid" value="{yun:}$show.cityid{/yun}"/>
+            <div class="yun_admin_select_box_list_box yun_admin_select_box_list_boxw130 dn" style="display:none" id="job_cityid">
+              <div class="yun_admin_select_box_list">{yun:}foreach from=$city_type[$show.provinceid] key=j item=v{/yun} <a href="javascript:;" onclick="select_city('{yun:}$v{/yun}','cityid','{yun:}$city_name[$v]{/yun}','three_city','city');"> {yun:}$city_name[$v]{/yun}</a> {yun:}/foreach{/yun}</div>
+            </div>
+          </div>
+          <div class="yun_admin_select_box yun_admin_select_boxw130 z_index11 {yun:}if $show.three_cityid<1{/yun}dn{yun:}/if{/yun}" id="cityshowth">
+            <input type="button" id="three_city" onclick="three_city_show('job_three_city');" value="{yun:}if $show.three_cityid{/yun}{yun:}$city_name[$show.three_cityid]{/yun}{yun:}else{/yun}请选择{yun:}/if{/yun}" class="yun_admin_select_box_text">
+            <input type="hidden" id="three_cityid" name="three_cityid" value="{yun:}$show.three_cityid{/yun}" />
+            <div class="yun_admin_select_box_list_box yun_admin_select_box_list_boxw130 dn" style="display:none" id="job_three_city">
+              <div class="yun_admin_select_box_list"> {yun:}foreach from=$city_type[$show.cityid] key=j item=v{/yun} <a href="javascript:;" onclick="selects('{yun:}$v{/yun}','three_city','{yun:}$city_name[$v]{/yun}');"> {yun:}$city_name[$v]{/yun}</a> {yun:}/foreach{/yun} </div>
+            </div>
+          </div>
+            </td>
+        </tr>
+        <tr >
+          <th width="120">详细地址：</th>
+          <td ><input type="text" class="input-text" name="address" id="address" size="30" value="{yun:}$show.address{/yun}"></td>
+        </tr>
+        <tr >
+          <th width="120"></th>
+          <td >
+            <div id="map_container" style="width:70%;height:300px;"></div>
+            <input name="x" id="map_x" type="hidden" value="{yun:}$show.x{/yun}">
+            <input name="y" id="map_y" type="hidden" value="{yun:}$show.y{/yun}"></td>
+        </tr>
+        <tr >
+          <th width="120">联系人：</th>
+          <td><input type="text" class="input-text" name="linkman" id="linkman" size="15" value="{yun:}$show.linkman{/yun}"></td>
+        </tr>
+        <tr class="admin_table_trbg">
+          <th width="120">联系手机：</th>
+          <td><input type="text" class="input-text" name="linktel" id="linktel" size="15" value="{yun:}$show.linktel{/yun}"></td>
+        </tr>
+        {yun:}if $show.id{/yun}
+        <tr  >
+          <th width="120">状　　态：</th>
+          <td><div class="yun_admin_divh">{yun:}if $show.state==1{/yun}
+            
+            {yun:}if $show.edate<time() && $show.edate>0{/yun} <font color="orange">已过期</font> {yun:}else{/yun} <font color="blue">已审核</font> {yun:}/if{/yun}
+            {yun:}elseif $show.state==3{/yun} <font color="red">未通过</font> {yun:}else{/yun} <font color="red">未审核</font> {yun:}/if{/yun} </div></td>
+        </tr>
+        {yun:}/if{/yun}
+        <tr>
+          <th width="120"></th>
+          <td> {yun:}if $show.id{/yun}
+            <input type="hidden" name="lasturl" value="{yun:}$lasturl{/yun}">
+            <input type="hidden" name="id" value="{yun:}$show.id{/yun}">
+            <input class="admin_submit4" type="submit" name="update" value="&nbsp;修 改&nbsp;" />
+            {yun:}else{/yun}
+            <input class="admin_submit4" type="submit" name="update" value="&nbsp;保 存&nbsp;" />
+            {yun:}/if{/yun} </td>
+        </tr>
+      </table>
+    </form>
+  </div>
+</div>
+<script src="http://api.map.baidu.com/api?v=1.4"></script> 
+<script type="text/javascript" src="{yun:}$config.sy_weburl{/yun}/js/map.js"></script>
+<script>
+	var map=new BMap.Map("map_container");
+	setLocation('map_container',116.404,39.915,"map_x","map_y");
+	$(document).ready(function() {
+		{yun:}if ($show.x=="" || $show.y=="") && $show.address!=""{/yun}
+			$("#address").val("{yun:}$show.address{/yun}");
+			localsearch('{yun:}if $city_name[$show.cityid]{/yun}{yun:}$city_name[$show.cityid]{/yun}{yun:}else{/yun}全国{yun:}/if{/yun}');
+		{yun:}elseif $show.x!="" && $show.y!=""{/yun}
+			setLocation('map_container',{yun:}$show.x{/yun},{yun:}$show.y{/yun},"map_x","map_y");
+		{yun:}else{/yun}
+			
+			function myFun(result){
+				var cityName = result.name;
+				map.setCenter(cityName);
+			}
+			var myCity = new BMap.LocalCity();
+			myCity.get(myFun);
+		
+		{yun:}/if{/yun}
+	});
+	var local ;
+	function getLocalResult(){
+		var address=$.trim($("#address").val());
+		var points=local.getResults();
+			var lngLat=points.getPoi(0).point;
+			setLocation('map_container',lngLat.lng,lngLat.lat,"map_x","map_y");
+	}
+	function localsearch(city){
+		if($("#address").val()==""){
+			layer.msg('请输入地址！', 2, 8);return false;
+		}
+		local = new BMap.LocalSearch(city, {
+		renderOptions: {
+			map: map,
+			panel : "r-result",
+			autoViewport: true,
+			selectFirstResult: false
+		  },onSearchComplete : getLocalResult
+		});
+		map.centerAndZoom(new BMap.Point(116.404, 39.915), 4);
+		local.search($("#address").val());
+	}
+	function setLocation(id,x,y,xid,yid){
+		var data=get_map_config();
+		var config=eval('('+data+')');
+		var rating,map_control_type,map_control_anchor;
+		if(!x && !y){x=config.map_x;y=config.map_y;}
+		var point = new BMap.Point(x,y);
+		var marker = new BMap.Marker(point);
+		var opts = {type:BMAP_NAVIGATION_CONTROL_LARGE}
+		map.enableScrollWheelZoom(true);
+		map.addControl(new BMap.NavigationControl(opts));
+		map.centerAndZoom(point, 15);
+		map.addOverlay(marker);
+		map.addEventListener("click",function(e){
+		   var info = new BMap.InfoWindow('', {width: 260});
+			var projection = this.getMapType().getProjection();
+			var lngLat = e.point;
+			document.getElementById(xid).value=lngLat.lng;
+			document.getElementById(yid).value=lngLat.lat;
+			map.clearOverlays();
+			var point = new BMap.Point(lngLat.lng,lngLat.lat);
+			var marker = new BMap.Marker(point);
+			map.addOverlay(marker);
+		});
+	}
+</script>
+</body>
+</html>

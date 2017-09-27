@@ -1,0 +1,16 @@
+@charset "gb2312";
+/* CSS Document */
+.pyshare{width:330px; }
+.pyshare .li{width:28px;height:28px;margin-right:10px;float:left;background-image:url(../images/05.png);background-repeat:no-repeat;cursor:pointer;}
+.pyshare .li.s1{background-position:0px 0px;}
+.pyshare .li.s1:hover{background-position:0px -36px;}
+.pyshare .li.s2{background-position:-33px 0px;}
+.pyshare .li.s2:hover{background-position:-33px -36px;}
+.pyshare .li.s3{background-position:-66px 0px;}
+.pyshare .li.s3:hover{background-position:-66px -36px;}
+.pyshare .li.s4{background-position:-99px 0px;}
+.pyshare .li.s4:hover{background-position:-99px -36px;}
+.pyshare .li.s5{background-position:-132px 0px;}
+.pyshare .li.s5:hover{background-position:-132px -36px;}
+.pyshare .li.s6{background-position:-165px 0px;}
+.pyshare .li.s6:hover{background-position:-165px -36px;}

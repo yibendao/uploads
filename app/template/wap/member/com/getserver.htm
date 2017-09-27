@@ -1,0 +1,161 @@
+{yun:}include file="$wapstyle/member/cheader.htm"{/yun}
+<script>
+var integral='{yun:}$statis.integral{/yun}';
+var jobid='{yun:}$info.id{/yun}';
+
+$(document).ready(function () { 
+	$("input[name='days']").click(function(){ 
+		var val=$(this).val(); 
+		if(val=='1008'){
+			$(".pricehtml").html('0');
+			$("#customizediv").show();
+		}else{
+			$("#customizediv").hide();
+			$("#customize").val('');
+			countmoney(val);
+		}
+	});
+	$("#price").keyup(function(){
+		var days=$("input[name='days']:checked").val();
+		if(days=='1008'){
+			days=$('#customize').val();
+		}
+		countmoney(days);		
+	});
+	$("#customize").keyup(function(){
+		var val=$(this).val();
+		countmoney(val);		
+	});
+});
+function countmoney(val){
+	var price=$("#price").val(); 
+	var money=parseInt(val*(price*100))/100; 
+	if(integral<money){//余额不足
+		$("#ptype").val(2);
+	}else{
+		$("#ptype").val(1);
+	}
+	$(".pricehtml").html(money);
+}
+function forsubmit(server){
+	var days=$("input[name='days']:checked").val();
+	if(days=='1008'){
+		days=$('#customize').val();
+	} 
+	if(days==''||days<1){
+		layermsg("请选择或填写天数！", 2);return false;	
+	}else{
+		countmoney(days);
+		var ptype=$('#ptype').val();
+		if(ptype!='1'){
+			layermsg("{yun:}$config.integral_pricename{/yun}不足，请先充值！", 2);return false;
+		}
+	}
+	layer_load('执行中，请稍候...');
+	$.post("index.php?c=saveserver",{jobid:jobid,days:days,server:server},function(data){
+		layer.closeAll();
+		var data=eval('('+data+')');
+		if(data.type=='1'){ //成功
+			layermsg(data.msg,2,function(){location.href="index.php?c=job";});return false;
+		}else{
+			layermsg(data.msg,2,function(){location.reload();});return false;
+		}
+	});
+}
+</script>
+<section class="wap_member">
+<div class="wap_member_comp_h1"><span>我要推广</span></div>
+{yun:}if $smarty.get.server=='1'{/yun}
+
+<div class="getserbver_box"> 
+	<ul class="getserbver_box_list"> 
+		<li><span class="getserbver_box_list_s">自动刷新：</span><div class="getserbver_box_list_r">
+		<label class="getserbver_box_list_r_s getserbver_box_list_r_sh"><input type="radio" checked name="days" value='1'>1天</label>
+		<label class="getserbver_box_list_r_s getserbver_box_list_r_sh"><input type="radio"  name="days" value='3'>3天</label>
+		<label class="getserbver_box_list_r_s getserbver_box_list_r_sh"><input type="radio" name="days" value='7'>7天</label>
+		<label class="getserbver_box_list_r_s getserbver_box_list_r_sh"><input type="radio" name="days" value='15'>15天</label>
+		<label class="getserbver_box_list_r_s getserbver_box_list_r_sh"><input type="radio" name="days" value='30'>30天</label> 
+		<label class="getserbver_box_list_r_s getserbver_box_list_r_sh"><input type="radio" name="days" value='1008'>自定义</label> 
+		</div>
+		</li>
+		<li id="customizediv" style="display:none"><div class="getserbver_box_list_p">自定义时间：<input type="text"  placeholder="自定义" name="customize" id="customize"  onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" class="getserbver_box_list_r_zdy_bth">天</div></li>
+		<li><div class="getserbver_box_list_p">服务价格：<span class="getserbver_box_s">{yun:}$config.job_auto{/yun}</span> {yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}/天</div></li>
+		<li><div class="getserbver_box_list_p">所需{yun:}$config.integral_pricename{/yun}：<span class="getserbver_box_s pricehtml">{yun:}$config.job_auto{/yun}</span> {yun:}$config.integral_priceunit{/yun}</div></li>
+		<li><div class="getserbver_box_list_p">我的{yun:}$config.integral_pricename{/yun}：<span class="getserbver_box_s">{yun:}$statis.integral{/yun}</span>{yun:}$config.integral_priceunit{/yun}</div></li>
+	</ul>
+	<div class="getserbver_box_bth"><input type="button" onclick="forsubmit('1')" value="确定" class="reinputText2"></div>
+	{yun:}if $config.sy_freewebtel{/yun}<div class="getserbver_box_tel"><a href="tel:{yun:}$config.sy_freewebtel{/yun}">客服电话：{yun:}$config.sy_freewebtel{/yun}</a></div>{yun:}/if{/yun}
+	<input id="ptype" type="hidden" value="{yun:}if $statis.integral>=$config.job_auto{/yun}1{yun:}else{/yun}2{yun:}/if{/yun}"/>
+	<input id="price" type="hidden" value="{yun:}$config.job_auto{/yun}"/>
+</div> 
+{yun:}elseif $smarty.get.server=='2'{/yun}
+
+<div class="getserbver_box"> 
+	<ul class="getserbver_box_list"> 
+		<li><span class="getserbver_box_list_s">置顶时长：</span><div class="getserbver_box_list_r">
+		<label class="getserbver_box_list_r_s"><input type="radio" checked name="days" value='1'>1天</label>
+		<label class="getserbver_box_list_r_s"><input type="radio"  name="days" value='3'>3天</label>
+		<label class="getserbver_box_list_r_s"><input type="radio" name="days" value='7'>7天</label>
+		<label class="getserbver_box_list_r_s"><input type="radio" name="days" value='15'>15天</label>
+		<label class="getserbver_box_list_r_s"><input type="radio" name="days" value='30'>30天</label> 
+		<label class="getserbver_box_list_r_s"><input type="radio" name="days" value='1008'>自定义</label> 
+		</div>
+		</li>
+		<li id="customizediv" style="display:none"><div class="getserbver_box_list_p">自定义时间：<input type="text"  placeholder="自定义" name="customize" id="customize"  onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" class="getserbver_box_list_r_zdy_bth">天</div></li>
+		<li><div class="getserbver_box_list_p">所需{yun:}$config.integral_pricename{/yun}：<span class="getserbver_box_s pricehtml">{yun:}$config.integral_job_top{/yun}</span> {yun:}$config.integral_priceunit{/yun}</div></li>
+		<li><div class="getserbver_box_list_p">我的{yun:}$config.integral_pricename{/yun}余额：<span class="getserbver_box_s">{yun:}$statis.integral{/yun}</span> {yun:}$config.integral_priceunit{/yun}</div></li>
+	</ul>
+	<div class="getserbver_box_bth"><input type="button" onclick="forsubmit('2')" value="确定" class="reinputText2"></div>
+	{yun:}if $config.sy_freewebtel{/yun}<div class="getserbver_box_tel"><a href="tel:{yun:}$config.sy_freewebtel{/yun}">客服电话：{yun:}$config.sy_freewebtel{/yun}</a></div>{yun:}/if{/yun}
+	<input id="price" type="hidden" value="{yun:}$config.integral_job_top{/yun}"/>
+	
+	<input id="ptype" type="hidden" value="{yun:}if $statis.integral>=$config.integral_job_top{/yun}1{yun:}else{/yun}2{yun:}/if{/yun}"/>
+</div>
+ {yun:}elseif $smarty.get.server=='3'{/yun}
+
+<div class="getserbver_box"> 
+	<ul class="getserbver_box_list"> 
+		<li><span class="getserbver_box_list_s">推荐时长：</span><div class="getserbver_box_list_r">
+		<label class="getserbver_box_list_r_s"><input type="radio" checked name="days" value='1'>1天</label>
+		<label class="getserbver_box_list_r_s"><input type="radio"  name="days" value='3'>3天</label>
+		<label class="getserbver_box_list_r_s"><input type="radio" name="days" value='7'>7天</label>
+		<label class="getserbver_box_list_r_s"><input type="radio" name="days" value='15'>15天</label>
+		<label class="getserbver_box_list_r_s"><input type="radio"  name="days" value='30'>30天</label> 
+		<label class="getserbver_box_list_r_s"><input type="radio" name="days" value='1008'>自定义</label> 
+		</div>
+		</li>
+		<li id="customizediv" style="display:none"><div class="getserbver_box_list_p">自定义时间：<input type="text"  placeholder="自定义" name="customize" id="customize"  onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" class="getserbver_box_list_r_zdy_bth">天</div></li>
+		<li><div class="getserbver_box_list_p">所需{yun:}$config.integral_pricename{/yun}：<span class="getserbver_box_s pricehtml">{yun:}$config.com_recjob{/yun}</span>{yun:}$config.integral_priceunit{/yun}</div></li>
+		<li><div class="getserbver_box_list_p">我的{yun:}$config.integral_pricename{/yun}余额：<span class="getserbver_box_s">{yun:}$statis.integral{/yun}</span> {yun:}$config.integral_priceunit{/yun}</div></li>
+	</ul>
+	<div class="getserbver_box_bth"><input type="button" onclick="forsubmit('3')" value="确定" class="reinputText2"></div>
+	{yun:}if $config.sy_freewebtel{/yun}<div class="getserbver_box_tel"><a href="tel:{yun:}$config.sy_freewebtel{/yun}">客服电话：{yun:}$config.sy_freewebtel{/yun}</a></div>{yun:}/if{/yun}
+	<input id="ptype" type="hidden" value="{yun:}if $statis.integral>=$config.com_recjob{/yun}1{yun:}else{/yun}2{yun:}/if{/yun}"/>
+	<input id="price" type="hidden" value="{yun:}$config.com_recjob{/yun}"/>
+</div>
+{yun:}elseif $smarty.get.server=='4'{/yun}
+ 
+<div class="getserbver_box">
+	<ul class="getserbver_box_list">
+		<li><span class="getserbver_box_list_s">紧急天数：</span><div class="getserbver_box_list_r">
+		<label class="getserbver_box_list_r_s"><input type="radio" checked name="days" value='1'>1天</label>
+		<label class="getserbver_box_list_r_s"><input type="radio" name="days" value='3'>3天</label>
+		<label class="getserbver_box_list_r_s"><input type="radio" name="days" value='7'>7天</label>
+		<label class="getserbver_box_list_r_s"><input type="radio" name="days" value='15'>15天</label>
+		<label class="getserbver_box_list_r_s"><input type="radio" name="days" value='30'>30天</label> 
+		<label class="getserbver_box_list_r_s"><input type="radio" name="days" value='1008'>自定义</label> 
+		</div>
+		</li>
+		<li id="customizediv" style="display:none"><div class="getserbver_box_list_p">自定义时间：<input type="text"  placeholder="自定义" name="customize" id="customize"  onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" class="getserbver_box_list_r_zdy_bth">天</div></li>
+		<li><div class="getserbver_box_list_p">所需{yun:}$config.integral_pricename{/yun}：<span class="getserbver_box_s  pricehtml">{yun:}$config.com_urgent{/yun}</span>{yun:}$config.integral_priceunit{/yun}</div></li>
+		<li><div class="getserbver_box_list_p">我的{yun:}$config.integral_pricename{/yun}：<span class="getserbver_box_s">{yun:}$statis.integral{/yun}</span> {yun:}$config.integral_priceunit{/yun}</div></li>
+	</ul>
+	<div class="getserbver_box_bth"><input type="button" onclick="forsubmit('4')" value="确定" class="reinputText2"></div>
+	{yun:}if $config.sy_freewebtel{/yun}<div class="getserbver_box_tel"><a href="tel:{yun:}$config.sy_freewebtel{/yun}">客服电话：{yun:}$config.sy_freewebtel{/yun}</a></div>{yun:}/if{/yun}
+	<input id="price" type="hidden" value="{yun:}$config.com_urgent{/yun}"/>
+	<input id="ptype" type="hidden" value="{yun:}if $statis.integral>=$config.com_urgent{/yun}1{yun:}else{/yun}2{yun:}/if{/yun}"/>
+</div>
+{yun:}/if{/yun} 
+</section>
+<div class="clear"></div>
+{yun:}include file="$wapstyle/footer.htm"{/yun} 

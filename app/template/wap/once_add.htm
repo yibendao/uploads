@@ -1,0 +1,170 @@
+{yun:}include file="$wapstyle/header_cont.htm"{/yun}
+<section>
+  <div class="once_cont_content">
+    <div class="resume-cont_zk" style="padding-top:0px;">
+      <form action="{yun:}$config_wapdomain{/yun}/index.php?c=once&a=add" method="post" onsubmit="return ckonce(this);" enctype="multipart/form-data">
+        <div class="resume-cont_wate">
+        <dl class="resume-cont_wate_list">
+          <dt>我想招聘<span class="x_cor">*</span></dt>
+          <dd>
+            <input type="text" name="title" value="{yun:}$row.title{/yun}" class="reinputText">
+          </dd>
+        </dl>
+        <dl class="resume-cont_wate_list">
+          <dt>店面名称<span class="x_cor">*</span></dt>
+          <dd>
+            <input type="text" name="companyname" value="{yun:}$row.companyname{/yun}"  class="reinputText">
+          </dd>
+        </dl>
+        <dl class="resume-cont_wate_list">
+          <dt>联&nbsp;系&nbsp; 人<span class="x_cor">*</span></dt>
+          <dd>
+            <input type="text" name="linkman" value="{yun:}$row.linkman{/yun}"  class="reinputText">
+          </dd>
+        </dl>
+        <dl class="resume-cont_wate_list">
+          <dt>联系电话<span class="x_cor">*</span></dt>
+          <dd>
+            <input type="text" name="phone" onkeyup="this.value=this.value.replace(/[^0-9-]/g,'')" value="{yun:}$row.phone{/yun}"  class="reinputText">
+          </dd>
+        </dl>
+        <dl class="resume-cont_wate_list" style=" margin-bottom:0px;">
+          <dt>招聘要求<span class="x_cor">*</span></dt>
+          <dd>
+            <textarea id="require" class="once_textAreaMsg tip" placeholder="请输入你的招聘要求" name="require">{yun:}$row.require{/yun}</textarea>
+          </dd>
+        </dl>
+        <dl class="resume-cont_wate_list" style=" margin-bottom:0px;">
+          <dt>工作地点<span class="x_cor">*</span></dt>
+          <dd>
+          <div class="once_selcet">
+            <select id="provinceid" name="provinceid" onchange="checkcity(this.value,'1');" >
+            <option value="">请选择</option>
+            {yun:}foreach from=$city_index item=v{/yun}
+            <option value="{yun:}$v{/yun}" {yun:}if $row.provinceid==$v{/yun}selected="selected"{yun:}/if{/yun}>{yun:}$city_name[$v]{/yun}</option>
+            {yun:}/foreach{/yun}
+            </select>
+            </div>
+              <div class="once_selcet">
+            <select id="cityid" name="cityid" onchange="checkcity(this.value,'2');">
+            <option value="">请选择</option>
+            {yun:}foreach from=$city_type[$row.provinceid] item=v{/yun}
+            <option value="{yun:}$v{/yun}" {yun:}if $row.cityid==$v{/yun}selected="selected"{yun:}/if{/yun}>{yun:}$city_name[$v]{/yun}</option>
+            {yun:}/foreach{/yun}
+            </select>
+            </div>
+              <div class="once_selcet" {yun:}if !$row.three_cityid{/yun}style="display:none;"{yun:}/if{/yun} id="cityshowth" >
+            <select id="three_cityid" name="three_cityid" >
+            <option value="">请选择</option>
+            {yun:}foreach from=$city_type[$row.cityid] item=v{/yun}
+            <option value="{yun:}$v{/yun}" {yun:}if $row.three_cityid==$v{/yun}selected="selected"{yun:}/if{/yun}>{yun:}$city_name[$v]{/yun}</option>
+            {yun:}/foreach{/yun}
+            </select>
+            </div>
+          </dd>
+        </dl>
+        <dl class="resume-cont_wate_list" >
+          <dt>店面形象<span class="x_cor">&nbsp;</span></dt>
+          <dd>
+            <div class="once_cont_wate_list_photo">
+           <span class="once_cont_wate_list_photo_b"> 店面照片</span>
+           <i class="once_cont_wate_list_photo_img"></i>
+              <input type="file" id="pic" name="pic" value="" class="once_file">
+            </div>
+            {yun:}if $row.pic{/yun} <img src="{yun:}$config.sy_weburl{/yun}/{yun:}$row.pic{/yun}" width="145" height="35"> {yun:}/if{/yun} </dd>
+        </dl>
+        <dl class="resume-cont_wate_list">
+          <dt>招聘有效期<span class="x_cor">*</span></dt>
+          <dd>
+            <input type="text" name="edate" value="{yun:}if $row.edate{/yun}{yun:}$row.edate{/yun}{yun:}else{/yun}60{yun:}/if{/yun}" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" maxlength="3" class="reinputText reinputText_w120" >
+            <span class="cont_wate_list_date">天</span> </dd>
+        </dl>
+        {yun:}if $row.id==''{/yun}
+        <dl class="resume-cont_wate_list">
+          <dt>设置密码<span class="x_cor">*</span></dt>
+          <dd>
+            <input type="password" name="password" onkeyup="this.value=this.value.replace(/^ +| +$/g,'')" class="reinputText reinputText_w100">
+            <span class="once_cont_wate_list_tips">密码可用于刷新/修改/删除信息！</span> </dd>
+        </dl>
+        <dl class="resume-cont_wate_list">
+        
+        {yun:}else{/yun}
+        <dl class="resume-cont_wate_list">
+          <dt>密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码<span class="x_cor">*</span></dt>
+          <dd>
+            <input type="password" name="password" onkeyup="this.value=this.value.replace(/^ +| +$/g,'')" class="reinputText reinputText_w100">
+          </dd>
+        </dl>
+		<input name="id" value="{yun:}$row.id{/yun}" type="hidden"/>
+        {yun:}/if{/yun}
+		{yun:}if strpos($config.code_web,"店铺招聘")!==false{/yun}
+		 
+		  {yun:}if $config.code_kind==3{/yun}	
+			<dl class="resume-cont_wate_list">
+          <dt>安全验证<span class="x_cor">*</span></dt>
+          <dd>
+          	 
+				<div id="mask"></div>
+				<div id="popup-captcha-mobile" data-id='subreg' data-type='click'></div>
+				<input type='hidden' id="popup-submit">
+           </dd>
+        </dl>
+			<style>
+            .geetest_holder.geetest_wind{    min-width: 160px;}
+            </style>
+				{yun:}else{/yun}
+
+		<dl class="resume-cont_wate_list">
+          <dt>验证码：<span class="x_cor">*</span></dt>
+          <dd>
+            <input type="text" name="checkcode" id="checkcode"  class="reinputText reinputText_w100">
+			 <div class="fast_img">
+              <img id="vcode_img" class="authcode" src="{yun:}$config.sy_wapdomain{/yun}/authcode.inc.php" onclick="checkCode('vcode_img');"/>
+              <input type="hidden" id="code_kind" value="1" />
+              </div>
+          </dd>
+        </dl>
+
+         
+			
+			{yun:}/if{/yun}
+		{yun:}/if{/yun}
+        <dl class="resume-cont_wate_list mt10">
+          <input type="submit" name="submit" value="发布" class="inputSubmit"/>
+          </dd>
+        </dl>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+<script src="{yun:}$wap_style{/yun}/js/prefixfree.min.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/layer/layer.m.js" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/public.js" language="javascript"></script>
+<script type="text/javascript">
+function checkcity(id,type){
+	if(id>0){
+		$.post(wapurl+"?c=ajax&a=wap_city",{id:id,type:type},function(data){
+			if(type==1){
+				$("#cityid").html(data);
+				$("#cityshowth").hide();
+			}else{
+				if(data){
+					$("#three_cityid").html(data);
+					$("#cityshowth").show();
+					
+				}
+				
+			}
+		})
+	}else{
+		if(type==1){
+			$("#cityshowth").hide();
+			$("#cityid").html('<option value="">请选择</option>');
+		}
+	}
+	$("#three_cityid").html('<option value="">请选择</option>');
+}
+</script>
+<div class="yun_text_fooeter">{yun:}include file="$wapstyle/footer.htm"{/yun} </div>

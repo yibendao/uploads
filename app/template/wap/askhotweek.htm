@@ -1,0 +1,38 @@
+ {yun:}include file="$wapstyle/header_cont.htm"{/yun} 
+{yun:}qlist hot=7 order=answernum item=list ispage=1 t_len=20  limit=10{/yun}
+<div class="ask_ct_list" style="margin-top:10px;">
+  <div class="ask_ct_list_tit">
+    <div class="ask_ct_list_tit_ft"><a href="{yun:}url m=wap c=ask a=content id='`$list.id`'{/yun}">{yun:}$list.title|mb_substr:0:12:"GBK"{/yun}</a></div>
+    {yun:}if $list.isatn!='2'{/yun}
+    <div class="ask_ct_list_tit_rt">
+      {yun:}if in_array($list.id,$my_atten){/yun} <a href="javascript:void(0);" class="watch_qxgz" onclick="attention('{yun:}$list.id{/yun}','1','{yun:}url m=wap c=ask a=attention {/yun}');" >取消关注</a> {yun:}else{/yun}
+      {yun:}if $uid{/yun} <a href="javascript:void(0);" class="watch_gz" onclick="attention('{yun:}$list.id{/yun}','1','{yun:}url m=wap c=ask a=attention {/yun}');">关注</a> {yun:}else{/yun} <a href="javascript:void(0)"  onclick="showlogins('1');" class='watch_gz'>关注</a> {yun:}/if{/yun}
+      {yun:}/if{/yun} 
+      </div>
+      {yun:}/if{/yun}
+  </div>
+  <div class="ask_ct_list_peo">
+    <dl>
+      <dt><img style="width:64px;height:80px;" src="{yun:}$list.pic{/yun}" /></dt>
+      <dd>{yun:}$list.content|strip_tags|mb_substr:0:36:'gbk'{/yun}</dd>
+      <dd><a href="{yun:}url m=wap c=ask a=myquestion uid='`$list.uid`'{/yun}"><i>{yun:}$list.nickname|mb_substr:0:8:'gbk'{/yun}</i></a> 发起了话题</dd>
+      <dd class="ask_ct_list_peo_js">{yun:}$list.atnnum{/yun} 人关注 · {yun:}$list.answer_num{/yun} 个回答 · {yun:}$list.visit{/yun}次浏览</dd>
+      <dd><em>{yun:}$list.add_time|date_format:"%Y-%m-%d %H:%M"{/yun}</em></dd>
+    </dl>
+  </div>
+</div>
+{yun:}/qlist{/yun}  
+<div class="clear"></div>
+{yun:}if $total==0{/yun}
+
+<div class="noresult png" >您还没有任何问题，抓紧提问吧！</div>
+{yun:}else{/yun} 
+<div class="pages">{yun:}$pagenav{/yun}</div>
+{yun:}/if{/yun}     
+</div>
+</div>
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/layer/layer.m.js" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/public.js" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/prefixfree.min.js" language="javascript"></script>
+{yun:}include file="$wapstyle/footer.htm"{/yun}

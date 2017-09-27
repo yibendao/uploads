@@ -1,0 +1,47 @@
+{yun:}include file="$wapstyle/member/cheader.htm"{/yun} 
+<section class="wap_member">
+<div class="wap_member_comp_h1" style="position:relative"><span>兼职管理</span></div>
+
+<div class="wap_member_job_show">
+{yun:}foreach item=v from=$rows{/yun}
+<div class="wap_member_msg ">
+<div class="wap_member_date">
+<span class="yun_m_job_date_n">&nbsp;
+<a href="{yun:}url m=wap c=part a=show id=$v.id{/yun}" class=" job_list_jobname com_member_hr_cblue">{yun:}$v.name{/yun}</a>
+</span>
+<div class="wap_member_date_r">
+{yun:}if $v.edate!=0&&$v.edate < time(){/yun}
+<span class="wap_member_ygq">已过期</span>
+{yun:}elseif $v.state==1{/yun}
+已审核
+{yun:}elseif $v.state==3{/yun}
+<span class="wap_member_wtg">未通过</span>
+{yun:}elseif $v.state==0{/yun}
+<em>未审核</em>
+{yun:}/if{/yun}
+</div>
+</div>
+<div class="yun_m_job_list_zt">兼职报名：{yun:}$v.applynum{/yun}  <span class="wap_member_msg_job_s">浏览量：{yun:}$v.hits{/yun} </span></div>
+<div class="yun_m_job_list_zt">有效期至：{yun:}if $v.edate>0{/yun}{yun:}$v.edate|date_format:'%Y-%m-%d'{/yun}{yun:}else{/yun}长期招聘{yun:}/if{/yun} </div>
+{yun:}if $v.deadline gt 0{/yun}<div class="yun_m_job_list_zt">报名截止：{yun:}$v.deadline|date_format:"%Y-%m-%d"{/yun}</div>{yun:}/if{/yun}
+<div class="yun_m_job_list_zt">更新日期：{yun:}$v.lastupdate|date_format:"%Y-%m-%d"{/yun}</div>
+
+<div class="yun_member_bth">
+<a href="javascript:void(0)" onclick="layer_del('确定要删除？','index.php?c=partdel&id={yun:}$v.id{/yun}');"class="yun_member_partsub">删除</a>
+
+<a href="index.php?c=partadd&id={yun:}$v.id{/yun}" class="yun_member_partsub yun_member_bth2">修改</a> 
+</div>
+<div></div>
+
+</div>
+{yun:}foreachelse{/yun}
+<div class="wap_member_no">您暂时还没有兼职</div>
+{yun:}/foreach{/yun}
+<em class="wap_memberjob_fabu "><a href="javascript:void(0)" onclick="jobadd_url('{yun:}$statis.addpartjobnum{/yun}','{yun:}$config.integral_partjob{/yun}','{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}','part','{yun:}$statis.integral{/yun}');" style="width:100%;height:43px; line-height:43px; font-size:16px; margin-top:10px; background:#F90;color:#fff; display:inline-block; text-align:center">发布兼职</a></em>
+
+<div class="pages" style="margin-top:10px;"> {yun:}$pagenav{/yun}</div>
+</div>
+
+</section>
+
+{yun:}include file="$wapstyle/footer.htm"{/yun} 

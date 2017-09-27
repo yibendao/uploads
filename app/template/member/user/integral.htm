@@ -1,0 +1,40 @@
+{yun:}include file="$userstyle/header.htm"{/yun}
+<div class="yun_user_member_w1100"> {yun:}include file="$userstyle/left.htm"{/yun}
+   <div class="mian_right fltR mt20">
+   <div class="member_right_index_h1 fltL"> <span class="member_right_h1_span fltL">{yun:}$config.integral_pricename{/yun}管理</span> <i class="member_right_h1_icon user_bg"></i></div>
+         
+    <div class="integral_cont"> <div class="job_list_tit"> <ul class="">
+	<li  class="job_list_tit_cur"><a href="index.php?c=integral">{yun:}$config.integral_pricename{/yun}任务</a></li>
+      <li><a href="index.php?c=integral_reduce">{yun:}$config.integral_pricename{/yun}规则</a></li>
+ <li><a href="index.php?c=reward_list">{yun:}$config.integral_pricename{/yun}兑换</a></li>
+	</ul> 
+    </div>
+      <ul class="integral_cont_list">
+        <li> <span class="integral_cont_list_span"><i class="mb_con_icon mb_con_icon_w"></i>完善基本资料</span> <span class="integral_cont_list_span_c"> 完善基本资料，可获得<b>{yun:}$config.integral_userinfo{/yun}</b>{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun} </span> 
+		<span class="integral_cont_list_span_r"> 
+		{yun:}if $statusList.baseInfo{/yun}已完善  {yun:}else{/yun}  <a href="index.php?c=info"  target="_blank" class="integral_cont_list_a">立即完善</a> {yun:}/if{/yun} </span> </li>
+        <li> <span class="integral_cont_list_span"><i class="mb_con_icon mb_con_icon_s"></i>上传头像</span> <span class="integral_cont_list_span_c"> 上传头像，可获得<b>{yun:}$config.integral_avatar{/yun}</b>{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun} </span> <span class="integral_cont_list_span_r"> {yun:}if $statusList.photo{/yun}已上传{yun:}else{/yun} <a href="index.php?c=uppic" target="_blank"  class="integral_cont_list_a">上传头像</a> {yun:}/if{/yun} </span> </li>
+        <li> <span class="integral_cont_list_span"><i class="mb_con_icon mb_con_icon_y"></i>邀请朋友注册</span> <span class="integral_cont_list_span_c"> 邀请朋友注册，可获得<b>{yun:}$config.integral_invite_reg{/yun}</b>{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun} </span> <span class="integral_cont_list_span_r"> <a href="{yun:}url m=invitereg{/yun}" target="_blank" class="integral_cont_list_a">现在就邀请</a> </span> </li>
+		
+        <li> <span class="integral_cont_list_span"><i class="mb_con_icon mb_con_icon_d"></i>每天第一次登录</span> <span class="integral_cont_list_span_c"> 每天第一次登录，可获得 <b>{yun:}$config.integral_login{/yun}</b>{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun} </span><span class="integral_cont_list_span_r"> 今日已登录  </span>  </li>
+        <li> <span class="integral_cont_list_span"><i class="mb_con_icon mb_con_icon_rzd"></i>认证电子邮箱</span> <span class="integral_cont_list_span_c"> 认证电子邮箱，可获得 <b>{yun:}$config.integral_emailcert{/yun}</b>{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun} </span> <span class="integral_cont_list_span_r"> {yun:}if $statusList.emailChecked{/yun} 已验证 {yun:}else{/yun} <a href="index.php?c=binding"  target="_blank"  class="integral_cont_list_a">邮箱认证</a> {yun:}/if{/yun} </span> </li>
+        <li> <span class="integral_cont_list_span"><i class="mb_con_icon mb_con_icon_n"></i>认证手机号码</span> <span class="integral_cont_list_span_c"> 认证手机号码，可获得 <b>{yun:}$config.integral_mobliecert{/yun}</b>{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}</span> <span class="integral_cont_list_span_r"> {yun:}if $statusList.phoneChecked{/yun}
+          已验证
+          {yun:}else{/yun} <a href="index.php?c=binding"  target="_blank"  class="integral_cont_list_a">手机验证</a> {yun:}/if{/yun} </span> </li>
+        <li> <span class="integral_cont_list_span"><i class="mb_con_icon mb_con_icon_fb"></i>发布简历</span> <span class="integral_cont_list_span_c"> 发布简历，可获得 <b>{yun:}$config.integral_add_resume{/yun}</b>{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}</span> <span class="integral_cont_list_span_r">{yun:}if $expectnum{/yun}已发布{yun:}else{/yun}<a href="index.php?c=expect"  target="_blank" class="integral_cont_list_a">现在去发布</a>{yun:}/if{/yun}</span> </li>
+        <li> <span class="integral_cont_list_span"><i class="mb_con_icon mb_con_icon_pr"></i>上传身份验证</span> <span class="integral_cont_list_span_c"> 上传身份验证，可获得 <b>{yun:}$config.integral_identity{/yun}</b>{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}</span> <span class="integral_cont_list_span_r"> {yun:}if $statusList.identification{/yun}已验证{yun:}else{/yun} <a href="index.php?c=binding"  target="_blank"  class="integral_cont_list_a">现在去验证</a> {yun:}/if{/yun} </span> </li>
+        {yun:}if $config.integral_question_type==1{/yun}        	
+        <li> <span class="integral_cont_list_span"><i class="mb_con_icon mb_con_icon_fw"></i>发布问题</span> <span class="integral_cont_list_span_c"> 发布问题，可获得 <b>{yun:}$config.integral_question{/yun}</b>{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}</span> <span class="integral_cont_list_span_r">{yun:}if $statusList.question==false{/yun}已发布{yun:}else{/yun}<a href="{yun:}url m=ask c=addquestion {/yun}"  target="_blank"  class="integral_cont_list_a">发布问题</a>{yun:}/if{/yun}</span> </li>              
+        {yun:}/if{/yun}
+        {yun:}if $config.integral_answer_type==1{/yun}        	
+        <li> <span class="integral_cont_list_span"><i class="mb_con_icon mb_con_icon_rp"></i>回答问题</span> <span class="integral_cont_list_span_c"> 回答问题，可获得 <b>{yun:}$config.integral_answer{/yun}</b>{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}</span> <span class="integral_cont_list_span_r">{yun:}if $statusList.answer==false{/yun}已回答 {yun:}else{/yun}<a href="{yun:}url m=ask {/yun}#last-question"  target="_blank"  class="integral_cont_list_a">回答问题</a>{yun:}/if{/yun}</span> </li>
+        {yun:}/if{/yun}
+        {yun:}if $config.integral_answerpl_type==1{/yun}        	
+        <li> <span class="integral_cont_list_span"><i class="mb_con_icon mb_con_icon_ph"></i>评论回答</span> <span class="integral_cont_list_span_c"> 评论回答，可获得 <b>{yun:}$config.integral_answerpl{/yun}</b>{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}</span> <span class="integral_cont_list_span_r">{yun:}if $statusList.answerpl==false{/yun}已评论{yun:}else{/yun}<a href="{yun:}url m=ask {/yun}#last-question"  target="_blank"  class="integral_cont_list_a">评论回答</a> {yun:}/if{/yun}</span> </li> 
+        {yun:}/if{/yun}
+		
+      </ul>
+    </div>
+  </div>
+</div>
+{yun:}include file="$userstyle/footer.htm"{/yun}

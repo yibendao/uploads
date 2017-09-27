@@ -1,0 +1,253 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<link href="images/reset.css" rel="stylesheet" type="text/css" />
+<link href="images/system.css" rel="stylesheet" type="text/css" />
+<link href="images/table_form.css" rel="stylesheet" type="text/css" />
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script>
+<script src="js/admin_public.js" language="javascript"></script>
+<link href="images/blue.css" rel="stylesheet">
+<script src="js/icheck.js"></script>
+  <script>
+	$(document).ready(function(){
+	  $('input').iCheck({
+		checkboxClass: 'icheckbox_flat-blue',
+		radioClass: 'iradio_flat-blue'
+	  });
+	});
+</script>
+<title>后台管理</title>
+</head>
+<body class="body_ifm">
+<div class="infoboxp">
+<div class="infoboxp_top_bg"></div>
+<div id="subboxdiv" style="width:100%;height:100%;display:none;position:absolute;"></div> 
+<div class="infoboxp_top infoboxp_topIjf">
+    <span class="infoboxp_top_span">企业设置</span>
+	<span class="infoboxp_top_span_sz" ><a href="index.php?m=admin_comset">{yun:}$config.integral_pricename{/yun}设置</a></span> 
+	<span class="infoboxp_top_span_sz infoboxp_top_span_sz_in"><a href="index.php?m=admin_comset&c=set">企业设置</a></span>
+    <span class="infoboxp_top_span_sz" ><a href="index.php?m=admin_comset&c=rating">套餐设置</a></span>  
+	<span class="infoboxp_top_span_sz "><a href="index.php?m=admin_comset&c=logo">头像设置</a></span> 
+</div>
+<div class="main_tag">
+<div class="tag_box"><div>
+<table width="100%" class="table_form">
+  <tr class="admin_table_trbg">
+         <th width="260" bgcolor="#f0f6fb"><span class="admin_bold">参数说明</span></th>
+          <td bgcolor="#f0f6fb"><span class="admin_bold">参数值</span></td>
+    </tr>
+ <tr>
+		<th width="220">开启企业会员审核：</th>
+		<td>
+			<div class="iradio_flat_height">
+		    <input type="radio" name="com_status" value="1" id="com_status_0" {yun:}if $config.com_status==1{/yun}checked{yun:}/if{/yun}>
+		    <span class="iradio_flat_left"><label for="com_status_0">不审核</label>&nbsp;&nbsp;</span>
+		    <input type="radio" name="com_status" value="0" id="com_status_1" {yun:}if $config.com_status!=1{/yun}checked{yun:}/if{/yun}>
+		    <span class="iradio_flat_left"><label for="com_status_1">审核</label></span>
+            </div>
+            </td>
+	</tr>
+ 	  
+    <tr class="admin_table_trbg">
+		<th width="220">强制邮箱认证：</th>
+		<td>
+        <div class="iradio_flat_height">
+		    <input type="radio" name="com_enforce_emailcert" value="1" id="com_enforce_emailcert_0" {yun:}if $config.com_enforce_emailcert==1{/yun}checked{yun:}/if{/yun}>
+		    <span class="iradio_flat_left"><label for="com_enforce_emailcert_0">开启</label>&nbsp;&nbsp;</span>
+		    <input type="radio" name="com_enforce_emailcert" value="0" id="com_enforce_emailcert_1" {yun:}if $config.com_enforce_emailcert!=1{/yun}checked{yun:}/if{/yun}>
+		    <span class="iradio_flat_left"><label for="com_enforce_emailcert_1">关闭</label>&nbsp;&nbsp;</span>
+            </div>
+            </td>
+	</tr>
+    <tr>
+		<th width="220">强制手机认证：</th>
+		<td>
+        <div class="iradio_flat_height">
+		    <input type="radio" name="com_enforce_mobilecert" value="1" id="com_enforce_mobilecert_0" {yun:}if $config.com_enforce_mobilecert==1{/yun}checked{yun:}/if{/yun}>
+		    <span class="iradio_flat_left"><label for="com_enforce_mobilecert_0">开启</label>&nbsp;&nbsp;</span>
+		    <input type="radio" name="com_enforce_mobilecert" value="0" id="com_enforce_mobilecert_1" {yun:}if $config.com_enforce_mobilecert!=1{/yun}checked{yun:}/if{/yun}>
+		   <span class="iradio_flat_left"> <label for="com_enforce_mobilecert_1">关闭</label>&nbsp;&nbsp;</span>
+            </div>
+            </td>
+	</tr>
+    <tr class="admin_table_trbg">
+		<th width="220">强制营业执照认证：</th>
+		<td>
+        <div class="iradio_flat_height">
+		    <input type="radio" name="com_enforce_licensecert" value="1" id="com_enforce_licensecert_0" {yun:}if $config.com_enforce_licensecert==1{/yun}checked{yun:}/if{/yun}>
+		    <span class="iradio_flat_left"><label for="com_enforce_licensecert_0">开启</label>&nbsp;&nbsp;</span>
+		    <input type="radio" name="com_enforce_licensecert" value="0" id="com_enforce_licensecert_1" {yun:}if $config.com_enforce_licensecert!=1{/yun}checked{yun:}/if{/yun}>
+		    <span class="iradio_flat_left"><label for="com_enforce_licensecert_1">关闭</label>&nbsp;&nbsp;</span>
+            </div>
+            </td>
+	</tr>
+    <tr>
+		<th width="220">强制设置地理位置：</th>
+		<td>
+        <div class="iradio_flat_height">
+		    <input type="radio" name="com_enforce_setposition" value="1" id="com_enforce_setposition_0" {yun:}if $config.com_enforce_setposition==1{/yun}checked{yun:}/if{/yun}>
+		   <span class="iradio_flat_left"><label for="com_enforce_setposition_0">开启</label>&nbsp;&nbsp;</span>
+		    <input type="radio" name="com_enforce_setposition" value="0" id="com_enforce_setposition_1" {yun:}if $config.com_enforce_setposition!=1{/yun}checked{yun:}/if{/yun}>
+		    <span class="iradio_flat_left"><label for="com_enforce_setposition_1">关闭</label>&nbsp;&nbsp;</span>
+            </div>
+            </td>
+	</tr>
+ 	<tr class="admin_table_trbg">
+		<th width="220">开启求职咨询：</th>
+		<td>
+        <div class="iradio_flat_height">
+		    <input type="radio" name="com_message" value="1" id="com_message_0" {yun:}if $config.com_message==1{/yun}checked{yun:}/if{/yun}>
+		    <span class="iradio_flat_left"><label for="com_message_0">开启</label>&nbsp;&nbsp;</span>
+		    <input type="radio" name="com_message" value="0" id="com_message_1" {yun:}if $config.com_message!=1{/yun}checked{yun:}/if{/yun}>
+		    <span class="iradio_flat_left"><label for="com_message_1">关闭</label>&nbsp;&nbsp;</span>
+            </div>
+            </td>
+	</tr>
+   <tr>
+		<th width="220">举报虚假人才：</th>
+		<td>
+        <div class="iradio_flat_height">
+		    <input type="radio" name="com_report" value="1" id="com_report_0" {yun:}if $config.com_report==1{/yun}checked{yun:}/if{/yun}>
+		    <span class="iradio_flat_left"><label for="com_report_0">开启</label>&nbsp;&nbsp;</span>
+		    <input type="radio" name="com_report" value="0" id="com_report_1" {yun:}if $config.com_report!=1{/yun}checked{yun:}/if{/yun}>
+		    <span class="iradio_flat_left"><label for="com_report_1">关闭</label>&nbsp;&nbsp;</span>
+            </div>
+            </td>
+	</tr>
+	 <tr class="admin_table_trbg">
+		<th width="220">企业搜索器数量：</th>
+		<td><input class="input-text tips_class input_text_rp" type="text" name="com_finder" id="com_finder" value="{yun:}$config.com_finder{/yun}" size="20" maxlength="255" onKeyUp="this.value=this.value.replace(/[^0-9.]/g,'')"/>个</td>
+	</tr>
+    <tr>
+		<th width="220">上传公司LOGO大小：</th>
+		<td><input class="input-text tips_class input_text_rp" type="text" name="com_pickb" id="com_pickb" value="{yun:}$config.com_pickb{/yun}" size="20" maxlength="255" onKeyUp="this.value=this.value.replace(/[^0-9.]/g,'')"/>KB <span class="admin_web_tip">说明：1024KB=1M</span></td>
+	</tr>
+	   <tr class="admin_table_trbg">
+		<th width="220">企业上传图片大小：</th>
+		<td><input class="input-text tips_class" type="text" name="com_uppic" id="com_uppic" value="{yun:}$config.com_uppic{/yun}" size="20" maxlength="255" onKeyUp="this.value=this.value.replace(/[^0-9.]/g,'')"/>KB</td>
+	</tr>
+    <tr>
+		<th width="220">店铺招聘审核：</th>
+		<td>
+        <div class="iradio_flat_height">
+		    <input type="radio" name="com_fast_status" value="0" id="com_fast_status_0" {yun:}if $config.com_fast_status==0{/yun}checked{yun:}/if{/yun}>
+		    <span class="iradio_flat_left"><label for="com_fast_status_0">开启</label>&nbsp;&nbsp;</span>
+		    <input type="radio" name="com_fast_status" value="1" id="com_fast_status_1" {yun:}if $config.com_fast_status!=0{/yun}checked{yun:}/if{/yun}>
+		    <span class="iradio_flat_left"><label for="com_fast_status_1">关闭</label>&nbsp;&nbsp;</span>
+            </div>
+            </td>
+	</tr>
+    <tr class="admin_table_trbg">
+		<th width="220">店铺招聘刷新次数：</th>
+		<td><input class="input-text tips_class input_text_rp" type="text" name="com_xin" id="com_xin" value="{yun:}$config.com_xin{/yun}" size="20" maxlength="55" onKeyUp="this.value=this.value.replace(/[^0-9.]/g,'')"/>次</td>
+	</tr>
+    <tr>
+		<th width="220">企业职位发布审核：</th>
+		<td>
+        <div class="iradio_flat_height">
+		    <input type="radio" name="com_job_status" value="0" id="com_job_status_0" {yun:}if $config.com_job_status==0{/yun}checked{yun:}/if{/yun}>
+		    <span class="iradio_flat_left"><label for="com_job_status_0">开启</label>&nbsp;&nbsp;</span>
+		    <input type="radio" name="com_job_status" value="1" id="com_job_status_1" {yun:}if $config.com_job_status!=0{/yun}checked{yun:}/if{/yun}>
+		    <span class="iradio_flat_left"><label for="com_job_status_1">关闭</label>&nbsp;&nbsp;</span>
+            </div>
+            </td>
+	</tr>
+    
+    <tr class="admin_table_trbg">
+		<th width="220">兼职职位发布审核：</th>
+		<td>
+        <div class="iradio_flat_height">
+		    <input type="radio" name="com_partjob_status" value="0" id="com_partjob_status_0" {yun:}if $config.com_partjob_status==0{/yun}checked{yun:}/if{/yun}>
+		    <span class="iradio_flat_left"><label for="com_partjob_status_0">开启</label>&nbsp;&nbsp;</span>
+		    <input type="radio" name="com_partjob_status" value="1" id="com_partjob_status_1" {yun:}if $config.com_partjob_status!=0{/yun}checked{yun:}/if{/yun}>
+		    <span class="iradio_flat_left"><label for="com_partjob_status_1">关闭</label>&nbsp;&nbsp;</span>
+            </div>
+            </td>
+	</tr>
+      <tr>
+		<th width="220">企业认证审核：</th>
+		<td>
+        <div class="iradio_flat_height">
+		    <input type="radio" name="com_cert_status" value="1" id="com_cert_status_0" {yun:}if $config.com_cert_status==1{/yun}checked{yun:}/if{/yun}>
+		    <span class="iradio_flat_left"><label for="com_cert_status_1">开启</label>&nbsp;&nbsp;</span>
+		    <input type="radio" name="com_cert_status" value="0" id="com_cert_status_1" {yun:}if $config.com_cert_status!=1{/yun}checked{yun:}/if{/yun}>
+		    <span class="iradio_flat_left"><label for="com_cert_status_1">关闭</label>&nbsp;&nbsp;</span>
+            </div>
+            </td>
+	</tr>
+<tr>
+		<th width="220">会员到期提醒：</th>
+		<td><input class="input-text tips_class input_text_rp" type="text" name="sy_maturityday" id="sy_maturityday" value="{yun:}$config.sy_maturityday{/yun}" size="10" />天之内</td>
+	</tr>
+	<tr class="admin_table_trbg">
+		<th width="220">会员到期提醒频率：</th>
+		<td><input class="input-text tips_class input_text_rp" type="text" name="sy_maturityfrequency" id="sy_maturityfrequency" value="{yun:}$config.sy_maturityfrequency{/yun}" size="10" />天一次</td>
+	</tr>
+	<tr>
+		<th width="220">会员到期后默认为：</th>
+		<td>
+        <div class="iradio_flat_height">
+		    <input type="radio" name="com_vip_done" value="1" id="com_vip_done_0" {yun:}if $config.com_vip_done==1{/yun}checked{yun:}/if{/yun}>
+		    <span class="iradio_flat_left"><label for="com_vip_done_0">当前会员等级</label>&nbsp;&nbsp;</span>
+		    <input type="radio" name="com_vip_done" value="0" id="com_vip_done_1" {yun:}if $config.com_vip_done!=1{/yun}checked{yun:}/if{/yun}>
+		    <span class="iradio_flat_left"><label for="com_vip_done_1">非会员</label>&nbsp;&nbsp;</span>
+            </div>
+            </td>
+	</tr>
+    <tr class="admin_table_trbg">
+		<th width="220">登录才能搜索简历：</th>
+		<td>
+        <div class="iradio_flat_height">
+		    <input type="radio" name="com_search" value="1" id="com_search_1" {yun:}if $config.com_search==1{/yun}checked{yun:}/if{/yun}>
+		    <span class="iradio_flat_left"><label for="com_search_1">开启</label>&nbsp;&nbsp;</span>
+		    <input type="radio" name="com_search" value="0" id="com_search_0" {yun:}if $config.com_search==0{/yun}checked{yun:}/if{/yun}>
+		    <span class="iradio_flat_left"><label for="com_search_0">关闭</label>&nbsp;&nbsp;</span>
+            </div>
+            </td>
+	</tr>
+	<tr class="admin_table_trbg">
+		<td colspan="2" align="center">
+        <input type="hidden" name="pytoken" id='pytoken' value="{yun:}$pytoken{/yun}">
+        <input class="admin_submit4" id="mconfig" type="button" name="config" value="提交" />&nbsp;&nbsp;
+        <input class="admin_submit4" type="reset" value="重置" /></td>
+	</tr>
+</table>
+</div>
+
+</div>
+</div>
+<script>
+$(function(){
+	$("#mconfig").click(function(){
+		$.post("index.php?m=admin_comset&c=save",{
+			config : $("#mconfig").val(),
+			com_pickb : $("#com_pickb").val(),
+			com_enforce_emailcert : $("input[name=com_enforce_emailcert]:checked").val(),
+			com_enforce_mobilecert : $("input[name=com_enforce_mobilecert]:checked").val(),
+			com_enforce_licensecert : $("input[name=com_enforce_licensecert]:checked").val(),
+			com_enforce_setposition : $("input[name=com_enforce_setposition]:checked").val(),
+			com_uppic : $("#com_uppic").val(),
+			com_finder : $("#com_finder").val(),
+			com_fast_status : $("input[name=com_fast_status]:checked").val(),			
+			com_xin : $("#com_xin").val(),		
+			com_job_status : $("input[name=com_job_status]:checked").val(),
+			com_partjob_status : $("input[name=com_partjob_status]:checked").val(),
+			com_cert_status : $("input[name=com_cert_status]:checked").val(),
+			com_vip_done : $("input[name=com_vip_done]:checked").val(),
+			com_message : $("input[name=com_message]:checked").val(),
+			com_report : $("input[name=com_report]:checked").val(),
+			com_status : $("input[name=com_status]:checked").val(),
+			sy_maturityday: $("#sy_maturityday").val(),
+			sy_maturityfrequency: $("#sy_maturityfrequency").val(),			
+			com_search : $("input[name=com_search]:checked").val(),
+			pytoken:$("#pytoken").val()
+		},function(data,textStatus){
+			config_msg(data);
+		});
+	});
+})
+</script></div>
+</body>
+</html>

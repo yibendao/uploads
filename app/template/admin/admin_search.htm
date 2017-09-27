@@ -1,0 +1,40 @@
+	  <div class="search_select">
+        {yun:}if $smarty.get.keyword!=""{/yun}
+        <a class="Search_jobs_c_a" href="{yun:}searchurl m=$smarty.get.m c=$smarty.get.c untype='keyword'{/yun}">关键字：{yun:}$smarty.get.keyword{/yun}</a>
+        {yun:}/if{/yun}
+	</div>
+
+<div class="clear"></div>
+<div class="admin_screenlist_box">
+{yun:}assign var="v" value=0{/yun}
+{yun:}foreach item=row key=key from=$search_list{/yun}
+    {yun:}assign var="t" value=$row.param{/yun}
+    {yun:}assign var="v" value=$v+1{/yun}
+    <div class="admin_screenlist" {yun:}if $v>3{/yun}style="display:none"{yun:}/if{/yun}>
+    <span class="admin_screenlist_name">{yun:}$row.name{/yun}：</span>
+    	<a href="{yun:}searchurl m=$smarty.get.m c=$smarty.get.c untype=$t{/yun}" {yun:}if $smarty.get.$t!==true && $smarty.get.$t==''{/yun}class="admin_screenlist_cur"{yun:}/if{/yun}>全部</a>
+        {yun:}foreach item=r key=k from=$row.value{/yun}
+            <a href="{yun:}searchurl m=$smarty.get.m c=$smarty.get.c adv=$k adt=$t untype=$t{/yun}" 
+            {yun:}if $smarty.get.$t!==false && $smarty.get.$t!='' && $smarty.get.$t == $k{/yun}
+            class="admin_screenlist_cur"
+            {yun:}/if{/yun}>{yun:}$r{/yun}</a> 
+        {yun:}/foreach{/yun}   
+    </div>
+{yun:}/foreach{/yun}
+{yun:}if $v>3{/yun}
+<div class="admin_screenlist_more"><a href="javascript:;" onclick="searchmore()">展开更多条件</a></div>
+{yun:}/if{/yun}
+</div>
+<script>
+function searchmore(){
+    var html=$(".admin_screenlist_more a").html();
+	if(html=='展开更多条件'){
+	    $('.admin_screenlist:gt(2)').toggle();
+		$(".admin_screenlist_more a").html('收起更多条件');
+	}else{
+	    $('.admin_screenlist:gt(2)').toggle();
+		$(".admin_screenlist_more a").html('展开更多条件');
+	}
+	
+}
+</script>

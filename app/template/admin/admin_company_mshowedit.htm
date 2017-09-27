@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link href="images/reset.css" rel="stylesheet" type="text/css" />
+<link href="images/system.css" rel="stylesheet" type="text/css" />  
+<link href="images/table_form.css" rel="stylesheet" type="text/css" />
+<title>后台管理</title>
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script>
+<script src="js/admin_public.js" language="javascript"></script> 
+<link href="images/blue.css" rel="stylesheet">
+<link href="images/uploadify.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="{yun:}$config.sy_weburl{/yun}/js/jquery.uploadify-3.1.min.js"></script> 
+</head>
+<body class="body_ifm">
+<div class="infoboxp">
+<div class="infoboxp_top_bg"></div>
+
+<div class="infoboxp_top">
+
+	<span class="complay_top_span fl">修改信息</span>
+
+</div>
+
+<div class="admin_table_border">
+
+<div class="file_hj_box_xg mt10">
+<div class="file_button" style="border:none">
+
+  <iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe>
+   <form name="myform" method="post" target="supportiframe"  action="index.php?m=admin_company&c=mshowup" enctype="multipart/form-data" onsubmit="return checkshow();">
+	  <input type="hidden" name="id" value="{yun:}$smarty.get.id{/yun}"/>
+	  <input type="hidden" name="uid" value="{yun:}$smarty.get.comid{/yun}"/>
+	  <input type="hidden" name="picurl" value="{yun:}$picurl.picurl{/yun}"/>
+      <input type="hidden" name="pytoken" value="{yun:}$pytoken{/yun}">
+	   <div class="file_hj_box_img"><img src=".{yun:}$picurl.picurl{/yun}" width="220" height="180"> </div>
+	
+	    <ul class="file_hj_box">
+	  <li>
+	<div class="file_hj_name">环境图片：</div>
+		<div class=textbox>
+		  <input class=""  name="uplocadpic" type="file"  value="" size="50" class="inputbtn011"/>
+		  <em>最佳尺寸：155*110</em> </div>
+	  </li>
+	  <li>
+	<div class="file_hj_name">标&nbsp;&nbsp;题：</div>
+		<div class=textbox>
+		  <input class="file_button_edit_input" type="text" name="title" size="15" value="{yun:}$picurl.title{/yun}"/>
+		</div>
+	  </li>
+	  <li>
+	<div class="file_hj_name">排&nbsp;&nbsp;序：</div>
+		<div class=textbox>
+		  <input class="file_button_edit_input" type="text" name="showsort" size="15" value="{yun:}$picurl.sort{/yun}" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')"/>
+		  <em style=" margin-left:10px;">数值越大越靠前</em> </div>
+	  </li>
+	  <li><div class="sub_btn">
+		<input class="file_btn_01"  type="submit" name="submitbtn" value="更新信息">
+	  </div></li>
+	  </ul>
+	</form>
+  
+</div>
+</div></div>
+</div>
+<script language="javascript">
+function checkshow(){
+	var title=$.trim($("input[name=title]").val());
+	if(title==''){
+	   layer.msg('标题不能为空！', 2, 8); return false;
+	}		
+}
+</script>
+</body>
+</html>

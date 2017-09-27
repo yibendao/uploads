@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link href="images/reset.css" rel="stylesheet" type="text/css" />
+<link href="images/system.css" rel="stylesheet" type="text/css" />
+<link href="images/table_form.css" rel="stylesheet" type="text/css" />
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js"></script>  
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script> 
+<script src="js/admin_public.js" language="javascript"></script>
+<link rel="stylesheet" href="{yun:}$config.sy_weburl{/yun}/js/datepicker/css/font-awesome.min.css" type="text/css">  
+<script src="{yun:}$config.sy_weburl{/yun}/js/datepicker/foundation-datepicker.min.js"></script>
+<script language="javascript"> 
+function addresume(){
+	var username=$.trim($("#username").val());
+	var telphone=$.trim($("#telphone").val());
+	var qq=$.trim($("#qq").val());
+	var weixin=$.trim($("#weixin").val());
+	var reg= /^[1][034578]\d{9}$/;
+	if(username==''){parent.layer.msg("顾问姓名不能为空！",2,8);return false;}
+	if(telphone==''){parent.layer.msg("顾问手机号码不能为空！",2,8);return false;}else if(!reg.test(telphone)){
+		parent.layer.msg("手机号码格式错误！",2,8);return false;
+	}
+	if(qq==''){parent.layer.msg("顾问QQ号不能为空！",2,8);return false;}
+	if(weixin==''){parent.layer.msg("顾问微信号不能为空！",2,8);return false;}
+} 
+</script>
+<style>
+* {margin: 0 ;padding: 0;}
+body,div{ margin: 0 ;padding: 0;}
+</style>
+<title>后台管理</title>
+</head>
+<body class="body_ifm">
+<div class="infoboxp">
+<div class="infoboxp_top_bg"></div>
+  <div class="infoboxp_top" style="z-index:600;position:relative;">	
+	<div class="report_uaer_list"><span class="infoboxp_top_span">招聘顾问</span>
+	  </div> 
+  </div> 
+  <div class="admin_table_border"> 
+   <iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe>
+    <form action="index.php?m=admin_company_consultant&c=save"  method="post" onSubmit="return addresume();" target="supportiframe" encType="multipart/form-data" >
+		<input type="hidden" name="pytoken" id='pytoken' value="{yun:}$pytoken{/yun}">
+		<table width="100%" class="table_form" style="background:#fff;">
+      		<tr class="admin_table_trbg">
+        		<th>顾问姓名：</th>
+        		<td colspan='3'><input type="text" name="username" id="username" class="input-text" value="{yun:}$show.username{/yun}"></td>
+      		</tr>
+	 		<tr class="admin_table_trbg">
+				<th>顾问手机：</th>
+				<td colspan='3'><input type="text" name="mobile" id='telphone' onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" class="input-text" value="{yun:}$show.mobile{/yun}"></td>
+	 		</tr>
+	  		<tr >
+				<th>顾问QQ：</th>
+				<td colspan='3'><input type="text" name="qq" id="qq" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" class="input-text" value="{yun:}$show.qq{/yun}"></td>
+			</tr>
+			<tr>
+				<th>顾问微信：</th>
+				<td colspan='3'><input type="text" name="weixin" id="weixin" class="input-text" value="{yun:}$show.weixin{/yun}"></td>
+			</tr>
+	        <tr>
+				<th align="right">上传头像：</th>
+				<td align="left"colspan="4">
+                {yun:}if $show.logo{/yun}<div class=""><img src="{yun:}$config.sy_weburl{/yun}/{yun:}$show.logo{/yun}"  width="64" height="64"></div>{yun:}/if{/yun} <div class="com_hot_pic_text">
+				<input type="file" name="logo" style="width:230px;"></div>
+                <span class="admin_web_tip">支持jpg,jpeg,png文件格式，最大不要超过2M；最佳尺寸 64×64</span>
+				</td>
+            </tr>
+			<tr>
+				<th align="right">值班安排：</th>
+				<td align="left" colspan="4">   
+                    <div style="padding:5px;">                   
+			     	<span><input type="checkbox" value="1" name="status[]" {yun:}if in_array(1,$status){/yun}checked="checked"{yun:}/if{/yun}>礼拜一 </span> 
+			     	<span><input type="checkbox" value="2" name="status[]" {yun:}if in_array(2,$status){/yun}checked="checked"{yun:}/if{/yun}>礼拜二 </span> 
+			     	<span><input type="checkbox" value="3" name="status[]" {yun:}if in_array(3,$status){/yun}checked="checked"{yun:}/if{/yun}>礼拜三</span> 
+			      	<span><input type="checkbox" value="4" name="status[]" {yun:}if in_array(4,$status){/yun}checked="checked"{yun:}/if{/yun}>礼拜四 </span> 
+			     	<span><input type="checkbox" value="5" name="status[]" {yun:}if in_array(5,$status){/yun}checked="checked"{yun:}/if{/yun}>礼拜五 </span> 
+			     	<span><input type="checkbox" value="6" name="status[]" {yun:}if in_array(6,$status){/yun}checked="checked"{yun:}/if{/yun}>礼拜六</span> 
+			      	<span><input type="checkbox" value="7" name="status[]" {yun:}if in_array(7,$status){/yun}checked="checked"{yun:}/if{/yun}>礼拜日 </span>
+                    </div>
+				</td>
+		</tr>
+		<tr class="admin_table_trbg" >
+        	<th width="120"></th>
+        		<td>
+		        	<input type="hidden" name="adtime" id="adtime" class="input-text" value="{yun:}time(){/yun}">
+		        	<input type='hidden' name='id' value='{yun:}$show.id{/yun}'>
+		        	<input class="admin_submit4" type="submit" name="next" value="&nbsp;保存&nbsp;" />
+       			</td>
+        </tr>
+	   </table>
+    </form>
+ 
+</div>
+</div>
+</body>
+</html>

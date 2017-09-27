@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link href="images/reset.css" rel="stylesheet" type="text/css" />
+<link href="images/system.css" rel="stylesheet" type="text/css" /> 
+<link href="images/table_form.css" rel="stylesheet" type="text/css" />
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script>
+<script src="js/admin_public.js" language="javascript"></script>
+<link href="images/blue.css" rel="stylesheet">
+<script src="js/icheck.js"></script>
+  <script>
+	$(document).ready(function(){
+	  $('input').iCheck({
+		checkboxClass: 'icheckbox_flat-blue',
+		radioClass: 'iradio_flat-blue'
+	  });
+	});
+</script>
+<script language="javascript">
+function CheckMember(){  
+    var rating_name=$("#com_rating_val").val();
+	if(rating_name==''){
+		layer.msg('请选择会员级别！', 2, 8);return false;
+	} 
+	var username=$("#username").val();
+	if(username==''){
+		layer.msg('用户名不能为空！', 2, 8);return false;
+	} 
+	if($("input[name='password']").val()==''){
+		layer.msg('密码不能为空！', 2, 8);return false;
+	}
+	var obj = $("input[name='email']").val();
+	var myreg = /^([a-zA-Z0-9\-]+[_|\_|\.]?)*[a-zA-Z0-9\-]+@([a-zA-Z0-9\-]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+	if(obj!=""&&!myreg.test(obj)){
+		layer.msg('联系邮箱格式错误！', 2, 8);return false;
+	}
+	if($("input[name='moblie']").val() ==''){
+		layer.msg('联系手机不能为空！', 2, 8);return false;
+	}else{
+	   var obj = $("input[name='moblie']").val(); 
+	   if(isjsMobile(obj)==false&&isjsTell(obj)==false){
+	     layer.msg('电话格式错误！', 2, 8);return false;
+	   }
+	}
+	if($("input[name='name']").val()==''){
+		layer.msg('公司全称不能为空！', 2, 8);return false;
+	}
+	if($("input[name='address']").val()==''){
+		layer.msg('公司地址不能为空！', 2, 8);return false;
+	}
+	loadlayer();
+}
+</script> 
+<title>后台管理</title>
+</head>
+<body class="body_ifm">
+<div class="infoboxp">
+<div class="infoboxp_top_bg"></div>
+<div class="infoboxp_top">
+<span class="complay_top_span fl">添加企业会员信息</span>
+ 
+	<a href="index.php?m=admin_company" class="admin_infoboxp_tj admin_infoboxp_xwlb">企业用户列表</a> 
+
+</div>
+<div class="admin_table_border">
+<iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe> 
+<form name="myform" {yun:}if $get_info.type==''{/yun}target="supportiframe"{yun:}/if{/yun}  action="index.php?m=admin_company&c=add" onSubmit="return CheckMember();" method="post" >
+<table width="100%" class="table_form" style="background:#fff;">
+	<tr>
+		<th width="100"><span class="admin_required_icon">*</span>会员级别</th>
+		<td>
+            <div class="yun_admin_select_box zindex100"> 
+                  <input type="button" value="请选择" class="yun_admin_select_box_text" id="com_rating_name" onClick="select_click('com_rating');">
+                  <input name="rating_name" type="hidden" id="com_rating_val" value="">
+                   
+                 
+                  <div class="yun_admin_select_box_list_box dn" id="com_rating_select"> {yun:}foreach from=$rating_list item=v{/yun}
+                    <div class="yun_admin_select_box_list"> <a href="javascript:;" onClick="select_new('com_rating','{yun:}$v.id{/yun}','{yun:}$v.name{/yun}')">{yun:}$v.name{/yun}</a> </div>
+                    {yun:}/foreach{/yun} </div>
+                </div>
+            
+            
+            
+        </td>
+	</tr>
+	<tr class="admin_table_trbg" >
+		<th><span class="admin_required_icon">*</span>用&nbsp;户&nbsp; 名</th>
+		<td><input type="text"  value="" name="username" class="input-text input-textw230" onblur="check_comusername();" id="username"></td>
+	</tr>
+	<tr>
+		<th><span class="admin_required_icon">*</span>设置密码</th>
+		<td><input type="password" value="" name="password" class="input-text input-textw230">
+		<font color="gray"></font>
+		</td>
+	</tr>
+   	<tr class="admin_table_trbg" >
+   		<th><span class="admin_required_icon"></span>联系邮箱</th>
+		<td><input type="text" value="" name="email" class="input-text input-textw230">
+		<font color="gray"></font>
+       </td>
+	</tr>
+	<tr>
+		<th><span class="admin_required_icon">*</span>联系手机</th>
+		<td><input type="text" value="" name="moblie" class="input-text input-textw230">
+		<font color="gray"></font>
+       </td>
+	</tr>
+	<tr>
+		<th><span class="admin_required_icon"></span>固定电话</th>
+		<td><input type="text"  id="areacode" name="areacode" style="width:60px;height:33px;line-height:33px;border:1px solid #ddd;" class="" placeholder="如：0527" maxlength="7"/>
+	    <input type="text"  placeholder="固定电话" id="telphone" style="width:160px;height:33px;line-height:33px;border:1px solid #ddd;" name='telphone' maxlength="8"/>
+	    <input type="text"  placeholder="分机号" id="exten" style="width:40px;height:33px;line-height:33px;border:1px solid #ddd;"  name='exten' maxlength="4"/>
+		<font color="gray"></font>
+		</td>
+	</tr>
+   	<tr class="admin_table_trbg" >
+		<th><span class="admin_required_icon">*</span>公司全称</th>
+		<td><input type="text" value="" name="name" class="input-text input-textw230">
+		<font color="gray"></font>
+		</td>
+	</tr>
+     <tr>
+		<th><span class="admin_required_icon">*</span>公司地址</th>
+		<td><input type="text" value="" name="address" class="input-text input-textw230">
+		<font color="gray"></font>
+		</td>
+	</tr>
+   	<tr class="admin_table_trbg" >
+        <input type="hidden" id="status_1" name="status" value="1"> 
+	</tr>
+	<tr>
+		<td align="center" colspan="2">
+        <input class="admin_submit4" type="submit" name="submit" value="&nbsp;添 加&nbsp;" />
+		<input class="admin_submit4" type="reset" name="reset" value="&nbsp;重 置 &nbsp;" />
+        </td>
+	</tr>
+</table>
+<input type="hidden" name="pytoken" id="pytoken" value="{yun:}$pytoken{/yun}">
+<input type="hidden" name="type" value="{yun:}$get_info.type{/yun}">
+</form>
+
+</div></div>
+</body>
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<link href="images/reset.css" rel="stylesheet" type="text/css" />
+<link href="images/system.css" rel="stylesheet" type="text/css" />
+<link href="images/table_form.css" rel="stylesheet" type="text/css" />
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script>
+<script src="js/admin_public.js" language="javascript"></script>
+<title>后台管理</title>
+</head>
+<body class="body_ifm">
+<div class="infoboxp"><div class="infoboxp_top_bg"></div>
+<div id="subboxdiv" style="width:100%;height:100%;display:none;position:absolute;"></div>
+<div class="admin_h1_bg infoboxp_topIjf">
+
+   <span class="admin_title_span">预警配置</span>    
+<a href="index.php?m=warning" style="float:left; padding:4px 5px; background:#f60;color:#fff; margin-top:10px; margin-left:20px;">预警列表</a>
+</div>
+<div class="main_tag">
+<div class="tag_box">
+
+<div>
+<table width="100%" class="table_form">
+    <tr class="admin_table_trbg">
+	<th width="220">每天发布职位：</th>
+		<td>
+         <input class="admin_text_w130" type="text" name="warning_addjob" id="warning_addjob" value="{yun:}$config.warning_addjob{/yun}" size="13" maxlength="255" onKeyUp="this.value=this.value.replace(/[^0-9.]/g,'')"/>  <span class="admin_text_dw"> 条，</span> 
+          <div class="yun_admin_select_box yun_admin_select_boxw130  z_index15">                  
+          {yun:}if $config.warning_addjob_type{/yun} 
+          {yun:}if $config.warning_addjob_type==1{/yun}
+          <input type="button" value="是" class="yun_admin_select_box_text" id="warning_addjob_type_name" onClick="select_click('warning_addjob_type');">
+          <input name="warning_addjob_type" type="hidden" id="warning_addjob_type_val" value="1">
+           
+          {yun:}/if{/yun}             
+          {yun:}if $config.warning_addjob_type==2{/yun}
+          <input type="button" value="否" class="yun_admin_select_box_text" id="warning_addjob_type_name" onClick="select_click('warning_addjob_type');">
+          <input name="warning_addjob_type" type="hidden" id="warning_addjob_type_val" value="2">
+           
+          {yun:}/if{/yun}          
+          {yun:}else{/yun}                 
+          <input type="button" value="请选择" class="yun_admin_select_box_text" id="warning_addjob_type_name" onClick="select_click('warning_addjob_type');">
+          <input name="warning_addjob_type" type="hidden" id="warning_addjob_type_val" value="" >
+                             
+          {yun:}/if{/yun}                                                                                    
+          <div class="yun_admin_select_box_list_box yun_admin_select_box_list_boxw130 dn" id="warning_addjob_type_select"> 
+            <div class="yun_admin_select_box_list"> <a href="javascript:;" onClick="select_new('warning_addjob_type','1','是')">是</a> </div>
+            <div class="yun_admin_select_box_list"> <a href="javascript:;" onClick="select_new('warning_addjob_type','2','否')">否</a> </div>
+            </div>
+           </div>           
+           <span class="admin_text_dw">  锁定帐号</span>
+        </td>
+	</tr>
+    <tr>
+	<th width="220">每天下载简历：</th>
+		<td>
+         <input class="admin_text_w130" type="text" name="warning_downjob" id="warning_downresume" value="{yun:}$config.warning_downresume{/yun}" size="13" maxlength="255" onKeyUp="this.value=this.value.replace(/[^0-9.]/g,'')"/> <span class="admin_text_dw"> 条，</span>           
+          <div class="yun_admin_select_box yun_admin_select_boxw130  z_index14">                  
+          {yun:}if $config.warning_downresume_type{/yun} 
+          {yun:}if $config.warning_downresume_type==1{/yun}
+          <input type="button" value="是" class="yun_admin_select_box_text" id="warning_downresume_type_name" onClick="select_click('warning_downresume_type');">
+          <input name="warning_downresume_type" type="hidden" id="warning_downresume_type_val" value="1">
+           
+          {yun:}/if{/yun}             
+          {yun:}if $config.warning_downresume_type==2{/yun}
+          <input type="button" value="否" class="yun_admin_select_box_text" id="warning_downresume_type_name" onClick="select_click('warning_downresume_type');">
+          <input name="warning_downresume_type" type="hidden" id="warning_downresume_type_val" value="2">
+           
+          {yun:}/if{/yun}          
+          {yun:}else{/yun}                 
+          <input type="button" value="请选择" class="yun_admin_select_box_text" id="warning_downresume_type_name" onClick="select_click('warning_downresume_type');">
+          <input name="warning_downresume_type" type="hidden" id="warning_downresume_type_val" value="" >
+                             
+          {yun:}/if{/yun}                                                                                    
+          <div class="yun_admin_select_box_list_box yun_admin_select_box_list_boxw130 dn" id="warning_downresume_type_select"> 
+            <div class="yun_admin_select_box_list"> <a href="javascript:;" onClick="select_new('warning_downresume_type','1','是')">是</a> </div>
+            <div class="yun_admin_select_box_list"> <a href="javascript:;" onClick="select_new('warning_downresume_type','2','否')">否</a> </div>
+            </div>
+           </div>              
+           <span class="admin_text_dw"> 锁定帐号</span>
+        </td>
+	</tr>
+    <tr class="admin_table_trbg">
+	<th width="220">每天发布简历：</th>
+		<td>
+         <input class="admin_text_w130" type="text" name="warning_addresume" id="warning_addresume" value="{yun:}$config.warning_addresume{/yun}" size="13" maxlength="255" onKeyUp="this.value=this.value.replace(/[^0-9.]/g,'')"/> 
+         <span class="admin_text_dw">份，</span>            
+          <div class="yun_admin_select_box yun_admin_select_boxw130  z_index13">                  
+          {yun:}if $config.warning_addresume_type{/yun} 
+          {yun:}if $config.warning_addresume_type==1{/yun}
+          <input type="button" value="是" class="yun_admin_select_box_text" id="warning_addresume_type_name" onClick="select_click('warning_addresume_type');">
+          <input name="warning_addresume_type" type="hidden" id="warning_addresume_type_val" value="1">
+           
+          {yun:}/if{/yun}             
+          {yun:}if $config.warning_addresume_type==2{/yun}
+          <input type="button" value="否" class="yun_admin_select_box_text" id="warning_addresume_type_name" onClick="select_click('warning_addresume_type');">
+          <input name="warning_addresume_type" type="hidden" id="warning_addresume_type_val" value="2">
+           
+          {yun:}/if{/yun}          
+          {yun:}else{/yun}                 
+          <input type="button" value="请选择" class="yun_admin_select_box_text" id="warning_addresume_type_name" onClick="select_click('warning_addresume_type');">
+          <input name="warning_addresume_type" type="hidden" id="warning_addresume_type_val" value="" >
+                             
+          {yun:}/if{/yun}                                                                                    
+          <div class="yun_admin_select_box_list_box yun_admin_select_box_list_boxw130 dn" id="warning_addresume_type_select"> 
+            <div class="yun_admin_select_box_list"> <a href="javascript:;" onClick="select_new('warning_addresume_type','1','是')">是</a> </div>
+            <div class="yun_admin_select_box_list"> <a href="javascript:;" onClick="select_new('warning_addresume_type','2','否')">否</a> </div>
+            </div>
+           </div>                   
+        <span class="admin_text_dw"> 锁定帐号</span>  
+        </td>
+	</tr>
+    <tr>
+	<tr>
+		<th width="220">一小时内发送短信数量预警：</th>
+		<td><input class="admin_text_w130" type="text" name="sy_hour_msgnum" id="sy_hour_msgnum" value="{yun:}$config.sy_hour_msgnum{/yun}" size="10" maxlength="255" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')"/> <span class="admin_text_dw"> 条，  </span>
+          <div class="yun_admin_select_box yun_admin_select_boxw130  z_index12">                  
+          {yun:}if $config.warning_recharge_type{/yun} 
+          {yun:}if $config.warning_recharge_type==1{/yun}
+          <input type="button" value="是" class="yun_admin_select_box_text" id="warning_recharge_type_name" onClick="select_click('warning_recharge_type');">
+          <input name="warning_recharge_type" type="hidden" id="warning_recharge_type_val" value="1">
+           
+          {yun:}/if{/yun}             
+          {yun:}if $config.warning_recharge_type==2{/yun}
+          <input type="button" value="否" class="yun_admin_select_box_text" id="warning_recharge_type_name" onClick="select_click('warning_recharge_type');">
+          <input name="warning_recharge_type" type="hidden" id="warning_recharge_type_val" value="2">
+           
+          {yun:}/if{/yun}          
+          {yun:}else{/yun}                 
+          <input type="button" value="请选择" class="yun_admin_select_box_text" id="warning_recharge_type_name" onClick="select_click('warning_recharge_type');">
+          <input name="warning_recharge_type" type="hidden" id="warning_recharge_type_val" value="" >
+                             
+          {yun:}/if{/yun}                                                                                    
+          <div class="yun_admin_select_box_list_box yun_admin_select_box_list_boxw130 dn" id="warning_recharge_type_select"> 
+            <div class="yun_admin_select_box_list"> <a href="javascript:;" onClick="select_new('warning_recharge_type','1','是')">是</a> </div>
+            <div class="yun_admin_select_box_list"> <a href="javascript:;" onClick="select_new('warning_recharge_type','2','否')">否</a> </div>
+            </div>
+           </div>              
+           <span class="admin_text_dw">关闭短信</span>
+		</td>
+	</tr>
+    <tr class="admin_table_trbg">
+		<td colspan="2" align="center">
+        <input class="admin_submit4" id="integral" type="button" name="config" value="提交" />&nbsp;&nbsp;
+        <input class="admin_submit4" type="reset" value="重置" /></td>
+	</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<input type="hidden" name="pytoken" id='pytoken' value="{yun:}$pytoken{/yun}">
+<script>
+$(function(){
+	$("#integral").click(function(){
+		$.post("index.php?m=warning&c=config",{
+			config : $("#integral").val(),
+			warning_addjob_type : $("#warning_addjob_type_val").val(),
+			warning_addjob : $("#warning_addjob").val(),
+			warning_downresume_type : $("#warning_downresume_type_val").val(),
+			warning_downresume : $("#warning_downresume").val(),　
+			sy_hour_msgnum : $("#sy_hour_msgnum").val(),
+			warning_addresume_type : $("#warning_addresume_type_val").val(),
+			warning_close_msg : $("#warning_close_msg").val(),
+			warning_addresume : $("#warning_addresume").val(),
+			warning_recharge_type : $("#warning_recharge_type_val").val(),
+			pytoken : $("#pytoken").val()
+		},function(data,textStatus){
+			config_msg(data);
+		});
+	});
+})
+</script>
+</body>
+</html>

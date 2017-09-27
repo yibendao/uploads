@@ -1,0 +1,75 @@
+{yun:}include file="$userstyle/header.htm"{/yun}
+<div class="yun_user_member_w1100">
+    {yun:}include file="$userstyle/left.htm"{/yun}
+    <script>
+        function changesta(status, type) {
+            $.post("index.php?c=privacy", { status: status, type: type }, function (data) {
+                layer.msg('设置成功', 2, 9);
+            });
+        }
+    </script>
+  <div class="mian_right fltR mt20">
+      <div class="member_right_index_h1 fltL"> <span class="member_right_h1_span fltL">隐私设置</span> <i class="member_right_h1_icon user_bg"></i></div>
+  
+     <div class="resume_box_list">
+     <div class="resume_Prompt">提示：隐私设置为公开时，企业才能搜索到你的默认简历 </div>
+     
+   <div class="clear"></div>
+			<dl class="set-status">
+			<dd  {yun:}if $resume.status==1{/yun}class="cur"{yun:}/if{/yun}>
+				<span>我正在找工作，希望企业关注我的简历</span>
+				<a href="javascript:void(0)" onclick="layer_del('', 'index.php?c=privacy&act=up&status=1');" ><i class="i1"></i>公开</a>
+				<em class="yes"></em>
+				<em class="arr-bottom"></em>
+			</dd>
+			<dd  {yun:}if $resume.status==2{/yun}class="cur"{yun:}/if{/yun} style="width:350px;">
+				<span>目前没找工作，不希望企业关注我的简历</span>
+				<a href="javascript:void(0)" onclick="layer_del('', 'index.php?c=privacy&act=up&status=2');"  style="width:280px;"><i class="i2"></i>保密</a>
+				<em class="yes"></em>
+				<em class="arr-bottom"></em>
+			</dd>
+		</dl> 
+      {yun:}if $resume.status==1{/yun}
+		<div class="blacklist">
+			<p class="yun_usertitle">
+				<span>企业屏蔽</span> <span class="blacklist_tip">我不希望某些企业搜索到我</span>
+				<a href="javascript:void(0)" onclick="addblack()">+添加</a>
+				{yun:}if $rows{/yun}
+				<a id="clearcontent" href="javascript:void(0)" onclick="layer_del('您确定要取消屏蔽？', 'index.php?c=privacy&act=delall');"><i class="d"></i>清空</a></p>
+				<ul class="clearfix" id="company_blench">
+				{yun:}foreach from=$rows item=log{/yun}
+				<li><a href="javascript:void(0)" class="close" onclick="layer_del('您确定要取消屏蔽？', 'index.php?c=privacy&act=del&id={yun:}$log.id{/yun}');">x</a><a href="{yun:}url m=company c=show id='`$log.p_uid`'{/yun}" target="_blank">{yun:}$log.com_name{/yun}</a></li>
+				{yun:}/foreach{/yun}
+				</ul>
+				{yun:}else{/yun}
+				<a id="clearcontent" href="javascript:void(0)" onclick="layer_del('暂无企业清空！');"><i class="d"></i>清空</a>
+				{yun:}/if{/yun}
+				
+			<p align="center" class="more" style="display:none"><a href="javascript:void(0)" id="showmore">展开更多</a></p>
+		</div>
+         <div class="diggg">{yun:}$pagenav{/yun}</div>
+	
+         {yun:}else{/yun}
+        <div class="blacklist" id="company_no_list">当前设置下，任何企业都无法搜索到或查看您的简历</div> 
+       {yun:}/if{/yun} 
+    </div>
+</div>    
+</div>
+
+<div style="padding:10px;height:260px; display:none;" id='blackdiv'>
+    <input id="name" class="black_text" type="text" style="width:300px" placeholder="请输入要屏蔽的公司名称">
+    <input type="button" value="搜索" class="black_sumit" onclick="searchcom()">
+    <div class="Blacklist_box">
+        
+        <form action="index.php?c=privacy&act=save" target="supportiframe" method="post" onsubmit="return ckaddblack()">
+            <div class="alert-compt-list_h1">
+                <label id="select" class="fltR"><input id="checkAll" type="checkbox" onclick="m_checkAll(this.form)"> 全选</label>请在下方选择您要屏蔽的公司
+            </div>
+            <ul></ul>
+            <div class="black_submit_cont">
+                <input type="submit" value="确定" class="black_submit">
+            </div>
+        </form>
+    </div> 
+</div> 
+{yun:}include file="$userstyle/footer.htm"{/yun} 

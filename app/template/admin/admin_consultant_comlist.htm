@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link href="images/reset.css" rel="stylesheet" type="text/css" />
+<link href="images/system.css" rel="stylesheet" type="text/css" />
+<link href="images/table_form.css" rel="stylesheet" type="text/css" />
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script>
+<script src="js/admin_public.js" language="javascript"></script>
+<script type="text/javascript" src="js/show_pub.js"></script>  
+<title>后台管理</title>
+</head>
+<body class="body_ifm">
+<div class="infoboxp">
+<div class="infoboxp_top_bg"></div>
+<div class="admin_Filter"> 
+	<span class="complay_top_span fl">【{yun:}$info.username{/yun}】顾问负责的企业</span> 
+   <div class="admin_Filter_span" style="width:800px; text-align:left">联系手机：{yun:}$info.mobile{/yun}&nbsp;&nbsp;联系QQ：{yun:}$info.qq{/yun} &nbsp;&nbsp; 联系微信：{yun:}$info.weixin{/yun}</div>  
+  </div>
+
+  <div class="table-list">
+    <div class="admin_table_border">
+      <iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe>
+    	<form action="index.php" name="myform" method="get" id='myform' target="supportiframe">
+        <input name="m" value="admin_company_consultant" type="hidden"/>
+        <input name="c" value="delcom" type="hidden"/>
+        <input type="hidden" id="pytoken" name="pytoken"value="{yun:}$pytoken{/yun}">
+        <table width="100%">
+          <thead>
+            <tr class="admin_table_top">
+              <th width="20"><label for="chkall">
+                <input type="checkbox" id='chkAll' onclick='CheckAll(this.form)'/>
+                </label></th>
+              <th>用户ID</th>
+              <th align="left">用户名</th>
+               <th align="left">企业名称</th>
+              <th>邮箱</th>
+              <th>手机</th>
+              <th class="admin_table_th_bg">操作</th>
+            </tr>
+          </thead>
+          <tbody>
+          
+          {yun:}foreach item=v key=key from=$rows{/yun}
+          <tr align="center" {yun:}if ($key+1)%2=='0'{/yun}class="admin_com_td_bg"{yun:}/if{/yun} id="list{yun:}$v.uid{/yun}">
+            <td><input type="checkbox" class="check_all" value="{yun:}$v.uid{/yun}" name='del[]' onclick='unselectall()' rel="del_chk"/></td>
+            <td align="center" class="td1" width="80"><span>{yun:}$v.uid{/yun}</span></td>
+           <td align="left"><a href="index.php?m=admin_company&c=Imitate&uid={yun:}$v.uid{/yun}" target="_blank">{yun:}$v.username{/yun}</a></td>
+            <td align="left"><a href="{yun:}url m=company c=show id=$v.uid{/yun}" target="_bank">{yun:}$v.name{/yun}</a></td>
+            <td>{yun:}$v.linkmail{/yun}</td>
+            <td>{yun:}if $v.linkphone{/yun}{yun:}$v.linkphone{/yun}{yun:}else{/yun}{yun:}$v.linktel{/yun}{yun:}/if{/yun}</td>
+			<td> <a href="javascript:void(0)" onClick="layer_del('确定要取消该企业的顾问？','index.php?m=admin_company_consultant&c=delcom&uid={yun:}$v.uid{/yun}');"class="admin_cz_sc">取消</a></td>
+          </tr>
+           {yun:}/foreach{/yun}
+          <tr style="background:#f1f1f1;">
+            <td align="center"><input type="checkbox" id='chkAll2' onclick='CheckAll2(this.form)' /></td>
+            <td colspan="2" ><label for="chkAll2">全选</label>
+            	&nbsp;
+              	<input class="admin_submit4" type="button" name="delsub" value="删除所选" onClick="return really('del[]')" />
+            </td>
+            <td colspan="4" class="digg">{yun:}$pagenav{/yun}</td>
+          </tr>
+          </tbody>   
+        </table>
+		</form>
+    </div>
+  </div>
+  </div>
+</body>
+</html>

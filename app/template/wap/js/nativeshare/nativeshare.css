@@ -1,0 +1,63 @@
+/**
+ * Created by Jeffery Wang.
+ * Create Time: 2015-06-16 19:52
+ */
+#nativeShare {
+    font-size: 13px;
+width:100%;height:100%; background:rgba(51,51,51,0.5); position:fixed;left:0px;top:0px ; z-index:100000001;display:none;
+}
+.share_bgbox{width:100%;position:absolute; background:#fff;bottom:0px; left:0px; z-index:10000000}
+#nativeShare .label {
+    font-size: 20px;
+}
+
+#nativeShare .list {
+    width: 99%;
+    margin: 0 auto;
+}
+
+#nativeShare .list span {
+    width: 30%;
+    display: inline-block;
+    text-align: center;
+    margin: 10px 0;
+}
+
+#nativeShare .list span i {
+    width: 40px;
+    height: 40px;
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 5px;
+}
+
+#nativeShare .weibo i {
+    background-image: url('./icon/weibo.png');
+    background-size: cover;
+}
+
+#nativeShare .weixin i {
+    background-image: url('./icon/weixin_friend.png');
+    background-size: cover;
+}
+
+#nativeShare .weixin_timeline i {
+    background-image: url('./icon/weixin.png');
+    background-size: cover;
+}
+
+#nativeShare .qq i {
+    background-image: url('./icon/qq.png');
+    background-size: cover;
+}
+
+#nativeShare .qzone i {
+    background-image: url('./icon/qqzone.png');
+    background-size: cover;
+}
+
+#nativeShare .more i {
+    background-image: url('./icon/more.png');
+    background-size: cover;
+}
+#nativeShare  .nativesshare{width:100%; background:#f8f8f8; font-size:16px; padding:10px 0;border-bottom:1px solid #ddd; text-indent:20px;}

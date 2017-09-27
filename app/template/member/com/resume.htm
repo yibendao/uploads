@@ -1,0 +1,185 @@
+{yun:}include file="$comstyle/header.htm"{/yun}
+<div class="w1000">
+<div class="admin_mainbody"> 
+{yun:}include file="$comstyle/left.htm"{/yun}
+<link rel="stylesheet" href="{yun:}$style{/yun}/style/class.public.css" type="text/css"/>
+<script src="{yun:}$config.sy_weburl{/yun}/data/plus/job.cache.js" type="text/javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/data/plus/city.cache.js" type="text/javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/class.public.js" type="text/javascript"></script> 
+    <div class=right_box>
+      <div class=admincont_box>
+       <div class="com_tit">
+       <span class="com_tit_span">搜人才</span> 
+       </div>
+    <div class="ps_box">   
+    <form action='index.php' method="get" id="form">
+	<input name='c' value='resume' type='hidden'>
+        <div class="ps_select fl">      
+             <div class="ps_class fl">
+                  <input type="hidden" name="job_post" id="job_post" value="{yun:}$smarty.get.job_post{/yun}"/>
+		          <input class="ps_class_bx " type="button"  value="{yun:}if $job_name[$smarty.get.job_post]{/yun}{yun:}$job_name[$smarty.get.job_post]{/yun}{yun:}else{/yun}请选择职位类别{yun:}/if{/yun}" onclick="index_job(1,'#workadds_job','#job_post','left:100px;top:100px; position:absolute;','{yun:}$smarty.get.job_post{/yun}');" id="workadds_job">
+             </div>
+             <div class="ps_class fl">
+                 <input type="button" class="ps_class_city" value="{yun:}if $city_name[$smarty.get.cityin]{/yun}{yun:}$city_name[$smarty.get.cityin]{/yun}{yun:}else{/yun}请选择工作地区{yun:}/if{/yun}"  id="city" onclick="index_city(1, '#city', '#cityid');">
+	             <input type="hidden" name="cityin" id="cityid" value="{yun:}$smarty.get.cityin{/yun}" />
+             </div>
+             <div class="ps_class_exe fl">
+                  <input class="ps_exe" type="button" id="exp" value="{yun:}if $userclass_name[$smarty.get.exp]{/yun}{yun:}$userclass_name[$smarty.get.exp]{/yun}{yun:}else{/yun}请选择工作年限{yun:}/if{/yun}" onclick="search_show('job_exp');"/>
+                  <input type="hidden"  id="expid" name="exp" value="{yun:}$smarty.get.exp{/yun}"/>
+                  <ul class="ps_tm_list tm_list" style="display:none;" id="job_exp">
+					{yun:}foreach from=$userdata.user_word item=v key=key{/yun}
+                    <li><a href="javascript:;" onclick="selects('{yun:}$v{/yun}','exp','{yun:}$userclass_name[$v]{/yun}');">{yun:}$userclass_name[$v]{/yun}</a></li>
+                    {yun:}/foreach{/yun}						
+                  </ul>
+             </div>
+         
+              <div class="ps_class_exe fl">
+                  <input class="ps_exe" type="button" value="{yun:}if $userclass_name[$smarty.get.edu]{/yun}{yun:}$userclass_name[$smarty.get.edu]{/yun}{yun:}else{/yun}请选择最高学历{yun:}/if{/yun}" id="edu" onclick="search_show('job_edu');"/>
+                  <input type="hidden" id="eduid" name="edu" value="{yun:}$smarty.get.edu{/yun}"/>
+                  <ul class="ps_tm_list tm_list" style="display:none;" id="job_edu">
+					 <li><a href="javascript:;" onclick="selects('','edu','不限');">不限</a></li>
+					 {yun:}foreach from=$userdata.user_edu item=v key=key{/yun}
+                    <li><a href="javascript:;" onclick="selects('{yun:}$v{/yun}','edu','{yun:}$userclass_name[$v]{/yun}');">{yun:}$userclass_name[$v]{/yun}</a></li>
+                    {yun:}/foreach{/yun}
+                  </ul>
+             </div>
+			 </div>
+         <div class="ps_select fl">
+             <div class="ps_class_exe fl">
+                  {yun:}if $smarty.get.sex{/yun}
+    			{yun:}foreach item=v key=j from=$arr_data.sex{/yun}
+                    {yun:}if $j eq $smarty.get.sex{/yun}
+                    <input type="button" value="{yun:}$v{/yun}" class="ps_exe" id="sex" onClick="search_show('job_sex');">
+                    <input name="sex" type="hidden" id="sexid" value="{yun:}$j{/yun}">
+                    {yun:}/if{/yun}
+                {yun:}/foreach{/yun}
+            {yun:}else{/yun}
+                <input type="button" value="请选择性别" class="ps_exe" id="sex" onClick="search_show('job_sex');">
+                <input name="sex" type="hidden" id="sexid" value="">
+            {yun:}/if{/yun}            
+             <ul class="ps_tm_list tm_list" style="display:none;" id="job_sex">
+              <li><a href="javascript:;" onClick="selects('','sex','不限')">不限</a> </li>
+              {yun:}foreach from=$arr_data.sex key=j item=v{/yun}
+              <li><a href="javascript:;" onClick="selects('{yun:}$j{/yun}','sex','{yun:}$v{/yun}')">{yun:}$v{/yun}</a> </li>             
+              {yun:}/foreach{/yun}              
+                </ul>
+             </div>
+             <div class="ps_class_exe fl">
+                  <input class="ps_exe" type="button" value="{yun:}if $uptime[$smarty.get.uptime]{/yun}{yun:}$uptime[$smarty.get.uptime]{/yun}{yun:}else{/yun}请选择更新时间{yun:}/if{/yun}" id="uptime" onclick="search_show('job_uptime');"/>
+                  <input type="hidden" id="uptimeid" value="{yun:}$smarty.get.uptime{/yun}" name="uptime"/>
+					  <ul class="ps_tm_list tm_list" style="display:none;" id="job_uptime">
+					  <li><a href="javascript:;" onclick="selects('','uptime','不限');">不限</a></li>
+					  {yun:}foreach from=$uptime item=v key=key{/yun} 
+					  <li><a href="javascript:;" onclick="selects('{yun:}$key{/yun}','uptime','{yun:}$v{/yun}');">{yun:}$v{/yun}</a></li>
+					  {yun:}/foreach{/yun}
+                     </ul>
+             </div>
+       
+             <div class="resume_xz fl" style="padding-top:10px;">
+             	  <span class="fl">月薪范围：</span>
+                  <a href="{yun:}$config.sy_weburl{/yun}/member/index.php?c=resume&maxsalary=2000" class="resume_xzfw">2000以下</a>
+             	  <a href="{yun:}$config.sy_weburl{/yun}/member/index.php?c=resume&minsalary=2000&maxsalary=4000" class="resume_xzfw">2000-4000</a>
+             	  <a href="{yun:}$config.sy_weburl{/yun}/member/index.php?c=resume&minsalary=4000&maxsalary=6000" class="resume_xzfw">4000-6000</a>
+             	  <a href="{yun:}$config.sy_weburl{/yun}/member/index.php?c=resume&minsalary=6000&maxsalary=8000" class="resume_xzfw">6000-8000</a>
+             	  <a href="{yun:}$config.sy_weburl{/yun}/member/index.php?c=resume&minsalary=8000&maxsalary=10000" class="resume_xzfw">8000-10000</a>
+             	  <a href="{yun:}$config.sy_weburl{/yun}/member/index.php?c=resume&minsalary=10000" class="resume_xzfw">10000以上</a>
+             	  <input  type="text" id="min" name="minsalary" size="6" value="{yun:}if $smarty.get.minsalary{/yun}{yun:}$smarty.get.minsalary{/yun}{yun:}/if{/yun}" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" class="resume_xz_text"/>
+                  <span class="resume_xz_line">-</span>
+                  <input  type="text" id="max" name="maxsalary" size="6" value="{yun:}if $smarty.get.maxsalary{/yun}{yun:}$smarty.get.maxsalary{/yun}{yun:}/if{/yun}" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" class="resume_xz_text"/>
+             </div>
+             <div class="search_user_text_s fl">
+                  <input type="text"    placeholder="输入要搜索的关键字"    class="search_user_but_text fl" value="{yun:}$smarty.get.keyword{/yun}" name="keyword">
+                  <input type="submit" value="搜索" class="search_user_but_text_bth fl">  
+                  <a href="index.php?c=resume" class="search_user_but_text_qk fl">清空所选条件</a>
+             </div>
+			 </div>
+            </form>
+         
+           </div>
+         {yun:}if $total!=0{/yun} 
+         <div class="ps_head fl">
+              <div class="ps_head_ft fl"><div class="ps_head_cn fl"></div><span class="fl">简历列表</span></div>
+              <div class="ps_head_rt fr">
+                  <input type="checkbox" value="1" {yun:}if $smarty.get.pic{/yun}checked{yun:}/if{/yun} class="search_user_cont_h1_ck" name='pic' id='pic' onclick="javascript:window.location.href='{yun:}if $smarty.get.pic{/yun}{yun:}searchurl m=member c=resume untype='pic'{/yun}{yun:}else{/yun}{yun:}searchurl m=member c=resume pic=1{/yun}{yun:}/if{/yun}'"><label for="pic"> <span class="search_user_cont_h1_right_s">有照片</span></label>
+                  <input type="checkbox" value="1" class="search_user_cont_h1_ck" {yun:}if $smarty.get.idcard{/yun}checked{yun:}/if{/yun} name='idcard' id='idcard' onclick="javascript:window.location.href='{yun:}if $smarty.get.idcard{/yun}{yun:}searchurl m=member c=resume untype='idcard'{/yun}{yun:}else{/yun}{yun:}searchurl m=member c=resume idcard=1{/yun}{yun:}/if{/yun}'"> <label for="idcard"> <span class="search_user_cont_h1_right_s" >有身份验证</span></label>
+              </div>
+         </div>
+         <div class="ps_ct fl">
+             <table cellpadding="0" cellspacing="0" border="0" style="font-size:13px;">
+                   
+                   <tr><th width="auto">姓名</th>
+                   <th width="200">职位意向</th>
+                   <th width="auto">工作经验</th>
+                   <th width="auto">学历</th>
+                   <th width="auto">地区</th>
+                   <th width="auto">更新时间</th></tr>
+                     {yun:}userlist limit=20 minsalary='auto.minsalary' maxsalary='auto.maxsalary' noid=1 idcard='auto.idcard' edu='auto.edu' order='auto.order' work='auto.work' exp='auto.exp' sex='auto.sex' keyword='auto.keyword' hy='auto.hy' cityin='auto.cityin' adtime='auto.adtime' jobids='auto.jobids' pic='auto.pic' typeids='auto.typeids' type='auto.type' job1='auto.job1' job1_son='auto.job1_son' job_post='auto.job_post'  uptime='auto.uptime' post_len=14 ispage=1 islt=3 item=user key=key name=userlist1{/yun}
+                  
+                    <tr><td align="left"><a class="ps_ct_nm" href="{yun:}url m=resume c=search c=show id=$user.id{/yun}" target="_blank">{yun:}$user.username_n{/yun}</a><span class="sex_n">
+                    （{yun:}$arr_data['sex'][$user.sex]{/yun}， {yun:}if $user.birthday{/yun}{yun:}$time-$user.birthday{/yun}{yun:}else{/yun}{yun:}$time-$date{/yun}{yun:}/if{/yun}岁 ）
+                    </span> 
+                        {yun:}if $user.idcard_status=='1'{/yun}<img src="{yun:}$style{/yun}/images/sf.png" title="身份已认证"  class="user_rz_img png fl">{yun:}/if{/yun}
+                        {yun:}if $user.ispic{/yun}<img src="{yun:}$style{/yun}/images/profile.png" title="有形象照" class="user_rz_img png fl">{yun:}/if{/yun}</td>
+                        <td width="300" align="left"><span class="yxjob_name">{yun:}$user.job_post_n{/yun}</span></td>
+                        <td>{yun:}$user.exp_n{/yun}</td>
+                        <td>{yun:}$user.edu_n{/yun}</td>
+                        <td>{yun:}$user.job_city_one{/yun}-{yun:}$user.job_city_two{/yun}</td>
+                        <td>{yun:}if $user.time=='今天'||$user.time=='昨天'{/yun} <span style="color:red;">{yun:}$user.time{/yun}</span> {yun:}else{/yun}{yun:}$user.time{/yun}{yun:}/if{/yun} </td></tr>                      
+                    {yun:}/userlist{/yun}
+             </table>
+         </div>
+         {yun:}/if{/yun}
+         	{yun:}if $total==0{/yun} 
+	     <div class="member_no_content">没有找到合适的简历。</div>
+	       {yun:}/if{/yun}
+      <div class="clear"></div>
+	   {yun:}if $pagenav{/yun}
+	    <div class="search_pages" style="width:100%;text-align:center;"><div class="pages">{yun:}$pagenav{/yun}</div></div>
+       {yun:}/if{/yun}
+       </div>
+    </div>
+  </div>
+   </div>	
+<script>
+	$(document).ready(function(){
+		$("#form").submit(function(e){
+			var min = $("#min").val();
+			var max = $("#max").val();
+			if(min && max && parseInt(max) < parseInt(min)){
+				$("#min").val(max);
+				$("#max").val(min);
+			}
+		});
+	});
+	
+</script>
+<script type="text/javascript">  
+  if( !('placeholder' in document.createElement('input')) ){  
+   
+    $('input[placeholder],textarea[placeholder]').each(function(){   
+      var that = $(this),   
+      text= that.attr('placeholder');   
+      if(that.val()===""){   
+        that.val(text).addClass('placeholder');   
+      }   
+      that.focus(function(){   
+        if(that.val()===text){   
+          that.val("").removeClass('placeholder');   
+        }   
+      })   
+      .blur(function(){   
+        if(that.val()===""){   
+          that.val(text).addClass('placeholder');   
+        }   
+      })   
+      .closest('form').submit(function(){   
+        if(that.val() === text){   
+          that.val('');   
+        }   
+      });   
+    });   
+  }  
+</script> 
+{yun:}include file="$tplstyle/public_search/index_search.htm"{/yun}
+{yun:}include file="$comstyle/yqms.htm"{/yun}
+{yun:}include file="$comstyle/footer.htm"{/yun}

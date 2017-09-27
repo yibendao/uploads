@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link href="images/reset.css" rel="stylesheet" type="text/css" />
+<link href="images/system.css" rel="stylesheet" type="text/css" />  
+<link href="images/table_form.css" rel="stylesheet" type="text/css" />
+<title>后台管理</title>
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script>
+<script src="js/admin_public.js" language="javascript"></script> 
+<link href="images/blue.css" rel="stylesheet">
+<link href="images/uploadify.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="{yun:}$config.sy_weburl{/yun}/js/jquery.uploadify-3.1.min.js"></script> 
+<script> 
+$(document).ready(function(e) {
+	$("#buttonbtn").live("click",function(){
+		layer.confirm("确定需要重新上传？",function(){ 
+			var names = document.getElementsByName("id[]");
+			var i=0;
+			var ids='';
+			for(i;i<names.length;i++){
+				if(ids==""){ids=names[i].value;}else{ids=ids+","+names[i].value;}
+			}
+			$.post("index.php?m=admin_company&c=mshowdel",{ids:ids},function(msg){ 
+				window.location.href='index.php?m=admin_company&c=mshow';window.event.returnValue = false;return false;
+			}); 
+		});
+	})
+});
+var img_id_upload=new Array();
+var i=0;
+$(function() {
+	$('#file_upload').uploadify({
+		'auto':false,
+		'removeTimeout':0,
+		'swf':'{yun:}$config.sy_weburl{/yun}/js/uploadify.swf',
+		'uploader':'{yun:}$config.sy_weburl{/yun}/index.php?c=savecompic',
+		'method':'post',
+		'buttonText':'选择图片',
+		'multi': true,
+		'uploadLimit':10,
+		'fileTypeDesc':'Image Files',
+		'fileTypeExts':'*.gif; *.jpg; *.png; *.jpeg',
+		'fileSizeLimit':'20000KB',
+		'onUploadSuccess':function(file,data,response){
+			if(data!='2'){
+				var type=data.split("||");
+				var html="<li><div class=\"edit_photo_box\"><div class=\"edit_photo_pic\"><a href=\"javascript:void(0)\"><img id=\""+type[2]+"\" class=\"photo-slt\" width=\"220\" height=\"180\" alt=\""+type[0]+"\" src=\"."+type[1]+"\" imgangle=\"0\"></a></div></div><div class=\"edit_photo_value\"><p><label for=\"photo-title\"> <div class=\"com_photo_name\">环境名称：</div></label><input id=\"title_"+type[2]+"\" class=\"form-input\" type=\"text\" value=\""+type[0]+"\" name=\"title_"+type[2]+"\" maxlength=\"50\"><span id=\"span_title_title_"+type[2]+"\" style=\"display: none;\"></span></p><input name='id[]' type='hidden' value='"+type[2]+"'/></div></li>";
+				$("#albums_pic_list").append(html);
+			} 
+		},
+		'onQueueComplete' : function(queueData) {
+			$(".com_banner_show_box").hide();
+			$("#albums_pic_list").wrap("<form action='index.php?m=admin_company&c=mshowsave' target=\"supportiframe\" method='post' id=\"myform\"></form>");		
+			$("#myform").append("<div class=\"sub_btn\" style='text-align:center;width:100%;'><input class=\"com_add_show_bth com_submit\" type=\"submit\" value=\"保存文件\" name=\"submitbtn\">&nbsp;&nbsp;<input class=\"com_add_show_bth com_add_show_bth2\" type=\"button\" value=\"重新上传\" id=\"buttonbtn\"><input type=\"hidden\" name=\"pytoken\" value=\"{yun:}$pytoken{/yun}\"><input type=\"hidden\" name=\"comid\" value=\"{yun:}$smarty.get.comid{/yun}\"></div>");
+			$("#myform").before("<iframe id=\"supportiframe\" name=\"supportiframe\" onload=\"returnmessage('supportiframe');\" style=\"display:none\"></iframe>"); 
+		}   
+	});
+});
+</script>
+</head>
+<body class="body_ifm">
+<div class="infoboxp">
+<div class="infoboxp_top_bg"></div>
+
+<div class="infoboxp_top">
+
+	<span class="complay_top_span fl">上传企业环境</span>
+</div>
+    <div class="admin_table_border ">
+    <div class="table-list">
+    <table width="100%">
+     <tr>
+     <td style="border-bottom:none;">
+<div class="com_body">
+ <div class="com_banner_show_box">
+  <div class="index_photo_new fltL mt10">
+  <div class="com_add_show_box">
+	<input type="file" name="file_upload" id="file_upload" />选择需要上传的图片,点击立即上传
+	</div>
+	<div class="com_add_show">
+	<a href="javascript:void(0)" onclick="$('#file_upload').uploadify('settings', 'formData',{'typeCode':'1215154',uid:{yun:}$smarty.get.comid{/yun}});$('#file_upload').uploadify('upload','*')" class="com_add_show_bth com_submit">立即上传</a> 
+	<a href="javascript:$('#file_upload').uploadify('cancel','*')" class="com_add_show_bth com_add_show_bth2">重置上传队列</a> </div>
+  </div>
+</div>
+<div class="clear"></div>
+<div  class='photos-every-edit'>
+  <ul id='albums_pic_list'></ul>
+</div>
+</div>
+</div>
+         </td>   </tr>
+    </table>
+</div>
+</div>
+<style>
+.table-list tr:hover,.table-list table tbody tr:hover{ background:none}
+</style>
+</body>
+</html>

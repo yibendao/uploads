@@ -1,0 +1,37 @@
+{yun:}include file="$wapstyle/member/header.htm"{/yun} 
+<div class="main_member_cot_box">
+<div class="wap_member_comp_h1 ">
+<span>谁看过我的简历</span>
+</div>
+
+{yun:}foreach item=v from=$rows{/yun}
+<div class="wap_member_msg">
+<div class="com_member_hr_p1">
+<span>
+{yun:}if $v.type==2{/yun}
+<a href="{yun:}url m=wap c=company a=show id=$v.com_id{/yun}" class="wap_member_com_name  com_member_hr_cblue">{yun:}$v.com_name{/yun}</a>
+{yun:}/if{/yun}
+</span>
+</div>
+ <div class="user_member_box">
+ <div class="wap_member_msg_p1"> <span class="member_c9">简历名称：</span>{yun:}$v.resume_name{/yun}</div>
+ <div class="com_member_hr_p1"><span class="member_c9">浏览时间：</span>{yun:}$v.datetime|date_format:"%Y-%m-%d"{/yun}</div>
+ </div>
+<div class="com_member_hr_cz">
+<a href="javascript:void(0)" onclick="isdel('index.php?c=look&del={yun:}$v.id{/yun}')" class="yun_member_hr_bth">删除</a>
+{yun:}if $v.type==2{/yun}
+<a href="{yun:}url m=wap c=company a=show id=$v.com_id{/yun}" class="yun_member_hr_bth">查看详情</a>
+{yun:}/if{/yun}
+</div>
+</div>
+{yun:}/foreach{/yun}
+
+
+<div class="pages"> {yun:}$pagenav{/yun}</div>
+    {yun:}if $rows|@count<=0{/yun}
+<div class="wap_member_no">
+您暂时还没有信息<div><a class="wap_member_no_submit" href="{yun:}url m=wap c=job{/yun}">去搜索感兴趣的职位</a></div>
+</div>
+    {yun:}/if{/yun}
+</div>
+{yun:}include file="$wapstyle/footer.htm"{/yun} 

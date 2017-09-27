@@ -1,0 +1,40 @@
+{yun:}include file="$wapstyle/member/header.htm"{/yun} 
+<div class="main_member_cot_box">
+<div class="wap_member_comp_h1"><span>面试通知</span></div>
+{yun:}foreach item=v from=$rows{/yun}
+<div class="wap_member_Receive">
+
+<div class="wap_member_in_msg  wap_member_msg_after">
+<a href="index.php?c=invitecont&id={yun:}$v.id{/yun}" class="wap_member_link">
+<span class="wap_member_msg_name wap_member_msg_name_blod">{yun:}$v.fname{/yun}</span>
+<div class="wap_member_msg_ms">邀请你 {yun:}$v.intertime{/yun}  面试：【{yun:}$v.jobname{/yun}】</div>
+<div class="wap_member_msg_ms ">
+我的操作： {yun:}if $v.is_browse=="1"{/yun}
+<font color="#f60">尚未回复</font>
+{yun:}elseif $v.is_browse=="2"{/yun}
+<font color="#666">已查看</font>
+{yun:}elseif $v.is_browse=="3"{/yun} 
+	<font color="#008000">已同意</font>
+{yun:}elseif $v.is_browse=="4"{/yun}
+	<font color="#FF00000">已拒绝</font>
+{yun:}/if{/yun} 
+</div>
+</a>
+</div>
+
+
+</div>
+{yun:}foreachelse{/yun}
+<div class="wap_member_no">
+  <div class="wap_member_no_p1">
+  目前您暂未收到面试通知<div><a class="wap_member_no_submit" href="{yun:}url m=wap c=job{/yun}">立即投简历</a></div>
+  </div>
+
+
+</div>
+{yun:}/foreach{/yun}
+</section>
+<div class="pages"> {yun:}$pagenav{/yun}</div>
+</div>
+</div>
+{yun:}include file="$wapstyle/footer.htm"{/yun} 

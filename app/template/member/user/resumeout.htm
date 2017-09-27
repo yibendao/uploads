@@ -1,0 +1,96 @@
+{yun:}include file="$userstyle/header.htm"{/yun}
+<div class="yun_user_member_w1100">
+    {yun:}include file="$userstyle/left.htm"{/yun}
+    <div class="mian_right fltR mt12">
+       <div class="member_right_index_h1 fltL"> <span class="member_right_h1_span fltL">简历外发</span> <i class="member_right_h1_icon user_bg"></i></div>   
+       <div class="resume_box_list">
+        <div class="message_content" style="margin-top:0;">  
+            <div id="" class="resume_fk_box" style="margin-top:0;">
+            <iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe> 
+                <form name="MyForm" onsubmit="return check_out();" target="supportiframe" action="index.php?c=resumeout&act=send" method="post">
+                    <div class="yun_send_resume_list">
+                    <div class="yun_send_resume_list_name"><span class="yun_send_resume_list_x">*</span>将要发送的简历：</div>
+                  <div class="yun_send_resume_list_right" >
+                            <div class="yun_send_resume_list_r_box fltL">
+                                <input class="yun_send_resume_list_text" type="button" value="请选择简历" id="resume" onclick="search_show('job_resume');">
+                                <input type="hidden" id="resumeid" name="resume" value="" />
+                                <input type="hidden" id="resumename" name="resumename" value="" />
+                                <div class="yun_send_resume_list_box" style="display:none" id="job_resume">
+                                    <ul class="">
+                                        {yun:}foreach from=$rows item=resume{/yun}
+                                        <li><a href="javascript:;" onclick="select_resume('{yun:}$resume.id{/yun}','resume','{yun:}$resume.name{/yun}');">{yun:}$resume.name{/yun}</a></li>
+                                        {yun:}/foreach{/yun}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+               
+                        <div class="yun_send_resume_list">
+                    <div class="yun_send_resume_list_name"> <span class="yun_send_resume_list_x">*</span>企业的邮箱地址：</div>
+                      <div class="yun_send_resume_list_right" >
+                    <input type="text" class="yun_send_resume_txt" id="email" name="email" value="">
+                    </div>
+                    </div>
+                    
+                    
+                    
+                      <div class="yun_send_resume_list">
+                    <div class="yun_send_resume_list_name"><span class="yun_send_resume_list_x">*</span>应聘的企业名称：</div> 
+                      <div class="yun_send_resume_list_right" >
+                    <input type="text" class="yun_send_resume_txt" id="comname" name="comname" value="" maxlength="20"><i>（限20字）</i>
+                    </div>
+                    </div>
+                    <div class="yun_send_resume_list">
+                    <div class="yun_send_resume_list_name"><span class="yun_send_resume_list_x">*</span>应聘的职位名称：</div>
+                      <div class="yun_send_resume_list_right" >
+                    <input type="text" class="yun_send_resume_txt" id="jobname" name="jobname" value="" maxlength="20"><i>（限20字）</i>
+                    </div>
+                    </div>
+                    
+                     <div class="yun_send_resume_list">
+                    <div class="yun_send_resume_list_name">&nbsp;</div> 
+                       <div class="yun_send_resume_list_right" >
+                      <input type="submit" name="submit" class="yun_send_resume_bth uesr_submit" value="发送">
+                    </div>
+                      </div>
+                </form>
+            </div>
+        </div>
+       
+       
+       
+       
+       
+       
+       
+                <div class="List_Ope List_Title ">
+                    <span class="List_Title_span List_Title_w200" ><em class="List_Title_span_name">企业名称</em> </span>
+                    <span class="List_Title_span List_Title_w120" >职位名称</span>
+                    <span class="List_Title_span List_Title_w120" >接收人</span>
+                    <span class="List_Title_span List_Title_w140">邮箱</span>
+                    <span class="List_Title_span List_Title_w120">相关简历</span>
+                    <span class="List_Title_span List_Title_w80" >发送时间</span>
+                    <span class="List_Title_span List_Title_w80" >操作</span>
+                </div>
+                
+                {yun:}foreach from=$out item=item{/yun}
+                <div class="List_Ope List_Ope_bor">
+                    <span class="List_Title_span List_Title_w200"><em class="List_Title_span_name">{yun:}$item.comname{/yun}</em></span>
+                    <span class="List_Title_span List_Title_w120">{yun:}$item.jobname{/yun}</span>
+                    <span class="List_Title_span List_Title_w120">{yun:}$item.recipient{/yun}</span>
+                    <span class="List_Title_span List_Title_w140">{yun:}$item.email{/yun}</span>
+                    <span class="List_Title_span List_Title_w120">{yun:}$item.resume{/yun}</span>
+                    <span class="List_Title_span List_Title_w80">{yun:}$item.datetime|date_format:"%Y-%m-%d"{/yun}</span>
+                    <span class="List_Title_span List_Title_w80"><a href="javascript:void(0)" onclick="layer_del('确定要删除？','index.php?c=resumeout&act=del&id={yun:}$item.id{/yun}');" class="List_dete cblue"> 删除</a></span>
+                </div>
+                {yun:}foreachelse{/yun}
+                <div class="msg_no">
+                    暂无简历外发信息！
+                </div>
+                {yun:}/foreach{/yun}
+                <div class="diggg">{yun:}$pagenav{/yun}</div>
+               
+    </div>
+</div></div>
+{yun:}include file="$userstyle/footer.htm"{/yun}

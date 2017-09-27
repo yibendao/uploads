@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link href="images/reset.css" rel="stylesheet" type="text/css" />
+<link href="images/system.css" rel="stylesheet" type="text/css" />
+<link href="images/table_form.css" rel="stylesheet" type="text/css" />
+<script> var weburl = '{yun:}$config.sy_weburl{/yun}';</script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js"></script>
+<script src="js/check_public.js"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script>
+<script src="js/admin_public.js" language="javascript"></script>
+<script charset="utf-8" src="../js/kindeditor/kindeditor-min.js"></script>
+<script charset="utf-8" src="../js/kindeditor/lang/zh_CN.js"></script>
+<link rel="stylesheet" href="../js/kindeditor/themes/default/default.css" />
+<title>后台管理</title>
+<style>
+* {margin: 0 ;padding: 0;}
+body,div{ margin: 0 ;padding: 0;}
+</style>
+<script>
+KindEditor.ready(function(K) {
+	var editor = K.editor({
+		allowFileManager : true
+	});
+	K('#insertfile').click(function() {
+		editor.loadPlugin('insertfile', function() {
+			editor.plugin.fileDialog({
+				fileUrl : K('#url').val(),
+				clickFn : function(url, title) {
+					K('#url').val(url);
+					K('#span_url').html(url); 
+					editor.hideDialog();
+				}
+			});
+		});
+	});
+}); 
+ 
+function cksubmit(){
+	var name=$.trim($("#name").val());
+	var url=$.trim($("#url").val());
+	if(name==''){parent.layer.msg("文档名称不能为空！",2,8);return false;}
+	if(url==''){parent.layer.msg("请上传文档！",2,8);return false;}
+	
+	
+}
+</script>
+</head>
+<body class="body_ifm">
+<div class="infoboxp">
+<div class="infoboxp_top_bg"></div>
+<div class="infoboxp_top">
+<h6>详细信息</h6>
+       <div class="infoboxp_right">
+       <a href="index.php?m=hr" class="infoboxp_tj">文档列表</a>
+	   <a href="index.php?m=hrclass&c=add" class="infoboxp_send">添加类别</a>
+	   </div>
+</div>
+<div class="main_tag">
+<div class="tag_box"> 
+<iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe> 
+<form name="myform" target="supportiframe" action="index.php?m=hr&c=save" method="post" onSubmit="return cksubmit()">
+<table width="100%" class="table_form" style="background:#fff;">
+	<input class="input-text" name="yurl" type="hidden" value="{yun:}$row.url{/yun}"/> 
+	<input class="input-text" name="url" type="hidden" value="{yun:}$row.url{/yun}" id='url'/> 
+	<tr>
+	<th>文档名称：</th>
+		<td><input type="text" id="name" value="{yun:}$row.name{/yun}" name="name" class="input-text"></td>
+	</tr>
+	<tr>
+	<th>文档类别：</th>
+		<td>
+         
+        <div class="yun_admin_select_box yun_admin_select_boxw250 z_index13">
+        
+          {yun:}if $row.cid{/yun}
+          {yun:}foreach from=$t_class item=glist{/yun} 
+          {yun:}if $row.cid==$glist.id{/yun}
+          <input type="button" value="{yun:}$glist.name{/yun}" class="yun_admin_select_box_text" id="cid_name" onClick="select_click('cid');">
+          <input name="cid" type="hidden" id="cid_val" value="{yun:}$glist.id{/yun}">
+           
+          {yun:}/if{/yun}
+          {yun:}/foreach{/yun}
+          {yun:}else{/yun}
+          <input type="button" value="请选择" class="yun_admin_select_box_text" id="cid_name" onClick="select_click('cid');">
+           <input name="cid" type="hidden" id="cid_val" value="">
+               
+          {yun:}/if{/yun}  
+        
+                        
+           <div class="yun_admin_select_box_list_box yun_admin_select_box_list_boxw250 dn" id="cid_select"> {yun:}foreach from=$t_class item=glist{/yun} 
+           <div class="yun_admin_select_box_list"> <a href="javascript:;" onClick="select_new('cid','{yun:}$glist.id{/yun}','{yun:}$glist.name{/yun}')">{yun:}$glist.name{/yun}</a> </div>
+            {yun:}/foreach{/yun} </div>
+        </div>
+        
+        </td>
+	</tr>
+	<tr>
+	<th>是否显示：</th>
+		<td>
+        <div class="yun_admin_select_box yun_admin_select_boxw250" style="z-index:10;">
+       {yun:}if $row.is_show=='0'{/yun}
+                  <input type="button" value="不显示" class="yun_admin_select_box_text" id="is_show_name" onClick="select_click('is_show');">
+                  <input name="is_show" type="hidden" id="is_show_val" value="0">
+                   
+                  {yun:}else{/yun}
+                  <input type="button" value="显示" class="yun_admin_select_box_text" id="is_show_name" onClick="select_click('is_show');">
+                  <input name="is_show" type="hidden" id="is_show_val" value="1">
+                   
+                  {yun:}/if{/yun}
+                  <div class="yun_admin_select_box_list_box dn" id="is_show_select">
+                    <div class="yun_admin_select_box_list">
+                    <a href="javascript:;" onClick="select_new('is_show','1','显示')">显示</a>
+                    <a href="javascript:;" onClick="select_new('is_show','0','不显示')">不显示</a>
+                    </div>
+                   </div>
+                </div></td>
+	</tr>
+	<tr>
+		<th>上传文档：</th>
+		<td><span id="span_url" style="color:#444">{yun:}$row.url{/yun}</span><input type="button" id="insertfile" value="选择文档" /></td>
+	</tr>
+	<tr>
+    
+		<td align="center" colspan="4">
+        {yun:}if is_array($row){/yun} 
+		<input type="hidden" name="id" value="{yun:}$row.id{/yun}">	
+        <input class="admin_submit4" type="submit" name="submit" value="&nbsp;修 改&nbsp;" />
+        {yun:}else{/yun}
+        <input class="admin_submit4" type="submit" name="submit" value="&nbsp;添 加&nbsp;" />
+        {yun:}/if{/yun}
+		<input class="admin_submit4" type="reset" name="reset" value="&nbsp;重 置 &nbsp;" /></td>
+	</tr>
+</table>
+<input type="hidden" name="pytoken" value="{yun:}$pytoken{/yun}">
+</form>
+</div></div></div>
+</body>
+</html>

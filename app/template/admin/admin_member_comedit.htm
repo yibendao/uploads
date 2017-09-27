@@ -1,0 +1,432 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link href="images/reset.css" rel="stylesheet" type="text/css" />
+<link href="images/system.css" rel="stylesheet" type="text/css" />
+<link href="images/table_form.css" rel="stylesheet" type="text/css" />
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script>
+<script src="js/admin_public.js" language="javascript"></script>
+<script src="js/check_public.js"></script>
+<title>后台管理</title>
+</head>
+<body class="body_ifm">
+<div class="infoboxp">
+<div class="infoboxp_top_bg"></div>
+<div class="infoboxp_top">
+<h6 style="width:170px;">企业会员信息</h6>
+</div>
+<script charset="utf-8" src="{yun:}$config.sy_weburl{/yun}/js/kindeditor/kindeditor-min.js"></script>
+<script charset="utf-8" src="{yun:}$config.sy_weburl{/yun}/js/kindeditor/lang/zh_CN.js"></script>
+<script language="javascript">
+var weburl="{yun:}$config.sy_weburl{/yun}";
+var editor;
+KindEditor.ready(function(K) {
+	editor = K.create('#content', {
+		resizeType : 1,
+		allowPreviewEmoticons : false,
+		allowImageUpload : false,
+		items : [
+			'bold', 'italic', 'underline',
+			'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+			'insertunorderedlist']
+	});
+});
+function editrat(){
+	var ratingid = $("#rating_val").val();
+	var uid = $("#uid").val();
+	var pytoken = $('#pytoken').val();
+	$.post("index.php?m=admin_company&c=rating",{ratingid:ratingid,uid:uid,pytoken:pytoken},function(data){
+		if(data==1){
+			parent.layer.msg('操作成功！', 2, 9);
+		}else if(data==0){
+			layer.msg('会员级别没有改变！', 2, 9);
+		}else{
+			parent.layer.msg('网络繁忙，请稍后再试！', 2,8);
+		}
+
+	})
+}
+function cleartime(){
+	$("#vip_etime").val('');
+}
+function ckform(){ 
+	var email=$("input[name='email']").val();
+	if(email&&check_email(email)==false){
+		layer.msg('邮箱格式错误！',2,8);return false;
+	}
+	var moblie=$("input[name='moblie']").val();
+	if(moblie&&isjsMobile(moblie)==false){
+		layer.msg('手机格式错误！',2,8);return false;
+	}
+	var phoneone=$("input[name='phoneone']").val();
+	var phonetwo=$("input[name='phonetwo']").val();
+	var phonethree=$("input[name='phonethree']").val();
+	var phone=phoneone+'-'+phonetwo;
+	if((phoneone&&phonetwo=='')||(phoneone==''&&phonetwo)){
+		layer.msg('请填写完整固定电话！',2,8);return false;
+	}
+	if(phoneone&&phonetwo&&isjsTell(phone)==false){
+		layer.msg('固定电话格式错误！',2,8);return false;
+	}
+	loadlayer();
+}
+function selectsmoney(id,moneyname,name){
+	$("#moneytype_select").hide();
+	$("#moneytype_name").val(name);
+	$("#moneytype_val").val(id);
+	$(".moneyname").html(moneyname);
+} 
+</script>
+<div class="main_tag" >
+<div class="admin_table_border">
+<iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe>
+<form name="myform" onsubmit="return ckform();" target="supportiframe" action="index.php?m=admin_company&c={yun:}if is_array($com_info){/yun}edit{yun:}else{/yun}add{yun:}/if{/yun}" method="post" enctype="multipart/form-data">
+<table width="100%" class="table_form table_form_thr" style="background:#fff;">
+<tr><td colspan="4"bgcolor="#f0f6fb"><div class="admin_bold">基本资料</div></td></tr>
+<tr>
+		<th width="130" align="left">会员级别：</th>
+		<td width="400">
+        <div class="yun_admin_select_box">
+        
+        {yun:}foreach from=$rating_list item=ratings{/yun}
+        	{yun:}if $ratings.id==$statis.rating{/yun}
+                <input type="button" value="{yun:}$ratings.name{/yun}" class="yun_admin_select_box_text" id="rating_name" onClick="select_click('rating');">
+                <input name="ratingid" type="hidden" id="rating_val" value="{yun:}$ratings.id{/yun}">
+            {yun:}/if{/yun}
+        {yun:}/foreach{/yun}
+        
+            <div class="yun_admin_select_box_list_box dn" id="rating_select">
+            {yun:}foreach from=$rating_list item=ratings{/yun}
+                 <div class="yun_admin_select_box_list">
+                 <a href="javascript:;" onClick="select_new('rating','{yun:}$ratings.id{/yun}','{yun:}$ratings.name{/yun}')">{yun:}$ratings.name{/yun}</a>
+                 </div> 
+            {yun:}/foreach{/yun}
+            </div>
+        </div>
+        
+        
+        <a href="javascript:;" onClick="editrat();" class="admin_comedity_text_a" style="margin-top:10px">点击修改会员级别</a>
+        </td>
+		<th width="140">到期时间：</th>
+		<td>
+        <link rel="stylesheet" href="{yun:}$config.sy_weburl{/yun}/js/datepicker/css/font-awesome.min.css" type="text/css">  
+	<script src="{yun:}$config.sy_weburl{/yun}/js/datepicker/foundation-datepicker.min.js"></script>
+        <input id="vip_etime" class="admin_comedity_text" type="text" readonly size="20" value="{yun:}if $statis.vip_etime>0{/yun}{yun:}$statis.vip_etime|date_format:'%Y-%m-%d'{/yun}{yun:}/if{/yun}" name="vip_etime">
+        <script type="text/javascript">
+		$('#vip_etime').fdatepicker({format: 'yyyy-mm-dd',startView:4,minView:2});   
+        </script>
+        <a href="javascript:;" onClick="cleartime();">无限期</a>
+		</td>
+	</tr>
+<tr class="admin_table_trbg" >
+		<th>用户名：</th>
+		<td> <input type="text"  value="{yun:}$com_info.username{/yun}" name="username" id="username" class="admin_comedity_text"><a href="javascript:;" onClick="editname('{yun:}$com_info.username{/yun}');" class="admin_comedity_text_a">修改用户名</a></td>
+         {yun:}if is_array($com_info){/yun}
+        <th>注册IP：</th>
+		<td>{yun:}$com_info.reg_ip{/yun}
+		<font color="gray"></font>
+		</td>
+        {yun:}/if{/yun}
+	</tr>
+	<tr>
+		<th>密码：</th>
+		<td><input type="text" value="" name="password" class="admin_comedity_text">
+		<span class="admin_web_tip">不修改请留空!</span>
+		</td>
+        {yun:}if is_array($com_info){/yun}
+        <th>注册时间：</th>
+		<td>{yun:}$com_info.reg_date|date_format:'%Y-%m-%d'{/yun}
+		<font color="gray"></font>
+		</td>
+        {yun:}/if{/yun}
+	</tr>
+<tr class="admin_table_trbg" >
+		<th>E-mail：</th>
+		<td><input type="text" value="{yun:}$row.linkmail{/yun}" name="email" class="admin_comedity_text">
+		<font color="gray"></font>
+		</td>
+        {yun:}if is_array($com_info){/yun}
+        	<th>登录IP：</th>
+		<td>{yun:}$com_info.login_ip{/yun}
+		<font color="gray"></font>
+		</td>
+        {yun:}/if{/yun}
+	</tr>
+		<tr>
+		<th>联系手机：</th>
+		<td><input type="text" value="{yun:}$row.linktel{/yun}" name="moblie" class="admin_comedity_text">
+		<font color="gray"></font>
+        </td>
+        {yun:}if is_array($com_info){/yun}
+        	<th>最近登录时间：</th>
+		<td>{yun:}$com_info.login_date|date_format:'%Y-%m-%d'{/yun}
+		<font color="gray"></font>
+
+		</td>
+        {yun:}/if{/yun}
+	</tr>
+ <tr class="admin_table_trbg" >
+		<th>企业地址：</th>
+		<td><input type="text" value="{yun:}$row.address{/yun}" size="45" name="address" class="input-text">
+		<font color="gray"></font>
+        {yun:}if is_array($com_info){/yun}
+        <th>登录次数：</th>
+		<td>{yun:}$com_info.login_hits{/yun}
+		<font color="gray"></font>
+		</td>
+        {yun:}/if{/yun}
+	</tr>
+    <tr>
+		<th>企业全称：</th>
+		<td><input type="text" size="45" name="name" class="input-text" value="{yun:}$row.name{/yun}"></td>
+		<th>从事行业：</th>
+		<td>
+        <div class="yun_admin_select_box zindex100">
+            {yun:}if $row.hy{/yun}
+                 {yun:}foreach from=$industry_index key=j item=v{/yun}
+                    {yun:}if $row.hy==$v{/yun}
+                    <input type="button" value="{yun:}$industry_name[$v]{/yun}" class="yun_admin_select_box_text" id="hy_name" onClick="select_click('hy');">
+                    <input name="hy" type="hidden" id="hy_val" value="{yun:}$v{/yun}">
+                    {yun:}/if{/yun}
+                {yun:}/foreach{/yun}
+            {yun:}else{/yun}
+                <input type="button" value="请选择" class="yun_admin_select_box_text" id="hy_name" onClick="select_click('hy');">
+                <input name="hy" type="hidden" id="hy_val" value="">
+            {yun:}/if{/yun}
+            
+            <div class="yun_admin_select_box_list_box dn" id="hy_select">     
+                {yun:}foreach from=$industry_index key=j item=v{/yun}
+                <div class="yun_admin_select_box_list">
+                    <a href="javascript:;" onClick="select_new('hy','{yun:}$v{/yun}','{yun:}$industry_name[$v]{/yun}')">{yun:}$industry_name[$v]{/yun}</a>
+                </div>                    
+                {yun:}/foreach{/yun}
+            </div>
+        </div>
+        </td>
+	</tr>
+   <tr class="admin_table_trbg" >
+		<th>企业性质：</th>
+		<td>
+          <div class="yun_admin_select_box zindex100">
+            {yun:}if $row.pr{/yun}
+                 {yun:}foreach from=$comdata.job_pr key=j item=v{/yun}
+                    {yun:}if $row.pr==$v{/yun}
+                    <input type="button" value="{yun:}$comclass_name[$v]{/yun}" class="yun_admin_select_box_text" id="pr_name" onClick="select_click('pr');">
+                    <input name="pr" type="hidden" id="pr_val" value="{yun:}$v{/yun}">
+                    {yun:}/if{/yun}
+                {yun:}/foreach{/yun}
+            {yun:}else{/yun}
+                <input type="button" value="请选择" class="yun_admin_select_box_text" id="pr_name" onClick="select_click('pr');">
+                <input name="pr" type="hidden" id="pr_val" value="">
+            {yun:}/if{/yun}
+            
+            <div class="yun_admin_select_box_list_box dn" id="pr_select">     
+                {yun:}foreach from=$comdata.job_pr key=j item=v{/yun}
+                <div class="yun_admin_select_box_list">
+                    <a href="javascript:;" onClick="select_new('pr','{yun:}$v{/yun}','{yun:}$comclass_name[$v]{/yun}')">{yun:}$comclass_name[$v]{/yun}</a>
+                </div>                    
+                {yun:}/foreach{/yun}
+            </div>
+        </div>
+          
+          
+          </td>
+		<th>所在地：</th>
+		<td>
+        <div class="yun_admin_select_box yun_admin_select_boxw130">
+        <input type="button" id="province" class="yun_admin_select_box_text" onclick="search_show('job_province');" value="{yun:}if $city_name[$row.provinceid]{/yun}{yun:}$city_name[$row.provinceid]{/yun}{yun:}else{/yun}请选择{yun:}/if{/yun}">
+        <input type="hidden" id="provinceid" name="provinceid" value="{yun:}$row.provinceid{/yun}" />
+        <div class="yun_admin_select_box_list_box yun_admin_select_box_list_boxw130 dn" id="job_province">
+        {yun:}foreach from=$city_index key=j item=v{/yun}     
+        <div class="yun_admin_select_box_list"><a href="javascript:;" onclick="select_city('{yun:}$v{/yun}','province','{yun:}$city_name[$v]{/yun}','cityid','city');">{yun:}$city_name[$v]{/yun}</a></div>
+        {yun:}/foreach{/yun}
+        </div>
+        </div>
+        <div class="yun_admin_select_box yun_admin_select_boxw130">
+        <input type="button" id="cityid" value="{yun:}if $row.cityid{/yun}{yun:}$city_name[$row.cityid]{/yun}{yun:}else{/yun}请选择{yun:}/if{/yun}" class="yun_admin_select_box_text" onclick="search_show('job_cityid');">
+        <input type="hidden" id="cityidid" name="cityid" value="{yun:}$row.cityid{/yun}"/>
+        <div class="yun_admin_select_box_list_box yun_admin_select_box_list_boxw130 dn" id="job_cityid">
+        {yun:}foreach from=$city_type[$row.provinceid] key=j item=v{/yun}
+        <div class="yun_admin_select_box_list"><a href="javascript:;" onclick="select_city('{yun:}$v{/yun}','cityid','{yun:}$city_name[$v]{/yun}','three_city','city');">{yun:}$city_name[$v]{/yun}</a></div>
+        {yun:}/foreach{/yun}
+        </div>
+        </div>
+        <div class="yun_admin_select_box yun_admin_select_boxw130 {yun:}if $row.three_cityid<1{/yun}dn{yun:}/if{/yun}" id="cityshowth">
+        <input type="button" id="three_city" class="yun_admin_select_box_text" onclick="three_city_show('job_three_city');" value="{yun:}if $row.three_cityid{/yun}{yun:}$city_name[$row.three_cityid]{/yun}{yun:}else{/yun}请选择{yun:}/if{/yun}">
+        <input type="hidden" id="three_cityid" name="three_cityid" value="{yun:}$row.three_cityid{/yun}" />
+        <div class="yun_admin_select_box_list_box yun_admin_select_box_list_boxw130 dn" id="job_three_city">
+        {yun:}foreach from=$city_type[$row.cityid] key=j item=v{/yun}
+        <div class="yun_admin_select_box_list"><a href="javascript:;" onclick="selects('{yun:}$v{/yun}','three_city','{yun:}$city_name[$v]{/yun}');">{yun:}$city_name[$v]{/yun}</a></div>
+        {yun:}/foreach{/yun}
+        </div>
+        </div>
+        
+        
+           
+            </td>
+	</tr>
+    <tr>
+		<th>企业规模：</th>
+		<td>
+                       
+          
+          <div class="yun_admin_select_box z_index7">
+            {yun:}if $row.mun{/yun}
+                 {yun:}foreach from=$comdata.job_mun key=j item=v{/yun}
+                    {yun:}if $row.mun==$v{/yun}
+                    <input type="button" value="{yun:}$comclass_name[$v]{/yun}" class="yun_admin_select_box_text" id="job_mun_name" onClick="select_click('job_mun');">
+                    <input name="mun" type="hidden" id="job_mun_val" value="{yun:}$v{/yun}">
+                    {yun:}/if{/yun}
+                {yun:}/foreach{/yun}
+            {yun:}else{/yun}
+                <input type="button" value="请选择" class="yun_admin_select_box_text" id="job_mun_name" onClick="select_click('job_mun');">
+                <input name="mun" type="hidden" id="job_mun_val" value="">
+            {yun:}/if{/yun}
+            
+            <div class="yun_admin_select_box_list_box dn" id="job_mun_select">     
+                {yun:}foreach from=$comdata.job_mun key=j item=v{/yun}
+                <div class="yun_admin_select_box_list">
+                    <a href="javascript:;" onClick="select_new('job_mun','{yun:}$v{/yun}','{yun:}$comclass_name[$v]{/yun}')">{yun:}$comclass_name[$v]{/yun}</a>
+                </div>                    
+                {yun:}/foreach{/yun}
+            </div>
+        </div>
+          
+          
+          </td>
+		<th>固定电话：</th>
+		<td>
+			<input type="text" name="phoneone" class="admin_text_w100" value="{yun:}$row.phoneone{/yun}"  onKeyUp="this.value=this.value.replace(/[^0-9]/g,'')"  maxlength="4"/>
+			<input type="text" name="phonetwo" class="admin_text_w150" value="{yun:}$row.phonetwo{/yun}" onKeyUp="this.value=this.value.replace(/[^0-9]/g,'')"maxlength="8"  />
+			<input type="text" name="phonethree"  class="admin_text_w100" value="{yun:}$row.phonethree{/yun}" onKeyUp="this.value=this.value.replace(/[^0-9]/g,'')" />
+		</td>
+	</tr>
+    <tr class="admin_table_trbg" >
+		<th>注册资金：</th>
+		<td>
+		<div class="yun_admin_select_box z_index6" style="width:80px">
+			<input type="button" value="{yun:}if $row.moneytype=='2'{/yun}美元{yun:}else{/yun}人民币{yun:}/if{/yun}" class="yun_admin_select_box_text" id="moneytype_name" onClick="select_click('moneytype');">
+			<input name="moneytype" type="hidden" id="moneytype_val" value="{yun:}$row.moneytype{/yun}">
+			<div class="yun_admin_select_box_list_box dn" id="moneytype_select"  style="width:80px"> 
+                <div class="yun_admin_select_box_list">
+                    <a href="javascript:void(0);" onClick="selectsmoney('moneytype','万元','人民币')">人民币</a>
+                    <a href="javascript:void(0);" onClick="selectsmoney('moneytype','万美元','美元')">美元</a>
+                </div>                 
+            </div>
+		</div>
+		<input type="text" name="money" size="10" class="admin_comedity_text" value="{yun:}if $row.money==''{/yun}0{yun:}else{/yun}{yun:}$row.money{/yun}{yun:}/if{/yun}" onKeyUp="this.value=this.value.replace(/[^0-9]/g,'')" style="width:50px;margin-left:10px;"/><span class='moneyname'>{yun:}if $row.moneytype=='2'{/yun}万美元{yun:}else{/yun}万元{yun:}/if{/yun}</span></td>
+		<th>邮政编码：</th>
+		<td><input type="text" name="zip" size="10" class="admin_comedity_text" value="{yun:}$row.zip{/yun}" onKeyUp="this.value=this.value.replace(/[^0-9]/g,'')" /></td>
+	</tr>
+    <tr>
+		<th>联系人：</th>
+		<td><input type="text" name="linkman" size="15" class="admin_comedity_text" value="{yun:}$row.linkman{/yun}" /></td>
+		<th>所属职位：</th>
+		<td><input type="text" name="linkjob" size="15" class="admin_comedity_text" value="{yun:}$row.linkjob{/yun}" /></td>
+	</tr>
+	<tr class="admin_table_trbg" >
+		<th>联系QQ：</th>
+		<td><input type="text" name="linkqq" size="15" class="input-text" value="{yun:}$row.linkqq{/yun}" onKeyUp="this.value=this.value.replace(/[^0-9]/g,'')"/></td>
+		<th>企业网址：</th>
+		<td><input type="text" name="website" size="35" class="input-text" value="{yun:}$row.website{/yun}" /></td>
+	</tr> 
+ 	<tr>
+		<th>企业简介：</th>
+		<td colspan="3"><textarea name="content" id="content" cols="70" rows="8">{yun:}$row.content{/yun}</textarea></td>
+	</tr>
+  <tr>
+		<th>公交站点：</th>
+		<td colspan="3"><textarea name="busstops" id="busstops" cols="70" rows="3" class="admin_comdit_textarea">{yun:}$row.busstops{/yun}</textarea></td>
+	</tr>
+	 <tr>
+		<th>联系方式：</th>
+		<td>
+          <div class="yun_admin_select_box">
+          <input type="button" value="{yun:}if $row.infostatus==2{/yun}不公开{yun:}else{/yun}公开{yun:}/if{/yun}" class="yun_admin_select_box_text" id="infostatus_name" onClick="select_click('infostatus');">
+          <input name="infostatus" type="hidden" id="infostatus_val" value="{yun:}if $row.infostatus{/yun}{yun:}$row.infostatus{/yun}{yun:}else{/yun}2{yun:}/if{/yun}">
+            <div class="yun_admin_select_box_list_box dn" id="infostatus_select">   
+                <div class="yun_admin_select_box_list">
+                    <a href="javascript:;" onClick="select_new('infostatus','1','公开')">公开</a>
+                </div>  
+                 <div class="yun_admin_select_box_list">
+                    <a href="javascript:;" onClick="select_new('infostatus','2','不公开')">不公开</a>
+                </div>                    
+            </div>
+        </div>
+          </td></tr>
+	<tr>
+	<th width="160">公司二维码：</th>
+		<td><input  type="file" name="comqcode" class="input-text input_text_bg">
+		{yun:}if $row.comqcode{/yun}
+		<img src="{yun:}$row.comqcode{/yun}" width="100" height="100">
+		{yun:}/if{/yun}
+		</td>
+	</tr>
+ 	<tr class="admin_table_trbg">
+		<th>管理员评价：</th>
+		<td colspan="3"><input type="text" name="admin_remark" size="70" class="input-text" value="{yun:}$row.admin_remark{/yun}" /></td>
+	</tr>
+	<tr >
+		<th>状态：</th>
+		<td colspan="3">
+        <label><span class="admin_radio_box"><input type="radio" checked name="status" value="0" class="admin_radio_box_r">未审核</span> </label>
+         <label><span class="admin_radio_box"><input type="radio" {yun:}if $com_info.status=='1'{/yun}checked{yun:}/if{/yun} name="status" value="1" class="admin_radio_box_r">已审核</span> </label>
+         <label><span class="admin_radio_box"><input type="radio"   {yun:}if $com_info.status=='2'{/yun}checked{yun:}/if{/yun} name="status" value="2" class="admin_radio_box_r">锁定</span> </label>
+		<font color="gray"></font>
+		</td>
+	</tr>
+	<tr id="lock_info" {yun:}if $com_info.status!='2'{/yun}style="display:none"{yun:}/if{/yun}>
+	<th>锁定说明：</th>
+	<td colspan="3"><textarea   name="lock_info" cols="70" rows="2" class="admin_comdit_textarea">{yun:}$com_info.lock_info{/yun}</textarea></td>
+    </tr>
+    <tr><td colspan="4"bgcolor="#f0f6fb"><div class="admin_bold">账户数据</div></td></tr>
+	
+	<tr class="admin_table_trbg" >
+		<th>刷新兼职职位数：</th>
+		<td><input type="text" name="breakpart_num" size="15" class="admin_comedity_text" value="{yun:}$statis.breakpart_num{/yun}" onKeyUp="this.value=this.value.replace(/[^0-9]/g,'')" /></td>
+		<th>剩余职位数：</th>
+		<td><input type="text" name="job_num" size="15" class="admin_comedity_text" value="{yun:}$statis.job_num{/yun}" onKeyUp="this.value=this.value.replace(/[^0-9]/g,'')"/></td>
+	</tr>
+	<tr>
+		<th>剩余下载数：</th>
+		<td><input type="text" name="down_resume" size="15" class="admin_comedity_text" value="{yun:}$statis.down_resume{/yun}" onKeyUp="this.value=this.value.replace(/[^0-9]/g,'')" /></td>
+		<th>邀请人才面试数：</th>
+		<td><input type="text" name="invite_resume" size="15" class="admin_comedity_text" value="{yun:}$statis.invite_resume{/yun}" onKeyUp="this.value=this.value.replace(/[^0-9]/g,'')" /></td>
+	</tr>
+    <tr class="admin_table_trbg" >
+		<th>刷新职位数：</th>
+		<td><input type="text" name="breakjob_num" size="15" class="admin_comedity_text" value="{yun:}$statis.breakjob_num{/yun}" onKeyUp="this.value=this.value.replace(/[^0-9]/g,'')"/></td>
+		<th>剩余兼职职位数：</th>
+		<td><input type="text" name="part_num" size="15" class="admin_comedity_text" value="{yun:}$statis.part_num{/yun}" onKeyUp="this.value=this.value.replace(/[^0-9]/g,'')"/></td>
+	</tr>
+
+	<tr class="admin_table_trbg" >
+		<td align="center" colspan="4">
+        {yun:}if is_array($com_info){/yun}
+        <input type="hidden" name="uid" value="{yun:}$com_info.uid{/yun}" id="uid"/>
+        <input type="hidden" name="lasturl" value="{yun:}$lasturl{/yun}">
+        <input class="admin_submit4" type="submit" name="com_update" value="&nbsp;修 改&nbsp;" />
+        {yun:}else{/yun}
+        <input class="admin_submit4" type="submit" name="com_add" value="&nbsp;添 加&nbsp;" />
+        {yun:}/if{/yun}
+		<input class="admin_submit4" type="reset" name="reset" value="&nbsp;重 置 &nbsp;" /></td>
+	</tr>
+</table>
+<input type="hidden" name="pytoken" id='pytoken' value="{yun:}$pytoken{/yun}">
+</form>
+<script language="javascript">
+$(document).ready(function(){
+	$("input[name=status]").click(function(){
+		if($(this).val()=="2"){
+			$("#lock_info").show();
+		}else{
+			$("#lock_info").hide();
+		}
+	})
+});
+</script>
+</div></div></div></div>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>PHP output Excel Example</title>
+    </head>
+        <table width="100%" border="1">
+    <tr>
+			{yun:}if in_array("uid",$type){/yun}<th>企业UID</th>{yun:}/if{/yun}
+			{yun:}if in_array("name",$type){/yun}<th>企业名称</th>{yun:}/if{/yun}
+			{yun:}if in_array("hy",$type){/yun}<th>行业</th>{yun:}/if{/yun}
+            {yun:}if in_array("pr",$type){/yun}<th>企业性质</th>{yun:}/if{/yun}
+            {yun:}if in_array("rating",$type){/yun}<th>会员等级</th>{yun:}/if{/yun}
+            {yun:}if in_array("vip_stime",$type){/yun}<th>会员开始时间</th>{yun:}/if{/yun}
+			{yun:}if in_array("provinceid",$type){/yun}<th>省</th>{yun:}/if{/yun}
+			{yun:}if in_array("cityid",$type){/yun}<th>市</th>{yun:}/if{/yun}
+            {yun:}if in_array("mun",$type){/yun}<th>企业规模</th>{yun:}/if{/yun}
+			{yun:}if in_array("sdate",$type){/yun}<th>创办时间</th>{yun:}/if{/yun}
+			{yun:}if in_array("money",$type){/yun}<th>注册资金</th>{yun:}/if{/yun}
+			{yun:}if in_array("address",$type){/yun}<th>公司地址</th>{yun:}/if{/yun}
+			{yun:}if in_array("zip",$type){/yun}<th>邮编</th>{yun:}/if{/yun}
+			{yun:}if in_array("linkman",$type){/yun}<th>联系人</th>{yun:}/if{/yun}
+			{yun:}if in_array("linkjob",$type){/yun}<th>所属职位</th>{yun:}/if{/yun}
+			{yun:}if in_array("linkqq",$type){/yun}<th>联系QQ</th>{yun:}/if{/yun}
+			{yun:}if in_array("linkphone",$type){/yun}<th>固定电话</th>{yun:}/if{/yun}
+			{yun:}if in_array("linktel",$type){/yun}<th>联系手机</th>{yun:}/if{/yun}
+			{yun:}if in_array("linkmail",$type){/yun}<th>邮件</th>{yun:}/if{/yun}
+			{yun:}if in_array("website",$type){/yun}<th>网址</th>{yun:}/if{/yun}
+			{yun:}if in_array("rec",$type){/yun}<th>知名企业</th>{yun:}/if{/yun}
+            {yun:}if in_array("lastdate",$type){/yun}<th>更新时间</th>{yun:}/if{/yun}
+			
+			
+    </tr>
+    {yun:}foreach item=v key=key from=$list{/yun}
+    <tr>
+			{yun:}if in_array("uid",$type){/yun}<td>{yun:}$v.uid{/yun}</td>{yun:}/if{/yun}
+			{yun:}if in_array("name",$type){/yun}<td>{yun:}$v.name{/yun}</td>{yun:}/if{/yun}
+			{yun:}if in_array("hy",$type){/yun}<td>{yun:}$industry_name[$v.hy]{/yun}</td>{yun:}/if{/yun}
+			{yun:}if in_array("pr",$type){/yun}<td>{yun:}$comclass_name[$v.pr]{/yun}</td>{yun:}/if{/yun}
+            {yun:}if in_array("rating",$type){/yun}<td>{yun:}$v.rating{/yun}</td>{yun:}/if{/yun}
+            {yun:}if in_array("vip_stime",$type){/yun}<td>{yun:}$v.vip_stime|date_format:"%Y-%m-%d"{/yun}</td>{yun:}/if{/yun}
+			{yun:}if in_array("provinceid",$type){/yun}<td>{yun:}$city_name[$v.provinceid]{/yun}</td>{yun:}/if{/yun}
+			{yun:}if in_array("cityid",$type){/yun}<td>{yun:}$city_name[$v.cityid]{/yun}</td>{yun:}/if{/yun}
+			{yun:}if in_array("mun",$type){/yun}<td>{yun:}$comclass_name[$v.mun]{/yun}</td>{yun:}/if{/yun}
+            {yun:}if in_array("sdate",$type){/yun}<td>{yun:}$v.sdate{/yun}</td>{yun:}/if{/yun}
+			{yun:}if in_array("money",$type){/yun}<td>{yun:}$v.money{/yun}</td>{yun:}/if{/yun}
+			{yun:}if in_array("address",$type){/yun}<td>{yun:}$v.address{/yun}</td>{yun:}/if{/yun}
+			{yun:}if in_array("zip",$type){/yun}<td>{yun:}$v.zip{/yun}</td>{yun:}/if{/yun}
+			{yun:}if in_array("linkman",$type){/yun}<td>{yun:}$v.linkman{/yun}</td>{yun:}/if{/yun}
+			{yun:}if in_array("linkjob",$type){/yun}<td>{yun:}$v.linkjob{/yun}</td>{yun:}/if{/yun}
+			{yun:}if in_array("linkqq",$type){/yun}<td>{yun:}$v.linkqq{/yun}</td>{yun:}/if{/yun}
+			{yun:}if in_array("linkphone",$type){/yun}<td>{yun:}$v.linkphone{/yun}</td>{yun:}/if{/yun}
+			{yun:}if in_array("linktel",$type){/yun}<td>{yun:}$v.linktel{/yun}</td>{yun:}/if{/yun}
+			{yun:}if in_array("linkmail",$type){/yun}<td>{yun:}$v.linkmail{/yun}</td>{yun:}/if{/yun}
+			{yun:}if in_array("website",$type){/yun}<td>{yun:}$v.website{/yun}</td>{yun:}/if{/yun}
+            {yun:}if in_array("rec",$type){/yun}<td>{yun:}if $v.rec==1{/yun}是{yun:}else{/yun}否{yun:}/if{/yun}</td>{yun:}/if{/yun}
+			{yun:}if in_array("lastdate",$type){/yun}<td>{yun:}$v.lastupdate|date_format:"%Y-%m-%d"{/yun}</td>{yun:}/if{/yun}
+    </tr>
+    {yun:}/foreach{/yun}
+    </table>

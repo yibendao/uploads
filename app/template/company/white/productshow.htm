@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+    <title>{yun:}$title{/yun}</title>
+    <meta name=keywords content="{yun:}$keywords{/yun}" />
+    <meta name=description content="{yun:}$description{/yun}" />
+    <link rel="stylesheet" href="{yun:}$style{/yun}/style/css.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="{yun:}$com_style{/yun}/images/style.css" />
+</head>
+<body>
+    <div class="wrap">
+        <div class="c_header_top">
+            <div class="c_top_logo fl">
+                <div class="c_logo_ba">
+                    {yun:}if $com.logo{/yun}<img src="{yun:}$com.logo{/yun}" width="185" height="75" onerror="showImgDelay(this,'{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_unit_icon{/yun}',2);" />{yun:}else{/yun}<img src="{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_unit_icon{/yun}" width="185" height="75" />{yun:}/if{/yun}
+                </div>
+                <div class="wrap_l_name">
+                    <span class="wrap_l_name_n">{yun:}$com.name{/yun}</span>
+                    {yun:}if $com.email_status=="1"{/yun} <img src="{yun:}$com_style{/yun}images/rz_yx2.png" alt="邮箱未认证" title="邮箱已认证" class="png" /> {yun:}else{/yun} <img src="{yun:}$com_style{/yun}images/rz_yx.png" alt="邮箱未认证" title="邮箱未认证" class="png" /> {yun:}/if{/yun}
+        {yun:}if $com.moblie_status=="1"{/yun} <img src="{yun:}$com_style{/yun}images/rz_sj2.png" alt="手机未认证" title="手机已认证" class="png" /> {yun:}else{/yun} <img src="{yun:}$com_style{/yun}images/rz_sj.png" alt="手机未认证" title="手机未认证" class="png" /> {yun:}/if{/yun}
+        {yun:}if $com.yyzz_status=="1"{/yun} <img src="{yun:}$com_style{/yun}images/rz_zz2.png" alt="执照未认证" title="执照已认证" class="png" /> {yun:}else{/yun} <img src="{yun:}$com_style{/yun}images/rz_zz.png" alt="执照未认证" title="执照未认证" class="png" /> {yun:}/if{/yun}
+        <div class="wrap_l_name_p"> {yun:}if $usertype=='1'{/yun}
+          {yun:}if $isatn.id{/yun} <a href="javascript:void(0)" onclick="atn('{yun:}$com.uid{/yun}','{yun:}url m=ajax c=atn_company{/yun}')" id='atn_{yun:}$com.uid{/yun}' class="wrap_l_name_gz">取消关注</a> {yun:}else{/yun} <a href="javascript:void(0)" onclick="atn('{yun:}$com.uid{/yun}','{yun:}url m=ajax c=atn_company{/yun}')" id='atn_{yun:}$com.uid{/yun}' class="wrap_l_name_gz">关注</a> {yun:}/if{/yun}
+          {yun:}else{/yun}
+            {yun:}if $uid{/yun}
+            <a href="javascript:void(0)" onclick="layer.msg('只有个人用户才能关注', 2, 8)" class="wrap_l_name_gz">关注</a> 
+            {yun:}else{/yun}
+            <a href="javascript:void(0)" onclick="showlogin('1');" class="wrap_l_name_gz">关注</a> 
+            {yun:}/if{/yun} 
+          {yun:}/if{/yun}
+          已有<span id="antnum{yun:}$com.uid{/yun}">{yun:}$com.ant_num{/yun}</span>人关注 </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="c_top_daoh">
+        <ul>
+            <li class="c_currer"><a href="{yun:}url m=company c=show id=$com.uid{/yun}">首页</a></li>
+            <li class=""><a href="{yun:}url m=company c=show id=$com.uid{/yun}#about">关于我们</a></li>
+            <li class=""><a href="{yun:}url m=company c=show id=$com.uid{/yun}#job">招聘职位</a></li>
+            <li class=""><a href="{yun:}url m=company c=show id=$com.uid{/yun}#show">企业环境</a></li>
+            <li class=""><a href="{yun:}url m=company c=show id=$com.uid{/yun}#news">企业新闻</a></li>
+            <li class=""><a href="{yun:}url m=company c=show id=$com.uid{/yun}#product">企业产品</a></li>
+            <li class=""><a href="{yun:}$config.sy_weburl{/yun}">人才网首页</a></li>
+        </ul>
+    </div>
+    <div class="clear"></div>
+    <div class="c_header">
+        <div class="c_header_pic"><img src="{yun:}$banner.pic{/yun}" onerror="showImgDelay(this,'{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_banner{/yun}',2);" width="980" height="300" /></div>
+    </div>
+
+    <div class="clear"></div>
+
+    <div class="c_content">
+        <div class="wrap">
+            <div class="c_content_bao">
+                <div class="c_content_about">
+                    <div class="c_about_tit" id="about"><i></i><span style="width:auto;">产品展示</span></div>
+                </div>
+                <div class="blue_p_h1">{yun:}$ProductInfo.title{/yun}</div>
+                <div class="firm_det_con"><img src="{yun:}$config.sy_weburl{/yun}/{yun:}$ProductInfo.pic{/yun}" width="300" /></span> </div>
+                 <div class="" style="width:100%; line-height:30px;">
+                 {yun:}$ProductInfo.body{/yun} </div>
+            </div>
+        </div>
+    </div>
+
+<script>
+var weburl="{yun:}$config.sy_weburl{/yun}",integral_pricename='{yun:}$config.integral_pricename{/yun}',pricename='{yun:}$config.integral_pricename{/yun}',code_web='{yun:}$config.code_web{/yun}',code_kind='{yun:}$config.code_kind{/yun}';</script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/public.js" language="javascript"></script>
+<!--[if IE 6]>
+<script src="{yun:}$config.sy_weburl{/yun}/js/png.js"></script>
+<script>
+DD_belatedPNG.fix('.png,.inter_con .inter_con_new,.vip_pic_xg a,.vip_mes h2 a');
+</script>
+<![endif]-->
+{yun:}include file="$tplstyle/public_search/login.htm"{/yun} 
+{yun:}include file="$tplstyle/footer.htm"{/yun}

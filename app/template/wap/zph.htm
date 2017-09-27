@@ -1,0 +1,45 @@
+{yun:}include file="$wapstyle/header_cont.htm"{/yun}
+ {yun:}fairs limit=1 item=zphs {/yun}
+<div class="wap_zph_banner">
+     <div class="wap_zph_ct">
+          <div class="wap_zph_ct_tit">{yun:}$zphs.title{/yun}</div>
+          
+          <div class="wap_zph_ct_tm">[ {yun:}$zphs.starttime|date_format:"%Y-%m-%d"{/yun} 至 {yun:}$zphs.endtime|date_format:"%Y-%m-%d"{/yun} ]</div>
+          <div class="wap_zph_ct_but">
+              
+               <a class="wap_zph_ct_but_ck" href="{yun:}url m=wap c=zph a=show id='`$zphs.id`'{/yun}">查看详情 &gt;&gt;</a>
+          </div>
+     </div>
+   
+</div>
+ {yun:}/fairs{/yun}
+
+<section>
+  <div class="warp_content clear">
+
+        <div class="job_list_content">
+      {yun:}fairs ispage=1 limit=5 item=zph {/yun}
+           <div class="job_list_box job_fair_state_ov" style="padding:15px 10px;"> 
+          
+         <a href="{yun:}url m=wap c=zph a=show id='`$zph.id`'{/yun}">
+         <div class="zphname">{yun:}$zph.title{/yun}</div>
+         <div class="zphtime"><i class="zphtime_icon"></i>{yun:}$zph.starttime|date_format:"%Y-%m-%d"{/yun} 至 {yun:}$zph.endtime|date_format:"%Y-%m-%d"{/yun}</div>
+         <div class="zphadd"><i class="zphadd_icon"></i>{yun:}$zph.address{/yun}</div>
+         </a>
+         </div>  
+          {yun:}/fairs{/yun}
+          <div class="pages">{yun:}$pagenav{/yun}</div>
+      <div class="clear"></div>
+      </div>
+  </div>
+</section>
+<section>
+{yun:}if !$total{/yun}
+  <div class="wap_member_no">很抱歉，还没有发布招聘会的相关信息</div>
+{yun:}/if{/yun}
+</section>
+<script src="{yun:}$wap_style{/yun}/js/prefixfree.min.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/layer/layer.m.js" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/public.js" language="javascript"></script>
+{yun:}include file="$wapstyle/footer.htm"{/yun} 

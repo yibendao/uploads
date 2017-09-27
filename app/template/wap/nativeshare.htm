@@ -1,0 +1,131 @@
+<!----如果是微信登录，引导微信自有分享------>
+
+<script src="{yun:}$wap_style{/yun}/js/nativeshare/nativeshare.js" language="javascript"></script>
+<link rel="stylesheet" href="{yun:}$wap_style{/yun}/js/nativeshare/nativeshare.css" type="text/css"/>
+
+
+{yun:}if $isweixin{/yun}
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+
+<script>
+	$(function(){
+		$('#shareClick').click(function(){
+			
+			var url = $(this).attr('data-url');
+			if(new RegExp('http://').test(url)){
+				window.location.href=url;
+			}else{
+				$("#weixinBrowser").show();
+			}
+			
+		});
+		$('#weixinBrowser').click(function(){
+			
+			$(this).hide();
+		});
+	});
+</script>
+{yun:}if $signPackage{/yun}
+<script>
+var shareurl = '{yun:}$shareurl{/yun}';
+wx.config({
+    appId: '{yun:}$signPackage.appId{/yun}',
+    timestamp: '{yun:}$signPackage.timestamp{/yun}',
+    nonceStr: '{yun:}$signPackage.nonceStr{/yun}',
+    signature: '{yun:}$signPackage.signature{/yun}',
+    jsApiList: [
+        'onMenuShareTimeline',
+        'onMenuShareAppMessage',
+        'onMenuShareQQ',
+        'onMenuShareWeibo',
+		'onMenuShareQZone'
+      ]
+  });
+	if(shareurl!=''){
+		
+		var link = shareurl;
+
+		}else{
+		
+		var link = '{yun:}$signPackage.url{/yun}';
+	}
+ wx.ready(function () {
+  var shareData = {
+  title: '{yun:}$title{/yun}',
+  desc: '{yun:}$description{/yun}',
+  link: link,
+  imgUrl: '{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_wx_sharelogo{/yun}',
+	success: function () { 
+		// 用户确认分享后执行的回调函数
+
+	},
+	cancel: function () { 
+		// 用户取消分享后执行的回调函数
+		
+	}
+  };
+  wx.onMenuShareAppMessage(shareData);
+  wx.onMenuShareTimeline(shareData);
+  wx.onMenuShareQQ(shareData);
+  wx.onMenuShareWeibo(shareData);
+  wx.onMenuShareQZone(shareData);
+  });
+  wx.error(function (res) {
+  console.log(res.errMsg);
+  });
+</script>
+{yun:}/if{/yun}
+{yun:}else{/yun}
+<!----如果是UC QQ浏览器，弹出分享界面------>
+<div id="nativeShare"></div>
+<script>
+	
+	$(function(){
+		
+		$('#shareClick').click('click', function () {
+			
+			new nativeShare('nativeShare',config);	
+
+		}); 
+		$('#otherBrowser').click(function(){
+			
+			$(this).hide();
+		});
+		$('#nativeShare').click(function(evt){
+		
+			if($(evt.target).parents(".share_bgbox").length==0){
+				
+				$(this).hide();
+			}
+			
+		});
+	});
+	
+ </script>
+<!----如果是其他浏览器分享，则弹出分享指引------>
+
+
+{yun:}/if{/yun}
+
+<!--微信分享公共代码--->
+
+
+<!--分享-->
+
+<div id="otherBrowser" style="width:100%;height:100%; background:rgba(51,51,51,0.9); position:fixed;left:0px;top:0px ; z-index:100000001;display:none" > 
+ <div class="yun_wap_share_tip" style="width:100%; position:absolute; z-index:100000001;top:50%; margin-top:-90px;">
+ 
+ <div class="yun_wap_share_tip_p"><i class="yun_wap_share_n">1.</i>点击浏览器顶部或底部的<i class="yun_wap_share_tip_i3"></i>或<i class="yun_wap_share_tip_i4"></i></div>
+ <div class="yun_wap_share_tip_p"><i class="yun_wap_share_n">2.</i>然后点击分享按钮<i class="yun_wap_share_tip_i"></i>或<i class="yun_wap_share_tip_i2"></i></div>
+ <div class="yun_wap_share_tip_p"><i class="yun_wap_share_n">3.</i>分享给朋友或者朋友圈</div>
+</div>
+</div>
+
+<!--分享-->
+
+<div id="weixinBrowser" style="width:100%;height:100%; background:rgba(51,51,51,0.9); position:fixed;left:0px;top:0px ; z-index:100000001;display:block;display:none" > 
+ <div class="yun_wap_share_tip" style="width:100%; position:absolute; z-index:100000001;">
+ <i class="yun_wap_share_tip_wxicon_more"></i>
+<i class="yun_wap_share_tip_wxicon"></i>
+</div>
+</div>

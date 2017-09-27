@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<link href="images/reset.css" rel="stylesheet" type="text/css" />
+<link href="images/system.css" rel="stylesheet" type="text/css" />
+<link href="images/table_form.css" rel="stylesheet" type="text/css" />
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script>
+<script src="js/admin_public.js" language="javascript"></script>
+<title></title>
+</head>
+<body class="body_ifm">
+<div class="infoboxp"><div class="infoboxp_top_bg"></div>
+<div class="admin_Prompt">
+<div class="admin_Prompt_span">
+    注意事项：
+    1. 生成请确保目录有可写权限，否则无法生成。
+    2. 添加数量时，请勿填写太大数值
+</div><div class="admin_Prompt_close"></div></div>
+<div class="infoboxp_top"><h6>生成XML</h6></div> 
+<div class="admin_table_border">
+	<table width="100%" class="table_form ">
+		<tr>
+			<th width="30%">数据类型：</th>
+			<td>
+            
+          <div class="yun_admin_select_box z_index10">
+            <input type="button" value="全部" class="yun_admin_select_box_text" id="datetype_name" onClick="select_click('datetype');">
+			<input type="hidden" id="datetype_val" value="sitemap"/>
+            <div class="yun_admin_select_box_list_box dn" id="datetype_select">
+                 <div class="yun_admin_select_box_list"><a href="javascript:;" onClick="select_new('datetype','sitemap','全部')">全部</a></div>
+                 <div class="yun_admin_select_box_list"><a href="javascript:;" onClick="select_new('datetype','company','企业')">企业</a></div> 
+                 <div class="yun_admin_select_box_list"><a href="javascript:;" onClick="select_new('datetype','job','职位')">职位</a></div> 
+                 <div class="yun_admin_select_box_list"><a href="javascript:;" onClick="select_new('datetype','resume','简历')">简历</a></div> 
+                 <div class="yun_admin_select_box_list"><a href="javascript:;" onClick="select_new('datetype','ask','问答')">问答</a></div> 
+                 <div class="yun_admin_select_box_list"><a href="javascript:;" onClick="select_new('datetype','news','新闻')">新闻</a></div>   
+            </div>
+        </div>
+			</td>
+		</tr>
+		<tr class="admin_table_trbg">
+			<th width="30%">数据排序：</th>
+			<td>
+            
+            <div class="yun_admin_select_box  z_index9">
+            <input type="button" value="更新时间" class="yun_admin_select_box_text" id="order_name" onClick="select_click('order');">
+              <input name="ratingid" type="hidden" id="order_val" value="uptime"><!--这块后加-->
+            <div class="yun_admin_select_box_list_box dn" id="order_select">
+                 <div class="yun_admin_select_box_list"><a href="javascript:;" onClick="select_new('order','addtime','添加时间')">添加时间</a></div>
+                 <div class="yun_admin_select_box_list"><a href="javascript:;" onClick="select_new('order','uptime','更新时间')">更新时间</a></div> 
+            </div>
+        </div>
+			</td>
+		</tr>
+		<tr>
+			<th width="30%">更新频率：</th>
+			<td>
+            
+            
+             <div class="yun_admin_select_box  z_index8">
+            <input type="button" value="总是" class="yun_admin_select_box_text" id="frequency_name" onClick="select_click('frequency');">
+              <input name="ratingid" type="hidden" id="frequency_val" value="always"><!--这块后加-->
+            <div class="yun_admin_select_box_list_box dn" id="frequency_select">
+                 <div class="yun_admin_select_box_list"><a href="javascript:;" onClick="select_new('frequency','always','总是')">总是</a></div>
+                 <div class="yun_admin_select_box_list"><a href="javascript:;" onClick="select_new('frequency','hourly','每小时')">每小时</a></div> 
+                 <div class="yun_admin_select_box_list"><a href="javascript:;" onClick="select_new('frequency','daily','每天')">每天</a></div>
+                 <div class="yun_admin_select_box_list"><a href="javascript:;" onClick="select_new('frequency','weekly','每周')">每周</a></div> 
+                 <div class="yun_admin_select_box_list"><a href="javascript:;" onClick="select_new('frequency','monthly','每月')">每月</a></div>
+                 <div class="yun_admin_select_box_list"><a href="javascript:;" onClick="select_new('frequency','yearly','每年')">每年</a></div> 
+                 <div class="yun_admin_select_box_list"><a href="javascript:;" onClick="select_new('frequency','never','从不')">从不</a></div> 
+            </div>
+        </div>
+			</td>
+		</tr>
+		<tr class="admin_table_trbg">
+			<th width="30%">获取数量：</th>
+			<td><input class="input-text" type="text" id="limit" value="100" size="20" name="limit" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')"/> <span class="admin_web_tip">请谨慎填写数量</span></td>
+		</tr>
+		<tr>
+			<th width="30%">文件名称：</th>
+			<td><input class="input-text" type="text" id="xfilename" size="20" value="sitemap"/> <span class="admin_web_tip">如：sitemap，请勿带后缀</span></td>
+		</tr> 
+		<tr class="admin_table_trbg">
+		<td class="ud" align="center" colspan="2">
+		  <input class="admin_submit4" type="button" id="archive" value="更新内容"/>&nbsp;&nbsp;
+		</td>
+		</tr> 
+	</table>  
+</div></div>
+<input type="hidden" id="pytoken" value="{yun:}$pytoken{/yun}">
+<script>
+$(document).ready(function(){ 
+	dchange();
+	$("#archive").click(function(){
+		var pytoken=$("#pytoken").val();
+		var datetype=$("#datetype_val").val();
+		var order=$("#order_val").val();
+		var limit=$.trim($("#limit").val());
+		var filename=$("#xfilename").val();
+		var frequency=$("#frequency_val").val(); 
+		if(limit<1||limit==''){
+			parent.layer.msg('请输入获取数量', 2,8);return false;
+		}
+		parent.layer.load('正在生成文件……',0);
+		$.post("index.php?m=admin_xml&c=archive",{type:datetype,order:order,limit:limit,name:filename,frequency:frequency,pytoken:pytoken},function(data){  
+			var data=eval('('+data+')');
+			parent.layer.msg(data.msg, Number(data.tm), Number(data.st),function(){location.reload();});return false;
+		})
+	})  
+})  
+</script>
+</body>
+</html>

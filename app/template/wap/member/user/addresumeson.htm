@@ -1,0 +1,361 @@
+{yun:}include file="$wapstyle/member/header.htm"{/yun} 
+<script src="{yun:}$wap_style{/yun}/js/resume.js" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/mobiscroll/mobiscroll_002.js"></script>
+<script src="{yun:}$wap_style{/yun}/js/mobiscroll/mobiscroll.js"></script>
+<script src="{yun:}$wap_style{/yun}/js/mobiscroll/mobiscroll_003.js"></script>
+<link rel="stylesheet" href="{yun:}$wap_style{/yun}/js/mobiscroll/css/animate.min.css" type="text/css">
+<link rel="stylesheet" href="{yun:}$wap_style{/yun}/js/mobiscroll/css/mobiscroll.css" type="text/css"> 
+<script>
+$(function () {
+	var currYear = (new Date()).getFullYear();
+	var opt = {
+		preset: 'date', 
+		theme: 'android-ics light', 
+		display: 'modal', 
+		mode: 'scroller', 
+		dateFormat: 'yy-mm', 
+		setText: '确定', 
+		cancelText: '取消',
+		dateOrder: 'yyyymm', 
+		dayText: '日', monthText: '月', yearText: '年',
+		startYear: currYear - 100, 
+		endYear: currYear 
+	};
+	$("#sdate").mobiscroll('setDate', $("#sdate").val(), true).date(opt);
+	$("#edate").mobiscroll('setDate', $("#edate").val(), true).date(opt); 
+});
+</script>  
+ <style>
+	   .yun_wap_addresume_box_control_text{border:1px solid #ddd;}
+	   .yun_wap_addresume_texttextAreaMsg{width:100%;height:60px;border:none; margin:0; padding:0;outline: none;}
+	   </style>
+<div class="resume-cont">
+  <div class=""> {yun:}if $smarty.get.type=="skill"{/yun}
+    <div class="wap_member_comp_h1"><span>填写职业技能</span></div>
+    <div class="yun_wap_addresume_box">
+      <form id="skillInfo" method="post" action="index.php?c=addresumeson&eid={yun:}$smarty.get.eid{/yun}&type=skill" enctype="multipart/form-data" onsubmit="return checkskill(this)">
+        <div class="yun_wap_addresume_box_group">
+          <div class="yun_wap_addresume_box_label"> 技能名称 <span class="resume-cont_wate_bj">*</span> </div>
+          <div class="yun_wap_addresume_box_control">
+            <input type="text" name="name" value="{yun:}$row.name{/yun}" placeholder=" 例：IT开发" class="yun_wap_addresume_text">
+          </div>
+        </div>
+        <div class="yun_wap_addresume_box_group">
+          <div class="yun_wap_addresume_box_label"> 掌握时间  </div>
+          <div class="yun_wap_addresume_box_control">
+            <input type="text" name="longtime" value="{yun:}$row.longtime{/yun}" placeholder=" 年" class="yun_wap_addresume_text">
+          </div>
+        </div>
+       <div class="yun_wap_addresume_box_group">
+          <div class="yun_wap_addresume_box_label"> 技能证书 </div>
+          <div class="yun_wap_addresume_box_control">
+             <input name="file" type="file" accept="image/*">
+          </div>
+        </div>
+        <div class="yun_wap_addresume_box_group" style="background: transparent; border: none;">
+          <input type="hidden" name="table" value="skill" />
+          <input type="hidden" name="eid" value="{yun:}$smarty.get.eid{/yun}" />
+          <input type="hidden" name="id" value="{yun:}$row.id{/yun}" /> 
+          <input type="submit" name="submit" value="保存" class="reinputText2">
+        </div>
+      </form>
+    </div>
+    {yun:}elseif $smarty.get.type=="work"{/yun}
+    <div class="wap_member_comp_h1"><span>填写工作经历</span></div>
+    <div class="yun_wap_addresume_box">
+      <form id="workInfo" method="post" action="index.php?c=saveresumeson&eid={yun:}$smarty.get.eid{/yun}" onsubmit="return checkwork(this)">
+        <div class="yun_wap_addresume_box_group">
+          <div class="yun_wap_addresume_box_label">单位名称 <span class="resume-cont_wate_bj">*</span> </div>
+          <div class="yun_wap_addresume_box_control">
+            <input type="text" name="name" value="{yun:}$row.name{/yun}" class="yun_wap_addresume_text" placeholder="请填写单位名称">
+          </div>
+        </div>
+        <div class="yun_wap_addresume_box_group">
+          <div class="yun_wap_addresume_box_label">入职时间 <span class="resume-cont_wate_bj">*</span> </div>
+          <div class="yun_wap_addresume_box_control">
+			<input id="sdate" name="sdate" class="yun_wap_addresume_text_tm" type="text" value="{yun:}$row.sdate|date_format:'%Y-%m'{/yun}"> 
+          </div>
+        </div>
+        <div class="yun_wap_addresume_box_group">
+          <div class="yun_wap_addresume_box_label">离职时间 <span class="resume-cont_wate_bj">*</span> </div>
+          <div class="yun_wap_addresume_box_control">
+               <div style="position:relative;width:120px;display:inline-block;">
+                   <input id="edate" name="edate" class="yun_wap_addresume_text_tt" type="text" {yun:}if $row.edate != 0{/yun}value="{yun:}$row.edate|date_format:'%Y-%m'{/yun}"{yun:}/if{/yun}>  
+		       </div>
+           <input name='ckendday' id='ckendday' onclick="ckenddays('edate')" value='1' type='checkbox' {yun:}if $row.edate < 1&&$row.id>0{/yun}checked{yun:}/if{/yun} />至今
+          </div>
+        </div>       
+        <div style="clear:both"></div>
+        <div class="yun_wap_addresume_box_group">
+          <div class="yun_wap_addresume_box_label">担任职位 </div>
+          <div class="yun_wap_addresume_box_control">
+            <input type="text" name="title" value="{yun:}$row.title{/yun}" class="yun_wap_addresume_text" placeholder="请填写担任职位">
+          </div>
+        </div>
+      
+        <div class="yun_wap_addresume_box_group">
+          <div class="yun_wap_addresume_box_label">工作描述</div>
+          <div class="yun_wap_addresume_box_control">
+          <div class="yun_wap_addresume_box_control_text">
+            <textarea name="content" class="yun_wap_addresume_texttextAreaMsg">{yun:}$row.content{/yun}</textarea>
+          </div>
+          </div>
+        </div>
+        <div class="yun_wap_addresume_box_group" style="background: transparent; border: none;">
+          <input type="hidden" name="table" value="work" />
+          <input type="hidden" name="eid" value="{yun:}$smarty.get.eid{/yun}" /> 
+          <input type="hidden" name="id" value="{yun:}$row.id{/yun}" />
+          <input type="submit" name="submit" value="保存" class="reinputText2">
+        </div>
+      </form></div>
+    {yun:}elseif $smarty.get.type=="project"{/yun}
+    <div class="wap_member_comp_h1"><span>填写项目经历</span></div>
+    <div class="yun_wap_addresume_box">
+      <form id="projectInfo" method="post" action="index.php?c=saveresumeson&eid={yun:}$smarty.get.eid{/yun}" onsubmit="return checkproject(this)">
+        <div class="yun_wap_addresume_box_group">
+          <div class="yun_wap_addresume_box_label"> 项目名称 <span class="resume-cont_wate_bj">*</span> </div>
+          <div class="yun_wap_addresume_box_control">
+            <input type="text" name="name" value="{yun:}$row.name{/yun}" placeholder="请填写项目名称" class="yun_wap_addresume_text">
+          </div>
+        </div>
+        <div class="yun_wap_addresume_box_group">
+          <div class="yun_wap_addresume_box_label">开始时间 <span class="resume-cont_wate_bj">*</span> </div>
+          <div class="yun_wap_addresume_box_control">
+            <i class="yun_wap_addresume_box_control_date"></i>
+			<input id="sdate" name="sdate" class="yun_wap_addresume_text" type="text" value="{yun:}$row.sdate|date_format:'%Y-%m'{/yun}">  
+            </div>
+         </div>       
+        <div class="yun_wap_addresume_box_group">
+          <div class="yun_wap_addresume_box_label">结束时间 <span class="resume-cont_wate_bj">*</span> </div>
+          <div class="yun_wap_addresume_box_control">
+            <i class="yun_wap_addresume_box_control_date"></i>
+			<input id="edate" name="edate" class="yun_wap_addresume_text" type="text" value="{yun:}$row.edate|date_format:'%Y-%m'{/yun}">  
+          </div>
+        </div>       
+        <div class="yun_wap_addresume_box_group">
+          <div class="yun_wap_addresume_box_label"> 担任职位 </div>
+          <div class="yun_wap_addresume_box_control">
+            <input type="text" name="title" value="{yun:}$row.title{/yun}"  placeholder="请填写担任职位" class="yun_wap_addresume_text">
+          </div>
+        </div>
+        <div class="yun_wap_addresume_box_group">
+          <div class="yun_wap_addresume_box_label"> 项目内容</div>
+          <div class="yun_wap_addresume_box_control">
+            <div class="yun_wap_addresume_box_control_text">  <textarea name="content" class="yun_wap_addresume_texttextAreaMsg">{yun:}$row.content{/yun}</textarea></div>
+          </div>
+        </div>
+        <div class="yun_wap_addresume_box_group" style="background: transparent; border: none;">
+          <input type="hidden" name="table" value="project" />
+          <input type="hidden" name="eid" value="{yun:}$smarty.get.eid{/yun}" /> 
+          <input type="hidden" name="id" value="{yun:}$row.id{/yun}" />
+          <input type="submit" name="submit" value="保存" class="reinputText2">
+        </div>
+      </form>
+    </div>
+    {yun:}elseif $smarty.get.type=="edu"{/yun}
+    <div class="wap_member_comp_h1"><span>填写教育经历</span></div>
+    <div class="yun_wap_addresume_box">
+      <form id="eduInfo" method="post" action="index.php?c=saveresumeson&eid={yun:}$smarty.get.eid{/yun}" onsubmit="return checkedu(this)">
+        <div class="yun_wap_addresume_box_group">
+          <div class="yun_wap_addresume_box_label"> 学校名称 <span class="resume-cont_wate_bj">*</span> </div>
+          <div class="yun_wap_addresume_box_control">
+            <input type="text" name="name" value="{yun:}$row.name{/yun}"  placeholder="请填写学校名称" class="yun_wap_addresume_text">
+          </div>
+        </div>
+        <div class="yun_wap_addresume_box_group">
+          <div class="yun_wap_addresume_box_label">入学时间 <span class="resume-cont_wate_bj">*</span> </div>
+          <div class="yun_wap_addresume_box_control">
+            <i class="yun_wap_addresume_box_control_date"></i>
+			<input id="sdate" name="sdate" class="yun_wap_addresume_text" type="text" value="{yun:}$row.sdate|date_format:'%Y-%m'{/yun}"> 
+			 
+          </div>
+        </div>
+        <div class="yun_wap_addresume_box_group">
+          <div class="yun_wap_addresume_box_label">离校时间 <span class="resume-cont_wate_bj">*</span> </div>
+          <div class="yun_wap_addresume_box_control">
+            <i class="yun_wap_addresume_box_control_date"></i>
+            <input id="edate" name="edate" class="yun_wap_addresume_text" type="text" value="{yun:}$row.edate|date_format:'%Y-%m'{/yun}"> 
+          </div>
+        </div>
+         <div class="yun_wap_addresume_box_group">
+          <div class="yun_wap_addresume_box_label">所学专业</div>
+          <div class="yun_wap_addresume_box_control">
+            <input type="text" name="specialty" value="{yun:}$row.specialty{/yun}" placeholder="请填写所学专业" class="yun_wap_addresume_text">
+          </div>
+        </div> 
+        <div class="yun_wap_addresume_box_group">
+          <div class="yun_wap_addresume_box_label"> 班级职务</div>
+          <div class="yun_wap_addresume_box_control">
+            <input type="text" name="title" value="{yun:}$row.title{/yun}" placeholder="请填写班级职务" class="yun_wap_addresume_text">
+          </div>
+        </div>  
+       <div class="yun_wap_addresume_box_group">
+	    <div class="yun_wap_addresume_box_label"> 最高学历 </div>
+	    <div class="yun_wap_addresume_box_control">
+	      <div class="select"> <span class="txt education">
+	      {yun:}if $userclass_name[$row.education]{/yun}{yun:}$userclass_name[$row.education]{/yun}{yun:}else{/yun}请选择{yun:}/if{/yun}</span>
+	        <select id="education" name="education" class="textval" onchange="ckresume('education')">
+	        <option value="">请选择</option>
+	           {yun:}foreach from=$userdata.user_edu item=v{/yun}
+	          <option value="{yun:}$v{/yun}">{yun:}$userclass_name[$v]{/yun}</option>
+	           {yun:}/foreach{/yun}
+	        </select>
+	      </div>
+	    </div>
+	  </div>
+        <div class="yun_wap_addresume_box_group" style="background: transparent; border: none;">
+          <input type="hidden" name="table" value="edu" />
+          <input type="hidden" name="eid" value="{yun:}$smarty.get.eid{/yun}" /> 
+          <input type="hidden" name="id" value="{yun:}$row.id{/yun}" />
+          <input type="submit" name="submit" value="保存" class="reinputText2">
+        </div>
+      </form>
+    </div>
+    {yun:}elseif $smarty.get.type=="training"{/yun}
+    <div class="wap_member_comp_h1"><span>填写培训经历</span></div>
+    <div class="yun_wap_addresume_box">
+      <form id="trainingInfo" method="post" action="index.php?c=saveresumeson&eid={yun:}$smarty.get.eid{/yun}" onsubmit="return checktraining(this)">
+        <div class="yun_wap_addresume_box_group">
+          <div class="yun_wap_addresume_box_label"> 培训中心 <span class="resume-cont_wate_bj">*</span> </div>
+          <div class="yun_wap_addresume_box_control">
+            <input type="text" name="name" value="{yun:}$row.name{/yun}" placeholder=" 请填写培训中心名称" class="yun_wap_addresume_text">
+          </div>
+        </div>
+        <div class="yun_wap_addresume_box_group">
+          <div class="yun_wap_addresume_box_label">开始时间 <span class="resume-cont_wate_bj">*</span> </div>
+          <div class="yun_wap_addresume_box_control">
+            <i class="yun_wap_addresume_box_control_date"></i>
+			<input id="sdate" name="sdate" class="yun_wap_addresume_text" type="text" value="{yun:}$row.sdate|date_format:'%Y-%m'{/yun}">  
+          </div>
+		 
+        </div>
+        <div class="yun_wap_addresume_box_group">
+          <div class="yun_wap_addresume_box_label">结束时间 <span class="resume-cont_wate_bj">*</span> </div>
+          <div class="yun_wap_addresume_box_control">
+            <i class="yun_wap_addresume_box_control_date"></i>
+            <input id="edate" name="edate" class="yun_wap_addresume_text" type="text" {yun:}if $row.edate>1{/yun}value="{yun:}$row.edate|date_format:'%Y-%m'{/yun}"{yun:}/if{/yun}> 
+          </div>
+		  
+        </div>
+        <div class="yun_wap_addresume_box_group">
+          <div class="yun_wap_addresume_box_label"> 培训方向 </div>
+          <div class="yun_wap_addresume_box_control">
+            <input type="text" name="title" value="{yun:}$row.title{/yun}"  placeholder=" 请填写培训方向" class="yun_wap_addresume_text">
+          </div>
+        </div>
+        <div class="yun_wap_addresume_box_group">
+          <div class="yun_wap_addresume_box_label"> 培训描述 </div>
+          <div class="yun_wap_addresume_box_control">
+               <div class="yun_wap_addresume_box_control_text">  <textarea name="content" class="yun_wap_addresume_texttextAreaMsg">{yun:}$row.content{/yun}</textarea></div>
+          </div>
+        </div>
+         <div class="yun_wap_addresume_box_group" style="background: transparent; border: none;">
+            <input type="hidden" name="table" value="training" />
+            <input type="hidden" name="eid" value="{yun:}$smarty.get.eid{/yun}" /> 
+            <input type="hidden" name="id" value="{yun:}$row.id{/yun}" />
+            <input type="submit" name="submit" value="保存" class="reinputText2">
+      </div>
+      </form>
+    </div>
+    {yun:}elseif $smarty.get.type=="cert"{/yun}
+    <div class="wap_member_comp_h1"><span>填写证书</span></div>
+    <div class="yun_wap_addresume_box">
+      <form id="certInfo" method="post" action="index.php?c=saveresumeson&eid={yun:}$smarty.get.eid{/yun}" onsubmit="return checkcert(this)">
+        <div class="yun_wap_addresume_box_group">
+          <div class="yun_wap_addresume_box_label"> 证书全称 <span class="resume-cont_wate_bj">*</span> </div>
+          <div class="yun_wap_addresume_box_control">
+            <input type="text" name="name" value="{yun:}$row.name{/yun}"   placeholder=" 请填写证书全称" class="yun_wap_addresume_text">
+          </div>
+        </div>
+         <div class="yun_wap_addresume_box_group">
+          <div class="yun_wap_addresume_box_label">颁发时间 <span class="resume-cont_wate_bj">*</span> </div>
+          <div class="yun_wap_addresume_box_control">
+            <i class="yun_wap_addresume_box_control_date"></i>
+			<input id="sdate" name="sdate" class="yun_wap_addresume_text" type="text" value="{yun:}$row.sdate|date_format:'%Y-%m-%d'{/yun}">           </div>
+        </div>
+      
+        <div class="yun_wap_addresume_box_group">
+          <div class="yun_wap_addresume_box_label"> 颁发单位 <span class="resume-cont_wate_bj">*</span> </div>
+          <div class="yun_wap_addresume_box_control">
+            <input type="text" name="title" value="{yun:}$row.title{/yun}"    placeholder=" 请填写颁发单位" class="yun_wap_addresume_text">
+          </div>
+        </div>
+        <div class="yun_wap_addresume_box_group">
+          <div class="yun_wap_addresume_box_label"> 证书描述 <span class="resume-cont_wate_bj">*</span> </div>
+          <div class="yun_wap_addresume_box_control">
+            <div class="yun_wap_addresume_box_control_text">  <textarea name="content" class="yun_wap_addresume_texttextAreaMsg">{yun:}$row.content{/yun}</textarea></div>
+          </div>
+        </div>
+           <div class="yun_wap_addresume_box_group" style="background: transparent; border: none;">
+            <input type="hidden" name="table" value="cert" />
+            <input type="hidden" name="eid" value="{yun:}$smarty.get.eid{/yun}" /> 
+            <input type="hidden" name="id" value="{yun:}$row.id{/yun}" />
+            <input type="submit" name="submit" value="保存" class="reinputText2">
+         </div>
+      </form>
+    </div>
+    {yun:}elseif $smarty.get.type=="other"{/yun}
+    <div class="wap_member_comp_h1"><span>附加信息</span></div>
+    <div class="yun_wap_addresume_box">
+      <form id="otherInfo" method="post" action="index.php?c=saveresumeson&eid={yun:}$smarty.get.eid{/yun}" onsubmit="return checkother(this)">
+        <div class="yun_wap_addresume_box_group">
+          <div class="yun_wap_addresume_box_label"> 其他标题 <span class="resume-cont_wate_bj">*</span> </div>
+          <div class="yun_wap_addresume_box_control">
+            <input type="text" name="name" value="{yun:}$row.name{/yun}"   placeholder=" 请填写" class="yun_wap_addresume_text">
+          </div>
+        </div>
+        <div class="yun_wap_addresume_box_group">
+          <div class="yun_wap_addresume_box_label"> 其他描述  </div>
+          <div class="yun_wap_addresume_box_control">
+            <div class="yun_wap_addresume_box_control_text">  <textarea name="content" class="yun_wap_addresume_texttextAreaMsg">{yun:}$row.content{/yun}</textarea></div>
+          </div>
+        </div
+  
+        >
+        <dl class="resume-cont_wate_list">
+          <dt>&nbsp;</dt>
+          <dd>
+            <input type="hidden" name="table" value="other" />
+            <input type="hidden" name="eid" value="{yun:}$smarty.get.eid{/yun}" /> 
+            <input type="hidden" name="id" value="{yun:}$row.id{/yun}" />
+            <input type="submit" name="submit" value="保存" class="reinputText2">
+          </dd>
+        </dl>
+      </form>
+    </div>
+    {yun:}elseif $smarty.get.type=="desc"{/yun}
+    <div class="wap_member_comp_h1"><span>自我评价</span></div>
+    <div class="yun_wap_addresume_box">
+      <form id="descInfo" method="post" action="index.php?c=saveresumeson&eid={yun:}$smarty.get.eid{/yun}" onsubmit="return checkdesc(this)">
+        <div class="yun_wap_addresume_box_group" style="background: transparent; border: none;">
+           <div class="yun_wap_addresume_box_control_text">   <textarea name="description" id="description" class="yun_wap_addresume_texttextAreaMsg">{yun:}$description{/yun}</textarea></div>
+         </div>
+		<div class="wap_member_comp_h1"><span>个人标签</span></div>
+		 <div class="yun_wap_addresume_box"> 
+		 <div class="resume_pop_bq">
+		 <ul>
+		  {yun:}foreach from=$arrayTag key=key item=tv{/yun}
+		 <li class="changetag resume_pop_bq_cur" data-tag="{yun:}$tv{/yun}" tag-class="2"><em>{yun:}$tv{/yun}&nbsp;</em></li> 
+		 {yun:}/foreach{/yun}
+
+		 {yun:}foreach from=$userdata.user_tag key=key item=v{/yun}
+			 {yun:}if !in_array($userclass_name[$v],$arrayTag){/yun}
+				<li class="changetag " data-tag="{yun:}$userclass_name[$v]{/yun}" tag-class="1"><em>{yun:}$userclass_name[$v]{/yun}</em></li> 
+			 {yun:}/if{/yun}
+		 
+		 {yun:}/foreach{/yun}
+		 </ul>
+	
+		 <div class="yun_resume_tjbq_bth"><input class="yun_resume_tjbq" type="inputText" tabindex="1000" id="addfuli" ><a class="checkboxAddBton">添加标签</a></div>
+		 <input type="hidden" name="tag" id="tag" value="{yun:}$resume.tag{/yun}">
+		 </div>	 </div>
+           <div class="yun_wap_addresume_box_group" style="background: transparent; border: none;">
+            <input type="hidden" name="table" value="resume" />
+            <input type="hidden" name="eid" value="{yun:}$smarty.get.eid{/yun}" />
+            <input type="submit" name="submit" value="保存" class="reinputText2">
+          </div>
+      </form>
+    </div>
+    {yun:}/if{/yun} </div>
+</div>
+{yun:}include file="$wapstyle/footer.htm"{/yun} 

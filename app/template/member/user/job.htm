@@ -1,0 +1,131 @@
+{yun:}include file="$userstyle/header.htm"{/yun}
+<div class="yun_user_member_w1100"> {yun:}include file="$userstyle/left.htm"{/yun}
+  <div class="mian_right fltR mt20">
+       <div class="member_right_index_h1 fltL"> <span class="member_right_h1_span fltL">我的职位</span> <i class="member_right_h1_icon user_bg"></i></div>
+    <div class="resume_box_list">
+    <div class="job_list_tit"> <ul class=""><li {yun:}if $smarty.get.c=='msg'{/yun}class="job_list_tit_cur"{yun:}/if{/yun}><a href="index.php?c=msg">面试通知</a>{yun:}if $msgnum{/yun}<i class="left_sidebar_leftmune_icon">{yun:}$msgnum{/yun}</i>{yun:}/if{/yun}</li>
+      <li {yun:}if $smarty.get.c=='job'{/yun}class="job_list_tit_cur"{yun:}/if{/yun}><a href="index.php?c=job">申请的职位</a></li>
+      <li {yun:}if $smarty.get.c=='favorite'{/yun}class="job_list_tit_cur"{yun:}/if{/yun}><a href="index.php?c=favorite">职位收藏</a></li>
+      <li {yun:}if $smarty.get.c=='look_job'{/yun}class="job_list_tit_cur"{yun:}/if{/yun}><a href="index.php?c=look_job">浏览的职位 </a></li>
+	  </ul>
+      </div>
+        <div class="clear"></div>
+      <div class="resume_Prompt">您已申请 <span style="color:red;">{yun:}$total{/yun}</span> 条职位,请耐心等待企业回复！</div>
+      <div class="clear"></div>
+       <div class="job_td_list_box">
+     <div class="job_td_list">
+      投递反馈： 
+      <a href="index.php?c=job" class="{yun:}if !$smarty.get.browse{/yun}job_td_list_cur{yun:}else{/yun}job_td_list_a{yun:}/if{/yun}">不限</a>
+      {yun:}foreach item=v from=$StateList key=key{/yun}
+     <a href="index.php?c=job&browse={yun:}$key{/yun}" class="{yun:}if $smarty.get.browse==$key{/yun}job_td_list_cur{yun:}else{/yun}job_td_list_a{yun:}/if{/yun}">{yun:}$v{/yun}</a>
+        {yun:}/foreach{/yun}
+        </div>
+      <div class="job_td_list job_td_list_mt">
+      投递时间：
+       <a href="index.php?c=job" class="{yun:}if !$smarty.get.datetime{/yun}job_td_list_cur{yun:}else{/yun}job_td_list_a{yun:}/if{/yun}">不限</a>
+       {yun:}foreach item=v from=$search_list key=key{/yun}
+      <a href="index.php?c=job&datetime={yun:}$key{/yun}"  class="{yun:}if $smarty.get.datetime==$key{/yun}job_td_list_cur{yun:}else{/yun}job_td_list_a{yun:}/if{/yun}">{yun:}$v{/yun}</a>
+        {yun:}/foreach{/yun}
+      </div>
+        </div>
+       <div class="clear"></div>
+       
+      <div id="gms_showclew"></div>
+      <form action="index.php" method="get" target="supportiframe" id='myform'>
+      <input type="hidden" name="c" value="job" />
+      <input type="hidden" name="act" value="del" />
+      {yun:}if !empty($rows){/yun}
+      <div class="List_Ope List_Title mt12"> 
+      <div class="job_applied_position_name"><em class="List_Title_span_name">申请的职位</em></div> 
+      <div class="job_applied_position">投递反馈</div>
+      <div class="job_applied_position">投递简历名称</div>
+        <div class="job_applied_position">投递时间</div>
+      <span class="List_Title_span List_Title_w80">操作</span>
+  </div>
+      {yun:}/if{/yun}
+      {yun:}foreach item=job from=$rows{/yun}
+      <div class="List_Ope List_Ope_bor">
+       <div class="job_applied_position_namec">
+      
+          <input type=checkbox name="delid[]" value="{yun:}$job.id{/yun}" class="job_applied_position_nameccheck">
+        
+        <div class=""> {yun:}if $job.type==1{/yun} 
+        <a href="{yun:}url m=job c=comapply id='`$job.job_id`'{/yun}" target="_blank" title="{yun:}$job.job_name{/yun}" class="List_Title_span_com">{yun:}$job.job_name{/yun}</a> 
+       {yun:}/if{/yun} 
+        </div>    
+       
+        <a href="{yun:}url m=company c=show id='`$job.com_id`'{/yun}" target="_blank" title="{yun:}$job.com_name{/yun}"class="List_Ope_a">{yun:}$job.com_name{/yun} </a> </div>
+         {yun:}if $job.is_browse!=4{/yun} 
+				  {yun:}if $job.userid_msg==1{/yun}
+					{yun:}if $job.is_browse==5{/yun}
+					<div class="job_applied_position job_applied_position_mt10 {yun:}if $job.is_browse>1{/yun}statuscolor{yun:}/if{/yun}">{yun:}$StateList[$job.is_browse]{/yun}</div>
+					{yun:}else{/yun}
+					<div class="job_applied_position job_applied_position_mt10 statuscolor">已邀请</div>
+					{yun:}/if{/yun}
+				  {yun:}else{/yun}
+				  <div class="job_applied_position job_applied_position_mt10 {yun:}if $job.is_browse>1{/yun}statuscolor{yun:}/if{/yun}">{yun:}$StateList[$job.is_browse]{/yun}</div>
+				  {yun:}/if{/yun}
+              {yun:}else{/yun}
+			  <div class="job_applied_position job_applied_position_mt10 {yun:}if $job.is_browse>1{/yun}statuscolor{yun:}/if{/yun}">{yun:}$StateList[$job.is_browse]{/yun}</div>
+              {yun:}/if{/yun}
+   <div class="job_applied_position job_applied_position_mt10">{yun:}$job.resume_name{/yun}</div>
+    <div class="job_applied_position job_applied_position_mt10">{yun:}$job.datetime|date_format:'%Y-%m-%d'{/yun}</div>
+      <span class="List_Title_span List_Title_w80 mt10"> 
+      
+      {yun:}if $job.quxiao=='1'{/yun}
+      <span class="List_dete" style="color:#999;">已取消申请</span><br/>
+      <a href="javascript:void(0)" onclick="layer_del('确定要删除？','index.php?c=job&act=del&id={yun:}$job.id{/yun}');" class="List_dete cblue" >删除</a>
+      {yun:}else{/yun}
+        {yun:}if $job.body!=''{/yun} <span class="List_dete" style="color:#999;">已取消申请</span><br/>
+        {yun:}/if{/yun}
+        {yun:}if $job.is_browse=='1'&&$job.body==''{/yun} <a href="javascript:void(0)" onclick="canceljob({yun:}$job.id{/yun});" class="List_dete cblue" >取消申请</a> {yun:}else{/yun} <a href="javascript:void(0)" onclick="layer_del('确定要删除？','index.php?c=job&act=del&id={yun:}$job.id{/yun}');" class="List_dete cblue" >删除</a> {yun:}/if{/yun} 
+        {yun:}/if{/yun}  
+       
+        </span> </div>
+      <div class="clear"></div>
+      {yun:}foreachelse{/yun}
+      <div class="msg_no">
+      <p>亲爱的用户，您还没有申请过职位，想要获得更多工作机会</p>
+<a href="{yun:}url m=job{/yun}" target="_blank"class="msg_no_sq uesr_submit">立即搜索我感兴趣的职位>></a>
+</div>
+      {yun:}/foreach{/yun}
+       </div>
+      {yun:}if $rows{/yun}
+     <div class="resume_box_bottom">
+      <div class="List_Ope List_Ope_bg"> 
+      <span class="job_bth_inc">
+        <input id="checkAll" type="checkbox" onclick="m_checkAll(this.form)" class="List_Title_span_check_n mt5">
+        </span>
+        <input type="button" name="subdel" value="批量取消" onclick="return really_quxiao('delid[]');" class="job_pl_sub">
+      </div>
+    
+     <div class="diggg" style="margin-top:10px; float:right">{yun:}$pagenav{/yun}</div>  
+           </div>
+      {yun:}/if{/yun}
+    </form>
+    
+  </div>
+</div>
+<div style="padding:10px;height:180px;display:none;" id='blackdiv'>
+  <div class="Blacklist_box">
+    <form action="index.php?c=job&act=qs" target="supportiframe" method="post">
+      <input type="hidden" value="" name="id" id="qsid">
+       <div class="qxsq_box"> 
+        <span class="Blacklist_box_qx">选择取消原因：</span>
+        <select name="body" style="width:160px;">
+          <option value="已经找到工作">已经找到工作</option>
+          <option value="想休息一段时间">想休息一段时间</option>
+          <option value="生病了">生病了</option>
+          <option value="看错信息了">看错信息了</option>
+          <option value="很长时间没有查看">很长时间没有查看</option>
+          <option value="其它原因">其它原因</option>
+        </select>
+      </div>
+      <div class="qxsq_box_bth">
+        <input type="submit" value="确定" class="job_sq_qx_yy">
+      </div>
+    </form>
+  </div>
+  <div class="clear"></div>
+</div>
+{yun:}include file="$userstyle/footer.htm"{/yun}

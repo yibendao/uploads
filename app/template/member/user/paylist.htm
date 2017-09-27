@@ -1,0 +1,60 @@
+{yun:}include file="$userstyle/header.htm"{/yun}
+<div class="yun_user_member_w1100">
+    {yun:}include file="$userstyle/left.htm"{/yun}
+        <div class="mian_right fltR mt20">
+         <div class="member_right_index_h1 fltL"> <span class="member_right_h1_span fltL">财务明细</span> <i class="member_right_h1_icon user_bg"></i></div>
+    
+        <div>
+            <div id="gms_showclew"></div>
+            <div class="resume_box_list">
+            <div class="job_list_tit"> <ul class="">
+	<li class="job_list_tit_cur" ><a href="index.php?c=paylist">充值记录</a></li>
+      <li><a href="index.php?c=paylog">消费记录</a></li>
+
+	</ul> 
+    </div>
+            {yun:}if !empty($rows){/yun}
+                <div class="List_Ope List_Title ">
+                    <span class="List_Title_span List_Title_w260"><em class="List_Title_span_name">充值单号</em></span>
+                    <span class="List_Title_span List_Title_w120">充值金额</span>
+                    <span class="List_Title_span List_Title_w120">支付类型</span>
+                    <span class="List_Title_span List_Title_w120"> 状态	 </span>
+                    <span class="List_Title_span List_Title_w120" >时间</span>
+                    <span class="List_Title_span List_Title_w120">操作</span>
+                </div>
+                {yun:}/if{/yun}
+                {yun:}foreach from=$rows item=log{/yun}
+                {yun:}assign var="state" value=$log.order_state{/yun}
+                {yun:}assign var="type" value=$log.order_type{/yun}
+                <div class="List_Ope List_Ope_bor">
+                    <span class="List_Title_span List_Title_w260">{yun:}$log.order_id{/yun}</span>
+                    <span class="List_Title_span List_Title_w120">{yun:}$log.order_price{/yun}</span>
+                    <span class="List_Title_span List_Title_w120">{yun:}if $type{/yun}{yun:}$arr_data.pay.$type{/yun}{yun:}else{/yun}手动{yun:}/if{/yun}</span>
+                    <span class="List_Title_span List_Title_w120"> {yun:}$arr_data.paystate.$state{/yun}	 </span>
+                    <span class="List_Title_span List_Title_w120">{yun:}$log.order_time|date_format:'%Y-%m-%d %H:%M'{/yun}</span>
+                    <span class="List_Title_span List_Title_w120">
+                        {yun:}if $log.order_state=='1'{/yun} <a href="index.php?c=payment&id={yun:}$log.id{/yun}" class="cblue">去付款</a> |
+                        <a href="javascript:void(0)" onclick="layer_del('确定要取消？', 'index.php?c=paylist&act=del&id={yun:}$log.id{/yun}');" class="cblue">
+                            取消充值
+                        </a>
+                        {yun:}else{/yun}
+                        {yun:}$arr_data.paystate.$state{/yun}
+                        {yun:}/if{/yun}
+                    </span>
+                     {yun:}if $log.order_remark{/yun}<div class="clear"></div>
+                   <div class="List_Title_content" style="padding-left:0px;"> <span class="List_Title_conten_tit">备注：</span>{yun:}$log.order_remark{/yun}</div>{yun:}/if{/yun}
+                </div>
+                
+                {yun:}foreachelse{/yun}
+                <div class="msg_no">您还没有充值记录，<a href="index.php?c=pay" class="cblue">点击充值</a>。</div>
+                {yun:}/foreach{/yun}
+                {yun:}if !empty($rows){/yun}
+               
+                {yun:}/if{/yun}
+                <div class="diggg">{yun:}$pagenav{/yun}</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{yun:}include file="$userstyle/footer.htm"{/yun}

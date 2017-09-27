@@ -1,0 +1,71 @@
+{yun:}include file="$wapstyle/member/header.htm"{/yun} 
+<script src="{yun:}$wap_style{/yun}/js/binding.js" language="javascript"></script>
+<section class="wap_member">
+
+
+    {yun:}if $smarty.get.type=="email"{/yun}
+
+    <div class="wap_member_comp_h1"><span>绑定邮箱</span></div>
+    <div class="wap_member_Receive">
+	<div class="pmail_hint">
+		修改后的邮箱将作为新的登录账号
+	</div>
+	<div class="pmail_inp">
+		<ul>
+			<li>
+				<span><i>*</i>邮箱：</span>
+			  <div class="bd_box_bor">	<input type="text" class="bd_box_bor_text" name="email" id="emailval" value="{yun:}$member.email{/yun}"></div>
+			</li>
+		<li> <span><i>*</i>验证码：</span>
+		<div class=" bd_box_bor_130"><input type="text" name="authcode" class="bd_box_bor_text">
+        <img id="vcode_img" src="{yun:}$config.sy_wapdomain{/yun}/authcode.inc.php" class="bd_box_bor_yzm" onclick="checkCode('vcode_img');"></div></li>
+			<li>
+				<span>&nbsp;</span>
+                <div style="padding:0px 10px 20px 95px;">
+				<input type="button" value="发送验证邮箱" class="pmail_save" onclick="check_email('vcode_img');">
+				<input type="button" value="返回" class="pmail_close" onclick="history.back();">
+			    </div>
+            </li>
+		</ul>
+	</div>
+    </div>
+    {yun:}/if{/yun}
+    {yun:}if $smarty.get.type=="moblie"{/yun}
+       <div class="wap_member_comp_h1"><span>绑定手机</span></div>
+       <div class="wap_member_Receive">
+
+	<div class="pmail_hint">
+		绑定完成后，您可以使用该手机号码登录账号、找回密码
+	</div>
+	<div class="pmail_inp">
+		<ul>
+			<li>
+				<span><i>*</i>手机号：</span>
+			  <div class="bd_box_bor">		<input type="text" class="bd_box_bor_text" name="moblie" id="moblieval" value="{yun:}$member.moblie{/yun}"></div>
+			</li>
+			<li>
+				<span><i>*</i>短信验证：</span>
+					<div class=" bd_box_bor_130"><input type="text" class="bd_box_bor_text" id="moblie_code">
+				<a href="javascript:void(0);" onclick="sendmoblie();" class="phone_node" id="time">获取验证码</a></div>
+			</li>
+        <li> <span><i>*</i>验证码：</span>
+			<div class=" bd_box_bor_130"><input type="text" name="authcode" class="bd_box_bor_text">
+        <img id="vcode_img" src="{yun:}$config.sy_wapdomain{/yun}/authcode.inc.php"  class="bd_box_bor_yzm" onclick="checkCode('vcode_img');"></div></li>
+			<li>
+				<span>&nbsp;</span>
+                <div style="padding:0px 10px 20px 95px;">
+				<input type="button" value="保存" class="pmail_save" onclick="check_moblie('vcode_img');">
+				<input type="button" value="返回" class="pmail_close" onclick="history.back();">
+                 </div>
+			</li>
+		</ul>
+	</div>
+    </div>
+	{yun:}/if{/yun}
+
+
+<input type="hidden" id="send" value="0" />
+
+</div>
+</section>
+{yun:}include file="$wapstyle/footer.htm"{/yun} 

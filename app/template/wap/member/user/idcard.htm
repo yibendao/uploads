@@ -1,0 +1,94 @@
+{yun:}include file="$wapstyle/member/header.htm"{/yun}
+<script type="text/javascript">  
+function previewImage(file){
+
+     var div = document.getElementById('preview');
+     if (file.files && file.files[0]){
+         div.innerHTML ='<img id=imghead>';
+         var img = document.getElementById('imghead');
+         img.onload = function(){
+         
+           img.width  =  280;
+           img.height = 150;
+
+         }
+         var reader = new FileReader();
+         reader.onload = function(evt){img.src = evt.target.result;}
+         reader.readAsDataURL(file.files[0]);
+     }else{ 
+       var sFilter='filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale,src="';
+       file.select();
+       var src = document.selection.createRange().text;
+       div.innerHTML = '<img id=imghead>';
+       var img = document.getElementById('imghead');
+       img.filters.item('DXImageTransform.Microsoft.AlphaImageLoader').src = src;
+    
+       div.innerHTML = "<div id=divhead style='width:280px;height:150px;"+sFilter+src+"\"'></div>";
+     }
+	 $('#preview').show();
+}    
+function clacImgZoomParam( maxWidth, maxHeight, width, height ){
+	 var param = {top:0, left:0, width:width, height:height};
+    if( width>maxWidth || height>maxHeight ){
+        rateWidth = width / maxWidth;
+        rateHeight = height / maxHeight;
+        if( rateWidth > rateHeight ) {
+            param.width =  maxWidth;
+            param.height = Math.round(height / rateWidth);
+        }else{
+            param.width = Math.round(width / rateHeight);
+            param.height = maxHeight;
+        }
+    }
+    param.left = Math.round((maxWidth - param.width) / 2);
+    param.top = Math.round((maxHeight - param.height) / 2);
+    return param;
+}
+function checkidcard(){
+	var idcard=$("#idcard").val();
+	if(idcard==''){
+		layermsg("请填写身份证号！");return false;   
+	}
+	var reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;  
+	if(reg.test(idcard) === false){  
+       layermsg("身份证号格式错误！");return false;     
+	}  
+	if($.trim($("#pic").val())==''&&$("#imghead")[0].src==''){
+		layermsg("请上传证件照！");return false;   
+	}
+}
+</script>   
+<form id="resumeInfo" action="" method="post" onsubmit="return checkidcard();"  enctype="multipart/form-data">
+	<div class="main_member_cot_box"> 
+	<div class="wap_member_comp_h1"><span>身份认证</span></div>
+	<div class="wap_member_Receive">
+		<dl class="resume-cont_wate_list">
+	       <dt><span class="resume-cont_wate_bj">*</span>身份证号</dt>
+	       <dd>
+			<div class=""><input type="text" name="idcard" id="idcard" value="{yun:}$resume.idcard{/yun}" class="bd_box_bor_text"></div>
+	       </dd>
+		</dl> 
+		
+		<dl class="resume-cont_wate_list">
+	       <dt><span class="resume-cont_wate_bj">*</span>证件照</dt>
+	       <dd>
+	         <input type="file" name="pic" onchange="previewImage(this)">
+	       </dd>
+		</dl>
+		
+		<dl class="resume-cont_wate_list" id="preview" {yun:}if !$resume.idcard_pic{/yun}style="display:none"{yun:}/if{/yun}>
+			<dd>
+				<div><img {yun:}if $resume.idcard_pic{/yun}src="{yun:}$config.sy_weburl{/yun}{yun:}$resume.idcard_pic{/yun}"{yun:}/if{/yun} id="imghead" width="280" height="150"/></div>
+			</dd>
+		</dl>
+   
+		<dl class="resume-cont_wate_list"> 
+	    	<dd>
+	        	<input type="hidden" name="eid" id="eid" value="{yun:}$smarty.get.eid{/yun}">
+	        	<input type="submit" name="submit" value="保存" class="reinputText2">
+	        </dd>
+      	</dl>     
+	</div>
+</div>
+</form>
+{yun:}include file="$wapstyle/footer.htm"{/yun} 

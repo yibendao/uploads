@@ -1,0 +1,107 @@
+{yun:}include file="$comstyle/header.htm"{/yun}
+<div class="w1000">
+  <div class="admin_mainbody"> {yun:}include file="$comstyle/left.htm"{/yun}
+    <DIV class=right_box>
+      <DIV class=admincont_box>
+        <div class="com_tit"><span class="com_tit_span">置顶职位</span>
+         
+          <div class="news_search"> 
+          <form action="" method="get" />
+            <input name="c" type="hidden" value="job">
+            <input name="act" type="hidden" value="bidding">
+            <input name="keyword" type="text"class="news_text" placeholder="搜索已有职位">
+            <input  type="submit" class="news_bth" value="搜索">
+            </form>
+          </div>
+        </div>
+        <div class="clear"></div>
+        <div class="com_body">
+          <iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe>
+          <form action="index.php?c=job&act=opera" method="post" id='myform' target="supportiframe">
+            <div class="com_Release_job">
+            {yun:}if !empty($rows){/yun}
+            <div class="com_Release_job_h1"> 
+				<span class="com_Release_job_a_c">&nbsp;</span> 
+				<span class="com_Release_job_a" style="width:150px;">职位名称</span> 
+				<span class="com_Release_job_b" style="width:100px;">浏览量 </span> 
+				<span class="com_Release_job_f" style="width:100px;">审核状态</span> 
+				<span class="com_Release_job_b"  style="width:120px;">更新时间</span> 
+				<span class="com_Release_job_b"  style="width:120px;">置顶到期时间</span> 
+				<span class="com_Release_job_b"  style="width:140px;">截止日期</span> 
+				<span class="com_Release_job_f" style="text-align:center;width:110px;">操作</span> </div>
+                 {yun:}/if{/yun}
+            {yun:}foreach item=v from=$rows{/yun}
+            <div class="com_Release_job_span  com_Release_job_list">
+              <div class="com_Release_job_span  com_Release_job_a_c">
+                <input type="checkbox" name="checkboxid[]" value="{yun:}$v.id{/yun}">
+              </div>
+              <div class="com_Release_job_span com_Release_job_a" style="width:150px;"><span  class="com_Release_name"><a href="{yun:}url m=job c=comapply id='`$v.id`'{/yun}" class="com_m_job_list_jobname_a cblue" target="_blank">{yun:}$v.name{/yun}</a></span></div>
+              <div class="com_Release_job_span com_Release_job_b" style="width:100px;">{yun:}$v.jobhits{/yun}&nbsp; </div>
+              <div class="com_Release_job_span com_Release_job_f" style="width:100px;"> 
+			  {yun:}if $v.xsdate>time(){/yun}
+				<span class="n_verify">置顶中</span>
+			{yun:}else{/yun} 
+				<span class="y_verify_wtg">置顶已结束</span>
+				
+			{yun:}/if{/yun} 
+                &nbsp;</div>
+              <div class="com_Release_job_span com_Release_job_f " style="width:120px;">{yun:}$v.lastupdate|date_format:'%Y-%m-%d'{/yun}&nbsp;</div>
+              <div class="com_Release_job_span com_Release_job_f" style="width:120px;" >{yun:}$v.xsdate|date_format:'%Y-%m-%d'{/yun}&nbsp;</div>
+              <div class="com_Release_job_span com_Release_job_f" style="width:140px;" >{yun:}$v.edate|date_format:'%Y-%m-%d'{/yun}&nbsp;</div>
+              <div class="com_Release_job_span com_Release_job_f" style="width:110px;text-align:center">
+				<a href="javascript:void(0);" onclick="jingjia('{yun:}$v.id{/yun}','{yun:}$v.xuanshang{/yun}');" class="uesr_name_a">置顶</a>&nbsp;
+                        {yun:}if $statis.vip_etime>time() || $statis.vip_etime=="0"{/yun}
+                        {yun:}if $statis.rating_type==1{/yun}
+                        {yun:}if $statis.editjob_num>0{/yun}  
+						<a href="javascript:void(0)" onclick="layer.confirm('修改职位数还剩余{yun:}$statis.editjob_num{/yun}个！确认修改？', function(){window.location.href ='index.php?c=job&act=opera&up={yun:}$v.id{/yun}';window.event.returnValue = false;return false; });" class="uesr_name_a">修改</a> {yun:}else{/yun}
+						
+                        {yun:}if $config.com_integral_online==1{/yun} <a href="javascript:void(0)" onclick="layer.confirm('本次修改需扣除{yun:}$config.integral_jobedit{/yun}{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}，确认修改？', function(){window.location.href ='index.php?c=jobadd&act=edit&id={yun:}$v.id{/yun}';window.event.returnValue = false;return false; });" class="uesr_name_a">修改</a> {yun:}else{/yun} <a  href="javascript:void(0)" onclick="job_edit();" class="uesr_name_a">修改</a> {yun:}/if{/yun}
+                        {yun:}/if{/yun}
+                        {yun:}else{/yun} 						
+						<a  href="javascript:void(0)" onclick="layer.confirm('确定修改该职位么？', function(){window.location.href ='index.php?c=jobadd&act=edit&id={yun:}$v.id{/yun}';window.event.returnValue = false;return false; });" class="uesr_name_a">修改</a> {yun:}/if{/yun}
+                        {yun:}else{/yun}
+                        {yun:}if $config.com_integral_online==1{/yun} 
+						
+						<a href="javascript:void(0)" onclick="layer.confirm('本次修改需扣除{yun:}$config.integral_jobedit{/yun}{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}，确认修改？', function(){window.location.href ='index.php?c=jobadd&act=edit&id={yun:}$v.id{/yun}';window.event.returnValue = false;return false; });');" class="uesr_name_a">修改</a> {yun:}else{/yun} <a  href="javascript:void(0)" onclick="job_edit();" class="uesr_name_a">修改</a> {yun:}/if{/yun}
+                        {yun:}/if{/yun} &nbsp; 
+                       {yun:}if $statis.vip_etime>time() || $statis.vip_etime=="0"{/yun}
+                        {yun:}if $statis.rating_type==1{/yun}
+                        {yun:}if $statis.breakjob_num>0{/yun} <a href="javascript:void(0)" onclick="layer_del('刷新职位数还剩余{yun:}$statis.breakjob_num{/yun}个！确认刷新？', 'index.php?c=job&act=opera&up={yun:}$v.id{/yun}');" class="uesr_name_a">刷新</a> {yun:}else{/yun}
+                        {yun:}if $config.com_integral_online==1{/yun} <a href="javascript:void(0)" onclick="layer_del('本次刷新需扣除{yun:}$config.integral_jobefresh{/yun}{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}！确认刷新？', 'index.php?c=job&act=opera&up={yun:}$v.id{/yun}');" class="uesr_name_a">刷新</a> {yun:}else{/yun} <a  href="javascript:void(0)" onclick="job_refresh();"  title="刷新">刷新</a> {yun:}/if{/yun}
+                        {yun:}/if{/yun}
+                        {yun:}else{/yun} <a  href="javascript:void(0)" onclick="layer_del('确定刷新该职位么？', 'index.php?c=job&act=opera&up={yun:}$v.id{/yun}');" class="uesr_name_a">刷新</a> {yun:}/if{/yun}
+                        {yun:}else{/yun}
+                        {yun:}if $config.com_integral_online==1{/yun} <a href="javascript:void(0)" onclick="layer_del('本次刷新需扣除{yun:}$config.integral_jobefresh{/yun}{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}！确认刷新？', 'index.php?c=job&act=opera&up={yun:}$v.id{/yun}');" class="uesr_name_a">刷新</a> {yun:}else{/yun} <a  href="javascript:void(0)" onclick="job_refresh();"  title="刷新" class="uesr_name_a">刷新</a> {yun:}/if{/yun}
+                        {yun:}/if{/yun} 
+                 </div>
+            </div>
+            {yun:}foreachelse{/yun}
+            <div class="msg_no">暂无相关竞价信息！</div>
+            {yun:}/foreach{/yun}
+            <div class="clear"></div>
+            <div class="com_Release_job_bot">
+            {yun:}if !empty($rows){/yun}
+            <span class="com_Release_job_qx" style="padding-left:0px;">
+              <input id='checkAll'  type="checkbox" onclick='m_checkAll(this.form)'class="com_Release_job_qx_check">
+              全选</span>
+              <INPUT class="c_btn_02 c_btn_02_w110" type="button" value="批量删除职位" onclick="return really('checkboxid[]');">
+              <input class="c_btn_02 c_btn_02_w110" onclick="jobadd_url('{yun:}$addjobnum{/yun}','{yun:}$config.integral_job{/yun}','{yun:}$config.integral_pricename{/yun}');" type="button" value="新增职位" name="input">
+              {yun:}/if{/yun}
+              <div class="clear"></div>
+              <div class="diggg">{yun:}$pagenav{/yun}</div>
+            </DIV>
+            </DIV>
+          </form>
+        </DIV>
+        <div  class="clear"></div>
+        <div class="wxts_box wxts_box_mt30">
+          <div class="wxts">温馨提示：</div>
+          1、如贵公司有紧急招聘岗位，建议升级贵宾，以帮助您快速找到心意的人才。 <br>
+          2、请贵公司保证职位信息的真实性、合法性，并及时更新职位信息，如被举报或投诉，确认发布的信息违反相关规定后，本站将会关闭贵公司的招聘服务，敬请谅解！ </div>
+      </div>
+    </DIV>
+  </DIV>
+</DIV>   
+<div class="clear"></div>
+{yun:}include file="$comstyle/jobserver.htm"{/yun}
+{yun:}include file="$comstyle/footer.htm"{/yun}

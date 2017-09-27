@@ -1,0 +1,87 @@
+{yun:}include file="$askstyle/header.htm"{/yun}  
+<div class="content ">
+	<div class="quiz">
+		
+		<div class="quiz_con">
+        <div class="ask_tit_que">我要提问</div>
+        <div class="clear"></div>
+			<form id='myform' name="myform" target="supportiframe" action="{yun:}url m=ask c=save{/yun}" method="post" onSubmit="return checkform();">
+			<div class="quiz_fl">
+				<input name="title" type="text" placeholder="问题标题" id="title" class="quix_txt"  onblur="if(this.value==''){this.value='问题标题'}" onclick="if(this.value=='问题标题'){this.value=''}" value="问题标题"/>
+				<div class="quiz_chi">
+					<span>选择问题种类</span> 
+                    <div class="quiz_box">
+						<div class="quiz_box_first">
+							<div class="quiz_box_title">选择分类：</div>
+							<ul class="quiz_select">
+								{yun:}qcache  item=qclist{/yun}
+								<li class="qc{yun:}$qclist.id{/yun}"><a href="javascript:void(0)" onclick="getclass('{yun:}$qclist.id{/yun}','{yun:}$qclist.name{/yun}','{yun:}url m=ask c=qclass{/yun}')">{yun:}$qclist.name{/yun}</a></li>
+								{yun:}/qcache{/yun}  
+							</ul>
+							<div class="quiz_select_line"></div>
+						</div>
+						<div class="quiz_box_second">
+							<div class="quiz_box_title"></div>
+							<ul class="quiz_select"> </ul>
+						</div>
+                    </div> 
+					<input name='cid' type='hidden' value=''>
+				</div>
+			</div>
+			<div class="quiz_nr">
+				<h3>问题补充：</h3>
+				<textarea name="content" id='content'></textarea>
+			</div> 
+			{yun:}if strpos($config.code_web,"职场提问")!==false{/yun}
+				{yun:}if $config.code_kind==3{/yun}	
+					<div style="width:200px; float:left; margin-top:10px;">
+				<div id="popup-captcha" data-id='subask' data-type='click'></div>
+				<input type='hidden' id="popup-submit">
+                  </div>
+				{yun:}else{/yun}
+				
+				<div  class="ask_yz_name fl"> 验证码：</div>
+				<div class="affirm">
+				<input class="quix_input fl" id="ask_CheckCode" type="text"  placeholder="请输入验证码" onblur="if(this.value==''){this.value='请输入验证码'}" onclick="if(this.value=='请输入验证码'){this.value=''}" value="请输入验证码" maxlength="4" name="authcode" style="width:100px" >
+				<img  class="fl" id="vcode_imgs" src="{yun:}$config.sy_weburl{/yun}/app/include/authcode.inc.php" onclick="checkCode('vcode_imgs');">
+				</div>
+				{yun:}/if{/yun}
+			 {yun:}/if{/yun}
+			<div class="ask_affirm">
+				<input name='submit' type="submit" id='subask' value="确认发起" class="ask_affirm_bth" />
+			</div>
+			</form>
+		</div>
+	</div>
+</div> 
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js" type="text/javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script>
+<script src="{yun:}$ask_style{/yun}/js/question.js" type="text/javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/public.js" language="javascript"></script>
+<!--[if IE 6]>
+<script src="{yun:}$config.sy_weburl{/yun}/js/png.js"></script>
+<script>
+DD_belatedPNG.fix('.png,.attention .watch_gz');
+</script>
+<![endif]-->
+<script type="text/javascript"> 
+var searchurl="{yun:}url m=ask c=autosearch{/yun}";
+var keyurl="{yun:}url m=ask{/yun}/index.php?c=search";
+</script>
+<script charset="utf-8" src="{yun:}$config.sy_weburl{/yun}/js/kindeditor/kindeditor-min.js"></script>
+<script charset="utf-8" src="{yun:}$config.sy_weburl{/yun}/js/kindeditor/lang/zh_CN.js"></script> 
+<script charset="utf-8" src="{yun:}$plusstyle{/yun}/ask.cache.js"></script>
+<script src="http://static.geetest.com/static/tools/gt.js"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/geetest/pc.js" type="text/javascript"></script>
+<script language="javascript">
+KindEditor.ready(function(K) {
+	editor = K.create('#content', {
+		themeType : 'default',
+		items : [''],
+		afterBlur:function(){this.sync();} 
+	});
+});  
+
+</script>
+<iframe id="supportiframe" name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe>
+{yun:}include file="$askstyle/footer.htm"{/yun}   

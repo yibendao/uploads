@@ -1,0 +1,81 @@
+{yun:}include file="$comstyle/header.htm"{/yun}
+<div class="w1000">
+<div class="admin_mainbody">
+{yun:}include file="$comstyle/left.htm"{/yun}
+<div class=right_box>
+  <div class=admincont_box>
+        <div class="com_tit">
+       <span class="com_tit_span">竞价排行搜索</span> </div>  
+    <div class="clear"></div>
+         <div class="com_body">
+    <div class="job_re_ts">
+     <span>提示：审核中<em class="job_tips_zt">（{yun:}if $status.status0{/yun}{yun:}$status.status0{/yun}{yun:}else{/yun}0{yun:}/if{/yun}）</em>
+已审核<em class="job_tips_zt">（{yun:}if $status.status1{/yun}{yun:}$status.status1{/yun}{yun:}else{/yun}0{yun:}/if{/yun}）</em>
+未通过<em class="job_tips_zt">（{yun:}if $status.status3{/yun}{yun:}$status.status3{/yun}{yun:}else{/yun}0{yun:}/if{/yun}）</em>
+已过期<em class="job_tips_zt">（{yun:}if $status.status2{/yun}{yun:}$status.status2{/yun}{yun:}else{/yun}0{yun:}/if{/yun}）</em>  
+还可发布<em class="job_tips_zt">（{yun:}if $statis.vip_etime>time()||$statis.vip_etime=="0"{/yun}{yun:}if $statis.rating_type==1{/yun}{yun:}$statis.job_num{/yun}{yun:}else{/yun}无限{yun:}/if{/yun}{yun:}else{/yun}0{yun:}/if{/yun}）</em>
+     </span>
+       <input class="fb_Com_xz" onclick="location.href='index.php?c=jobadd'" type="button" value="新增职位" name="input">
+       <input type="button" value="查看竞价排行" onclick="location.href='index.php?c=topbid'"  class="fb_Com_xz" style="width:90px;">
+
+          <div class="clear"></div>
+          <div style="padding-left:80px;"> {yun:}if $statis.integral =="0"{/yun} <font color="#FF0000">您的{yun:}$config.integral_pricename{/yun}为<span>0</span>个请充值发布职位！</font> {yun:}/if{/yun}    </div>
+    </div>
+    <div class="clear"></div>
+    <div class="admin_textbox_04">
+      <div style="float:left; margin-top:10px;">
+      <form method="get" action="index.php">
+      <input type="hidden" name="c" value="topbid" />
+      <span class="topbid_span">行业类别：</span>
+	  <div class="text_seclet text_seclet_cur" style="z-index:400">
+		<input id="qyhy" class="SpFormLBut text_seclet_w250 " type="button" {yun:}if $hy{/yun}value="{yun:}$industry_name[$hy]{/yun}"{yun:}else{/yun}value="请选择"{yun:}/if{/yun} onclick="search_show('job_qyhy');">
+		<input id="qyhyid" type="hidden" value="{yun:}$hy{/yun}" name="hy">
+		<div id="job_qyhy" class="cus-sel-opt-panel" style="display:none; z-index:301">
+		<ul>
+		{yun:}foreach item=v from=$industry_index{/yun}
+		<li><a href="javascript:;" onclick="selects('{yun:}$v{/yun}','qyhy','{yun:}$industry_name[$v]{/yun}');"> {yun:}$industry_name[$v]{/yun}</a></li>
+		{yun:}/foreach{/yun}
+		</ul>
+		</div>
+	</div>
+      <input type="submit" value=" 搜 索 " class="top_bid_sub"/>
+      </form> 
+      </div>
+      <div  class="table" id="jingjia" style="display:">
+        <table id="job_checkbokid" cellSpacing=1 align=center border=0 class="jingjia_table">
+          <tbody>
+            <tr align=middle style="height:30px">
+              <th scope=col style="WIDth: 10%">第一名</th>
+              <th scope=col style="WIDth: 10%">第二名</th>
+              <th scope=col style="WIDth: 10%">第三名</th>
+              <th scope=col style="WIDth: 10%">第四名</th>
+              <th scope=col style="WIDth: 10%">第五名</th>
+              <th scope=col style="WIDth: 10%">第六名</th>
+              <th scope=col style="WIDth: 10%">第七名</th>
+              <th scope=col style="WIDth: 10%">第八名</th>
+              <th scope=col style="WIDth: 10%">第九名</th>
+              <th scope=col style="WIDth: 10%">第十名</th>
+            </tr>
+            <tr style="height:30px">
+              {yun:}foreach item=v from=$list{/yun}
+              <td>{yun:}$v{/yun}</td>
+              {yun:}foreachelse{/yun}
+               <td colspan="10">暂无相关信息！</td>
+              {yun:}/foreach{/yun}
+               </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="clear"></div>
+		<iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe> 
+ 
+    </div>
+  </div> 
+</div> 
+</div> 
+</div> 
+</div> 
+
+
+
+{yun:}include file="$comstyle/footer.htm"{/yun}

@@ -1,0 +1,147 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link href="images/reset.css" rel="stylesheet" type="text/css" />
+<link href="images/system.css" rel="stylesheet" type="text/css" />
+<link href="images/table_form.css" rel="stylesheet" type="text/css" />
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script>
+<script src="js/admin_public.js" language="javascript"></script>
+<title>后台管理</title>
+<style>
+* {
+	margin: 0;
+	padding: 0;
+}
+body, div {
+	margin: 0;
+	padding: 0;
+}
+</style>
+</head>
+<body class="body_ifm">
+<div class="infoboxp">
+  <div class="infoboxp_top_bg"></div>
+  <div class="infoboxp_top">
+    <h6>普工简历</h6>
+  </div>
+  <div class="main_tag" >
+    <div class="tag_box">
+      <iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe>
+      <form target="supportiframe" action="index.php?m=admin_tiny&c=save" method="post" onSubmit="return check_resume_tiny()">
+        <table width="100%" class="table_form" style="background:#fff;">
+          <tr>
+            <th>姓名：</th>
+            <td width="350"><input type="text"  value="{yun:}$row.username{/yun}" name="username" id="username" class="input-text"></td>
+            <th>性别：</th>
+            <td>
+            
+            
+            <div class="yun_admin_select_box z_index100">   
+              {yun:}if $row.sex{/yun}
+    			{yun:}foreach item=v key=j from=$arr_data.sex{/yun}
+                    {yun:}if $j eq $row.sex{/yun}
+                    <input type="button" value="{yun:}$v{/yun}" class="yun_admin_select_box_text" id="user_sex_name" onClick="select_click('user_sex');">
+                    <input name="sex" type="hidden" id="user_sex_val" value="{yun:}$j{/yun}">
+                    {yun:}/if{/yun}
+                {yun:}/foreach{/yun}
+            {yun:}else{/yun}
+                <input type="button" value="请选择" class="yun_admin_select_box_text" id="user_sex_name" onClick="select_click('user_sex');">
+                <input name="sex" type="hidden" id="user_sex_val" value="">
+                        
+            {yun:}/if{/yun}            
+            <div class="yun_admin_select_box_list_box dn" id="user_sex_select"> 
+              <div class="yun_admin_select_box_list"> 
+              {yun:}foreach from=$arr_data.sex key=j item=v{/yun}
+              <a href="javascript:;" onClick="select_new('user_sex','{yun:}$j{/yun}','{yun:}$v{/yun}')">{yun:}$v{/yun}</a>              
+              {yun:}/foreach{/yun}              
+               </div>
+               </div>
+          </div>
+            
+            
+            
+            
+            
+            
+            </td>
+          </tr>
+          <tr  class="admin_table_trbg">
+            <th>工作年限：</th>
+            <td><div class="yun_admin_select_box zindex100"> {yun:}if $row.exp{/yun}
+                {yun:}foreach from=$userdata.user_word key=j item=v{/yun}
+                {yun:}if $row.exp==$v{/yun}
+                <input type="button" value="{yun:}$userclass_name[$v]{/yun}" class="yun_admin_select_box_text" id="user_exp_name" onClick="select_click('user_exp');">
+                <input name="exp" type="hidden" id="user_exp_val" value="{yun:}$v{/yun}">
+                 
+                {yun:}/if{/yun}
+                {yun:}/foreach{/yun}
+                {yun:}else{/yun}
+                <input type="button" value="请选择" class="yun_admin_select_box_text" id="user_exp_name" onClick="select_click('user_exp');">
+                <input name="exp" type="hidden" id="user_exp_val" value="0">
+                 
+                {yun:}/if{/yun}
+                <div class="yun_admin_select_box_list_box dn" id="user_exp_select"> {yun:}foreach from=$userdata.user_word key=j item=v{/yun}
+                  <div class="yun_admin_select_box_list"> <a href="javascript:;" onClick="select_new('user_exp','{yun:}$v{/yun}','{yun:}$userclass_name[$v]{/yun}')">{yun:}$userclass_name[$v]{/yun}</a> </div>
+                  {yun:}/foreach{/yun} </div>
+              </div></td>
+            <th>意向职位：</th>
+            <td><input type="text" id="job" name="job" value="{yun:}$row.job{/yun}" class="input-text"/></td>
+          </tr>
+          <tr>
+            <th>手机：</th>
+            <td colspan="3"><input type="text" name="mobile" id="mobile" value="{yun:}$row.mobile{/yun}" class="input-text" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')"/></td>
+          </tr>
+          <tr  class="admin_table_trbg">
+            <th>自我介绍：</th>
+            <td colspan="3"><textarea id="production" name="production" style="width:500px; height:50px;border:1px solid #ccc; font-size:12px;color:#666">{yun:}$row.production{/yun}</textarea></td>
+          </tr>
+          <tr  class="admin_table_trbg">
+            <th>密码：</th>
+            <td colspan="3"><input type="password" name="password" id="password" value="" class="input-text" style='width:100px' onkeyup="this.value=this.value.replace(/^ +| +$/g,'')"/>
+              <span class="admin_web_tip">不填写则不修改</span></td>
+          </tr>
+          <tr>
+            <td align="center" colspan="4"> {yun:}if is_array($row){/yun}
+              <input type="hidden" name="id" id="id" value="{yun:}$row.id{/yun}"/>
+              <input type="hidden" name="lasturl" value="{yun:}$lasturl{/yun}">
+              {yun:}/if{/yun}
+              <input class="admin_submit4" type="submit" name="submit" value="&nbsp;保 存&nbsp;" />
+              <input class="admin_submit4" type="reset" name="reset" value="&nbsp;重 置 &nbsp;" /></td>
+          </tr>
+        </table>
+        <input type="hidden" name="pytoken" id="pytoken" value="{yun:}$pytoken{/yun}">
+      </form>
+    </div>
+  </div>
+</div>
+<script>
+function check_resume_tiny(){ 
+	var id=$("#id").val();
+	var username=$("#username").val();
+	if($.trim(username)==""){ 
+		layer.msg('请填写姓名', 2, 8);return false; 
+	}	
+	var job=$("input[name=job]").val();
+	if($.trim(job)==""){
+		layer.msg('请填写求职意向', 2, 8);return false; 
+	}
+	var mobile=$.trim($("#mobile").val());
+	if(!mobile){ 
+		layer.msg('请填写手机号', 2, 8);return false; 
+	}else{
+		var reg= /^[1][34578]\d{9}$/;   
+		if(!reg.test(mobile)){ 
+			layer.msg('手机格式错误！', 2, 8);return false;
+		}
+	}
+	var production=$("#production").val();
+	if($.trim(production)==""){ 
+		layer.msg('请填写自我介绍', 2, 8);return false;
+	}
+
+}
+</script>
+</body>
+</html>

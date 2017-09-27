@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link href="images/reset.css" rel="stylesheet" type="text/css" />
+<link href="images/system.css" rel="stylesheet" type="text/css" />
+<link href="images/table_form.css" rel="stylesheet" type="text/css" />
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script>
+<script src="js/admin_public.js" language="javascript"></script>
+<title>后台管理</title>
+</head>
+<body class="body_ifm">
+<div id="wname"  style="display:none; width: 350px; ">
+  <div style="height: 160px;" class="job_box_div">
+    <div class="job_box_inp">
+      <table class="table_form "style="width:100%">
+        <tr >
+          <td  class='ui_content_wrap'>复制(CTRL+C)以下內容并添加到模板中</td>
+        </tr>
+        <tr>
+          <td><input type="text" name="position" id='copy_url' class="input-text" size='45' style="width:310px;"/></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+<div class="infoboxp">
+<div class="infoboxp_top_bg"></div>
+<div class="infoboxp_top">
+  <h6>广告预览</h6>
+</div>
+<div class="admin_table_border">
+<table width="100%" class="table_form">
+<tbody>
+  <tr>
+    <th align="right"  width="230">广告调用代码：</th>
+    <td><div class="yun_admin_divh">{yun:}if $ad.is_end=='1'{/yun}
+      广告已过期，不可调用。
+      {yun:}elseif $ad.is_open=='0'{/yun}
+      广告停用，不可调用
+      {yun:}else{/yun} <a href="javascript:void(0);" onclick="copy_url('内部调用','{yun\:}ad cid={yun:}$ad.class_id{/yun} id={yun:}$ad.id{/yun}{\/yun}')">内部调用</a> | <a href="javascript:void(0);" onclick="copy_url('外部调用','&lt;script src=\'{yun:}$ad.src{/yun}\' language=\'javascript\'&gt;&lt;/script&gt;')">外部调用</a> {yun:}/if{/yun}</div></td>
+  </tr>
+  <tr>
+    <th align="right"  width="230">广告调用方式：</th>
+    <td><div class="yun_admin_divh">将JS代码复制 粘贴到需要投放该广告的页面（可以在<a href="index.php?m=admin_tpl&c=template"><font color="#FF0000">后台模板管理中</font></a>修改）</div></td>
+  </tr>
+  <tr>
+    <th align="right"  width="230">广告预览：</th>
+    <td><div style="padding:10px 0;">{yun:}$ad.html{/yun}</div></td>
+  </tr>
+</tbody>
+<table>
+</div>
+</div>
+</body>
+</html>

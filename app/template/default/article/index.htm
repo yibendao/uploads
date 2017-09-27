@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>{yun:}$title{/yun}</title>
+<meta name="keywords" content="{yun:}$keywords{/yun}"/>
+<meta name="description" content="{yun:}$description{/yun}"/>
+<link rel="stylesheet" href="{yun:}$style{/yun}/style/css.css" type="text/css"/>
+<link rel="stylesheet" href="{yun:}$style{/yun}/style/news.css" type="text/css">
+<link rel="stylesheet" href="{yun:}$config.sy_weburl{/yun}/js/article/css/style.css" type="text/css">
+</head>
+<body>
+{yun:}include file="$tplstyle/header.htm"{/yun}
+<div class="yun_content">
+    <div class="current_Location  com_current_Location png"><div class="fl">您当前的位置：<a href="{yun:}$config.sy_weburl{/yun}">首页</a> > <a href="{yun:}url m=article{/yun}">职场资讯</a></div></div>
+  <div class="news_Slideshow fl"> 
+  <div id="focusImage" class="slide">
+	<ul class="contents">
+	  {yun:}article limit=4 type=t pic=1 urlstatic=1 key=key   t_len=20  item=news_flash {/yun}
+	  <li class="current">
+			<div class="image"><a href="{yun:}$news_flash.url{/yun}"><img src="{yun:}$config.sy_weburl{/yun}/{yun:}$news_flash.newsphoto{/yun}" width="390px" height="245px"></a></div>
+			<div class="text">
+				<span class="title" style="display:inline-block;width:100%;height:45px; overflow:hidden"><a href="{yun:}$news_flash.url{/yun}">{yun:}$news_flash.title{/yun}</a></span>
+				<div style="width:100%;height:185px; overflow:hidden"><p>{yun:}$news_flash.description{/yun}</p></div>
+			</div>
+		</li>
+    {yun:}/article{/yun}
+	</ul>
+	
+	<div class="triggers">
+	    {yun:}article limit=4 type=t pic=1 urlstatic=1 key=key   t_len=20  item=thumb {/yun}
+		<a href="javascript:;" class="cur current"><img src="{yun:}$config.sy_weburl{/yun}/{yun:}$thumb.s_thumb{/yun}" width="58" height="38"></a>
+		{yun:}/article{/yun}
+	</div>
+
+	<div class="icon-dot">
+		<a href="javascript:;" class="cur current"></a>
+		<a href="javascript:;"></a>
+		<a href="javascript:;"></a>
+		<a href="javascript:;"></a>
+	</div>
+	
+	<span class="link-watch pre down"></span>
+	<span class="link-watch next down"></span>
+	
+</div>
+  {yun:}article limit=4 type=t pic=1 urlstatic=1 key=key   t_len=20  item=news_flash {/yun}
+    <input name="picurl" id="{yun:}$key+1{/yun}" type="hidden" value="{yun:}formatpicurl path=$news_flash.newsphoto{/yun}+{yun:}$news_flash.url{/yun}+{yun:}$news_flash.title{/yun}" />
+    {yun:}/article{/yun}
+    
+  </div>
+  <div class="yun_news_top">
+  <div class="yun_news_top_tit_t"></div>
+  <div class="yun_news_top_tit"><span class="yun_news_top_tit_p">今日推荐</span></div>
+  <ul class="yun_news_top_list">
+  {yun:}article limit=8 urlstatic=1 item=news{/yun}
+  <li><a href="{yun:}$news.url{/yun}" target="_blank">{yun:}$news.title{/yun}</a><em>{yun:}$news.time{/yun}</em></li>
+  {yun:}/article{/yun}
+  </ul>
+  </div>
+ 
+  <div class="news_cont fl" id="renew"> 
+    
+   
+    {yun:}articleclass arclist=7 arcpic=1 r_news=1 item=arcgroupright urlstatic=1 len=4 pt_len=25 pd_len=32 t_len=25{/yun}
+    {yun:}if is_array($arcgroupright.arclist)||is_array($arcgroupright.arcpic)&&$arcgroupright.arclist|@count>0{/yun}
+    <div class="news_sort_list fl">
+      <div class="news_ind_tit"> <span>{yun:}$arcgroupright.name{/yun}</span><i class="act_tit_bg yun_bg_color"></i> <a href="{yun:}$arcgroupright.url{/yun}">更多>></a> </div>
+      {yun:}foreach from=$arcgroupright.arcpic item=acrpicsright{/yun}
+      <dl>
+        <dt> <a href="{yun:}$acrpicsright.url{/yun}" target="_blank"><img src="{yun:}$config.sy_weburl{/yun}/{yun:}$acrpicsright.s_thumb{/yun}"  width="113" height="77" alt="{yun:}$acrpicsright.title{/yun}"></a> </dt>
+        <dd>
+          <p style="width:100%;"><a  target="_blank" href="{yun:}$acrpicsright.url{/yun}" class="yun_text_color">{yun:}$acrpicsright.title{/yun}</a></p>
+          <span style="width:100%;">{yun:}$acrpicsright.description|strip_tags{/yun}...</span> </dd>
+      </dl>
+      {yun:}/foreach{/yun}
+      <ul>
+        {yun:}foreach from=$arcgroupright.arclist item=arclistright{/yun}
+        <li class="png"> <a href="{yun:}$arclistright.url{/yun}" target="_blank">{yun:}$arclistright.title{/yun}</a> </li>
+        {yun:}/foreach{/yun}
+      </ul>
+    </div>
+    {yun:}/if{/yun}
+    {yun:}/articleclass{/yun} </div>
+</div>
+<!--[if IE 6]>
+<script src="{yun:}$config.sy_weburl{/yun}/js/png.js"></script>
+<script>
+DD_belatedPNG.fix('.png');
+</script>
+<![endif]-->
+
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/lazyload.min.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/public.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/article/imageslide.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/article/prototype.js" language="javascript"></script>
+<script>
+new ImageSlide({
+	project:"#focusImage",
+	content:".contents li",
+	tigger:".triggers a",
+	dot:".icon-dot a",
+	watch:".link-watch",
+	auto:!0,
+	hide:!0
+})
+</script>
+{yun:}include file="$tplstyle/footer.htm"{/yun}

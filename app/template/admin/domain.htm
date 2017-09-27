@@ -1,0 +1,84 @@
+<script type="text/javascript">
+var weburl="{yun:}$config.sy_weburl{/yun}";
+function checksiteall(url){
+	var codewebarr="";
+	$(".check_all:checked").each(function(){
+		if(codewebarr==""){codewebarr=$(this).val();}else{codewebarr=codewebarr+","+$(this).val();}
+	});
+	if(codewebarr==""){
+		parent.layer.msg('您还未选择任何信息！', 2, 8);	return false;
+	}else{
+		checksite('',codewebarr,url);
+	}
+}
+function checksite(name,id,url){ 
+	if(name==''){
+		$("#com_name").html("");
+	}
+	$('#formDomain').attr('action', url);
+	$('#siteusername').html(name);
+	$('#sitekeyword').val('');
+	$('#siteuid').val(id);
+	$.layer({
+		type : 1,
+		title :'分配站点', 
+		closeBtn : [0 , true],
+		border : [10 , 0.3 , '#000', true],
+		area : ['350px','200px'],
+		page : {dom :"#infoboxdomain"}
+	});
+}
+$(document).ready(function(){	
+	$('#sitebutton').click(function(){		
+		var pytoken = $('#pytoken').val();
+		var keyword = $('#sitekeyword').val();
+		$.post(weburl+"/index.php?m=ajax&c=selsite",{pytoken:pytoken,keyword:keyword},function(data){			
+			$('#did_select').html(data);		
+		});
+	});	
+});
+</script>
+<style>
+.admin_compay_fp{width:340px; margin-top:10px;}
+.admin_compay_fp_s{width:100px; text-align:right; font-weight:bold; display:inline-block}
+.admin_compay_fp_sub{width:140px;height:25px;border:1px solid #ddd;}
+.admin_compay_fp_sub1{width:40px;height:27px; background:#3692cf;color:#fff;border:none; cursor:pointer}
+</style>
+	<div id="infoboxdomain"  style="display:none; width: 350px; ">
+		<form action="" target="supportiframe" method="post" id="formDomain"> 
+			<div class="admin_compay_fp">
+				<span class="admin_compay_fp_s" id="com_name">用户：</span> 
+				<em  id="siteusername"></em>
+			</div>
+			<div class="admin_compay_fp">
+				<span class="admin_compay_fp_s">分站搜索：</span>
+				<input type="text" value="" id="sitekeyword" class="admin_compay_fp_sub">
+				<input type='button' id="sitebutton" value="搜索" class="admin_compay_fp_sub1">
+			</div>
+			<div class="admin_compay_fp">
+				<span class="admin_compay_fp_s">切换站点：</span>
+                
+             
+                
+                <div class="yun_admin_select_box zindex100"> 
+                  <input type="button" value="请选择" class="yun_admin_select_box_text" id="did_name" onClick="select_click('did');">
+                  <input name="did" type="hidden" id="did_val" value="">
+                 
+                  <div class="yun_admin_select_box_list_box dn" id="did_select"> 
+					{yun:}foreach from=$Dname key=key item=dlist{/yun}
+                    <div class="yun_admin_select_box_list"> <a href="javascript:;" onClick="select_new('did','{yun:}$key{/yun}','{yun:}$dlist{/yun}')">{yun:}$dlist{/yun}</a> </div>
+                    {yun:}/foreach{/yun} 
+					</div>
+           </div>
+                
+                
+                
+			</div>
+			<div class="admin_compay_fp">
+				<span class="admin_compay_fp_s">&nbsp;</span>
+				<input type="submit"  value='确认' class="submit_btn"><input type="button"  onClick="layer.closeAll();" class="cancel_btn" value='取消' style="margin-left:10px;">
+			</div> 
+			<input type="hidden" name="pytoken" value="{yun:}$pytoken{/yun}">
+			<input name="uid" value="0" id="siteuid" type="hidden">
+		</form> 
+	</div>

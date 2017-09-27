@@ -1,0 +1,76 @@
+{yun:}include file="$comstyle/header.htm"{/yun}
+<div class="w1000">
+<div class="admin_mainbody"> {yun:}include file="$comstyle/left.htm"{/yun} 
+  <script type="text/javascript" language="javascript">
+function unselectall(){
+	if(document.getElementById('chkAll').checked){
+		document.getElementById('chkAll').checked = document.getElementById('chkAll').checked&0;
+	}
+}
+function CheckAll(form){
+	for (var i=0;i<form.elements.length;i++){
+	var e = form.elements[i];
+	if (e.Name != 'chkAll'&&e.disabled==false)
+	e.checked = form.chkAll.checked;
+	}
+}
+</script>
+  <div class=right_box>
+    <div class=admincont_box >
+      <div class="com_tit"><span class="com_tit_span">系统消息</span></div>
+      <div class="com_body">
+        <iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe>
+        <form action="index.php?c=sysnews&act=del" name="myform" method="post" target="supportiframe" id='myform'>
+          <div class='admin_note2'>
+            <div class="resume_box_list">
+             {yun:}if $rows{/yun}
+              <div class="List_Ope List_Title ">
+               <span class="List_Title_span List_Title_w60" style="width:30px; padding-left:10px;">
+                <label for="chkall"><input type="checkbox" id='chkAll'  onclick='CheckAll(this.form)' style=" margin-top:9px;"/></label>
+                </span>
+                <span class="List_Title_span List_Title_w120" style="text-align:left">编号</span>
+                 <span class="List_Title_span List_Title_w360">内容</span> 
+                 <span class="List_Title_span List_Title_w200">时间</span> 
+                 <span class="List_Title_span List_Title_w80"> 操作</span> 
+              </div>
+              {yun:}/if{/yun}
+              {yun:}foreach from=$rows item=item{/yun}
+              <div class="List_Ope List_Ope_bor"> 
+              <span class="List_Title_span List_Title_w60" style="width:30px; padding-left:10px;">
+              <input type="checkbox" value="{yun:}$item.id{/yun}"  name='del[]' onclick='unselectall()' rel="del_chk" />
+              </span>
+              <span class="List_Title_span List_Title_w120" style="text-align:left">{yun:}$item.id{/yun}</span> 
+              <span class="List_Title_span List_Title_w360">{yun:}$item.content|mb_substr:0:50:'gbk'{/yun}</span> 
+              <span class="List_Title_span List_Title_w200">{yun:}$item.ctime|date_format:"%Y-%m-%d %H:%M"{/yun}</span> 
+              <span class="List_Title_span List_Title_w80"> 
+			   <a href="javascript:void(0)" onclick="showsys('{yun:}$item.content{/yun}','{yun:}$item.id{/yun}','{yun:}$item.ctime|date_format:"%Y-%m-%d %H:%M"{/yun}'); " class="cblue"> 查看</a> 
+              <a href="javascript:void(0)" onclick="layer_del('确定要删除？', 'index.php?c=sysnews&act=del&id={yun:}$item.id{/yun}'); " class="cblue"> 删除</a> </span> </div>
+              {yun:}foreachelse{/yun}
+              <div class="msg_no">暂无信息！</div>
+              {yun:}/foreach{/yun} </div>
+            <div class="clear"></div>
+            {yun:}if $rows{/yun}
+            <div class="com_Release_job_bot"><span class="com_Release_job_qx">
+                    <input id='checkAll'  type="checkbox" onclick='m_checkAll(this.form)' class="com_Release_job_qx_check">
+                    全选</span>
+              <input type="button" name="delsub" class='c_btn_02' value="删除所选" onclick="return really('del[]');"/>
+            </div>
+            <div class="clear"></div>
+            <div class="diggg">{yun:}$pagenav{/yun}</div>
+            {yun:}/if{/yun} </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<div id="show" style="display:none;width:100%;">
+	<div class="sys_tm">
+	<p><i>时间：</i><span id="systime"></span></p>
+	<p><i>内容：</i><span id="sysshow"></span></p>
+	</div>
+	<div class="sys_bot">
+	<a class="sys_bot_del" href="javascript:void(0)" id="delsys"> 删除</a><a class="sys_bot_qx" href="javascript:void(0)" onclick="layer.closeAll();" class="cblue">返回</a>
+	</div>
+</div>
+{yun:}include file="$comstyle/footer.htm"{/yun}

@@ -1,0 +1,74 @@
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>PHP output Excel Example</title>
+    </head>
+        <table width="100%" border="1">
+    <tr>
+        {yun:}if in_array("id",$rtype){/yun}<th>简历ID</th>{yun:}/if{/yun}
+        {yun:}if in_array("name",$rtype){/yun}<th>简历名称</th>{yun:}/if{/yun}
+        {yun:}if in_array("uid",$type){/yun}<th>用户UID</th>{yun:}/if{/yun}
+        {yun:}if in_array("name",$type){/yun}<th>姓名</th>{yun:}/if{/yun}
+        {yun:}if in_array("sex",$type){/yun}<th>性别</th>{yun:}/if{/yun}
+        {yun:}if in_array("birthday",$type){/yun}<th>生日</th>{yun:}/if{/yun}
+        {yun:}if in_array("marriage",$type){/yun}<th>婚姻</th>{yun:}/if{/yun}
+        {yun:}if in_array("height",$type){/yun}<th>身高</th>{yun:}/if{/yun}
+        {yun:}if in_array("nationality",$type){/yun}<th>民族</th>{yun:}/if{/yun}
+        {yun:}if in_array("weight",$type){/yun}<th>体重</th>{yun:}/if{/yun}
+        {yun:}if in_array("idcard",$type){/yun}<th>身份证</th>{yun:}/if{/yun}
+        {yun:}if in_array("telphone",$type){/yun}<th>手机</th>{yun:}/if{/yun}
+        {yun:}if in_array("telhome",$type){/yun}<th>座机</th>{yun:}/if{/yun}
+        {yun:}if in_array("email",$type){/yun}<th>邮件</th>{yun:}/if{/yun}
+        {yun:}if in_array("edu",$type){/yun}<th>教育程度</th>{yun:}/if{/yun}
+        {yun:}if in_array("homepage",$type){/yun}<th>个人主页</th>{yun:}/if{/yun}
+        {yun:}if in_array("address",$type){/yun}<th>详细地址</th>{yun:}/if{/yun}
+        {yun:}if in_array("exp",$type){/yun}<th>工作经验</th>{yun:}/if{/yun}
+        {yun:}if in_array("domicile",$type){/yun}<th>户籍所在地</th>{yun:}/if{/yun}
+        {yun:}if in_array("living",$type){/yun}<th>现居住地</th>{yun:}/if{/yun}  
+        {yun:}if in_array("description",$type){/yun}<th>个人说明</th>{yun:}/if{/yun}
+        {yun:}if in_array("hy",$rtype){/yun}<th>意向行业</th>{yun:}/if{/yun}
+        {yun:}if in_array("job_classid",$rtype){/yun}<th>意向职位</th>{yun:}/if{/yun}
+        {yun:}if in_array("provinceid",$rtype){/yun}<th>省</th>{yun:}/if{/yun}
+        {yun:}if in_array("cityid",$rtype){/yun}<th>市</th>{yun:}/if{/yun}
+        {yun:}if in_array("three_cityid",$rtype){/yun}<th>县</th>{yun:}/if{/yun}
+        {yun:}if in_array("minsalary,maxsalary",$rtype){/yun}<th>薪水</th>{yun:}/if{/yun}
+        {yun:}if in_array("type",$rtype){/yun}<th>工作性质</th>{yun:}/if{/yun}
+        {yun:}if in_array("report",$rtype){/yun}<th>到岗时间</th>{yun:}/if{/yun}
+        {yun:}if in_array("lastupdate",$rtype){/yun}<th>更新时间</th>{yun:}/if{/yun}
+    </tr>
+    {yun:}foreach item=v key=key from=$list{/yun}
+    <tr>
+        {yun:}if in_array("id",$rtype){/yun}<td>{yun:}$v.id{/yun}</td>{yun:}/if{/yun}
+        {yun:}if in_array("name",$rtype){/yun}<td>{yun:}$v.name{/yun}</td>{yun:}/if{/yun}
+        
+        {yun:}if in_array("uid",$type){/yun}<td>{yun:}$v.reusme.uid{/yun}</td>{yun:}/if{/yun}
+        {yun:}if in_array("name",$type){/yun}<td>{yun:}$v.reusme.name{/yun}</td>{yun:}/if{/yun}
+        {yun:}if in_array("sex",$type){/yun}<td>{yun:}$v.reusme.sex{/yun}</td>{yun:}/if{/yun}
+        {yun:}if in_array("birthday",$type){/yun}<td>{yun:}$v.reusme.birthday{/yun}</td>{yun:}/if{/yun}
+        {yun:}if in_array("marriage",$type){/yun}<td>{yun:}$userclass_name[$v.reusme.marriage]{/yun}</td>{yun:}/if{/yun}
+        {yun:}if in_array("height",$type){/yun}<td>{yun:}$v.reusme.height{/yun}</td>{yun:}/if{/yun}
+        {yun:}if in_array("nationality",$type){/yun}<td>{yun:}$v.reusme.nationality{/yun}</td>{yun:}/if{/yun}
+        {yun:}if in_array("weight",$type){/yun}<td>{yun:}$v.reusme.weight{/yun}</td>{yun:}/if{/yun}
+        {yun:}if in_array("idcard",$type){/yun}<td>{yun:}$v.reusme.idcard{/yun}</td>{yun:}/if{/yun}
+        {yun:}if in_array("telphone",$type){/yun}<td>{yun:}$v.reusme.telphone{/yun}</td>{yun:}/if{/yun}
+        {yun:}if in_array("telhome",$type){/yun}<td>{yun:}$v.reusme.telhome{/yun}</td>{yun:}/if{/yun}
+        {yun:}if in_array("email",$type){/yun}<td>{yun:}$v.reusme.email{/yun}</td>{yun:}/if{/yun}
+        {yun:}if in_array("edu",$type){/yun}<td>{yun:}$userclass_name[$v.reusme.edu]{/yun}</td>{yun:}/if{/yun}
+        {yun:}if in_array("homepage",$type){/yun}<td>{yun:}$v.reusme.homepage{/yun}</td>{yun:}/if{/yun}
+        {yun:}if in_array("address",$type){/yun}<td>{yun:}$v.reusme.address{/yun}</td>{yun:}/if{/yun}
+        {yun:}if in_array("exp",$type){/yun}<td>{yun:}$userclass_name[$v.reusme.exp]{/yun}</td>{yun:}/if{/yun}
+        {yun:}if in_array("domicile",$type){/yun}<td>{yun:}$v.reusme.domicile{/yun}</td>{yun:}/if{/yun}
+        {yun:}if in_array("living",$type){/yun}<td>{yun:}$v.reusme.living{/yun}</td>{yun:}/if{/yun}
+        {yun:}if in_array("description",$type){/yun}<td>{yun:}$v.reusme.description{/yun}</td>{yun:}/if{/yun}
+        
+        {yun:}if in_array("hy",$rtype){/yun}<td>{yun:}$industry_name[$v.hy]{/yun}</td>{yun:}/if{/yun}
+        {yun:}if in_array("job_classid",$rtype){/yun}<td>{yun:}$v.job_classid{/yun}</td>{yun:}/if{/yun}
+        {yun:}if in_array("provinceid",$rtype){/yun}<td>{yun:}$city_name[$v.provinceid]{/yun}</td>{yun:}/if{/yun}
+        {yun:}if in_array("cityid",$rtype){/yun}<td>{yun:}$city_name[$v.cityid]{/yun}</td>{yun:}/if{/yun}
+        {yun:}if in_array("three_cityid",$rtype){/yun}<td>{yun:}$city_name[$v.three_cityid]{/yun}</td>{yun:}/if{/yun}
+		{yun:}if in_array("minsalary,maxsalary",$rtype){/yun}<td>{yun:}if $v.minsalary && $v.maxsalary{/yun}￥{yun:}$v.minsalary{/yun} - {yun:}$v.maxsalary{/yun}{yun:}else if $v.minsalary{/yun}￥{yun:}$v.minsalary{/yun}以上{yun:}else{/yun}面议{yun:}/if{/yun}</td>{yun:}/if{/yun}
+        {yun:}if in_array("type",$rtype){/yun}<td>{yun:}$userclass_name[$v.type]{/yun}</td>{yun:}/if{/yun}
+        {yun:}if in_array("report",$rtype){/yun}<td>{yun:}$userclass_name[$v.report]{/yun}</td>{yun:}/if{/yun}
+        {yun:}if in_array("lastupdate",$rtype){/yun}<td>{yun:}$v.lastupdate|date_format:"%Y-%m-%d"{/yun}</td>{yun:}/if{/yun}
+    </tr>
+    {yun:}/foreach{/yun}
+    </table>

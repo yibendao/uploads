@@ -1,0 +1,334 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>简历</title>
+<style>
+.name {
+	font-style: normal;
+}
+.style {
+	font-style: normal;
+}
+.user_resume_bg {
+	width:834px;
+	margin:0 auto;
+}
+.user_resume {
+	float:left;
+	width:834px;
+	padding-bottom:15px;
+}
+.user_resume_box {
+	float:left;
+	width:824px;
+	padding:5px;
+	border:1px solid #ddddde;
+}
+.resume_ct_msg {
+	float:left;
+	width:784px;
+	padding:20px;
+	background:#fbfbfb;
+}
+.ct_msg_ft {
+	float:left;
+	width:698px;
+	font-size:14px;
+}
+.ct_msg_ft i {
+	color:#666;
+}
+.ct_msg_ft span {
+	line-height:25px;
+}
+.ct_msg_ft_nm {
+	float:left;
+	width:100%;
+	margin-bottom:25px;
+}
+.ct_msg_ft_nm em {
+	font-size:24px;
+}
+.ct_msg_ft_nm span.auth {
+	background:url(../images/sf.png) no-repeat left;
+	padding-left:18px;
+}
+.ct_msg_ft_nm span.rever {
+	width:179px;
+	background:url(../resume/images/res_show.png) no-repeat;
+	color:#fff;
+	font-size:12px;
+	line-height:20px;
+	padding-left:10px;
+	display:inline-block;
+	margin-left:5px;
+}
+.ct_msg_ft_x {
+	float:left;
+	width:100%;
+}
+.ct_msg_ft_x_edu {
+	float:left;
+	width:160px;
+}
+.ct_msg_ft_x_pc {
+	float:left;
+	width:140px;
+}
+.ct_msg_ft_z {
+	float:left;
+	width:100%;
+}
+.ct_msg_ft_z_num {
+	float:left;
+	width:252px;
+}
+.ct_msg_ft_z_num em {
+	color:#ff0000;
+	width:172px;
+	height:23px;
+	line-height:23px;
+	padding-left:10px;
+	background:#fff;
+	display:inline-block;
+}
+.ct_msg_rt {
+	float:right;
+	width:86px;
+}
+.ct_msg_rt img {
+	width:80px;
+	height:100px;
+	padding:2px;
+	border:1px solid #ddddde;
+}
+.resume_ct_det {
+	float:left;
+	width:784px;
+	padding:20px;
+	font-size:14px;
+}
+.resume_ct_det i {
+	color:#666;
+}
+.ct_det_tit {
+	float:left;
+	width:100%;
+	height:32px;
+	line-height:32px;
+	margin-top:10px;
+	margin-bottom:25px;
+	font-size:18px;
+}
+.icon_a {
+	float:left;
+	width:6px;
+	height:18px;
+	background:#0393d6;
+	margin-top:7px;
+	margin-right:10px;
+}
+.ct_det_exp {
+	line-height:35px;
+}
+.ct_det_exp em {
+	color:#ff6600;
+}
+.ct_det_bus {
+	float:left;
+	line-height:35px;
+}
+.ct_det_bus_b {
+	float:left;
+	width:350px;
+}
+.ct_det_bus_c {
+	float:left;
+	width:350px;
+}
+.ct_det_bx {
+	float:left;
+	width:690px;
+	margin-left:10px;
+	border-left:2px solid #dfdfdf;
+}
+.ct_det_bx_tep {
+	float:left;
+	width:100%;
+	padding-left:30px;
+	line-height:26px;
+}
+.ct_det_work {
+	float:left;
+	position:relative;
+	width:100%;
+	padding-top:15px;
+	width:690px;
+	margin-top:10px;
+	margin-left:10px;
+	word-wrap:break-word;
+	border-left:2px solid #dfdfdf;
+}
+.ct_det_work_icon {
+	position:absolute;
+	top:20px;
+	left:-6px;
+	border-radius:50%;
+	display:block;
+	width:10px;
+	height:10px;
+	background:#0393d6;
+	overflow:hidden;
+}
+.ct_det_time {
+	float:left;
+	color:#666;
+	width:100%;
+	padding-left:30px;
+	line-height:26px;
+}
+.ct_det_peo {
+	float:left;
+	width:100%;
+	padding-left:30px;
+	line-height:26px;
+}
+.ct_det_peo em {
+	font-size:16px;
+	font-weight:bold;
+}
+em, i {
+	font-style:normal
+}
+.ct_det_tag {
+	background: #FFC;
+	padding: 0px 11px;
+	height: 28px;
+	line-height: 28px;
+	border: 1px solid #FC9;
+	display: inline-block;
+	margin-right: 5px;
+	margin-top: 2px;
+}
+</style>
+</head>
+<body style="background:#fff; margin:0 auto">
+<div class="user_resume_bg">
+  <div class="user_resume">
+    <div class="user_resume_box">
+      <div class="resume_ct_msg">
+        <div class="ct_msg_ft">
+          <div class="ct_msg_ft_nm"><em>{yun:}$Info.username_n{/yun}</em><i>&nbsp;（{yun:}$Info.sex{/yun},{yun:}$Info.age{/yun}岁）</i></div>
+          <div class="ct_msg_ft_x"><span class="ct_msg_ft_x_edu"><i>学历:</i>{yun:}$Info.useredu{/yun}</span><span class="ct_msg_ft_x_pc"><i>经验：</i>{yun:}$Info.user_exp{/yun}</span> <span class="ct_msg_ft_x_pc"><i>所在地：</i>{yun:}$Info.living{/yun}</span> {yun:}if $Info.user_marriage{/yun} <span class="ct_msg_ft_x_pc"><i>婚姻：</i>{yun:}$Info.user_marriage{/yun}</span> {yun:}/if{/yun} </div>
+          {yun:}if $Info.basic_info=='1'{/yun}
+          <div class="ct_msg_ft_x"> {yun:}if $Info.domicile{/yun} <span class="ct_msg_ft_x_edu"><i>籍贯:</i>{yun:}$Info.domicile{/yun}</span>{yun:}/if{/yun}
+            {yun:}if $Info.height{/yun}<span class="ct_msg_ft_x_pc"><i>身高：</i>{yun:}$Info.height{/yun}cm</span>{yun:}/if{/yun}            
+            {yun:}if $Info.weight{/yun}<span class="ct_msg_ft_x_pc"><i>体重：</i>{yun:}$Info.weight{/yun}kg</span>{yun:}/if{/yun}
+            {yun:}if $Info.nationality{/yun}<span class="ct_msg_ft_x_pc"><i>民族：</i>{yun:}$Info.nationality{/yun}</span>{yun:}/if{/yun} </div>
+          {yun:}/if{/yun} </div>
+        <div class="ct_msg_rt"> 
+        <img src="{yun:}$Info.resume_photo{/yun}" onerror="showImgDelay(this,'{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_member_icon{/yun}',2);" width="120" height="150"> </div>
+      </div>
+      <div class="resume_ct_det">
+        <div class="ct_det_tit"><span class="icon_a"></span>求职意向</div>
+        <div class="ct_det_exp"><i>期望职位：</i><em>{yun:}$Info.jobname{/yun}</em></div>
+        <div class="ct_det_bus"> <span class="ct_det_bus_b"><i>期望行业：</i>{yun:}$Info.hy{/yun}</span> 
+        <span class="ct_det_bus_c"><i>期望薪资：</i>{yun:}if $Info.maxsalary&&$Info.minsalary{/yun}￥{yun:}$Info.minsalary{/yun}-{yun:}$Info.maxsalary{/yun}{yun:}else if $Info.minsalary{/yun}￥{yun:}$Info.minsalary{/yun}以上{yun:}else{/yun}面议{yun:}/if{/yun}</span> </div>
+        <div class="ct_det_bus"> <span class="ct_det_bus_b"><i>工作地区：</i>{yun:}$Info.city_two{/yun}</span> 
+        <span class="ct_det_bus_c"><i>到职时间：</i>{yun:}$Info.report{/yun}</span> </div>
+        <div class="ct_det_bus"> <span class="ct_det_bus_b"><i>求职状态：</i>{yun:}$Info.jobstatus{/yun}</span> 
+        <span class="ct_det_bus_c"><i>职位性质：</i>{yun:}$Info.type{/yun}</span> </div>
+      </div>
+      {yun:}if is_array($Info.user_work) && !empty($Info.user_work){/yun}
+      <div class="resume_ct_det">
+        <div class="ct_det_tit"><span class="icon_b"></span>工作经历</div>
+        {yun:}foreach item=all from=$Info.user_work{/yun}
+        <div class="ct_det_work"> <i class="ct_det_work_icon"></i>
+     <span class="ct_det_time">{yun:}$all.sdate|date_format:"%Y年%m月"{/yun} - {yun:}if $all.edate{/yun}{yun:}$all.edate|date_format:"%Y年%m月"{/yun}{yun:}else{/yun}至今{yun:}/if{/yun}</span>
+     <span class="ct_det_peo"><em>{yun:}$all.title{/yun}</em><i></i></span> <span class="ct_det_bx_tep">{yun:}$all.name{/yun}</span> 
+     <span class="ct_det_bx_tep">工作内容：{yun:}$all.content{/yun}</span> </div>
+        {yun:}/foreach{/yun} </div>
+      {yun:}/if{/yun}
+      {yun:}if is_array($Info.user_edu) && !empty($Info.user_edu){/yun}
+      <div class="resume_ct_det">
+        <div class="ct_det_tit"><span class="icon_c"></span>教育经历</div>
+        {yun:}section name=all loop=$Info.user_edu{/yun}
+        <div class="ct_det_work"> <i class="ct_det_work_icon"></i> 
+        <span class="ct_det_time">{yun:}$Info.user_edu[all].sdate|date_format:"%Y年%m月"{/yun} - {yun:}$Info.user_edu[all].edate|date_format:"%Y年%m月"{/yun}</span> 
+        <span class="ct_det_peo"><em>{yun:}$Info.user_edu[all].education_n{/yun}</em></span> <span class="ct_det_peo">{yun:}$Info.user_edu[all].name{/yun}</span> 
+        <span class="ct_det_peo">专业：{yun:}$Info.user_edu[all].specialty{/yun}</span>
+        <span class="ct_det_bx_tep">担任职务：{yun:}$Info.user_edu[all].title{/yun}</span> </div>
+        {yun:}/section{/yun} </div>
+      {yun:}/if{/yun}
+      {yun:}if is_array($Info.user_tra) && !empty($Info.user_tra){/yun}
+      <div class="resume_ct_det">
+        <div class="ct_det_tit"><span class="icon_g"></span>培训经历</div>
+        {yun:}section name=all loop=$Info.user_tra{/yun}
+        <div class="ct_det_work"> <i class="ct_det_work_icon"></i> 
+        <span class="ct_det_time">{yun:}$Info.user_tra[all].sdate|date_format:"%Y年%m月"{/yun} - {yun:}$Info.user_tra[all].edate|date_format:"%Y年%m月"{/yun}</span>
+        <span class="ct_det_peo"><em>{yun:}$Info.user_tra[all].title{/yun}</em></span>
+        <span class="ct_det_bx_tep">{yun:}$Info.user_tra[all].name{/yun}</span>
+        <span class="ct_det_bx_tep">培训描述：{yun:}$Info.user_tra[all].content{/yun}</span> </div>
+        {yun:}/section{/yun} </div>
+      {yun:}/if{/yun}
+      {yun:}if is_array($Info.user_skill) && !empty($Info.user_skill){/yun}
+      <div class="resume_ct_det">
+        <div class="ct_det_tit"><span class="icon_d"></span>职业技能</div>       
+        {yun:}foreach item=one from=$Info.user_skill{/yun}
+        <div class="ct_det_work"> <i class="ct_det_work_icon"></i>
+        <span class="ct_det_peo"><em>{yun:}$one.skill_n{/yun}</em></span>
+        <span class="ct_det_bx_tep">掌握时间：{yun:}$one.longtime{/yun}年</span>
+        <span class="ct_det_bx_tep">技能名称：{yun:}$one.name{/yun}</span>       
+       {yun:}if $one.pic{/yun} <span class="ct_det_bx_tep">技能证书：         
+        <img src="{yun:}$config.sy_weburl{/yun}/{yun:}$one.pic{/yun}" width="95" height="70" style="vertical-align:middle"></span>{yun:}/if{/yun} </div>
+        {yun:}/foreach{/yun} </div>
+      {yun:}/if{/yun}
+      {yun:}if is_array($Info.user_xm) && !empty($Info.user_xm){/yun}
+      <div class="resume_ct_det">
+        <div class="ct_det_tit"><span class="icon_e"></span>项目经验</div>
+        {yun:}section name=all loop=$Info.user_xm{/yun}
+        <div class="ct_det_work"> <i class="ct_det_work_icon"></i> 
+        <span class="ct_det_time">{yun:}$Info.user_xm[all].sdate|date_format:"%Y年%m月"{/yun} - {yun:}$Info.user_xm[all].edate|date_format:"%Y年%m月"{/yun}</span>
+         <span class="ct_det_peo"><em>{yun:}$Info.user_xm[all].name{/yun}</em>{yun:}if $Info.user_xm[all].sys{/yun}<i>（{yun:}$Info.user_xm[all].sys{/yun}）</i>{yun:}/if{/yun}</span> 
+         <span class="ct_det_bx_tep">{yun:}$Info.user_xm[all].title{/yun}</span> 
+         <span class="ct_det_bx_tep">项目内容：{yun:}$Info.user_xm[all].content{/yun}</span> </div>
+        {yun:}/section{/yun} </div>
+      {yun:}/if{/yun}
+           
+      {yun:}if is_array($Info.user_other) && !empty($Info.user_other){/yun}
+      <div class="resume_ct_det">
+        <div class="ct_det_tit"><span class="icon_h"></span>其他信息</div>
+        {yun:}section name=all loop=$Info.user_other{/yun}
+        <div class="ct_det_work"> <i class="ct_det_work_icon"></i> 
+        <span class="ct_det_peo"><em>{yun:}$Info.user_other[all].name{/yun}</em></span> 
+        <span class="ct_det_bx_tep"><i>其他描述：</i>{yun:}$Info.user_other[all].content{/yun}</span> </div>
+        {yun:}/section{/yun} </div>
+      {yun:}/if{/yun}
+      {yun:}if !empty($Info.description){/yun}
+      <div class="resume_ct_det">
+        <div class="ct_det_tit"><span class="icon_j"></span>自我评价</div>
+        <div class="ct_det_bx"> <span class="ct_det_bx_tep">{yun:}$Info.description{/yun}</span> 
+        <span class="ct_det_bx_tep"> 
+        {yun:}if $Info.arrayTag{/yun}
+        {yun:}foreach from=$Info.arrayTag item=v{/yun}
+        <span class="ct_det_tag">{yun:}$v{/yun}</span>
+        {yun:}/foreach{/yun}
+        {yun:}/if{/yun} 
+        </span> </div>
+      </div>
+      {yun:}/if{/yun}
+      <div class="resume_ct_det">
+        <div class="ct_det_tit"><span class="icon_k"></span>联系方式</div>
+        <div class="ct_det_bx"> 
+        <span class="ct_det_bx_tep">联系电话：<a href="{yun:}url m=resume c=show id=$Info.id{/yun}">登录后可以查看</a></span>
+         {yun:}if $Info.basic_info=='1'{/yun} {yun:}if $Info.address{/yun}
+         <span class="ct_det_bx_tep">详细地址：{yun:}$Info.address{/yun}</span>
+          {yun:}/if{/yun}   {yun:}/if{/yun} 
+          <span class="ct_det_bx_tep">电子邮箱：<a href="{yun:}url m=resume c=show id=$Info.id{/yun}">登录后可以查看</a></span> </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

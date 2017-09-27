@@ -1,0 +1,49 @@
+{yun:}include file="$userstyle/header.htm"{/yun}
+<div class="yun_user_member_w1100">
+    {yun:}include file="$userstyle/left.htm"{/yun}
+      <div class="mian_right fltR mt20">
+       <div class="member_right_index_h1 fltL"> <span class="member_right_h1_span fltL">财务明细</span> <i class="member_right_h1_icon user_bg"></i></div>
+       <div>
+            <div id="gms_showclew"></div>
+            <div class="resume_box_list">
+              <div class="job_list_tit"> 
+              <ul class="">
+	   <li><a href="index.php?c=paylist">充值记录</a></li>
+      <li class="job_list_tit_cur"><a href="index.php?c=paylog">消费记录</a></li>
+	</ul> 
+    </div>
+            {yun:}if !empty($rows){/yun}
+                <div class="List_Ope List_Title ">
+                    <span class="List_Title_span List_Title_w290"><em class="List_Title_span_name">流水单号</em></span>
+                    <span class="List_Title_span List_Title_w170">财务出入</span>
+                    <span class="List_Title_span List_Title_w230">备注</span>
+                    <span class="List_Title_span List_Title_w170 List_Title_span_ag" > 操作时间	 </span>
+                   
+                </div>
+                {yun:}/if{/yun}
+                {yun:}foreach from=$rows item=log{/yun}
+               {yun:}assign var="state" value=$log.pay_state{/yun}
+                <div class="List_Ope List_Ope_bor">
+                    <span class="List_Title_span List_Title_w290">{yun:}$log.order_id{/yun}</span>
+                    <span class="List_Title_span List_Title_w170">{yun:}$log.order_price{/yun}{yun:}if $log.type==2{/yun}元{yun:}else{/yun}{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}{yun:}/if{/yun}</span>
+                    <span class="List_Title_span List_Title_w230">{yun:}$log.pay_remark{/yun}&nbsp;</span>
+                    <span class="List_Title_span List_Title_w170"> {yun:}$log.pay_time{/yun} </span>
+                
+                    
+                
+                    
+                </div>
+                
+                {yun:}foreachelse{/yun}
+                <div class="msg_no">您还没有财务记录</div>
+                {yun:}/foreach{/yun}
+                {yun:}if !empty($rows){/yun}
+               
+                {yun:}/if{/yun}
+                <div class="diggg">{yun:}$pagenav{/yun}</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{yun:}include file="$userstyle/footer.htm"{/yun}

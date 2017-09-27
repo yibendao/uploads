@@ -1,0 +1,40 @@
+{yun:}include file="$wapstyle/member/cheader.htm"{/yun} 
+<section class="wap_member">
+<div class="wap_member_comp_h1"><span>{yun:}$config.integral_pricename{/yun}兑换</span></div>
+
+{yun:}foreach item=v from=$rows{/yun} 
+<div class="reward_list">
+      <div class="reward_list_top">
+           <div class="reward_list_top_nm">{yun:}$v.name{/yun}</div>
+           {yun:}if $v.status=="0"{/yun}
+            <div class="reward_list_top_no">未审核</div>            
+            {yun:}elseif $v.status=="1"{/yun} 
+            <div class="reward_list_top_ok">已审核</div>
+           {yun:}elseif $v.status=="2"{/yun} 
+           <div class="reward_list_top_sh">未通过</div>
+            {yun:}/if{/yun}
+      </div>
+      <div class="reward_list_ct">
+           <div class="reward_list_ct_img"><a href="{yun:}url m=wap c=redeem a=show id=$v.gid{/yun}"><img width="80px" height="80px" src="{yun:}$config.sy_weburl{/yun}/{yun:}$v.pic{/yun}"/></a></div>
+           <div class="reward_list_ct_rt">
+                 <div class="reward_list_ct_rt_m">会员：{yun:}$v.linkman{/yun}</div>
+                 <div class="reward_list_ct_rt_m">联系方式：{yun:}$v.linktel{/yun}</div>
+                 <div class="reward_list_ct_rt_m">兑换时间：{yun:}$v.ctime|date_format:"%Y-%m-%d %H:%M"{/yun}</div>
+                 <div class="reward_list_ct_rt_m">数量：{yun:}$v.num{/yun}（件） {yun:}$config.integral_pricename{/yun}：<span style="color:red;">{yun:}$v.integral{/yun}{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}</span></div>
+                 {yun:}if $v.express||$v.expnum{/yun}<div class="reward_list_ct_rt_m">物流：{yun:}$v.express{/yun} {yun:}$v.expnum{/yun}</div>{yun:}/if{/yun}
+                 <div class="reward_list_ct_rt_m">{yun:}if $v.body==''{/yun}备注：{yun:}/if{/yun}{yun:}$v.body{/yun}</div>
+                  {yun:}if $v.status=="2"{/yun} 
+                 <div class="reward_list_ct_rt_z"><a  href="javascript:void(0)"  onclick="layer.open({title:'查看原因',content: '{yun:}$v.statusbody{/yun}'});">查看原因</a></div>
+                  {yun:}elseif $v.status=="0"{/yun} 
+                  <div class="reward_list_ct_rt_z"><a href="javascript:void(0)" onclick="layer_del('确定要取消兑换？','index.php?c=delreward&id={yun:}$v.id{/yun}')">取消兑换</a></div>
+                   {yun:}/if{/yun} 
+           </div>
+      </div>
+</div>
+{yun:}foreachelse{/yun}
+<div class="wap_member_no">您共有<span class="f60" ><font color="orange">{yun:}$statis.integral{/yun}</font></span>{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}还没有在商城兑换礼品，快去商城兑换礼品吧！<br><a href="{yun:}url m=wap c=redeem{/yun}" class="wap_member_no_submit">我要兑换</a></div>
+ 
+{yun:}/foreach{/yun} 
+</section>
+<div class="pages"> {yun:}$pagenav{/yun}</div>
+{yun:}include file="$wapstyle/footer.htm"{/yun} 

@@ -1,0 +1,349 @@
+{yun:}include file="$wapstyle/member/cheader.htm"{/yun}  
+<script src="{yun:}$wap_style{/yun}/js/jobadd.js" language="javascript"></script> 
+<script src="{yun:}$wap_style{/yun}/js/part.js" language="javascript"></script>  
+<script src="{yun:}$wap_style{/yun}/js/ueditor/ueditor.config.js"></script>
+<script src="{yun:}$wap_style{/yun}/js/ueditor/ueditor.all.min.js"></script> 
+ <script type="text/javascript">
+ var weburl='{yun:}$config_wapdomain{/yun}';
+var ue = UE.getEditor('description',{
+	toolbars: false,elementPathEnabled:false,wordCount:false,autoHeightEnabled:false 
+}); 
+function change_salary_type(){
+	if($("#salary_type").attr('checked')=='checked'){
+		$("#minsalary").attr("disabled","disabled");
+		$("#maxsalary").attr("disabled","disabled");
+		$("#minsalary").val(0);$("#maxsalary").val(0);
+	}else{
+		$("#minsalary").removeAttr("disabled","disabled");
+		$("#maxsalary").removeAttr("disabled","disabled");
+		$("#minsalary").val('{yun:}$row.minsalary{/yun}');
+		$("#maxsalary").val('{yun:}$row.maxsalary{/yun}');
+	}
+}
+</script>
+<section class="wap_member">
+  <div class="wap_member_comp_h1" style="position:relative"><span>新增职位</span>
+  <em class="wap_member_comp_em">以下<font color="#ff0000">*</font> 号为必填项</em></div>
+  
+  <div class="yun_wap_addresume_box">
+    <form action="" method="post" onsubmit="return checkfrom();">
+      <div class="yun_wap_addresume_box_group">
+        <div class="yun_wap_addresume_box_label"> 职位名称 <span class="resume-cont_wate_bj">*</span> </div>
+        <div class="yun_wap_addresume_box_control">
+          <input type="text" name="name" id='name' value="{yun:}$row.name{/yun}"  placeholder="请填写职位名称" class="yun_wap_addresume_text">
+        </div>
+      </div>
+      <div class="yun_wap_addresume_box_group">
+        <div class="yun_wap_addresume_box_label">职位类别 <span class="resume-cont_wate_bj">*</span> </div>
+        <div class="yun_wap_addresume_box_control">
+          <div class="selectOption" style="width:31%">
+            <select name="job1" onchange="checkjob(this.value,'1');">
+              <option value="">请选择</option>
+                {yun:}foreach from=$job_index item=v{/yun}
+                <option value="{yun:}$v{/yun}" {yun:}if $row.job1==$v{/yun}selected="selected"{yun:}/if{/yun}>{yun:}$job_name[$v]{/yun}</option>
+                {yun:}/foreach{/yun}
+              
+            </select>
+          </div>
+          <div class="selectOption" style="width:31%">
+            <select name="job1_son" id="job1_son" onchange="checkjob(this.value,'2');">
+              <option value="">请选择</option>
+                {yun:}foreach from=$job_type[$row.job1] item=v{/yun}
+              <option value="{yun:}$v{/yun}" {yun:}if $row.job1_son==$v{/yun}selected="selected"{yun:}/if{/yun}>{yun:}$job_name[$v]{/yun}</option>
+                {yun:}/foreach{/yun}
+            </select>
+          </div>
+          <div class="selectOption" style="width:31%">
+            <select name="job_post" id="job_post">
+              <option value="">请选择</option>
+                {yun:}foreach from=$job_type[$row.job1_son] item=v{/yun}
+              <option value="{yun:}$v{/yun}" {yun:}if $row.job_post==$v{/yun}selected="selected"{yun:}/if{/yun}>{yun:}$job_name[$v]{/yun}</option>
+                {yun:}/foreach{/yun}
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="yun_wap_addresume_box_group">
+        <div class="yun_wap_addresume_box_label">工作地点 <span class="resume-cont_wate_bj">*</span> </div>
+        <div class="yun_wap_addresume_box_control">
+          <div class="selectOption" style="width:31%">
+            <select name="provinceid" id="provinceid" onchange="checkcity(this.value,'1');">
+              <option value="">请选择</option>
+                {yun:}foreach from=$city_index item=v{/yun}                
+              <option value="{yun:}$v{/yun}" {yun:}if $row.provinceid==$v{/yun}selected="selected"{yun:}/if{/yun}>{yun:}$city_name[$v]{/yun}</option>              
+                {yun:}/foreach{/yun}              
+            </select>
+          </div>
+          <div class="selectOption" style="width:31%">
+            <select name="cityid" id="cityid" onchange="checkcity(this.value,'2');">
+              <option value="">请选择</option>              
+                {yun:}foreach from=$city_type[$row.provinceid] item=v{/yun}                
+              <option value="{yun:}$v{/yun}" {yun:}if $row.cityid==$v{/yun}selected="selected"{yun:}/if{/yun}>{yun:}$city_name[$v]{/yun}</option>             
+                {yun:}/foreach{/yun}              
+            </select>
+          </div>
+          <div class="selectOption"  style="width:31%;{yun:}if !$row.three_cityid{/yun}display:none;{yun:}/if{/yun}"  id="cityshowth">
+            <select name="three_cityid" id="three_cityid">
+              <option value="">请选择</option>              
+                {yun:}foreach from=$city_type[$row.cityid] item=v{/yun}                
+              <option value="{yun:}$v{/yun}" {yun:}if $row.three_cityid==$v{/yun}selected="selected"{yun:}/if{/yun}>{yun:}$city_name[$v]{/yun}</option>              
+                {yun:}/foreach{/yun}           
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="yun_wap_addresume_box_group">
+        <div class="yun_wap_addresume_box_label"> 薪水待遇 <span class="resume-cont_wate_bj">*</span> </div>
+        <div class="yun_wap_addresume_box_control">
+          <input type="text" class="xz_text_job"name="minsalary" id='minsalary' placeholder="最低薪资" value="{yun:}if $row.minsalary{/yun}{yun:}$row.minsalary{/yun}{yun:}/if{/yun}" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')"{yun:}if !$row.minsalary&&!$row.maxsalary&&$row.id{/yun} disabled="disabled"{yun:}/if{/yun}>
+          <span>-</span>
+          <input type="text" class="xz_text_job" name="maxsalary" id='maxsalary' placeholder="最高薪资" value="{yun:}if $row.maxsalary{/yun}{yun:}$row.maxsalary{/yun}{yun:}/if{/yun}"  onkeyup="this.value=this.value.replace(/[^0-9]/g,'')"{yun:}if !$row.minsalary&&!$row.maxsalary&&$row.id{/yun} disabled="disabled"{yun:}/if{/yun}>
+          <span style="color:#666;"><label><input type="checkbox" id="salary_type" name="salary_type" value="1" onclick="change_salary_type()"{yun:}if !$row.minsalary&&!$row.maxsalary&&$row.id{/yun} checked="checked"{yun:}/if{/yun}/> 面议</label></span>
+        </div>
+      </div>
+      <div class="yun_wap_addresume_box_group">
+        <div class="yun_wap_addresume_box_label"> 招聘天数 <span class="resume-cont_wate_bj">*</span> </div>
+        <div class="yun_wap_addresume_box_control">
+          <input type="text" name="days" id='days' value="{yun:}if $row.days{/yun}{yun:}$row.days{/yun}{yun:}else{/yun}30{yun:}/if{/yun}" class="yun_wap_addresume_text"  onkeyup="this.value=this.value.replace(/[^0-9]/g,'')">
+        </div>
+      </div>
+      <div class="yun_wap_addresume_box_group">
+        <div class="yun_wap_addresume_box_label"> 职位描述 <span class="resume-cont_wate_bj">*</span> </div>
+        <div class="yun_wap_addresume_box_control">
+          <textarea class="textAreaMsg tip" style="height:200px" name="description" id="description" placeholder="请输入职位描述500字以内">{yun:}$row.description{/yun}</textarea>
+        </div>
+      </div>
+       <div class="yun_wap_addresume_box_group"style=" padding:10px 15px 10px 10px">
+          <div class="yun_wap_addresume_box_label">联系方式</div>
+          <div class="yun_wap_add_hm">
+		    <input type="hidden" name="islink" value="{yun:}if $row.islink{/yun}{yun:}$row.islink{/yun}{yun:}else{/yun}1{yun:}/if{/yun}" />
+                <div class="admin_job_js_list_rt">
+                     <span class="admin_job_style {yun:}if $row.islink==1|| $row.islink==''{/yun}admin_job_style_n{yun:}/if{/yun}" onclick="choice('1','link')" id="islink1">使用企业联系方式( {yun:}$company.linkman{/yun}&nbsp;{yun:}if $company.linktel{/yun}{yun:}$company.linktel{/yun}{yun:}else{/yun}{yun:}$company.linkphone{/yun}{yun:}/if{/yun} )</span>
+                     </div>
+                     <div class="admin_job_js_list_rt">
+                          <span class="admin_job_style {yun:}if $row.islink==2{/yun}admin_job_style_n{yun:}/if{/yun}" onclick="choice('2','link')" id="islink2">使用新联系方式</span>
+                     </div>                     
+				    <div class="admin_job_js" id="newlink" style="padding:10px 10px 10px 0px;display:none;">
+                         <div class="job_touch_other">
+                               <div class="job_touch_other_tit">使用新联系方式</div>
+				               <input type="text"  class="payment_fp_touch_text payment_fp_touch_text_p" {yun:}if $job_link.link_man&&$row.islink=='2'{/yun}value="{yun:}$job_link.link_man{/yun}"{yun:}/if{/yun} id="link_man" name="link_man" placeholder="请输入联系人"> 
+			    	           <input type="text"  {yun:}if $job_link.link_moblie&&$row.islink=='2'{/yun}value="{yun:}$job_link.link_moblie{/yun}"{yun:}/if{/yun} id="link_moblie" name="link_moblie" placeholder="请输入联系电话" class="payment_fp_touch_text">
+				         </div>
+                         </div>
+                <div class="admin_job_style {yun:}if $row.islink==3{/yun}admin_job_style_n{yun:}/if{/yun}" onclick="choice('3','link')" id="islink3">不向求职者展示联系方式（不想受到骚扰）</div>  
+				</div>                          
+          </div>
+          
+        <div class="yun_wap_addresume_box_group" style=" padding:10px 15px 10px 10px">
+          <div class="yun_wap_addresume_box_label" style="width:100px;">接收简历的邮箱</div>
+          <div class="yun_wap_add_hm">
+		  <input type="hidden" name="isemail" value="{yun:}if $row.isemail{/yun}{yun:}$row.isemail{/yun}{yun:}else{/yun}{yun:}if $company.linkmail{/yun}1{yun:}else{/yun}0{yun:}/if{/yun}{yun:}/if{/yun}" />
+                     <div class="admin_job_js_list_rt">
+                          {yun:}if $company.linkmail{/yun}<span class="admin_job_style {yun:}if $row.isemail==1||!$row.isemail{/yun}admin_job_style_n{yun:}/if{/yun}" onclick="choice('1','email')" id="isemail1">使用企业邮箱( {yun:}$company.linkmail{/yun} )</span>{yun:}/if{/yun}
+                     </div>
+                    <div class="admin_job_js_list_rt">
+                          <span class="admin_job_style {yun:}if $row.isemail==2{/yun}admin_job_style_n{yun:}/if{/yun}" onclick="choice('2','email')" id="isemail2">使用新邮箱</span>
+                     </div>                     
+				    <div class="admin_job_js" id="newemail" style="padding:10px 10px 10px 0px;{yun:}if $row.is_email!=2{/yun}display:none;{yun:}/if{/yun}"" >
+                         <div class="job_touch_other">
+                               <div class="job_touch_other_tit">使用新邮箱</div>
+			    	           <input type="text"  id="email" name="email" value="{yun:}$job_link.email{/yun}" placeholder="请填写新邮箱" class="payment_fp_touch_text">
+				         </div>
+                         </div>
+                <div class="admin_job_style {yun:}if $row.isemail==3{/yun}admin_job_style_n{yun:}/if{/yun}" onclick="choice('3','email')" id="isemail3">不需要将收到的简历发送到邮箱</div>  
+			</div>                          
+          </div>
+      <div class="info-table-value"><a class="iconfont form-show-btn" href="javascript:void(0)"onclick="$('#jobother').toggle();">展开选填信息</a></div>
+      <div class="yun_wap_xtbox" id="jobother"style="display:none">
+        <div class="yun_wap_addresume_box_group">
+          <div class="yun_wap_addresume_box_label"> 从事行业 </div>
+          <div class="yun_wap_addresume_box_control">
+            <div class="select"> <span class="txt hy">
+            {yun:}if $row.hy{/yun}
+            {yun:}$industry_name[$row.hy]
+            {/yun}{yun:}else{/yun}请选择{yun:}/if{/yun}
+            </span>
+              <select name="hy"class="textval" id="hyid" onchange="ckpartjob('hy');">
+				<option value="">请选择</option>
+				{yun:}foreach item=v from=$industry_index{/yun}
+                
+                <option value="{yun:}$v{/yun}" {yun:}if $row.hy==$v{/yun}selected="selected"{yun:}/if{/yun}>{yun:}$industry_name[$v]{/yun}</option>
+                
+                {yun:}/foreach{/yun}
+              
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="yun_wap_addresume_box_group">
+          <div class="yun_wap_addresume_box_label"> 招聘人数</div>
+          <div class="yun_wap_addresume_box_control">
+            <div class="select"> <span class="txt number">{yun:}if $row.number{/yun}{yun:}$comclass_name[$row.number]{/yun}{yun:}else{/yun}请选择{yun:}/if{/yun}</span>
+              <select name="number" id="numberid" onchange="ckpartjob('number');">
+                <option value="">请选择</option>
+				{yun:}foreach item=v from=$comdata.job_number{/yun}
+                
+                <option value="{yun:}$v{/yun}" {yun:}if $row.number==$v{/yun}selected="selected"{yun:}/if{/yun}>{yun:}$comclass_name[$v]{/yun}</option>
+                
+                {yun:}/foreach{/yun}
+              
+              </select>
+            </div>
+          </div>
+        </div>
+                <div class="yun_wap_addresume_box_group">
+          <div class="yun_wap_addresume_box_label"> 工作经验 </div>
+          <div class="yun_wap_addresume_box_control">
+            <div class="select"> <span class="txt exp">{yun:}if $row.exp{/yun}{yun:}$comclass_name[$row.exp]{/yun}{yun:}else{/yun}请选择{yun:}/if{/yun}</span>
+              <select name="exp"class="textval"id="expid" onchange="ckpartjob('exp');">
+			   <option value="">请选择</option>
+				{yun:}foreach item=v from=$comdata.job_exp{/yun}
+                
+                <option value="{yun:}$v{/yun}" {yun:}if $row.exp==$v{/yun}selected="selected"{yun:}/if{/yun}>{yun:}$comclass_name[$v]{/yun}</option>
+                
+                {yun:}/foreach{/yun}
+              
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="yun_wap_addresume_box_group">
+          <div class="yun_wap_addresume_box_label"> 到岗时间 </div>
+          <div class="yun_wap_addresume_box_control">
+            <div class="select"> <span class="txt report">{yun:}if $row.report{/yun}{yun:}$comclass_name[$row.report]{/yun}{yun:}else{/yun}请选择{yun:}/if{/yun}</span>
+              <select name="report"class="textval"id="reportid" onchange="ckpartjob('report');">
+			   <option value="">请选择</option>
+				{yun:}foreach item=v from=$comdata.job_report{/yun}
+                
+                <option value="{yun:}$v{/yun}" {yun:}if $row.report==$v{/yun}selected="selected"{yun:}/if{/yun}>{yun:}$comclass_name[$v]{/yun}</option>
+                
+                {yun:}/foreach{/yun}
+              
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="yun_wap_addresume_box_group">
+          <div class="yun_wap_addresume_box_label"> 年龄要求 </div>
+          <div class="yun_wap_addresume_box_control">
+            <div class="select"> <span class="txt age">{yun:}if $row.age{/yun}{yun:}$comclass_name[$row.age]{/yun}{yun:}else{/yun}请选择{yun:}/if{/yun}</span>  
+              <select name="age"class="textval"id="ageid" onchange="ckpartjob('age');">
+			  <option value="">请选择</option>
+				{yun:}foreach item=v from=$comdata.job_age{/yun}
+                
+                <option value="{yun:}$v{/yun}" {yun:}if $row.age==$v{/yun}selected="selected"{yun:}/if{/yun}>{yun:}$comclass_name[$v]{/yun}</option>
+                
+                {yun:}/foreach{/yun}
+              
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="yun_wap_addresume_box_group">
+          <div class="yun_wap_addresume_box_label"> 性别要求 </div>
+          <div class="yun_wap_addresume_box_control">
+            <div class="select"> <span class="txt sex">{yun:}if $row.sex==1{/yun}{yun:}$arr_data1{/yun}{yun:}else if $row.sex==2{/yun}{yun:}$arr_data1{/yun}{yun:}else if $row.sex==3{/yun}{yun:}$arr_data1{/yun}{yun:}else{/yun}请选择{yun:}/if{/yun}</span>
+              <select name="sex"class="textval"id="sexid" onchange="ckpartjob('sex');">
+			  <option value="">请选择</option>
+                {yun:}foreach from=$arr_data.sex key=j item=v{/yun}    
+                <option value="{yun:}$j{/yun}"{yun:}if $row.sex==$j{/yun}selected="selected"{yun:}/if{/yun}>{yun:}$v{/yun}</option>
+                {yun:}/foreach{/yun}         
+              
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="yun_wap_addresume_box_group">
+          <div class="yun_wap_addresume_box_label"> 教育程度 </div>
+          <div class="yun_wap_addresume_box_control">
+            <div class="select"> <span class="txt edu">{yun:}if $row.edu{/yun}{yun:}$comclass_name[$row.edu]{/yun}{yun:}else{/yun}请选择{yun:}/if{/yun}</span> 
+              <select name="edu"class="textval"id="eduid" onchange="ckpartjob('edu');">
+                <option value="">请选择</option>
+				{yun:}foreach item=v from=$comdata.job_edu{/yun}
+                
+                <option value="{yun:}$v{/yun}" {yun:}if $row.edu==$v{/yun}selected="selected"{yun:}/if{/yun}>{yun:}$comclass_name[$v]{/yun}</option>
+                
+                {yun:}/foreach{/yun}
+              
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="yun_wap_addresume_box_group">
+          <div class="yun_wap_addresume_box_label"> 婚姻状况 </div>
+          <div class="yun_wap_addresume_box_control">
+            <div class="select"> <span class="txt marriage">{yun:}if $row.marriage{/yun}{yun:}$comclass_name[$row.marriage]{/yun}{yun:}else{/yun}请选择{yun:}/if{/yun}</span>
+              <select name="marriage"class="textval"id="marriageid" onchange="ckpartjob('marriage');">
+                 <option value="">请选择</option>
+				{yun:}foreach item=v from=$comdata.job_marriage{/yun}
+                
+                <option value="{yun:}$v{/yun}" {yun:}if $row.marriage==$v{/yun}selected="selected"{yun:}/if{/yun}>{yun:}$comclass_name[$v]{/yun}</option>
+                
+                {yun:}/foreach{/yun}
+              
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="yun_wap_addresume_box_group" style=" padding:10px 15px 10px 10px">
+        
+          <div  style="color:#999"> 语言要求 </div>
+          <div class="jobadd_zk" onclick="zhankaiShouqi(this);">{yun:}if !$row.id{/yun}更多{yun:}else{/yun}收起{yun:}/if{/yun}</div>
+           {yun:}foreach from=$comdata.job_lang key=j item=v{/yun}
+            <label class="jobadd_span" for="lang_{yun:}$v{/yun}" style="width:46%;{yun:}if $j>5&&!$row.id{/yun}display:none{yun:}/if{/yun}">
+              <input type="checkbox" name="lang[]" value="{yun:}$v{/yun}" id="lang_{yun:}$v{/yun}" {yun:}if $row.lang && in_array($v,$row.lang){/yun}checked{yun:}/if{/yun}>
+              {yun:}$comclass_name[$v]{/yun} </label>
+            {yun:}/foreach{/yun}
+        </div>
+        <div class="yun_wap_addresume_box_group"style=" padding:10px 15px 10px 10px">
+          <div  style="color:#999">  福利待遇</div>
+            <div class="jobadd_zk" onclick="zhankaiShouqi(this);">{yun:}if !$row.id{/yun}更多{yun:}else{/yun}收起{yun:}/if{/yun}</div>
+          {yun:}foreach from=$comdata.job_welfare key=j item=v{/yun}
+            <label class="jobadd_span" for="welfare_{yun:}$v{/yun}" style="width:46%; {yun:}if $j>5&&!$row.id{/yun}display:none{yun:}/if{/yun}">
+              <input type="checkbox" name="welfare[]" value="{yun:}$v{/yun}" id="welfare_{yun:}$v{/yun}" {yun:}if $row.welfare && in_array($v,$row.welfare){/yun}checked{yun:}/if{/yun}>
+              {yun:}$comclass_name[$v]{/yun} </label>
+            {yun:}/foreach{/yun} 
+        </div>
+       </div>
+      <div class="yun_wap_addresume_box_group" style="background: transparent; border: none;">
+        <input name="id" value="{yun:}$row.id{/yun}" type="hidden"/>
+        <input name="state" value="{yun:}$row.state{/yun}" type="hidden"/>
+        <input type="submit" name="submit" value="提交操作" class="reinputText2">
+      </div>
+    </form>
+  </div>
+</section>
+<script>
+function zhankaiShouqi(control){
+	$(control).parent().find('.jobadd_span:gt(5)').slideToggle(1000);
+	if($(control).html()=='更多'){
+		$(control).html('收起');
+	}else{
+		$(control).html('更多');
+	}
+}
+function choice(id,type){
+	if(type=='link'||type=='email'){
+		if(id==1){
+			$("#is"+type+"3").removeClass('admin_job_style_n');
+			$("#is"+type+"2").removeClass('admin_job_style_n');
+			$("#is"+type+id).addClass('admin_job_style_n');
+			$("input[name='is"+type+"']").val(id);
+			$("#new"+type).hide();
+		}else if(id==2){
+			$("#is"+type+"3").removeClass('admin_job_style_n');
+			$("#is"+type+"1").removeClass('admin_job_style_n');
+			$("#is"+type+id).addClass('admin_job_style_n');
+			$("input[name='is"+type+"']").val(id);
+			$("#new"+type).show();
+		}else if(id==3){
+			$("#is"+type+"1").removeClass('admin_job_style_n');
+			$("#is"+type+"2").removeClass('admin_job_style_n');
+			$("#is"+type+id).addClass('admin_job_style_n');
+			$("input[name='is"+type+"']").val(id);
+			$("#new"+type).hide();
+		}
+	}
+}
+</script>
+{yun:}include file="$wapstyle/footer.htm"{/yun} 

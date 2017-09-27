@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link href="images/reset.css" rel="stylesheet" type="text/css" />
+<link href="images/system.css" rel="stylesheet" type="text/css" />
+<link href="images/table_form.css" rel="stylesheet" type="text/css" />
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script>
+<script src="js/admin_public.js" language="javascript"></script>
+<title>后台管理</title>
+</head>
+<body class="body_ifm">
+<div class="infoboxp">
+<div class="infoboxp_top_bg"></div>
+<div class="infoboxp_top">
+<span class="complay_top_span fl">添加个人会员信息</span>
+
+	<a href=" javascript:history.back(-1);" class="admin_infoboxp_tj admin_infoboxp_xwlb">个人用户列表</a>
+
+</div>
+<div class="admin_table_border">
+<iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe>
+<form name="myform" action="index.php?m=user_member&c=save" method="post"  target="supportiframe">
+<table width="100%" class="table_form" style="background:#fff;">
+	<tr>
+		<th width="140">用&nbsp;户&nbsp; 名：</th>
+		<td><input type="text"  value="" name="username" class="input-text"></td>
+	</tr>
+<tr class="admin_table_trbg">
+		<th>设置密码：</th>
+		<td><input type="password" value="" name="password" class="input-text">
+		<font color="gray"></font>
+		</td>
+	</tr>
+	<tr>
+		<th>联系邮箱：</th>
+		<td><input type="text" value="" name="email" class="input-text">
+		<font color="gray"></font>
+		</td>
+	</tr>
+	<tr class="admin_table_trbg">
+		<th>联系手机：</th>
+		<td><input type="text" value="" name="moblie" class="input-text">
+		<font color="gray"></font>
+        </td>
+	</tr>
+	<tr>
+		<td align="center" colspan="2">
+        <input class="admin_submit4" type="submit" name="submit" value="&nbsp;添 加&nbsp;" />
+		<input class="admin_submit4" type="reset" name="reset" value="&nbsp;重 置 &nbsp;" /></td>
+	</tr>
+</table>
+<input type="hidden" name="pytoken" value="{yun:}$pytoken{/yun}">
+</form>
+</div>
+</div>
+</body>
+</html>

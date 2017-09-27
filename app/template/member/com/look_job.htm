@@ -1,0 +1,57 @@
+{yun:}include file="$comstyle/header.htm"{/yun}
+<link href="{yun:}$comstyle{/yun}/images/index_style.css" type=text/css rel=stylesheet>
+<div class="w1000">
+<div class="admin_mainbody"> {yun:}include file="$comstyle/left.htm"{/yun}
+  <div class=right_box>
+    <div class=admincont_box>
+      <div class="com_tit"> <span class="com_tit_span">被浏览的职位</span> </div>
+      <div class="com_body">
+        <iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe>
+        <form action="index.php?c=look_job&act=del" method="post" target="supportiframe" id='myform'>
+          <div class=table>
+            <div id="job_checkbokid" >
+            {yun:}if $rows{/yun}
+              <div class="job_news_list job_news_list_h1">
+                  <span class="job_news_list_span job_w30"style="padding-right:5px;">&nbsp;</span> 
+                  <span class="job_news_list_span job_w170" style="width:170px;">职位名称</span> 
+                  <span class="job_news_list_span job_w90">姓名</span> 
+                   <span class="job_news_list_span job_w100">意向职位</span> 
+                  <span class="job_news_list_span job_w100">工作经验</span> 
+                  <span class="job_news_list_span job_w100">期望薪资</span>
+                  <span class="job_news_list_span job_w100" style="width:160px;">浏览时间</span> 
+                  <span class="job_news_list_span job_w100">操作</span> 
+              </div>
+              {yun:}/if{/yun}
+              {yun:}foreach item=v from=$rows{/yun}
+              <div class="job_news_list"> <span class="job_news_list_span job_w30" style="padding-right:5px;">
+                <input type='checkbox' name="delid[]" value="{yun:}$v.id{/yun}" class="com_Release_job_qx_check" style="margin-top:2px;">
+                </span> <span class="job_news_list_span job_w170" style="width:170px;">{yun:}$v.jobname{/yun}&nbsp;</span> 
+                <span class="job_news_list_span job_w90"><a href="{yun:}url m=resume c=show uid='`$v.uid`'{/yun}" target="_blank" class="uesr_name_a">&nbsp;{yun:}$v.name{/yun}</a></span>
+                <span class="job_news_list_span job_w100"><span class="yxjob_name">&nbsp;{yun:}$v.jobclassidname{/yun}</span></span> 
+                 <span class="job_news_list_span job_w100">&nbsp;{yun:}$v.exp{/yun}</span>
+                 <span class="job_news_list_span job_w100">&nbsp;{yun:}if $v.minsalary&&$v.maxsalary{/yun}￥{yun:}$v.minsalary{/yun}-{yun:}$v.maxsalary{/yun}{yun:}else if $v.minsalary{/yun}￥{yun:}$v.minsalary{/yun}以上{yun:}else{/yun}面议{yun:}/if{/yun}</span> 
+                 <span class="job_news_list_span job_w100" style="width:160px;">&nbsp;{yun:}$v.datetime|date_format:'%Y-%m-%d %H:%M'{/yun}</span> 
+                 <span class="job_news_list_span job_w100" style="text-align:right">{yun:}if $v.userid_msg==1{/yun} <font color="red">已邀请</font> {yun:}else{/yun} <a href="javascript:;" uid="{yun:}$v.uid{/yun}" username="{yun:}$v.name{/yun}" class="sq_resume uesr_name_a" style="position:relative; "> 邀请面试</a> {yun:}/if{/yun} <span class="com_m_line">|</span> <a href="javascript:void(0)" onclick="layer_del('确定要删除？', '{yun:}$now_url{/yun}&act=del&id={yun:}$v.id{/yun}')" class="uesr_name_a">删除</a></span> </div>
+              {yun:}foreachelse{/yun}
+                <div class="msg_no">亲爱的用户，目前还没有人才浏览您。
+                   <p>您可以主动邀请人才面试</p>
+                   <a href="{yun:}url m=resume{/yun}" class="com_msg_no_bth com_submit">我要主动找人才</a></div>
+              {yun:}/foreach{/yun} </div>
+          </div>
+          {yun:}if $rows{/yun}
+          <div class="com_Release_job_bot"> <span class="com_Release_job_qx">
+            <input id='checkAll'  type="checkbox" onclick='m_checkAll(this.form)'class="com_Release_job_qx_check">
+            全选</span>
+            <INPUT class="c_btn_02" type="button" name="subdel" value="批量删除" onclick="return really('delid[]');">
+          </div>
+          <div class="clear"></div>
+          <div class="diggg">{yun:}$pagenav{/yun}</div>
+          {yun:}/if{/yun}
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+{yun:}include file="$comstyle/yqms.htm"{/yun}
+{yun:}include file="$comstyle/footer.htm"{/yun} 

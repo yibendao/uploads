@@ -1,0 +1,139 @@
+@charset "gb2312";
+/* CSS Document */
+* {
+	margin: 0 auto;
+	padding: 0;
+}
+.resume_gjbody {
+	font-family:Œ¢»Ì—≈∫⁄;
+	font-size:14px;
+	background:#f4f4f4 url(../images/bg.png) no-repeat top center
+}
+a {
+	color: #666666;
+	text-decoration: none;
+}
+img {
+	border: medium none;
+	vertical-align:middle
+}
+body, ul, ol, li, dl, dt, dd, div, span, b, form, img, p, pre {
+	border: 0 none;
+	list-style: none outside none;
+	margin: 0;
+	padding: 0;
+}
+.clear {
+	clear: both;
+}
+.resumegj_container {
+	margin: 0 auto;
+	text-align: left;
+	width: 850px;
+}
+.head {
+	text-align: right;
+	float:left;
+	background:#fff;
+	width:100%;
+	position:relative
+}
+.resume_gj {
+	width:141px;
+	height:30px;
+	position:absolute;
+	right:0px;
+	bottom:0px;
+}
+.none{ display:none}
+.logo_1 {
+	float: left;
+	padding:20px 20px;
+}
+.header_right {
+	float:right;
+	margin-top:5px;
+	margin-right:10px;
+}
+.menu1Content {
+	background: none repeat scroll 0 0 #FFFFFF;
+	width: 100%;
+}
+.menu1_top div {
+	color: #666666;
+	font-size: 16px;
+	height: 66px;
+	line-height:66px;
+	margin: 0 auto;
+	text-align: center;
+	width: 100%
+}
+.menu1_top p {
+	background: none repeat scroll 0 0 #2C7ED2;
+	color: #FFFFFF;
+	height: 44px;
+	line-height: 44px;
+	margin: 0 auto;
+	text-align: center;
+	font-size:16px;
+	width:100%;
+}
+.note {
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	padding-bottom:10px;
+	
+}
+.note span {
+	margin: 0 20px;
+}
+.btn{width:100%; text-align:center; padding:20px 0;}
+.btn_1 {
+	background:#0d8bd7;
+	border: medium none;
+	color: #fff;
+	cursor: pointer;
+	height: 33px;
+	width:130px;
+	font-weight:bold
+}
+.btn a {
+	margin: 0 5px;
+}
+.btn_1:hover{color:#fff}
+/*œ¬‘ÿºÚ¿˙Ã· æ*/
+.Download_resume_tips{width:500px; background:#fff; padding:20px; font-size:14px;}
+.Download_resume_tips_h1{border-bottom:1px solid #ddd; padding-bottom:20px; font-size:16px; font-weight:bold}
+.Download_resume_tips_h1 .Download_resume_tips_h1_s{ font-size:18px;color:#f60; font-style:normal; font-weight:bold}
+.Download_resume_con_list{width:100%;}
+.Download_resume_tips_p{ line-height:30px; text-align:left; padding:10px 0;}
+.Download_resume_tips_p .Download_resume_tips_p_span{ display:inline-block; word-spacing:normal}
+.Download_resume_cont{width:500px;height:380px; overflow:auto}
+.Download_resume_tips_c{color:#093; font-style:normal; font-weight:bold}
+.Download_resume_tips_f{color:#f60; font-style:normal; font-weight:bold}
+.Download_resume_tips_cf{color:#999; font-style:normal; }
+.Download_resume_tips_rad{width:13px;height:13px; overflow:hidden; vertical-align:middle; margin-right:5px; margin-left:5px;}
+.Download_resume_tips_cur{background:#f8f8f8;}
+.Download_resume_tips_yhq{width:100%; padding:5px 0}
+.Download_resume_tips_yhq a{color:#f60;}
+.Download_resume_tips_jine{width:100%; padding:10px 0; font-size:14px; font-weight:bold; text-align:center}
+.Download_resume_tips_jine .Download_resume_tips_f{ font-size:20px;}
+.Download_resume_tips_bth{width:100%;padding:10px 0; text-align:center}
+.Download_resume_tips_sub{width:110px;height:40px; background:#f60;color:#fff;border:none; font-size:14px; font-weight:bold; cursor:pointer;font-family:microsoft yahei,ÀŒÃÂ;}
+.Download_resume_cont_list{width:100%; float:left}
+
+.resume_jl_box_t2 img{float:left;}
+.resume_beizu_text{border:1px solid #ddd;width:340px;height:90px;}
+.resume_beizu_bth{width:80px;height:30px; background:#1369c0;border:none;color:#fff; cursor:pointer}
+.btn_1{width:85px;height:30px; line-height:30px;border:none; background:#456dab;color:#fff; cursor:pointer; font-family:Œ¢»Ì—≈∫⁄; margin-right:10px; display:inline-block}
+
+
+.resume_job_tag{ background:#faf3eb; margin-right:5px; display:inline-block; padding:0px 18px 0px 5px; line-height:23px;border:1px solid #fbd7c3; position:relative; white-space:nowrap; font-size:12px;color:#f60}
+.resume_job_tag_icon{width:6px;height:6px;border:1px solid #fbd7c3;  border-radius:50%; background:#fff; display:inline-block; position:absolute;right:5px;top:8px; overflow:hidden}
+.resume_user_bq{background:#FFC url(../images/yxz.png) no-repeat right bottom;padding:0px 11px;cursor:default;height:28px;line-height:28px;border:1px solid #FC9;  display:inline-block; margin-left:10px;} 
+.yun_resume_jobtime6{ line-height:30px;color:#f00; display:inline-block; margin-left:30px; background:url(../images/resumetime.png) no-repeat left center; padding-left:22px;}
+
+.gj_resume_bj{width:100%;height:40px; line-height:40px; font-size:20px;color:#FF0; font-weight:bold; background:#e80606; text-align:center; position:relative;}
+.gj_resume_bj_left{width:9px;height:47px; background:url(../images/gj_left.gif) no-repeat; display:inline-block; position:absolute;left:-9px;top:0px;}
+.gj_resume_bj_right{width:9px;height:47px; background:url(../images/gj_right.gif) no-repeat; display:inline-block; position:absolute;right:-9px;top:0px;}

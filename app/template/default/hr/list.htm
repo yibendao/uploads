@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>{yun:}$title{/yun}</title>
+<meta name="keywords" content="{yun:}$keywords{/yun}"/>
+<meta name="description" content="{yun:}$description{/yun}"/>
+<link rel="stylesheet" href="{yun:}$style{/yun}/style/css.css" type="text/css"/>
+<link rel="stylesheet" href="{yun:}$style{/yun}/style/news.css" type="text/css"/>
+</head>
+<body>
+{yun:}include file="$tplstyle/header.htm"{/yun}
+<div class="yun_body">
+<div class="yun_content">
+<div class="current_Location icon com_current_Location png"><div class="fl">您当前的位置：<a href="{yun:}$config.sy_weburl{/yun}">首页</a> > <a href="{yun:}url m=hr{/yun}">工具箱</a></div></div>
+<div class="clear"></div>
+<div class="Toolbox_content_box">
+<div class="Toolbox_content_box_left">
+<div class="Toolbox_content_h1 yun_bg_color"><span class="Toolbox_content_span">HR必备工具</span></div>
+<ul class="Toolbox_content_nav">
+{yun:}foreach item=v key=key from=$list{/yun}
+<li {yun:}if $smarty.get.id==$v.id{/yun}class="Toolbox_content_nav_cur"{yun:}/if{/yun}><a href="{yun:}url m=hr c=list id='`$v.id`'{/yun}" title="{yun:}$v.name{/yun}">{yun:}$v.name{/yun}</a></li>
+{yun:}/foreach{/yun}
+</ul>
+</div>
+<div class="Toolbox_content_box_right">
+{yun:}if is_array($class){/yun}
+<div class=" Toolbox_left02">
+    <div class="Toolbox_list_show ">
+        <div class="Toolbox_list_img"><img src="{yun:}$config.sy_weburl{/yun}/{yun:}$class.pic{/yun}" width="72" height="72"></div>
+        <div class="Toolbox_list_cont">
+            <div class="Toolbox_list_h1">
+            <a href="{yun:}url m=hr c=list id='`$class.id`'{/yun}" title="{yun:}$list.name{/yun}">{yun:}$class.name{/yun}</a>
+            </div>
+            <div class="Toolbox_list_p">{yun:}$class.content{/yun}</div>
+        </div>
+       
+    </div>
+
+</div>
+{yun:}/if{/yun}
+<ul class="Toolbox_content_list">
+{yun:}hrlist id='auto.id' keyword='auto.keyword' ispage =1 limit=52 item=lists{/yun}
+<li><a href="javascript:downhr('{yun:}$lists.id{/yun}');" title="{yun:}$lists.name{/yun}">{yun:}$lists.name{/yun}</a></li>                        
+{yun:}/hrlist{/yun}
+       {yun:}if !$lists{/yun}
+	<div class="Toolbox_content_msg">暂无信息</div>
+	   {yun:}/if{/yun}
+
+</ul>
+<div class="pages"> {yun:}$pagenav{/yun}</div>
+</div>
+
+</div>
+</div>
+</div>
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/public.js" language="javascript"></script>
+<!--[if IE 6]>
+<script src="{yun:}$config.sy_weburl{/yun}/js/png.js"></script>
+<script>
+DD_belatedPNG.fix('.png');
+</script>
+<![endif]--> 
+<script>
+function downhr(id){
+    $.post("{yun:}url m=hr c=ajax{/yun}", { id: id }, function (data) {
+		window.location.href=data;
+	})
+}
+function checkkey(){
+	var keyword=$("input[name=key]").val();
+	if(keyword=="" || keyword=="请输入关键字"){
+		layer.msg('请输入关键字！', 2, 8);return false;
+	}
+}
+</script>
+{yun:}include file="$tplstyle/footer.htm"{/yun}

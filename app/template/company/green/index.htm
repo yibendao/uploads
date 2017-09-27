@@ -1,0 +1,248 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>{yun:}$title{/yun}</title>
+<link rel="stylesheet" href="{yun:}$style{/yun}/style/css.css" type="text/css" />
+<link rel="stylesheet" type="text/css" href="{yun:}$com_style{/yun}/images/style.css" />
+</head>
+<body style="background:#f0f0f0">
+<div class="c_w_header">
+  <div class="c_header_tou01">
+    <div class="wrap">
+      <div class="c_tou01_huany">
+        <div class="c_huany_xt fl">{yun:}$com.name{/yun}欢迎您！</div>
+      </div>
+    </div>
+  </div>
+   <div class="black_bg" >
+  <div class="black_banner" ><img  src="{yun:}$banner.pic{/yun}" onerror="showImgDelay(this,'{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_banner{/yun}',2);"> </div></div>
+  <div class="black_cont">
+  <div class="black_cont_cominfo">
+  <div class="balck_logo"><img src="{yun:}$com.logo{/yun}" width="185" height="75" onerror="showImgDelay(this,'{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_unit_icon{/yun}',2);" />
+  </div>
+  <div class="black_cont_cominfo_right">
+  <div class="black_cont_cominfo_nb">
+  <h1 class="black_cont_cominfo_name">{yun:}$com.name{/yun}</h1> 
+   {yun:}if $ComMember.source==6 && $ComMember.claim==0 && $ComMember.email!=""{/yun}
+        <a href="javascript:claim('{yun:}url m=ajax c=claim uid=$com.uid{/yun}');">认领</a>
+        {yun:}/if{/yun}
+  {yun:}if $usertype=='1'{/yun}
+			  {yun:}if $isatn.id{/yun} 
+			  <a href="javascript:void(0)" onclick="atn('{yun:}$com.uid{/yun}','{yun:}url m=ajax c=atn_company{/yun}')" id='atn_{yun:}$com.uid{/yun}' class="wrap_l_name_gz">取消关注</a> 
+			  {yun:}else{/yun} 
+			  <a href="javascript:void(0)" onclick="atn('{yun:}$com.uid{/yun}','{yun:}url m=ajax c=atn_company{/yun}')" id='atn_{yun:}$com.uid{/yun}' class="wrap_l_name_gz">关注</a> 
+			  {yun:}/if{/yun}
+          {yun:}else{/yun} 
+            {yun:}if $uid{/yun}
+            <a href="javascript:void(0)" onclick="layer.msg('只有个人用户才能关注', 2,8)" class="wrap_l_name_gz">关注</a> 
+            {yun:}else{/yun}
+            <a href="javascript:void(0)" onclick="showlogin('1');" class="wrap_l_name_gz">关注</a> 
+            {yun:}/if{/yun} 
+		  {yun:}/if{/yun}
+          已有<font id="antnum{yun:}$com.uid{/yun}">{yun:}$com.ant_num{/yun}</font>人关注
+          </div>
+  <div class="">
+  {yun:}if $com.email_status=="1"{/yun} 
+  <div class="rz_list"><img src="{yun:}$com_style{/yun}images/rz_yx2.png" alt="邮箱未认证" title="邮箱已认证" class="png" /> 
+  已认证</div>
+  {yun:}else{/yun}
+  <div class="rz_list"> <img src="{yun:}$com_style{/yun}images/rz_yx.png" alt="邮箱未认证" title="邮箱未认证" class="png" />
+   未认证</div>
+    {yun:}/if{/yun}
+        {yun:}if $com.moblie_status=="1"{/yun} 
+     <div class="rz_list">   <img src="{yun:}$com_style{/yun}images/rz_sj2.png" alt="手机未认证" title="手机已认证" class="png" />
+        已认证</div>
+         {yun:}else{/yun} 
+      <div class="rz_list">   <img src="{yun:}$com_style{/yun}images/rz_sj.png" alt="手机未认证" title="手机未认证" class="png" />
+         未认证 </div>
+         {yun:}/if{/yun}
+        {yun:}if $com.yyzz_status=="1"{/yun}
+      <div class="rz_list">   <img src="{yun:}$com_style{/yun}images/rz_zz2.png" alt="执照未认证" title="执照已认证" class="png" /> 
+        已认证</div>
+        {yun:}else{/yun} 
+      <div class="rz_list">  <img src="{yun:}$com_style{/yun}images/rz_zz.png" alt="执照未认证" title="执照未认证" class="png" /> 
+          未认证 </div>
+        {yun:}/if{/yun}
+       </div>
+  </div>
+  </div>
+    <div class="wx_share_fx">
+        <div class="wx_share_fx_img"><img src="{yun:}url m=ajax c=pubqrcode toc=company toa=show toid=$com.uid{/yun}" width="120" height="120"></div>
+        </div> 
+    <div class="black_cont_bg"></div>
+   </div>
+   <div class="clear"></div>
+      <div class="black_com_w980">
+   <div class="black_com_box">
+      <div class="black_com_box_left">
+  <div class="black_com_box_tit"><span class="black_com_box_tit_s">公司介绍</span></div>
+   <div class="black_com_box_js"> {yun:}if $com.content{/yun}{yun:}$com.content{/yun}{yun:}else{/yun}<div class="firm_tips_no">该企业还没有填写公司简介! </div>{yun:}/if{/yun} </div>
+     <div class="black_com_box_tit" style="padding-bottom:0px;"><span class="black_com_box_tit_s">招聘职位</span></div>
+     <div class="black_com_box_jobbox">
+   <ul>
+    {yun:}joblist item=joblist uid='auto.id'{/yun}
+      
+     <li>
+     <div class="black_com_box_jobname"><a href="{yun:}$joblist.job_url{/yun}">{yun:}$joblist.name{/yun}</a></div>
+     <div class="black_com_box_jobjs"><span class="black_com_box_jobjs_xz">{yun:}$joblist.job_salary{/yun}</span><i class="black_com_box_jobjsline">|</i>{yun:}$joblist.job_city_two{/yun}<i class="black_com_box_jobjsline">|</i>{yun:}$joblist.job_edu{/yun}学历<i class="black_com_box_jobjsline">|</i>{yun:}$joblist.job_exp{/yun}经验</div>
+     <div class="black_com_box_jobtime">{yun:}$joblist.lastupdate|date_format:"%Y-%m-%d"{/yun} </div>
+     <div class="black_com_box_jobyp"><a href="{yun:}$joblist.job_url{/yun}">立即应聘</a></div>
+     </li>
+     {yun:}/joblist{/yun}
+     </ul>
+   {yun:}if $num==0{/yun}
+     <div class="firm_tips_no"> 该企业还没有发布职位信息!</div>
+     {yun:}/if{/yun} 
+     </ul>
+     </div>
+      <div class="maincenters companysearch_menuBoxs">
+      <div id="sortBoxs">
+        <div class="search_menuBoxs">
+          <ul>
+            <li class="search_curs" id="typezb" onmousemove="searchtype('zb');">周边招聘</li>
+            <li id="typezp" onmousemove="searchtype('zp');">招聘频道</li>
+            <li id="typerm" onmousemove="searchtype('rm');">热门搜索</li>
+          </ul>
+        </div>
+        <div class="contentBoxs">
+
+        <div class="contentBox_conts " id="type_zb">
+        <div class="Industry_lists">
+			{yun:}if $city.three_cityid{/yun}
+				{yun:}foreach item=v from=$city_type[$city.cityid]{/yun}
+				<a href="{yun:}listurl provinceid=$city.provinceid cityid=$city.cityid type=three_cityid v=$v page=1{/yun}">{yun:}$city_name[$v]{/yun}招聘</a>
+				{yun:}/foreach{/yun}
+			{yun:}elseif $city.cityid{/yun}
+				{yun:}foreach item=v from=$city_type[$city.provinceid]{/yun}
+				<a href="{yun:}listurl provinceid=$city.provinceid type=cityid v=$v page=1{/yun}">{yun:}$city_name[$v]{/yun}招聘</a>
+				{yun:}/foreach{/yun}
+			{yun:}else{/yun}
+				{yun:}foreach item=v from=$city_index{/yun}
+				<a href="{yun:}listurl type=provinceid v=$v page=1{/yun}">{yun:}$city_name[$v]{/yun}招聘</a>
+				{yun:}/foreach{/yun}
+			{yun:}/if{/yun}
+        </div>
+        </div>
+          <div class="contentBox_conts none" id="type_zp" >
+           <div class="Industry_lists">
+        {yun:}foreach item=v from=$industry_index{/yun}
+		<a href="{yun:}listurl type=hy v=$v{/yun}">{yun:}$industry_name[$v]{/yun}招聘</a>
+		{yun:}/foreach{/yun}
+              
+          </div> </div>
+          <div class="contentBox_conts none" id="type_rm">
+            <div class="Industry_lists">
+                {yun:}key limit=20 recom=1 type=3 item=keylist{/yun}
+                <a href="{yun:}$keylist.url{/yun}">{yun:}$keylist.key_name{/yun}</a> 
+                {yun:}/key{/yun}
+          </div> </div>
+        </div>
+      </div>
+    </div>
+     
+              <div class="black_com_box_tit"><span class="black_com_box_tit_s">联系方式</span></div>
+                <div class="black_com_box_content">    {yun:}if $looktype=="1"{/yun}
+ <div class="firm_det_link"> 
+      {yun:}if $com.linkman{/yun}<span class="firm_mes1">联 &nbsp;系&nbsp;人：<i> <em class="JoB_material_right JoB_material_line">{yun:}$com.linkman{/yun}</em> </i></span>{yun:}/if{/yun}
+      {yun:}if $com.linkjob{/yun}<span class="firm_mes1">联系人职位：<i> <em class="JoB_material_right JoB_material_line">{yun:}$com.linkjob{/yun}</em> </i></span>{yun:}/if{/yun}
+    {yun:}if $com.linkphone{/yun} <span class="firm_mes1">固定电话：<i>{yun:}$com.linkphone{/yun}</i></span> {yun:}/if{/yun}
+          {yun:}if $com.linktel{/yun} <span class="firm_mes1">联系电话：<i> <em class="JoB_material_right JoB_material_line">{yun:}image uid=$com.uid action=linktel{/yun}</em> </i></span> {yun:}/if{/yun}
+          {yun:}if $com.linkmail{/yun} <span class="firm_mes1">联系邮件：<i>{yun:}$com.linkmail{/yun}</i></span> {yun:}/if{/yun}
+          {yun:}if $com.linkqq{/yun} <span class="firm_mes1">联 系 QQ：<i>{yun:}$com.linkqq{/yun}</i></span> {yun:}/if{/yun}
+          {yun:}if $com.zip{/yun} <span class="firm_mes1">邮政编码：<i>{yun:}$com.zip{/yun}</i></span> {yun:}/if{/yun}
+          {yun:}if $com.website{/yun} <span class="firm_mes1">企业网址：<i>{yun:}$com.website{/yun}</i></span> {yun:}/if{/yun}
+           {yun:}if $com.busstops{/yun} <span class="firm_mes1" style="width:100%;">公交站点：<i>{yun:}$com.busstops{/yun}</i></span> {yun:}/if{/yun}         
+          {yun:}if $com.address{/yun} <span class="firm_mes1" style="width:100%;">公司地址：<i>{yun:}$com.address{/yun}</i></span> {yun:}/if{/yun}
+          {yun:}if $com.comqcode{/yun} <span class="firm_mes1" style="width:100%;">微信公众号：<i><img src="{yun:}$com.comqcode{/yun}" width="120" height="120"></i></span> {yun:}/if{/yun}
+          </div>
+      {yun:}else{/yun}
+      {yun:}if $looktype=="3" || $looktype=="2"|| $looktype=="5"{/yun} 
+      <div class="firm_login">
+        <div class="firm_login_con"> <span>{yun:}$look_msg{/yun}</span> </div>
+      </div>
+       {yun:}elseif $looktype=="6"{/yun} 
+       <div class="firm_login">
+        <div class="firm_login_con"> <span>{yun:}$look_msg{/yun}</span>  <a href="{yun:}$config.sy_weburl{/yun}/member/index.php?c=expect" class="firm_login_zc">创建简历</a></div>
+      </div>
+       {yun:}elseif $looktype=="4"{/yun} 
+       <div class="firm_login">
+        <div class="firm_login_con"> <span>{yun:}$look_msg{/yun}</span>  <a class="firm_login_dl" href="javascript:void(0);" onclick="showlogin('1');">立即登录</a> <a class="firm_login_zc" href="{yun:}url m=register usertype=1 type=1{/yun}">立即注册</a></div>
+      </div>
+	  {yun:}/if{/yun} 
+          {yun:}/if{/yun} </div>{yun:}show{/yun}
+          {yun:}if !empty($show){/yun}
+       <div class="black_com_box_tit"><span class="black_com_box_tit_s">企业环境</span></div>
+       <div class="black_com_box_content"> 
+          <ul class="black_hjlist">
+            {yun:}foreach from=$show item=row{/yun}
+            <li><a class="image_gall" href="{yun:}$config.sy_weburl{/yun}/{yun:}$row.picurl{/yun}"><img src="{yun:}$config.sy_weburl{/yun}/{yun:}$row.picurl{/yun}" width="200" height="127"  title="{yun:}$row.title{/yun}"/></a></li>
+            {yun:}/foreach{/yun}
+          </ul>
+         </div> {yun:}/if{/yun} {yun:}if !empty($NewsList){/yun}
+         <div class="black_com_box_tit"><span class="black_com_box_tit_s">企业新闻</span></div>
+                <div class="black_com_box_content">
+      <ul class="black_newslist">
+        {yun:}foreach from=$NewsList item=row{/yun}
+        <li>
+          <p><a href="{yun:}url m=company c=newsshow id=$com.uid nid=$row.id style=$smarty.get.style{/yun}" target="_blank">{yun:}$row.title{/yun}</a></p>
+        </li>
+        {yun:}/foreach{/yun}
+      </ul>
+      </div> {yun:}/if{/yun}   {yun:}if !empty($ProductList){/yun}
+           <div class="black_com_box_tit"><span class="black_com_box_tit_s">企业产品</span></div>
+                  <div class="black_com_box_content"> 
+                
+      {yun:}foreach from=$ProductList item=row{/yun}
+      <dl class="black_cplist">
+        <dt><a href="{yun:}url m=company c=productshow id=$com.uid pid=$row.id style=$smarty.get.style{/yun}"><img src="{yun:}formatpicurl path=$row.pic{/yun}" width="200" height="140" /></a></dt>
+        <dd><a href="{yun:}url m=company c=productshow id=$com.uid pid=$row.id style=$smarty.get.style{/yun}">{yun:}$row.title{/yun}</a></dd>
+      </dl>
+      {yun:}/foreach{/yun}
+          </div> {yun:}/if{/yun} 
+
+   </div>
+		<div class="black_com_box_right">
+		   <div class="black_com_box_tit"><span class="black_com_box_tit_s">投递查看</span></div>
+		   <div class="black_com_lookreseme"><div class="black_com_lookreseme_n"><span class="black_com_lookreseme_n_n">{yun:}$pre{/yun}</span>%</div>简历回复率</div>
+			   <div class="black_com_lookms"><div class="black_com_lookreseme_n"><span class="black_com_lookreseme_n_n">{yun:}$invite_resume{/yun}</span></div>邀请面试</div>
+		   <div class="black_com_box_tit"><span class="black_com_box_tit_s">基本信息</span></div>
+		   <div class="black_com_box_right_info">
+		   <div class="c_nr_hy"><em>行业</em><span>{yun:}$com.hy_info{/yun}</span></div>
+		  <div class="c_nr_hy"><em>性质</em><span>{yun:}$com.pr_info{/yun}</span></div>
+		  <div class="c_nr_hy"><em>规模</em><span>{yun:}$com.mun_info{/yun}</span></div>
+		  <div class="c_nr_hy"><em>地区</em><span>{yun:}$com.provinceid{/yun}</span></div>
+	  {yun:}if $com.money{/yun}<div class="c_nr_hy"><em>注资</em>{yun:}$com.money{/yun}万</div>{yun:}/if{/yun}
+	  {yun:}if $com.sdate{/yun}<div class="c_nr_hy"><em>创办</em>{yun:}$com.sdate{/yun}</div>{yun:}/if{/yun}
+			   
+		 </div>
+		</div>
+      </div>     
+    </div>
+
+
+<div class="clear"></div>
+<script>
+var weburl="{yun:}$config.sy_weburl{/yun}",integral_pricename='{yun:}$config.integral_pricename{/yun}',pricename='{yun:}$config.integral_pricename{/yun}',code_web='{yun:}$config.code_web{/yun}',code_kind='{yun:}$config.code_kind{/yun}';</script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/public.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/popImage/jquery.popImage.mini.js" language="javascript"></script>
+<script>
+function searchtype(id){
+	$(".search_curs").removeClass("search_curs");
+	$("#type"+id).addClass("search_curs");
+	$(".contentBox_conts").hide();
+	$("#type_"+id).show();
+}
+$(function () {
+	$("a.image_gall").popImage();
+	$('.c_zj02_list li').click(function () {
+		$(this).addClass('c_zj02_curr').siblings().removeClass('c_zj02_curr');
+	});
+});
+</script>
+{yun:}include file="$tplstyle/public_search/login.htm"{/yun} 
+<iframe id="supportiframe" name="supportiframe" onload="returnmessage('supportiframe');" class="none"></iframe>
+
+{yun:}include file="$tplstyle/footer.htm"{/yun}

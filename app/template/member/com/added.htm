@@ -1,0 +1,124 @@
+{yun:}include file="$comstyle/header.htm"{/yun}
+<div class="w1000">
+<div class="admin_mainbody">
+{yun:}include file="$comstyle/left.htm"{/yun}
+<div class=right_box>
+	<div id="grow_freedom" class="grow_mod_wrap my_freedom" style="padding:0px;border:none;">
+    <div class=admincont_box style="padding:0px;">
+   	<iframe id="fdingdan"  name="fdingdan" onload="returnmessage('fdingdan');" style="display:none"></iframe>
+    <div class="com_tit"><span class="com_tit_span">会员服务</span></div>
+    <div class="serve_zz fl">      
+    	<div class="serve_zz_top fl">
+        	<div class="serve_zz_top_ft fl">
+            	<p class="serve_zz_top_ft_tit"><a href="{yun:}url  m=company c=show id='`$uid`'{/yun}">{yun:}$com.name{/yun}</a></p>
+                <p class="serve_zz_top_ft_m">我的套餐：<em class="serve_zz_top_r">
+				{yun:}if $statis.vip_etime < time() && $statis.vip_etime != 0{/yun}
+			 		{yun:}if $config.com_vip_done == 0{/yun}
+			 			非会员
+					{yun:}else if $config.com_vip_done == 1{/yun}
+ 						{yun:}$statis.rating_name{/yun}
+			 		{yun:}/if{/yun}
+			 	{yun:}else{/yun}
+					{yun:}$statis.rating_name{/yun}
+			 	{yun:}/if{/yun}</em> <a class="serve_zz_top_mx" href="index.php?c=paylogtc">套餐明细</a></p>
+                <p class="serve_zz_top_ft_tm">服务期限：<em class="serve_zz_top_tm_c">{yun:}$statis.vip_stime|date_format:'%Y-%m-%d'{/yun} -- {yun:}if $statis.vip_etime==0{/yun}永久{yun:}else{/yun}{yun:}$statis.vip_etime|date_format:'%Y-%m-%d'{/yun}{yun:}/if{/yun}</em></p>
+            </div>
+            <div class="serve_zz_top_rt fl">
+                <p class="serve_zz_top_rt_top">&nbsp;</p>
+                <div class="serve_zz_top_rt_u">
+                <ul>
+                	<li><dl><dt class="serve_zz_top_u_zw"></dt><dd>剩余职位数: <i class="serve_zz_top_rt_r">{yun:}$statis.job_num{/yun}</i></dd></dl></li>
+                    <li><dl><dt class="serve_zz_top_u_jl"></dt><dd>剩余简历数: <i class="serve_zz_top_rt_r">{yun:}$statis.down_resume{/yun}</i></dd></dl></li>
+                   
+                    <li><dl><dt class="serve_zz_top_u_sy"></dt><dd>剩余天数:<i class="serve_zz_top_rt_r">{yun:}if $statis.rating!='3'||$statis.rating=='3'&&$days{/yun}{yun:}$days{/yun}天{yun:}else{/yun}永久{yun:}/if{/yun}</i></dd></dl></li>
+                </ul>
+                </div>
+            </div>
+		</div>
+        <div class="report_uaer_list fl">
+        	<ul>
+			    <li><a href="index.php?c=right" >套餐会员</a></li>
+			    <li><a href="index.php?c=right&act=time" >时间会员</a></li> 
+                <li class="report_uaer_list_cur"><a href="index.php?c=right&act=added" >增值包</a></li> 
+            </ul>
+		</div>
+        <div class="clear"></div>
+        <div class="Value_added">
+	        <div class="Value_added_mune">  
+		        <ul class="Value_added_mune_left">
+		        	{yun:}foreach from=$rows item=v key=key{/yun}
+					<li {yun:}if $smarty.get.id==$v.id||($smarty.get.id==''&&$key<1){/yun}class="Value_added_mune_cur"{yun:}/if{/yun}><a href="index.php?c=right&act=added&id={yun:}$v.id{/yun}">{yun:}$v.name{/yun}</a><i class="Value_added_bg"></i></li>
+					{yun:}/foreach{/yun}
+		        </ul>
+	        </div>
+            <div class="Value_added_box"> 
+            <div class="clear"></div>
+			{yun:}if $info{/yun}
+        	<table class="added_de_box_table" cellpadding="0" cellspacing="0">
+           		<tbody>
+	           		<tr>
+	           			<th>套餐内容</th><th  align="center"><div style="width:65px">套餐价</div></th><th align="center"><div style="width:85px">会员价格</div></th>
+	           		</tr>
+	           		{yun:}foreach from=$info item=v{/yun}
+	          <tr>
+                   
+	           			<td>
+	           				<label>
+                            <div class="added_cont_b">
+	                    	<input type="radio" name="service_package" value="{yun:}$v.id{/yun}" onclick="toChange()" class="added_cont_radio"/>
+	                    	{yun:}if $v.resume{/yun}<span class="added_cont_s">下载简历：<i class="com_dt_rage">{yun:}$v.resume{/yun}</i>,</span>{yun:}/if{/yun}
+	                    	{yun:}if $v.interview{/yun}<span class="added_cont_s">邀请面试：<i class="com_dt_rage">{yun:}$v.interview{/yun}</i>,</span>{yun:}/if{/yun}
+	                    	{yun:}if $v.job_num{/yun}<span class="added_cont_s">发布职位：<i class="com_dt_rage">{yun:}$v.job_num{/yun}</i>,</span>{yun:}/if{/yun}
+	                    	{yun:}if $v.breakjob_num{/yun}<span class="added_cont_s">刷新职位：<i class="com_dt_rage">{yun:}$v.breakjob_num{/yun}</i>,</span>{yun:}/if{/yun} 
+	                    	
+	                    	{yun:}if $v.part_num{/yun}<span class="added_cont_s">发布兼职：<i class="com_dt_rage">{yun:}$v.part_num{/yun}</i>,</span>{yun:}/if{/yun} 
+	                    	{yun:}if $v.breakpart_num{/yun}<span class="added_cont_s">刷新兼职：<i class="com_dt_rage">{yun:}$v.breakpart_num{/yun}</i>,</span>{yun:}/if{/yun} 
+	                    	</div>
+	                    	</label>
+	                    </td>
+	           			<td align="center"><span class="">{yun:}$v.service_price{/yun}</span>元</td>
+	           			<td align="center">
+	           				<span class="added_de_box_table_jg">{yun:}if $discount.service_discount{/yun}{yun:}$v.service_price*$discount.service_discount*0.01{/yun}{yun:}else{/yun}{yun:}$v.service_price{/yun}{yun:}/if{/yun}</span>元 
+	           				<div class="added_de_box_table_jgyh">{yun:}if $discount.service_discount{/yun}专享{yun:}0.1*$discount.service_discount{/yun}折优惠{yun:}/if{/yun} </div> 
+	           			</td>
+                     
+	         		</tr>  
+	         		{yun:}/foreach{/yun}
+           		</tbody>
+           	</table>
+            <div class="added_de_box_fk">应付金额：<span class="added_de_box_fk_je" id="price">0</span> 元</div>
+            <div class="added_de_box_fk">
+            <form name="alipayment" target="fdingdan" action="index.php?c=pay&act=dingdan" method="post" id="myform1">
+            	<input type="hidden" value="" id="comserviceid" name="comservice"/>
+            	<a href="javascript:buyvip();" class="added_de_box_bth">立即购买</a>
+            </form>
+            </div>
+            {yun:}else{/yun}
+			<div class="msg_no"><p>亲爱的用户，目前没有增值包服务</p></div>
+			{yun:}/if{/yun}
+            <div class="clear"></div> 
+		</div>
+	</div>
+	</div>
+	</div>
+</div>
+</div>
+<script>
+function toChange(){
+	var obj  = document.getElementsByName('service_package');
+    for(var i=0;i<obj.length;i++){
+        if(obj[i].checked==true){
+        	{yun:}foreach from=$info item=v{/yun}
+            if(obj[i].value=='{yun:}$v.id{/yun}'){
+            document.getElementById('price').innerHTML='{yun:}if $discount.service_discount{/yun}{yun:}$v.service_price*$discount.service_discount*0.01{/yun}{yun:}else{/yun}{yun:}$v.service_price{/yun}{yun:}/if{/yun}';
+            document.getElementById('comserviceid').value='{yun:}$v.id{/yun}';
+            }
+            {yun:}/foreach{/yun}
+        }
+    }
+}
+function buyvip(){
+	$('#myform1').submit();
+}
+</script>
+{yun:}include file="$comstyle/footer.htm"{/yun}

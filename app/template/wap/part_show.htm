@@ -1,0 +1,144 @@
+{yun:}include file="$wapstyle/header_cont.htm"{/yun}
+<section>
+  <div class="">
+    <div class="user_contnet_box ">
+      <div class="com_show_t1">
+        <h2>{yun:}$job.name{/yun}</h2></div>
+<div class="Part-time_job_js"> 
+            <span class="Part-time_job_js_span"><i class="Part-time_job_js_city iconfont_partcity"></i>
+            {yun:}if $city_name[$job.three_cityid]{/yun}
+            	{yun:}$city_name[$job.cityid]{/yun}-{yun:}$city_name[$job.three_cityid]{/yun}
+            {yun:}elseif $city_name[$job.cityid]{/yun}
+            	{yun:}$city_name[$job.provinceid]{/yun}-{yun:}$city_name[$job.cityid]{/yun}
+            {yun:}/if{/yun}
+            </span>
+            <span class="Part-time_job_js_span"><i class="Part-time_job_js_city iconfont_parteye"></i>{yun:}$job.hits{/yun}次</span> 
+            <span class="Part-time_job_js_span"><i class="Part-time_job_js_city iconfont_partdate"></i>{yun:}$job.lastupdate|date_format:"%Y-%m-%d"{/yun}</span> 
+            </div> 
+             <div class="Part-time_job_js"> 
+             <span class="Part-time_job_js_span "><i class="Part-time_job_js_s_doc ">￥</i><em class="Part-time_job_js_span_jg">{yun:}$job.salary{/yun}{yun:}$partclass_name[$job.salary_type]{/yun}</em></span>
+             </div>
+            
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="mt10">
+    <div class="user_contnet_box ">
+      <div class="wap_title"><span class="">基本信息</span></div>
+      <ul class="user_contnet_ul user_contnet_ul_jz">
+        <li><span class="user_contnet_info_n">工作类型：</span>{yun:}$partclass_name[$job.type]{/yun}</li>
+        <li><span class="user_contnet_info_n"> 发&nbsp;布 &nbsp;者：</span>{yun:}$job.com_name{/yun}</li>
+         <li><span class="user_contnet_info_n">招聘人数： </span>{yun:}$job.number{/yun}人</li>
+        {yun:}if $job.sex{/yun} <li><span class="user_contnet_info_n">性别要求： </span>{yun:}$job.sex{/yun}</li>{yun:}/if{/yun}
+         <li><span class="user_contnet_info_n">有效期至： </span>{yun:}if $job.edate{/yun}{yun:}$job.edate|date_format:'%Y-%m-%d'{/yun}{yun:}else{/yun}长期招聘{yun:}/if{/yun}</li>
+		 <li>
+            <table class="det-tab" width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tbody>
+					<tr>
+                        <th height="28" align="center" valign="middle" class="fre-tab01">TIME</th>
+                        <th height="28" align="center" valign="middle" class="fre-tab02">周一</th>
+                        <th height="28" align="center" valign="middle" class="fre-tab03">周二</th>
+                        <th height="28" align="center" valign="middle" class="fre-tab04">周三</th>
+                        <th height="28" align="center" valign="middle" class="fre-tab05">周四</th>
+                        <th height="28" align="center" valign="middle" class="fre-tab06">周五</th>
+                        <th height="28" align="center" valign="middle" class="fre-tab07">周六</th>
+                        <th height="28" align="center" valign="middle" class="fre-tab08">周日</th>
+                    </tr>
+                    <tr>
+                        <td height="28" align="center" valign="middle" class="fre-tab09">上午</td>
+						{yun:}foreach from=$morning item=v{/yun}
+                        <td height="28" align="center" valign="middle" {yun:}if in_array($v,$job.worktime){/yun}class="cut"{yun:}/if{/yun}><i></i></td>
+						{yun:}/foreach{/yun}
+					</tr>
+					<tr>
+                        <td height="28" align="center" valign="middle" class="fre-tab10">下午</td>
+                        {yun:}foreach from=$noon item=v{/yun}
+                        <td height="28" align="center" valign="middle" {yun:}if in_array($v,$job.worktime){/yun}class="cut"{yun:}/if{/yun}><i></i></td>
+						{yun:}/foreach{/yun}
+					</tr>
+					<tr>
+                        <td height="28" align="center" valign="middle" class="fre-tab11">晚上</td>
+                        {yun:}foreach from=$afternoon item=v{/yun}
+                        <td height="28" align="center" valign="middle" {yun:}if in_array($v,$job.worktime){/yun}class="cut"{yun:}/if{/yun}><i></i></td>
+						{yun:}/foreach{/yun}
+					</tr>
+					</tbody>
+			</table>
+    </li>
+         <li><span class="user_contnet_info_n">结算周期：</span>{yun:}$partclass_name[$job.billing_cycle]{/yun}</li>
+         <li><span class="user_contnet_info_n">工作地址： </span>{yun:}$job.address{/yun}</li>
+		 {yun:}if $job.x&&$job.y{/yun}
+         <li><span class="user_contnet_info_n" style=" float:none;">位&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;置： </span>
+         
+		<section>
+		<div class="con_map" id="company_baidu_map">
+			<div id="maps_container" style="height:200px;min-width:300px;"></div>
+		</div>
+		</section>
+		
+         </li>
+       {yun:}/if{/yun}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="mt10" id="con_link_per">
+    <div class="user_contnet_box ">
+      <div class="wap_title"><span class="">具体要求</span></div>
+    <div class="part_show_cont">
+    {yun:}$job.content{/yun}
+    </div>
+<div class="job_jz_tips">提示：刷信誉、淘宝刷钻、YY网络兼职、加YY联系的职位都是骗子！收取费用或押金的都有欺诈嫌疑，请警惕！</div>
+<div class="job_jz_tips_sq">
+          {yun:}if is_array($apply){/yun}
+          <a class="job_jz_tips_sq_bth job_jz_tips_sq_have_bth" href="javascript:void(0);">已报名</a>
+          {yun:}else{/yun} 
+              {yun:}if $usertype==1{/yun}
+              <a class="job_jz_tips_sq_bth" href="javascript:;" onclick="PartApply('{yun:}$job.id{/yun}')">我要报名</a>
+              {yun:}else{/yun}
+                <a class="job_jz_tips_sq_bth" onclick="layermsg('只有个人用户才能申请报名', 2);" href="javascript:;">我要报名</a>
+              {yun:}/if{/yun}
+         {yun:}/if{/yun}
+
+      {yun:}if $usertype==1{/yun}
+      {yun:}if $collect{/yun}
+      <a class="job_jz_tips_sq_sc"style="color:grey;"><i class="job_jz_tips_sq_icon job_jz_tips_sq_icon_ysc"></i><span class="job_jz_tips_sq_icon_ysc_s">已收藏</span></a>
+     {yun:}else{/yun}
+     <a href="javascript:PartCollect('{yun:}$job.id{/yun}','{yun:}$job.uid{/yun}');" class="job_jz_tips_sq_sc"><i class="job_jz_tips_sq_icon job_jz_tips_sq_icon_sc"></i>收藏</a>
+      {yun:}/if{/yun}
+      {yun:}else{/yun}
+        <a onclick="layermsg('只有个人用户才能收藏', 2);" href="javascript:;" class="job_jz_tips_sq_sc"><i class="job_jz_tips_sq_icon  job_jz_tips_sq_icon_sc"></i>收藏</a>
+      {yun:}/if{/yun}
+ 
+ 
+ </div>
+{yun:}if is_array($apply){/yun}
+<div class="">
+ <div class="wap_title"><span class="">联系方式</span></div>
+<div>联系人：{yun:}$job.linkman{/yun}</div>
+<div>联系电话：{yun:}$job.linktel{/yun}</div>
+</div>
+{yun:}/if{/yun} 
+</div>
+  </div>  
+</section>
+<script src="{yun:}$wap_style{/yun}/js/prefixfree.min.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/layer/layer.m.js" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/public.js" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/part.js" language="javascript"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak={yun:}$config.map_key{/yun}" charset="utf-8"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/map.js" language="javascript"></script> 
+ <script>
+var sy_weburl = '{yun:}$config.sy_weburl{/yun}';
+var map=new BMap.Map("maps_container"); 
+map.centerAndZoom(new BMap.Point('{yun:}$job.x{/yun}', '{yun:}$job.y{/yun}'), 12);
+var point = new BMap.Point('{yun:}$job.x{/yun}','{yun:}$job.y{/yun}');
+var marker = new BMap.Marker(point);
+map.addOverlay(marker); 
+</script> 
+{yun:}include file="$wapstyle/footer.htm"{/yun} 

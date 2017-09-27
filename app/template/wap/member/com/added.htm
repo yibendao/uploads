@@ -1,0 +1,86 @@
+{yun:}include file="$wapstyle/member/cheader.htm"{/yun} 
+<section class="wap_member">
+<div class="wap_member_rReceive">
+	<div class="wap_member_rReceive_t">尊敬的企业用户：</div>
+	<div class="">您当前是：<font color="#f60">{yun:}if $statis.vip_etime < time() && $statis.vip_etime != 0{/yun}
+			 		{yun:}if $config.com_vip_done == 0{/yun}
+			 			非会员 
+					{yun:}else if $config.com_vip_done == 1{/yun}
+ 						{yun:}$statis.rating_name{/yun}
+			 		{yun:}/if{/yun}
+			 	{yun:}else{/yun}
+					{yun:}$statis.rating_name{/yun}
+			 	{yun:}/if{/yun}</font></div> 
+	<div class="">服务期限：{yun:}$statis.vip_stime|date_format:'%Y-%m-%d'{/yun} -- {yun:}if $statis.vip_etime==0{/yun}永久{yun:}else{/yun}{yun:}$statis.vip_etime|date_format:'%Y-%m-%d'{/yun}{yun:}/if{/yun}</div> 
+</div>
+<ul class="member_ms_tc">
+	<li><a href="index.php?c=rating">套餐会员</a>	</li>
+	<li><a href="index.php?c=time">时间会员</a>	</li>
+   	<li class="member_ms_tc_cur"><a href="index.php?c=added">增值包</a>	</li>
+</ul>
+<div class="wap_member_added_box">
+<table width="100%">
+<tr>
+<td valign="top">
+<ul class="wap_member_added_box_left">
+		{yun:}foreach from=$rows item=v key=key{/yun}
+			<li {yun:}if $smarty.get.id==$v.id||($smarty.get.id==''&&$key<1){/yun} class="member_ms_added_cur"{yun:}/if{/yun}><a href="index.php?c=added&id={yun:}$v.id{/yun}">{yun:}$v.name{/yun}</a><i class="Value_added_bg"></i></li>
+		{yun:}/foreach{/yun} 
+	</ul></td>
+<td valign="top">
+    {yun:}if $info{/yun}
+    <div class="wap_member_added_cont">
+		{yun:}foreach from=$info item=v{/yun}
+			<div class="added_list">
+            <label>
+			<input type="radio" name="service_package" value="{yun:}$v.id{/yun}" onclick="toChange()" class="wap_member_added_radio"/>
+			套餐价：<em class="">{yun:}$v.service_price{/yun} </em>元
+			会员价：<em class="com_dt_rage">{yun:}if $discount.service_discount{/yun}{yun:}$v.service_price*$discount.service_discount*0.01{/yun}{yun:}else{/yun}{yun:}$v.service_price{/yun}{yun:}/if{/yun} </em>元 
+			<div> 
+			套餐内容：{yun:}if $v.resume{/yun}下载简历<i class="com_dt_rage">{yun:}$v.resume{/yun}</i>{yun:}/if{/yun}
+		        {yun:}if $v.interview{/yun}+ 邀请面试<i class="com_dt_rage">{yun:}$v.interview{/yun}</i>{yun:}/if{/yun}
+		        {yun:}if $v.job_num{/yun}+ 发布职位<i class="com_dt_rage">{yun:}$v.job_num{/yun}</i>{yun:}/if{/yun}
+		        {yun:}if $v.breakjob_num{/yun}+ 刷新职位<i class="com_dt_rage">{yun:}$v.breakjob_num{/yun}</i>{yun:}/if{/yun}
+		        
+		        {yun:}if $v.part_num{/yun}+ 发布兼职<i class="com_dt_rage">{yun:}$v.part_num{/yun}</i>{yun:}/if{/yun}
+		        {yun:}if $v.breakpart_num{/yun}+ 刷新兼职<i class="com_dt_rage">{yun:}$v.breakpart_num{/yun}</i>{yun:}/if{/yun}
+		        </div>
+	        </label>
+            </div>
+		{yun:}/foreach{/yun} 
+		<div class="wap_member_added_money">应付金额：<span id="price" class="wap_member_added_money_n">0</span> 元</div>
+		<form action="index.php?c=pay" method="post">
+			<input type="hidden" name="usertype" value="service"/>
+			<input type="hidden" id="comserviceid" name="id" value=""/>
+			<input type='submit' value='立即购买' class="wap_member_added_bth">
+		</form>
+        {yun:}else{/yun}
+		        <div class="wap_member_no">		没有增值包服务</div>
+		{yun:}/if{/yun}
+
+	</div>
+    </td>
+</tr>
+</table>
+	
+	
+	
+	
+</div>
+</section>
+<script>
+function toChange(){
+	var obj  = document.getElementsByName('service_package');
+    for(var i=0;i<obj.length;i++){
+        if(obj[i].checked==true){
+        	{yun:}foreach from=$info item=v{/yun}
+            if(obj[i].value=='{yun:}$v.id{/yun}'){
+            	document.getElementById('price').innerHTML='{yun:}if $discount.service_discount{/yun}{yun:}$v.service_price*$discount.service_discount*0.01{/yun}{yun:}else{/yun}{yun:}$v.service_price{/yun}{yun:}/if{/yun}';
+            	document.getElementById('comserviceid').value='{yun:}$v.id{/yun}';
+            }
+            {yun:}/foreach{/yun}
+        }
+    }
+}
+</script>
+{yun:}include file="$wapstyle/footer.htm"{/yun} 

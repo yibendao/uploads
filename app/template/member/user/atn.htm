@@ -1,0 +1,46 @@
+{yun:}include file="$userstyle/header.htm"{/yun}
+<div class="yun_user_member_w1100">
+    {yun:}include file="$userstyle/left.htm"{/yun}
+      <div class="mian_right fltR mt20">
+        <div class="member_right_index_h1 fltL"> <span class="member_right_h1_span fltL">关注的企业</span> <i class="member_right_h1_icon user_bg"></i></div>
+   
+        <div class="resume_box_list">
+        {yun:}if !empty($rows){/yun}
+            <div class="List_Ope List_Title ">
+                <span class="List_Title_span List_Title_w330"><em class="List_Title_span_name">企业名称</em></span>
+                <span class="List_Title_span List_Title_w330">正在招聘</span>
+                <span class="List_Title_span List_Title_w120">关注时间</span>
+                <span class="List_Title_span List_Title_w80">操作</span>
+            </div>
+            {yun:}/if{/yun}
+            {yun:}foreach item=log from=$rows{/yun}
+            <div class="List_Ope List_Ope_bor">
+                <span class="List_Title_span List_Title_w330">
+                    <a href="{yun:}url m=company c=show id='`$log.sc_uid`'{/yun}" target="_blank" class="List_Title_span_com">{yun:}$log.com_name{/yun}&nbsp;</a>
+                </span>
+                <span class="List_Title_span List_Title_w330">
+                    {yun:}if $log.jobnum>0{/yun}
+                    {yun:}$log.jobname{/yun} 
+                    <a href="{yun:}url m=company c=show id='`$log.sc_uid`'{/yun}#job" target="_blank" class="gz_job_n">共{yun:}$log.jobnum{/yun}个职位>></a>
+                    {yun:}else{/yun}
+                    暂无职位
+                    {yun:}/if{/yun}
+                    &nbsp;
+                </span>
+                <span class="List_Title_span List_Title_w120">{yun:}$log.time|date_format:'%Y-%m-%d'{/yun}</span>
+                <span class="List_Title_span List_Title_w80"><a href="javascript:void(0)" onclick="layer_del('您确定要取消关注？', '{yun:}$config.sy_weburl{/yun}/member/index.php?c=atn&act=del&id={yun:}$log.id{/yun}&uid={yun:}$log.sc_uid{/yun}');" class="cblue">取消关注</a>
+                </span>
+            </div>
+            {yun:}foreachelse{/yun}
+           <div class="msg_no">
+      <p>亲爱的用户，目前您未关注任何企业，想要了解企业近况</p>
+  <p>立即搜索我感兴趣的企业关注吧！</p>
+<a href="{yun:}url m=company{/yun}" target="_blank" class="msg_no_sq uesr_submit">立即搜索我感兴趣的企业>></a>
+</div>
+            {yun:}/foreach{/yun}
+            <div class="clear"></div>
+            <div class="diggg">{yun:}$pagenav{/yun}</div>
+        </div>
+    </div>
+</div>
+{yun:}include file="$userstyle/footer.htm"{/yun} 

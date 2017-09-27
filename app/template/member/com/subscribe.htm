@@ -1,0 +1,65 @@
+{yun:}include file="$comstyle/header.htm"{/yun}
+<div class="w1000">
+<div class="admin_mainbody"> {yun:}include file="$comstyle/left.htm"{/yun}
+  <link href="{yun:}$comstyle{/yun}/images/index_style.css" type=text/css rel=stylesheet>
+  <div class=right_box>
+    <div class=admincont_box>
+      <div class="com_tit"> 
+		<span class="com_tit_span">人才订阅</span>
+		<a href="{yun:}url m=subscribe{/yun}" target="_blank" class="my_dy">我要订阅</a>
+      </div>
+      <div class="com_body">
+        <div class=admin_textbox_04>
+          <iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe>
+          <form action="index.php?c=subscribe&act=del" target="supportiframe" method="post" id='myform'>
+            <div class=table> 
+               {yun:}if !empty($rows){/yun}
+                <div class="job_news_list job_news_list_h1"> 
+                <span class="job_news_list_span job_w30" style="padding-right:5px;">&nbsp;</span>  
+                 <span class="job_news_list_span job_w160" style="width:200px;">职位类别</span>  
+                <span class="job_news_list_span job_w140">所在城市</span> 
+                <span class="job_news_list_span job_w100">月薪范围</span> 
+                <span class="job_news_list_span job_w100">发送周期</span> 
+                <span class="job_news_list_span job_w100">订阅认证</span> 
+                <span class="job_news_list_span job_w160" style="text-align:center">操作</span>
+                </div>
+                {yun:}foreach  from=$rows  item=v{/yun}
+                <div class="job_news_list">
+				<span class="job_news_list_span job_w30" style="padding-right:5px;">
+                  <input type=checkbox name="delid[]" value="{yun:}$v.id{/yun}"  class="com_Release_job_qx_check" style="margin-top:2px;">
+                  </span>  
+                  <span class="job_news_list_span job_w160" style="width:200px;">{yun:}$v.jobname{/yun}</span> 
+                 <span class="job_news_list_span job_w140">{yun:}$v.city_name{/yun}&nbsp;</span> 
+                  <span class="job_news_list_span job_w100">{yun:}if $v.minsalary&&$v.maxsalary{/yun}￥{yun:}$v.minsalary{/yun}-{yun:}$v.maxsalary{/yun}{yun:}else if $v.minsalary{/yun}￥{yun:}$v.minsalary{/yun}以上{yun:}else{/yun}面议{yun:}/if{/yun}&nbsp;</span> 
+                  <span class="job_news_list_span job_w100">{yun:}$v.time{/yun}天&nbsp;</span> 
+                  <span class="job_news_list_span job_w100">{yun:}if $v.status=='1'{/yun}已认证{yun:}else{/yun}未认证{yun:}/if{/yun}&nbsp;</span> 
+                  <span class="job_news_list_span job_w160" style="text-align:center">
+					<a href="index.php?c=subscribe&act=record&id={yun:}$v.id{/yun}" class="sq_resume uesr_name_a" style="position:relative; "> 发送记录</a> 
+					<a href="{yun:}url m=subscribe id='`$v.id`'{/yun}" class="uesr_name_a" target="_blank">修改</a>
+					<a href="javascript:void(0)" onclick="layer_del('确定要删除？','index.php?c=subscribe&act=del&id={yun:}$v.id{/yun}')" class="uesr_name_a">删除</a></span> 
+				</div>
+                {yun:}/foreach{/yun}
+                <div>
+                  <div class="com_Release_job_bot"> <span class="com_Release_job_qx">
+                    <input id='checkAll'  type="checkbox" onclick='m_checkAll(this.form)'class="com_Release_job_qx_check">
+                    全选</span>
+                    <INPUT  class="c_btn_02" type="button" name="subdel" value="批量删除" onclick="return really('delid[]');">
+                  </div>
+                  <div class="diggg">{yun:}$pagenav{/yun}</div>
+                </div> 
+                {yun:}else{/yun}
+                   <div class="msg_no">
+                   <p>亲爱的用户，目前您还没有订阅简历信息。</p>
+                   <a href="{yun:}url m=subscribe{/yun}" target="_bank" class="com_msg_no_bth com_submit">我要订阅</a></div>
+             
+                {yun:}/if{/yun} 
+            </div> 
+          </form>
+          <div class="clear"></div> 
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 
+</div> 
+{yun:}include file="$comstyle/footer.htm"{/yun}

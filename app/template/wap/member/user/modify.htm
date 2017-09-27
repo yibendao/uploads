@@ -1,0 +1,109 @@
+{yun:}include file="$wapstyle/member/header.htm"{/yun} 
+<script>
+function show_name(){
+	$(".resume_top_name_left").hide();
+	$(".resume-rename").show();
+}
+function hide_name(){
+	$(".resume_top_name_left").show();
+	$(".resume-rename").hide();
+}
+</script>
+<div class="index_section">
+<div class="main_member_cot_box">
+<div class=" modify_tx_pd">
+<div class="modify_tx_box"><a href="index.php?c=photo">{yun:}if $user.sex==1{/yun}<img src="{yun:}$config.sy_weburl{/yun}/{yun:}$user.photo{/yun}" border="0" onerror="showImgDelay(this,'{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_member_icon{/yun}',2);">{yun:}else{/yun}<img src="{yun:}$config.sy_weburl{/yun}/{yun:}$user.photo{/yun}" border="0" onerror="showImgDelay(this,'{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_member_iconv{/yun}',2);">{yun:}/if{/yun}</a></div>
+<div class="resume_top_name_left"> 
+<span>简历名称：{yun:}$expect.name{/yun} </span> <a href="javascript:show_name();" class="resume_top_name_left_a cblue resume_top_name_left_a_hide">
+<i class="m_icon_bj yun_wap_usericonfont_t"></i>编辑</a></div>
+<div class="resume-rename" style="display:none;">
+<form action="index.php?c=modify" method="post">
+	<span class="btn-primary_text"> 简历名称：</span>
+	<input class="resume_tit_t" type="text" class="text input-medium" value="{yun:}$expect.name{/yun}" name="name">
+	<input type="hidden" name="eid" value="{yun:}$expect.id{/yun}">
+	<input class="resume_bc" type="submit" name="submit" class="btn-primary" value="保存">
+	<a href="javascript:hide_name();" class="resume_top_name_left_a cblue">取消</a>
+</form>
+</div>
+<div class="list_box_wz">简历完整度：
+<div class="per"><div class="papic" style="width:{yun:}$expect.integrity{/yun}%"></div></div>
+<span class="corg">{yun:}$expect.integrity{/yun}%</span>
+
+</div>
+<div class="modify_yl"><a href="{yun:}url m=wap c=photo index=member{/yun}">修改个人头像</a><span class="modify_yl_line">|</span><a href="{yun:}url m=wap c=resume a=show id=$expect.id{/yun}" class="">预览简历</a></div>
+</div>
+<div class="listBox">
+  <div class="listBox-title fn-dbox" onclick="document.location.href='index.php?c=info&eid={yun:}$expect.id{/yun}';"> 
+	  <span class="fn-dbox-flex fn-dbox-flex-flex1"><a href="index.php?c=info&eid={yun:}$expect.id{/yun}">基本信息</a> <i class="list_box_b">+20%</i></span>
+	  <em class="listBox-r_right">
+      <a href="index.php?c=info&eid={yun:}$expect.id{/yun}"> 
+		 <font color="#FF7201 ">完整</font>
+	  </a> 
+	</em>
+   </div>
+    <div class="listBox-title fn-dbox" onclick="document.location.href='index.php?c=addexpect&eid={yun:}$expect.id{/yun}';"> 
+	  <span class="fn-dbox-flex fn-dbox-flex-flex1"> 求职意向 {yun:}if $resume.expect{/yun}<i class="list_box_b">+35%</i>{yun:}else{/yun}+35%{yun:}/if{/yun}</span>
+       <em class="listBox-r_right">
+	   {yun:}if $resume.expect{/yun}
+	   <font color="#FF7201">完整</font>
+	   {yun:}else{/yun}未填写{yun:}/if{/yun} 
+	</em>
+  </div>
+  <div class="listBox-title fn-dbox" onclick="document.location.href='index.php?c=rinfo&eid={yun:}$expect.id{/yun}&type=work';"> 
+	  <span class="fn-dbox-flex fn-dbox-flex-flex1">工作经历 {yun:}if $resume.work{/yun}<i class="list_box_b">+10%</i>{yun:}else{/yun}+10%{yun:}/if{/yun}</span>
+       <em class="listBox-r_right">
+       <a href="index.php?c=rinfo&eid={yun:}$expect.id{/yun}&type=work">
+	   {yun:}if $resume.work{/yun}
+	   <font color="#FF7201 ">完整</font>
+	   {yun:}else{/yun}未填写{yun:}/if{/yun} 
+	   </a>
+	</em>
+  </div>
+	<div class="listBox-title fn-dbox" onclick="document.location.href='index.php?c=rinfo&eid={yun:}$expect.id{/yun}&type=edu';"> 
+        <span class="fn-dbox-flex fn-dbox-flex-flex1"> 教育经历 {yun:}if $resume.edu{/yun}<i class="list_box_b">+10%</i>{yun:}else{/yun}+10%{yun:}/if{/yun}</span>
+   <em class="listBox-r_right">
+    {yun:}if $resume.edu{/yun}<font color="#FF7201 ">完整</font>{yun:}else{/yun}未填写{yun:}/if{/yun}</em>
+    </div>
+  <div class="listBox-title fn-dbox" onclick="document.location.href='index.php?c=rinfo&eid={yun:}$expect.id{/yun}&type=project';">
+   <span class="fn-dbox-flex fn-dbox-flex-flex1"> 
+  项目经历  {yun:}if $resume.project{/yun}<i class="list_box_b">+8%</i>{yun:}else{/yun}+8%{yun:}/if{/yun}</span>
+  <em class="listBox-r_right">
+   {yun:}if $resume.project{/yun}<font color="#FF7201 ">完整</font>{yun:}else{/yun}未填写{yun:}/if{/yun}
+  </em>
+  </div>
+    <div class="listBox-title fn-dbox" onclick="document.location.href='index.php?c=rinfo&eid={yun:}$expect.id{/yun}&type=training';">
+   <span class="fn-dbox-flex fn-dbox-flex-flex1"> 
+  培训经历  {yun:}if $resume.training{/yun}<i class="list_box_b">+7%</i>{yun:}else{/yun}+7%{yun:}/if{/yun}</span>
+  <em class="listBox-r_right">
+   {yun:}if $resume.training{/yun}<font color="#FF7201 ">完整</font>{yun:}else{/yun}未填写{yun:}/if{/yun}
+  </em>
+  </div>
+  <div class="listBox-title fn-dbox" onclick="document.location.href='index.php?c=rinfo&eid={yun:}$expect.id{/yun}&type=skill';"> 
+  <span class="fn-dbox-flex fn-dbox-flex-flex1"> 
+  职业技能 {yun:}if $resume.skill{/yun}<i class="list_box_b">+10%</i>{yun:}else{/yun}+10%{yun:}/if{/yun}  
+  </span>
+   <em class="listBox-r_right">
+  {yun:}if $resume.skill{/yun}<font color="#FF7201 ">完整</font>{yun:}else{/yun}未填写{yun:}/if{/yun} 
+  </em>
+  </div>  
+ 
+  <div class="listBox-title fn-dbox" onclick="document.location.href='index.php?c=rinfo&eid={yun:}$expect.id{/yun}&type=other';"> 
+    <span class="fn-dbox-flex fn-dbox-flex-flex1">  其他信息 {yun:}if $resume.other{/yun}<i class="list_box_b">+0%</i>{yun:}else{/yun}+0%{yun:}/if{/yun}</span>
+   <em class="listBox-r_right"> {yun:}if $resume.other{/yun}<font color="#FF7201 ">完整</font>{yun:}else{/yun}未填写{yun:}/if{/yun} </em></div>
+<div class="listBox-title fn-dbox" onclick="document.location.href='index.php?c=addresumeson&eid={yun:}$expect.id{/yun}&type=desc';">
+    <span class="fn-dbox-flex fn-dbox-flex-flex1"> 自我评价 {yun:}if $user.description{/yun}<i class="list_box_b">+0%</i>{yun:}else{/yun}+0%{yun:}/if{/yun}</span>
+    <em class="listBox-r_right">
+        {yun:}if $user.description{/yun}
+        <font color="#FF7201 ">完整</font>
+        {yun:}else{/yun}未填写{yun:}/if{/yun}
+    </em>
+</div>
+
+</div>
+<div class="listBox" style="margin-top:10px;">
+ <a  href="index.php?c=resume" >  <div class="listBox-title fn-dbox"> <span class="fn-dbox-flex fn-dbox-flex-flex1">返回简历管理</span>   
+    <em class="listBox-r_right" style="top:25px;"></em> </div></a>
+ </div>
+ </div> </div>
+ <div class="clear"></div>
+{yun:}include file="$wapstyle/footer.htm"{/yun} 

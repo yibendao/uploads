@@ -1,0 +1,137 @@
+{yun:}include file="$wapstyle/member/header.htm"{/yun}
+<div class="user_index_bg">
+<div class="user_index_photo">
+<a href="index.php?c=photo">{yun:}if $user.sex==1{/yun}<img src="{yun:}$config.sy_weburl{/yun}/{yun:}$user.photo{/yun}" border="0" onerror="showImgDelay(this,'{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_member_icon{/yun}',2);">{yun:}else{/yun}<img src="{yun:}$config.sy_weburl{/yun}/{yun:}$user.photo{/yun}" border="0" onerror="showImgDelay(this,'{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_member_iconv{/yun}',2);">{yun:}/if{/yun}</a>
+</div>
+<div class="user_index_photo_icon_bg"><a href="index.php?c=photo"><i class="user_index_photo_icon"></i></a></div>
+<div class="user_index_name">{yun:}$username{/yun} </div>
+<div class="user_index_resume">
+      {yun:}if $expect.integrity{/yun}
+      <div class="user_index_resume_box">
+      <div class="user_index_resume_t">简历完整度：</div>
+      <div class="container">
+        <div class="progress">
+          <div class="progress-bar" style="width:{yun:}$expect.integrity{/yun}%"></div>
+        </div>
+        <span class="progress-bar-bf">{yun:}$expect.integrity{/yun}%</span> </div>
+        </div>
+      {yun:}else{/yun}
+     <div class="user_index_resume_no"> 暂无简历!<a href="index.php?c=addresume" class="user_index_resume_cj"><i class="user_index_resume_cj_icon"></i>创建简历</a></div> {yun:}/if{/yun}
+</div>
+</div>
+<section>
+  <div class="m_index_msg">
+    <dl class="m_index_msg_list">
+      {yun:}if $wkyqnum{/yun}<i class="m_index_msg_list_number">{yun:}$wkyqnum{/yun}</i>{yun:}/if{/yun} <a href="index.php?c=invite">
+      <dt>{yun:}$yqnum{/yun}</dt>
+      <dd>面试通知</dd>
+      </a>
+    </dl>
+    <dl class="m_index_msg_list">
+      <a href="index.php?c=sq">
+      <dt>{yun:}$statis.sq_jobnum{/yun}</dt>
+      <dd>申请记录</dd>
+      </a>
+    </dl>
+    <dl class="m_index_msg_list">
+      <a href="index.php?c=collect">
+      <dt>{yun:}$statis.fav_jobnum{/yun}</dt>
+      <dd>收藏记录</dd>
+      </a>
+    </dl>
+  </div>
+</section>
+<div class="clear"></div>
+<section>
+<div class="user_nav_box">
+<div class="user_nav_box_tit"><span class="user_nav_box_tit_s">求职管理</span></div>
+<ul>
+<li><a href="index.php?c=resume" ><i class="user_nav_box_icon user_nav_box_icon_jl"></i>简历管理</a></li>
+<li><a href="index.php?c=invite" ><i class="user_nav_box_icon user_nav_box_icon_tz"></i>面试通知</a></li>
+<li> <a href="index.php?c=sq"><i class="user_nav_box_icon user_nav_box_icon_sq"></i>申请的职位</a></li>
+<li> <a href="index.php?c=collect" ><i class="user_nav_box_icon user_nav_box_icon_sc "></i>收藏的职位</a></li>
+<li>  <a href="index.php?c=look_job"><i class="user_nav_box_icon user_nav_box_icon_eye"></i>浏览的职位</a></li>
+<li> <a href="index.php?c=look"><i class="user_nav_box_icon user_nav_box_icon_look"></i>谁看过我</a></li>
+<li><a href="index.php?c=partapply"><i class="user_nav_box_icon user_nav_box_icon_jz"></i>兼职报名</a></li>
+<li> <a href="index.php?c=partcollect"><i class="user_nav_box_icon user_nav_box_icon_jzsc"></i>兼职收藏</a></li>
+<li><a href="{yun:}url m=wap c=ask{/yun}"><i class="user_nav_box_icon user_nav_box_icon_ask"></i>问大家</a></li>
+</ul>
+</div>
+</section>
+<div class="clear"></div>
+<section>
+<div class="user_nav_box">
+<div class="user_nav_box_tit"><span class="user_nav_box_tit_s">账户管理</span></div>
+<ul>
+<li><a href="index.php?c=info"><i class="user_nav_box_icon user_nav_box_icon_info"></i>基本信息</a></li>
+<li> <a href="index.php?c=paylog"><i class="user_nav_box_icon user_nav_box_icon_dg"></i>财务管理</a></li>
+<li> <a href="index.php?c=reward_list"><i class="user_nav_box_icon user_nav_box_icon_dh"></i>{yun:}$config.integral_pricename{/yun}兑换</a></li>
+<li> <a href="index.php?c=binding" ><i class="user_nav_box_icon user_nav_box_icon_bd "></i>账户绑定</a></li>
+<li>  <a href="index.php?c=password"  ><i class="user_nav_box_icon user_nav_box_icon_sz"></i>更改密码</a></li>
+<li> <a href="javascript:;" onclick="islogout('{yun:}url m=wap c=loginout{/yun}','确认退出吗？');"><i class="user_nav_box_icon user_nav_box_icon_tc"></i>退出登录</a></li>
+</ul>
+</div>
+</section>
+
+<div class="clear"></div>
+
+
+
+
+<div id="yingdaoone" {yun:}if $user.name!=""{/yun}style="display:none;"{yun:}/if{/yun} style="width:100%;height:100%; background:rgba(51,51,51,0.6); position:fixed;left:0px;top:0px; z-index:100000;display:block;">
+  <div style="width:100%; position:absolute;left:0px;top:140px;">
+    <div style="padding:20px;">
+      <div class="index_yd_box">
+      <div class="index_yd_box_h1">亲，你还没有填写基本信息</div>
+      <div class="user_resume_index_tip_p"><a href="index.php?c=info" class="user_resume_index_tip_sub">编辑</a></div>
+      <div class="user_resume_index_tip_p2"><a href="javascript:Close_yd('yingdaoone');" class="user_resume_index_tip_p2_a">下次再说</a></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{yun:}if $user.name!=""{/yun}
+
+<div id="yingdaotwo" {yun:}if $user.resume_photo!=""{/yun}style="display:none;"{yun:}/if{/yun} style="width:100%;height:100%; background:rgba(0,0,0,0.6); position:fixed;left:0px;top:0px; z-index:100000;display:block;">
+  <div style="width:100%; position:absolute;left:0px;top:140px;">
+    <div style="padding:20px;">
+    <div class="index_yd_box">
+      <div class="index_yd_box_h1">亲，你还没有上传头像</div>
+      <div class="user_resume_index_tip_p"><a href="index.php?c=photo" class="user_resume_index_tip_sub">上传头像</a></div>
+      <div class="user_resume_index_tip_p2"><a href="javascript:Close_yd('yingdaotwo');" class="user_resume_index_tip_p2_a">下次再说</a></div>
+    </div>   </div>
+  </div>
+</div>
+{yun:}/if{/yun}
+
+{yun:}if $user.resume_photo!=""{/yun}
+<div id="yingdaothree" {yun:}if $user.email_status!=0||$user.moblie_status!=0||$user.idcard_status!=0{/yun}style="display:none;"{yun:}/if{/yun} style="width:100%;height:100%; background:rgba(51,51,51,0.6); position:fixed;left:0px;top:0px; z-index:100000;display:block;">
+  <div style="width:100%; position:absolute;left:0px;top:220px;">
+    <div style="padding:20px;">
+     <div class="index_yd_box">
+      <div class="index_yd_box_h1">亲，你还没有绑定</div>
+      <div class="user_resume_index_tip_p"><a href="index.php?c=binding" class="user_resume_index_tip_sub">绑定</a></div>
+      <div class="user_resume_index_tip_p2"><a href="javascript:Close_yd('yingdaothree');" class="user_resume_index_tip_p2_a">下次再说</a></div>
+    </div>
+  </div>  </div>
+</div>
+{yun:}/if{/yun}
+{yun:}if $user.email_status!=0||$user.moblie_status!=0||$user.idcard_status!=0{/yun}
+
+<div id="yingdaofour" {yun:}if $expect.integrity{/yun}style="display:none;"{yun:}/if{/yun} style="width:100%;height:100%; background:rgba(51,51,51,0.6); position:fixed;left:0px;top:0px; z-index:100000;display:block;">
+  <div style="width:100%; position:absolute;left:0px;top:140px;">
+    <div style="padding:20px;">
+      <div class="user_resume_index_tit">亲，你还没有创建简历</div>
+      <div class="user_resume_index_tip">为了更快的找到工作，创建属于自己的简历吧！</div>
+      <div class="user_resume_index_tip_p"><a href="index.php?c=addresume" class="user_resume_index_tip_sub">创建简历</a></div>
+      <div class="user_resume_index_tip_p2"><a href="javascript:Close_yd('yingdaofour');" class="user_resume_index_tip_p2_a">下次再说</a></div>
+    </div>
+  </div>
+</div>
+{yun:}/if{/yun}
+<script>
+function Close_yd(id){
+	$("#"+id).hide();
+}
+</script>
+{yun:}include file="$wapstyle/footer.htm"{/yun}

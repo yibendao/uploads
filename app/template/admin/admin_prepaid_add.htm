@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<link href="images/reset.css" rel="stylesheet" type="text/css" />
+<link href="images/system.css" rel="stylesheet" type="text/css" />
+<link href="images/table_form.css" rel="stylesheet" type="text/css" />
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script>
+<script src="js/admin_public.js" language="javascript"></script>
+<title>后台管理</title>
+<script>
+function checkpadd(){
+	var quota=$.trim($("#quota").val());
+	var num=$.trim($("#num").val());
+	var stime=$.trim($("#stime").val());
+	var etime=$.trim($("#etime").val());
+	if(quota==''){parent.layer.msg('额度不能为空！',2,8); return false;}
+	if(num==''){parent.layer.msg('生成数量不能为空！',2,8); return false;}
+	if(stime==''||etime==''){
+		parent.layer.msg('开始时间、结束时间不能为空！',2,8); return false;
+	}else{
+		var st=stime.split(' ');
+		var ed=etime.split(' '); 
+		if(toDate(st[0])>toDate(ed[0])){
+			parent.layer.msg('开始时间不得大于结束时间', 2, 2);   return false;
+		}
+	}
+}
+</script>
+</head>
+<body class="body_ifm">
+<div class="infoboxp">
+<div class="infoboxp_top_bg"></div>
+  <div class="infoboxp_top"><h6>添加卡号</h6></div>
+  <div class="admin_table_border">
+    <iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe>
+    <form name="myform" action="index.php?m=admin_prepaid&c=add" method="post" target="supportiframe" onSubmit="return checkpadd()">
+      <table width="100%" class="table_form" style="background:#fff;">
+        <tr class="admin_table_trbg">
+          <th>额　　度：</th>
+          <td><input class="input-text" type="text" onkeyup="this.value=this.value.replace(/[^0-9.]/g,'')" name="quota" id="quota" size="20" value="{yun:}$pinfo.quota{/yun}"/></td>
+        </tr>
+        <tr>
+          <th>生成数量：</th>
+          <td><input class="input-text" type="text" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" name="num" id="num" size="20"/></td>
+        </tr>
+        <tr class="admin_table_trbg">
+        <th width="120">开始时间：</th>
+        <td><link rel="stylesheet" href="{yun:}$config.sy_weburl{/yun}/js/datepicker/css/font-awesome.min.css" type="text/css">  
+			<script src="{yun:}$config.sy_weburl{/yun}/js/datepicker/foundation-datepicker.min.js"></script>
+          <input id="stime" class="input-text" type="text" readonly value="{yun:}$pinfo.stime|date_format:'%Y-%m-%d'{/yun}" name="stime"> </td>
+      </tr>
+      <tr >
+        <th width="120">结束时间：</th>
+        <td><input id="etime" class="input-text" type="text" readonly value="{yun:}$pinfo.etime|date_format:'%Y-%m-%d'{/yun}" name="etime">
+          <script type="text/javascript">
+			var checkin = $('#stime').fdatepicker({
+				format: 'yyyy-mm-dd hh:ii',startView:4,minView:0 
+			});
+			var checkout = $('#etime').fdatepicker({
+				format: 'yyyy-mm-dd hh:ii',startView:4,minView:0
+			});   
+		   
+        </script></td>
+      </tr> 
+      <tr class="admin_table_trbg">
+        <th width="120">状　　态：</th>
+        <td>
+        <div class="yun_admin_select_box zindex100">
+            {yun:}if $pinfo.type{/yun}
+                    <input type="button" value="不可用" class="yun_admin_select_box_text" id="type_name" onClick="select_click('type');">
+                    <input name="type" type="hidden" id="type_val" value="2">
+            {yun:}else{/yun}
+                <input type="button" value="可用" class="yun_admin_select_box_text" id="type_name" onClick="select_click('type');">
+                <input name="type" type="hidden" id="type_val" value="1">
+            {yun:}/if{/yun}
+            
+            <div class="yun_admin_select_box_list_box dn" id="type_select">     
+                <div class="yun_admin_select_box_list">
+                    <a href="javascript:;" onClick="select_new('type','1','可用')">可用</a>
+                </div>     
+                <div class="yun_admin_select_box_list">
+                    <a href="javascript:;" onClick="select_new('type','2','不可用')">不可用</a>
+                </div>                 
+            </div>
+        </div>
+        </td>
+      </tr>
+        <tr class="admin_table_trbg" >
+          <td align="center" colspan="2">
+			{yun:}if $info.id{/yun}
+            <input type="hidden" name="id" value="{yun:}$info.id{/yun}"/>
+            <input class="admin_submit2" type="submit" name="submit" value="&nbsp;更 新&nbsp;"  />
+            {yun:}else{/yun}
+            <input class="admin_submit2" type="submit" name="submit" value="&nbsp;添 加&nbsp;"  />
+            {yun:}/if{/yun}
+            <input class="admin_submit2" type="reset" name="reset" value="&nbsp;重 置 &nbsp;" /></td>
+        </tr>
+      </table>
+	  <input type="hidden" name="pytoken" value="{yun:}$pytoken{/yun}">
+    </form>
+  </div>
+</div>
+</body>
+</html>

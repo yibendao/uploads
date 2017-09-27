@@ -1,0 +1,143 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<link href="images/reset.css" rel="stylesheet" type="text/css" />
+<link href="images/system.css" rel="stylesheet" type="text/css" />
+<link href="images/table_form.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="{yun:}$config.sy_weburl{/yun}/js/jscolor/jscolor.js"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script>
+<script src="js/admin_public.js" language="javascript"></script>
+<script charset="utf-8" src="../js/kindeditor/kindeditor-min.js"></script>
+<link href="images/blue.css" rel="stylesheet">
+<script src="js/icheck.js"></script>
+  <script>
+	$(document).ready(function(){
+	  $('input').iCheck({
+		checkboxClass: 'icheckbox_flat-blue',
+		radioClass: 'iradio_flat-blue'
+	  });
+	});
+function setsave(id,pytoken,config){
+	
+	var nid = $('#nid_val').val();
+	var name = $('#name').val();
+	var sort = $('#sort').val();
+	var eject =	$("input[name='eject']:checked").val();
+	var model = $("input[name='model']:checked").val();
+	var bold = $("input[name='bold']:checked").val();
+	var display = $("input[name='display']:checked").val();
+	 if (name=="") {
+		 layer.msg('请填写导航名称！', 2,8); 
+		 return false;
+	 }
+
+	 $.post('index.php?m=model_config&c=setnav',{nid:nid,name:name,sort:sort,eject:eject,model:model,bold:bold,display:display,id:id,config:config,pytoken:pytoken},function(data){
+		
+		var data=eval('('+data+')');
+		
+		parent.layer.msg(data.msg, Number(data.tm), Number(data.st),function(){parent.layer.closeAll();});
+		return false;
+	
+	 
+	 });
+}
+</script>
+<title>后台管理</title>
+</head>
+<body class="body_ifm">
+<div class="infoboxp">
+<div class="infoboxp_top_bg"></div>
+  <div class="admin_table_border">
+      <table width="100%" class="table_form" style="background:#fff;">
+        <tr >
+          <th width="120">导航类别：</th>
+          <td>
+            <div class="yun_admin_select_box zindex100">
+            {yun:}if $types.nid{/yun}
+				{yun:}foreach item=v from=$type{/yun}
+                   {yun:}if $v.id eq $types.nid{/yun}
+                    <input type="button" value="{yun:}$v.typename{/yun}" class="yun_admin_select_box_text" id="nid_name" onClick="select_click('nid');">
+                    <input name="nid" type="hidden" id="nid_val" value="{yun:}$v.id{/yun}">
+                    {yun:}/if{/yun}
+                {yun:}/foreach{/yun}
+            {yun:}else{/yun}
+                <input type="button" value="请选择" class="yun_admin_select_box_text" id="nid_name" onClick="select_click('nid');">
+                <input name="nid" type="hidden" id="nid_val" value="">
+            {yun:}/if{/yun}
+            
+            <div class="yun_admin_select_box_list_box dn" id="nid_select">     
+				{yun:}foreach item=v from=$type{/yun}
+                <div class="yun_admin_select_box_list">
+                    <a href="javascript:;" onClick="select_new('nid','{yun:}$v.id{/yun}','{yun:}$v.typename{/yun}')">{yun:}$v.typename{/yun}</a>
+                </div>                    
+                {yun:}/foreach{/yun}
+            </div>
+        </div>
+          </td>
+        </tr>
+        <tr class="admin_table_trbg" >
+          <th>导航名称：</th>
+          <td><input class="input-text" type="text" name="name" id="name" size="40" value="{yun:}$types.name{/yun}"/>
+         </td>
+        </tr>
+        <tr >
+          <th>排　　序：</th>
+          <td><input class="input-text" type="text" name="sort" size="5" id="sort" value="{yun:}$types.sort{/yun}"/></td>
+        </tr>
+        <tr class="admin_table_trbg" >
+          <th>弹出窗口：</th>
+          <td>
+          <div class="iradio_flat_height">
+            <input type="radio" name="eject" value="1" id="eject_1" {yun:}if $types.eject=='1'{/yun}checked=checked {yun:}/if{/yun}>
+           <span class="iradio_flat_left"><label for="eject_1">新窗口</label>&nbsp;&nbsp;</span>
+            <input type="radio" name="eject" value="0"  id="eject_2" {yun:}if $types.eject!='1'{/yun}checked=checked{yun:}/if{/yun}>
+            <span class="iradio_flat_left"><label for="eject_2">原窗口 </label></span>
+            </div></td>
+        </tr>
+        <tr >
+          <th>状　　态：</th>
+          <td>
+          <div class="iradio_flat_height">
+            <input type="radio" name="model" value="hot" id="model_hot" {yun:}if $types.model=='hot'{/yun}checked=checked {yun:}/if{/yun}> 
+            <span class="iradio_flat_left"><label for="model_hot">热</label>&nbsp;&nbsp;</span>
+            <input type="radio" name="model" value="new" id="model_new" {yun:}if $types.model=='new'{/yun}checked=checked{yun:}/if{/yun}> 
+            <span class="iradio_flat_left"><label for="model_new">新</label>&nbsp;&nbsp;</span>
+            <input type="radio" name="model" value="" id="model_n" {yun:}if $types.model==''{/yun}checked=checked{yun:}/if{/yun}> 
+            <span class="iradio_flat_left"><label for="model_n">无</label>&nbsp;&nbsp;</span>
+            </div>
+            </td>
+        </tr>
+        <tr >
+          <th>加　　粗：</th>
+          <td>
+          <div class="iradio_flat_height">
+          <input type="radio" name="bold" value="1" id="bold_y" {yun:}if $types.bold=='1'{/yun}checked=checked{yun:}/if{/yun}>
+            <span class="iradio_flat_left"><label for="bold_y">是</label>&nbsp;&nbsp;</span>
+            <input type="radio" name="bold" value="0" id="bold_n" {yun:}if $types.bold!='1'{/yun}checked=checked{yun:}/if{/yun}>
+            <span class="iradio_flat_left"><label for="bold_n">否</label>&nbsp;&nbsp;</span>
+            </div>
+            </td>
+        </tr>
+        <tr >
+          <th>显　　示：</th>
+          <td>
+          <div class="iradio_flat_height">
+          <input type="radio" name="display" value="1" id="display_y" {yun:}if $types.display=='1'{/yun}checked=checked {yun:}/if{/yun}>
+            <span class="iradio_flat_left"><label for="display_y">是</label>&nbsp;&nbsp;</span>
+            <input type="radio" name="display" value="0" id="display_n" {yun:}if $types.display!='1'{/yun}checked=checked{yun:}/if{/yun}>
+           <span class="iradio_flat_left"><label for="display_n"> 否</label>&nbsp;&nbsp;</span>
+            
+             </div></td>
+        </tr>
+        <tr class="admin_table_trbg" >
+          <td align="center" colspan="2"> 
+            <input class="admin_submit4" type="button" onclick="setsave('{yun:}$types.id{/yun}','{yun:}$pytoken{/yun}','{yun:}$types.config{/yun}');" name="update" value="&nbsp;保存&nbsp;"  />
+            </td>
+        </tr>
+      </table>
+  </div>
+</div>
+</body>
+</html>

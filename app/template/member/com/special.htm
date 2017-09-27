@@ -1,0 +1,76 @@
+{yun:}include file="$comstyle/header.htm"{/yun}
+<script>
+function statusbody(id){
+	var statusbody=$("#statusbody"+id).attr('statusbody');
+	$("#showbody").html(statusbody)
+	$.layer({
+		type : 1,
+		title : '审核说明',
+		closeBtn : [0 , true],
+		border : [10 , 0.3 , '#000', true],
+		area : ['320px','auto'],
+		page : {dom : '#infobox'}
+	});
+}
+</script>
+<div class="w1000">
+  <div class="admin_mainbody"> {yun:}include file="$comstyle/left.htm"{/yun}
+    <div class=right_box>
+      <div class=admincont_box>
+        <div class=admin_tit><span class="admin_tit_bg">专题招聘</span>
+          <div class=admin_tit_right> </div>
+        </div>
+             <div class="com_body">
+        <div class=admin_textbox_04> 
+            <div class=table>
+              <div>
+                <div>
+                  <table id="job_checkbokid" cellspacing=1 align=center border=0 class="com_table">
+                    <tbody>
+                     {yun:}if $rows{/yun}
+                      <tr align=middle style="height:30px">
+                        <th>专题名称</th>
+                        <th>专题介绍</th>
+                        <th>报名时间</th>
+                        <th>状态</th>
+                        <th >操作</th>
+                      </tr>
+                      {yun:}/if{/yun}
+                    {yun:}foreach item=v from=$rows{/yun}
+                    <tr style="height:30px">
+                      <td style="width:230px;"><a href="{yun:}url m=special c=show id='`$v.sid`'{/yun}" target=_blank>{yun:}$v.title{/yun}</a></td>
+                      <td style="width:180px;">{yun:}$v.intro|mb_substr:0:15:'gbk'{/yun}</td>
+                      <td>{yun:}$v.time|date_format:'%Y-%m-%d'{/yun}</td>
+                      <td>{yun:}if $v.status==1{/yun}<font color="green">已审核</font>{yun:}elseif $v.status==2{/yun}<font color="#FF0000">未通过</font>{yun:}else{/yun}<font color="blue">未审核</font>{yun:}/if{/yun}</td>
+                      <td>{yun:}if $v.status==2{/yun}<a href="javascript:void(0);" class="statusbody" id="statusbody{yun:}$v.id{/yun}" statusbody="{yun:}$v.statusbody{/yun}" onclick="statusbody('{yun:}$v.id{/yun}');" >查看原因</a> {yun:}/if{/yun}<a href="javascript:void(0)" onclick="layer_del('确定要删除？', 'index.php?c=special&act=del&id={yun:}$v.id{/yun}');">删除</a></td>
+                    </tr>
+                    {yun:}foreachelse{/yun}
+                    <tr style="height:30px">
+                      <td colspan="5">
+                         <div class="com_msg_no">
+						  <p>亲爱的用户，目前您还没有报名专题招聘</p>
+						<a class="com_msg_no_bth com_submit" href="{yun:}url m=special{/yun}" target="_blank">查看专题招聘信息</a>
+                         </div>						
+						</td>
+                    </tr>
+                    {yun:}/foreach{/yun}
+                      </tbody>
+
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div class="diggg">{yun:}$pagenav{/yun}</div> 
+          <div class="clear"></div>
+                   
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<div class="admin_Operating_sh" id="infobox" style="padding:10px;width:300px; display:none;"> 
+	<div class="admin_Operating_text" style="padding:5px; height:auto;color:#C30; font-size:14px; line-height:23px;white-space: normal; word-break: break-all;" id="showbody"> </div>
+</div>
+{yun:}include file="$comstyle/footer.htm"{/yun}

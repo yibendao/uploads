@@ -1,0 +1,123 @@
+{yun:}include file="$wapstyle/header_cont.htm"{/yun}
+<div class="" id="editnone">
+<div class="articlemune_tit">我的频道<a href="javascript:void(0);" onclick="editshow();" class="articlemune_tit_bj">编辑</a></div>
+<section>
+<div>
+<ul class="articlemune">
+{yun:}if $newc{/yun}
+		{yun:}foreach from=$newc item=v{/yun}
+		<li><a>{yun:}$group_name[$v]{/yun}</a></li>
+		{yun:}/foreach{/yun}
+	{yun:}else{/yun}	
+		{yun:}articleclass key=key item=v{/yun}
+		{yun:}if $key<6{/yun}
+		<li><a>{yun:}$v.name{/yun}</a></li>
+		{yun:}/if{/yun}
+		{yun:}/articleclass{/yun}
+{yun:}/if{/yun}	
+</ul>
+</div>
+</section>
+<div class="articlemune_tit">推荐频道</div>
+<section>
+<div>
+<ul class="articlemune">
+{yun:}if $newc{/yun}
+	{yun:}foreach from=$oldc item=v{/yun}
+	<li><a>{yun:}$group_name[$v]{/yun}</a></li>
+	{yun:}/foreach{/yun}
+{yun:}else{/yun}	
+	{yun:}articleclass key=key item=v{/yun}
+	{yun:}if $key>5{/yun}
+	<li><a>{yun:}$v.name{/yun}</a></li>
+	{yun:}/if{/yun}
+	{yun:}/articleclass{/yun}
+{yun:}/if{/yun}	
+</ul>
+</div>
+</section>
+<div class="clear"></div>
+</div>
+
+<div class="" style="display:none" id="editshow">
+<div class="articlemune_tit">我的频道<a href="javascript:void(0);" onclick="edit('{yun:}url m=wap c=article a=editchannels{/yun}');" class="articlemune_tit_bj">完成</a></div>
+<section>
+<div>
+<ul id="newc" class="articlemune">
+{yun:}if $newc{/yun}
+	{yun:}foreach from=$newc item=v{/yun}
+	<li id="new{yun:}$v{/yun}" data-category="{yun:}$v{/yun}" onclick="delchannels('{yun:}$v{/yun}','{yun:}$group_name[$v]{/yun}')"><a>{yun:}$group_name[$v]{/yun}<i class="articlemune_icon"></i></a></li>
+	{yun:}/foreach{/yun}
+{yun:}else{/yun}	
+	{yun:}articleclass key=key item=v{/yun}
+	{yun:}if $key<6{/yun}
+	<li id="new{yun:}$v.id{/yun}" data-category="{yun:}$v.id{/yun}" onclick="delchannels('{yun:}$v.id{/yun}','{yun:}$v.name{/yun}')"><a>{yun:}$v.name{/yun}<i class="articlemune_icon"></i></a></li>
+	{yun:}/if{/yun}
+	{yun:}/articleclass{/yun}
+{yun:}/if{/yun}	
+</ul>
+</div>
+</section>
+<div class="articlemune_tit">推荐频道</div>
+<section>
+<div>
+<ul id="oldc" class="articlemune">
+{yun:}if $newc{/yun}
+	{yun:}foreach from=$oldc item=v{/yun}
+	<li id="old{yun:}$v{/yun}" data-category="{yun:}$v{/yun}" onclick="addchannels('{yun:}$v{/yun}','{yun:}$group_name[$v]{/yun}')"><a>{yun:}$group_name[$v]{/yun}</a></li>
+	{yun:}/foreach{/yun}
+{yun:}else{/yun}	
+	{yun:}articleclass key=key item=v{/yun}
+	{yun:}if $key>5{/yun}
+	<li id="old{yun:}$v.id{/yun}" data-category="{yun:}$v.id{/yun}" onclick="addchannels('{yun:}$v.id{/yun}','{yun:}$v.name{/yun}')"><a>{yun:}$v.name{/yun}</a></li>
+	{yun:}/if{/yun}
+	{yun:}/articleclass{/yun}
+{yun:}/if{/yun}	
+</ul>
+</div>
+</section>
+<div class="clear"></div>
+</div>
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/layer/layer.m.js" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/public.js" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/prefixfree.min.js" language="javascript"></script>
+<script type="text/javascript"> 
+function editshow(){
+	$("#editnone").hide();
+	$("#editshow").show();
+}
+function addchannels(category,name){
+	$("#old"+category).remove();
+	$("#newc").append(function(){
+		var html="<li id=\"new"+category+"\" data-category=\""+category+"\" onclick=\"delchannels('"+category+"','"+name+"')\"><a>"+name+"<i class=\"articlemune_icon\"></i></a></li>";
+		return html;
+	});
+}
+function delchannels(category,name){
+	$("#new"+category).remove();
+	$("#oldc").append(function(){
+		var html="<li id=\"old"+category+"\" data-category=\""+category+"\" onclick=\"addchannels('"+category+"','"+name+"')\"><a>"+name+"</a></li>";
+		return html;
+	});
+}
+function edit(url){
+	var oldc=[],newc=[];
+	$("#oldc").find('li').each(function(){
+		oldc.push($(this).attr('data-category'));
+	  });
+	$("#newc").find('li').each(function(){
+		newc.push($(this).attr('data-category'));
+	  });
+	$.post(url,{oldc:oldc,newc:newc},function(data){
+		if(data){
+			if(data==1){
+				layermsg('我的频道最少要有一个');
+			}else{
+				window.location.href=data;
+			}
+		}
+	});
+}
+</script>
+{yun:}include file="$wapstyle/footer.htm"{/yun} 

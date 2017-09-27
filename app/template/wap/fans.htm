@@ -1,0 +1,27 @@
+{yun:}include file="$wapstyle/header_cont.htm"{/yun}
+{yun:}include file="$wapstyle/nav.htm"{/yun} 
+{yun:}foreach from=$rows item=flist{/yun}
+<div class="atn_ct">
+  <div class="atn_ct_m">
+    <div class="atn_ct_m_img"> <img src="{yun:}$flist.pic{/yun}" onerror="showImgDelay(this,'{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_friend_icon{/yun}',2);"width="40px;" style="border-radius:10px;" /> </div>
+    <div class="atn_ct_m_wr">
+      <div class="atn_ct_m_wr_nm"> <a href="{yun:}$flist.url{/yun}">{yun:}$flist.nickname{/yun}</a>
+        <div class="atn_ct_plus"> {yun:}if $uid==$info.uid{/yun}
+          <div class="ask_fans_right user{yun:}$flist.uid{/yun}"> {yun:}if $flist.atn==1{/yun} <a href="javascript:void(0)" onclick="attention_user('{yun:}$flist.uid{/yun}','','{yun:}url m=wap c=ask a=atnuser{/yun}')" class="watch_qxgz">取消关注</a> {yun:}else{/yun} <a href="javascript:void(0)" onclick="attention_user('{yun:}$flist.uid{/yun}','','{yun:}url m=wap c=ask a=atnuser{/yun}')" class="watch_gz">+ 关注</a> {yun:}/if{/yun} </div>
+          {yun:}/if{/yun} </div>
+      </div>
+      <div class="atn_ct_m_wr_aw fans{yun:}$flist.uid{/yun}" fans='{yun:}$flist.fans{/yun}'>粉丝 <i>{yun:}$flist.fans{/yun}</i> | 关注 <i>{yun:}$flist.atnnum{/yun}</i></div>
+    </div>
+  </div>
+</div>
+{yun:}foreachelse{/yun}
+<div class="noresult png">暂无粉丝，快来关注我吧！</div>
+{yun:}/foreach{/yun} 
+
+<div class="clear"></div>
+<div class="pages">{yun:}$pagenav{/yun}</div>
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/layer/layer.m.js" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/public.js" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/prefixfree.min.js" language="javascript"></script>
+{yun:}include file="$wapstyle/footer.htm"{/yun}

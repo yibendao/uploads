@@ -1,0 +1,259 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link href="images/reset.css" rel="stylesheet" type="text/css" />
+<link href="images/system.css" rel="stylesheet" type="text/css" />
+<link href="images/table_form.css" rel="stylesheet" type="text/css" />
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script>
+<script src="js/admin_public.js" language="javascript"></script>
+<script src="js/jquery.insert.js"></script>
+<script language="javascript">
+
+	$(function(){
+		$(".status").click(function(){
+			$(".seolist").hide();
+			var seomodel=$("#seomodel").val();
+			$(".list_public").show();
+			$(".list_"+seomodel).show();
+			$("input[name=pid]").val($(this).attr("pid"));
+			$.layer({
+				type : 1,
+				title :'可选择参数', 
+				offset: ['80px', ''],
+				closeBtn : [0 , true],
+				border : [10 , 0.3 , '#000', true],
+				area : ['550px','300px'],
+				page : {dom :"#infobox"}
+			});
+		});
+	
+	});
+	function selectseo(name,val,valname){
+		
+		$("#"+name+"_name").val(valname);
+		$("#"+name+"_val").val(val);
+		$("#"+name+"_select").hide();
+		var pytoken = $('#pytoken').val();
+		$.post('index.php?m=model_config&c=getseo',{id:val,pytoken:pytoken},function(data){
+			
+			if(data){
+				var data=eval('('+data+')');
+				$('#seoname').val(data.seoname);
+				$('#ident').val(data.ident);
+				$('#rewrite_url').val(data.rewrite_url);
+				$('#php_url').val(data.php_url);
+				$('#title').val(data.title);
+				$('#keywords').val(data.keywords);
+				$('#description').val(data.description);
+				$('#did').val(data.did);
+				$('#didname').val(data.didname);
+			}else{
+				layer.msg('请选择正确的SEO模块！');
+			}
+			
+			
+		
+		})
+	}
+	function clickseoSureBtn(){
+		var codewebarr="";
+		$("input[name=seocheckbox]:checked").each(function(){ 
+			if(codewebarr==""){codewebarr="{"+$(this).val()+"}";}else{codewebarr=codewebarr+" - {"+$(this).val()+"}";}
+		});
+		$("input[name='seocheckbox']").attr('checked',false);
+		var pid=$("input[name=pid]").val();
+		$('#'+pid).setCaret();
+		$('#'+pid).insertAtCaret(codewebarr);
+		layer.closeAll();
+	}
+	function change_list(id){
+		$(".seolist").hide();
+		$("#list_"+id).show();
+	}
+	function setsave(){
+
+		var pytoken = $('#pytoken').val();
+		var seoname = $('#seoname').val();
+		var ident = $('#ident').val();
+		var rewrite_url = $('#rewrite_url').val();
+		var php_url = $('#php_url').val();
+		var title = $('#title').val();
+		var keywords = $('#keywords').val();
+		var description = $('#description').val();
+		var did = $('#did').val();
+		var id = $('#seoid_val').val();
+		if (!id) {
+			 layer.msg('请选择需要修改的SEO模块！', 2,8); 
+			 return false;
+		}
+		if (seoname=="") {
+			 layer.msg('请填写SEO名称！', 2,8); 
+			 return false;
+		}
+		if (ident=="") {
+			 layer.msg('请填写SEO标识！', 2,8); 
+			 return false;
+		}
+		if (title=="") {
+			 layer.msg('请填写SEO标题！', 2,8); 
+			 return false;
+		}
+		if (keywords=="") {
+			 layer.msg('请填写SEO关键词！', 2,8); 
+			 return false;
+		}
+		if (description=="") {
+			 layer.msg('请填写SEO描述！', 2,8); 
+			 return false;
+		}
+
+		 $.post('index.php?m=model_config&c=setseo',{id:id,seoname:seoname,ident:ident,rewrite_url:rewrite_url,php_url:php_url,title:title,keywords:keywords,description:description,did:did,pytoken:pytoken},function(data){
+			
+			var data=eval('('+data+')');
+			
+			parent.layer.msg(data.msg, Number(data.tm), Number(data.st),function(){parent.layer.closeAll();});
+			return false;
+		
+		 
+		 });
+	}
+</script>
+<title>后台管理</title>
+</head>
+<body class="body_ifm">
+<div id="infobox" style="display:none;padding:0px 20px;">
+    <div class="admin_Prompt" style="width:500px; margin:10px 10px;">
+        <div class="admin_Prompt_span">
+           提示：下面的标识符请根据页面对应添加，否则无法正常显示！
+        </div>
+    </div>
+    <form action="index.php" target="supportiframe" method="get" id="formstatus">
+        <input name="pid" value="0" type="hidden">
+        <input type="hidden" name="pytoken" value="{yun:}$pytoken{/yun}">
+        <div class="admin_seo_tck_box" style="overflow-x:hidden">
+
+        {yun:}assign var="sort" value=1{/yun}
+        {yun:}foreach item=rows key=key from=$arr_data.seoconfig{/yun}
+            	<div style="display:none;" class="seolist list_{yun:}$key{/yun}">
+                {yun:}foreach item=row key=k from=$rows{/yun}
+                <div class="admin_seo_tck_box_list" style="padding:5px 0;">
+                <input type="checkbox" name="seocheckbox" value="{yun:}$k{/yun}" id="{yun:}$k{/yun}" class="admin_seo_tck_box_check">
+                <span class="admin_seo_tck_box_l"><label for="{yun:}$k{/yun}">{yun:}$row{/yun}</span>
+               代码：{{yun:}$k{/yun}}</label>
+                </div>
+               {yun:}/foreach{/yun}
+               </div>
+            {yun:}assign var="sort" value=$sort+1{/yun}
+        {yun:}/foreach{/yun}
+        </div>
+        <p style="text-align:center; clear:both;">
+		<input class="submit_btn" type="button" value="确认"  onClick="clickseoSureBtn();" >&nbsp;&nbsp;
+		<input class="cancel_btn" type="button" value="取消" onclick="layer.closeAll();">
+		</p>
+    </form>
+</div>
+<div class="infoboxp">
+<div class="infoboxp_top_bg"></div>
+<div class="admin_Prompt">
+        <div class="admin_Prompt_span">
+           提示：如果您不是程序员或不清楚用法，请不要随意修改SEO标识符！网站的SEO部分是网站重要部分，请不要经常修改！<br/>
+        </div>
+        <div class="admin_Prompt_close"></div>
+    </div>
+<div class="infoboxp_top_bg"></div>
+
+<div class="admin_table_border">
+	<table width="100%" class="table_form" style="background:#fff;">
+    	
+        <tr class="admin_table_trbg" >
+			<th>SEO模块：</th>
+			<td>
+            <div class="yun_admin_select_box zindex100">
+           
+             <input type="button" value="请选择" class="yun_admin_select_box_text" id="seoid_name" onClick="select_click('seoid');">
+             <input name="seoid" type="hidden" id="seoid_val" value="0">
+        
+            
+            <div class="yun_admin_select_box_list_box dn" id="seoid_select">     
+    			{yun:}foreach item=row key=key from=$seo{/yun}
+                <div class="yun_admin_select_box_list">
+                    <a href="javascript:;" onClick="selectseo('seoid','{yun:}$row.id{/yun}','{yun:}$row.seoname{/yun}')">{yun:}$row.seoname{/yun}</a>
+                </div>                    
+                {yun:}/foreach{/yun}
+            </div>
+        </div>
+            </td>
+		</tr>
+		<tr>
+			<th>页面名称：</th>
+			<td><input class="input-text" type="text" name="seoname" id="seoname" size="40" value="{yun:}$info.seoname{/yun}"/></td>
+		</tr>
+        <tr class="admin_table_trbg" >
+			<th>SEO标识符：</th>
+			<td><input class="input-text" type="text" name="ident" id="ident" size="40" value="{yun:}$info.ident{/yun}" id='ident'/></td>
+		</tr>
+     	<tr>
+			<th>使用范围：</th>
+			<td><input type="button" value="{yun:}if $info.did{/yun}{yun:}$Dname[$info.did]{/yun}{yun:}else{/yun}总站{yun:}/if{/yun}" class="city_news_but" onClick="add_site('{yun:}$info.did{/yun}','{yun:}$Dname[$info.did]{/yun}');" id="didname">
+			<input type="hidden" id="did" value="{yun:}$info.did{/yun}" name="did"></td>
+			
+        </tr> 
+        <tr  class="admin_table_trbg">
+			<th>伪静态规则：</th>
+			<td>
+             <input class="input-text" type="text" id="rewrite_url" name="rewrite_url" size="60" value="{yun:}$info.rewrite_url{/yun}"/><span class="admin_web_tip">如：/job/{id}.html 多数用于详情页</span>
+            </td>
+		</tr>
+        <tr >
+			<th>原始路径：</th>
+			<td>
+             <input class="input-text" type="text" id="php_url" name="php_url" size="60" value="{yun:}$info.php_url{/yun}"/>
+             <span class="admin_web_tip">如：/job/index.php?c=comapply （只需模块链接 无需参数 与上对应）</span>
+            </td>
+		</tr>
+	   	<tr class="admin_table_trbg" >
+			<th>网站标题（title）：</th>
+			<td>
+              <div style="height:5px;"></div>
+            <textarea name="title" id="title" cols="60" rows="3" style=" float:left">{yun:}$info.title{/yun}</textarea>
+          <div style="float:left; padding-left:10px;">
+            <div style="padding-bottom:5px;">  <span class="admin_web_tip">一般不超过80个字符</span></div>
+            <input class="input-text status" type="button" name="select" pid="title" style="width:60px" value="选择参数"/></div>
+            </td>
+		</tr>
+		<tr >
+			<th>网站关键字（keywords）：</th>
+			<td>
+              <div style="height:5px;"></div>
+             <textarea name="keywords" id="keywords" cols="60" rows="3" style=" float:left">{yun:}$info.keywords{/yun}</textarea>
+           <div style="float:left; padding-left:10px;">
+            <div style="padding-bottom:5px;"><span class="admin_web_tip">一般不超过100个字符</span></div>
+            <input class="input-text status" type="button" name="select" pid="keywords" style="width:60px" value="选择参数"/></div>
+			</td>
+		</tr>
+    	<tr class="admin_table_trbg" >
+			<th>网站描述（description）：</th>
+			<td>
+              <div style="height:5px;"></div>
+			 <textarea name="description" id="description" cols="60" rows="5" style=" float:left">{yun:}$info.description{/yun}</textarea><div style="float:left; padding-left:10px;">
+            <div style="padding:15px 0;"> <span class="admin_web_tip">一般不超过200个字符</span></div>
+              <input class="input-text status" type="button" name="select" pid="description" style="width:60px" value="选择参数"/>
+              </div>
+			</td>
+            <td>
+		</tr>
+		<tr>
+			<td align="center" colspan="2">
+            <input type="hidden" name="pytoken" id="pytoken" value="{yun:}$pytoken{/yun}">
+        	<input class="admin_submit4" type="button" name="update"  onclick="setsave();" value="&nbsp;保存&nbsp;"  />
+
+			</td>
+		</tr>
+	</table>
+</div>
+</div>
+{yun:}include file="$adminstyle/checkdomain.htm"{/yun}
+</body>
+</html>

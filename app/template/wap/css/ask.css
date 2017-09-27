@@ -1,0 +1,52 @@
+@charset "utf-8";
+/* CSS Document */
+/*屏幕变换字体大小不跟这变*/
+html {width: 100%;height: 100%;-webkit-text-size-adjust: none;-moz-text-size-adjust: none;-ms-text-size-adjust: none;-o-text-size-adjust: none;text-size-adjust: none;}
+body {width: 100%;height: 100%;margin: 0;padding: 0;font: 0.8rem Helvetica Neue, Helvetica, STHeiTi, sans-serif;;
+line-height: 1.5;background:#f6f6f6; }
+dl,dd,dt,ul,li{ list-style:none;margin:0; padding:0}
+h1,h2,h3{ margin:0; padding:0;}
+input{font-family:微软雅黑;}
+em,i{font-style:normal}
+a,button,input{-webkit-tap-highlight-color:rgba(255,0,0,0);}
+.mt15{ margin-top:15px;}
+/*定义任何元素*/
+*, *:after, *:before {-webkit-box-sizing: before-box;-moz-box-sizing: before-box;-ms-box-sizing: before-box;-o-box-sizing: before-box;}
+*:after {clear: both}
+.clearfix {zoom: 1;}
+.clear{clear: both}
+a{ text-decoration:none;color:#333;}
+#bg{ position:fixed; left:0px;top:0px;right:0px;bottom:0px; background:#000; opacity:0.5; z-index:-1}
+.mt10{ margin-top:10px;}
+*{ margin:0; padding:0;}
+
+/*新鲜事*/
+.askfriend_nav{width:100%;height:40px;line-height:40px;background:#fff;}
+.askfriend_nav ul li{}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

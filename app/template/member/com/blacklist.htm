@@ -1,0 +1,64 @@
+{yun:}include file="$comstyle/header.htm"{/yun}
+<div class="w1000">
+<div class="admin_mainbody">
+{yun:}include file="$comstyle/left.htm"{/yun}
+<div class=right_box>
+  <div class=admincont_box>
+    <div class="com_tit">
+       <span class="com_tit_span">黑名单管理</span> 
+      <form action="index.php" method="get" />
+       <div class="news_search">
+          <input name="c" type="hidden" value="blacklist">
+         <input name="keyword" type="text"class="news_text" placeholder="请输入简历关键字" value="{yun:}$smarty.get.keyword{/yun}">
+              <input name="" type="submit" class="news_bth" value="搜索">
+           </div>
+          </form>
+          </div>      
+		  <div class="com_body">
+   
+    <div class=admin_textbox_04>
+	<iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe>
+      <form action="{yun:}$now_url{/yun}&act=del" target="supportiframe" method="post" id='myform'>
+        <div class=table>
+         <div id="job_checkbokid" >
+          {yun:}if $rows{/yun}
+              <div class="job_news_list job_news_list_h1">
+                  <span class="job_news_list_span job_w30"style="padding-right:5px;">&nbsp;</span>
+                  <span class="job_news_list_span job_w90">姓名</span>
+                   <span class="job_news_list_span job_w370" style="width:300px;">求职意向</span>
+                  <span class="job_news_list_span job_w140">工作经验</span>
+                  <span class="job_news_list_span job_w140">期望薪资</span>
+                  <span class="job_news_list_span job_w100">屏蔽时间</span>
+                  <span class="job_news_list_span job_w80">操作</span>
+                 </div>
+           {yun:}/if{/yun}
+            {yun:}foreach item=v from=$rows{/yun}
+                    <div class="job_news_list">
+                  <span class="job_news_list_span job_w30" style="padding-right:5px;"><input type=checkbox name="delid[]" value="{yun:}$v.id{/yun}" style="margin-top:4px;"></span>
+                 <span class="job_news_list_span job_w90"><a href="{yun:}url m=resume c=show uid=$v.p_uid{/yun}" target="_blank" class="com_Release_name">{yun:}$v.name{/yun}</a></span>
+                  <span class="job_news_list_span job_w370" style="width:300px;"><span class="yxjob_name">{yun:}$v.jobname{/yun}</span></span>
+                 <span class="job_news_list_span job_w140">{yun:}$v.exp{/yun}</span>
+                  <span class="job_news_list_span job_w140">{yun:}$v.salary{/yun}</span>
+                  <span class="job_news_list_span job_w100">{yun:}$v.inputtime|date_format:'%Y-%m-%d'{/yun}</span>
+                  <span class="job_news_list_span job_w80"><a href="javascript:void(0)" onclick="layer_del('确定将该用户移除黑名单？', 'index.php?c=blacklist&act=del&id={yun:}$v.id{/yun}'); ">取消屏蔽</a></span>
+                 </div>
+           
+            {yun:}foreachelse{/yun}
+           <div class="msg_no">没有被您屏蔽记录。</div>
+            {yun:}/foreach{/yun}
+              </div>
+        </div>
+			{yun:}if $rows{/yun}
+			<div class="com_Release_job_bot"> <span class="com_Release_job_qx"><input id='checkAll'  type="checkbox" onclick='m_checkAll(this.form)'class="com_Release_job_qx_check">  全选</span>
+				<INPUT class="c_btn_02" type="button" name="subdel" value="批量删除" onclick="return really('delid[]');"> 
+			</div>
+			<div class="diggg fltR ">{yun:}$pagenav{/yun}</div>
+			{yun:}/if{/yun}
+		   </form>
+        </div>
+     
+    </div>
+  </div>
+</div>
+</div> </div>  
+{yun:}include file="$comstyle/footer.htm"{/yun}

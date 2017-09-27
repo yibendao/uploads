@@ -1,0 +1,413 @@
+<!DOCtYPE html PUBLIC "-//W3C//DtD XHtML 1.0 transitional//EN" "http://www.w3.org/tR/xhtml1/DtD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>{yun:}$title{/yun}</title>
+<meta name=keywords content="{yun:}$keywords{/yun}"/>
+<meta name=description content="{yun:}$description{/yun}"/>
+<link rel="stylesheet" href="{yun:}$resumestyle{/yun}/css/new_resume.css" type="text/css"/>
+</head>
+<body class="resume_bg_c">
+<div class="yun_resume_content"> 
+  {yun:}if $smarty.get.see!=member && $smarty.get.see!=userd{/yun}
+  
+  <div class="yun_resume_header">
+    <div class="yun_resume_logo"> <a href="{yun:}$config.sy_weburl{/yun}"><img src="{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_logo{/yun}" class="png" style=" border:none;"></a> </div>
+    <div class="yun_resume_logo_zt"> 编号：<span class="yun_resume_logo_zt_n">{yun:}$Info.id{/yun}</span> <em class="yun_resume_logo_zt_list"> 简历更新：<span class="yun_resume_logo_zt_n">{yun:}$Info.lastupdate{/yun} </span> </em> 浏览：<span class="yun_resume_logo_zt_n"><script language="javascript" src="{yun:}url m=resume c=show a=GetHits id='`$Info.id`'{/yun}"></script>次 </span> </div>
+  </div>
+  
+  {yun:}/if{/yun}
+  
+  <div class="yun_resume_box"> 
+    
+    <div class="yun_resume_info">
+      <div class="yun_resume_name">{yun:}if $Info.m_status=="1"{/yun}{yun:}$Info.name{/yun}{yun:}else{/yun}{yun:}$Info.username_n{/yun}{yun:}/if{/yun}  
+	  {yun:}if $UserMember.source==6 && $UserMember.claim==0 && $UserMember.email!=""{/yun}
+	  <a class="myresume_rl " href="javascript:void(0);" onClick="claim('{yun:}url m=ajax c=claim uid=$Info.uid{/yun}')">认领</a>
+	  {yun:}/if{/yun}
+ </div>
+      <div class="yun_resume_p">{yun:}$Info.sex{/yun}<span class="yun_resume_info_line">|</span>{yun:}if $Info.age{/yun}{yun:}$Info.age{/yun}岁<span class="yun_resume_info_line">|</span>{yun:}/if{/yun}{yun:}if $Info.living{/yun}{yun:}$Info.living{/yun} <span class="yun_resume_info_line">|</span>{yun:}/if{/yun}{yun:}if $Info.useredu{/yun}{yun:}$Info.useredu{/yun}学历<span class="yun_resume_info_line">|</span>{yun:}/if{/yun}{yun:}if $Info.exp{/yun}{yun:}$Info.user_exp{/yun}经验{yun:}/if{/yun}</div>
+ <div class="yun_resume_tel">
+ {yun:}if $Info.basic_info=='1'{/yun}
+<div class="one_vita_Basic_info_c">
+{yun:}if $Info.user_marriage{/yun}<span class="one_vita_Identity">{yun:}$Info.user_marriage{/yun}</span>  
+<span class="yun_resume_info_line">|</span>{yun:}/if{/yun}
+{yun:}if $Info.domicile{/yun}<span class="one_vita_Identity">户籍：{yun:}$Info.domicile{/yun} </span>  <span class="yun_resume_info_line">|</span>{yun:}/if{/yun}
+{yun:}if $Info.weight||$Info.height{/yun}<span class="one_vita_Identity">
+{yun:}if $Info.height{/yun}{yun:}$Info.height{/yun}cm{yun:}/if{/yun}
+{yun:}if $Info.weight&&$Info.height{/yun}/{yun:}/if{/yun}
+{yun:}if $Info.weight{/yun} {yun:}$Info.weight{/yun}kg{yun:}/if{/yun} </span> <span class="yun_resume_info_line">|</span>
+{yun:}/if{/yun}    
+{yun:}if $Info.nationality{/yun} <span class="one_vita_Identity">{yun:}$Info.nationality{/yun}</span>{yun:}/if{/yun}   
+</div>
+{yun:}/if{/yun}
+
+</div>
+<div class="yun_resume_photo_bg"></div>
+      <div class="yun_resume_photo"><img src="{yun:}$Info.resume_photo{/yun}" onerror="showImgDelay(this,'{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_member_icon{/yun}',2);" width="80" height="100"> </div>
+    </div>
+    
+    
+    <div class="yun_resume_job_intention">
+      <div class="yun_resume_h1"><span class="yun_resume_h1_s"><i class="yun_resume_h1_icon yun_resume_h1_iconyx"></i>求职意向</span></div>
+      <ul class="yun_resume_job_intention_list ">
+                <li class="yun_resume_job_intention_list_end">期望从事职位：
+				{yun:}foreach from=$Info.expectjob key=key item=v{/yun}
+				{yun:}if $key<5{/yun}
+				<span class="resume_job_tag"><i class="resume_job_tag_icon"></i>{yun:}$v{/yun}</span>
+				{yun:}/if{/yun}
+				{yun:}/foreach{/yun}
+				</li>
+                <li>期望从事行业：{yun:}$Info.hy{/yun}</li>
+        <li>工作地点：{yun:}$Info.city_one{/yun} {yun:}$Info.city_two{/yun} {yun:}$Info.city_three{/yun}</li>
+        <li>期望薪资：{yun:}if $Info.maxsalary&&$Info.minsalary{/yun}￥{yun:}$Info.minsalary{/yun}-{yun:}$Info.maxsalary{/yun}{yun:}else if $Info.minsalary{/yun}￥{yun:}$Info.minsalary{/yun}以上{yun:}else{/yun}面议{yun:}/if{/yun}</li>
+        <li>到岗时间：{yun:}$Info.report{/yun}</li>
+        <li>求职状态：{yun:}$Info.jobstatus{/yun}</li>
+        <li>期望工作性质：{yun:}$Info.type{/yun}</li>
+
+      </ul>
+    </div>
+    {yun:}if is_array($Info.user_work) && !empty($Info.user_work){/yun}
+    
+    <div class="yun_resume_joblist">
+      <div class="yun_resume_h1"><span class="yun_resume_h1_s"><i class="yun_resume_h1_icon yun_resume_h1_iconjl"></i>工作经历</span>
+      <span class="yun_resume_jobtime">平均工作时长：{yun:}$Info.avghourInfo{/yun}</span></div>
+      <ul class="yun_resume_tabulation">
+      {yun:}foreach item=one from=$Info.user_work{/yun}
+        <li class="yun_resume_exp_list">
+          <div class="yun_resume_exp_timt">{yun:}$one.sdate|date_format:"%Y.%m"{/yun}-{yun:}if $one.edate{/yun}{yun:}$one.edate|date_format:"%Y.%m"{/yun}{yun:}else{/yun}至今{yun:}/if{/yun}</div>
+          <div class="yun_resume_exp_r">
+            <div class="yun_resume_exp_name">{yun:}$one.name{/yun}<span class="yun_resume_exp_name_job">{yun:}$one.title{/yun}</span></div>
+            <div class="yun_resume_exp_p">{yun:}$one.content{/yun}</div>
+          </div>
+        </li>
+        {yun:}/foreach{/yun}
+      </ul>
+    </div>
+    {yun:}/if{/yun}
+    {yun:}if is_array($Info.user_edu) && !empty($Info.user_edu){/yun}
+   
+    <div class="yun_resume_joblist">
+      <div class="yun_resume_h1"><span class="yun_resume_h1_s"><i class="yun_resume_h1_icon yun_resume_h1_iconjy"></i>教育经历</span></div>
+      <ul class="">
+      {yun:}foreach item=one from=$Info.user_edu{/yun}
+        <li class="yun_resume_exp_list ">
+          <div class="yun_resume_exp_timt">{yun:}$one.sdate|date_format:"%Y.%m"{/yun}-{yun:}$one.edate|date_format:"%Y.%m"{/yun}</div>
+          <div class="yun_resume_exp_r">
+            <div class="yun_resume_exp_name">{yun:}$one.name{/yun}<span class="yun_resume_exp_name_job">{yun:}$one.title{/yun}</span></div>
+            {yun:}if $one.education_n || $one.specialty{/yun}<div class="yun_resume_exp_p">{yun:}$one.education_n{/yun}学历 <span class="yun_resume_exp_name_zy">{yun:}$one.specialty{/yun}专业</span></div>{yun:}/if{/yun}
+          </div>
+        </li>
+        {yun:}/foreach{/yun}
+      </ul>
+    </div>
+    {yun:}/if{/yun}
+    {yun:}if is_array($Info.user_tra) && !empty($Info.user_tra){/yun}
+    
+    <div class="yun_resume_joblist">
+      <div class="yun_resume_h1"><span class="yun_resume_h1_s"><i class="yun_resume_h1_icon yun_resume_h1_iconpx"></i>培训经历</span></div>
+      <ul class="">
+      {yun:}foreach item=one from=$Info.user_tra{/yun}
+        <li class="yun_resume_exp_list  ">
+          <div class="yun_resume_exp_timt">{yun:}$one.sdate|date_format:"%Y.%m"{/yun} - {yun:}$one.edate|date_format:"%Y.%m"{/yun} </div>
+          <div class="yun_resume_exp_r ">
+            <div class="yun_resume_exp_name">{yun:}$one.name{/yun}<span class="yun_resume_exp_name_job">{yun:}$one.title{/yun}</span></div>
+            <div class="yun_resume_exp_p">{yun:}$one.content{/yun} </div>
+          </div>
+        </li>
+        {yun:}/foreach{/yun}
+      </ul>
+    </div>
+    {yun:}/if{/yun}
+	{yun:}if $Info.m_status=="1"{/yun}
+    {yun:}if is_array($Info.user_skill) && !empty($Info.user_skill){/yun}
+    
+    <div class="yun_resume_joblist">
+      <div class="yun_resume_h1"><span class="yun_resume_h1_s"><i class="yun_resume_h1_icon yun_resume_h1_iconjn"></i>职业技能</span></div>
+      <ul class="resume_skill">
+      {yun:}foreach item=one from=$Info.user_skill{/yun}
+        <li class=""> <i class="resume_skill_icon"></i>   <div  class=" "> 技能名称：<span class="resume_table_blod">{yun:}$one.name{/yun}</span> <span class="yun_resume_exp_name_job">掌握时间：{yun:}$one.longtime{/yun}年</span></div>
+        {yun:}if $one.pic{/yun}
+        <div class="">技能证书：<img src="{yun:}$config.sy_weburl{/yun}/{yun:}$one.pic{/yun}" width="95" height="70"></div> 
+        {yun:}/if{/yun}
+        </li>
+      {yun:}/foreach{/yun}
+      </ul>
+    </div>
+    {yun:}/if{/yun}
+	{yun:}/if{/yun}
+    {yun:}if is_array($Info.user_xm) && !empty($Info.user_xm){/yun}
+    
+    <div class="yun_resume_joblist">
+      <div class="yun_resume_h1"><span class="yun_resume_h1_s"><i class="yun_resume_h1_icon yun_resume_h1_iconxm"></i>项目经验</span></div>
+      <ul class="">
+      {yun:}foreach item=one from=$Info.user_xm{/yun}
+        <li class="yun_resume_exp_list ">
+          <div class="yun_resume_exp_timt">{yun:}$one.sdate|date_format:"%Y.%m"{/yun} - {yun:}$one.edate|date_format:"%Y.%m"{/yun}</div>
+          <div class="yun_resume_exp_r">
+            <div class="yun_resume_exp_name">{yun:}$one.name{/yun}<span class="yun_resume_exp_name_job">{yun:}$one.title{/yun}</span></div>
+            <div class="yun_resume_exp_p"> {yun:}$one.content{/yun} </div>
+          </div>
+        </li>
+        {yun:}/foreach{/yun}
+      </ul>
+    </div>
+    {yun:}/if{/yun}
+                 
+       {yun:}if is_array($Info.user_show) && !empty($Info.user_show){/yun}
+       <div class="yun_resume_joblist">
+      <div class="yun_resume_h1"><span class="yun_resume_h1_s"><i class="yun_resume_h1_icon yun_resume_h1_iconry"></i>我的作品</span></div>
+            <div class="fairs_introduction_p" >
+        <ul class="fairs_introduction_img" id="rolling_img1">
+        {yun:}foreach item=v from=$Info.user_show{/yun}
+            <li>
+                <a class="image_gall" href="{yun:}$config.sy_weburl{/yun}/{yun:}$v.picurl{/yun}">
+                    <img src="{yun:}$config.sy_weburl{/yun}/{yun:}$v.picurl{/yun}" width="210" height="153" />
+                </a>
+            </li>
+		{yun:}/foreach{/yun}
+        </ul>
+    </div>   
+</div>
+
+            {yun:}/if{/yun} 
+    {yun:}if is_array($Info.user_other) && !empty($Info.user_other){/yun}
+    
+    <div class="yun_resume_joblist">
+      <div class="yun_resume_h1"><span class="yun_resume_h1_s"><i class="yun_resume_h1_icon yun_resume_h1_iconqt"></i>其他信息</span></div>
+      <ul class="resume_skill">
+      {yun:}foreach item=one from=$Info.user_other{/yun}
+        <li class=""> <i class="resume_skill_icon"></i>标题：<span class="resume_table_blod">{yun:}$one.name{/yun}</span>
+          <div class="yun_resume_exp_p">{yun:}$one.content{/yun}</div>
+        </li>
+        {yun:}/foreach{/yun} 
+      </ul>
+    </div>
+    {yun:}/if{/yun} 
+    {yun:}if !empty($Info.description){/yun}
+    
+    <div class="yun_resume_joblist yun_resume_joblist_mt20">
+      <div class="yun_resume_h1"><span class="yun_resume_h1_s"><i class="yun_resume_h1_icon yun_resume_h1_iconpj"></i>自我评价</span></div>
+      <ul class="resume_skill">
+        <li class=""><i class="resume_skill_icon"></i>
+          <div class="yun_resume_exp_p">{yun:}$Info.description{/yun}</div>
+        </li>
+         {yun:}if $Info.arrayTag{/yun}
+		 <li class=""><i class="resume_skill_icon"></i>
+          <div class="yun_resume_exp_p">
+		  {yun:}foreach from=$Info.arrayTag item=v{/yun}
+		  <span class="resume_user_bq">{yun:}$v{/yun}</span>
+		  {yun:}/foreach{/yun}          
+		  </div>
+        </li>
+        {yun:}/if{/yun}
+      </ul>
+    </div>
+    {yun:}/if{/yun}
+     {yun:}if $Info.doc{/yun}
+       
+    <div class="yun_resume_joblist yun_resume_joblist_mt20">
+      <div class="yun_resume_h1"><span class="yun_resume_h1_s"><i class="yun_resume_h1_icon yun_resume_h1_iconpj"></i>简历内容</span></div>
+      
+          <div class="yun_resume_zt_p">{yun:}$Info.user_doc.doc{/yun}</div>
+       
+    </div>
+       {yun:}/if{/yun}
+   
+       
+    <div class="yun_resume_joblist yun_resume_joblist_mt20">
+      <div class="yun_resume_h1"><span class="yun_resume_h1_s"><i class="yun_resume_h1_icon yun_resume_h1_iconlx"></i>联系方式</span></div>
+      {yun:}if $Info.m_status=="1"{/yun}
+
+	{yun:}if $Info.telphone{/yun}
+    <div class="resume_Intention"><i class="one_vita_Intention_i one_vita_red"></i>联系手机：{yun:}image number=$Info.telphone uid=$Info.uid action=telphone width=200{/yun}</div>
+	{yun:}/if{/yun}
+	
+	{yun:}if $Info.telhome{/yun}
+    <div class="resume_Intention"><i class="one_vita_Intention_i one_vita_red"></i>联系座机：{yun:}image number=$Info.telhome  uid=$Info.uid action=telhome width=200{/yun} </div>        
+	{yun:}/if{/yun}
+
+	{yun:}if $Info.email{/yun}
+    <div class="resume_Intention "><i class="one_vita_Intention_i one_vita_red"></i>电子邮箱：{yun:}$Info.email{/yun} </div>
+	{yun:}/if{/yun}
+
+	{yun:}if $Info.homepage{/yun}
+
+    <div class="resume_Intention"><i class="one_vita_Intention_i one_vita_red"></i>个人主页：{yun:}$Info.homepage{/yun}</div>
+	{yun:}/if{/yun}
+    {yun:}if $Info.qq{/yun}
+	<div class="resume_Intention"><i class="one_vita_Intention_i one_vita_red"></i>联系Q Q：{yun:}$Info.qq{/yun}</div>
+   {yun:}/if{/yun}
+	{yun:}if $Info.address{/yun}
+    <div class="resume_Intention "><i class="one_vita_Intention_i one_vita_red"></i>详细地址：{yun:}$Info.address|mb_substr:0:16:'gbk'{/yun}</div>
+	{yun:}/if{/yun}
+    
+
+    {yun:}if $Info.idcard{/yun}<div class="one_vita_Intention "><i class="one_vita_Intention_i one_vita_red"></i><span>身份证号：</span>
+    <span class="one_vita_Identity">
+    {yun:}image uid=$Info.uid action=idcard width=180{/yun}
+    {yun:}if $Info.idcard_status==1 && $Info.idcard{/yun}<img src="{yun:}$config.sy_weburl{/yun}/app/template/resume/images/sfrz.png" title="身份已认证">已认证{yun:}/if{/yun}
+    </span> </div>
+    {yun:}/if{/yun} 
+	{yun:}if $Info.wxewm{/yun}
+    <div class="two_vita_ewm_box"><img src=".{yun:}$Info.wxewm{/yun}" width="120" height="120"><div class="two_vita_ewm_box_p">个人二维码</div></div>
+    {yun:}/if{/yun}
+   {yun:}else{/yun}
+   <div class="re_touch">{yun:}$Info.link_msg{/yun}</div>
+   {yun:}/if{/yun}
+    </div>
+
+	 
+	{yun:}if $Info.user_jy.annex{/yun}
+    <div class="yun_resume_joblist yun_resume_joblist_mt20">
+      <div class="yun_resume_h1"><span class="yun_resume_h1_s"><i class="yun_resume_h1_icon yun_resume_h1_iconfj"></i>简历附件</span></div>
+       
+   <div class="re_touch fl">{yun:}if $Info.m_status=="1"{/yun}<a href="{yun:}$config.sy_weburl{/yun}{yun:}$Info.user_jy.annex{/yun}">{yun:}$Info.user_jy.annexname{/yun}</a>{yun:}else{/yun}<a >{yun:}$Info.user_jy.annexname{/yun}</a>(请先下载简历！){yun:}/if{/yun}</div> 
+    </div>
+	{yun:}/if{/yun}
+  </div>
+
+</div>
+ 
+{yun:}if $smarty.get.see!=member && $smarty.get.see!=used{/yun}
+<div class="yun_resume_operation" id="operation_box">
+  <div class="yun_resume_operation_box"> 
+  <div class="yun_resume_operation_box_h1">操作区</div>
+  {yun:}if is_array($talent_pool){/yun}
+    <div class="vita_Opera_cz_list">
+    <i class="vita_Opera_cz_list_icon vita_Opera_cz_list_icon_sc"></i>
+      <input class="vita_btn_1 yun_resume_cz_sub yun_resume_cz_sub_cor"type="button" onClick="layer.msg('该简历已加入到人才库！',2,8);" value="已收藏简历">
+      
+    </div>
+    {yun:}else{/yun}
+    <div class="vita_Opera_cz_list">
+        <i class="vita_Opera_cz_list_icon vita_Opera_cz_list_icon_sc"></i>
+      <input class="vita_btn_1 yun_resume_cz_sub" type="button" onClick="add_user_talent('{yun:}$Info.id{/yun}','{yun:}$usertype{/yun}')" value="收藏简历">
+    </div>
+    {yun:}/if{/yun}
+    {yun:}if $usertype==2{/yun}
+    {yun:}if $usermsgnum{/yun}
+    <div class="vita_Opera_cz_list">
+        <i class="vita_Opera_cz_list_icon vita_Opera_cz_list_icon_yq"></i>
+      <input class="vita_btn_1 yun_resume_cz_sub yun_resume_cz_sub_cor" type="button" onClick="layer.msg('该简历已邀请面试！',2,8);" value="已邀请面试">
+    </div>
+    {yun:}else{/yun}
+    <div class="vita_Opera_cz_list">
+       <i class="vita_Opera_cz_list_icon vita_Opera_cz_list_icon_yq"></i>
+      <input class="vita_btn_1 sq_resume yun_resume_cz_sub" type="button" value="邀请面试 " name="submit" username="{yun:}$Info.name{/yun}" eid="" uid="{yun:}$Info.uid{/yun}">
+    </div>
+    {yun:}/if{/yun}
+    {yun:}else{/yun}
+    {yun:}if $uid{/yun}
+    <div class="vita_Opera_cz_list">
+        <i class="vita_Opera_cz_list_icon vita_Opera_cz_list_icon_yq"></i>
+      <input class="vita_btn_1 yun_resume_cz_sub" onClick="layer.msg('只有企业用户，才可以邀请！',2,8);" type="button" value="邀请面试 ">
+    </div>
+    {yun:}else{/yun}
+    <div class="vita_Opera_cz_list">
+            <i class="vita_Opera_cz_list_icon vita_Opera_cz_list_icon_yq"></i>
+      <input class="vita_btn_1 yun_resume_cz_sub" onClick="showlogin('2');" type="button" value="邀请面试 ">
+    </div>
+    {yun:}/if{/yun}
+    {yun:}/if{/yun}
+   <div class="vita_Opera_cz_list">
+    <i class="vita_Opera_cz_list_icon vita_Opera_cz_list_icon_xz"></i>
+  {yun:}if $uid==$Info.uid{/yun}
+  <input class="vita_btn_1 yun_resume_cz_sub" onClick="for_link('{yun:}$Info.id{/yun}','{yun:}url m=ajax c=for_link{/yun}','{yun:}url m=ajax c=resume_word id=$Info.id{/yun}');" type="button" name="submit" value="下载简历 ">
+  {yun:}/if{/yun}
+  {yun:}if $usertype==2 ||$uid==$Info.uid{/yun}
+  {yun:}if $jobnum{/yun}
+  {yun:}if $Info.downresume==1{/yun}
+      <a href="{yun:}url m=ajax c=resume_word id=$Info.id{/yun}" class="vita_btn_1 yun_resume_cz_sub">下载简历</a>
+      {yun:}else{/yun}
+        <input class="vita_btn_1 yun_resume_cz_sub" onClick="for_link('{yun:}$Info.id{/yun}','{yun:}url m=ajax c=for_link{/yun}','{yun:}url m=ajax c=resume_word id=$Info.id{/yun}');" type="button" name="submit" value="下载简历 ">
+        {yun:}/if{/yun}
+    {yun:}else{/yun}
+       <input class="vita_btn_1 yun_resume_cz_sub" onClick="addjob();" type="button" name="submit" value="下载简历 ">             
+    {yun:}/if{/yun}
+    {yun:}else{/yun}
+   	 {yun:}if $uid{/yun}
+       <input class="vita_btn_1 yun_resume_cz_sub" onClick="layer.msg('只有企业用户，才可以下载！',2,8);" type="button" name="submit" value="下载简历 ">
+       {yun:}else{/yun}
+       <input class="vita_btn_1 yun_resume_cz_sub" onClick="showlogin('2');" type="button" name="submit" value="下载简历 ">
+       {yun:}/if{/yun}
+    {yun:}/if{/yun}
+    </div>
+    <div class="vita_Opera_cz_list">
+        <i class="vita_Opera_cz_list_icon vita_Opera_cz_list_icon_dy"></i>
+      <input class="vita_btn_1 vita_red yun_resume_cz_sub" type="button" onClick="dayin()" value="打印简历 " name="button">
+    </div>
+    <div class="vita_Opera_cz_list">
+        <i class="vita_Opera_cz_list_icon vita_Opera_cz_list_icon_fx"></i>
+      <input class="vita_btn_1 vita_red yun_resume_cz_sub" type="button" onClick="javascript:window.location.href='{yun:}url m=resume c=resumeshare id='`$Info.id`'{/yun}'" value="分享简历" name="submit">
+    </div>
+    <input type="hidden" value="{yun:}$Info.id{/yun}" id="eid">
+     
+  </div>
+  
+</div>
+
+<div id='for_link'  class="none"  style="float:left;width:350px">
+	<div class="city_1" style="padding-top:5px;"></div>
+	<div class="btn" style="float: left; padding-bottom: 20px; padding-top: 10px; width: 100%; text-align: center;">  
+       <a href="{yun:}url m=ajax c=resume_word id=$Info.id{/yun}" class="resume_bthxz">下载简历</a>
+	</div>
+    
+</div>
+{yun:}/if{/yun} 
+
+{yun:}if $smarty.get.see==member{/yun} 
+
+
+<div class="expext_yl_box_bth"><a href="javascript:;" onClick="settemplate('确定使用该模版？', '{yun:}url m=ajax c=settpl id=2 eid=$Info.id{/yun}');" class="expext_yl_box_sub">使用该模板</a></div>
+{yun:}/if{/yun} 
+
+<div id="bg"></div>
+<a name="resume"></a> 
+<div class="clear"></div>
+{yun:}if $smarty.get.see!=member && $smarty.get.see!=userd{/yun}
+<div class="yun_resume_foot"><a href="{yun:}$config.sy_weburl{/yun}" target="_blank">{yun:}$config.sy_webname{/yun}</a> &copy; 版权所有 {yun:}$config.sy_weburl{/yun}  本网招聘及简历信息等 ,未经书面授权不得转载 <br />
+<div id="uclogin" class="none"></div>
+</div>
+{yun:}/if{/yun}
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/public.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script>
+<script src="{yun:}$style{/yun}/js/resume.js" language="javascript"></script>
+<script type="text/javascript" src="{yun:}$config.sy_weburl{/yun}/js/jscolor/jscolor.js"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/popImage/jquery.popImage.mini.js" language="javascript"></script>
+<script src="{yun:}$style{/yun}/js/ScrollPic.js" language="javascript"></script>
+<script>
+var integral_pricename='{yun:}$config.integral_pricename{/yun}'; 
+var weburl="{yun:}$config.sy_weburl{/yun}";
+var downurl="{yun:}url m=ajax c=down_resume{/yun}";
+$(function(){
+	$("a.image_gall").popImage();
+})
+<!--//--><![CDATA[//><!--
+var li_num=$("#rolling_img1 li").length;
+if(li_num>3){//如果图片数量不足，就不执行切换
+	var scrollPic_02 = new ScrollPic();
+	scrollPic_02.scrollContId   = "rolling_img1"; //内容容器ID
+	scrollPic_02.arrLeftId      = "LeftArr";//左箭头ID
+	scrollPic_02.arrRightId     = "RightArr"; //右箭头ID
+	scrollPic_02.frameWidth     = 680;//显示框宽度
+	scrollPic_02.pageWidth      = 231; //翻页宽度
+	scrollPic_02.speed          = 10; //移动速度(单位毫秒，越小越快)
+	scrollPic_02.space          = 10; //每次移动像素(单位px，越大越快)
+	scrollPic_02.autoPlay       = true; //自动播放
+	scrollPic_02.autoPlayTime   = 2; //自动播放间隔时间(秒)
+	scrollPic_02.initialize(); //初始化
+}
+//--><!]]> 
+</script>
+<!--[if IE 6]>
+<script src="{yun:}$config.sy_weburl{/yun}/js/png.js"></script>
+<script>
+DD_belatedPNG.fix('.png,.yun_resume_photo_bg,.yun_resume_h1_icon,.yun_resume_jobtime,.vita_Opera_cz_list_icon');
+</script>
+<![endif]-->
+{yun:}include file="$tplstyle/public_search/login.htm"{/yun} 
+{yun:}include file="$tplstyle/public_search/resume_include.htm"{/yun}
+</body>
+</html>

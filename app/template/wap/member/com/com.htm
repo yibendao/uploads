@@ -1,0 +1,98 @@
+{yun:}include file="$wapstyle/member/cheader.htm"{/yun} 
+<section class="wap_member">
+<div class="wap_member_combox">
+<div class="wap_member_rReceive_t">尊敬的企业用户：</div>
+<div class="">您当前是：<font color="#f60">{yun:}if $statis.vip_etime < time() && $statis.vip_etime != 0{/yun}
+			 		{yun:}if $config.com_vip_done == 0{/yun}
+			 			非会员 
+					{yun:}else if $config.com_vip_done == 1{/yun}
+			 			{yun:}$statis.rating_name{/yun}
+			 		{yun:}/if{/yun}
+			 	{yun:}else{/yun}
+					{yun:}$statis.rating_name{/yun}
+			 	{yun:}/if{/yun}</font><a href="index.php?c=rating" class="wap_member_combox_a">查看特权</a></div>
+<div class="">服务期限为：{yun:}$statis.vip_stime|date_format:'%Y-%m-%d'{/yun} - {yun:}if $statis.vip_etime==0{/yun}永久{yun:}else{/yun}{yun:}$statis.vip_etime|date_format:'%Y-%m-%d'{/yun}{yun:}/if{/yun}</div>
+</div>
+<div class="wap_member_comjf">
+<ul class="wap_member_comjf_list">
+<li><div class="wap_member_comjf_n">{yun:}$statis.integral{/yun}{yun:}$config.integral_priceunit{/yun}</div>可用{yun:}$config.integral_pricename{/yun}</li>
+<li> <div class="wap_member_comjf_n">{yun:}$integral{/yun}{yun:}$config.integral_priceunit{/yun}</div>已消费{yun:}$config.integral_pricename{/yun}</li>
+</ul>
+<div class="wap_member_comcz"><a href="index.php?c=consume&type=1" style="width:49%">明细</a><a href="index.php?c=pay" class="wap_member_comcz_k" style="width:49%">充值</a> </div>
+
+</div>
+<div class="wap_member_comsytc">
+<ul class="wap_member_comsytc_list">
+<li class="wap_member_comsytc_list_b1">
+<div class="wap_member_comsytc_list_n">{yun:}if $statis.rating_type=='2'{/yun}不限{yun:}else{/yun}{yun:}$statis.job_num{/yun}{yun:}/if{/yun}</div>
+<div class="wap_member_comsytc_list_p">可发布职位 </div>
+<div class="">套餐数：{yun:}if $statis.rating_type=='2'{/yun}不限{yun:}else{/yun}{yun:}$rating.job_num{/yun}{yun:}/if{/yun}</div>
+<div class="">
+{yun:}if $rating.job_num-$statis.job_num>=0{/yun}
+	已发布：{yun:}$rating.job_num-$statis.job_num{/yun}
+{yun:}else if $rating.job_num-$statis.job_num<0{/yun}
+	增值服务：{yun:}$statis.job_num-$rating.job_num{/yun}
+{yun:}/if{/yun}
+</div>
+  <a href="javascript:void(0)" onclick="jobadd_url('{yun:}$addjobnum{/yun}','{yun:}$config.integral_job{/yun}','{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}','job','{yun:}$statis.integral{/yun}');" class="wap_member_comsytc_list_bth">发布职位</a>
+</li>
+<li class="wap_member_comsytc_list_b2">
+<div class="wap_member_comsytc_list_n">{yun:}if $statis.rating_type=='2'{/yun}不限{yun:}else{/yun}{yun:}$statis.down_resume{/yun} {yun:}/if{/yun}</div>
+<div class="wap_member_comsytc_list_p"> 可下载简历</div>
+<div class="">套餐数：{yun:}if $statis.rating_type=='2'{/yun}不限{yun:}else{/yun}{yun:}$rating.resume{/yun}{yun:}/if{/yun}</div>
+<div class="">
+{yun:}if $rating.resume-$statis.down_resume>=0{/yun}
+	已下载：{yun:}$rating.resume-$statis.down_resume{/yun}
+{yun:}else if $rating.resume-$statis.down_resume<0{/yun}
+	增值服务:{yun:}$statis.down_resume-$rating.resume{/yun}
+{yun:}/if{/yun}
+</div>
+<a href="index.php?c=down" class="wap_member_comsytc_list_bth">查看</a>
+</li>
+<li class="wap_member_comsytc_list_b3">
+<div class="wap_member_comsytc_list_n">{yun:}if $statis.rating_type=='2'{/yun}不限{yun:}else{/yun}{yun:}$statis.invite_resume{/yun} {yun:}/if{/yun}</div>
+ <div class="wap_member_comsytc_list_p">可邀请面试</div>
+<div class="">套餐数：{yun:}if $statis.rating_type=='2'{/yun}不限{yun:}else{/yun}{yun:}$rating.interview{/yun}{yun:}/if{/yun}</div>
+<div class="">
+{yun:}if $rating.interview-$statis.invite_resume>=0{/yun}
+	已邀请：{yun:}$rating.interview-$statis.invite_resume{/yun}
+{yun:}else if $rating.interview-$statis.invite_resume<0{/yun}
+	增值服务：{yun:}$statis.invite_resume-$rating.interview{/yun}
+{yun:}/if{/yun}
+</div>
+<a href="{yun:}url m=wap c=resume{/yun}" class="wap_member_comsytc_list_bth">搜人才</a>
+</li>
+</ul>
+</div>
+<ul class="wap_member_comsy">
+<li>
+<div class="wap_member_comsy_tit">刷新职位</div>
+<div class="wap_member_comsy_p wap_member_comsy_p1">套餐数：{yun:}if $statis.rating_type=='2'{/yun}会员有效期内不限{yun:}else{/yun}{yun:}$rating.breakjob_num{/yun}{yun:}/if{/yun}</div>
+<div class="wap_member_comsy_p"><i class="com_body_pay_list_sl_iocn"></i>
+{yun:}if $rating.breakjob_num-$statis.breakjob_num >= 0{/yun}
+	已使用：{yun:}$rating.breakjob_num-$statis.breakjob_num{/yun}
+{yun:}else if $rating.breakjob_num-$statis.breakjob_num < 0{/yun}
+	增值服务：{yun:}$statis.breakjob_num-$rating.breakjob_num{/yun}
+{yun:}/if{/yun}
+</div>
+<div class="wap_member_comsy_p"><i class="com_body_pay_list_sl_iocn com_body_pay_list_sl_iocn_sy"></i>剩余：{yun:}if $statis.rating_type=='2'{/yun}会员有效期内不限{yun:}else{/yun}{yun:}$statis.breakjob_num{/yun}{yun:}/if{/yun}</div>
+</li>
+<li>
+<div class="wap_member_comsy_tit">发布兼职职位</div>
+<div class="wap_member_comsy_p wap_member_comsy_p1">套餐数：{yun:}if $statis.rating_type=='2'{/yun}会员有效期内不限{yun:}else{/yun}{yun:}$rating.part_num{/yun}{yun:}/if{/yun}</div>
+<div class="wap_member_comsy_p"><i class="com_body_pay_list_sl_iocn"></i>
+{yun:}if $rating.part_num-$statis.part_num>=0{/yun}
+	已使用：{yun:}$rating.part_num-$statis.part_num{/yun}
+{yun:}else if $rating.part_num-$statis.part_num<0{/yun}
+	增值服务：{yun:}$statis.part_num-$rating.part_num{/yun}
+{yun:}/if{/yun}
+</div>
+<div class="wap_member_comsy_p"><i class="com_body_pay_list_sl_iocn com_body_pay_list_sl_iocn_sy"></i>剩余：{yun:}if $statis.rating_type=='2'{/yun}会员有效期内不限{yun:}else{/yun}{yun:}$statis.part_num{/yun}{yun:}/if{/yun}</div>
+</li>
+
+
+</ul>
+</section>
+</div>
+
+{yun:}include file="$wapstyle/footer.htm"{/yun} 

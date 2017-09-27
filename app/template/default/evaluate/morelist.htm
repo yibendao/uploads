@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>{yun:}$title{/yun}</title>
+<meta name="keywords" content="{yun:}$keywords{/yun}"/>
+<meta name="description" content="{yun:}$description{/yun}"/>
+<link rel="stylesheet" href="{yun:}$style{/yun}/style/css.css" type="text/css"/>
+<link rel="stylesheet" href="{yun:}$style{/yun}/style/evaluate.css" type="text/css"/>
+</head>
+<body>
+{yun:}include file="$tplstyle/header.htm"{/yun}
+<div class="yun_body">
+<div class="yun_content">
+	  <div class="current_Location icon "><div class="fl">您当前的位置：<a href="{yun:}$config.sy_weburl{/yun}">首页</a> > 测评</div></div>
+      <div class="more_list_box">
+       <div class="more_list_box_cont">
+     
+        <div class="more_list_box_content">
+          <div class="more_list_box_content_box">
+       <div class="more_list_box_left">
+         <div class="more_list_box_h1 yun_bg_color"><span class="more_list_box_span">趣味测试分类</span></div>
+        {yun:}foreach from=$group item=v{/yun}
+        	{yun:}if $gid==$v.id{/yun}
+            	<a href="{yun:}url m=evaluate c=morelist gid=$v.id{/yun}" class="more_list_box_a" style="background:#fff url({yun:}$style{/yun}/images/map_icon_job.png) no-repeat 10px 8px; font-weight:bold">{yun:}$v.name{/yun}</a>
+            {yun:}else{/yun}
+            	<a href="{yun:}url m=evaluate c=morelist gid=$v.id{/yun}" class="more_list_box_a">{yun:}$v.name{/yun}</a>     
+            {yun:}/if{/yun}        
+        {yun:}foreachelse{/yun}
+        <div class="cp_ts">目前没有测评分类</div>
+        {yun:}/foreach{/yun}
+       
+       </div>
+        <div class="evaluatemore_right">
+         <ul>
+			{yun:}foreach from=$rows item=v{/yun}
+				<li>
+                 <div class="evaluatemore_img">
+                 <img src="{yun:}$config.sy_weburl{/yun}/{yun:}$v.pic{/yun}" width="110" height="80" onerror="showImgDelay(this,'{yun:}$style{/yun}/images/nopic.gif',2);"/>
+                 </div>
+                   <div class="evaluatemore_rp">
+				<a href="{yun:}url m=evaluate c=exampaper titleid=$v.id gid=$v.keyid{/yun}" title="{yun:}$v.name{/yun}" class="evaluatemore_right_a">{yun:}$v.name{/yun}</a>
+				
+                <div class="evaluatemore_ms">{yun:}$v.description{/yun}</div>
+                <div class="evaluatemore_right_hot">热度：{yun:}$v.visits{/yun}</div>
+                </div>
+                </li>
+			{yun:}foreachelse{/yun}
+            
+            <div class="seachno">
+        <div class="seachno_left"> <img src="{yun:}$style{/yun}/images/search-no.gif" width="144" height="102"></div>
+        <div class="listno-content" style="margin-left:30px;"> <strong>很抱歉，目前没有测评试卷</strong><br>
+         </div>
+      </div>
+			{yun:}/foreach{/yun}
+        </ul>
+          </div>
+         </div>
+		 <div class="clear"></div>
+		 <div class="pages"> {yun:}$pagenav{/yun}</div>
+       </div> 
+       </div> 
+</div>
+</div>
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/public.js" language="javascript"></script>
+<!--[if IE 6]>
+<script src="{yun:}$config.sy_weburl{/yun}/js/png.js"></script>
+<script>
+DD_belatedPNG.fix('.png');
+</script>
+<![endif]--> 
+{yun:}include file="$tplstyle/footer.htm"{/yun}

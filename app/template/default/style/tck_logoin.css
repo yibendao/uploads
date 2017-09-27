@@ -1,0 +1,130 @@
+@charset "gb2312";
+/* CSS Document */
+.none{ display:none;}
+/*µ¯³öµÇÂ¼¿ò*/
+.logoin_tck{width:580px;height:250px; background:#fff; }
+.logoin_tck_left{position:relative;width:370px; float:left;border-right:1px solid #f5f5f5; margin-top:25px; padding-left:25px;}
+.logoin_tck_t_list{width:100%; float:left; margin-top:15px;}
+.logoin_tck_tit{width:60px; float:left; line-height:33px;color:#999; text-align:center}
+.logoin_tck_text{width:198px;height:33px;border:1px solid #d3dcdd;  float:left; overflow:hidden}
+.logoin_tck_text_icon{width:33px; display:inline-block;height:33px; background: url(../images/re.png) no-repeat center center; float:left;}
+.logoin_tck_text_icon_p{background:url(../images/so.png) no-repeat center center;}
+.logoin_tck_text_icon_y{background: url(../images/so.png) no-repeat center center;}
+.logoin_tck_text_t1{width:160px;height:32px; line-height:32px; float:left;color:#999;border:1px solid #fff;}
+.logoin_tck_p{width:258px; padding-top:15px; padding-bottom:15px; float:left}
+.logoin_tck_p_chek{width:13px;height:13px; overflow:hidden; vertical-align:middle; margin-right:5px;}
+.logoin_tck_fot{ float:right;color:#3767b0}
+.logoin_tck_fl{ float:left;color:#948989}
+.logoin_tck_fw{ display:inline-block; float:left; line-height:33px;color:#999}
+.logoin_tck_submit{width:100px;height:40px; background:#3cb0ed;border:none;color:#fff; cursor:pointer}
+.logoin_tck_bth_sub{width:258px;height:43px; background:#0180cf;border:none;color:#fff; font-size:16px; cursor:pointer}
+.logoin_tck_text_yzm{width:120px;}
+.logoin_tck_text_yzm_r{width:; float:left; }
+.logoin_tck_right{width:135px; float:left; margin-top:35px; padding-left:20px; font-size:14px;color:#a09797; text-align:center}
+.logoin_tck_reg{ padding-top:10px; padding-bottom:20px;}
+.logoin_tck_reg a{width:80px;height:28px; line-height:28px; text-align:center;border:1px solid #14c59a; display:block;color:#14c59a; margin:30px auto 0;}
+.logoin_tck_reg a:hover{ background:#14c59a;color:#fff; text-decoration:none}
+.logoin_tck_other{ margin-top:30px;}
+.logoin_tck_other_img{ margin-top:13px;}
+.logoin_tck_other_img a{ display:inline-block;width:35px;height:35px;border:1px solid #ddd;border-radius:50%; text-align:center; margin-right:5px;}
+.logoin_tck_other_img a:hover{border:1px solid #0180cf}
+.logoin_tck_other_img .logoin_tck_other_wx:hover{border:1px solid #39bd04}
+.logoin_tck_other_img .logoin_tck_other_xl:hover{border:1px solid #e5480a}
+.logoin_tck_other_img img{ margin-top:8px;}.Pop-up_logoin_list{width:100%; float:left; margin-top:20px;}
+.interview_inp{width:270px;height:30px; line-height:30px;border:1px solid #ccc;}
+.r_Interview{width:280px; position:relative;padding-left:80px; margin-top:10px;}
+.Interview_span{width:80px; display:inline-block;height:30px; line-height:30px; position:absolute;left:0px;top:0px; text-align:right}
+.Interview_text{width:250px;height:30px; line-height:30px;border:1px solid #ccc}
+.Interview_textarea_text{width:250px;height:80px; line-height:30px;border:1px solid #ccc}
+.Interview_select{width:250px;height:30px; line-height:30px;border:1px solid #ccc}
+.Interview_text_w200{width:200px;}
+.Interview_text_box{width:250px;height:30px; line-height:30px;border:1px solid #ccc; position:relative}
+.Interview_text_box_t{width:100%; text-align:left;height:30px; padding-left:10px; border:none; background:#fff url(../images/sub_bg2.gif) no-repeat 230px center}
+.Interview_text_box_list{ width:250px;position:absolute;left:-1px;top:30px; background:#fff;border:1px solid #ccc;}
+;max-height:160px;_height:expression(this.scrollHeight > 160 ? "160px" : "auto");overflow: auto;
+overflow-x: hidden; background:#fff}
+.Interview_text_box_list li{width:100%;}
+.Interview_text_box_list li a{ width:240px;display:block; padding-left:10px;height: 26px;line-height: 26px;}
+.Interview_text_box_list li a:hover{ background:#bad9f9;color:#333; text-decoration:none}
+.fastlogin_verification{width:200px; float:left}
+.wxcode_login {
+    width: 41px;
+    height: 41px;
+    background-image: url(../images/er.png);
+    background-repeat: no-repeat;
+    position: absolute;
+    right:-14px;
+    top: 1px;
+    cursor: pointer;
+}
+.wxcode_login:hover {
+    width: 41px;
+    height: 41px;
+    background-image: url(../images/er.png);
+    background-repeat: no-repeat;
+    position: absolute;
+    right:-14px;
+    top: 1px;
+    cursor: pointer;
+    background-position:0px -42px;
+}
+.normal_login {
+    width: 41px;
+    height: 41px;
+    background-image: url(../images/er.png);
+    background-repeat: no-repeat;
+    position: absolute;
+    right: -14px;
+    top: 1px;
+    cursor: pointer;
+    background-position: -59px 0px;
+    display: none;
+}
+.normal_login:hover {
+    width: 41px;
+    height: 41px;
+    background-image: url(../images/er.png);
+    background-repeat: no-repeat;
+    position: absolute;
+    right: -14px;
+    top: 1px;
+    cursor: pointer;
+    background-position: -59px -42px;
+    display: none;
+}
+.wxlogintext {
+    margin: 0 auto;
+    width: 100px;
+    height: 100px;
+    padding: 10px;
+    margin-top: 30px;
+    border: 1px #eeeeee solid;
+}
+.wxlogintext img {
+    width: 100px;
+    height: 100px;
+    border: 0px;
+}
+.wxlogintxt {
+    margin: 0 auto;
+    width: 190px;
+    text-align:center;
+    margin-top:20px;
+    height: 36px;
+    line-height: 36px;
+    background-color: #EEEEEE;
+    color: #999999;
+    border-radius: 30px;
+}
+
+
+
+
+
+
+
+
+
+
+
+

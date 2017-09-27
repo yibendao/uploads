@@ -1,0 +1,29 @@
+{yun:}include file="$wapstyle/member/header.htm"{/yun} 
+<div class="main_member_cot_box">
+<div class="wap_member_comp_h1"><span>相似职位</span></div>
+{yun:}foreach item=one from=$job{/yun}
+  <div class="com_member_hr">
+ <div class="com_member_hr_name"> 
+<a href="{yun:}url m=wap c=job a=view id=$one.id{/yun}"  class="wap_member_com_name  com_member_hr_cblue">{yun:}$one.name{/yun}</a>    
+</div>
+ <div class="user_member_box">
+  <div class="com_member_hr_p1"><a href="{yun:}url m=wap c=company a=show id =$one.uid{/yun}">{yun:}$one.com_name{/yun}</A> </div>
+ <div class="com_member_hr_p1"><span class="member_c9">性别：</span>{yun:}if $one.sex{/yun}{yun:}$one.sex{/yun}{yun:}else{/yun}保密{yun:}/if{/yun}&nbsp;&nbsp;&nbsp;{yun:}if $one.edu{/yun}<span class="member_c9">学历：</span><span class="wap_member_msg_p1_cf">{yun:}$comclass_name[$one.edu]{/yun}</span>&nbsp;&nbsp;&nbsp;{yun:}/if{/yun}<span class="member_c9">到岗时间：</span>{yun:}$comclass_name[$one.report]{/yun}</div>
+  <div class="com_member_hr_p1"><span class="member_c9">工作经验：</span>{yun:}$comclass_name[$one.exp]{/yun}&nbsp;&nbsp;&nbsp;<span class="member_c9">月薪：</span><span class="wap_member_msg_p1_cf">{yun:}if $one.minsalary&&$one.maxsalary{/yun}￥{yun:}$one.minsalary{/yun}-{yun:}$one.maxsalary{/yun}{yun:}else if $one.minsalary{/yun}￥{yun:}$one.minsalary{/yun}以上{yun:}else{/yun}面议{yun:}/if{/yun}</span></div>
+  </div>
+<div class="com_member_hr_cz">
+<a class="yun_member_hr_bth">匹配度：{yun:}$one.pre{/yun}%</a>
+<a href="{yun:}url m=wap c=job a=view id=$one.id{/yun}" class="yun_member_hr_bth">查看详情</a>
+</div>
+</div>
+{yun:}foreachelse{/yun}  
+<div class="wap_member_no">
+您还没有相似职位<div><a class="wap_member_no_submit" href="{yun:}url m=wap c=job{/yun}">去搜索相关职位</a></div>
+</div>
+{yun:}/foreach{/yun} 
+</div>
+{yun:}if $job|@count>0{/yun} 
+<div class="pages">{yun:}$pagenav{/yun}</div>
+{yun:}/if{/yun} 
+
+{yun:}include file="$wapstyle/footer.htm"{/yun} 

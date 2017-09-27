@@ -1,0 +1,167 @@
+<div class="left_box">
+  {yun:}if $js_def==2{/yun}
+  <div class="subnav_h1"><span>企业资料</span>  </div>
+  <ul class="left_nav_ul">
+    <li {yun:}if $smarty.get.c=="info"{/yun} class="style01 left_nav_hover"{yun:}else{/yun}class="style01"{yun:}/if{/yun}><span><a href="index.php?c=info" title="基本信息"><i class="com_left_icon com_left_icon_info"></i>基本信息</a></span> </li>
+        <li {yun:}if $smarty.get.c=="uppic"{/yun} class="style01 left_nav_hover"{yun:}else{/yun}class="style08"{yun:}/if{/yun}><span><a href="index.php?c=uppic" title="企业LOGO"><i class="com_left_icon com_left_icon_logo"></i>企业Logo</a></span> </li>
+    <li {yun:}if $smarty.get.c=="map"{/yun} class="style01 left_nav_hover"{yun:}else{/yun}class="style02"{yun:}/if{/yun}><span><a href="index.php?c=map" title="企业地图"><i class="com_left_icon com_left_icon_map"></i>企业地图</a></span> </li>
+    <li {yun:}if $smarty.get.c=="news"{/yun} class="style01 left_nav_hover"{yun:}else{/yun}class="style03"{yun:}/if{/yun}><span><a href="index.php?c=news" title="企业新闻"><i class="com_left_icon com_left_icon_news"></i>企业新闻</a></span> </li>
+    <li {yun:}if $smarty.get.c=="product"{/yun} class="style01 left_nav_hover"{yun:}else{/yun}class="style04"{yun:}/if{/yun}><span><a href="index.php?c=product" title="企业产品"><i class="com_left_icon com_left_icon_cp"></i>企业产品</a></span> </li>
+    <li {yun:}if $smarty.get.c=="show"{/yun} class="style01 left_nav_hover"{yun:}else{/yun}class="style05"{yun:}/if{/yun}><span><a href="index.php?c=show" title="企业环境"><i class="com_left_icon com_left_icon_hj"></i>企业环境</a></span> </li>
+     <li {yun:}if $smarty.get.c=="comtpl"{/yun} class="style01 left_nav_hover"{yun:}else{/yun}class="style09"{yun:}/if{/yun}><span><a href="index.php?c=comtpl" title="模板切换"><i class="com_left_icon com_left_icon_mb"></i>模板切换</a></span></li>
+    <li {yun:}if $smarty.get.c=="binding"{/yun} class="style01 left_nav_hover"{yun:}else{/yun}class="style07"{yun:}/if{/yun}><span><a href="index.php?c=binding"><i class="com_left_icon com_left_icon_bd"></i>账户认证</a></span></li> 
+	 <li {yun:}if $smarty.get.c=="tongji"{/yun} class="style01 left_nav_hover"{yun:}else{/yun}class="style07"{yun:}/if{/yun}><span><a href="index.php?c=tongji"><i class="com_left_icon com_left_icon_fx"></i>招聘分析</a></span></li> 
+  </ul>
+  {yun:}/if{/yun}
+  {yun:}if $js_def==5{/yun}
+    <div class="subnav_h1"><span>人才管理</span>  </div>
+  <ul class="left_nav_ul">
+  {yun:}if $config.com_search==1{/yun}<li {yun:}if $smarty.get.c=="resume"{/yun} class="style01 left_nav_hover"{yun:}else{/yun}class="style06"{yun:}/if{/yun}><span><a href="index.php?c=resume" class="f60"><i class="com_left_icon com_left_icon_search"></i>搜人才<i class="com_icon com_icon_new"></i></a></span></li>{yun:}/if{/yun}
+  <li {yun:}if $smarty.get.c=="hr"||$smarty.get.c=="down"||$smarty.get.c=="talent_pool"||$smarty.get.c=="look_resume"||$smarty.get.c=="record"{/yun} class="style01 left_nav_hover"{yun:}else{/yun}class="style01"{yun:}/if{/yun}><span><a href="index.php?c=hr" title="我的简历"><i class="com_left_icon com_left_icon_jl"></i>我的简历</a></span> </li>
+   <li {yun:}if $smarty.get.c=="invite"{/yun} class="style01 left_nav_hover"{yun:}else{/yun}class="style03"{yun:}/if{/yun}><span><a href="index.php?c=invite" title="已邀请面试的人才"><i class="com_left_icon com_left_icon_yq"></i>面试邀请</a></span> </li>
+     <li {yun:}if $smarty.get.c=="subscribe"{/yun} class="style01 left_nav_hover"{yun:}else{/yun}class="style06"{yun:}/if{/yun}><span><a href="index.php?c=subscribe"><i class="com_left_icon com_left_icon_info"></i>人才订阅</a></span> </li>
+    <li {yun:}if $smarty.get.c=="finder"{/yun} class="style01 left_nav_hover"{yun:}else{/yun}class="style06"{yun:}/if{/yun}><span><a href="index.php?c=finder"><i class="com_left_icon com_left_icon_sq"></i>人才搜索器</a></span> </li>
+	<li {yun:}if $smarty.get.c=="attention_me"{/yun} class="style01 left_nav_hover"{yun:}else{/yun}class="style06"{yun:}/if{/yun}><span><a href="index.php?c=attention_me" ><i class="com_left_icon com_left_icon_gz"></i>关注我的人才</a></span> </li>
+    <li {yun:}if $smarty.get.c=="look_job"{/yun} class="style01 left_nav_hover"{yun:}else{/yun}class="style06"{yun:}/if{/yun}><span><a href="index.php?c=look_job"><i class="com_left_icon com_left_icon_eye"></i>被浏览的职位</a></span> </li>
+    <li class="style09"><span><a href="{yun:}url m=ask c=friend a=myquestion uid=$uid{/yun}" target="_blank" title="我的问答"><i class="com_left_icon com_left_icon_ask"></i>我的问答</a></span> </li>
+   
+  </ul>
+  {yun:}/if{/yun}
+
+  {yun:}if $js_def==3{/yun}
+        <div class="subnav_h1"><span>招聘管理</span>  </div>
+     <ul class="left_nav_ul"> 
+     <li><span><a href="javascript:void(0)"  onclick="jobadd_url('{yun:}$addjobnum{/yun}','{yun:}$config.integral_job{/yun}','{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}');return false;" class="f60 bold"><i class="com_left_icon com_left_icon_fb"></i>发布新职位</a></span> </li>
+     <li {yun:}if $smarty.get.c=="job"{/yun} class="style01 left_nav_hover"{yun:}else{/yun}class="style03"{yun:}/if{/yun}><span><a href="index.php?c=job&w=1" title="发布中的职位"><i class="com_left_icon com_left_icon_zwgl"></i>职位管理</a></span></li>   
+    <li {yun:}if $smarty.get.c=="special"{/yun} class="style01 left_nav_hover"{yun:}else{/yun}class="style07"{yun:}/if{/yun}><span><a href="index.php?c=special"><i class="com_left_icon com_left_icon_zt"></i>专题招聘</a></span></li>
+    <li {yun:}if $smarty.get.c=="partadd"{/yun} class="style01 left_nav_hover"{yun:}else{/yun}class="style07"{yun:}/if{/yun}><span><a onclick="jobadd_url('{yun:}$addpartjobnum{/yun}','{yun:}$config.integral_partjob{/yun}','{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}','part');" title="发布兼职" class="f60 bold" style="cursor:pointer"><i class="com_left_icon com_left_icon_jz"></i>发布兼职</a></span> </li>
+    <li {yun:}if $smarty.get.c=="partok" || $smarty.get.c=="part"{/yun} class="style01 left_nav_hover"{yun:}else{/yun}class="style07"{yun:}/if{/yun}><span><a href="index.php?c=partok&w=1" title="全部兼职"><i class="com_left_icon com_left_icon_jzgl"></i>兼职管理</a></span></li>
+    <li {yun:}if $smarty.get.c=="partapply"{/yun} class="style01 left_nav_hover"{yun:}else{/yun}class="style07"{yun:}/if{/yun}><span><a href="index.php?c=partapply" title="兼职报名"><i class="com_left_icon com_left_iconbm"></i>兼职报名</a></span></li>
+  </ul>
+  {yun:}/if{/yun}
+  {yun:}if $js_def==4{/yun}
+     <div class="subnav_h1"><span>财务管理</span>  </div>
+  <ul class="left_nav_ul">
+    <li {yun:}if $smarty.get.c=="pay"{/yun} class="style01 left_nav_hover"{yun:}else{/yun}class="style05"{yun:}/if{/yun}><span><a href="index.php?c=pay" title="立刻充值"><font color="#FF0000"><i class="com_left_icon com_left_icon_cz"></i>立刻充值</font></a></span></li>  
+    <li {yun:}if $smarty.get.c=="paylogtc"{/yun} class="style01 left_nav_hover"{yun:}else{/yun}class="style08"{yun:}/if{/yun}><span><a href="index.php?c=paylogtc" title="我的会员"><i class="com_left_icon com_left_icon_myhy"></i>我的会员</a></span></li>
+    <li {yun:}if $smarty.get.c=="right"&&$smarty.get.act=="" ||$smarty.get.c=="right"&&$smarty.get.act=="time"||$smarty.get.c=="right"&&$smarty.get.act=="added"{/yun} class="style01 left_nav_hover"{yun:}else{/yun}class="style12"{yun:}/if{/yun}><span><a href="index.php?c=right"><i class="com_left_icon com_left_icon_fw"></i>会员服务<i class="com_icon com_icon_new"></i></a></span></li>
+    <li {yun:}if $smarty.get.c=="com"||$smarty.get.c=="paylog"{/yun} class="style01 left_nav_hover"{yun:}else{/yun}class="style09"{yun:}/if{/yun}><span><a href="index.php?c=com" title="财务明细"><i class="com_left_icon com_left_icon_mx"></i>财务明细</a></span></li>
+    <li {yun:}if $smarty.get.c=="integral"||$smarty.get.c=="reward_list"||$smarty.get.c=="integral_reduce"{/yun} class="style01 left_nav_hover"{yun:}else{/yun}class="style12"{yun:}/if{/yun}><span><a href="index.php?c=integral"><i class="com_left_icon com_left_icon_gl"></i>{yun:}$config.integral_pricename{/yun}管理</a></span></li>
+   
+  </ul>
+  {yun:}/if{/yun}
+ {yun:}if $js_def==7{/yun}
+     <div class="subnav_h1"><span>系统设置</span>  </div>
+    <ul class="left_nav_ul">
+    <li {yun:}if $smarty.get.c=="vs"{/yun} class="style01 left_nav_hover"{yun:}else{/yun}class="style03"{yun:}/if{/yun}><span><a href="index.php?c=vs" title="修改密码"><i class="com_left_icon com_left_icon_m"></i>修改密码</a></span> </li>  
+    <li {yun:}if $smarty.get.c=="sysnews"{/yun} class="style01 left_nav_hover"{yun:}else{/yun}class="style11"{yun:}/if{/yun}><span><a href="index.php?c=sysnews" title="系统消息"><i class="com_left_icon com_left_icon_xin"></i>系统消息</a></span> </li>
+    <li {yun:}if $smarty.get.c=="msg"{/yun} class="style01 left_nav_hover"{yun:}else{/yun}class="style03"{yun:}/if{/yun}><span><a href="index.php?c=msg" title="求职咨询"><i class="com_left_icon com_left_icon_zx"></i>求职咨询</a></span> </li>
+  </ul>
+  {yun:}/if{/yun}
+
+{yun:}if $guweninfo.id{/yun}
+<div class="com_index_kf">
+<div class="com_m_index_h1"><span class="com_m_index_h1_s">招聘顾问</span></div>
+<div class="com_index_kf_box">
+<div class="com_index_kf_box_user">
+<div class="com_index_kf_box_user_photo"><img src="{yun:}$guweninfo.logo{/yun}" style="width:64px;height:64px"></div>
+<div class="com_index_kf_box_username">{yun:}$guweninfo.username{/yun}</div>
+<div class="">
+{yun:}if $guweninfo{/yun}
+<a target="_blank" href="tencent://message/?uin={yun:}$guweninfo.qq{/yun}&Site={yun:}$config.sy_webname{/yun}&Menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=1:{yun:}$guweninfo.qq{/yun}:12" alt="点击这里给我发消息"></a>
+{yun:}/if{/yun}</div>
+</div>
+<div class="com_index_kf_p">电话：{yun:}$guweninfo.mobile{/yun}</div>
+<div class="com_index_kf_p">微信：{yun:}$guweninfo.weixin{/yun}</div>
+<div class="com_index_kf_p">Q Q：{yun:}$guweninfo.qq{/yun}</div>
+
+<div class="com_index_kf_p">
+{yun:}if $atn.uid{/yun}
+<a href="javascript:void(0)" class="com_index_kf_dz_left">已点赞</a>
+{yun:}else{/yun}
+<a href="javascript:void(0)" onclick="zan('{yun:}$guweninfo.id{/yun}');" class="com_index_kf_dz_left">点赞</a>
+{yun:}/if{/yun}
+{yun:}if is_array($report)&& !$report.result{/yun}
+<a href="index.php?c=report&act=show"  class="com_index_kf_ts_left">已投诉</a>
+{yun:}else{/yun}
+<a href="javascript:void(0)" onclick="reportgw('{yun:}$guweninfo.id{/yun}','投诉顾问');"  class="com_index_kf_ts_left">投诉</a>
+{yun:}/if{/yun}</div>
+</div>
+</div>
+
+{yun:}else{/yun}
+<div class="com_index_kf">
+<div class="com_m_index_h1"><span class="com_m_index_h1_s">招聘顾问</span></div>
+<div class="com_index_kf_box">
+<div class="com_index_kf_box_user">
+<div class="com_index_kf_box_user_photo"><img src="{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_guwen{/yun}" style="width:64px;height:64px"></div>
+<div class="com_index_kf_box_username">网站客服</div>
+<div class="">
+{yun:}if $kfqq{/yun}
+<a target="_blank" href="tencent://message/?uin={yun:}$kfqq{/yun}&Site={yun:}$config.sy_webname{/yun}&Menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=1:{yun:}$kfqq{/yun}:12" alt="点击这里给我发消息"></a>
+{yun:}/if{/yun}
+</div>
+</div>
+<div class="com_index_kf_p">电话：{yun:}$config.sy_freewebtel{/yun}</div>
+<div class="com_index_kf_p">手机：{yun:}$config.sy_webmoblie{/yun}</div>
+<div class="com_index_kf_p">Q  Q：{yun:}$kfqq{/yun}</div>
+{yun:}if $config.wx_name{/yun}<div class="com_index_kf_p">微信公众号：{yun:}$config.wx_name{/yun}</div>{yun:}/if{/yun}
+</div>
+</div>
+
+{yun:}/if{/yun}
+</div>
+<div id="{yun:}$guweninfo.id{/yun}" style="display:none;">
+  <div class="Binding_pop_box" style="padding:10px;width:330px;height:200px ;background:#fff;">
+    <div class="Binding_pop_box_msg">您要投诉的顾问是：{yun:}$guweninfo.username{/yun}</div>
+   
+       <div class="popjb_tip">为了能够给您提供高质量的服务，反馈具体情况，我们会第一时间给您答复！</div>
+    
+     <div class="">
+     	 <textarea id="reason" name="reason" class="popjb_text"></textarea>
+      </div>
+      <div class="Binding_pop_sub" style="margin-top:15px;"> <span class="Binding_pop_box_list_left">&nbsp;</span>
+        <input class="com_pop_bth_qd" onclick="reportSub('index.php?c=report')" type="button" value="确定">
+		<input type='hidden' value="{yun:}$guweninfo.id{/yun}" id='eid' name='eid'> 
+        <input class="com_pop_bth_qx" type="button" value="取消" onclick="layer.closeAll();">
+      </div>
+    </div>
+  </div>
+<script type="text/javascript">
+function reportgw(eid,title){
+	$.layer({
+		type : 1,
+		title :title,
+		closeBtn : [0 , true],
+		border : [10 , 0.3 , '#000', true],
+		area : ['350px','auto'],
+		page : {dom :"#"+eid}
+	});
+}
+function reportSub(url){
+	var reason=$("#reason").val();
+	var eid=$("#eid").val();
+	if(reason==''){
+		layer.msg('请填写投诉内容！', 2, 8);return false;
+	}
+	$.post(url,{reason:reason,eid:eid},function(data){ 
+		layer.closeAll();
+		if(data=='0'){
+			layer.msg('投诉失败！', 2, 8);
+		}else if(data=='1'){
+			layer.msg('投诉成功！', 2, 9,function(){window.location.reload();});
+		}else if(data=='2'){			
+			layer.msg('已投诉成功，等待管理员回复！', 2, 8);
+		}
+	});
+}
+function zan(id){
+	$.post("index.php?m=ajax&c=guwenZan",{id:id},function(data){ 
+		if(data=='2'){
+			layer.msg('请不要重复点赞！', 2, 8);
+		}else if(data=='1'){
+			layer.msg('点赞成功！',2,9,function(){window.location.reload();});
+		}
+	});
+}
+</script>

@@ -1,0 +1,509 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script>
+<script src="js/check_public.js"></script>
+<script src="js/admin_public.js"></script>
+<script>
+var weburl="{yun:}$config.sy_weburl{/yun}"
+function audall(status){
+	var codewebarr="";
+	$(".check_all:checked").each(function(){ 
+		if(codewebarr==""){codewebarr=$(this).val();}else{codewebarr=codewebarr+","+$(this).val();}
+	});
+	if(codewebarr==""){
+		parent.layer.msg("您还未选择任何信息！",2,8);return false;
+	}else{
+		$("input[name=pid]").val(codewebarr);
+		$("#alertcontent").val('');
+		$("input[name=status]").attr("checked",false);
+		add_class('批量审核','350','230','#status_div','');
+	}
+}
+function checkstate(id,state){
+	var pytoken = $('#pytoken').val();
+	$.post("index.php?m=admin_company_job&c=checkstate",{id:id,state:state,pytoken:pytoken},function(data){
+		if(data==1){
+			if(state=='1'){
+				$('#state'+id).html('<span class="admin_com_noAudited" onclick="checkstate(\''+id+'\',\'2\');">已下架</span>');
+			}else{
+				$('#state'+id).html('<span class="admin_com_Audited"  onclick="checkstate(\''+id+'\',\'1\');">发布中</span>');
+			}
+		}
+	});
+
+}
+function audall2(status){
+	var codewebarr="";
+	$(".check_all:checked").each(function(){ 
+		if(codewebarr==""){codewebarr=$(this).val();}else{codewebarr=codewebarr+","+$(this).val();}
+	});
+	if(codewebarr==""){
+		parent.layer.msg("您还未选择任何信息！",2,8);	return false;
+	}else{
+		$("input[name=jobid]").val(codewebarr);
+		add_class('批量延期','270','180','#infobox2','');
+	}
+}
+function audall3(status){
+	var codewebarr="";
+	$(".check_all:checked").each(function(){ 
+		if(codewebarr==""){codewebarr=$(this).val();}else{codewebarr=codewebarr+","+$(this).val();}
+	});
+	if(codewebarr==""){
+		parent.layer.msg("您还未选择任何信息！",2,8);	return false;
+	}else{
+		$("input[name=jobid]").val(codewebarr);
+		add_class('批量修改职位类别','320','280','#infobox4','');
+	}
+}
+$(function(){
+	$(".status").click(function(){
+		var id=$(this).attr("pid");
+		$("input[name=pid]").val($(this).attr("pid"));
+ 		var status=$(this).attr("status");
+		$("#status"+status).attr("checked",true);
+		var pytoken=$("#pytoken").val();
+		$.post("index.php?m=admin_company_job&c=lockinfo",{id:id,pytoken:pytoken},function(msg){
+			$("#alertcontent").val(msg);
+			add_class('职位审核','350','230','#status_div','');
+		});
+	});
+	$(".xuanshang").click(function(){
+		$("input[name='pid']").val($(this).attr("pid"));
+		$("input[name='xuanshang']").val('');
+		$("input[name='xsdays']").val('');
+		add_class('职位置顶','300','200','#infobox3','');
+	});
+	$(".urgent").click(function(){
+		$("input[name=pid]").val($(this).attr("pid"));
+		$("input[name=eid]").val($(this).attr("eid"));
+		var eurgent=$(this).attr("eurgent"); 
+		if($(this).attr("tid")>0){
+			$("#surplus_urgent").html($(this).attr("tid")+"天+");
+			$("#surplus_urgent").show();
+		}
+		$(".eurgentdiv").hide();
+		if(eurgent){
+			$(".eurgent").html(eurgent);
+			$(".eurgentdiv").show();
+			add_class('紧急招聘','290','250','#infobox5','');
+		}else{
+			add_class('紧急招聘','290','220','#infobox5','');
+		} 
+	});
+	$(".rec").click(function(){
+		$("input[name=pid]").val($(this).attr("pid"));
+		$("input[name=eid]").val($(this).attr("eid"));
+		var edate=$(this).attr("edate"); 
+		if($(this).attr("tid")>0){
+			$("#surplus_recommend").html($(this).attr("tid")+"天+");
+			$("#surplus_recommend").show();
+		}
+		$(".edatediv").hide();
+		if(edate){
+			$(".edate").html(edate);
+			$(".edatediv").show();
+			add_class('职位推荐','290','250','#infobox6','');
+		}else{
+			add_class('职位推荐','290','220','#infobox6','');
+		} 
+	});
+});
+function Refresh(){
+	var codewebarr="";
+	$(".check_all:checked").each(function(){ 
+		if(codewebarr==""){codewebarr=$(this).val();}else{codewebarr=codewebarr+","+$(this).val();}
+	});
+	if(codewebarr==""){
+		parent.layer.msg("请选择要刷新的职位！",2,8);return false;
+	}else{
+		$.post("index.php?m=admin_company_job&c=refresh",{ids:codewebarr,pytoken:$('#pytoken').val()},function(data){
+			parent.layer.msg("刷新成功！",2,9);
+		})
+	}
+}
+function recommend(){
+	var codearr="";
+	$(".check_all:checked").each(function(){ 
+		if(codearr==""){codearr=$(this).val();}else{codearr=codearr+","+$(this).val();}
+	});
+	if(codearr==""){
+	    parent.layer.msg("请选择要推荐的职位！",2,8);return false;
+	}else{
+	    $("input[name=codearr]").val(codearr);
+		$(".edatediv").hide();
+	    add_class('职位批量推荐','290','220','#infobox6','');
+	}
+}
+function urgent(){
+    var codeugent="";
+	$(".check_all:checked").each(function(){
+	    if(codeugent==''){codeugent=$(this).val();}else{codeugent=codeugent+","+$(this).val();}
+	});
+	if(codeugent==""){
+	    parent.layer.msg("请选择要紧急的职位！",2,8);return false;
+	}else{
+	    $("input[name=codeugent]").val(codeugent);
+		$(".eurgentdiv").hide();
+		add_class('职位批量紧急','290','220','#infobox5','');
+	}
+}
+function Export(){
+	var codewebarr="";
+	$(".check_all:checked").each(function(){ 
+		if(codewebarr==""){codewebarr=$(this).val();}else{codewebarr=codewebarr+","+$(this).val();}
+	});
+	if(codewebarr==""){
+		parent.layer.msg('您还未选择需要导出用户！', 2, 8);	return false;
+	}else{
+		$("input[name=pid]").val(codewebarr);
+		add_class('选择导出字段','650','340','#export','');
+	}
+}
+function check_xls(){
+	var type="";
+	$(".type:checked").each(function(){ 
+		if(type==""){type=$(this).val();}else{type=type+","+$(this).val();}
+	});
+	if(type==""){
+		parent.layer.msg("请选择导出字段！",2,8);return false;
+	}
+	setTimeout(function(){$('.myform').submit()},0);
+	layer.closeAll();
+}
+function isxs(){
+	var xtype=$("#xtype").attr("checked");
+	var days=$.trim($("input[name='xsdays']").val());  
+	layer.closeAll();
+	if(xtype=="checked"){
+		parent.layer.confirm("确定取消该职位置顶？",function(){setTimeout(function(){$('.xssubmit').submit()},0);parent.layer.load('执行中，请稍候...',0);},function(){layer.closeAll();});
+	}else{
+		if(days<1){ 
+			parent.layer.msg("置顶天数均不能为空！",2,8,function(){add_class('职位置顶','300','200','#infobox3','');});return false;
+		}else{
+			parent.layer.confirm("是否确定为该职位增加"+days+"天置顶服务？",function(){setTimeout(function(){$('.xssubmit').submit()},0);parent.layer.load('执行中，请稍候...',0);},function(){layer.closeAll();});
+			
+		} 
+	}
+}
+function checkmove(){
+	if($("#hy").val()==""){
+		layer.msg("请选择行业类别！",2,8);return false;
+	}
+	if($("#job1_son").val()==""){
+		layer.msg("请选择职位类别！",2,8);return false;
+	}
+}
+</script>
+<link href="images/reset.css" rel="stylesheet" type="text/css" />
+<link href="images/system.css" rel="stylesheet" type="text/css" />
+<link href="images/table_form.css" rel="stylesheet" type="text/css" />
+<title>后台管理</title>
+</head>
+<body class="body_ifm">
+<div id="export" style="display:none;">
+	<div class="" style=" margin-top:10px; "  >
+    <div>
+      <form action="index.php?m=admin_company_job&c=xls" target="supportiframe" method="post" id="formstatus" class="myform">
+      <input type="hidden" name="pytoken" value="{yun:}$pytoken{/yun}">
+      <input type="hidden" name="where" value="{yun:}$where{/yun}"><input name="pid" value="0" type="hidden">
+			<div class="admin_resume_dc">
+            	 <label><span class="admin_resume_dc_s"> <input type="checkbox" class="type" name="type[]" value="id"> 职位ID</span></label>
+                 <label><span class="admin_resume_dc_s"> <input type="checkbox" class="type" name="type[]" value="uid"> 企业UID</span></label>
+               <label><span class="admin_resume_dc_s"> <input type="checkbox" class="type" name="type[]" value="name"> 职位名称</span></label>
+                 <label><span class="admin_resume_dc_s"> <input type="checkbox" class="type" name="type[]" value="hy"> 行业</span></label>
+                 <label><span class="admin_resume_dc_s"> <input type="checkbox" class="type" name="type[]" value="job1"> 一级类别</span></label>
+                <label><span class="admin_resume_dc_s"> <input type="checkbox" class="type" name="type[]" value="job1_son"> 二级类别</span></label>
+               <label><span class="admin_resume_dc_s"> <input type="checkbox" class="type" name="type[]" value="job_post"> 三级类别</span></label>
+            <label><span class="admin_resume_dc_s"> <input type="checkbox" class="type" name="type[]" value="provinceid"> 省</span></label>
+               <label><span class="admin_resume_dc_s"> <input type="checkbox" class="type" name="type[]" value="cityid"> 市</span></label>
+              <label><span class="admin_resume_dc_s"> <input type="checkbox" class="type" name="type[]" value="three_cityid"> 县</span></label>
+            <label><span class="admin_resume_dc_s"> <input type="checkbox" class="type" name="type[]" value="minsalary,maxsalary"> 薪水</span></label>
+    		 <label><span class="admin_resume_dc_s"> <input type="checkbox" class="type" name="type[]" value="number"> 招聘人数</span></label>
+			 <label><span class="admin_resume_dc_s"> <input type="checkbox" class="type" name="type[]" value="exp"> 工作经验</span></label>
+            <label><span class="admin_resume_dc_s"> <input type="checkbox" class="type" name="type[]" value="report"> 到岗时间</span></label>
+			 <label><span class="admin_resume_dc_s"> <input type="checkbox" class="type" name="type[]" value="sex"> 性别要求</span></label>
+             <label><span class="admin_resume_dc_s"> <input type="checkbox" class="type" name="type[]" value="edu"> 教育程度</span></label>
+               <label><span class="admin_resume_dc_s"> <input type="checkbox" class="type" name="type[]" value="marriage"> 婚姻状况</span></label>
+               <label><span class="admin_resume_dc_s"> <input type="checkbox" class="type" name="type[]" value="sdate"> 开始日期</span></label>
+               <label><span class="admin_resume_dc_s"> <input type="checkbox" class="type" name="type[]" value="edate"> 结束日期</span></label>
+				 <label><span class="admin_resume_dc_s"> <input type="checkbox" class="type" name="type[]" value="lastdate"> 更新时间</span></label>
+            <label><span class="admin_resume_dc_s"> <input type="checkbox" class="type" name="type[]" value="age"> 年龄要求</span></label>
+              <label><span class="admin_resume_dc_s"> <input type="checkbox" class="type" name="type[]" value="lang"> 语言要求</span></label>
+               <label><span class="admin_resume_dc_s"> <input type="checkbox" class="type" name="type[]" value="welfare"> 福利待遇</span></label>
+               <label><span class="admin_resume_dc_s"> <input type="checkbox" class="type" name="type[]" value="com_name"> 公司名称</span></label>
+                <label><span class="admin_resume_dc_s"> <input type="checkbox" class="type" name="type[]" value="pr"> 公司性质</span></label>
+                <label><span class="admin_resume_dc_s"> <input type="checkbox" class="type" name="type[]" value="mun"> 企业规模</span></label>
+            </div> 
+ 		   <div class="admin_resume_dc_sub" style="margin-top:10px;">  <input type="button" onClick="check_xls();"  value='确认' class="admin_resume_dc_bth1">
+        <input type="button" onClick="layer.closeAll();" class="admin_resume_dc_bth2" value='取消'>
+        </div>
+      </form>
+      </div>
+    </div>
+  </div>
+ <div id="infobox5"  style="display:none;text-align:center;">
+		<div class="admin_com_t_box"> 
+      <form action="index.php?m=admin_company_job&c=urgent" target="supportiframe" method="post" id="formstatus">
+      <input type="hidden" name="pytoken" id="pytoken" value="{yun:}$pytoken{/yun}">
+	  <input type="hidden" name="codeugent"/>
+      
+		<div class=" admin_com_smbox_list_pd">
+			<span class="admin_com_smbox_span">紧急天数：</span>
+			<input class="admin_com_smbox_text" value="" name="addday"  onKeyUp="this.value=this.value.replace(/[^0-9]/g,'')">
+			<span class="admin_com_smbox_list_s">天</span>    
+		</div>
+		<div class="eurgentdiv" style="display:none">
+          <span class="admin_com_smbox_span">当前结束日期：</span> 
+			<span class="admin_com_smbox_list_s eurgent" style="color:#f60"></span>    
+		</div>
+		<div class="admin_com_smbox_qx_box"> 如需取消紧急职位请单击 <input type="checkbox" name="s" value="1"> 点击确认即可</div> 
+          <div class="clear"></div>
+		<div class="admin_com_smbox_opt admin_com_smbox_opt_mt"><input type="submit" onclick="loadlayer();" value='确认' class="admin_examine_bth"><input type="button" onClick="layer.closeAll();" class="admin_examine_bth_qx"  value='取消'></div> 
+		<input name="pid" value="0" type="hidden">
+		<input name="eid" value="0" type="hidden">
+      </form>
+    </div> 
+</div>
+
+
+
+<div id="infobox6"  style="display:none;">
+	<div class="admin_com_t_box"> 
+		  <form action="index.php?m=admin_company_job&c=recommend" target="supportiframe" method="post" id="formstatus">
+		  <input type="hidden" name="pytoken" value="{yun:}$pytoken{/yun}">
+		  <input type="hidden" name="codearr"> 
+           
+          <div class=" admin_com_smbox_list_pd">
+          <span class="admin_com_smbox_span">推荐天数：</span>
+			<input class="admin_com_smbox_text" value="" name="addday" onKeyUp="this.value=this.value.replace(/[^0-9]/g,'')">
+			<span class="admin_com_smbox_list_s">天</span>    
+		</div>
+		<div class="edatediv" style="display:none">
+          <span class="admin_com_smbox_span">当前结束日期：</span> 
+			<span class="admin_com_smbox_list_s edate" style="color:#f60"></span>    
+		</div>
+			<div class="admin_com_smbox_qx_box"> 如需取消推荐职位请单击 <input type="checkbox" name="s" value="1"> 点击确认即可</div>
+        <div class="clear"></div>
+			<div class="admin_com_smbox_opt admin_com_smbox_opt_mt"><input type="submit" onclick="loadlayer();" value='确认' class="admin_examine_bth"><input type="button" onClick="layer.closeAll();" class="admin_examine_bth_qx" value='取消'></div>
+			<input name="pid" value="0" type="hidden">
+			<input name="eid" value="0" type="hidden">
+		  </form> 
+	  </div>
+      </div>
+	
+<div id="status_div"  style="display:none; width: 350px; "> 
+  <form action="index.php?m=admin_company_job&c=status" target="supportiframe" method="post" id="formstatus" name="myform">
+  <input type="hidden" name="pytoken" value="{yun:}$pytoken{/yun}">
+    <table cellspacing='1' cellpadding='1' class="admin_examine_table">
+  <tr>
+    <th width="80">审核操作：</th>
+      <td align="left">
+        <div class="admin_examine_right">
+	<label for="status0"><span class="admin_examine_table_s"><input type="radio" name="status" value="0" id="status0" >未审核</span></label>
+	<label for="status1"><span class="admin_examine_table_s"><input type="radio" name="status" value="1" id="status1" >已通过</span></label>
+	<label for="status3"><span class="admin_examine_table_s"><input type="radio" name="status" value="3" id="status3">未通过</span></label>
+    </div>
+    </td>
+          </tr>
+          <tr>
+            <th>审核说明：</th>
+   <td align="left"><textarea id="alertcontent" name="statusbody"class="admin_explain_textarea"></textarea></td>
+   </tr>
+     <tr>
+       <td colspan='2' align="center">
+       <div class="admin_Operating_sub"> 
+       <input name="pid" value="0" type="hidden">
+       <input type="submit"  value='确认' class="admin_examine_bth"> 
+       <input type="button" onClick="layer.closeAll();" class="admin_examine_bth_qx" value='取消'>
+       </div>
+       </td>
+   </tr>
+    </table>
+  </form> 
+</div>
+<div id="infobox3" style="display:none;text-align:center;margin-top:20px"> 
+
+      <form action="index.php?m=admin_company_job&c=xuanshang" target="supportiframe" method="post" id="formstatus" class="xssubmit">
+      <input type="hidden" name="pytoken" value="{yun:}$pytoken{/yun}">
+		 
+            <div class=" admin_com_smbox_list_b">
+          <span class="admin_com_smbox_span">置顶天数：</span>
+		<input class="admin_com_smbox_text admin_com_smbox_text_w130" value="" name="xsdays" onKeyUp="this.value=this.value.replace(/[^0-9]/g,'')"><span class="admin_com_smbox_list_s">天</span>    </div>
+   
+		<div class="admin_com_smbox_qx_box" style="width:300px;"> 如需取消职位置顶请单击 <input type="checkbox" id="xtype" name="s" value="1">  点击确认即可</div>
+   
+    <div class="admin_com_smbox_opt admin_com_smbox_opt_mt" style="width:300px;"><input type="button" onclick="isxs();" value='确认'  class="admin_examine_bth"><input type="button" onClick="layer.closeAll();" class="admin_examine_bth_qx" value='取消'></div>	
+        <input name="pid" value="0" type="hidden">
+      </form>  
+</div>
+
+<div id="infobox2" style="display:none;">
+		<div class="admin_com_t_box"> 
+      <form action="index.php?m=admin_company_job&c=ctime" target="supportiframe" method="post" id="formstatus">
+      <input type="hidden" name="pytoken" value="{yun:}$pytoken{/yun}">
+	<div class="admin_com_smbox_list"><span class="admin_com_smbox_span">延长时间：</span>
+    <input class="admin_com_smbox_text" value="" name="endtime" onKeyUp="this.value=this.value.replace(/[^0-9]/g,'')"> <span class="admin_com_smbox_list_s">天</span>    </div>
+    <div class="admin_com_smbox_opt"><input type="submit"  value='确认' class="admin_examine_bth"><input type="button"  onClick="layer.closeAll();" class="admin_examine_bth_qx" value='取消'></div>
+	
+        <input name="jobid" value="0" type="hidden">
+      </form> 
+  </div>
+</div>
+
+
+<div id="infobox4" style="display:none;">
+		<div class="admin_com_t_box_hy"> 
+      <form action="index.php?m=admin_company_job&c=saveclass" target="supportiframe" method="post" id="formstatus" onSubmit="return checkmove();">
+      <input type="hidden" name="pytoken" value="{yun:}$pytoken{/yun}">
+		
+        <div class="admin_com_select_list"><span class="admin_com_smbox_span">行业类别：</span>
+             <div class="admin_com_smbox_select_box">
+            <select name="hy" id="hy" class="admin_com_smbox_select"> 
+             <option value="">--选择大类--</option>
+             {yun:}foreach item=v from=$industry_index{/yun} 
+             <option value="{yun:}$v{/yun}">{yun:}$industry_name[$v]{/yun}</option>
+             {yun:}/foreach{/yun}
+            </select> 
+            </div>
+            </div>
+          <div class="admin_com_select_list">
+           <span class="admin_com_smbox_span">职位类别：</span>
+           <div class="admin_com_smbox_select_box">
+           <select name="job1" id="job1"  class="admin_com_smbox_select job1" lid="job1_son" >
+             <option value="">--请选择--</option> 
+             {yun:}foreach from=$job_index key=j item=v{/yun}
+             <option value='{yun:}$v{/yun}'>{yun:}$job_name[$v]{/yun}</option>
+             {yun:}/foreach{/yun} 
+             </select>
+           <select name="job1_son" id="job1_son" class="admin_com_smbox_select job1" lid="job1_son1" >
+            <option value="">--请选择--</option> 
+            </select>
+            <select name="job_post" id="job1_son1" class="admin_com_smbox_select" >
+            <option value="">--请选择--</option>
+            </select>
+      </div> </div>
+ 		  <div class="admin_com_smbox_opt admin_com_smbox_opt_mt"><input type="submit"  value='确认' class="admin_examine_bth"> <input type="button" onClick="layer.closeAll();" class="admin_examine_bth_qx" value='取消'>
+	
+    </div>
+        <input name="jobid" value="0" type="hidden">
+      </form> 
+  </div>
+</div> 
+<div class="infoboxp">
+<div class="infoboxp_top_bg"></div>
+<div class="admin_Filter"> 
+	<span class="complay_top_span fl">职位管理</span> 
+	<form action="index.php" name="myform" method="get" >
+	<input type="hidden" name="m" value="admin_company_job"/>
+	<input type="hidden" name="state" value="{yun:}$smarty.get.state{/yun}"/>
+	<input type="hidden" name="job_type" value="{yun:}$smarty.get.job_type{/yun}"/>
+	<input type="hidden" name="jtype" value="{yun:}$smarty.get.jtype{/yun}"/>
+	<input type="hidden" name="salary" value="{yun:}$smarty.get.salary{/yun}"/>
+   <div class="admin_Filter_span">搜索类型：</div>  
+	  <div class="admin_Filter_text formselect"  did='dtype'>
+		  <input type="button" value="{yun:}if $smarty.get.type=='1'{/yun}公司名称{yun:}else{/yun}职位名称{yun:}/if{/yun}" class="admin_Filter_but"  id="btype"> 
+		  <input type="hidden" id='type' value="{yun:}$smarty.get.type{/yun}" name='type'>
+		  <div class="admin_Filter_text_box" style="display:none" id='dtype'>
+			  <ul>
+			  <li><a href="javascript:void(0)" onClick="formselect('1','type','公司名称')">公司名称</a></li>
+			  <li><a href="javascript:void(0)" onClick="formselect('2','type','职位名称')">职位名称</a></li> 
+			  </ul>  
+		  </div>
+	  </div>
+	<input type="text" placeholder="输入你要搜索的关键字" name="keyword" class="admin_Filter_search"><input type="submit" name='news_search' value="搜索" class="admin_Filter_bth"> 
+	</form> 
+	<span class='admin_search_div'>
+		  <div class="admin_adv_search"><div class="admin_adv_search_bth">高级搜索</div></div>  
+ 	  </span>
+  </div>
+ {yun:}include file="admin/admin_search.htm"{/yun}  
+
+  <div class="table-list">
+  <div class="admin_table_border">
+  <iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe>
+    <form action="index.php" name="myform" method="get" id='myform' target="supportiframe">
+      <input name="m" value="admin_company_job" type="hidden"/>
+      <input name="c" value="del" type="hidden"/>
+      <table width="100%">
+        <thead>
+        		<tr class="admin_table_top">
+             <th><label for="chkall"><input type="checkbox" id='chkAll'  onclick='CheckAll(this.form)'/></label></th>
+            {yun:}if $smarty.get.t=="id" && $smarty.get.order=="asc"{/yun}
+            <th><a href="{yun:}searchurl order=desc t=id m=admin_company_job untype='order,t'{/yun}">编号<img src="images/sanj.jpg"/></a></th>
+            {yun:}else{/yun}
+			<th><a href="{yun:}searchurl order=asc t=id m=admin_company_job untype='order,t'{/yun}">编号<img src="images/sanj2.jpg"/></a></th>
+            {yun:}/if{/yun}
+            <th align="left" width="210">职位/公司</th>
+            <th>简历数/未查看/已面试数</th>
+			<th>发布/更新时间</th>
+			<th>到期时间</th>
+			<th>浏览量</th>
+            <th>来源</th>
+            <th>审核状态</th>
+            <th>招聘状态</th>
+            <th>置顶</th>
+            <th>推荐</th>
+            <th>紧急</th>
+     <th class="admin_table_th_bg">操作</th>
+        </thead>
+        <tbody>
+        {yun:}foreach item=v key=key from=$rows{/yun}
+        <tr align="center"  {yun:}if ($key+1)%2=='0'{/yun}class="admin_com_td_bg"{yun:}/if{/yun} id="list{yun:}$v.id{/yun}">
+          <td><input type="checkbox" value="{yun:}$v.id{/yun}" class="check_all"  name='del[]' onclick='unselectall()' rel="del_chk" /></td>
+          <td class="td1" style="text-align:center;width:50px;"><span>{yun:}$v.id{/yun}</span></td>
+          <td class="ud" align="left" width="210">
+          <a href="{yun:}url m=job c=comapply id='`$v.id`'{/yun}" target="_blank">{yun:}$v.name{/yun}</a><br/>
+          <a href="{yun:}url m=company c=show id='`$v.uid`'{/yun}" target="_blank" class="admin_cz_sc">{yun:}$v.com_name{/yun}</a>
+          </td>
+   		  <td class="td" align="center">{yun:}$v.snum{/yun}/{yun:}$v.browseNum{/yun}/{yun:}$v.inviteNum{/yun}</td>
+		  <td class="td" align="center">{yun:}$v.sdate|date_format:"%Y-%m-%d"{/yun}<br/>{yun:}$v.lastupdate|date_format:"%Y-%m-%d"{/yun}</td>
+		   <td class="td" align="center">{yun:}$v.edatetxt{/yun}</td>
+	      <td class="td" align="center">{yun:}$v.jobhits{/yun}</td>
+          <td>{yun:}$source[$v.source]{/yun}</td>
+          <td>{yun:}if $v.edate<=time(){/yun}<span class="admin_com_Lock">已过期</span>{yun:}elseif $v.state==1{/yun}<span class="admin_com_Audited">已审核</span>{yun:}elseif $v.state==0{/yun}<span class="admin_com_noAudited">未审核</span>{yun:}elseif $v.state==3{/yun}<span class="admin_com_tg">未通过</span>{yun:}/if{/yun}</td>
+          <td id="state{yun:}$v.id{/yun}">{yun:}if $v.status==1{/yun}<span class="admin_com_noAudited" onclick="checkstate('{yun:}$v.id{/yun}','2');">已下架</span>{yun:}else{/yun}<span class="admin_com_Audited"  onclick="checkstate('{yun:}$v.id{/yun}','1');">发布中</span>{yun:}/if{/yun}</td>
+          <td>{yun:}if $v.xsdate>time(){/yun}{yun:}$v.xsdate|date_format:"%Y-%m-%d"{/yun}{yun:}else{/yun}{yun:}/if{/yun}<br/><a href="javascript:;" class="admin_cz_sc xuanshang" pid="{yun:}$v.id{/yun}">置顶设置</a></td>
+          <td id="rec{yun:}$v.id{/yun}">
+          {yun:}if $v.rec_time>$time{/yun}
+          <a href="javascript:void(0);" class="rec" pid="{yun:}$v.id{/yun}" tid="{yun:}$v.rec_day{/yun}"  edate="{yun:}$v.recdate{/yun}" eid="{yun:}$v.rec_time{/yun}">
+          <img src="../config/ajax_img/doneico.gif" alt="职位推荐剩余{yun:}$v.rec_day{/yun}天" title="职位推荐剩余{yun:}$v.rec_day{/yun}天"></a>{yun:}else{/yun}
+		  <a href="javascript:void(0);" class="rec" pid="{yun:}$v.id{/yun}" tid="{yun:}$v.rec_day{/yun}" edate="{yun:}$v.recdate{/yun}" eid="{yun:}$v.rec_time{/yun}">
+          <img src="../config/ajax_img/errorico.gif" alt="职位推荐剩余{yun:}$v.rec_day{/yun}天" title="职位推荐剩余{yun:}$v.rec_day{/yun}天"></a>{yun:}/if{/yun}          
+          </td>
+          <td id="urgent{yun:}$v.id{/yun}">
+          {yun:}if $v.urgent_time>$time{/yun}
+          <a href="javascript:void(0);" class="urgent" pid="{yun:}$v.id{/yun}" tid="{yun:}$v.urgent_day{/yun}" eurgent="{yun:}$v.eurgent{/yun}" eid="{yun:}$v.urgent_time{/yun}"><img src="../config/ajax_img/doneico.gif" alt="紧急招聘剩余{yun:}$v.urgent_day{/yun}天" title="紧急招聘剩余{yun:}$v.urgent_day{/yun}天"></a>
+          {yun:}else{/yun}
+          <a href="javascript:void(0);" class="urgent" pid="{yun:}$v.id{/yun}" tid="{yun:}$v.urgent_day{/yun}" eurgent="{yun:}$v.eurgent{/yun}" eid="{yun:}$v.urgent_time{/yun}"><img src="../config/ajax_img/errorico.gif" alt="紧急招聘剩余{yun:}$v.urgent_day{/yun}天" title="紧急招聘剩余{yun:}$v.urgent_day{/yun}天"></a>
+          {yun:}/if{/yun}
+          </td>
+          <td><a href="javascript:;" class="status admin_cz_sc" pid="{yun:}$v.id{/yun}" status='{yun:}$v.state{/yun}'>审核</a> | <a href="index.php?m=admin_company_job&c=matching&id={yun:}$v.id{/yun}" class="admin_cz_sc">匹配</a><br/><a href="index.php?m=admin_company_job&c=show&id={yun:}$v.id{/yun}" class="admin_cz_sc">修改</a> | <a href="javascript:void(0)" onClick="layer_del('确定要删除？', 'index.php?m=admin_company_job&c=del&id={yun:}$v.id{/yun}');" class="admin_cz_sc">删除</a></td>
+        </tr>
+        {yun:}/foreach{/yun}
+        <tr style="background:#f1f1f1;">
+        <td align="center"><input type="checkbox" id='chkAll2' onclick='CheckAll2(this.form)' /></td>
+        <td colspan="5" >
+        <label for="chkAll2">全选</label>
+            <input class="admin_submit2" type="button" name="delsub" value="审核" onClick="audall('1');" />
+            <input class="admin_submit2" type="button" name="delsub" value="延期" onClick="audall2('0');" />
+            <input class="admin_submit2" type="button" name="delsub" value="刷新" onClick="Refresh();" />
+			<input class="admin_submit2" type="button" name="delsub" value="推荐" onClick="recommend();" />
+			<input class="admin_submit2" type="button" name="delsub" value="紧急" onClick="urgent();" />
+            <input class="admin_submit2" type="button" name="delsub" value="导出" onClick="Export();" />
+            <input class="admin_submit4" type="button" name="delsub" value="转移类别" onClick="audall3('0');" />
+            <input class="admin_submit2" type="button" name="delsub" value="删除" onClick="return really('del[]')" /></td>
+          <td colspan="9" class="digg">{yun:}$pagenav{/yun}</td>
+        </tr>
+          </tbody>
+      </table>
+	  <input type="hidden" name="pytoken" value="{yun:}$pytoken{/yun}">
+    </form>
+  </div>
+</div>
+</div>
+</body>
+</html>

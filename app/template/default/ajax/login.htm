@@ -1,0 +1,261 @@
+
+{yun:}if $usertype=="1"{/yun}
+<div class="login_after_user_box">
+  <div class="login_after_user_photo"> <img width="40" height="50" src="{yun:}$member.photo{/yun}" onerror="showImgDelay(this,'{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_member_icon{/yun}',2);"> </div>
+  <div class="login_after_user_name">
+    <div class="login_after_user_uname">你好！<span class="login_after_username_id">{yun:}$username{/yun}</span></div>
+    <div class="login_after_user_webname">欢迎登录{yun:}$config.sy_webname{/yun}</div>
+  </div>
+</div>
+<div class="login_after_ztbox">
+  <div class="login_after_zt_list"><a href="{yun:}$config.sy_weburl{/yun}/member/index.php?c=resume"><span class="login_after_zt_list_n">{yun:}$member.resume_num{/yun}</span>我的简历</a></div>
+  <div class="login_after_zt_list"><a href="{yun:}$config.sy_weburl{/yun}/member/index.php?c=job"> <span class="login_after_zt_list_n">{yun:}$member.sq_jobnum{/yun}</span>申请职位</a></div>
+  <div class="login_after_zt_list login_after_zt_list_end"><a href="{yun:}$config.sy_weburl{/yun}/member/index.php?c=favorite"><span class="login_after_zt_list_n">{yun:}$member.fav_jobnum{/yun}</span>收藏职位</a></div>
+</div>
+<div class="login_after_bthbox"> <a href="{yun:}$config.sy_weburl{/yun}/member/index.php?c=expect&add={yun:}$uid{/yun}" class="login_after_userbth">创建简历</a> 
+
+ <a href="{yun:}$config.sy_weburl{/yun}/member/index.php?c=resume" class="login_after_usergz">简历管理</a> 
+ <a href="{yun:}$config.sy_weburl{/yun}/member/index.php?c=atn" class="login_after_userbth">关注的企业</a>
+ <a href="{yun:}$config.sy_weburl{/yun}/member/index.php" class=" login_after_userbthend">进入管理中心</a> <a href="javascript:void(0);" onclick="logout('{yun:}url c=logout{/yun}');" class="login_after_bttc"> 安全退出</a> </div>
+{yun:}elseif $usertype=="2"{/yun}
+<div class="login_after_userlogo"><div class="login_after_comlogo"><img width="135" height="55"src="{yun:}$company.logo{/yun}"  onerror="showImgDelay(this,'{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_unit_icon{/yun}',2);"></div><div class="login_after_combg"></div></div>
+<div class="login_after_username">你好！<span class="login_after_username_id">{yun:}$username{/yun}</span></div>
+<div class="login_after_webrname">欢迎登录{yun:}$config.sy_webname{/yun}</div>
+<div class="login_after_ztbox">
+  <div class="login_after_zt_list"><a href="{yun:}$config.sy_weburl{/yun}/member/index.php?c=hr"><span class="login_after_zt_list_n">{yun:}$company.sq_job{/yun}</span>收到简历</a></div>
+  <div class="login_after_zt_list"><a href="{yun:}$config.sy_weburl{/yun}/member/index.php?c=job&w=1"><span class="login_after_zt_list_n">{yun:}$company.job{/yun}</span>招聘职位</a></div>
+  <div class="login_after_zt_list login_after_zt_list_end"><a href="{yun:}$config.sy_weburl{/yun}/member/index.php?c=job&w=2"><span class="login_after_zt_list_n">{yun:}$company.status2{/yun}</span>已过期职位</a></div>
+</div>
+<div class="login_after_bthbox"> {yun:}if $addjobnum=='1'{/yun} <a href="{yun:}$config.sy_weburl{/yun}/member/index.php?c=jobadd" class="login_after_bth">发布职位</a> {yun:}else{/yun} <a href="javascript:void(0)" onclick="jobaddurl('{yun:}$addjobnum{/yun}','{yun:}$config.integral_job{/yun}','{yun:}$config.integral_pricename{/yun}')" class="login_after_bth">发布职位</a> {yun:}/if{/yun} <a href="{yun:}$config.sy_weburl{/yun}/member/index.php" class=" login_after_bthend">进入管理中心</a> <a href="javascript:void(0);" onclick="logout('{yun:}url c=logout{/yun}');" class="login_after_bttc"> 安全退出</a> </div>
+{yun:}elseif $usertype=="3"{/yun}
+<div class="login_after_user_box">
+  <div class="login_after_user_photo"> <img width="40" height="40" src="{yun:}$lt.photo{/yun}" onerror="showImgDelay(this,'{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_lt_icon{/yun}',2);"> </div>
+  <div class="login_after_user_name">
+    <div class="login_after_user_uname">你好！<span class="login_after_username_id">{yun:}$username{/yun}</span></div>
+    <div class="login_after_user_webname">欢迎登录{yun:}$config.sy_webname{/yun}</div>
+  </div>
+</div>
+<div class="login_after_ztbox">
+  <div class="login_after_zt_list"><a href="{yun:}$config.sy_weburl{/yun}/member/index.php?c=entrust_resume"><span class="login_after_zt_list_n">{yun:}$lt.entrust{/yun}</span>委托简历</a></div>
+  <div class="login_after_zt_list"><a href="{yun:}$config.sy_weburl{/yun}/member/index.php?c=job&s=1"><span class="login_after_zt_list_n">{yun:}$lt.lt_job{/yun}</span>招聘职位</a></div>
+  <div class="login_after_zt_list login_after_zt_list_end"><a href="{yun:}$config.sy_weburl{/yun}/member/index.php?c=job&s=2"><span class="login_after_zt_list_n">{yun:}$lt.lt_status2{/yun}</span>已过期职位</a></div>
+</div>
+<div class="login_after_bthbox"> <a href="{yun:}$config.sy_weburl{/yun}/member/index.php?c=jobadd" class="login_after_userbth">发布职位</a> <a href="{yun:}$config.sy_weburl{/yun}/member/index.php?c=search_resume" class="login_after_usergz">搜索简历</a> <a href="{yun:}$config.sy_weburl{/yun}/member/index.php?c=yp_resume" class="login_after_userbth">收到简历</a> <a href="{yun:}$config.sy_weburl{/yun}/member/index.php" class=" login_after_userbthend">进入管理中心</a> <a href="javascript:void(0);" onclick="logout('{yun:}url c=logout{/yun}');" class="login_after_bttc"> 安全退出</a> </div>
+{yun:}elseif $usertype=="4"{/yun}
+<div class="login_after_user_box">
+  <div class="login_after_user_photo"> <img width="40" height="40" src="{yun:}$member.logo{/yun}" onerror="showImgDelay(this,'{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_member_icon{/yun}',2);"></div>
+  <div class="login_after_user_name">
+    <div class="login_after_user_uname">你好！<span class="login_after_username_id">{yun:}$username{/yun}</span></div>
+    <div class="login_after_user_webname">欢迎登录{yun:}$config.sy_webname{/yun}</div>
+  </div>
+</div>
+<div class="login_after_ztbox">
+  <div class="login_after_zt_list"><a href="{yun:}$config.sy_weburl{/yun}/member/index.php?c=subject"><span class="login_after_zt_list_n">{yun:}$member.subject{/yun}</span>发布课程</a></div>
+  <div class="login_after_zt_list"><a href="{yun:}$config.sy_weburl{/yun}/member/index.php?c=sign_up&status=2"><span class="login_after_zt_list_n">{yun:}$member.baoming{/yun}</span>未联系</a></div>
+  <div class="login_after_zt_list login_after_zt_list_end"><a href="{yun:}$config.sy_weburl{/yun}/member/index.php?c=message&status=1"><span class="login_after_zt_list_n">{yun:}$member.zixun{/yun}</span>未回复</a></div>
+</div>
+<div class="login_after_bthbox"> <a href="{yun:}$config.sy_weburl{/yun}/member/index.php?c=subject_add" class="login_after_userbth">发布课程</a> <a href="{yun:}$config.sy_weburl{/yun}/member/index.php?c=team" class="login_after_usergz">管理讲师</a> <a href="{yun:}$config.sy_weburl{/yun}/member/index.php?c=sign_up" class="login_after_userbth">预约名单</a> <a href="{yun:}$config.sy_weburl{/yun}/member/index.php" class=" login_after_userbthend">进入管理中心</a> <a href="javascript:void(0);" onclick="logout('{yun:}url c=logout{/yun}');" class="login_after_bttc"> 安全退出</a> </div>
+{yun:}else{/yun}
+<div class="hp_login_tit">
+
+<i class="hp_login_tit_icon"></i>会员登录
+{yun:}if $config.wx_author=='1'{/yun}
+<div class="wxcode_login" title="微信扫一扫登录" style="display:block;"></div>
+<div class="normal_login" title="普通登录" style="display:none;"></div>
+{yun:}/if{/yun}
+</div>
+
+<div class="wx_login_show" style="display:none;">
+	 <div id="wx_login_qrcode" class="wxlogintext">正在获取二维码...</div>
+	 <div class="wxlogintxt">请使用微信扫一扫登录</div>
+</div>
+
+<div id="login_normal">
+<div class="hp_login_hy"> <i class="hp_login_hy_icon fl"></i>
+  <input class="hp_login_hy_but fl" type="text" id="username" name="username" value="邮箱/手机号/用户名" placeholder="邮箱/手机号/用户名"/>
+  <div class="index_logoin_msg none" id="show_name">
+    <div class="index_logoin_msg_tx">请填写用户名</div>
+    <div class="index_logoin_msg_icon"></div>
+  </div>
+</div>
+<div class="hp_login_hy"> <i class="hp_login_mm_icon fl"></i>
+<input type="text" id="password2" value="请输入密码" class="hp_login_mm_but fl">
+<input type="password" id="password" name="password" class="hp_login_mm_but fl none" value="" placeholder="请输入密码">
+  <div class="index_logoin_msg none" id="show_pass">
+    <div class="index_logoin_msg_tx">请填写密码</div>
+    <div class="index_logoin_msg_icon"></div>
+  </div>
+</div>
+{yun:}if stripos($config.code_web,"前台登录")!==false{/yun}
+
+	{yun:}if $config.code_kind==3{/yun}	
+		<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js" language="javascript"></script>
+		<script>
+		var weburl="{yun:}$config.sy_weburl{/yun}",integral_pricename='{yun:}$config.integral_pricename{/yun}',pricename='{yun:}$config.integral_pricename{/yun}',code_web='{yun:}$config.code_web{/yun}',code_kind='{yun:}$config.code_kind{/yun}';
+		</script>
+		<script src="http://static.geetest.com/static/tools/gt.js"></script>
+		<script src="{yun:}$config.sy_weburl{/yun}/js/geetest/pc.js" type="text/javascript"></script>
+		<div class="index_verification">
+        <div id="popup-captcha" data-id='sublogin' data-type='click'></div>
+		<input type='hidden' id="popup-submit">
+		</div>
+        <style>
+		.index_verification .geetest_holder.geetest_wind{min-width:247px;}
+		</style>
+		{yun:}else{/yun}
+
+		<div class="index_login_tp">
+		<input type="text" id="txt_CheckCode" name="authcode" value="验证码"class="yun_Indexlogin_yzm" maxlength="4">
+		<a href="javascript:void(0);" onclick="checkCode('vcode_imgs');"><img id="vcode_imgs" src="{yun:}$config.sy_weburl{/yun}/app/include/authcode.inc.php" class="yun_Indexlogin_yzm_img"></a>
+		<div class="index_logoin_msg none" id="show_code">
+			<div class="index_logoin_msg_tx">请填写验证码</div>
+			<div class="index_logoin_msg_icon"></div>
+		  </div>
+		</div>
+		{yun:}/if{/yun}
+{yun:}else{/yun}
+
+<div class="hp_login_box">
+  <div class="hp_login_box_ft fl">
+    <input type="checkbox" value=""/>
+    <span class="hp_login_box_r">下次自动登录</span> </div>
+  <div class="hp_login_box_rt fr"><a href="{yun:}url m=forgetpw{/yun}">忘记密码？</a></div>
+</div>
+{yun:}/if{/yun}
+<div class="hp_login_lg">
+  <input class="hp_login_lg_but" type="button" value="登录" onclick="check_login('{yun:}url m=login c=loginsave{/yun}','vcode_imgs');"/>
+</div>
+<div class="clear"></div>
+<div class="hp_login_rg fl"> <a href="{yun:}url m=register usertype=2 type=1{/yun}" class="fl" style="text-decoration:none;">企业注册</a> <a class="fr" href="{yun:}url m=register usertype=1 type=1{/yun}" style="text-decoration:none;">个人注册</a> </div>
+{yun:}/if{/yun}
+</div>
+<style>
+#label{height:34px; line-height:34px;border:1px solid #e6e6e6}
+</style>
+<script>
+$(document).ready(function(){
+	$("#usertype1").click(function(){
+		$("#reg_url_1").show();
+		$("#reg_url_2").hide();
+		$("#usertype").val("1");
+		$("#usertype1").attr("class","");
+		$("#usertype2").attr("class","index_logoin_current1");
+	});
+	$("#usertype2").click(function(){
+		$("#reg_url_2").show();
+		$("#reg_url_1").hide();
+		$("#usertype").val("2");
+		$("#usertype2").attr("class","");
+		$("#usertype1").attr("class","index_logoin_current2");
+	});
+});
+$(document).ready(function(){
+	$("#username").focus(function(){
+		var txAreaVal = $(this).val();
+		if( txAreaVal == this.defaultValue){$(this).val("");}
+	}).blur(function(){
+		var txAreaVal = $(this).val();
+		if( txAreaVal == this.defaultValue||$(this).val()==""){$(this).val(this.defaultValue);}
+	});
+	$("#txt_CheckCode").focus(function(){
+		var txAreaVal = $(this).val();
+		if( txAreaVal == this.defaultValue){$(this).val("");}
+	}).blur(function(){
+		var txAreaVal = $(this).val();
+		if( txAreaVal == this.defaultValue||$(this).val()==""){$(this).val(this.defaultValue);}
+	});
+	$("#password2").focus(function(){
+		$("#password").show();
+		$("#password").focus();
+		$("#password2").hide();
+	})
+	$("#password").blur(function(){
+		if($("#password").val()==""){
+			$("#password2").show();
+			$("#password").hide();
+		}
+	})
+});
+
+$(document).ready(function(){
+	$("#username,#txt_CheckCode").focus(function(){
+		var txAreaVal = $(this).val();
+		if( txAreaVal == this.defaultValue){$(this).val("");}
+	}).blur(function(){
+		var txAreaVal = $(this).val();
+		if( txAreaVal == this.defaultValue||$(this).val()==""){$(this).val(this.defaultValue);}
+	}).keydown(function (e) {
+	    var ev = document.all ? window.event : e;
+	    if (ev.keyCode == 13) {
+	        check_login('{yun:}url m=login c=loginsave{/yun}','vcode_imgs');
+	    } else { return;}
+	});
+	$("#password2").focus(function(){
+		$("#password").show();
+		$("#password").focus();
+		$("#password2").hide();
+	})
+	$("#password").blur(function(){
+		if($("#password").val()==""){
+			$("#password2").show();
+			$("#password").hide();
+		}
+	}).keydown(function (e) {
+	    var ev = document.all ? window.event : e;
+	    if (ev.keyCode == 13) {
+	        check_login('{yun:}url m=login c=loginsave{/yun}','vcode_imgs');
+	    } else { return; }
+	});
+	var setval;
+	$('.wxcode_login').click(function(data){
+		
+		$('.wxcode_login').hide();
+		$('.normal_login').show();
+		$('#login_normal').hide();
+		$('.wx_login_show').show();
+		$.post('{yun:}url m=login c=wxlogin{/yun}',{t:1},function(data){
+			if(data==0){
+				$('#wx_login_qrcode').html('二维码获取失败..');
+			}else{
+				$('#wx_login_qrcode').html('<img src="'+data+'" width="100" height="100">');
+				setval = setInterval("wxorderstatus()", 2000); 
+			}
+		});
+
+	});
+	$('.normal_login').click(function(data){
+	
+		$('.wxcode_login').show();
+		$('.normal_login').hide();
+		$('#login_normal').show();
+		$('.wx_login_show').hide();
+		clearInterval(setval);
+	});
+});
+
+function wxorderstatus() { 
+	$.post('{yun:}url m=login c=getwxloginstatus{/yun}',{t:1},function(data){
+		
+		var data=eval('('+data+')');
+		if(data.url!='' && data.msg!=''){
+			layer.msg(data.msg, 2, 9,function(){window.location.href=data.url;});
+		}else if(data.url){
+			
+			window.location.href=data.url;
+		}
+	});
+}
+function jobaddurl(num,integral_job,integral_pricename){ 
+	if(num==0){
+		var msg='套餐已用完，请先购买会员，<br>您还可以<a href="'+weburl+'/member/index.php?c=right&act=added" style="color:red;">购买增值包</a>！';
+		layer.confirm(msg, function(){ 
+			window.open(weburl+'/index.php?c=right');  
+		});
+	}else if(num==2){
+		var msg='套餐已用完，继续操作将会扣除'+integral_job+' '+integral_pricename+'，您还可以<a href="'+weburl+'/member/index.php?c=right&act=added" style="color:red">购买增值包</a>，是否继续？';
+		layer.confirm(msg, function(){
+			window.open(weburl+'/member/index.php?c=jobadd');   
+		});
+	}
+}
+</script>

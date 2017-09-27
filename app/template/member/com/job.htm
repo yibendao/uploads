@@ -1,0 +1,148 @@
+{yun:}include file="$comstyle/header.htm"{/yun}
+<div class="w1000">
+  <div class="admin_mainbody"> {yun:}include file="$comstyle/left.htm"{/yun}
+    <div class=right_box>
+      <div class=admincont_box>
+
+          <div class="job_list_tit">
+         <ul class="">
+         <li {yun:}if $smarty.get.w=="1"{/yun} class="job_list_tit_cur"{yun:}/if{/yun}><a href="index.php?c=job&w=1">招聘中的职位</a></li>
+         <li {yun:}if $smarty.get.w=="0"{/yun} class="job_list_tit_cur"{yun:}/if{/yun}><a href="index.php?c=job&w=0">待审核职位</a></li>
+         <li {yun:}if $smarty.get.w=="3"{/yun} class="job_list_tit_cur"{yun:}/if{/yun}><a href="index.php?c=job&w=3">未通过职位</a></li>
+         <li {yun:}if $smarty.get.w=="2"{/yun} class="job_list_tit_cur"{yun:}/if{/yun}><a href="index.php?c=job&w=2">过期职位</a></li>
+         <li {yun:}if $smarty.get.w=="4"{/yun} class="job_list_tit_cur"{yun:}/if{/yun}><a href="index.php?c=job&w=4">已下架职位</a></li>
+         <li {yun:}if $smarty.get.w=="5"{/yun} class="job_list_tit_cur"{yun:}/if{/yun}><a href="index.php?c=job&w=5">所有职位</a></li>
+         </ul>
+         </div>
+      <div class="clear"></div>
+        <div class="com_body">
+          <div class="clear"></div>
+          <div class="com_Release_job"> {yun:}if !empty($rows){/yun}
+            <div class="com_Release_job_h1"> <span class="com_Release_job_a_c">&nbsp;</span> <span class="com_Release_job_a" style="width:200px;">职位名称</span> <span class="com_Release_job_c">收到简历</span> <span class="com_Release_job_e">浏览量 </span> {yun:}if $smarty.get.w==4{/yun}<span class="com_Release_job_b">招聘状态</span>{yun:}else{/yun}<span class="com_Release_job_e">审核状态</span> {yun:}/if{/yun}<span class="com_Release_job_e">更新时间</span> <span class="com_Release_job_e">到期时间</span> <span class="com_Release_job_e">操作</span> </div>
+            {yun:}/if{/yun}
+            <iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe>
+            <form action="index.php?c=job&act=opera" target="supportiframe" method="post" id='myform'>
+              {yun:}foreach item=job from=$rows{/yun}
+              <div class="com_Release_job_span  com_Release_job_list">
+                <div class="com_Release_job_span  com_Release_job_a_c">
+                  <input type="checkbox" name="checkboxid[]" value="{yun:}$job.id{/yun}" class="com_Release_job_check">
+                </div>
+                <div class="com_Release_job_span  com_Release_job_a" style="width:200px;"><a href="{yun:}url m=job c=comapply id='`$job.id`'{/yun}" class="com_Release_name">{yun:}$job.name{/yun}</a></div>
+                <div class="com_Release_job_span  com_Release_job_c"><a href="index.php?c=hr&jobid={yun:}$job.id{/yun}">{yun:}$job.jobnum{/yun}份</a></div>
+                <div class="com_Release_job_span  com_Release_job_e">{yun:}$job.jobhits{/yun} </div>
+                {yun:}if $smarty.get.w==4{/yun}
+                <div class="com_Release_job_span  com_Release_job_b"> {yun:}if $job.status=="1"{/yun} <span class="com_m_job_lis_zt" style="padding:0px 0px">已下架</span><a href="javascript:onstatus('{yun:}$job.id{/yun}','2');" class="com_m_job_lis_hf">【上架】</a> {yun:}/if{/yun} </div>
+                {yun:}else{/yun}
+                <div class="com_Release_job_span  com_Release_job_e"> {yun:}if $job.state=="0"{/yun} <span class="n_verify">等待审核</span>{yun:}/if{/yun}
+                  {yun:}if $job.state=="1"{/yun} <span class="y_verify">已审核</span>{yun:}/if{/yun}
+                  {yun:}if $job.state=="2"{/yun} <span class="y_verify_js">已到期</span>{yun:}/if{/yun}
+                  {yun:}if $job.state=="3"{/yun} <span class="y_verify_wtg">未通过</span>{yun:}/if{/yun} </div>
+                {yun:}/if{/yun}
+                <div class="com_Release_job_span  com_Release_job_span  com_Release_job_e">{yun:}$job.lastupdate|date_format:'%Y-%m-%d'{/yun}</div>
+                <div class="com_Release_job_span com_Release_job_e">{yun:}$job.edate|date_format:'%Y-%m-%d'{/yun} </div>
+                <div class="com_Release_job_span  com_Release_job_e" > 
+                
+                <a  href="index.php?c=jobadd&act=edit&id={yun:}$job.id{/yun}" class="cblue" class="cblue">修改</a>
+                <a href="javascript:void(0)" onclick="layer_del('确定要删除该职位？','index.php?c=job&act=opera&del={yun:}$job.id{/yun}');" class="cblue">删除</a> {yun:}if $smarty.get.w=='2'{/yun} <a href="javascript:void(0);" onclick="gotime('{yun:}$job.id{/yun}','{yun:}$job.edate|date_format:'%Y-%m-%d'{/yun}')" class="cblue">延期</a> {yun:}/if{/yun} </div>
+                	{yun:}if $smarty.get.w=='3'{/yun}
+                <div class="com_Release_job_span  com_Release_job_bot"> <em class="com_Release_job_span  com_Release_job_em" style="_margin-left:15px;">未通过原因：{yun:}$job.statusbody{/yun} </em> </div>
+                {yun:}/if{/yun} </div>
+              {yun:}foreachelse{/yun}
+              <div class="msg_no"><p>亲爱的用户，目前您还没有相关职位</p><a href="javascript:;" onclick="jobadd_url('{yun:}$addjobnum{/yun}','{yun:}$config.integral_job{/yun}','{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}');" class="com_msg_no_bth com_submit">点击添加职位</a></div>
+              {yun:}/foreach{/yun} 
+              {yun:}if !empty($rows){/yun}
+              <div class="com_Release_job_bot"> <span class="com_Release_job_qx">
+                <input id='checkAll' type="checkbox" onclick='m_checkAll(this.form)'class="com_Release_job_qx_check">
+                全选</span> {yun:}if $smarty.get.w=='2'{/yun}
+                <INPUT class="c_btn_02 c_btn_02_w110" type="button" value="批量延长有效期" onclick="allgotime();">
+                {yun:}/if{/yun}
+                <INPUT class="c_btn_02 c_btn_02_w110" type="button" value="批量删除职位" onclick="return really('checkboxid[]');">
+                {yun:}if $smarty.get.w=='4'{/yun}
+               <INPUT class="c_btn_02 c_btn_02_w110" type="button" value="一键上架招聘" onclick="return allonstatusopen('checkboxid[]');">
+                {yun:}/if{/yun}
+            </div>
+              {yun:}/if{/yun}
+            </form>
+          </div>
+          <div  class="clear"></div>
+          <div class="diggg">{yun:}$pagenav{/yun}</div>
+          <div  class="clear"></div>
+
+          <div  class="clear"></div>
+          <div class="wxts_box wxts_box_mt30">
+            <div class="wxts">温馨提示：</div>
+            1、如贵公司要快速招聘人才，建议成为我们的会员，获取更多的展示机会，以帮助您快速找到满意的人才。 <br>
+            2、请贵公司保证职位信息的真实性、合法性，并及时更新职位信息，如被举报或投诉，确认发布的信息违反相关规定后，本站将会关闭贵公司的招聘服务，敬请谅解！ </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+function gotime(id,edate,i){
+	$("#gotimeid").val(id);
+	if(i){
+		$("#gotime_edate").html("本次共延期<font color='red'>"+i+"</font>个职位！");
+	}else{
+		$("#gotime_edate").html('当前职位到期时间：<font color="red">'+edate+'</font>');
+	}
+	$.layer({
+		type : 1,
+		title : '延期天数',
+		closeBtn : [0 , true],
+		border : [10 , 0.3 , '#000', true],
+		area : ['340px','210px'],
+		page : {dom : '#gotime'}
+	});
+}
+function allgotime(){
+	var allid =[];
+	var i=0;
+	$('input[name="checkboxid[]"]:checked').each(function(){
+		allid.push($(this).val());
+		i++;
+	});
+	if(allid.length==0){
+		layer.msg("请选择要延期的职位！",2,8);return false;
+	}else{
+		gotime(allid,'',i);
+	}
+} 
+function allonstatusopen(){
+	var allid =[];
+	var i=0;
+	$('input[name="checkboxid[]"]:checked').each(function(){
+		allid.push($(this).val());
+		i++;
+	});
+	if(allid.length==0){
+		layer.msg("请选择要上架的职位！",2,8);return false;
+	}else{
+		onstatus(allid,2);
+	}
+} 
+function onstatus(id,status){
+	$.post("index.php?c=job&act=opera",{id:id,status:status},function(data){
+		if(data==1){ 
+			layer.msg('设置成功！', 2, 9,function(){window.location.reload();});return false;
+		}else{
+			layer.msg('设置失败！', 2, 8);
+		}
+	})
+}
+</script> 
+<div id="gotime"  style="display:none; width:230px; ">
+  <div class="job_box_div"  style="width:300px; ">
+    <div class="job_box_msg" style="margin-left:10px;_margin-left:5px;margin-top:10px; padding:5px;">
+      <p id="gotime_edate"></p>
+    </div>
+    <form action='index.php?c=job&act=opera' target="supportiframe" method="post" id='gotimef'>
+      <input type="hidden" name="gotimeid" id="gotimeid" value=""/>
+      <div class="job_box_inp"  style="padding:10px 5px 5px 20px"> <span style="float:left; margin-right:0px;">延期天数：</span>
+        <input name="day" value="" class="com_info_text placeholder" type="text" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" style="width:100px;"/>
+        <span class="fltL box_infobox_span" style="padding-left:10px;">天</span> </div>
+      <span class="job_box_botton" style="width:100%;"> <a class="job_box_yes job_box_botton2" href="javascript:void(0);" onclick="setTimeout(function(){$('#gotimef').submit()},0);">确定</a> </span>
+    </form>
+  </div>
+</div>
+{yun:}include file="$comstyle/footer.htm"{/yun}

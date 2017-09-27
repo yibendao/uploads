@@ -1,0 +1,249 @@
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312"/>
+<meta http-equiv="Cache-Control" content="no-cache"/>
+<title>{yun:}$title{/yun} - 手机人才网</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-compatible"content="IE=edge"/>
+<meta name="viewport" content="width=device-width" initial-scale="1"/>
+<meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=2.0, user-scalable=no, width=device-width"/>
+<link rel="stylesheet" href="{yun:}$config.sy_weburl{/yun}/app/template/wap/css/css.css" type="text/css"/>
+<link rel="stylesheet" href="{yun:}$config.sy_weburl{/yun}/app/template/wap/css/job.css" type="text/css"/>
+<link rel="stylesheet" href="{yun:}$config.sy_weburl{/yun}/app/template/wap/css/map.css" type="text/css"/>
+</head>
+<body>
+<header>
+   <div class="header">
+    <div class="header_bg"> <a class="hd-lbtn" href="javascript:history.back();"><i class="header_top_l"></i></a>
+       <div class="header_h1">{yun:}$title{/yun}</div> 
+     </div>
+  </div>
+ </header>
+<div id="allmap"></div>
+
+<form id="map-search" class="on">
+    <input type="hidden" name="c" value="map" />
+    <input type="hidden" name="x" id="x" value="" />
+    <input type="hidden" name="y" id="y" value="" />
+  <div id="search-type-wrapper" class="">
+    <div id="search-type-label">企业</div>
+    <div id="search-type-selector">
+      <label id="search-type-company" class="search-type checked" data-value="company" data-placeholder="企业名称">企业</label>
+      <label id="search-type-recruit" class="search-type" data-value="recruit" data-placeholder="职位名称">职位</label>
+    </div>
+  </div>
+  <div id="search-q-wrapper">
+      <input type="search" id="search-q" name="keyword" placeholder="企业名称" value="{yun:}$smarty.get.keyword{/yun}"/>
+  </div>
+  <button type="submit" id="search-submit"><i class="iconfont map_iconfont_search"></i></button>
+  <button type="button" id="search-close"><span class="iconfont map_iconfont_search_s"><<</span></button>
+</form>
+
+<div id="map-controls">
+  <button id="show-company-list"><i class="map_list map_iconfont_search_map "></i></button>
+  <button id="my-location"><i class="map_jz_list map_iconfont_search_map_nav "></i></button>
+</div>
+
+<div id="company-panel-controls" style="display:none;"> <span id="company-panel-close" class="icon close" style="display: none;"></span> <span id="company-panel-refresh">换一批<span class="icon refresh"></span><i class="iconfont map_iconfont_search_map_nav_hyh" style="font-size:16px; margin-left:5px;"></i></span> </div>
+<div id="company-panel" style="display:none;">
+    <div id="company-list" style="margin-left: 0; width:100%;">
+    </div>
+    <ul id="company-indicator"></ul>
+    <span id="company-list-prev" class="icon prev"><i class="iconfont company-listicon"></i></span> <span id="company-list-next" class="icon next"><i class="iconfont company-listicon"></i></span>
+</div>
+<style type="text/css">
+	#allmap {width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";}
+</style>
+<script src="{yun:}$config.sy_weburl{/yun}/app/template/wap/js/prefixfree.min.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/app/template/wap/js/layer/layer.m.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/app/template/wap/js/public.js" language="javascript"></script> 
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak={yun:}$config.map_key{/yun}"></script> 
+<script type="text/javascript">
+	// 百度地图API功能
+	var map = new BMap.Map("allmap");                    // 创建Map实例
+	var point = new BMap.Point(116.331398, 39.897445);   //设置中心点坐标
+	var map_zoom = 15;//3---18                           //设置地图初始缩放级别
+	map.centerAndZoom(point, map_zoom);                  //设置中心点和地图缩放级别
+	var company_list_index = 0;//1-10
+	var company_list_index_max = 9;
+	var json_data;
+	var mk_list = new Array();
+	var pagecount = 0;
+	var page = 1;
+	var location_r;
+    //map拖拽事件
+	map.addEventListener("dragend", function (e) {
+	    //alert("当前位置：" + e.point.lng + ", " + e.point.lat);
+	    var ceonterPoint=map.getCenter();
+	    get_com_list(1, ceonterPoint.lng, ceonterPoint.lat, map_zoom);
+	})
+	$(function () {
+	   
+	    $('#my-location').click(function () {
+	        get_current_loaction();
+	    });
+	    $('#map-search').submit(function () {
+	        if (!$('#map-search').hasClass('on')) {
+	            $('#map-search').addClass('on'); return false;
+	        }
+	    });
+	    $('#search-close').click(function () {
+	        if ($('#map-search').hasClass('on')) {
+	            $('#map-search').removeClass('on');
+	        } else {
+	            $('#map-search').addClass('on');
+	        }
+	    });
+	    $('#company-list-prev').click(function () {
+	        if (company_list_index > 0) {
+	            $('#company-list').css('margin-left', '-' + (company_list_index < 1 ? 0 : --company_list_index) + '00%');
+	        } else {
+	            company_list_index = company_list_index_max - 1;
+	            $('#company-list').css('margin-left', '-' + company_list_index + '00%');
+	        }
+	        var i = company_list_index;
+	        var info_point = new BMap.Point(json_data.list[i].x, json_data.list[i].y);
+	        map.panTo(info_point);
+	        $('#company-indicator li:eq(' + i + ')').addClass('current').siblings().removeClass('current');
+	        show_info_window(mk_list[i]);
+	    });
+	    $('#company-list-next').click(function () {
+	        if (company_list_index < (company_list_index_max-1)) {
+	            $('#company-list').css('margin-left', '-' + (company_list_index >= (company_list_index_max - 1) ? company_list_index_max : ++company_list_index) + '00%');
+	        } else {
+	            company_list_index = 0;
+	            $('#company-list').css('margin-left', '0%');
+	        }
+	        var i = company_list_index;
+	        var info_point = new BMap.Point(json_data.list[i].x, json_data.list[i].y);
+	        map.panTo(info_point);
+	        $('#company-indicator li:eq(' + i + ')').addClass('current').siblings().removeClass('current');
+	        show_info_window(mk_list[i]);
+	    });
+	    $('#show-company-list').click(function () {
+	        if($("#company-panel-controls").css("display")=="none"){
+	            $('#company-panel-controls').show();
+	            $('#company-panel').show();
+	        } else {
+	            $('#company-panel-controls').hide();
+	            $('#company-panel').hide();
+	        }
+	    });
+	    $('#company-panel-refresh').click(function () {
+	        get_com_list((page < pagecount) ? ++page : pagecount, location_r.point.lng, location_r.point.lat, map_zoom);
+	    });
+	});
+	function show_info_window(marker) {
+	    var i = marker.tag;
+	    var joblist_html = '';
+	    var joblist_length = 0;
+	    if (json_data.list[i].joblist) {
+	        for (var j = 0; j < json_data.list[i].joblist.length; j++) {
+	            joblist_html += '<li><a href="' + json_data.list[i].joblist[j].job_url + '">' + json_data.list[i].joblist[j].name + '</a></li>';
+	        }
+	        joblist_length = json_data.list[i].joblist.length;
+	    }
+	    var info_html = ' <div class="map_company">' +
+        '<div class="map_company_cont">' +
+'<ul class="map_company_post">' +
+    joblist_html +
+'</ul>' +
+'<div class="map_company_xq"><a href="' + json_data.list[i].com_url + '">查看详情>></a></div>' +
+'</div>' +
+'</div>';
+	    var infoWindow = new BMap.InfoWindow(info_html, { title: '<div class="map_company_h1"><a style="color:#000;" href="' + json_data.list[i].com_url + '">' + json_data.list[i].name + '</a></div>', width: 100, height: 20 * joblist_length + 90 });
+	    marker.openInfoWindow(infoWindow);
+	}
+	get_current_loaction(page);
+	function get_current_loaction(page) {
+	    var geolocation = new BMap.Geolocation();
+	    geolocation.getCurrentPosition(function (r) {
+	        if (this.getStatus() == BMAP_STATUS_SUCCESS) {
+	            location_r = r;
+	            $('#x').val(r.point.lng);
+	            $('#y').val(r.point.lat);
+	            get_com_list(page, r.point.lng, r.point.lat, map_zoom);
+	        }
+	        else {
+	            alert('failed' + this.getStatus());
+	        }
+	    }, { enableHighAccuracy: true });
+	}
+	function get_com_list(page, x, y, zoom) {
+	var map = new BMap.Map("allmap");            
+		map.centerAndZoom(new BMap.Point(x,y), 15);  
+		var top_right_navigation = new BMap.NavigationControl({anchor: BMAP_ANCHOR_BOTTOM_RIGHT , type: BMAP_NAVIGATION_CONTROL_SMALL,offset: new BMap.Size(0, 105)});
+		map.addControl(top_right_navigation);    
+		var b=map.getBounds();           //返回当前视口的西南纬度/经度和东北纬度/经度
+		var a=b.getSouthWest();
+		var d=b.getNorthEast();
+	    $.post('{yun:}url m=wap c=map a=joblist{/yun}', {minx:a.lng,maxx:d.lng,miny:a.lat,maxy:d.lat, page: page, keyword: '{yun:}$smarty.get.keyword{/yun}', r: zoom }, function (data) {
+	  
+	        json_data = eval('(' + data + ')');
+	        pagecount = json_data.pagecount;
+	        var company_indicator_html = '';
+	        var company_list_html = '';
+	        for (var i = 0; i < json_data.list.length; i++) {
+	            var info_point = new BMap.Point(json_data.list[i].x, json_data.list[i].y);
+	            if (i == 0) {
+	                map.centerAndZoom(info_point, 15);
+	            }
+	            var mk = new BMap.Marker(info_point);
+	            mk.tag = i;
+	            mk.addEventListener("click", function () {
+	                show_info_window(this);
+	            });
+
+	            company_indicator_html += '<li ' + (i == 0 ? 'class="current"' : '') + ' style="width: 10%;"></li>';
+	            company_list_html += '<div class="company-info" style="width: '+document.body.clientWidth+'px;">' +
+'<h3 class="company-title"><a href="' + json_data.list[i].com_url + '">' + json_data.list[i].name + '</a></h3>' +
+'</div>  ';
+	            mk_list[i] = mk;
+	            map.addOverlay(mk);
+	            map.panTo(info_point);
+	        }
+	        if (json_data.list.length <= 0) {
+	            layermsg('您的附近没有相关职位！', 2);
+	            var info_point = new BMap.Point(x, y);
+	            if (i == 0) {
+	                map.centerAndZoom(info_point, 15);
+	            }
+	            var mk = new BMap.Marker(info_point);
+	            map.addOverlay(mk);
+	            map.panTo(info_point);
+	        }
+	        company_list_index_max = json_data.list.length;
+	        $('#company-indicator').html(company_indicator_html);
+	        $('#company-list').html(company_list_html);
+	        $('#company-list').width(document.body.clientWidth * json_data.list.length);
+	    });
+	}
+	map.addEventListener("dragend", function (e) {
+		
+		//var map = new BMap.Map("allmap");
+		var ceonterPoint=map.getCenter();
+		
+		get_com_list(1, ceonterPoint.lng, ceonterPoint.lat, map_zoom,map);
+	});
+	map.addEventListener("zoomend", function (e) {
+		
+		//var map = new BMap.Map("allmap");
+		var ceonterPoint=map.getCenter();
+
+		get_com_list(1, ceonterPoint.lng, ceonterPoint.lat, map_zoom,map);
+	});
+	//关于状态码
+	//BMAP_STATUS_SUCCESS	检索成功。对应数值"0"。
+	//BMAP_STATUS_CITY_LIST	城市列表。对应数值"1"。
+	//BMAP_STATUS_UNKNOWN_LOCATION	位置结果未知。对应数值"2"。
+	//BMAP_STATUS_UNKNOWN_ROUTE	导航结果未知。对应数值"3"。
+	//BMAP_STATUS_INVALID_KEY	非法密钥。对应数值"4"。
+	//BMAP_STATUS_INVALID_REQUEST	非法请求。对应数值"5"。
+	//BMAP_STATUS_PERMISSION_DENIED	没有权限。对应数值"6"。(自 1.1 新增)
+	//BMAP_STATUS_SERVICE_UNAVAILABLE	服务不可用。对应数值"7"。(自 1.1 新增)
+	//BMAP_STATUS_TIMEOUT	超时。对应数值"8"。(自 1.1 新增)
+</script> 
+</body>
+</html>

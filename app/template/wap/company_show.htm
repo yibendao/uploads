@@ -1,0 +1,130 @@
+{yun:}include file="$wapstyle/header_cont.htm"{/yun}
+<section>
+  <div class="company-info" style="background:url({yun:}$config.sy_weburl{/yun}/app/template/wap/images/beijing.jpg) no-repeat center center;background-size: cover;"><img class="avatar" src="{yun:}$row.logo{/yun}" onerror="showImgDelay(this,'{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_unit_icon{/yun}',2);">
+    <div class="firm_name">
+    {yun:}$row.name{/yun}    
+    {yun:}if $comrat.com_pic!=""{/yun}<img src="{yun:}$config.sy_weburl{/yun}/{yun:}$comrat.com_pic{/yun}" width="20" height="20" /> {yun:}/if{/yun}    
+    {yun:}if $row.yyzz_status=='1'{/yun}<i class="job_qy_rz_icon"></i>{yun:}/if{/yun}
+    </div>
+    <div class="firm_t_city"> <i class="user_map iconfont_comshowmap"></i>{yun:}$city_name[$row.provinceid]{/yun}/{yun:}$city_name[$row.cityid]{/yun} <i class="user_map iconfont_comshowdate" style="margin-left:10px;"></i>{yun:}$row.lastupdate{/yun}</div>
+  </div>
+</section>
+<section>
+  <div class=" mt10">
+    <div class="user_contnet_box ">
+      <div class="wap_title"><span class="">基本信息</span></div>
+      <div class="com_share"><a href="javascript:void(0);"  data-url='{yun:}url m=wap c=company a=share id=$row.uid{/yun}'  class="com_share_bth" id="shareClick"><i class="com_share_bth_icon iconfont_comshare"></i><span class="com_share_bth_s">分享企业</span></a></div>
+      <ul class="user_contnet_ul">
+        {yun:}if $comclass_name[$row.pr]{/yun}<li  class="com_show_li"><span class="user_contnet_info_n">企业性质：</span>{yun:}$comclass_name[$row.pr]{/yun}</li>{yun:}/if{/yun}
+        {yun:}if $row.money!=0{/yun}<li  class="com_show_li"><span class="user_contnet_info_n">注册资金：</span>{yun:}$row.money{/yun}万元</li>{yun:}/if{/yun}
+        <li  class="com_show_li"><span class="user_contnet_info_n">公司规模：</span>{yun:}$comclass_name[$row.mun]{/yun}</li>
+        <li class="com_show_li"><span class="user_contnet_info_n">所属行业：</span>{yun:}$industry_name[$row.hy]{/yun}</li>
+      </ul>
+    </div>
+  </div>
+</section>
+<section id='content'>
+  <div class=" mt10">
+    <div class="user_contnet_box ">
+      <div class="wap_title_j"><span class="">公司简介</span>
+      {yun:}if $uid{/yun}
+        {yun:}if $usertype=='1'{/yun}
+          {yun:}if $isatn.id{/yun} 
+                <div class="firm_name_gz_no atn_{yun:}$row.uid{/yun}"><a href="javascript:void(0)" onclick="atn('{yun:}$row.uid{/yun}','{yun:}url m=ajax c=atn_company{/yun}')" id='atn_{yun:}$row.uid{/yun}'>取消关注</a> </div>		
+				{yun:}else{/yun}
+				<div class="firm_name_gz atn_{yun:}$row.uid{/yun}"><a href="javascript:void(0)" onclick="atn('{yun:}$row.uid{/yun}','{yun:}url m=wap c=ajax a=atn_company{/yun}')" id='atn_{yun:}$row.uid{/yun}'>关注</a> </div>		
+				{yun:}/if{/yun}
+		{yun:}else{/yun} 
+		  <div class="firm_name_gz"><a href="javascript:void(0)" onclick="layermsg('只有个人用户才能关注');">关注</a></div>		
+        {yun:}/if{/yun} 
+       {yun:}else{/yun} 
+         <div class="firm_name_gz"><a href="javascript:void(0)" onclick="layermsg('请先登录');">关注</a></div>
+        {yun:}/if{/yun} 
+      </div>
+      <div class="user_contnet_box_p ">  
+       
+      {yun:}if $row.content{/yun}
+      {yun:}$row.content{/yun}
+      {yun:}else{/yun} 
+      <div class="evaluate_pj_no"><i class="evaluate_pj_no_icon"></i>该企业还没有填写公司简介! </div>      
+      {yun:}/if{/yun} 
+      
+       </div>
+      </div>
+  </div>
+</section>
+<section id='tel'>
+  <div class=" mt10">
+    <div class="user_contnet_box ">
+      <div class="wap_title"><span class="">联系方式</span></div>
+      
+      
+       {yun:}if $looktype=="1"{/yun}
+       <ul class="com_post_msg com_post_msg_touch com_post_msg_bot">
+        {yun:}if $row.linkman{/yun}<li><i class="com_post_msg_touch_icon iconfont_jobshow_teluser"></i>联&nbsp;系&nbsp;人：</span>{yun:}$row.linkman{/yun}</li>{yun:}/if{/yun}
+        {yun:}if $row.linktel{/yun}<li class="com_post_msg_tel"><i class="com_post_msg_touch_icon iconfont_jobshow_telip"></i>联系手机：<a href="tel:{yun:}$row.linktel{/yun}">{yun:}$row.linktel{/yun}<span class="com_post_tel_bd"><i class="com_post_zx iconfont"></i>  <div class="com_post_tel_bd_p">拨打咨询</div></span></a></li>{yun:}/if{/yun}
+        {yun:}if $row.linkphone{/yun}<li class="com_post_msg_tel"><i class="com_post_msg_touch_icon iconfont_jobshow_tel"></i>联系电话：<a href="tel:{yun:}$row.linkphone{/yun}">{yun:}$row.linkphone{/yun}<span class="com_post_tel_bd"><i class="com_post_zx iconfont"></i>  <div class="com_post_tel_bd_p">拨打咨询</div></span></a></li>{yun:}/if{/yun}
+        {yun:}if $row.busstops{/yun}<li><i class="com_post_msg_touch_icon iconfont_jobshow_bus"></i>公交站点：</span>{yun:}$row.busstops{/yun}</li>{yun:}/if{/yun}
+        <li><i class="com_post_msg_touch_icon iconfont_jobshow_map"></i>公司地址：</span>{yun:}$row.address{/yun}</li>
+      </ul>
+       {yun:}else{/yun}
+        {yun:}if $looktype=="3" || $looktype=="2"|| $looktype=="5"{/yun}
+        <div class="com_post_login"> <i class="com_post_tel iconfont"></i>{yun:}$look_msg{/yun} </div>
+        {yun:}elseif $looktype=="4"{/yun}
+       {yun:}if $row.linkman{/yun} <div class="com_tel_p">联&nbsp;系&nbsp; 人：{yun:}$row.linkman{/yun}</div>{yun:}/if{/yun}
+     {yun:}if $row.linktel{/yun}  <div class="com_tel_p">联系手机：{yun:}$row.linktel{/yun}</div>{yun:}/if{/yun}
+     {yun:}if $row.linkphone{/yun}  <div class="com_tel_p">联系电话：{yun:}$row.linkphone{/yun}</div>{yun:}/if{/yun}
+      <div  class="com_tel_p">公司地址：{yun:}$row.address{/yun}</div>
+      <div class="com_post_login com_post_login_pd"> <i class="com_post_tel iconfont"></i><span class="com_touch_tip">登录后查看联系方式</span> <a href="{yun:}url m=wap c=login job=$job.id{/yun}" class="com_s_logoin">登录</a> <a href="{yun:}url m=wap c=register{/yun}" class="com_s_reg">注册</a></div>
+  
+      	{yun:}elseif $looktype=="6"{/yun}
+		<div class="com_post_login"> <i class="com_post_tel iconfont"></i>{yun:}$look_msg{/yun} </div>
+		<div class="company_tit_p_touch_l_c"><a href="{yun:}url m=wap{/yun}member/index.php?c=addresume" class="company_tit_p_touch_log">创建简历</a></div>
+		 {yun:}/if{/yun}
+      {yun:}/if{/yun} </div>
+     </div>
+</section>
+  
+  
+<section  id="job">
+  <div class=" mt10">
+    <div class="index_warp_content">
+      <div class="wap_title"><span class="">正在招聘的职位</span></div>
+      {yun:}assign var=uid value=$row.uid{/yun}
+      {yun:}joblist namelen=8 comlen=12 ispage=0 uid='@row.uid' order=xuanshang  islt=4 item=job_list name=joblist1{/yun}
+      <div class="com_show_joblist" > <a href="{yun:}url m=wap c=job a=view id=$job_list.id{/yun}" class="job_list">
+        <h3>{yun:}$job_list.name_n{/yun}{yun:}if $job.urgent_time>time(){/yun}<i class="urgent">急招</i>{yun:}/if{/yun}</h3>
+        <aside class="job_qy_name">
+        <strong style="color:#ff6a6a; font-weight:normal">￥{yun:}$job_list.job_salary{/yun}</strong>
+        </aside>
+        <div class="com_show_jiobc">
+        <span class="com_show_city"><i class="com_show_city_icon"></i>{yun:}$job_list.job_city_one{/yun}-{yun:}$job_list.job_city_two{/yun}</span>
+         {yun:}if $job_list.job_exp{/yun}<span class="com_show_jy"><i class="com_show_jy_icon"></i>{yun:}$job_list.job_exp{/yun}经验 </span>{yun:}/if{/yun}
+         {yun:}if $job_list.job_edu{/yun}<span class="com_show_jy"><i class="com_show_xl_icon"></i>{yun:}$job_list.job_edu{/yun}学历 </span>{yun:}/if{/yun}
+         </div>
+        <aside class="job_pay"><span class="job_t_date job_t_date_t">{yun:}if $job_list.time=='今天' || $job_list.time=='昨天'{/yun} <span style="color:red;">{yun:}$job_list.time{/yun}</span> {yun:}else{/yun}
+          {yun:}$job_list.time{/yun}
+          {yun:}/if{/yun}</span></aside>
+        </a> </div>
+        {yun:}joblistelse{/yun}
+		<div class="evaluate_pj_no"><i class="evaluate_pj_no_icon"></i>该企业还没有发布职位信息! </div>
+      {yun:}/joblist{/yun} 
+      </div>
+  </div>
+</section>
+
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/layer/layer.m.js" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/public.js" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/prefixfree.min.js" language="javascript"></script>
+<script>
+	var config = {
+		url:'{yun:}url m=wap c=company a=share id=$row.uid{/yun}',
+		title:'{yun:}$row.name{/yun}-{yun:}$config.sy_webname{/yun}',
+		desc:'',
+		img:'{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_wx_sharelogo{/yun}',
+		img_title:'{yun:}$row.name{/yun}',
+		from:'{yun:}$config.sy_webname{/yun}'
+	};
+</script>
+{yun:}include file="$wapstyle/footer.htm"{/yun} 

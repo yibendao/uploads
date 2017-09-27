@@ -1,0 +1,288 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<link href="./images/reset.css" rel="stylesheet" type="text/css" />
+<link href="./images/system.css" rel="stylesheet" type="text/css" />
+<link href="./images/table_form.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="{yun:}$config.sy_weburl{/yun}/js/jscolor/jscolor.js"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script>
+<script src="js/admin_public.js" language="javascript"></script>
+<script charset="utf-8" src="../js/kindeditor/kindeditor-min.js"></script>
+<script charset="utf-8" src="../js/kindeditor/lang/zh_CN.js"></script>
+<link rel="stylesheet" href="../js/kindeditor/themes/default/default.css" />
+</head>
+<script language="javascript">
+KindEditor.ready(function(K) {
+	var colorpicker;
+	K('#colorpicker').bind('click', function(e) {
+		e.stopPropagation();
+		if (colorpicker) {
+			colorpicker.remove();
+			colorpicker = null;
+			return;
+		}
+		var colorpickerPos = K('#colorpicker').pos();
+		colorpicker = K.colorpicker({
+			x : colorpickerPos.x,
+			y : colorpickerPos.y + K('#colorpicker').height(),
+			z : 19811214,
+			selectedColor : 'default',
+			noColor : '无颜色',
+			click : function(color) {
+				K('#color').val(color);
+				$('#color + font').css('color', color);
+				colorpicker.remove();
+				colorpicker = null;
+			}
+		});
+	});
+	K(document).click(function() {
+		if (colorpicker) {
+			colorpicker.remove();
+			colorpicker = null;
+		}
+	});
+});
+</script>
+<body class="body_ifm">
+<div class="infoboxp">
+<div class="infoboxp_top_bg"></div>
+<div class="infoboxp_top" style="z-index:600;position:relative;">	
+	<div class="report_uaer_list"><span class="infoboxp_top_span">会员等级</span>
+	 <a href="index.php?m=admin_comrating"class="report_uaer_list_on" >等级设置</a>
+	 <a href="index.php?m=admin_comrating&c=server" >增值服务</a> 
+	  </div> 
+  </div> 
+<div class="admin_Prompt">
+<div class="admin_Prompt_span">
+    <b>提示：</b>企业会员等级关乎您的收入问题，请谨慎添加和修改并注意整体的合理性。
+</div><div class="admin_Prompt_close"></div></div>
+
+<div style=" background: #FFFFFF; border: 1px solid #DCE3ED;">
+<div class=" ">
+<iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe> 
+<form name="myform" target="supportiframe" action="index.php?m=admin_comrating&c=saveclass" method="post" id="myform" enctype="multipart/form-data" onSubmit="return checkform();">
+<input type="hidden" name="pytoken" id="pytoken" value="{yun:}$pytoken{/yun}">
+<input name="category" value="1" type="hidden"/>
+<table width="100%" class="table_form table_form_thr" style="background:#fff;">
+<tr>
+<td colspan="2"><div style="padding:5px 0; font-size:14px; font-weight:bold;color:#6688cb">添加企业会员等级</div></td>
+</tr>
+    <tr class="admin_table_trbg">
+        <th align="right" width="150">会员模式：</th>
+        <td colspan="3">        
+        <input type="radio" name="type" value="1" id="Radiotype1_0" {yun:}if $row.type!=2{/yun}checked{yun:}/if{/yun}>
+        <label for="Radiotype1_0">套餐模式</label>
+        <input type="radio" name="type" value="2" id="Radiotype1_1" {yun:}if $row.type==2{/yun}checked{yun:}/if{/yun}>
+        <label for="Radiotype1_1">时间模式</label>
+        <span class="admin_web_tip">套餐模式针对下载简历、发布职位等数量控制，时间模式在有效时间内，不限任何操作</span>
+        </td>
+    </tr>
+
+    <tr>
+        <th align="right">等级名称：</th>
+        <td>
+        <input type="text" name="name" id="name" class="input-text tips_class" size="30" value="{yun:}$row.name{/yun}">
+        <span class="admin_web_tip">如：VIP1</span>
+        <input type="checkbox" name="youhui" value="1" onClick="$('.vip_type_youhui').toggle();" {yun:}if $row.yh_price{/yun}checked{yun:}/if{/yun}>优惠活动
+        </td>
+		 <th align="right">服务购买：</th>
+        <td>
+        <input type="text" name="service_price" id="service_price" class="input-text" size="12" value="{yun:}$row.service_price{/yun}" onKeyUp="this.value=this.value.replace(/[^0-9]/g,'')"> 元
+        </td>
+    </tr> 
+        <tr>
+        <th align="right">有效时间：</th>
+        <td>
+        <input type="text" name="service_time" id="service_time" class="input-text" size="12" value="{yun:}$row.service_time{/yun}" onKeyUp="this.value=this.value.replace(/[^0-9.]/g,'')"> 天 <span class="admin_web_tip">提示：0代表不限</span>
+        </td>
+        <th align="right">排序：</th>
+        <td>
+        <input type="text" name="sort" id="sort" class="input-text tips_class" size="12" value="{yun:}$row.sort{/yun}" onkeyup="this.value=this.value.replace(/[^0-9.]/g,'')">
+        <span class="admin_web_tip">大前小后</span>
+        </td>
+    </tr>
+    
+    <tr>
+        <th align="right">状态：</th>
+        <td colspan="3">          
+            <input type="radio" name="display" value="1" id="RadioGroup1_0" {yun:}if $row.display==1{/yun}checked{yun:}/if{/yun}>
+            <label for="RadioGroup1_0">启用</label>
+            <input type="radio" name="display" value="0" id="RadioGroup1_1" {yun:}if $row.display==0{/yun}checked{yun:}/if{/yun}>
+            <label for="RadioGroup1_1">不启用</label>
+			<span class="admin_web_tip">前台是否可见</span>
+        </td>
+    </tr>
+    <tr class="admin_table_trbg">	
+		<th align="right">会员类别图标：</th>
+		<td><input  type="file" size="45" name="com_pic" class="input-text">
+            {yun:}if $row.com_pic!=""{/yun}
+        <img src="{yun:}$config.sy_weburl{/yun}/{yun:}$row.com_pic{/yun}">
+        <a href="javascript:void(0)" onclick="layer_del('确定要删除？', 'index.php?m=admin_comrating&c=delpic&id={yun:}$row.id{/yun}');" style="color:red;">删除图标</a>
+        {yun:}/if{/yun}
+          </td>
+	</tr>
+	<tr class="admin_table_trbg">
+        <th align="right" width="150">会员职位推荐：</th>
+        <td colspan="3">
+        <input type="radio" name="jobrec" value="1" id="Radiojobrec1_0" {yun:}if $row.jobrec!=2{/yun}checked{yun:}/if{/yun}>
+        <label for="Radiojobrec1_0">否</label>
+        <input type="radio" name="jobrec" value="2" id="Radiojobrec1_1" {yun:}if $row.jobrec==2{/yun}checked{yun:}/if{/yun}>
+        <label for="Radiojobrec1_1">是</label>
+        <span class="admin_web_tip">开通或购买该等级的企业发布的职位默认为推荐职位</span>
+        </td>
+    </tr>
+    <tr>
+        <th align="right">类别说明：</th>
+        <td colspan="3">
+       <textarea name="explains" id="explain" rows="3" cols="50" class="admin_explain_textarea_w400">{yun:}$row.explains{/yun}</textarea>
+       <span class="admin_web_tip">类别备注说明或者优惠活动</span>
+        </td>
+    </tr>
+    <tr class="admin_table_trbg vip_type_youhui" {yun:}if $row.yh_price<1{/yun}style="display:none;"{yun:}/if{/yun}>
+        <th align="right" style="color:red;">设置优惠：</th>
+         <td colspan="3">
+         <ul class="com_com_a_list">
+            <li><span class="com_com_a_list_s">优惠后价格：</span> <input type="text" name="yh_price" id="yh_price" class="com_com_a_text" size="8" value="{yun:}$row.yh_price{/yun}" onKeyUp="this.value=this.value.replace(/[^0-9]/g,'')">元</li>
+              <li><span class="com_com_a_list_s">优惠开始日期：</span>
+                   <link rel="stylesheet" href="{yun:}$config.sy_weburl{/yun}/js/datepicker/css/font-awesome.min.css" type="text/css">  
+					<script src="{yun:}$config.sy_weburl{/yun}/js/datepicker/foundation-datepicker.min.js"></script>
+                    <input id="ad_start" class="com_com_a_text com_com_a_text_w100" type="text" readonly size="12" value="{yun:}$row.time_start|date_format:'%Y-%m-%d'{/yun}" name="time_start"> 
+               </li>
+                  <li><span class="com_com_a_list_s">优惠结束日期：</span>
+                 
+                    <input id="ad_end" class="com_com_a_text com_com_a_text_w100" type="text" readonly size="12" value="{yun:}$row.time_end|date_format:'%Y-%m-%d'{/yun}" name="time_end">
+                    <script type="text/javascript"> 
+					var checkin = $('#ad_start').fdatepicker({
+						format: 'yyyy-mm-dd',startView:4,minView:2 
+					}).on('changeDate', function (ev) {
+						if (ev.date.valueOf() > checkout.date.valueOf()) {
+							var newDate = new Date(ev.date)
+							newDate.setDate(newDate.getDate() + 1);
+							checkout.update(newDate);
+						}
+						checkin.hide();
+						$('#ad_end')[0].focus();
+					}).data('datepicker');
+					var checkout = $('#ad_end').fdatepicker({
+						format: 'yyyy-mm-dd',startView:4,minView:2,
+						onRender: function (date) {
+							return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
+						}
+					}).on('changeDate', function (ev) {
+						checkout.hide();
+					}).data('datepicker');  
+                    </script>
+                    </li>
+                  
+                  </ul>
+        </td>
+    </tr>
+	<tr>
+        <th align="right" style="color:red;">赠送{yun:}$config.integral_pricename{/yun}：</th>
+         <td colspan="3">
+        <input type="number" name="integral_buy" id="integral_buy" min="0"  maxlength="3" value="{yun:}$row.integral_buy{/yun}" onKeyUp="this.value=this.value.replace(/[^0-9]/g,'')" class="com_com_a_text">
+        <span class="admin_web_tip">企业购买套餐赠送一定积分用于职位置顶、紧急招聘等服务</span>
+         </td>
+    </tr>
+    <tr {yun:}if $row.type==2{/yun}style="display:none;"{yun:}/if{/yun}>
+        <th align="right" style="color:red;">增值服务折扣：</th>
+         <td colspan="3">
+        <input type="number" name="service_discount" id="service_discount" min="0" max="100" maxlength="3" value="{yun:}$row.service_discount{/yun}" onKeyUp="this.value=this.value.replace(/[^0-9]/g,'')" class="com_com_a_text">折
+        <span class="admin_web_tip">折扣针对不同等级会员所购买增值包服务享有的优惠！（0、100表示无折扣，88表示八八折）</span>
+         </td>
+    </tr>
+    <tr class="vip_type_2 admin_table_trbg" {yun:}if $row.type==2{/yun}style="display:none;"{yun:}/if{/yun}>
+        <th rowspan="5" align="right" style="color:red;">设置套餐：</th>
+         <td colspan="3">
+          
+          <ul class="com_com_a_list">
+            <li>
+            <span class="com_com_a_list_s">发布职位：</span><input type="text" name="job_num" id="job_num" class="com_com_a_text" size="6" value="{yun:}$row.job_num{/yun}" onKeyUp="this.value=this.value.replace(/[^0-9.]/g,'')">份</li>
+         <li> <span class="com_com_a_list_s">下载简历：</span><input type="text" name="resume" id="resume" class="com_com_a_text" size="6" value="{yun:}$row.resume{/yun}" onKeyUp="this.value=this.value.replace(/[^0-9.]/g,'')">份</li>
+            <li> <span class="com_com_a_list_s">邀请面试：</span><input type="text" name="interview" id="interview"  class="com_com_a_text" size="6" value="{yun:}$row.interview{/yun}" onKeyUp="this.value=this.value.replace(/[^0-9.]/g,'')">份</li>
+          </ul>
+        
+                
+                <tr class="vip_type_2 admin_table_trbg" {yun:}if $row.type==2{/yun}style="display:none;"{yun:}/if{/yun}>
+      <td colspan="3">
+                
+              <ul class="com_com_a_list">
+
+          
+               <li> <span class="com_com_a_list_s">刷新职位：</span><input type="text" name="breakjob_num" id="breakjob_num" class="com_com_a_text" size="6" value="{yun:}$row.breakjob_num{/yun}" onKeyUp="this.value=this.value.replace(/[^0-9.]/g,'')">次</li>
+                <li>  <span class="com_com_a_list_s">发布兼职职位：</span><input type="text" name="part_num" id="part_num"  class="com_com_a_text" size="6" value="{yun:}$row.part_num{/yun}" onKeyUp="this.value=this.value.replace(/[^0-9.]/g,'')">份</li>
+               <li> <span class="com_com_a_list_s">刷新兼职职位：</span><input type="text" name="breakpart_num" id="breakpart_num" class="com_com_a_text" size="6" value="{yun:}$row.breakpart_num{/yun}" onKeyUp="this.value=this.value.replace(/[^0-9.]/g,'')">次</li>
+                 
+                </ul>
+                </td>
+				</tr>
+			   
+				</td>
+			</tr>
+    
+    
+		<tr class="admin_table_trbg">
+		<td colspan="4" align="center">
+			<input name="id" type="hidden" value="{yun:}$row.id{/yun}">
+			<input class="admin_submit4" name="useradd" type="submit" value="提交" id="dosubmit">
+		</td>
+		</tr>
+ </table>
+ </form>
+</div>
+</div>
+</div>
+<script>
+$(document).ready(function(){
+	$("input[name=type]").click(function(){
+		var type = $(this).val();
+		if(type=="1"){
+			$(".vip_type_2").show();
+			$(".vip_type_1").hide();
+		}else{
+			$(".vip_type_2").hide();
+			$(".vip_type_1").show();
+		}
+	});
+});
+function checkform(){
+	if($("#name").val()==""){
+		parent.layer.msg("等级名称不能为空！",2,8);
+		return false;
+	}
+	if($("#service_price").val()==""){
+		parent.layer.msg("价格不能为空！",2,8);return false;
+	}
+	if($("input[name='youhui']").attr("checked")=='checked'){
+		if($("#yh_price").val()==''){
+			parent.layer.msg("优惠价格不能为空！",2,8);return false;
+		}
+		if($("#ad_start").val()==''||$("#ad_end").val()==''){
+			parent.layer.msg("请选择优惠时间！",2,8);return false;
+		} 
+	}
+}
+
+$(".tips_class").hover(function(){ 
+	var msg_id=$(this).attr('id'); 
+	var msg=$('#'+msg_id+' + font').html();
+	if($.trim(msg)!=''){
+		layer.tips(msg, this, {
+		guide: 1, 
+		style: ['background-color:#5EA7DC; color:#fff;top:-7px', '#5EA7DC']
+		}); 
+		$(".xubox_layer").addClass("xubox_tips_border");
+	} 
+},function(){
+	var msg_id=$(this).attr('id');
+	var msg=$('#'+msg_id+' + font').html();
+	if($.trim(msg)!=''){
+		layer.closeTips();
+	} 
+});
+</script>
+</body>
+</html>

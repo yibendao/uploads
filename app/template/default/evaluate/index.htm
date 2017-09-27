@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>{yun:}$title{/yun}</title>
+<meta name="keywords" content="{yun:}$keywords{/yun}"/>
+<meta name="description" content="{yun:}$description{/yun}"/>
+<link rel="stylesheet" href="{yun:}$style{/yun}/style/css.css" type="text/css"/>
+<link rel="stylesheet" type="text/css" href="{yun:}$style{/yun}/style/evaluate.css"/>
+</head>
+<body>
+
+{yun:}include file="$tplstyle/header.htm"{/yun}
+<div class="clear"></div>
+
+<div class="cp_content">
+<div class="wrap">
+    <div class="current_Location  png">您当前的位置：<a href="{yun:}$config.sy_weburl{/yun}">首页</a>  >  <span>测评</span>
+</div>
+<div class="clear"></div>
+<div class="cp_content_left fl">
+	<div class="cp_left_inner">
+		<div class="cp_zhic_text">
+			<div id="cp_top_div" class="cp_left_inner_hd_box">
+			
+			{yun:}foreach from=$evaluateTop item=item key=key{/yun}
+			<div class="cp_text_top"  {yun:}if $key neq 0{/yun}style="display:none;height:211px;"{yun:}else{/yun}style="height:211px;"{yun:}/if{/yun} >
+				<div class="cp_top_pic fl"><img src="{yun:}$config.sy_weburl{/yun}/{yun:}$item.pic{/yun}" width="378" height="210" onerror="showImgDelay(this,'{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_logo{/yun}',2);"/><span class="cp_top_arr"></span></div>
+				<div class="cp_top_secret fl">
+					<div class="cp_secret_tit"><a href="{yun:}url m=evaluate c=exampaper titleid='`$item.id`' gid='`$item.keyid`'{/yun}"  target="_blank">{yun:}$item.name{/yun}</a></div>
+					<div class="cp_secret_star">
+					<div class="cp_star_lt fl c9">测评人数：<em>{yun:}$item.visits{/yun}人</em><br>评论：<em>{yun:}$item.comnum{/yun}条</em></div>
+					<div class="cp_star_tt fl"><a href="{yun:}url m=evaluate c=exampaper titleid='`$item.id`' gid='`$item.keyid`'{/yun}"  target="_blank">开始测试</a></div>
+					</div>
+					<div class="clear"></div>
+					<div class="cp_secret_with c6" style="height:70px;">{yun:}$item.description|mb_substr:0:60:'gbk'{/yun}<a href="{yun:}url m=evaluate c=exampaper titleid='`$item.id`' gid='`$item.keyid`'{/yun}" target="_blank">[详细]</a></div>
+				</div>
+			</div>
+			{yun:}/foreach{/yun}
+			  
+			</div>               
+			
+			<div class="clear"></div>
+			
+            <div class="cp_text_main">
+			<div class="cp_text_di" id="top_small">
+			<ul>
+			{yun:}foreach from=$evaluateTop item=item key=key{/yun}
+			<li {yun:}if $key=='4'{/yun}style="margin-right:auto;"{yun:}/if{/yun}>
+				<a href="javascript:void(0)">
+				<img src="{yun:}$config.sy_weburl{/yun}/{yun:}$item.pic{/yun}" width="180" height="100" onerror="showImgDelay(this,'{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_logo{/yun}',2);"/>
+				</a></li>
+			{yun:}/foreach{/yun}
+			</ul>
+            
+			</div>
+            </div>  
+		</div>
+		<div class="clear"></div> 
+		<div class="cp_left_hot">
+			<div class="cp_hot_biaoti f14">热门测评</div>
+			{yun:}if $rows{/yun}
+			<div class="cp_hot_fit01">
+				{yun:}foreach from=$rows item=item key=key{/yun}
+				<div class="cp_hot_fit">
+					<div class="cp_fit_tp fl">
+					<a href="{yun:}url m=evaluate c=exampaper titleid='`$item.id`' gid='`$item.keyid`'{/yun}" target="_blank"> 
+					  <img src="{yun:}$config.sy_weburl{/yun}/{yun:}$item.pic{/yun}" width="245" height="136" onerror="showImgDelay(this,'{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_logo{/yun}',2);"/></a></div>
+					<div class="cp_fit_youb fl">
+					<div class="cp_youb_tit"><a href="{yun:}url m=evaluate c=exampaper titleid='`$item.id`' gid='`$item.keyid`'{/yun}" target="_blank">{yun:}$item.name{/yun}</a></div>
+					<div class="cp_youb_nr c5">{yun:}$item.description{/yun}</div>
+					<div class="cp_youb_sl"><em class="fl c9">{yun:}$item.visits{/yun}人测试过</em> <a href="{yun:}url m=evaluate c=exampaper titleid='`$item.id`' gid='`$item.keyid`'{/yun}" class="fr" target="_blank">[点击进入测评]</a></div>
+					</div>
+				</div>
+				{yun:}/foreach{/yun}
+			</div>
+			<div class="cp_jz_more">
+				<a class="cp_jz_more_g" href="{yun:}url m=evaluate c=morelist{/yun}">更多</a>
+			</div>
+			{yun:}/if{/yun}
+			<div class="clear"></div> 
+		</div>  
+	</div>
+</div> 
+<div class="cp_content_right fr">
+<div class="cp_right_bao">
+	<div class="cp_bao_recom">
+        <div class="cp_recom_tit">测评推荐</div>
+        <div class="cp_recom_list">
+            <ul>
+              {yun:}foreach from=$evaluateRecommend item=item key=key{/yun}
+              <li><a href="{yun:}url m=evaluate c=exampaper titleid='`$item.id`' gid='`$item.keyid`'{/yun}" target="_blank">{yun:}$item.name{/yun}</a> <span class="cp_recom_list_s">{yun:}$item.visits{/yun}</span></li>
+              {yun:}/foreach{/yun}
+            </ul>
+        </div>
+    </div>
+    
+    <div class="cp_bao_join">
+        <div class="cp_recom_tit">他们也参加了测评</div>
+        <div class="cp_join_list">
+            <ul>
+            {yun:}foreach from=$examinee item=list key=key{/yun}
+            <li><a href="{yun:}url m=ask c=friend a=myquestion uid=$list.uid{/yun}" target="_blank"><img src="{yun:}$list.pic{/yun}" width="48"  height="48" onerror="showImgDelay(this,'{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_friend_icon{/yun}',2);"/></a><div style="width:42px; height:20px; text-align:center; margin-top:5px; overflow:hidden; text-overflow:clip; white-space:nowrap;">{yun:}$list.nickname{/yun}</div></li>
+            {yun:}/foreach{/yun}
+            </ul>
+        </div>
+    </div>
+
+
+</div>
+</div> 
+</div>
+<div class="clear"></div>
+
+
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script> 
+<script src="{yun:}$config.sy_weburl{/yun}/js/lazyload.min.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/public.js" language="javascript"></script> 
+<script type="text/javascript" src="{yun:}$style{/yun}/js/evaluate.js"></script>
+<!--[if IE 6]>
+<script src="{yun:}$config.sy_weburl{/yun}/js/png.js"></script>
+<script>
+DD_belatedPNG.fix('.png,.cp_top_arr');
+</script>
+<![endif]--> 
+{yun:}include file="$tplstyle/footer.htm"{/yun}

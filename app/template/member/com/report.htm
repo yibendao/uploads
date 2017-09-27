@@ -1,0 +1,41 @@
+{yun:}include file="$comstyle/header.htm"{/yun}
+<div class="w1000">
+<div class="admin_mainbody">
+{yun:}include file="$comstyle/left.htm"{/yun}
+<div class="right_box">
+<div class="admincont_box" >
+         <div class="com_tit"><span class="com_tit_span">投诉记录</span></div>
+<div class="clear"></div>
+<div class="com_body" style=" margin-top:10px;">
+<iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe>
+ <div class="resume_box_list">
+ {yun:}if $rows{/yun}
+<div class="List_Ope List_Title ">
+<span class="List_Title_span List_Title_w110" style=" text-align:left; padding-left:10px;">被投诉者 </span>
+ <span class="List_Title_span List_Title_w110">投诉者</span>
+ <span class="List_Title_span List_Title_w310">投诉内容</span>
+ <span class="List_Title_span List_Title_w110">投诉时间</span>
+ <span class="List_Title_span List_Title_w100">操作</span>
+</div>
+{yun:}/if{/yun}
+ {yun:}foreach from=$rows item=msg{/yun}
+ <div class="List_Ope List_Ope_bor">
+    <span class="List_Title_span List_Title_w110" style="text-align:left; padding-left:10px;overflow:hidden;">{yun:}$msg.r_name{/yun} </span>
+	<span class="List_Title_span List_Title_w110">{yun:}$msg.username{/yun}</span>
+	<span class="List_Title_span List_Title_w310" style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">{yun:}$msg.r_reason{/yun}</span>
+ <span class="List_Title_span List_Title_w110">{yun:}$msg.inputtime|date_format:'%Y-%m-%d %H:%M'{/yun}</span>
+ <span class="List_Title_span List_Title_w100"><a href="javascript:void(0)" onclick="layer_del('您确定要删除？', 'index.php?c=report&act=del&id={yun:}$msg.id{/yun}'); " class="cblue">删除</a></span>
+ 
+ <span class="List_Title_conten_tit" style="display:block;width:730px; float:left; padding-left:10px;">回复结果：{yun:}if $msg.result{/yun}{yun:}$msg.result{/yun}{yun:}else{/yun}未回复{yun:}/if{/yun}</span>
+</div>
+
+{yun:}foreachelse{/yun}
+<div class="msg_no">您还没有投诉记录。</div>
+
+{yun:}/foreach{/yun}
+</div>
+<div class="diggg" style="margin-top:10px;">{yun:}$pagenav{/yun}</div>
+</div> </div></div>
+</div></div>
+
+{yun:}include file="$comstyle/footer.htm"{/yun}

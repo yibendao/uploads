@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<link href="images/reset.css" rel="stylesheet" type="text/css" />
+<link href="images/system.css" rel="stylesheet" type="text/css" />
+<link href="images/table_form.css" rel="stylesheet" type="text/css" />
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script>
+<script src="js/admin_public.js" language="javascript"></script>  
+<title>后台管理</title>
+</head>
+<body class="body_ifm">
+<div class="infoboxp">
+<div class="infoboxp_top_bg"></div>
+<div class="infoboxp_top infoboxp_topIjf">
+    <span class="infoboxp_top_span">模板管理</span>
+	<span class="infoboxp_top_span_sz"><a href="index.php?m=admin_tpl">切换模板</a></span> 
+	<span class="infoboxp_top_span_sz infoboxp_top_span_sz_in"><a href="index.php?m=admin_tpl&c=comtpl">企业模板</a></span> 
+	<span class="infoboxp_top_span_sz "><a href="index.php?m=admin_tpl&c=resumetpl">简历模板</a></span> 
+	<span class="infoboxp_top_span_sz "><a href="index.php?m=admin_tpl&c=template">模板管理</a></span> 
+</div>
+<div class="infoboxp_top">
+
+<a href="index.php?m=admin_tpl&c=comtpladd" class="admin_infoboxp_tj">添加企业模板</a>
+
+</div>
+<div class="table-list">
+{yun:}foreach item=v from=$list{/yun}
+<div class="" style="float: left; width: 260px;border:1px solid #ddd; text-align: center; padding: 15px; line-height: 180%; margin-top:10px; margin-right:5px; background:#fff">
+	  <img width="255" height="125" border="1" alt="{yun:}$v.name{/yun}" src="../{yun:}$v.pic{/yun}">
+	  <br>
+	 <strong>{yun:}$v.name{/yun}</strong>
+	 <br>
+	风格目录名称：{yun:}$v.url{/yun}
+      <br>
+      状态：{yun:}if $v.status==1{/yun}正在使用{yun:}else{/yun}已停止{yun:}/if{/yun}
+      <br>
+      <input name="" value="修改" type="submit" class="admin_submit4" onClick="location.href='index.php?m=admin_tpl&c=comtpladd&id={yun:}$v.id{/yun}'" style="padding:0px;">
+      <input name="" value="删除" type="submit" class="admin_submit4" onclick="layer_del('确定要删除？', 'index.php?m=admin_tpl&c=comtpldel&id={yun:}$v.id{/yun}');" style="padding:0px;">
+	 </div>
+     {yun:}/foreach{/yun}
+</div>
+</div>
+   <input type="hidden" name="pytoken" id='pytoken' value="{yun:}$pytoken{/yun}">
+</body>
+</html>

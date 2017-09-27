@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<link href="images/reset.css" rel="stylesheet" type="text/css" />
+<link href="images/system.css" rel="stylesheet" type="text/css" />
+<link href="images/table_form.css" rel="stylesheet" type="text/css" />
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script>
+<script src="js/admin_public.js" language="javascript"></script>
+<script>
+function answer(title,support,content,qid,id){
+	$("#id").val(id);
+	$("#qid").val(qid);
+	$("#title").html(title);
+	$("#support").val(support);
+	$("#content").val(content);
+	add_class('修改回答','340','280','#answer_div','');
+} 
+</script>
+<title>后台管理</title>
+</head>
+<body class="body_ifm">
+<div id="answer_div"  style="display:none;">
+    <div id="infobox" style=" width:355px; margin-top:10px;" >
+      <form name="myform" target="supportiframe" action="index.php?m=admin_question&c=save_answer" method="post" >
+      <input type="hidden" name="pytoken" id='pytoken' value="{yun:}$pytoken{/yun}">
+		<table cellspacing='1' cellpadding='1' class="admin_examine_table">
+			<tr><th style="width:80px">所属问题：</th><td><span id="title"></span></td></tr>
+			<tr><th>支持数：</th><td><input class="com_com_a_text" type="text" id="support" name="support" size="20" value="" /></td></tr>
+			<tr><th>回答内容：</th><td><textarea id="content" name="content"></textarea></td></tr>
+			<tr><td colspan='2' align="center"> <input type="submit"  name="update" value='确认' class="admin_examine_bth">
+          &nbsp;&nbsp;<input type="button" onClick="layer.closeAll();" class="admin_examine_bth_qx" value='取消'></td></tr>
+		</table>
+        <input type="hidden" name="id" id="id" value="" />
+        <input type="hidden" name="qid" id="qid" value=""/>
+      </form>
+    </div> 
+</div>
+<div class="infoboxp">
+<div class="infoboxp_top_bg"></div>
+  <div class="infoboxp_top">
+    <h6>回答列表</h6> <a href="index.php?m=admin_question" class="user_status user_status_u">返回问题列表</a>
+  </div>
+  <div class="table-list admin_table_border">
+    <iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe>
+    <form action="index.php" name="myform" method="get" target="supportiframe" id='myform'>
+    <input type="hidden" name="pytoken" id="pytoken" value="{yun:}$pytoken{/yun}">
+
+      <input name="m" value="admin_question" type="hidden"/>
+      <input name="c" value="delanswer" type="hidden"/>
+      <input name="qid" value="{yun:}$qid{/yun}" type="hidden"/>
+      <table width="100%">
+        <thead>
+          <tr>
+            <th><label for="chkall">
+              <input type="checkbox" id='chkAll'  onclick='CheckAll(this.form)'/>
+              </label></th>
+            <th>编号</th>
+            <th align="left">内容</th>
+            <th >回答者昵称</th>
+            <th>评论数</th>
+            <th>支持数</th>
+            <th>回答时间</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+        
+        {yun:}foreach item=v from=$all_answer{/yun}
+        <tr align="center" id="list{yun:}$v.id{/yun}">
+          <td><input type="checkbox" value="{yun:}$v.id{/yun}"  name='del[]' onclick='unselectall()' rel="del_chk" /></td>
+          <td align="left" class="td1" style="text-align:center;"><span>{yun:}$v.id{/yun}</span></td>
+          <td class="od" align="left">{yun:}$v.content|strip_tags|mb_substr:0:40:'gbk'{/yun}</td>
+          <td>{yun:}$v.username{/yun}</td>
+          <td>{yun:}$v.comment{/yun}</td>
+          <td>{yun:}$v.support{/yun}</td>
+          <td class="td">{yun:}$v.add_time|date_format:"%Y-%m-%d  %H:%M:%S"{/yun}</td>
+          <td>
+          	{yun:}if $v.comment{/yun}
+          		<a href="index.php?m=admin_question&c=getcomment&id={yun:}$v.id{/yun}">查看评论</a>
+          	{yun:}else{/yun}
+          		暂无评论
+          	{yun:}/if{/yun} 
+          	<span style="cursor:pointer;" onClick="answer('{yun:}$ques.title{/yun}','{yun:}$v.support{/yun}','{yun:}$v.content{/yun}','{yun:}$ques.id{/yun}','{yun:}$v.id{/yun}')" class="admin_cz_bj"><img src="images/iconv/button_edit.png" alt="修改" title="修改"/></span>
+          	<a href="javascript:void(0)" onClick="layer_del('确定要删除？', 'index.php?m=admin_question&c=delanswer&id={yun:}$v.id{/yun}&qid={yun:}$qid{/yun}');"><img src="images/iconv/del_icon2.gif" alt="删除" title="删除"/></a></td>
+        </tr>
+        {yun:}/foreach{/yun}
+        <tr style="background:#f1f1f1;">
+       		<td align="center"><input type="checkbox" id='chkAll2' onclick='CheckAll2(this.form)' /></td>
+			<td colspan="2" ><label for="chkAll2">全选</label>&nbsp;
+          <input class="admin_submit4" type="button" name="delsub" value="删除所选" onClick="return really('del[]')" /></td>
+          <td colspan="5" class="digg">{yun:}$pagenav{/yun}</td>
+        </tr>
+        </tbody>
+        
+      </table>
+    </form>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,84 @@
+{yun:}include file="$comstyle/header.htm"{/yun}
+<div class="w1000">
+  <div class="admin_mainbody"> {yun:}include file="$comstyle/left.htm"{/yun}
+    <div class=right_box>
+      <div class=admincont_box>
+                <div class="com_tit">
+       <span class="com_tit_span">面试邀请</span> 
+        <form action="index.php" method="get">
+           <div class="news_search">
+          <input name="c" type="hidden" value="{yun:}$smarty.get.c{/yun}">
+               <input name="keyword" id="keyword" type="text" class="news_text" value="{yun:}$smarty.get.keyword{/yun}" placeholder="请输入简历关键字">
+              <input name="" type="submit" class="news_bth" value="搜索">
+          </div> 
+          </form>
+        </div>
+        <div class="com_body">
+        <div class=admin_textbox_04>
+       <iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe>
+          <form action="{yun:}$now_url{/yun}&act=del" method="post" target="supportiframe" id='myform'>
+           <div class=table>
+          <div id="job_checkbokid" >
+             {yun:}if !empty($rows){/yun}
+              <div class="job_news_list job_news_list_h1">
+                  <span class="job_news_list_span job_w30">&nbsp;</span>
+                   <span class="job_news_list_span job_w100" style="text-align:left">姓名</span>
+                  <span class="job_news_list_span job_w270">求职意向</span>
+                  <span class="job_news_list_span job_w100">工作经验</span> 
+                  <span class="job_news_list_span job_w100">邀请时间</span>
+                  <span class="job_news_list_span job_w100">面试时间</span>
+                  <span class="job_news_list_span job_w80">状态</span>
+                  <span class="job_news_list_span job_w80">操作</span>
+                 </div>
+                {yun:}foreach from=$rows item=job{/yun}
+                {yun:}assign var="uid" value=$job.uid{/yun}                
+                <div class="job_news_list">
+					<span class="job_news_list_span job_w30" style="padding-right:6px;"><input type=checkbox name="delid[]" value="{yun:}$job.id{/yun}"   class="com_Release_job_qx_check" style="margin-top:2px;"></span>
+					<span class="job_news_list_span job_w100" style="text-align:left;width:95px;">&nbsp;<a href="{yun:}url m=resume c=show uid='`$uid`'{/yun}" target=_blank class="com_Release_name">{yun:}$user[$uid].name{/yun}</a></span>
+					<span class="job_news_list_span job_w270">&nbsp;<span class="yxjob_name">{yun:}$user[$uid].jobname{/yun}</span></span>
+					<span class="job_news_list_span job_w100">&nbsp;{yun:}$user[$uid].exp{/yun}</span> 
+					<span class="job_news_list_span job_w100">&nbsp;{yun:}$job.datetime|date_format:'%Y-%m-%d'{/yun}</span>
+					<span class="job_news_list_span job_w100">&nbsp;{yun:}$job.intertime{/yun}</span>
+					<span class="job_news_list_span job_w80">
+						{yun:}if $job.is_browse=="1"{/yun}
+                           <font color="blue">对方未回复</font>
+                           {yun:}elseif $job.is_browse=="2"{/yun}
+                           	已查看
+                           {yun:}elseif $job.is_browse=="3"{/yun} 
+                           	<font color="#008000">已同意</font>
+                           {yun:}elseif $job.is_browse=="4"{/yun}
+                           	<font color="#FF00000">已拒绝</font>
+                           {yun:}/if{/yun} 
+                     </span>
+					<span class="job_news_list_span job_w80"><a href="javascript:void(0)" onclick="layer_del('确定要删除？', '{yun:}$now_url{/yun}&act=del&id={yun:}$job.id{/yun}')" class="uesr_name_a">删除</a></span>
+                 </div> 
+                {yun:}/foreach{/yun}
+				<div>  
+				<div class="com_Release_job_bot"> <span class="com_Release_job_qx"><input id='checkAll'  type="checkbox" onclick='m_checkAll(this.form)'class="com_Release_job_qx_check"> 全选</span>
+					 <INPUT  class="c_btn_02" type="button" name="subdel" value="批量删除" onclick="return really('delid[]');">
+					
+				 </div> 
+				<div class="diggg" style="width:100%; text-align:center; margin-top:20px; float:left;">{yun:}$pagenav{/yun}</div>
+				</div>
+                {yun:}elseif $smarty.get.keyword!="" {/yun}
+                 <div class="msg_no">
+                  <p>没有搜索邀请记录。</p>
+                   <a href="{yun:}url m=resume{/yun}" class="com_msg_no_bth com_submit" target="_blank">我要主动找人才</a>
+                </div>
+                
+                {yun:}else{/yun}
+                 <div class="msg_no">
+                  <p> 亲爱的用户，目前您还没有邀请人才面试记录！</p>
+                   <a href="{yun:}url m=resume{/yun}" class="com_msg_no_bth com_submit" target="_blank">我要主动找人才</a>
+                </div>
+                {yun:}/if{/yun}
+				</div>        
+				</div>				
+          </form> 
+    </div>
+  </div>
+   </div>
+</div>
+</div>
+</div>
+{yun:}include file="$comstyle/footer.htm"{/yun} 

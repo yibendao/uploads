@@ -1,0 +1,330 @@
+@charset "gb2312";
+/* CSS Document */ 
+.body_bg{ background:#f8f8f8}
+.comappiy_left_box{width:920px; float:left}
+.comappiy_left_sidebar{width:880px; padding:0px 20px 20px 20px; background:#fff;position:relative; float:left; z-index:100}
+.Company_left_cont{width:100%; background:#fff; float:left}
+.Company_post_box{width:100%;height:106px; position:relative;z-index:200;}
+.Company_post_top{width: 880px;padding: 0px 20px 20px 20px;border-bottom:1px solid #eee; padding-bottom:20px; position:relative; background:#fff; z-index:200}
+.Company_post_name{width:640px; padding-top:20px; padding-bottom:10px;float:left; position:relative}
+.Company_post_qy_name{width:100%; float:left; font-size:14px; padding-bottom:10px;}
+.Company_post_Welfare{width:100%; float:left; padding:10px 0 0px 0;}
+.Company_post_State{width:100%; float:left; font-size:14px;color:#abaeb0}
+.Company_post_State .Company_post_State_s{ margin-right:20px;}
+.c_Grey{color:#9f9898}
+.Company_Basic_information{width:880px;padding:0px 0px 20px 0px; float:left;font-size:14px;}
+.Company_Basic_information_list{width:100%; float:left; line-height:26px; margin-top:18px;color:#666 }
+.Company_Basic_information_icon{width:26px;height:26px; display:block; float:left; margin-right:10px; }
+.Company_Basic_information_icon_a{background:url(../images/com_icon.png) no-repeat 0 0;}
+.Company_Basic_information_icon_b{background:url(../images/com_icon.png) no-repeat 0 -43px;}
+.Company_Basic_information_icon_c{background:url(../images/com_icon.png) no-repeat 0 -84px;}
+.Company_Basic_information_icon_d{background:url(../images/com_icon.png) no-repeat 0 -126px;}
+.Company_Basic_information_icon_e{background:url(../images/com_icon.png) no-repeat 0 -217px;}
+.Company_Basic_information_icon_g{background:url(../images/com_icon.png) no-repeat 0 -171px;}
+.Company_Basic_information_icon_f{background:url(../images/com_icon.png) no-repeat 0 -264px;}
+.Company_Basic_information_line{ font-size:12px;color:#9f9e9e; padding:0px 6px;}
+.Company_Basic_information_map{color:#007ccf; display:inline-block; background:url(../images/com_icon_map.png) no-repeat; padding-left:20px; margin-left:10px;}
+.Company_Basic_information_r_y{ float:left;width:790px;}
+.Company_Basic_information_l{ display:inline-block;}
+.Company_Basic_information_tel{color:#ff3030; font-weight:bold; font-size:16px;}
+.Company_Basic_information_hm{ display:inline-block;width:70px;height:24px; background:#999;color:#fff; text-align:center; line-height:24px; margin-right:10px;border-radius:3px;}
+.Company_Basic_information_hm:hover{color:#fff; text-decoration:none; background:#666;}
+.Company_Basic_information_sm{color:#adacac}
+.Company_Basic_information_xz{color: #ff3030;font-size:16px; font-weight:bold}
+.com_gx{ margin-left:30px;}
+.Company_Basic_information_red{color:#fc0225}
+.Company_Basic_information_d{ font-size:12px;color:#a09697}
+.complay_h1_share{width:300px; float:left; line-height:30px;}
+.complay_h1_share span{float:left;}
+.complay_h1_share  .Company_post_s_fl{ float:left}
+.Company_post_name_h1{display:inline-block; font-size:25px; line-height:36px; font-weight:normal; font-family:Î¢ÈíÑÅºÚ;float:left;}
+.Company_post_span_i{ display:inline-block;color:#00a0e9; 
+    border: 1px solid #00a0e9; float:left; margin-top:5px; margin-left:10px; padding:3px 10px;border-radius:3px;text-align:center;}
+.Company_post_jingj{ border: 1px solid #129f73;color:#129f73;}
+.Company_post_jinj{border: 1px solid #129f73;color:#129f73}
+.Company_post_name em{ font-size:14px;color:#b2b8bc; margin-right:10px; _margin-right:5px;  float:left;line-height:30px;}
+.Company_post_h1_msg{width:100%; padding-bottom:10px;color:#a8a6a6}
+.Company_post_h1_msg_left{ display:inline-block; margin-left:20px;_margin-left:10px;}
+.Company_post_msg{width:100%; float:left;position:relative; z-index:2;margin-top:10px;height: 30px;line-height: 30px;}
+.Company_h1_line{ display:block;width:7px;height:16px; position:absolute;left:0px;top:7px; z-index:3}
+.Company_h1_line_bor{width:100%;height:1px; line-height:1px; overflow:hidden; background:#ddd;position:absolute;left:0px;top:15px; z-index:2}
+.Company_post_msg  .Company_co{color:#333131; height:30px; line-height:30px;display:block; font-size:16px;padding-left:10px; padding-right:10px; font-weight:bold; background:#fff; position:absolute;left:5px;top:0px; z-index:4}
+.Company_post_ms{width:100%;height:32px; float:left}
+.Company_post_ms span{ display:block;width:88px;height:30px; text-align:center; line-height:30px;border-bottom:none; float:left; margin-right:10px; cursor:pointer}
+.Company_post_cur{border:1px solid #ddd; background:#fff;}
+.Company_Record{width:100%;padding-bottom:10px; float:left; margin-top:20px;}
+.Company_Record_list{width:100%;height:30px; line-height:30px;border-bottom:1px solid #ddd;color:#666}
+.Company_Record_h1{ background:#f8f8f8; }
+.Company_job_record_div{ padding-top:10px;}
+.Company_Record_span{ display:inline-block; line-height:30px;}
+.Company_Record_spanzhe{width:300px; padding-left:20px; font-size:14px;}
+.Company_Record_spantime{width:260px;}
+.Company_Record_spanzt{width:80px;}
+.Company_Record_span_cor{ color:#093}
+
+.Company_post_zx{width:650px;height:32px; line-height:32px;position:relative; font-size:14px; font-weight:bold; float:left;border-bottom:1px solid #dddddd}
+.Company_post_more{width:100%; float:left;height:35px; line-height:35px; font-weight:bold;color:#7a7878;border-top:1px solid #fff; position:relative}
+.Company_Name {width: 100%;height: 55px;line-height: 55px;background: url(../images/yun_icoline.jpg) repeat-x bottom;text-align: center;font-size: 30px;font-family: Î¢ÈíÑÅºÚ;overflow: hidden}
+.Authenticate {float: right;margin-right: 20px;}
+.Company_Name span {display: block;width: 600px;float: left;color: #EE5800}
+.Company_h1 {width: 100%;height: 40px;line-height: 40px;font-size: 20px;color: #3d98e1;}
+.Company_h1 span {display: block;background-position: 0 -45px;padding-left: 20px;}
+.Company_h1 .Company_h1_span {font-size: 18px;}
+.Company_content {width:100%;white-space: normal; word-break: break-all; position:relative; z-index:30}
+.stamp_exceed{ position:absolute;right:10px;top:20px; z-index:20}
+.Company_Claim{width:100%; float:left; padding-top:10px;}
+.Company_Claim li {width: 305px;float: left;color: #707070;line-height: 25px; margin-right:30px;font-size:14px;margin-top:5px;}
+.Company_Claim li  .Company_Claim_r{color:#0064d3}
+.Company_Claim  .Company_Claim_end{width:650px;}
+.yun_com_fl_dy{ display:inline-block; padding:2px 8px; margin-bottom:3px; line-height:20px; background:#f8f8f8; font-size:14px;color:#666; margin-right:5px;border-radius:2px;}
+.yun_com_fl_dy_cor{    padding: 5px 10px;background: #edf9ff; color: #3d9ccc;  font-size:14px;}
+.Job_Description {line-height: 30px;color: #666666;width: 100%;font-size:14px;overflow: hidden; margin-top:10px; padding-bottom:20px;}
+.Company_Profile {line-height:30px;color: #666666;font-size:14px;width: 100%;overflow: hidden;white-space: normal; word-break: break-all; padding-bottom:30px; padding-top:10px;}
+.Company_Contact_show {float: left; padding-top:10px;}
+.Company_Contact_show li {width: 305px;float: left;color: #707070;line-height: 33px;font-size:14px;}
+.Company_details {width:100#;float: left}
+.Company_details ul {width: 690px;float: left;border: 1px solid #dedede;}
+.Company_details ul li {height: 30px;line-height: 30px;float: left;width: 100%;border-bottom: 1px solid #dedede;}
+.Company_details ul li strong {width: 98px;height: 30px;display: block;float: left;border-right: 1px solid #dedede;padding-left: 10px;}
+.Company_details ul li em {display: block;width: 564px;float: left;padding-left: 10px;color: #666;}
+.comapply_sq {width:700px; padding:30px 0;float: left}
+.comapply_sq .comapply_sq_submit {display: inline-block;width: 170px;height: 50px;background:#f60;line-height: 50px;font-size: 18px; text-shadow: 1px 1px rgba(0,0,0,.1);font-weight:bold;text-align: center;color: #fff;font-family:Î¢ÈíÑÅºÚ;border-radius:3px;float: left}
+.comapply_sq .comapply_ysq  {display: inline-block;width: 137px;height: 40px;background: url(../images/yun_com_sub_sq.jpg);line-height: 40px;font-size: 16px;text-align: center;color: #fff;font-family:Î¢ÈíÑÅºÚ;float: left;text-decoration: none;}
+.comapply_sq .comapply_sq_submit:hover {text-decoration: none;color: #fff;}
+.comapply_sq_r {width:470px;height:22px;line-height:22px;float: left;margin-top:10px;margin-left: 40px;_margin-left: 20px; font-size:14px; position:relative; z-index:1000}
+.comapply_sq_r .comapply_sq_sc {color:#999797;display: inline-block;padding-left:22px;background: url(../images/yun_sq_icon.gif) no-repeat;margin-left: 10px; background-position: 0 4px; float:left}
+.comapply_sq_r .comapply_sq_sc_have{background-position: 0 -121px;color: #ff7300; }
+.comapply_sq_r .comapply_sq_tj {color:#ff7300;display: inline-block;padding-left:22px;background: url(../images/yun_sq_icon.gif) no-repeat;margin-left: 15px; background-position: 0 -153px;float:left}
+.comapply_sq_r .comapply_sq_jb {color:#999797;display: inline-block;padding-left:22px;background: url(../images/yun_sq_icon.gif) no-repeat;margin-left: 10px; background-position: 0 -60px;float:left}
+.comapply_sq_r .comapply_sq_cy {color:#ff7300;display: inline-block;padding-left:22px;background: url(../images/yun_sq_icon.gif) no-repeat;margin-left: 15px; background-position: 0 -218px;float:left}
+.about_cj{color:#F00; text-decoration:underline; padding:0px 5px;}
+.com_mok{ float:left; position:relative; z-index:300;}
+.job_show_tip{width:898px; margin-top:20px; float:left;color:#333;border:1px solid #f5e5a0; background:#fff6d5; padding:10px; line-height:23px; font-size:14px;position:relative; z-index:1}
+.job_show_tip_p{ padding-left:60px;}
+.job_show_tip_tip_i{display:block;width:40px;height:40px;line-height:1.333;font-weight:700;font-size:30px;color:#fff6d5; text-align:center;background-color:#ff6060;border-radius:1000px}
+.job_show_tip_icon{ position:absolute;right:10px;top:10px;}
+.job_show_tip_cr{color:#39F}
+.comapply_sq_r a:hover {color: #ff7300;text-decoration: none}
+.comapply_sq_r .comapply_sq_sc:hover {background-position: 0 -121px}
+.comapply_sq_r .comapply_sq_tj:hover {background-position: 0 -153px}
+.comapply_sq_r .comapply_sq_jb:hover {background-position: 0 -184px;}
+.comapply_sq_r .comapply_sq_cy:hover {background-position: 0 -218px}
+.comapply_sq_r_cy{width:130px;height:130px;border:2px solid #ff7300; position:absolute;left:0px;top:30px; z-index:1000}
+.comapply_sq_r_cont{ position:relative}
+.comapply_sq_r_cont_icon{width:12px;height:7px; display:block; position:absolute;left:60px;top:-9px; background:url(../images/com_icon2.gif) no-repeat}
+.Company_post_touch{width:100%; float:left; margin-top:10px;}
+.Company_post_touch_list{width:100%; line-height:28px; font-size:14px; float:left; margin-top:5px;}
+.Company_post_touch_list_left{width:100%; float:left}
+.Company_post_touch_list_right{ float:left}
+.Company_no_Record{width:100%; text-align:center; padding:20px 0; font-size:14px;}
+.Company_post_touch_map{ display:inline-block; background:url(../images/Job_map.jpg) no-repeat left center; padding-left:15px; margin-left:10px;color:#1369c0}
+.about_touch_logoin {background: #f8f8f8;color:#C00;float: left;margin-bottom: 10px;width:800px; margin-top:20px; padding:13px 10px 13px 70px; font-size:14px; }
+.about_touch_red {float: left;font-size: 14px;height: 25px; line-height:25px;color:#666}
+.about_touch .about_touch_logoin  .about_touch_red  a{ display:inline-block; float:none;color:#06F; text-decoration:underline; width:35px; margin-left:0px;}
+.about_touch .about_touch_logoin .about_touch_logoin_bth{display:inline-block;height: 26px;line-height: 26px;text-align: center;width:60px; color:#fff; font-weight:bold; margin-left:5px;}
+.about_touch .about_touch_logoin .about_touch_logoin_bth:hover{ background:#155ba2; text-decoration:none}
+.about_touch_re{ display:inline-block; margin-left:20px;}
+.about_touch_reg{width:100%; float:left; font-size:14px;color:#666; margin-top:5px;}
+.about_touch_reg_bth{color:#1369c0; text-decoration:underline}
+.login_button {background: url(../images/yun_submit2.png) no-repeat 0 -64px;border: medium none;cursor: pointer;height: 36px;width: 102px;}
+.yun_red{color:#F30}
+.login_button2 {background:#1369c0;color:#fff; margin-top:10px;border: medium none;cursor: pointer;height: 36px;width: 102px;}
+.comapply_Leave_message {width: 100%;float: left;background: url("../images/yun_icoline.jpg") repeat-x scroll center bottom transparent;padding-bottom: 10px;margin-top: 10px;}
+.comapply_Leave_message_n {height: 24px;line-height: 24px;overflow: hidden;width: 100%;}
+.comapply_Leave_message_n span {float: left;}
+.comapply_Leave_message_n b {font-weight: bold;color: #EE5800}
+.comapply_Leave_message_n em {float: right;color: #666}
+.comapply_Leave_message_h {color: #333333;font-size: 14px;line-height: 22px;margin-top: 5px;}
+.comapply_Leave_message_reply {background-color: #EDF4FA;border: 1px solid #A4C8E8;margin-top: 5px;font-size: 12px;line-height: 21px;padding: 3px 10px;}
+.comapply_Leave_fb {width: 100%;color: #000;font-size: 14px;font-weight: bold;line-height: 40px;}
+.comapply_Leave_fb_text {width:326px;background: #fff;border: 1px solid #f1efef;resize: none;height:60px;font-size:12px;color:#666;line-height:20px; padding:5px; line-height:20px;}
+.comapply_Leave_fb_s {width:100%; float:left}
+.comapply_Leave_fb_sub { background:#1c99ef;width:80px;height:35px;border: none;color: #fff;cursor: pointer;float:left; font-size:14px; margin-left:10px;}
+.comapply_lea_a{height:35px; line-height:35px;color: #1369c0; font-size:14px; position:absolute;right:10px;top:0px; font-weight:normal}
+.comapply_Leave_fb_R{ float:left; width:515px;background:#f2f2f2;height:30px; line-height:30px;border:1px solid #e6e6e6; margin-left:10px; margin-top:15px; padding-left:10px; padding-right:10px;color:#a19f9e}
+.Company_post_other{width:670px; background:#fff; float:left; margin-top:10px; padding-left:20px; padding-bottom:10px;}
+.Company_post_other_list{width:100%; float:left; border-bottom:1px solid #f3f3f3; padding-top:10px; padding-bottom:5px; }
+.Company_post_other_list ul li{width:207px; padding:0px 10px; line-height:20px;}
+.Company_other_job{width:240px;float:left; border-bottom:1px solid #f3f3f3; padding:8px 10px; line-height:24px;}
+.Company_other_name{ font-size:14px;}
+.Company_other_cor{color:#999}
+.Company_other_fd8{color:#ff3030;font-weight:bold;}
+.Company_post_7a{color:#7a7878}
+.com_post_xs{color:#f60}
+.Compply_right_sidebar{width:260px; float:right; overflow:hidden; font-size:14px;}
+.Compply_right_qy{width:240px;padding:20px 10px; background:#fff; float:left; }
+.Compply_logo{width:185px;border:1px solid #ddd;height:75px; background:#fff; text-align:center; padding:2px; margin:0 auto}
+.Compply_right_name{width:100%; line-height:23px; margin-top:15px; font-size:16px;  text-align:center}
+.Compply_right_name a{}
+.Compply_right_rz{width:100%; margin-top:5px; font-size:14px;color:#746e6e;padding-bottom:10px; position:relative}
+.Compply_right_rz img{ display:inline-block; margin-right:8px;}
+.Compply_right_gz{display:block;width:74px;height:26px; background:#ef531f; text-align:center; line-height:26px;color:#fff; position:absolute;right:0px;top:-5px;}
+.Compply_right_gz:hover{ background:#F30;color:#fff; text-decoration:none}
+.Compply_right_js{width:100%; float:left; padding:10px 0px;}
+.Compply_right_js ul li{width:100%; float:left; line-height:20px;color:#737373; margin-top:18px;}
+.Compply_right_span_c{ display:block; padding-left:45px; position:relative}
+.Compply_right_icon{width:20px;height:20px; display:inline-block; position:absolute;left:10px;top:0px;}
+.Compply_right_icon_hy{ background:url(../images/com_icon_c.png) no-repeat 0 0;}
+.Compply_right_icon_xz{ background:url(../images/com_icon_c.png) no-repeat 0 -35px;}
+.Compply_right_icon_city{ background:url(../images/com_icon_c.png) no-repeat 0 -73px;}
+.Compply_right_icon_rs{ background:url(../images/com_icon_c.png) no-repeat 0 -106px;}
+.Compply_right_icon_zj{ background:url(../images/com_icon_c.png) no-repeat 0 -146px;}
+.Compply_right_post{width:260px;  background:#fff;float:left; margin-top:20px;}
+.Company_post_xs{border-bottom: 1px solid #DDDDDD;  float: left;  font-size: 16px; background:#fff;height:40px; line-height:40px; width:100%;}
+.Company_post_xs span{ padding-left:15px;}
+.Compply_right_post_other{width:100%; float:left; }
+.Compply_right_post_other li{width:215px; padding:5px 10px; float:left;border-bottom:1px solid #f1f1f1; line-height:23px;}
+.Compply_right_post_other_name{ font-size:14px;display:block;}
+.complay_post_map{ font-size:12px; display:inline-block; padding:2px 4px;background: url(../images/Job_map.jpg) no-repeat left center ;color: #1155CC; display: inline-block;padding-left: 18px; margin-left:10px;}
+.Compply_right_banner{ margin-top:20px;}
+.Pop-up_box {_position: absolute;width: 380px;box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);position: absolute;z-index: 9999; }
+.Pop-up_box_h1 {background-position: 0 -381px;color: #FFFFFF;font-size: 14px;height: 41px;line-height: 40px;padding-left: 15px;}
+.Pop-up_box_h1 span {float: left;font-size: 14px;line-height: 40px;margin: 0;padding: 0 10px;}
+.Pop-up_box_h1 a {background-position: -104px -59px;cursor: pointer;display: block;float: right;height: 41px;width: 41px;}
+.Pop-up_logoin {color: #666666;line-height: 24px;padding:10px 20px 20px 20px;float: left;width: 340px;}
+.Pop-up_logoin_pad {padding-top: 10px;}
+.Pop-up_logoin_jb {background-color: #F1F9FE;border: 1px solid #C1E4F7;color: #2B9CDF;font-size: 14px;font-weight: bold;height: 28px;line-height: 28px;margin-bottom: 15px;padding-left: 10px;}
+.Pop-cottextarea {resize: none;border-color: #CCCCCC #DBDBDB #DBDBDB #CCCCCC;border-radius: 2px 2px 2px 2px;border-style: solid;border-width: 1px;}
+.ajax_login_tit {background-color: #F1F9FE;border: 1px solid #C1E4F7;color: #2B9CDF;font-size: 14px;font-weight: bold;height: 28px;line-height: 28px;margin-bottom: 15px;padding-left: 10px;}
+.Pop-cottextarea_text {width: 80px;border-color: #CCCCCC #DBDBDB #DBDBDB #CCCCCC;border-radius: 2px 2px 2px 2px;border-style: solid;border-width: 1px;height: 25px;line-height: 25px;}
+.login_button_jb {width: 100px;height: 30px;color:#fff; font-size:14px;background:#1369c0;border: none;cursor: pointer}
+.Pop-up_logoin_sq .Pop-up_logoin_jb_span {width: 70px;}
+.Pop-up_logoin_list {margin-bottom: 15px;width: 100%;float: left;}
+.Pop-up_logoin_list span {display: inline-block;width: 60px;float: left;text-align: right;line-height: 25px;}
+.ajax_login_input {border:1px solid #ddd;border-style: solid;border-width: 1px;font-family: Verdana, Geneva, sans-serif;font-size: 12px;height:25px;line-height: 25px;padding: 3px;width:220px;float: left}
+.Pop-up_logoin_bot {border-top: 1px solid #ccc;width: 100%;float: left}
+.Pop-up_logoin_sq {width:100%;margin-top: 10px;font-size: 14px;}
+.Pop-up_logoin_sq span {display: inline-block;width: 90px;text-align: right;float:left}
+.POp_up_r{width:200px;float:left}
+.POp_up_r  em{ margin-right:10px;border:1px solid #ddd; padding:3px 10px; display:inline-block; font-size:14px; margin-top:3px;}
+.POp_up_r em input{width:13px;height:13px; overflow:hidden; vertical-align:middle; margin-right:3px;}
+.Pop-up_logoin_sq em {display: inline-block;}
+.Pop-up_logoin_sq .Pop-up_radio {margin-left: 10px;margin-right: 5px;}
+.Company_pages{width:100%; float:left; margin-top:10px; text-align:center}
+
+.Company_pages a{ display:inline-block; padding:2px 6px;border:1px solid #ddd; cursor:pointer;margin:0px 5px;}
+.Company_pages .Company_pages_cur{display:inline-block; padding:2px 6px;border:1px solid #fff;margin:0px 5px;}
+.Company_pages a:hover{background:#06F;color:#fff;}
+.Company_pages_sl{display:inline-block; padding:2px 6px;border:1px solid #ddd; cursor:pointer}
+.comapply_no_msg{width:100%; float:left; padding-top:30px; padding-bottom:30px;}
+.comapply_no_msg_cont{width:300px; margin:0px auto;}
+.comapply_no_msg_cont span{ display:block;width:128px;height:84px; background:url(../images/no1.png) no-repeat; margin:0 auto}
+.comapply_no_msg_cont  em{ font-size:18px; display:block;line-height:27px; text-align:center; margin-top:20px;}
+.Company_other_no_msg{width:100%; text-align:center; padding-top:10px; padding-bottom:10px;}
+/*Ö°Î»·¢²¼Õß*/
+.job_prom{ width:270px; background:#3d9ccc; padding-bottom:10px;color:#fff; position:absolute;right:8px;top:-8px; z-index:10}
+.job_deal_icon{width:7px;height:8px; background:url(../images/job_prom_icon.png) no-repeat; display:inline-block; position:absolute;left:-7px;top:-0px;}
+.job_deal{ width:100%; position:relative}
+.job_deal_res{ width:130px; text-align:center; margin:12px 0 0 0;}
+.job_deal_size{width:100%; float:left; color:#fff; font-weight:bold; font-size:18px; line-height:30px;}
+.job_deal_text{width:100%; float:left; color:#fff;}
+.job_deal_line{ width:1px; height:40px; border-right:1px dashed #fff; margin:20px 0 0 0;}
+.comappiy_left_sidebar_otherjob_h1{width:100%; float:left;border-bottom:1px solid #e9e9e9; padding:10px 0;}
+.comappiy_left_sidebar_otherjob_h1_s{ font-size:16px;}
+.comappiy_left_c_list{width:100%; float:left; padding-top:10px;}
+.comappiy_left_c_list li{width:100%; float:left;border-bottom:1px solid #e9e9e9; padding:14px 0; position:relative}
+.comappiy_left_jobname{ font-size:16px; padding-bottom:10px;}
+.comappiy_left_sidebar_otherjob_sq{width:90px;height:35px; line-height:35px; text-align:center; background:#ff6a6a;color:#fff; display:block; position:absolute;right:0px;top:20px;}
+.comappiy_left_sidebar_otherjob_sq:hover{ background:#ff5a5a;color:#fff; text-decoration:none;}
+.comappiy_left_jobname_mag{width:100%; font-size:16px; padding:20px 0; text-align:center; float:left}
+.comappiy_left_sidebar_otherjob_x{ font-size:14px;color:#666}
+.comappiy_left_sidebar_otherjob_line{ font-size:12px;color:#999; padding:0px 10px}
+.about_touch_logoin_tc{ text-align:center}
+.zx_yx_input{width:105px;height:33px; line-height:33px;line-height:33px;border:1px solid #f1efef; text-indent:10px; margin-right:10px;}
+.affirm_yz{width:100%; float:left; margin-top:10px;}
+.job_hr{width:858px;border:1px dashed #dad9d9; float:left; padding:25px 10px 15px 10px; position:relative;z-index:3; margin-top:50px;}
+.job_hr_tit{width:110px;height:27px; background:#fff; font-size:16px; font-weight:bold; position:absolute;left:20px;top:-10px; text-align:center}
+.job_hr_icon{width:43px;height:43px; background:#1c99ef;color:#fff; text-align:center; line-height:43px; font-size:22px; float:left;border-radius:50%; }
+.job_hr_left{ float:left; line-height:22px; padding-left:16px;color:#737171; position:relative; z-index:100}
+.job_hr_right{ width:550px;float:right}
+.job_hr_list{ width:130px;float:left;border-right:1px solid #f3f3f3; padding:23px 0px 0px 0px; text-align:center;color:#555; position:relative; z-index:90}
+.job_hr_listbig{ width:138px;float:left;border-right:1px solid #f3f3f3; padding:23px 0px 0px 0px; text-align:center;color:#555; position:relative; z-index:90}
+.job_hr_listbig_end{border:none;}
+.job_hr_list_n{width:100%; text-align:center; position:absolute;left:0px;top:-12px; font-size:24px;color:#1c99ef}
+.job_hr_list_dw{ font-size:14px;color:#b2b4b5}
+.job_hare{width:400px; line-height:30px; position:absolute;left:0px;top:-55px;}
+.job_hare span{float:left;}
+.job_hare  .job_hare_fl{ float:left}
+.Company_post_td{width:240px; position:absolute;right:20px;top:20px;}
+.Company_post_td_bth{width:100px;height:42px; line-height:42px; padding-left:50px;display:block; font-size:18px; background:#ff6a6a url(../images/com_icon_td.png) no-repeat 20px center;color:#fff;border-radius:25px; margin:0 auto}
+.Company_post_td_bth:hover{ background:#f35252 url(../images/com_icon_td.png) no-repeat 20px center;color:#fff; text-decoration:none;}
+.Company_post_td_ysq{width:90px;height:42px; line-height:42px; padding-left:60px;display:block; font-size:18px; background:#999 url(../images/com_icon_td.png) no-repeat 20px center;color:#fff;border-radius:25px; margin:0 auto}
+.Company_post_sub{ width:240px;padding-top:15px; }
+.Company_post_sub_a{ display:inline-block; padding-left:23px; margin-left:15px;float:left}
+.Company_post_sub_a_sc{ background:url(../images/com_icon_sc.png) no-repeat  left center}
+.Company_post_sub_a_ysc{ background:url(../images/com_icon_sc.png) no-repeat left center}
+.Company_post_sub_a_tj{ background:url(../images/com_icon_tj.png) no-repeat left center}
+.Company_post_sub_a_wx{ background:url(../images/com_icon_wx.png) no-repeat left center}
+.Company_Basic_information_r{width:840px; float:left}
+.job_hr_left_ly{width:23px;height:23px; display:inline-block; background:url(../images/com_iconly.gif) no-repeat; position:absolute;right:35px;top:-5px;}
+.job_hr_ly_box{width:350px;border:1px solid #eee9eb; position:absolute;z-index:99999;left:190px; top:-40px; background:#fff; padding:0px 0px 10px 10px;}
+.Company_post_more_icon{width:11px;height:15px; display:inline-block;  background:url(../images/com_iconly_jt.png) no-repeat; position:absolute;left:-21px;top:35px;}
+.Company_post_name_img{ float:left; margin-left:5px; margin-top:10px;}
+.jobtel_box{ padding:10px; }
+.jobtel_box_tip{ width:100%; text-align:left;padding:5px 0 5px 0px;color:#666; font-size:12px;}
+.jobtel_box_tip_name{color:#ff6165}
+.jobtel_box_p{ line-height:28px;}
+.jobtel_box_wx{width:100%; text-align:center; padding:5px 0px 5px 0; font-size:12px;color:#999;}
+.jobtel_box_wxewm{width:100px; padding:5px;border:1px solid #eee; text-align:center; margin:0 auto}
+.jobtel_box_tel{ padding:0px 0 0 0;}
+.jobtel_touch_box{ padding-left:160px;min-height:165px;_height:165px; position:relative}
+.jobtel_touch{ line-height:22px; padding-top:5px;color:#ff0000; font-size:18px;}
+.jobtel_touch a{color:#C30; text-decoration:underline;}
+.jobtel_touch_hr{ font-weight:bold; font-size:16px;}
+.jobtel_touch_box_wx{width:120px; position:absolute;left:10px;top:0px;}
+.jobtel_box_wx_gz{width:100%; font-size:14px; font-weight:bold;color:#f60; text-align:center}
+.jobtel_box_t_box{width:250px;background:#fffff6;border:1px solid #e8e8b0; padding:15px 0px 15px 15px; margin-top:15px; position:relative}
+.jobtel_box_t_box_icon{width:12px;height:8px; display:inline-block; position:absolute;left:125px;top:-8px; background:url(../images/yuntel_icon.png) no-repeat}
+.jobtel_box_t_hrl{ padding-left:50px; background:url(../images/yuntel_icon1.png) no-repeat 0px 5px}
+.jobtel_touch_p{ line-height:22px;color:#999; font-size:12px; margin-top:10px;}
+.jobtel_box_bot{width:106px;height:8px; background:url(../images/yuntel_icon2.png) no-repeat; margin:0 auto}
+.jobtel_box_t_box_cj{ color:#C30; text-decoration:underline}
+.jobtel_box_t_box_cj_tip{width:100%;color:#999; line-height:22px; padding-top:5px;}
+.evaluate{width:100%; float:left; padding:10px  0 0 0}
+.evaluate_userlist{width:100%; float:left;border-bottom:1px dashed #dce4e6; padding:10px 0;}
+.evaluate_ms{width:240px; float:left}
+.evaluate_username{width:80px; float:left}
+.evaluate_username_u{width:100%; text-align:center; margin-top:5px;color:#999}
+.evaluate_user_pf{width:780px; float:left; padding-left:20px;}
+.evaluate_ms_box{width:100%; float:left; position:relative}
+.evaluate_tag{width:100%; float:left; padding:15px 0 0 0}
+.evaluate_tag_s{ display:inline-block; padding:2px 8px;border:1px solid #ddd; margin-right:10px; font-size:12px;color:#999}
+.evaluate_pj_box{width:100%; float:left; padding:10px 0;}
+.evaluate_pj{width:100%; line-height:25px;color:#666; float:left}
+.evaluate_date{ font-size:12px; position:absolute;right:0px;top:5px;color:#999}
+.evaluate_look_compj{width:100%; text-align:center; float:left; padding:20px  0 0 0}
+.evaluate_look_compj a{color:#1c99ef}
+.evaluate_userphoto{width:80px;height:100px; position:relative}
+.evaluate_photouser_bg{width:80px;height:100px; position:absolute;left:0px;top:0px; background:url(../images/user_photo_bg.png) no-repeat}
+.evaluate_pj_dp {width:100%; float:left}
+.evaluate_pj_dp a{color:#11cd6e; display:inline-block; padding-left:20px; background:url(../images/yun_z.png) no-repeat;}
+.evaluate_pj_dp a:hover{ text-decoration:none;}
+.evaluate_pf_otherbox{width:100%; float:left; padding-bottom:20px;}
+.evaluate_pf_other{width:100%; float:left; margin-top:10px;}
+.evaluate_pf_other_name{width:100px; float:left; text-align:right}
+.evaluate_pf_other_start{width:115px;height:19px; background:url(../images/start_no.png) no-repeat; float:left; position:relative}
+.evaluate_pf_other_start_p{width:115px;height:19px; background:url(../images/start_yes.png) no-repeat; position:absolute;left:0px;top:0px; display:block}
+.evaluate_pf_left{width:550px; float:left}
+.evaluate_pf_other_fs{ float:left; padding-left:10px;}
+.evaluate_pf_right{ float:right; margin-top:40px;width:200px;}
+.evaluate_pf_right_fs{ font-size:40px;color:#f60}
+.evaluate_pf_userzh{width:700px; float:left}
+.evaluate_pf_userzh_l{width:70px; float:left}
+.evaluate_pf_userzh_list{width:230px; float:left;color:#666}
+.evaluate_pf_job{ float:left;width:380px;}
+.evaluate_pf_left_tit{ font-size:16px; padding:10px 0px 10px 30px; float:left}
+.evaluate_pf_left_tit_n{ font-size:12px;color:#999; padding-left:10px;}
+.evaluate_pf_otherbox_bor{border-bottom:1px solid #ddd}
+
+.Company_other_job ul li{color:#666;background:#f9f9f9;border-bottom:1px dashed #e9e9e9;padding:8px;}
+.company_ct{color:#666;}
+.yun_info_sex{ float:left; display:inline-block;width:60px; line-height:28px; cursor:pointer; margin-top:5px; margin-left:10px;}
+.usericon_sex{width:28px;height:28px; display:block; float:left; margin-right:8px;_margin-right:4px}
+.usericon_sex1{ background:url(../images/yun_info_sex_icon.png) no-repeat 0 0;}
+.yun_info_sex_cur .usericon_sex1{background:url(../images/yun_info_sex_icon.png) no-repeat -29px 0;}
+.usericon_sex2{ background:url(../images/yun_info_sex_icon.png) no-repeat 0px -29px;}
+.yun_info_sex_cur .usericon_sex2{ background:url(../images/yun_info_sex_icon.png) no-repeat -29px -29px;}
+.evaluate_pj_no{width:100%; background:url(../images/no1.png) no-repeat center 10px; padding:80px  0 30px 0; text-align:center;color:#666}
+
+
+

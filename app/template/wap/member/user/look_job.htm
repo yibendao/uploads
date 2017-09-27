@@ -1,0 +1,42 @@
+{yun:}include file="$wapstyle/member/header.htm"{/yun} 
+<div class="main_member_cot_box">
+<div class="wap_member_comp_h1"><span>浏览的职位</span></div>
+{yun:}foreach item=one from=$look{/yun}
+
+  <div class="com_member_hr">
+ <div class="com_member_hr_name"> 
+<a href="{yun:}url m=wap c=job a=view id=$one.job_id{/yun}"  class="wap_member_com_name  com_member_hr_cblue">{yun:}$one.jobname{/yun}</a>
+	<span class="com_member_hr_date">  {yun:}if $one.jobstate=='1'{/yun}
+				<span class="wap_member_post_list_zt ap_member_post_list_zt_gq">招聘中</span> 
+				 {yun:}elseif $one.jobstate=='2'{/yun}
+				<span class="wap_member_post_list_zt ap_member_post_list_zt_bf">已过期</span> 
+				  {yun:}elseif $one.jobstate=='3'{/yun}
+				  <span class="wap_member_post_list_zt ap_member_post_list_zt_zt">已下架</span> 
+				 {yun:}/if{/yun}
+  </span>               
+                 
+</div>
+ <div class="user_member_box">
+  <div class="com_member_hr_p1"><a href="{yun:}url m=wap c=company a=show id =$one.com_id{/yun}" target="_blank">{yun:}$one.comname{/yun}</A> </div>
+ 
+  <div class="com_member_hr_p1"><span class="member_c9">地区：</span>{yun:}$one.provinceid{/yun}-{yun:}$one.cityid{/yun}&nbsp;&nbsp;&nbsp;<span class="member_c9">薪资：</span><span class="wap_member_msg_p1_cf">{yun:}if $one.minsalary&&$one.maxsalary{/yun}￥{yun:}$one.minsalary{/yun}-{yun:}$one.maxsalary{/yun}{yun:}else if $one.minsalary{/yun}￥{yun:}$one.minsalary{/yun}以上{yun:}else{/yun}面议{yun:}/if{/yun}</span></div>
+ <div class="com_member_hr_p1"><span class="member_c9">浏览时间：</span>{yun:}$one.datetime|date_format:"%Y-%m-%d"{/yun}</div>
+ </div>
+<div class="com_member_hr_cz">
+<a href="javascript:void(0)"  onclick="layer_del('确定要删除？', 'index.php?c=lookjobdel&id={yun:}$one.id{/yun}');"  class="yun_member_hr_bth">删除</a>
+<a href="{yun:}url m=wap c=job a=view id=$one.job_id{/yun}" class="yun_member_hr_bth">查看详情</a>
+</div>
+</div>
+
+
+{yun:}foreachelse{/yun}  
+<div class="wap_member_no">
+您还没有浏览过的职位<div><a class="wap_member_no_submit" href="{yun:}url m=wap c=job{/yun}">去搜索相关职位</a></div>
+</div>
+{yun:}/foreach{/yun} 
+</div>
+{yun:}if $look|@count>0{/yun} 
+<div class="pages">{yun:}$pagenav{/yun}</div>
+{yun:}/if{/yun} 
+
+{yun:}include file="$wapstyle/footer.htm"{/yun} 

@@ -1,0 +1,181 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script>
+<script src="js/admin_public.js" language="javascript"></script>
+<script>
+$(function(){
+	$(".status").click(function(){
+		$("input[name=pid]").val($(this).attr("pid"));
+		var uid=$(this).attr("pid");
+		var status=$(this).attr("status");
+		$("#status"+status).attr("checked",true);
+		$("input[name=uid]").val(uid);
+		$.get("index.php?m=user_member&c=lockinfo&uid="+uid,function(msg){
+			$("#alertcontent").val($.trim(msg));
+			status_div('锁定用户','350','230');
+		});
+	});
+});
+function SendMsg(){
+	var codewebarr="";
+	$(".check_all:checked").each(function(){
+		if(codewebarr==""){codewebarr=$(this).val();}else{codewebarr=codewebarr+","+$(this).val();}
+	});
+	$("#userid").val(codewebarr);
+	setTimeout(function(){$('#checkform').submit()},0);
+}
+</script>
+<link href="images/reset.css" rel="stylesheet" type="text/css" />
+<link href="images/system.css" rel="stylesheet" type="text/css" />
+<link href="images/table_form.css" rel="stylesheet" type="text/css" />
+
+<title>后台管理</title>
+</head>
+<body class="body_ifm">
+<form action="index.php?m=admin_message&c=show" method="post" id='checkform'>
+  <input type="hidden" name="userid" id="userid" value="">
+  <input type="hidden" name="pytoken" value="{yun:}$pytoken{/yun}">
+</form>
+{yun:}include file="$adminstyle/member_send_email.htm"{/yun}
+<div id="status_div"  style="display:none; width: 350px; ">
+  <div class="" style=" margin-top:10px; "  >
+    <form action="index.php?m=user_member&c=status" target="supportiframe" method="post" id="formstatus">
+      <table cellspacing='1' cellpadding='1' class="admin_examine_table">
+     <tr>
+    <th width="80">锁定操作：</th>
+     <td align="left">
+         		<label for="status1"> <span class="admin_examine_table_s"><input type="radio" name="status" value="1" id="status1" >正常</span></label>
+            	<label for="status2"> <span class="admin_examine_table_s"><input type="radio" name="status" value="2" id="status2">锁定</span></label>
+          </td>
+        </tr>
+        </tr>
+          <tr>
+            <th>锁定说明：</th>
+           <td align="left"> <textarea id="alertcontent" name="lock_info" class="admin_explain_textarea"></textarea> </td>
+        
+           </tr>
+        <tr>
+           <td colspan='2' align="center"><input type="submit"  value='确认' class="admin_examine_bth">
+          
+            <input type="button" id="zxxCancelBtn" onClick="layer.closeAll();" class="admin_examine_bth_qx" value='取消'></td>
+        </tr>
+   
+      <input type="hidden" name="pytoken" value="{yun:}$pytoken{/yun}">
+      <input name="uid" value="0" type="hidden">
+         </table>
+    </form>
+  </div>
+</div>
+<div class="infoboxp">
+  <div class="infoboxp_top_bg"></div>
+  <form action="index.php" name="myform" method="get">
+    <input name="m" value="user_member" type="hidden"/>
+    <div class="admin_Filter">
+    	<span class="complay_top_span fl">个人会员列表</span>
+      <div class="admin_Filter_span">搜索类型：</div>
+      <div class="admin_Filter_text formselect" did='duser_type'>
+        <input type="button" {yun:}if $smarty.get.type==''||$smarty.get.type=='1'{/yun} value="用户名" {yun:}elseif $smarty.get.type=='2'{/yun} value="姓名" {yun:}elseif $smarty.get.type=='3'{/yun} value="EMAIL" {yun:}elseif $smarty.get.type=='4'{/yun} value="手机号" {yun:}elseif $smarty.get.type=='5'{/yun} value="用户ID"{yun:}/if{/yun} class="admin_Filter_but" id="buser_type">
+        <input type="hidden" name="type" id="user_type" value="{yun:}if $smarty.get.type{/yun}{yun:}$smarty.get.type{/yun}{yun:}else{/yun}1{yun:}/if{/yun}"/>
+        <div class="admin_Filter_text_box" style="display:none" id="duser_type">
+          <ul> 
+            <li><a href="javascript:void(0)" onClick="formselect('1','user_type','用户名')">用户名</a></li>
+            <li><a href="javascript:void(0)" onClick="formselect('2','user_type','姓名')">姓名</a></li>
+            <li><a href="javascript:void(0)" onClick="formselect('3','user_type','EMAIL')">EMAIL</a></li>
+            <li><a href="javascript:void(0)" onClick="formselect('4','user_type','手机号')">手机号</a></li>
+			<li><a href="javascript:void(0)" onClick="formselect('5','user_type','用户ID')">用户ID</a></li>
+          </ul>
+        </div>
+      </div>
+      <input type="text" placeholder="输入你要搜索的关键字"  name='keyword' class="admin_Filter_search">
+      <input type="submit" name='search' value="搜索" class="admin_Filter_bth">
+      <span class='admin_search_div'>
+      <div class="admin_adv_search">
+        <div class="admin_adv_search_bth">高级搜索</div>
+      </div>
+      </span> <a href="index.php?m=user_member&c=add" class="admin_infoboxp_tj">添加会员</a> </div>
+  </form>
+  {yun:}include file="admin/admin_search.htm"{/yun}
+  <div class="table-list">
+    <div class="admin_table_border">
+      <iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe>
+      <form action="index.php"  target="supportiframe" name="myform" method="get" id='myform'>
+        <input name="m" value="user_member" type="hidden"/>
+        <input name="c" value="del" type="hidden"/>
+        <table width="100%">
+          <thead>
+            <tr class="admin_table_top">
+              <th style="width:20px;"><label for="chkall">
+                  <input type="checkbox" id='chkAll'  onclick='CheckAll(this.form)'/>
+                </label></th>
+              <th align="left"> {yun:}if $smarty.get.t=="uid" && $smarty.get.order=="asc"{/yun} <a href="index.php?m=user_member&order=desc&t=uid">用户ID<img src="images/sanj.jpg"/></a> {yun:}else{/yun} <a href="index.php?m=user_member&order=asc&t=uid">用户ID<img src="images/sanj2.jpg"/></a> {yun:}/if{/yun}</th>
+              <th align="left">用户名</th>
+              <th align="left">姓名</th>
+              <th align="left">EMAIL/手机号</th>
+              <th align="left"> {yun:}if $smarty.get.t=="reg_date" && $smarty.get.order=="asc"{/yun} <a href="index.php?m=user_member&order=desc&t=reg_date">注册时间<img src="images/sanj.jpg"/></a> {yun:}else{/yun} <a href="index.php?m=user_member&order=asc&t=reg_date">注册时间<img src="images/sanj2.jpg"/></a> {yun:}/if{/yun}</th>
+              <th> {yun:}if $smarty.get.t=="login_date" && $smarty.get.order=="asc"{/yun} <a href="index.php?m=user_member&order=desc&t=login_date">最近登录时间<img src="images/sanj.jpg"/></a> {yun:}else{/yun} <a href="index.php?m=user_member&order=asc&t=login_date">最近登录时间<img src="images/sanj2.jpg"/></a> {yun:}/if{/yun}</th>
+              <th>登录IP</th>
+              <th>来源</th>
+              <th>站点</th>
+              <th>添加/重置</th>
+              <th class="admin_table_th_bg">操作</th>
+            </tr>
+          </thead>
+          <tbody>
+          {yun:}foreach item=v key=key from=$userrows{/yun}
+          <tr align="center" {yun:}if ($key+1)%2=='0'{/yun}class="admin_com_td_bg"{yun:}/if{/yun} id="list{yun:}$v.uid{/yun}">
+            <td width="20"><input type="checkbox" value="{yun:}$v.uid{/yun}" class="check_all"  name='del[]' onclick='unselectall()' rel="del_chk" email="{yun:}$v.email{/yun}" moblie="{yun:}$v.telphone{/yun}"/></td>
+            <td align="left" class="td1" style="text-align:center; width:60px;">{yun:}$v.uid{/yun}</td>
+            <td align="left"><a href="index.php?m=user_member&c=Imitate&uid={yun:}$v.uid{/yun}" target="_blank" class="admin_cz_sc">{yun:}$v.username{/yun}</a> {yun:}if $v.status==2{/yun}<img src="../config/ajax_img/suo.png" alt="已锁定">{yun:}/if{/yun} </td>
+            <td align="left">{yun:}$v.name{/yun}</td>
+            <td class="od" align="left"> 
+              <div style="width:190px;">{yun:}if $v.email{/yun}
+              {yun:}$v.email{/yun}
+              {yun:}if $email_promiss{/yun}<a onClick="send_email('{yun:}$v.email{/yun}');" style="color:green; cursor:pointer;">发邮件</a>{yun:}/if{/yun}</div>
+              {yun:}/if{/yun}
+              <div style="width:190px;">{yun:}if $v.moblie{/yun}
+              {yun:}$v.moblie{/yun}
+              {yun:}if $moblie_promiss{/yun}<a onClick="send_moblie('{yun:}$v.moblie{/yun}');" style="color:green; cursor:pointer;">发信息</a> {yun:}/if{/yun}
+              {yun:}/if{/yun}</div> </td>
+            <td class="td" align="left">{yun:}$v.reg_date|date_format:"%Y-%m-%d"{/yun}</td>
+            <td>{yun:}if $v.login_date!=""{/yun}{yun:}$v.login_date|date_format:"%Y-%m-%d"{/yun}
+              {yun:}else{/yun}<font color="#FF0000">从未登录</font>{yun:}/if{/yun}</td>
+            <td align="left">{yun:}$v.login_ip{/yun}</td>
+            <td>{yun:}$source[$v.source]{/yun}</td>
+			<td>
+			<div>{yun:}$Dname[$v.did]{/yun}</div>
+			<div><a href="javascript:;" onclick="checksite('{yun:}$v.username{/yun}','{yun:}$v.uid{/yun}','index.php?m=user_member&c=checksitedid');" class="admin_company_xg_icon">重新分配</a></div>
+			</td>
+            <td><div><a href="index.php?m=admin_resume&c=addresume&uid={yun:}$v.uid{/yun}" class="admin_cz_sc">添加简历</a></div>
+              <a href="javascript:void(0);" onClick="resetpw('{yun:}$v.username{/yun}','{yun:}$v.uid{/yun}');" class="admin_com_cz">点我重置</a></td>
+            <td><a href="index.php?m=user_member&c=Imitate&uid={yun:}$v.uid{/yun}" target="_blank" class="admin_cz_sc">管理</a> | <a href="javascript:;" class="admin_cz_sc status" pid="{yun:}$v.uid{/yun}" status="{yun:}$v.status{/yun}">锁定</a><br/>
+              <a href="index.php?m=user_member&c=edit&id={yun:}$v.uid{/yun}" class="admin_cz_sc">修改</a> | <a href="javascript:void(0)" onClick="layer_del('确定要删除？', 'index.php?m=user_member&c=del&del={yun:}$v.uid{/yun}');"class="admin_cz_sc">删除</a></td>
+          </tr>
+          {yun:}/foreach{/yun}
+          <tr style="background:#f1f1f1;">
+            <td align="center"><input type="checkbox" id='chkAll2' onclick='CheckAll2(this.form)' /></td>
+            <td colspan="4" ><label for="chkAll2">全选</label>
+              &nbsp;
+              <input class="admin_submit4" type="button" name="delsub" value="删除所选"  onclick="return really('del[]')"/>
+              {yun:}if $email_promiss{/yun}
+              <input class="admin_submit4" type="button"  value="发邮件"  onclick="return confirm_email('确定发邮件吗？','email_div')"/>
+              {yun:}/if{/yun}
+              {yun:}if $moblie_promiss{/yun}
+              <input class="admin_submit4" type="button" value="发信息"  onclick="return confirm_email('确定发信息吗？','moblie_div')"/>
+              {yun:}/if{/yun}
+			  <input class="admin_submit4" type="button" name="delsub" value="批量选择分站" onClick="checksiteall('index.php?m=user_member&c=checksitedid');" />
+			  </td>
+            <td colspan="7" class="digg">{yun:}$pagenav{/yun}</td>
+          </tr>
+            </tbody>
+        </table>
+        <input type="hidden" name="pytoken" id='pytoken' value="{yun:}$pytoken{/yun}">
+      </form>
+    </div>
+  </div>
+</div>
+{yun:}include file="$adminstyle/checkdomain.htm"{/yun}
+</body>
+</html>

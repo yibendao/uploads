@@ -1,0 +1,250 @@
+{yun:}include file="$userstyle/header.htm"{/yun}
+<script src="{yun:}$config.sy_weburl{/yun}/js/member_public.js"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/binding.js"></script>
+<script>var weburl = "{yun:}$config.sy_weburl{/yun}";</script>
+<div class="yun_user_member_w1100">
+    {yun:}include file="$userstyle/left.htm"{/yun}
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body, div {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+        <div class="mian_right fltR mt20">
+            <div class="member_right_index_h1 fltL"> <span class="member_right_h1_span fltL">账户绑定</span> <i class="member_right_h1_icon user_bg"></i></div>
+    
+
+        <div class="clear"></div>
+        <div class="resume_box_list">
+         
+            <div class="Binding_h1_box">
+            <div class="Binding_h1">登录用户名：<span class="resume_bd_span">{yun:}$username{/yun}</span></div>
+            <div class="Binding_h1">上次登录时间：{yun:}$member.login_date|date_format:"%Y-%m-%d %H:%M:%S"{/yun}  <a href="index.php?c=passwd" class="Binding_a">修改密码</a></div>
+            </div>
+          <div class="resume_Prompt mt10 fltL"> 绑定手机号码、完成邮箱验证，可以增加求职反馈的及时性和准确性，从而提高求职成功率 </div>
+            {yun:}if $setname==1{/yun}
+            <div class="Binding_hint"><span class="fltL">您有一次修改账户名和重置一次密码机会<b>（仅限一次）</b></span><a href="index.php?c=setname">立即修改</a></div>
+            {yun:}/if{/yun}
+
+            <div class="Binding_list">
+                <div class="Binding_list_left"><div class="bingding_yx {yun:}if $resume.email_status==1{/yun}bingding_yx_cur{yun:}/if{/yun}"><i class="binding_yx_icon"></i></div><span class="bingding_yx_wr">绑定邮箱</span></div>
+                {yun:}if $resume.email_status==1{/yun}
+                <div class="Binding_list_text">当前邮箱已验证：<b class="Binding_list_b">{yun:}$resume.email{/yun}</b> </div>
+                <div class="Binding_oper">
+                    <a href="javascript:void(0)" onclick="layer_del('确定要取消绑定？','index.php?c=binding&act=del&type=email');" class="Binding_submit_qx">取消绑定</a>
+                </div>
+                {yun:}else{/yun}
+                <div class="Binding_list_text">当前邮箱未验证：<b class="Binding_list_b">{yun:}$resume.email{/yun}</b> 邮箱验证后，<br>可以通过邮箱随时取回账户密码。</div>
+                <div class="Binding_oper"><a href="javascript:getshow('email','绑定邮箱');" class="Binding_submit">立即绑定</a></div>
+                {yun:}/if{/yun}
+            </div>
+            <div class="Binding_list">
+                <div class="Binding_list_left"><div class="bingding_yx {yun:}if $resume.moblie_status==1{/yun}bingding_yx_cur{yun:}/if{/yun}"><i class="binding_sj_icon"></i></div><span class="bingding_yx_wr">绑定手机</span></div>
+                {yun:}if $resume.moblie_status==1{/yun}
+                <div class="Binding_list_text">
+                    当前手机已绑定：
+                    <b class="Binding_list_b">{yun:}$resume.telphone{/yun}</b>
+                </div>
+                <div class="Binding_oper">
+                    <a href="javascript:void(0)" onclick="layer_del('确定要取消绑定？','index.php?c=binding&act=del&type=moblie');" class="Binding_submit_qx">取消绑定</a>
+                </div>
+                {yun:}else{/yun}
+                <div class="Binding_list_text">
+                    当前手机未绑定：
+                    <b class="Binding_list_b">{yun:}$resume.telphone{/yun}</b> 绑定后可使用该手机登录账号<br>或找回密码
+                </div>
+                <div class="Binding_oper">
+                    <a href="javascript:getshow('moblie','绑定手机号码');" class="Binding_submit">立即绑定</a>
+                </div>
+                {yun:}/if{/yun}
+            </div>
+            <div class="Binding_list">
+                <div class="Binding_list_left"><div class="bingding_yx {yun:}if $member.qqid!=""{/yun}bingding_yx_cur{yun:}/if{/yun}"><i class="binding_qq_icon"></i></div><span class="bingding_yx_wr">绑定QQ</span></div>
+                {yun:}if $member.qqid!=""{/yun}
+                <div class="Binding_list_text Binding_list_text_mt">已绑定QQ号</div>
+                <div class="Binding_oper">
+                    <a href="javascript:void(0)" onclick="layer_del('确定要取消绑定？','index.php?c=binding&act=del&type=qqid');" class="Binding_submit_qx">取消绑定</a>
+                </div>
+                {yun:}else{/yun}
+                <div class="Binding_list_text Binding_list_text_mt">未绑定QQ号</div>
+                {yun:}if $config.sy_qqlogin!='1'{/yun}
+                <div class="Binding_oper">
+                    <a href="javascript:void(0)" onclick="layer.msg('对不起，QQ绑定已关闭！',2,8);return false;" class="Binding_submit">立即绑定</a>
+                </div>
+                {yun:}else{/yun}
+                <div class="Binding_oper">
+                    <a href="{yun:}url m=qqconnect  login=1{/yun}" class="Binding_submit">立即绑定</a>
+                </div>
+                {yun:}/if{/yun}
+                {yun:}/if{/yun}
+            </div>
+            <div class="Binding_list">
+                <div class="Binding_list_left"><div class="bingding_yx {yun:}if $member.sinaid!=""{/yun}bingding_yx_cur{yun:}/if{/yun}"><i class="binding_xl_icon"></i></div><span class="bingding_yx_wr">绑定新浪微博</span></div>
+                {yun:}if $member.sinaid!=""{/yun}
+                <div class="Binding_list_text Binding_list_text_mt">已绑定，可使用新浪微博快速登录</div>
+                <div class="Binding_oper">
+                    <a href="javascript:void(0)" onclick="layer_del('确定要取消绑定？','index.php?c=binding&act=del&type=sinaid');" class="Binding_submit_qx">取消绑定</a>
+                </div>
+                {yun:}else{/yun}
+                <div class="Binding_list_text Binding_list_text_mt">授权绑定后，可使用新浪微博快速登录</div>
+                {yun:}if $config.sy_sinalogin!='1'{/yun}
+                <div class="Binding_oper">
+                    <a href="javascript:void(0)" onclick="layer.msg('对不起，新浪绑定已关闭！',2,8);return false;" class="Binding_submit">立即绑定</a>
+                </div>
+                {yun:}else{/yun}
+                <div class="Binding_oper">
+                    <a href="{yun:}url m=sinaconnect login=1{/yun}" class="Binding_submit">立即绑定</a>
+                </div>
+                {yun:}/if{/yun}
+                {yun:}/if{/yun}
+            </div>
+			<div class="Binding_list">
+            <div class="Binding_list_left"><div class="bingding_yx {yun:}if $member.wxopenid!="" || $member.wxid!=''{/yun}bingding_yx_cur{yun:}/if{/yun}"><i class="binding_wx_icon"></i></div><span class="bingding_yx_wr">绑定微信</span></div>
+            {yun:}if $member.wxopenid!="" || $member.wxid!=''{/yun}
+            <div class="Binding_list_text  Binding_list_text_mt">已绑定，可使用微信扫描登录</div>
+            <div class="Binding_oper"><a href="javascript:void(0)" onClick="layer_del('确定要取消绑定？','index.php?c=binding&act=del&type=wxid');" class="Binding_submit_qx">取消绑定</a></div>
+            {yun:}else{/yun}
+            <div class="Binding_list_text  Binding_list_text_mt">授权绑定后，可使用微信扫描登录</div>
+            {yun:}if $config.wx_author!='1'{/yun}
+            <div class="Binding_oper"><a href="javascript:void(0)" onclick="layer.msg('对不起，微信绑定已关闭！',2,8); return false;" class="Binding_submit">立即绑定</a></div>
+            {yun:}else{/yun}
+            <div class="Binding_oper"><a href="{yun:}url m=wxconnect login=1{/yun}" class="Binding_submit">立即绑定</a></div>
+            {yun:}/if{/yun}
+            {yun:}/if{/yun} 
+		  </div>
+            <div class="Binding_listsf">
+                <div class="Binding_list_left"><div class="bingding_yx {yun:}if $resume.idcard_status==1{/yun}bingding_yx_cur{yun:}/if{/yun}"><i class="binding_sf_icon"></i></div><span class="bingding_yx_wr">身份认证</span></div>
+                <div class="Binding_listsf_cont">
+				{yun:}if $resume.idcard{/yun}
+                <div class="Binding_listsf_zj">证件号：{yun:}$resume.idcard{/yun}</div>
+                {yun:}/if{/yun} 
+                {yun:}if $resume.idcard_status==1{/yun}
+                <div class="Binding_list_text">身份已认证</div>
+                <div class="m_rech_lj fr">
+                	<a href="javascript:getyyzz('上传身份认证','500','500');" class="Binding_listsf_cont_bth">重新上传</a>
+                	</div>
+                {yun:}else{/yun}
+					{yun:}if $resume.idcard_pic!=""{/yun}
+						{yun:}if $resume.idcard_status==2{/yun}
+						<div class="Binding_list_text">
+                        <span class="Binding_listsf_wtg">审核未通过</span> 
+                       	 原因：{yun:}$resume.statusbody{/yun}</div>
+						<a href="javascript:getyyzz('上传身份认证','500','500');" class="Binding_listsf_cont_bth">重新上传</a>
+						{yun:}else{/yun}
+						<div class="Binding_list_text">身份认证已上传，请等待管理员审核</div>
+						<a href="javascript:getyyzz('上传身份认证','500','500');" class="Binding_listsf_cont_bth">重新上传</a>
+						{yun:}/if{/yun}
+					{yun:}else{/yun}
+					<div class="Binding_list_text Binding_list_text_mt">身份认证增加企业对你的信任度</div>
+						<a href="javascript:getyyzz('上传身份认证','500','500');" class="Binding_listsf_cont_bth">未验证</a>
+					{yun:}/if{/yun}
+                {yun:}/if{/yun}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="email" style="display:none;">
+    <div class="Binding_pop_box" style="padding:10px;width:480px;height:200px; background:#fff">
+        <div class="Binding_pop_box_msg">修改后的邮箱将作为新的登录账号</div>
+        <div>
+            <div class="Binding_pop_box_list">
+                <span class="Binding_pop_box_list_left"><i class="Binding_pop_box_list_left_i">*</i>新的邮箱：</span>
+                <input type="text" name="email" value="{yun:}$resume.email{/yun}" class="Binding_pop_box_list_text Binding_pop_box_list_textw200">
+            </div>
+            <div class="Binding_pop_box_list">
+                <span class="Binding_pop_box_list_left"><i class="Binding_pop_box_list_left_i">*</i>验证码：</span>
+                <input type="text" name="email_code" maxlength="4" class="Binding_pop_box_list_text">
+                <img id="vcode_img" src="{yun:}$config.sy_weburl{/yun}/app/include/authcode.inc.php" style=" margin:0 5px 5px 5px; vertical-align:middle;">
+                <a href="javascript:void(0);" onclick="checkCode('vcode_img');">看不清</a>
+            </div>
+            <div class="Binding_pop_sub" style="margin-top:10px;">
+                <span class="Binding_pop_box_list_left">&nbsp;</span>
+                <input class=" com_pop_bth" type="button" onclick="sendbemail('vcode_img');" value="发送验证邮箱">
+                <input class=" com_pop_bth_qx" type="button" value="取消" onclick="layer.closeAll();">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="moblie" style=" display:none;">
+    <div class="Binding_pop_box" style="padding:10px;width:480px;height:200px; background:#fff;">
+        <div class="Binding_pop_box_msg">绑定完成后，您可以使用该手机号码登录账号、找回密码</div>
+        <div>
+            <div class="Binding_pop_box_list">
+                <span class="Binding_pop_box_list_left"><i class="Binding_pop_box_list_left_i">*</i>手机号码：</span>
+                <input type="text"  name="moblie" value="{yun:}$resume.telphone{/yun}" class="Binding_pop_box_list_text Binding_pop_box_list_textw200"  >
+				
+            </div>
+            <div class="Binding_pop_box_list">
+                <span class="Binding_pop_box_list_left"><i class="Binding_pop_box_list_left_i">*</i>短信验证码：</span>
+                <input type="text" id="moblie_code" class="Binding_pop_box_list_text" style="width:90px;">
+                <a href="javascript:;" onclick="sendmoblie();" class="Binding_pop_bth" id="time">免费发送验证码</a>
+            </div>
+            <div class="Binding_pop_sub" style="margin-top:10px;">
+                <span class="Binding_pop_box_list_left">&nbsp;</span>
+                <input class="com_pop_bth_qd" onclick="check_moblie();" type="button" value="保存">
+                <input class="com_pop_bth_qx" type="button" value="取消" onclick="layer.closeAll();">
+            </div>
+        </div>
+    </div>
+</div>
+<div id="yyzz" style=" display:none;">
+    <div class="Binding_pop_box" style="padding:10px;width:480px;height:420px; overflow:auto; background:#fff;">
+        <div class="Binding_pop_box_msg">身份认证验证，有利于更好的应聘工作</div>
+        <div style="padding:20px 0">
+       		<iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe>
+            <form name="MyForm" target="supportiframe" method="post" action="index.php?c=binding&act=save" enctype="multipart/form-data" onsubmit="return check_user_cert();">
+				<div class="Binding_pop_box_list"><span class="Binding_pop_box_list_left"><i class="Binding_pop_box_list_left_i">*</i>证件号码：</span>
+                <input type="text" name="idcard" id="idcard" value='{yun:}$resume.idcard{/yun}' class="Binding_pop_box_list_text Binding_pop_box_list_textw200">
+                </div>
+                <div class="Binding_pop_box_list">
+                <span class="Binding_pop_box_list_left"><i class="Binding_pop_box_list_left_i">*</i>证件扫描件：</span>
+                <input type="file" name="pic" onchange="ajaxfile()" id="pic" class="Binding_pop_box_list_text Binding_pop_box_list_textw200"/></div>
+                <div class="Binding_pop_box_list">
+	               <img src="{yun:}$resume.idcard_pic{/yun}" id="imghead" width="380" height="200" {yun:}if !$resume.idcard_pic{/yun}style="display:none"{yun:}/if{/yun}/> {yun:}if $resume.idcard_pic{/yun}<a target="_blank" href="{yun:}$resume.idcard_pic{/yun}">查看原图</a>{yun:}/if{/yun}
+       			</div>
+                <div class="Binding_pop_sub" style="margin-top:20px;">
+                    <span class="Binding_pop_box_list_left">&nbsp;</span>
+					<input id="user_cert" name="user_cert" type="hidden" value="{yun:}$resume.idcard_pic{/yun}">
+                    <input class="com_pop_bth_qd" name="upfile" type="submit" value="保存">
+                    <input class="com_pop_bth_qx" type="button" value="取消" onclick="layer.closeAll();">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="{yun:}$config.sy_weburl{/yun}/js/imgareaselect/ajaxfileupload.js" type="text/javascript"></script>
+<script type="text/javascript">
+function ajaxfile() {
+	if($("#pic").val() != '') {      
+		var i=layer.load('图片上传中，请稍候....', 0);
+		$.ajaxFileUpload({
+			url: 'index.php?c=binding&act=save',
+			secureuri: false, 
+			fileElementId: 'pic', 
+			dataType: 'json', 
+			data:{'uppic':'1'},
+			success: function (data, status){ 
+				layer.close(i);	
+				if (data.msg) {
+					layer.msg(data.msg, 2, 8);
+				} else {
+				    $('#imghead').show();
+					$('#imghead').attr('src',data.url);
+					$('#user_cert').attr('value',data.url);
+				}
+		   }
+		})
+	}
+}
+</script>
+<input type="hidden" id="linktel" value="{yun:}$resume.telphone{/yun}" />
+<input type="hidden" id="linkmail" value="{yun:}$resume.email{/yun}" />
+<input type="hidden" id="send" value="0" />
+{yun:}include file="$userstyle/footer.htm"{/yun}

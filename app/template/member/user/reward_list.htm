@@ -1,0 +1,58 @@
+{yun:}include file="$userstyle/header.htm"{/yun}
+<div class="yun_user_member_w1100"> {yun:}include file="$userstyle/left.htm"{/yun}
+     <div class="mian_right fltR mt20">
+         <div class="member_right_index_h1 fltL"> <span class="member_right_h1_span fltL">{yun:}$config.integral_pricename{/yun}管理</span> <i class="member_right_h1_icon user_bg"></i></div>
+    <div>
+      <div id="gms_showclew"></div>
+      <div class="resumelistbox01 ">
+        <div class="resume_box_list"> <div class="job_list_tit"> <ul class="">
+	<li ><a href="index.php?c=integral">{yun:}$config.integral_pricename{/yun}任务</a></li>
+      <li><a href="index.php?c=integral_reduce">{yun:}$config.integral_pricename{/yun}规则</a></li>
+ <li class="job_list_tit_cur"><a href="index.php?c=reward_list">{yun:}$config.integral_pricename{/yun}兑换</a></li>
+	</ul> 
+    </div>
+          <table class="reward_table" cellpadding="1" cellspacing="1" border="0">
+          {yun:}if $rows{/yun}
+            <tr>
+              <th><div style="width:190px;">商品名称</div></th>
+              <th>消耗{yun:}$config.integral_pricename{/yun}</th>
+              <th>数量</th>
+              <th>联系人</th>
+              <th>状态</th>
+            </tr>
+            {yun:}foreach from=$rows item=log{/yun}
+          
+            <tr>
+              <td><div ><a href="{yun:}url m=redeem c=show id=$log.gid{/yun}" target="_blank" class="List_Title_span_com">{yun:}$log.name{/yun}</a></div></td>
+              <td align="center"> {yun:}$log.integral{/yun}</td>
+              <td align="center"> {yun:}$log.num{/yun}(件) </td>
+              <td align="center">{yun:}$log.linkman{/yun}</td>
+              <td align="center"> {yun:}if $log.status=="0"{/yun} <span class="wate_verify">等待审核</span> | <a href="javascript:void(0)" onclick="layer_del('确定要取消？', 'index.php?c=reward_list&act=del&id={yun:}$log.id{/yun}');" class="re_qx">取消兑换</a> {yun:}elseif $log.status=="1"{/yun} <span class="y_verify">已通过</span> {yun:}elseif $log.status=="2"{/yun} <span class="n_verify">未通过</span><br/>
+                {yun:}if $log.statusbody{/yun}<a href="javascript:void(0);"onclick="layer.alert('{yun:}$log.statusbody{/yun}', -1, !1);">查看原因</a>{yun:}/if{/yun} {yun:}/if{/yun}</td>
+            </tr>
+            <tr>
+              <td colspan="5">{yun:}$log.body{/yun}<span class="reward_tel">电话：{yun:}$log.linktel{/yun}</span>兑换日期{yun:}$log.ctime|date_format:'%Y-%m-%d %H:%M:%S'{/yun}
+              
+            {yun:}if $log.express{/yun}
+               <div class="reward_kd_p"> 快递公司：{yun:}$log.express{/yun}
+                {yun:}/if{/yun}{yun:}if $log.expnum{/yun}
+               <span class="reward_tel"> 单号：{yun:}$log.expnum{/yun}</span>
+                </div>
+                {yun:}/if{/yun}</td>
+            </tr>
+             {yun:}/foreach{/yun}
+             <tr> <td colspan="5"><div class="wxts_box">
+                <div class="wxts">温馨提示：</div>
+               您已兑换（<span style="color:#f60;">{yun:}$num{/yun}</span>）份礼品，还有<span style="color:#f60;">{yun:}$statis.integral{/yun}</span>{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}。 <a href="{yun:}url m=redeem{/yun}" class="cblue"  target="_blank" >我要兑换</a><br>
+            </div></td></tr>
+            {yun:}else{/yun}
+               <tr><td colspan="5"> <div class="msg_no" style="width:700px;">您共有<span style="color:#f60;">{yun:}$statis.integral{/yun}</span>{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}，还没有兑换记录，<a class="cblue" href="{yun:}url m=redeem{/yun}" target="_blank">现在就去兑换</a>。</div></td></tr>
+         {yun:}/if{/yun}
+          </table>
+          <div class="diggg">{yun:}$pagenav{/yun}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 
+{yun:}include file="$userstyle/footer.htm"{/yun}

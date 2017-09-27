@@ -1,0 +1,112 @@
+{yun:}include file="$wapstyle/nativeshare.htm"{/yun}
+
+<footer>
+<div class="clear"></div>
+<div class="footer_box_bot"></div>
+<div class="footer_sum">
+  <div class="bottom_sum">
+    <div class="bottom_con">
+      <div class="classify "> 
+      <a href="{yun:}url m=wap{/yun}" id="indexclick" class="fotter_nav_link"> 
+      <i class="footer_icon iconfont_home"></i> 
+      <span class="fotter_nav_span">首页</span> 
+      </a> </div>
+      <div class="classify"  >
+        <a href="{yun:}url m=wap c=job{/yun}"  class="fotter_nav_link">      
+         <em class="fotter_nav_link"> 
+         <i class="footer_icon iconfont_jobhome"></i> 
+         <span class="fotter_nav_span">找工作</span> 
+         </em></a>
+        </div>
+
+
+       <div class="classify footer_nav_cur"> 
+      <a href="javascript:void(0);" id="jobclick" class="fotter_nav_link"> 
+      <i class="iconfont_homemore"></i> 
+            <span class="iconfont_homemore_bg"></span>   <span class="fotter_nav_span">&nbsp;</span> 
+     
+      </a> 
+            </div>
+      <div class="classify"> 
+    <a href="{yun:}url m=wap c=resume{/yun}"  id="resumeclick{yun:}url m=wap c=resume{/yun}" class="fotter_nav_link"> 
+      <em class="fotter_nav_link"> 
+      <i class="footer_icon iconfont_userhome"></i> <span class="fotter_nav_span">找人才</span> 
+      </em> </a>
+           
+      </div>
+      {yun:}if !$username{/yun}
+      <div class="classify"> <a href="javascript:void(0);" id="reg_mune_box" class="fotter_nav_link"> <i class="footer_icon iconfont_myhome"></i> <span class="fotter_nav_span">我的</span> </a>
+       
+      </div>
+      {yun:}else{/yun}
+      <div class="classify"> <a href="{yun:}url m=wap{/yun}member" id="memberclick" class="fotter_nav_link"> <i class="footer_icon iconfont_myhome"></i> <span class="fotter_nav_span">我的</span> </a> </div>
+      {yun:}/if{/yun}
+    </div>
+   </div>
+</div> 
+ <div style="width:100%;height:100%; background:rgba(0,0,0,0.9); position:fixed;left:0px;right:0px;bottom:0px;top:0px ; z-index:10000;display:none" id="footerjob"> 
+ <div class="foot_nav_close"></div>
+ <div class="foot_nav_box" style="width:100%; position:absolute;"> 
+        
+           <ul class="foot_nav_box_list">
+              <li><a href="{yun:}url m=wap c=part{/yun}" class="foot_nav_box_a"><span class="foot_nav_box_list_icon cor_3"><i class="nav_icon iconfont_part "></i></span><div class="foot_nav_box_name">找兼职</div></a> </li>   
+			  <li>  <a href="{yun:}url m=wap c=tiny{/yun}" class="foot_nav_box_a"><span class="foot_nav_box_list_icon cor_7"><i class="nav_icon iconfont_tiny "></i></span><div class="foot_nav_box_name">普工专区</div></a> </li>
+              <li><a href="{yun:}url m=wap c=once{/yun}" class="foot_nav_box_a"><span class="foot_nav_box_list_icon cor_4"><i class="nav_icon iconfont_once "></i></span><div class="foot_nav_box_name">店铺招聘</div></a> </li>
+              <li> <a href="{yun:}url m=wap c=map{/yun}" class="foot_nav_box_a"><span class="foot_nav_box_list_icon cor_5"><i class="nav_icon iconfont_map "></i></span><div class="foot_nav_box_name">附近职位</div></a></li>
+              <li> <a href="{yun:}url m=wap c=company{/yun}" class="foot_nav_box_a"><span class="foot_nav_box_list_icon cor_2"><i class="nav_icon iconfont_comp "></i></span><div class="foot_nav_box_name">找企业</div></a> </li>
+              <li> <a href="{yun:}url m=wap c=zph{/yun}" class="foot_nav_box_a"><span class="foot_nav_box_list_icon cor_6"><i class="nav_icon iconfont_zph "></i></span><div class="foot_nav_box_name">招聘会</div></a> </li>
+                    <li> <a href="{yun:}url m=wap c='article' type=tj{/yun}" class="foot_nav_box_a"><span class="foot_nav_box_list_icon cor_8"><i class="nav_icon iconfont_news "></i></span><div class="foot_nav_box_name">职场资讯</div></a> </li>
+              <li> <a href="{yun:}url m=wap c='redeem'{/yun}" class="foot_nav_box_a"><span class="foot_nav_box_list_icon cor_jf"><i class="nav_icon iconfont_jf "></i></span><div class="foot_nav_box_name">商城</div></a> </li>
+              <li> <a href="{yun:}url m=wap c='ask'{/yun}" class="foot_nav_box_a"><span class="foot_nav_box_list_icon cor_wd"><i class="nav_icon iconfont_ask "></i></span><div class="foot_nav_box_name">互动问答</div></a> </li>
+              <li> <a href="{yun:}url m=wap c='advice'{/yun}" class="foot_nav_box_a"><span class="foot_nav_box_list_icon cor_yj"><i class="nav_icon iconfont_yj "></i></span><div class="foot_nav_box_name">意见反馈</div></a> </li>
+            </ul>
+            </div>
+     </div>
+</footer>
+<div class="yunwap_reg" id="reg_mune" style="display:none">
+    <div class="yunwap_close"></div>
+         <ul>
+             <li><a href="{yun:}url m=wap c=register usertype=2{/yun}"><i class="yunwap_reg_icon yunwap_reg_icon_bg1"><em class="yunwap_reg_icon_bg1p"></em></i>企业注册</a></li> 
+             <li><a href="{yun:}url m=wap c=register{/yun}" ><i class="yunwap_reg_icon yunwap_reg_icon_bg2"><em class="yunwap_reg_icon_bg2p"></em></i>个人注册</a></li>
+         </ul>
+         <div class="yunwap_login"><a href="{yun:}url m=wap c=login{/yun}" class="">会员登录</a></div>
+     </div>  
+
+{yun:}if $layer{/yun}
+<input id="layermsg" value="{yun:}$layer.msg{/yun}" type="hidden">
+<input id="layerurl" value="{yun:}$layer.url{/yun}" type="hidden">
+<script>$(document).ready(function(){islayer();});</script>
+{yun:}/if{/yun}
+<script>
+var wapurl="{yun:}url m=wap{/yun}",weburl="{yun:}$config.sy_weburl{/yun}",pricename="{yun:}$config.integral_pricename{/yun}",integral_pricename="{yun:}$config.integral_pricename{/yun}",code_web='{yun:}$config.code_web{/yun}',code_kind='{yun:}$config.code_kind{/yun}';
+$(document).ready(function () {
+    $('#jobclick').click('click', function () {
+      $('#footerjob').toggle();
+      $('#footerresume').hide();
+    });  
+	$('#footerjob').click('click', function () {
+		$('#footerjob').hide();
+    });
+    $('#reg_mune_box').click('click', function () {
+      $('#reg_mune').toggle();
+      $('#footerresume').hide();
+    });  
+	$('#reg_mune').click('click', function () {
+		$('#reg_mune').hide();
+    });
+	$('#reg_mune_boxs').click('click', function () {
+      $('#reg_mune').toggle();
+      $('#footerresume').hide();
+    });  
+	$('#reg_mune').click('click', function () {
+		$('#reg_mune').hide();
+    });
+});
+
+</script>
+{yun:}baidu{/yun}
+{yun:}if $config.sy_wx_sharelogo{/yun}
+<div style='margin:0 auto;width:0px;height:0px;overflow:hidden;'><img src="{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_wx_sharelogo{/yun}"></div>
+{yun:}/if{/yun}
+</body>
+</html>

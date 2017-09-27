@@ -1,0 +1,59 @@
+{yun:}include file="$comstyle/header.htm"{/yun}
+<div class="w1000">
+<div class="admin_mainbody">
+{yun:}include file="$comstyle/left.htm"{/yun}
+<div class=right_box>
+  <div class=admincont_box>
+     <div class="com_tit"><span class="com_tit_span">企业横幅图片</span></div>
+           <div class="com_body">
+
+		<iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe>
+      <form action="index.php?c=banner&act=save" method="post" id="myform" name="myform" target="supportiframe"  enctype="multipart/form-data"> 
+   <div class="clear"></div> 
+      {yun:}if is_array($banner){/yun}  
+           <div class="banner_h1"><span>横幅图片展示</span></div>
+           <div class="com_banner_pic_box_b">
+           	<img src=".{yun:}$banner.pic{/yun}" /> 
+            </div>
+             <div class="com_banner_pic_box_tip" style="width:420px;padding:20px;margin-top:20px;background:#f8f8f8;border-radius:5px;border:1px solid #ddd;">
+            <div style="background:#E7E7E7;text-align:left;text-indent:10px;color:#999;height:35px;line-height:35px;">若需要重新上传，最佳尺寸：980*300</div>
+           <div style="color:#555;text-align:left;"><span>选择上传的文件：</span><input name="pic" type="file" id="pic" class=""style="margin-top:20px;padding-left:10px;" ></div> 
+          <input name="update" type="hidden"  value="上传"> 
+          <a href="javascript:void(0)" onclick="checkbanner();" class="com_msg_no_bth com_submit">上传</a>
+          </div> 
+      {yun:}else{/yun} 
+		<div class="com_msg_no">
+		<p>亲爱的用户，目前您还没有上传上传横幅图片;</p>
+		<div class="com_banner_pic_box" style="width:420px;padding:20px;margin-top:20px;background:#f8f8f8;border-radius:5px;border:1px solid #ddd;">
+             <div style="background:#E7E7E7;text-align:left;text-indent:10px;color:#999;height:35px;line-height:35px;">立即上传横幅图片，最佳尺寸：980*300</div>
+             <div style="color:#555;text-align:left;"><span>选择上传的文件：</span><input name="pic" style="margin-top:20px;padding-left:10px;" type="file" id="pic" class=""></div>
+             <input name="save" type="hidden"  value="上传"> 
+             <a href="javascript:void(0)" onclick="checkbanner();" class="com_msg_no_bth com_submit">上传</a>
+        </div> 
+		</div>		  
+      {yun:}/if{/yun}  
+      </form>
+    
+  </div> 
+</div> 
+</div> 
+</div> 
+</div> 
+<script>
+var bid="{yun:}$banner.id{/yun}";
+var bannertype="{yun:}$config.integral_banner_type{/yun}";
+var bannerintegral="{yun:}$config.integral_banner{/yun}";
+function checkbanner(){
+	if ($("#pic").val()==""){
+		layer.msg('图片不能为空！！', 2,8);return false; 
+	}
+	if(bid==''&&bannertype!='1'&&bannerintegral>0){
+		layer.confirm("上传横幅将扣除您"+bannerintegral+"{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun},是否继续", function(){		
+			setTimeout(function(){$('#myform').submit();},0); 
+		});
+	}else{
+		setTimeout(function(){$('#myform').submit();},0);
+	}
+}
+</script> 
+{yun:}include file="$comstyle/footer.htm"{/yun}

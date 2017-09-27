@@ -1,0 +1,101 @@
+<script>
+    $(document).ready(function () {
+        $(".left_sidebar_icon").click(function () {
+            var aid = $(this).attr("aid");
+            var style = $("#leftlist" + aid).attr("style");
+            if ($(this).hasClass("left_sidebar_icon")) {
+                $(this).parent().prev().find('li.overflow').show();
+                $(this).attr("class", "left_sidebar_icon1");
+                $(this).parent().prev().prev().height($(this).parent().prev().find('ul li').length * 30);
+            } else {
+                $(this).parent().prev().find('li.overflow').hide();
+                $(this).attr("class", "left_sidebar_icon");
+                $(this).parent().prev().prev().height(($(this).parent().prev().find('ul li').length - $(this).parent().prev().find('ul li.overflow').length) * 30);
+            }
+        })
+    });
+</script>
+
+<div class="left_sidebar">
+<div class="left_sidebar_box">
+{yun:}if $left==1{/yun}
+  <div class="left_sidebar_box" style="display:block">
+    <div class="left_sidebar_tit user_bg">个人中心</div>
+    <ul class="left_sidebar_leftmune">
+      <li><a href="index.php?c=resume"><i class="left_navicon left_navicon_i1"></i>我的简历</a></li>
+      <li><a href="index.php?c=info"><i class="left_navicon left_navicon_i3"></i>基本信息</a></li>
+      <li><a href="index.php?c=msg"><i class="left_navicon left_navicon_i9"></i>我的职位</a>{yun:}if $msgnum{/yun}<i class="left_sidebar_leftmune_icon">{yun:}$msgnum{/yun}</i>{yun:}/if{/yun}</li>
+      <li><a href="index.php?c=privacy"><i class="left_navicon left_navicon_i6"></i>隐私设置</a></li>
+       <li><a href="index.php?c=passwd"><i class="left_navicon left_navicon_i21"></i>修改密码</a></li>
+      <li><a href="index.php?c=binding"><i class="left_navicon left_navicon_i22"></i>账户绑定</a></li>
+    </ul>
+  </div>
+{yun:}elseif $left==2{/yun}
+  <div class="left_sidebar_box" style="display:block">
+    <div class="left_sidebar_tit user_bg">简历管理</div>
+    <ul class="left_sidebar_leftmune">
+    
+      <li {yun:}if $smarty.get.c=='resume'||$smarty.get.c=='show'{/yun}class="left_sidebar_leftmune_cur"{yun:}/if{/yun}><i class="left_navicon left_navicon_i1"></i><a href="index.php?c=resume">我的简历</a></li>
+      {yun:}if $config.user_number>$myresumenum{/yun}
+      <li><i class="left_navicon left_navicon_i2"></i><a href="index.php?c=expect">创建简历</a></li>
+      {yun:}else{/yun}
+      <li><i class="left_navicon left_navicon_i2"></i><a href="javascript:void(0)" onclick="layer.msg('你的简历数已经达到系统设置的简历数了',2,8);return false;">创建简历</a></li>
+      {yun:}/if{/yun}
+      <li {yun:}if $smarty.get.c=='info'{/yun}class="left_sidebar_leftmune_cur"{yun:}/if{/yun}><a href="index.php?c=info"><i class="left_navicon left_navicon_i3"></i>基本信息</a></li>
+      <li {yun:}if $smarty.get.c=='uppic'{/yun}class="left_sidebar_leftmune_cur"{yun:}/if{/yun}><a href="index.php?c=uppic"><i class="left_navicon left_navicon_i4"></i>上传照片</a></li>
+      <li {yun:}if $smarty.get.c=='look'{/yun}class="left_sidebar_leftmune_cur"{yun:}/if{/yun}><a href="index.php?c=look"><i class="left_navicon left_navicon_i5"></i>谁看过我的简历 </a></li>
+      <li {yun:}if $smarty.get.c=='privacy'{/yun}class="left_sidebar_leftmune_cur"{yun:}/if{/yun}><a href="index.php?c=privacy"><i class="left_navicon left_navicon_i6"></i>隐私设置</a></li>
+      <li {yun:}if $smarty.get.c=='resumeout'{/yun}class="left_sidebar_leftmune_cur"{yun:}/if{/yun}><a href="index.php?c=resumeout"><i class="left_navicon left_navicon_i7"></i>简历外发</a></li>
+     
+      <li {yun:}if $smarty.get.c=='resumetpl'{/yun}class="left_sidebar_leftmune_cur"{yun:}/if{/yun}><a href="index.php?c=resumetpl"><i class="left_navicon left_navicon_i8"></i>简历模板</a></li>
+    </ul>
+  </div>
+{yun:}elseif $left==3{/yun}
+  <div class="left_sidebar_box" style="display:block">
+    <div class="left_sidebar_tit user_bg">求职管理</div>
+    <ul class="left_sidebar_leftmune">
+      <li {yun:}if $smarty.get.c=='msg'||$smarty.get.c=='job'||$smarty.get.c=='favorite'||$smarty.get.c=='look_job'{/yun}class="left_sidebar_leftmune_cur"{yun:}/if{/yun}><a href="index.php?c=msg"><i class="left_navicon left_navicon_i9"></i>我的职位</a>{yun:}if $msgnum{/yun}<i class="left_sidebar_leftmune_icon">{yun:}$msgnum{/yun}</i>{yun:}/if{/yun}</li>
+      <li {yun:}if $smarty.get.c=='partapply'||$smarty.get.c=='partcollect'{/yun}class="left_sidebar_leftmune_cur"{yun:}/if{/yun}> <a href="index.php?c=partapply"><i class="left_navicon left_navicon_i10"></i>我的兼职</a></li>
+      <li {yun:}if $smarty.get.c=='atn'{/yun}class="left_sidebar_leftmune_cur"{yun:}/if{/yun}><a href="index.php?c=atn"><i class="left_navicon left_navicon_i11"></i>关注的企业</a></li>
+		<li {yun:}if $smarty.get.c=='finder'{/yun}class="left_sidebar_leftmune_cur"{yun:}/if {/yun}> <a href="index.php?c=finder"><i class="left_navicon left_navicon_i12"></i>职位搜索器</a> </li>
+		<li {yun:}if $smarty.get.c=='commsg'{/yun}class="left_sidebar_leftmune_cur"{yun:}/if {/yun}><a href="index.php?c=commsg"><i class="left_navicon left_navicon_i13"></i>求职咨询 </a></li>
+      <li {yun:}if $smarty.get.c=='subscribe'{/yun}class="left_sidebar_leftmune_cur"{yun:}/if {/yun}><a href="index.php?c=subscribe"><i class="left_navicon left_navicon_i14"></i>订阅管理</a> </li>
+    </ul>
+  </div>
+{yun:}elseif $left==5{/yun}
+    <div class="left_sidebar_box" style="display:block">
+    <div class="left_sidebar_tit user_bg">财务管理</div>
+    <ul class="left_sidebar_leftmune">
+    <li {yun:}if $smarty.get.c=='pay'{/yun}class="left_sidebar_leftmune_cur"{yun:}/if {/yun}><a href="index.php?c=pay"><i class="left_navicon left_navicon_i17"></i>立即充值</a></li>
+      <li {yun:}if $smarty.get.c=='paylog'||$smarty.get.c=='paylist'{/yun}class="left_sidebar_leftmune_cur"{yun:}/if {/yun}> <a href="index.php?c=paylist"><i class="left_navicon left_navicon_i18"></i>财务明细</a> </li>
+      <li {yun:}if $smarty.get.c=='integral'||$smarty.get.c=='integral_reduce'||$smarty.get.c=='reward_list'{/yun}class="left_sidebar_leftmune_cur"{yun:}/if {/yun}> <a href="index.php?c=integral"><i class="left_navicon left_navicon_i19"></i>{yun:}$config.integral_pricename{/yun}管理</a> </li>
+      <li><a href="{yun:}url m=invitereg{/yun}" target="_blank"><i class="left_navicon left_navicon_i20"></i>邀请注册</a></li>
+      </ul>
+    </div>
+{yun:}elseif $left==6{/yun}
+  <div class="left_sidebar_box" style="display:block">
+    <div class="left_sidebar_tit user_bg">账号中心</div>
+    <ul class="left_sidebar_leftmune">
+     <li {yun:}if $smarty.get.c=='passwd'{/yun}class="left_sidebar_leftmune_cur"{yun:}/if {/yun}><a href="index.php?c=passwd"><i class="left_navicon left_navicon_i21"></i>修改密码</a></li>
+      <li {yun:}if $smarty.get.c=='binding'||$smarty.get.c=='setname'{/yun}class="left_sidebar_leftmune_cur"{yun:}/if {/yun}><a href="index.php?c=binding"><i class="left_navicon left_navicon_i22"></i>账户绑定</a></li>
+      <li {yun:}if $smarty.get.c=='sysnews'{/yun}class="left_sidebar_leftmune_cur"{yun:}/if {/yun}><a href="index.php?c=sysnews"><i class="left_navicon left_navicon_i24"></i>系统消息</a></li>
+      <li><a href="{yun:}url m=ask c=friend a=myquestion uid=$uid{/yun}" target="_blank"><i class="left_navicon left_navicon_i26"></i>我的提问</a></li>
+    </ul>
+  </div>
+{yun:}/if{/yun}
+</div>
+{yun:}if $config.sy_wx_qcode!=''{/yun}
+<div class="left_wx_box">
+<dl class="left_wx_box_dl">
+<dt><img src="{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_wx_qcode{/yun}" width="130" height="130"></dt>
+<dd class="">
+<div class="left_wx_box_tit">手机挑工作!</div>
+<div class="left_wx_box_p">微信扫一扫,入职更快速</div>
+</dd>
+</dl>
+
+</div>
+{yun:}/if{/yun}
+</div>
+
+

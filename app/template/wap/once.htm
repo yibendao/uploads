@@ -1,0 +1,50 @@
+{yun:}include file="$wapstyle/header_cont.htm"{/yun}
+<div class="once_fb">
+{yun:}if $num>0{/yun} 
+<a href="{yun:}url m=wap c=once a=add{/yun}" class="once_fb_a"> <span class="once_fb_a_s">发布</span>招聘</a> 
+   {yun:}else{/yun} 
+<a href="javascript:void(0);" onclick="layermsg('一天内只能发布{yun:}$config.sy_once{/yun}次！')" class="once_fb_a">  <span class="once_fb_a_s">发布</span>招聘</a> 
+   {yun:}/if{/yun} 
+   </div>
+<section>
+  <div class="warp_content clear"> {yun:}fast item=once ispage=1 limit=20 keyword='auto.keyword' islt=4 {/yun}
+    <div class="list_once_box">
+     <a href="{yun:}url m=wap c=once a=show id=$once.id{/yun}">
+      <div class="list_once_name">{yun:}$once.title{/yun}</div>
+      <div class="list_once_name_P"> {yun:}if $once.provinceid&& $once.cityid{/yun}{yun:}$city_name[$once.provinceid]{/yun}-{yun:}$city_name[$once.cityid]{/yun}-
+      {yun:}/if{/yun}{yun:}$once.require|mb_substr:0:100:gbk{/yun}</div>
+        </a>
+      <div class="list_once_name_P_tel">
+     
+      {yun:}if $config.user_wzp_link=='1' && !$smarty.cookies.uid{/yun} 
+      <a href='{yun:}url m=wap c=login usertype=2{/yun}'><font color='red'>登录后查看联系电话</font></a> 
+      {yun:}else{/yun}
+         <span class="list_once_touch"> 电话： {yun:}$once.phone{/yun} ({yun:}$once.linkman{/yun})</span>
+		 <a href="tel:{yun:}$once.phone{/yun}">
+         <div class="list_once_touch_tel"><i class="list_once_touch_tel_icon"></i><span class="list_once_touch_tel_p">拨打</span></div>
+		 </a>
+      {yun:}/if{/yun}
+     
+      
+      <div class="list_once_gxtime"> 更新于： {yun:}if $once.redtime==1 || $once.ctime<60{/yun} <span style="color:red;">{yun:}$once.ctime{/yun}</span> {yun:}else{/yun}
+                {yun:}$once.ctime{/yun}
+                {yun:}/if{/yun} </div>
+      </div>
+     </div>
+    {yun:}/fast{/yun} 
+    {yun:}if $total<=0{/yun}
+    {yun:}if $smarty.get.keyword!="" {/yun}
+    <div class="wap_member_no">没有搜索到店铺招聘<div><a class="wap_mb_no_sr" href="{yun:}url m=wap c='once'{/yun}">重新搜索</a></div></div>
+    {yun:}else{/yun}
+    <div class="wap_member_no">暂无店铺招聘<div><a class="wap_mb_no_sr" href="{yun:}url m=wap c='once'{/yun}">重新搜索</a></div></div>
+    {yun:}/if{/yun}
+    {yun:}else{/yun}
+    <div class="pages">{yun:}$pagenav{/yun}</div>
+    {yun:}/if{/yun} </div>
+</section>
+
+<script src="{yun:}$wap_style{/yun}/js/prefixfree.min.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/layer/layer.m.js" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/public.js" language="javascript"></script>
+{yun:}include file="$wapstyle/footer.htm"{/yun}

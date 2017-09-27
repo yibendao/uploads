@@ -1,0 +1,386 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link href="images/reset.css" rel="stylesheet" type="text/css" />
+<link href="images/system.css" rel="stylesheet" type="text/css" />
+<link href="images/table_form.css" rel="stylesheet" type="text/css" />
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js"></script>
+<script src="js/check_public.js"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script>
+<script src="js/admin_public.js" language="javascript"></script>
+<script charset="utf-8" src="../js/kindeditor/kindeditor-min.js"></script>
+<script charset="utf-8" src="../js/kindeditor/lang/zh_CN.js"></script>
+<link rel="stylesheet" href="{yun:}$config.sy_weburl{/yun}/js/datepicker/css/font-awesome.min.css" type="text/css">
+<script src="{yun:}$config.sy_weburl{/yun}/js/datepicker/foundation-datepicker.min.js"></script>
+<script language="javascript">
+KindEditor.ready(function(K){
+	editor = K.create('#content',{
+		resizeType : 1,
+		allowPreviewEmoticons : false,
+		allowImageUpload : false,
+		items : ['source',
+		'bold', 'italic', 'underline',
+		'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+		'insertunorderedlist','emoticons', 'image'],afterBlur:function(){this.sync();}
+
+	});
+});
+var weburl="{yun:}$config.sy_weburl{/yun}";
+function change_salary_type(){
+	if($("#salary_type").attr('checked')=='checked'){
+		$("#minsalary").attr("disabled","disabled");
+		$("#maxsalary").attr("disabled","disabled");
+		$("#minsalary").val(0);$("#maxsalary").val(0);
+	}else{
+		$("#minsalary").removeAttr("disabled","disabled");
+		$("#maxsalary").removeAttr("disabled","disabled");
+		$("#minsalary").val('{yun:}$show.minsalary{/yun}');
+		$("#maxsalary").val('{yun:}$show.maxsalary{/yun}');
+	}
+}
+</script>
+<style>
+* {
+	margin: 0;
+	padding: 0;
+}
+body, div {
+	margin: 0;
+	padding: 0;
+}
+</style>
+<title>后台管理</title>
+</head>
+<body class="body_ifm">
+<div class="infoboxp">
+  <div class="infoboxp_top_bg"></div>
+  <div class="infoboxp_top">
+    <h6>职位详情</h6>
+  </div>
+  <div class="admin_table_border">
+  <iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe>
+  <form action="" target="supportiframe" method="post" onSubmit="return check_form_job()">
+    <table width="100%" class="table_form" style="background:#fff;">
+      {yun:}if $show.id{/yun}
+      <tr >
+        <th>招聘编号：</th>
+        <td><div class="yun_admin_divh">{yun:}$show.id{/yun}</div></td>
+      </tr>
+      {yun:}/if{/yun}
+      <tr class="admin_table_trbg" >
+        <th>招聘名称：</th>
+        <td><input type="text" name="name" id="name" class="input-text" size="30" value="{yun:}$show.name{/yun}"></td>
+      </tr>
+      <tr >
+        <th>从事行业：</th>
+        <td><div class="yun_admin_select_box yun_admin_select_boxw250 z_index13"> {yun:}if $show.hy{/yun}
+            {yun:}foreach from=$industry_index key=j item=v{/yun}
+            {yun:}if $show.hy==$v{/yun}
+            <input type="button" value="{yun:}$industry_name[$v]{/yun}" class="yun_admin_select_box_text" id="job_hy_name" onClick="select_click('job_hy');">
+            <input name="hy" type="hidden" id="job_hy_val" value="{yun:}$v{/yun}">
+             
+            {yun:}/if{/yun}
+            {yun:}/foreach{/yun}
+            {yun:}else{/yun}
+            <input type="button" value="请选择" class="yun_admin_select_box_text" id="job_hy_name" onClick="select_click('job_hy');">
+            <input name="hy" type="hidden" id="job_hy_val" value="">
+             
+            {yun:}/if{/yun}
+            <div class="yun_admin_select_box_list_box yun_admin_select_box_list_boxw250 dn" id="job_hy_select"> {yun:}foreach from=$industry_index key=j item=v{/yun}
+              <div class="yun_admin_select_box_list"> <a href="javascript:;" onClick="select_new('job_hy','{yun:}$v{/yun}','{yun:}$industry_name[$v]{/yun}')">{yun:}$industry_name[$v]{/yun}</a> </div>
+              {yun:}/foreach{/yun} </div>
+          </div>
+          
+          </td>
+      </tr>
+      <tr class="admin_table_trbg" >
+        <th>职位类别：</th>
+        <td><div class="yun_admin_select_box yun_admin_select_boxw250 z_index12">
+            <input type="button" id="job1" onclick="search_show('job_job1');" value="{yun:}if $job_name[$show.job1]{/yun}{yun:}$job_name[$show.job1]{/yun}{yun:}else{/yun}请选择{yun:}/if{/yun}" class="yun_admin_select_box_text">
+            <input type="hidden" id="job1id" name="job1" value="{yun:}$show.job1{/yun}" />
+            <div class="yun_admin_select_box_list_box yun_admin_select_box_list_boxw250 dn" style="display:none" id="job_job1"> {yun:}foreach from=$job_index key=j item=v{/yun}
+              <div class="yun_admin_select_box_list"><a href="javascript:;" onclick="select_city('{yun:}$v{/yun}','job1','{yun:}$job_name[$v]{/yun}','job1_son','job');"> {yun:}$job_name[$v]{/yun}</a></div>
+              {yun:}/foreach{/yun} </div>
+          </div>
+          <div class="yun_admin_select_box yun_admin_select_boxw250 z_index12">
+            <input type="button" id="job1_son" onclick="search_show('job_job1_son');" value="{yun:}if $job_name[$show.job1_son]{/yun}{yun:}$job_name[$show.job1_son]{/yun}{yun:}else{/yun}请选择{yun:}/if{/yun}" class="yun_admin_select_box_text">
+            <input type="hidden" id="job1_sonid" name="job1_son" value="{yun:}$show.job1_son{/yun}" />
+            <div class="yun_admin_select_box_list_box yun_admin_select_box_list_boxw250 dn" style="display:none" id="job_job1_son"> {yun:}foreach from=$job_type[$show.job1] key=j item=v{/yun}
+              <div class="yun_admin_select_box_list"><a href="javascript:;" onclick="select_city('{yun:}$v{/yun}','job1_son','{yun:}$job_name[$v]{/yun}','job_post','job');"> {yun:}$job_name[$v]{/yun}</a></div>
+              {yun:}/foreach{/yun} </div>
+          </div>
+          <div class="yun_admin_select_box yun_admin_select_boxw250 z_index12">
+            <input type="button" id="job_post" onclick="three_city_show('job_job_post');" value="{yun:}if $show.job_post{/yun}{yun:}$job_name[$show.job_post]{/yun}{yun:}else{/yun}请选择{yun:}/if{/yun}" class="yun_admin_select_box_text">
+            <input type="hidden" id="job_postid" name="job_post" value="{yun:}$show.job_post{/yun}" />
+            <div class="yun_admin_select_box_list_box yun_admin_select_box_list_boxw250 dn" style="display:none" id="job_job_post"> {yun:}foreach from=$job_type[$show.job1_son] key=j item=v{/yun}
+              <div class="yun_admin_select_box_list"><a href="javascript:;" onclick="selects('{yun:}$v{/yun}','job_post','{yun:}$job_name[$v]{/yun}');">{yun:}$job_name[$v]{/yun}</a></div>
+              {yun:}/foreach{/yun} </div>
+          </div>
+          
+         </td>
+      </tr>
+      <tr >
+        <th>工作地点：</th>
+        <td><div class="yun_admin_select_box yun_admin_select_boxw130 z_index11">
+            <input type="button" id="province" onclick="search_show('job_province');" value="{yun:}if $city_name[$show.provinceid]{/yun}{yun:}$city_name[$show.provinceid]{/yun}{yun:}else{/yun}请选择{yun:}/if{/yun}" class="yun_admin_select_box_text">
+            <input type="hidden" id="provinceid" name="provinceid" value="{yun:}$show.provinceid{/yun}" />
+            <div class="yun_admin_select_box_list_box yun_admin_select_box_list_boxw130 dn" style="display:none" id="job_province"> {yun:}foreach from=$city_index key=j item=v{/yun}
+              <div class="yun_admin_select_box_list"><a href="javascript:;" onclick="select_city('{yun:}$v{/yun}','province','{yun:}$city_name[$v]{/yun}','cityid','city');"> {yun:}$city_name[$v]{/yun}</a></div>
+              {yun:}/foreach{/yun} </div>
+          </div>
+          <div class="yun_admin_select_box yun_admin_select_boxw130 z_index11">
+            <input type="button" id="cityid" onclick="search_show('job_cityid');" value="{yun:}if $show.cityid{/yun}{yun:}$city_name[$show.cityid]{/yun}{yun:}else{/yun}请选择{yun:}/if{/yun}" class="yun_admin_select_box_text">
+            <input type="hidden" id="cityidid" name="cityid" value="{yun:}$show.cityid{/yun}"/>
+            <div class="yun_admin_select_box_list_box yun_admin_select_box_list_boxw130 dn" style="display:none" id="job_cityid">
+              <div class="yun_admin_select_box_list">{yun:}foreach from=$city_type[$show.provinceid] key=j item=v{/yun} <a href="javascript:;" onclick="select_city('{yun:}$v{/yun}','cityid','{yun:}$city_name[$v]{/yun}','three_city','city');"> {yun:}$city_name[$v]{/yun}</a> {yun:}/foreach{/yun}</div>
+            </div>
+          </div>
+          <div class="yun_admin_select_box yun_admin_select_boxw130 z_index11 {yun:}if $show.three_cityid<1{/yun}dn{yun:}/if{/yun}" id="cityshowth">
+            <input type="button" id="three_city" onclick="three_city_show('job_three_city');" value="{yun:}if $show.three_cityid{/yun}{yun:}$city_name[$show.three_cityid]{/yun}{yun:}else{/yun}请选择{yun:}/if{/yun}" class="yun_admin_select_box_text">
+            <input type="hidden" id="three_cityid" name="three_cityid" value="{yun:}$show.three_cityid{/yun}" />
+            <div class="yun_admin_select_box_list_box yun_admin_select_box_list_boxw130 dn" style="display:none" id="job_three_city">
+              <div class="yun_admin_select_box_list"> {yun:}foreach from=$city_type[$show.cityid] key=j item=val{/yun} <a href="javascript:;" onclick="selects('{yun:}$val{/yun}','three_city','{yun:}$city_name[$val]{/yun}');"> {yun:}$city_name[$val]{/yun}</a> {yun:}/foreach{/yun} </div>
+            </div>
+          </div>
+          
+         </td>
+      </tr>
+      <tr class="admin_table_trbg" >
+        <th width="120">薪水待遇：</th>
+        <td>
+        <div class="admin_job_xz_box">
+          	<input type="text" name="minsalary" id="minsalary" class="admin_job_xz" size="3" value="{yun:}$show.minsalary{/yun}" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" placeholder="最低薪资"{yun:}if !$show.minsalary&&!$show.maxsalary&&$show.id{/yun} disabled="disabled"{yun:}/if{/yun}>
+            <span class="admin_job_xz_box_dw">元/月</span>
+        </div>
+        <span class="admin_job_xz_box_line">-</span>
+        <div class="admin_job_xz_box">
+          	<input type="text" name="maxsalary" id="maxsalary" class="admin_job_xz" size="5" value="{yun:}if $show.maxsalary{/yun}{yun:}$show.maxsalary{/yun}{yun:}/if{/yun}" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')"placeholder="最高薪资"{yun:}if !$show.minsalary&&!$show.maxsalary&&$show.id{/yun} disabled="disabled"{yun:}/if{/yun}>
+             <span class="admin_job_xz_box_dw">元/月</span>
+        </div>
+        <span class="admin_job_xz_box_line"><label><input type="checkbox" id="salary_type" name="salary_type" value="1" onclick="change_salary_type()"{yun:}if !$show.minsalary&&!$show.maxsalary&&$show.id{/yun} checked="checked"{yun:}/if{/yun}>面议</label></span>
+        </td>
+      </tr>
+    
+      <tr class="admin_table_trbg" >
+        <th width="120">招聘人数：</th>
+        <td><div class="yun_admin_select_box z_index8"> {yun:}if $show.number{/yun}
+            {yun:}foreach from=$comdata.job_number key=j item=v{/yun}
+            {yun:}if $show.number==$v{/yun}
+            <input type="button" value="{yun:}$comclass_name[$v]{/yun}" class="yun_admin_select_box_text" id="job_number_name" onClick="select_click('job_number');">
+            <input name="number" type="hidden" id="job_number_val" value="{yun:}$v{/yun}">
+             
+            {yun:}/if{/yun}
+            {yun:}/foreach{/yun}
+            {yun:}else{/yun}
+            <input type="button" value="请选择" class="yun_admin_select_box_text" id="job_number_name" onClick="select_click('job_number');">
+            <input name="number" type="hidden" id="job_number_val" value="">
+             
+            {yun:}/if{/yun}
+            <div class="yun_admin_select_box_list_box dn" id="job_number_select"> {yun:}foreach from=$comdata.job_number key=j item=v{/yun}
+              <div class="yun_admin_select_box_list"> <a href="javascript:;" onClick="select_new('job_number','{yun:}$v{/yun}','{yun:}$comclass_name[$v]{/yun}')">{yun:}$comclass_name[$v]{/yun}</a> </div>
+              {yun:}/foreach{/yun} </div>
+          </div>
+          
+         </td>
+      </tr>
+      <tr >
+        <th width="120">工作经验：</th>
+        <td><div class="yun_admin_select_box z_index7"> {yun:}if $show.exp{/yun}
+            {yun:}foreach from=$comdata.job_exp key=j item=v{/yun}
+            {yun:}if $show.exp==$v{/yun}
+            <input type="button" value="{yun:}$comclass_name[$v]{/yun}" class="yun_admin_select_box_text" id="job_exp_name" onClick="select_click('job_exp');">
+            <input name="exp" type="hidden" id="job_exp_val" value="{yun:}$v{/yun}">
+             
+            {yun:}/if{/yun}
+            {yun:}/foreach{/yun}
+            {yun:}else{/yun}
+            <input type="button" value="请选择" class="yun_admin_select_box_text" id="job_exp_name" onClick="select_click('job_exp');">
+            <input name="exp" type="hidden" id="job_exp_val" value="">
+             
+            {yun:}/if{/yun}
+            <div class="yun_admin_select_box_list_box dn" id="job_exp_select"> {yun:}foreach from=$comdata.job_exp key=j item=v{/yun}
+              <div class="yun_admin_select_box_list"> <a href="javascript:;" onClick="select_new('job_exp','{yun:}$v{/yun}','{yun:}$comclass_name[$v]{/yun}')">{yun:}$comclass_name[$v]{/yun}</a> </div>
+              {yun:}/foreach{/yun} </div>
+          </div>
+          
+         </td>
+      </tr>
+      <tr class="admin_table_trbg" >
+        <th width="120">到岗时间：</th>
+        <td><div class="yun_admin_select_box z_index6"> {yun:}if $show.report{/yun}
+            {yun:}foreach from=$comdata.job_report key=j item=v{/yun}
+            {yun:}if $show.report==$v{/yun}
+            <input type="button" value="{yun:}$comclass_name[$v]{/yun}" class="yun_admin_select_box_text" id="job_report_name" onClick="select_click('job_report');">
+            <input name="report" type="hidden" id="job_report_val" value="{yun:}$v{/yun}">
+             
+            {yun:}/if{/yun}
+            {yun:}/foreach{/yun}
+            {yun:}else{/yun}
+            <input type="button" value="请选择" class="yun_admin_select_box_text" id="job_report_name" onClick="select_click('job_report');">
+            <input name="report" type="hidden" id="job_report_val" value="">
+             
+            {yun:}/if{/yun}
+            <div class="yun_admin_select_box_list_box dn" id="job_report_select"> {yun:}foreach from=$comdata.job_report key=j item=v{/yun}
+              <div class="yun_admin_select_box_list"> <a href="javascript:;" onClick="select_new('job_report','{yun:}$v{/yun}','{yun:}$comclass_name[$v]{/yun}')">{yun:}$comclass_name[$v]{/yun}</a> </div>
+              {yun:}/foreach{/yun} </div>
+          </div>
+          
+          </td>
+      </tr>
+      <tr class="admin_table_trbg" >
+        <th width="120">年龄要求：</th>
+        <td><div class="yun_admin_select_box z_index5"> {yun:}if $show.age{/yun}
+            {yun:}foreach from=$comdata.job_age key=j item=v{/yun}
+            {yun:}if $show.age==$v{/yun}
+            <input type="button" value="{yun:}$comclass_name[$v]{/yun}" class="yun_admin_select_box_text" id="job_age_name" onClick="select_click('job_age');">
+            <input name="age" type="hidden" id="job_age_val" value="{yun:}$v{/yun}">
+             
+            {yun:}/if{/yun}
+            {yun:}/foreach{/yun}
+            {yun:}else{/yun}
+            <input type="button" value="请选择" class="yun_admin_select_box_text" id="job_age_name" onClick="select_click('job_age');">
+            <input name="age" type="hidden" id="job_age_val" value="">
+             
+            {yun:}/if{/yun}
+            <div class="yun_admin_select_box_list_box dn" id="job_age_select"> {yun:}foreach from=$comdata.job_age key=j item=v{/yun}
+              <div class="yun_admin_select_box_list"> <a href="javascript:;" onClick="select_new('job_age','{yun:}$v{/yun}','{yun:}$comclass_name[$v]{/yun}')">{yun:}$comclass_name[$v]{/yun}</a> </div>
+              {yun:}/foreach{/yun} </div>
+          </div>
+          
+          </td>
+      </tr>
+      <tr >
+        <th width="120">性　　别：</th>
+        <td>
+          
+         <div class="yun_admin_select_box z_index4">   
+              {yun:}if $arr_data.sex[$show.sex]{/yun}
+    			{yun:}foreach item=v key=j from=$arr_data.sex{/yun}
+                    {yun:}if $j eq $show.sex{/yun}
+                    <input type="button" value="{yun:}$v{/yun}" class="yun_admin_select_box_text" id="job_sex_name" onClick="select_click('job_sex');">
+                    <input name="sex" type="hidden" id="job_sex_val" value="{yun:}$j{/yun}">
+                    {yun:}/if{/yun}
+                {yun:}/foreach{/yun}
+            {yun:}else{/yun}
+                <input type="button" value="请选择" class="yun_admin_select_box_text" id="job_sex_name" onClick="select_click('job_sex');">
+                <input name="sex" type="hidden" id="job_sex_val" value="">
+                        
+            {yun:}/if{/yun}            
+            <div class="yun_admin_select_box_list_box dn" id="job_sex_select"> 
+              <div class="yun_admin_select_box_list"> 
+              {yun:}foreach from=$arr_data.sex key=j item=v{/yun}
+              <a href="javascript:;" onClick="select_new('job_sex','{yun:}$j{/yun}','{yun:}$v{/yun}')">{yun:}$v{/yun}</a>              
+              {yun:}/foreach{/yun}              
+               </div>
+               </div>
+          </div> 
+                    
+         </td>
+      </tr>
+      <tr class="admin_table_trbg" >
+        <th width="120">教育程度：</th>
+        <td><div class="yun_admin_select_box z_index3"> {yun:}if $show.edu{/yun}
+            {yun:}foreach from=$comdata.job_edu key=j item=v{/yun}
+            {yun:}if $show.edu==$v{/yun}
+            <input type="button" value="{yun:}$comclass_name[$v]{/yun}" class="yun_admin_select_box_text" id="job_edu_name" onClick="select_click('job_edu');">
+            <input name="edu" type="hidden" id="job_edu_val" value="{yun:}$v{/yun}">
+             
+            {yun:}/if{/yun}
+            {yun:}/foreach{/yun}
+            {yun:}else{/yun}
+            <input type="button" value="请选择" class="yun_admin_select_box_text" id="job_edu_name" onClick="select_click('job_edu');">
+            <input name="edu" type="hidden" id="job_edu_val" value="">
+             
+            {yun:}/if{/yun}
+            <div class="yun_admin_select_box_list_box dn" id="job_edu_select"> {yun:}foreach from=$comdata.job_edu key=j item=v{/yun}
+              <div class="yun_admin_select_box_list"> <a href="javascript:;" onClick="select_new('job_edu','{yun:}$v{/yun}','{yun:}$comclass_name[$v]{/yun}')">{yun:}$comclass_name[$v]{/yun}</a> </div>
+              {yun:}/foreach{/yun} </div>
+          </div>
+          
+         </td>
+      </tr>
+      <tr >
+        <th width="120">婚姻状况：</th>
+        <td><div class="yun_admin_select_box z_index2"> {yun:}if $show.marriage{/yun}
+            {yun:}foreach from=$comdata.job_marriage key=j item=v{/yun}
+            {yun:}if $show.marriage==$v{/yun}
+            <input type="button" value="{yun:}$comclass_name[$v]{/yun}" class="yun_admin_select_box_text" id="job_marriage_name" onClick="select_click('job_marriage');">
+            <input name="marriage" type="hidden" id="job_marriage_val" value="{yun:}$v{/yun}">
+             
+            {yun:}/if{/yun}
+            {yun:}/foreach{/yun}
+            {yun:}else{/yun}
+            <input type="button" value="请选择" class="yun_admin_select_box_text" id="job_marriage_name" onClick="select_click('job_marriage');">
+            <input name="marriage" type="hidden" id="job_marriage_val" value="">
+             
+            {yun:}/if{/yun}
+            <div class="yun_admin_select_box_list_box dn" id="job_marriage_select"> {yun:}foreach from=$comdata.job_marriage key=j item=v{/yun}
+              <div class="yun_admin_select_box_list"> <a href="javascript:;" onClick="select_new('job_marriage','{yun:}$v{/yun}','{yun:}$comclass_name[$v]{/yun}')">{yun:}$comclass_name[$v]{/yun}</a> </div>
+              {yun:}/foreach{/yun} </div>
+          </div>
+          
+         </td>
+      </tr>
+     
+      <tr class="admin_table_trbg" >
+        <th width="120">语言要求：</th>
+        <td >{yun:}foreach from=$comdata.job_lang key=j item=v{/yun}
+          <label for="lang{yun:}$v{/yun}" ><span class="admin_jobradio_box">
+            <input type="checkbox" id="lang{yun:}$v{/yun}" value='{yun:}$v{/yun}' name="lang[]" {yun:}if $show.lang && in_array($v,$show.lang){/yun}checked{yun:}/if{/yun} class="admin_radio_box_r" />
+            {yun:}$comclass_name[$v]{/yun}</span></label>
+          {yun:}/foreach{/yun} </td>
+      </tr>
+      <tr >
+        <th width="120">福利待遇：</th>
+        <td > {yun:}foreach from=$comdata.job_welfare key=j item=v{/yun}
+          <label for="welfare{yun:}$v{/yun}" > <span class="admin_jobradio_box">
+            <input type="checkbox" value='{yun:}$v{/yun}' id="welfare{yun:}$v{/yun}" name="welfare[]" {yun:}if $show.welfare && in_array($v,$show.welfare){/yun}checked{yun:}/if{/yun} class="admin_radio_box_r">
+            {yun:}$comclass_name[$v]{/yun}</span></label>
+        </div>
+      
+      {yun:}/foreach{/yun}
+        </td>
+      
+        </tr>
+      
+      <tr class="admin_table_trbg" >
+        <th width="120">描述职位：</th>
+        <td><textarea  name="content" cols="70" rows="8" id="content">{yun:}$show.description{/yun}</textarea></td>
+      </tr>
+      <tr class="admin_table_trbg" >
+        <th width="120">结束日期：</th>
+        <td><input id="edate" name="edate" class="input-text input_date" type="text" readonly size="15" value="{yun:}$show.edate|date_format:'%Y-%m-%d'{/yun}" name="edate">
+          <script type="text/javascript">
+		  $('#edate').fdatepicker({format: 'yyyy-mm-dd',startView:4,minView:2});  
+        </script></td>
+      </tr>
+      <tr>
+        <th width="120">浏览次数：</th>
+        <td><input type="text" class="input-text" name="jobhits" size="10" value="{yun:}$show.jobhits{/yun}"></td>
+      </tr>
+      {yun:}if $show.id{/yun}
+      <tr class="admin_table_trbg" >
+        <th width="120">状　　态：</th>
+        <td><div class="yun_admin_divh">{yun:}if $show.edate<time(){/yun}<font color="orange">已过期</font>{yun:}elseif $show.state==1{/yun}<font color="blue">已审核</font>{yun:}elseif $show.state==3{/yun}<font color="red">未通过</font>{yun:}else{/yun}<font color="red">未审核</font>{yun:}/if{/yun}</div></td>
+      </tr>
+      {yun:}/if{/yun}
+      <tr>
+        <th width="120"></th>
+        <td><input type="hidden" name="pytoken" value="{yun:}$pytoken{/yun}"/>
+          {yun:}if $show.id{/yun}
+          <input type="hidden" name="lasturl" value="{yun:}$lasturl{/yun}">
+          <input type="hidden" name="id" value="{yun:}$show.id{/yun}">
+          <input class="admin_submit4" type="submit" name="update" value="&nbsp;修 改&nbsp;" />
+          {yun:}else{/yun}
+          <input type="hidden" name="uid" value="{yun:}$uid{/yun}">
+          <input class="admin_submit4" type="submit" name="update" value="&nbsp;保 存&nbsp;" />
+          {yun:}/if{/yun} </td>
+      </tr>
+    </table>
+  </form>
+</div>
+</div>
+<input type="hidden" id="circleurl" value='{yun:}url m=ajax c=ajaxcircle{/yun}' />
+</body>
+</html>

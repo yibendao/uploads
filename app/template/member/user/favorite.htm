@@ -1,0 +1,57 @@
+{yun:}include file="$userstyle/header.htm"{/yun}
+<div class="yun_user_member_w1100"> {yun:}include file="$userstyle/left.htm"{/yun}
+  <div class="mian_right fltR mt20">
+     <div class="member_right_index_h1 fltL"> <span class="member_right_h1_span fltL">我的职位</span> <i class="member_right_h1_icon user_bg"></i></div>
+    <div id="gms_showclew"></div>
+    <form action="index.php" method="get" target="supportiframe" id='myform'>
+      <input type="hidden" name="c" value="favorite" />
+      <input type="hidden" name="act" value="del" />
+      <div class="resume_box_list"> <div class="job_list_tit"> <ul class="">
+	<li {yun:}if $smarty.get.c=='msg'{/yun}class="job_list_tit_cur"{yun:}/if{/yun}><a href="index.php?c=msg">面试通知</a>{yun:}if $msgnum{/yun}<i class="job_list_tit_cur">{yun:}$msgnum{/yun}</i>{yun:}/if{/yun}</li>
+      <li {yun:}if $smarty.get.c=='job'{/yun}class="job_list_tit_cur"{yun:}/if{/yun}><a href="index.php?c=job">申请的职位</a></li>
+      <li {yun:}if $smarty.get.c=='favorite'{/yun}class="job_list_tit_cur"{yun:}/if{/yun}><a href="index.php?c=favorite">职位收藏</a></li>
+      <li {yun:}if $smarty.get.c=='look_job'{/yun}class="job_list_tit_cur"{yun:}/if{/yun}><a href="index.php?c=look_job">浏览的职位 </a></li>
+	</ul> </div>{yun:}if empty($rows){/yun}
+        <div class="msg_no">
+          <p>亲爱的用户，您还没有收藏过职位，想要获得更多工作机会</p>
+          <a href="{yun:}url m=job{/yun}" target="_blank" class="msg_no_sq uesr_submit">立即搜索我感兴趣的职位>></a> </div>
+        {yun:}else{/yun}
+        <div class="List_Ope List_Title"> 
+        <div class="List_Title_span List_Title_span_n">&nbsp;</div>
+        <div class="List_Title_span List_Title_w360">收藏的职位</div>
+         <div class="List_Title_span List_Title_w120 List_left_tl">薪资待遇</div>
+          <div class="List_Title_span List_Title_w120">工作地点</div>
+           <div class="List_Title_span List_Title_w120">招聘状态</div> 
+           <div class="List_Title_span List_Title_w80">操作</div> 
+           </div>
+        {yun:}foreach item=job from=$rows{/yun}
+        <div class="List_Ope List_Ope_bor"> 
+        <div class="List_Title_span List_Title_span_n">
+          <input type=checkbox name="del[]" value="{yun:}$job.id{/yun}" class="List_Title_span_check">
+          </div> 
+          <div class="List_Title_span List_Title_w360"> {yun:}if $job.type==1{/yun} 
+          <a href="{yun:}url m=job c=comapply id='`$job.job_id`'{/yun}" target="_blank" title="{yun:}$job.job_name{/yun}" class="List_Title_span_com">{yun:}$job.job_name{/yun}</a> {yun:}/if{/yun}
+          <div class="">
+          <a href="{yun:}url m=company c=show id='`$job.com_id`'{/yun}" target="_blank" title="{yun:}$job.com_name{/yun}"class="List_Ope_a">{yun:}$job.com_name{/yun} </a> </div>
+          </div> 
+          <div class="List_Title_span List_Title_w120 List_left_tl"> &nbsp;{yun:}if $job.minsalary&&$job.maxsalary{/yun}￥{yun:}$job.minsalary{/yun}-{yun:}$job.maxsalary{/yun}{yun:}if $job.type!=1{/yun}万{yun:}/if{/yun}{yun:}else if $job.minsalary{/yun}￥{yun:}$job.minsalary{/yun}{yun:}if $job.type!=1{/yun}万{yun:}/if{/yun}以上{yun:}else{/yun}面议{yun:}/if{/yun}</div> 
+          <div class="List_Title_span List_Title_w120">&nbsp;{yun:}$city_name[$job.provinceid]{/yun}-{yun:}$city_name[$job.cityid]{/yun}</div> 
+          <div class="List_Title_span List_Title_w120">&nbsp;{yun:}$job.statename{/yun}</div> 
+          <div class="List_Title_span List_Title_w80"> <a href="javascript:void(0)" onclick="layer_del('确定要删除？', 'index.php?c=favorite&act=del&id={yun:}$job.id{/yun}');" class="re_sc cblue">删除</a> </div>
+           </div>
+        {yun:}/foreach{/yun}
+        {yun:}/if{/yun} </div>
+      {yun:}if $rows{/yun}
+       <div class="resume_box_bottom">
+      <div class="List_Ope List_Ope_bg"> 
+       <span class="job_bth_inc">
+        <input id="checkAll" type="checkbox" onclick="m_checkAll(this.form)" class="List_Title_span_check_n mt5">
+        </span>
+        <input type="button" name="subdel" value="批量删除" onclick="return really('del[]');" class="job_pl_sub">
+      </div>
+      <div class="diggg" style="float:right; margin-top:10px;">{yun:}$pagenav{/yun}</div>
+      {yun:}/if{/yun}
+    </form>
+  </div>
+</div>
+{yun:}include file="$userstyle/footer.htm"{/yun}

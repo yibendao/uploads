@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<link href="images/reset.css" rel="stylesheet" type="text/css" />
+<link href="images/system.css" rel="stylesheet" type="text/css" /> 
+<link href="images/table_form.css" rel="stylesheet" type="text/css" />
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script>
+<script src="js/admin_public.js"></script>
+<script> 
+function check_form(){
+	var classname = $.trim($("#classname").val());
+	if(classname==""){ 
+		parent.layer.msg("类别名称不能为空！",2,8);
+		return false; 
+	}
+}	 
+function change_f(){
+	var f_id=$("#f_id").val();
+	if(f_id=='0'){
+		$("#is_rec").show();
+	}else{$("#is_rec").hide();} 
+}
+
+</script>
+<title>后台管理-测评类别管理</title>
+</head>
+<body class="body_ifm">
+<iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe>
+
+<div id="houtai_div" style=" width:298px; display:none;">
+	<form name="myform" target="supportiframe" action="index.php?m=admin_evaluate&c=addgroup" method="post" onSubmit="return check_form();">
+		<table class="table_form "style="width:100%">
+			<tbody>
+				<tr class="ui_td_11">
+					<td style="text-align: right;" class="ui_content_wrap">类别名称：</td>
+					<td><input type="text" name="classname" value="" id="classname" style="width:180px;height:30px; line-height:30px;border:1px solid #ddd"/></td>
+				</tr>
+				<tr class="ui_td_11">
+					<td  class="ui_content_wrap" colspan='2' style="border-bottom:none"><input class="admin_submit4" type="submit" name="sub" value=" 添加 "  /></td>
+				</tr> 
+			</tbody>
+		</table>
+		<input type="hidden" name="pytoken" id="pytoken" value="{yun:}$pytoken{/yun}">
+	</form>
+</div>
+
+<div class="infoboxp">
+
+<div class="infoboxp_top_bg"></div>
+
+<div class="infoboxp_top">
+    <span class="admin_title_span">测评分类</span> 
+    <em class="admin-tit_line"></em>
+    <a href="javascript:void(0);" onClick="add_class('添加类别','300','130','#houtai_div','')" class="admin_infoboxp_nav admin_infoboxp_tj admin_infoboxp_lb">添加类别</a>
+    <em class="admin-tit_line"></em>
+    <a href="index.php?m=admin_evaluate" class="admin_infoboxp_nav admin_infoboxp_xwlb">测评试卷列表</a>
+    <em class="admin-tit_line"></em>
+    <a href="index.php?m=admin_evaluate&c=examup" class="admin_infoboxp_nav admin_infoboxp_tj">添加试卷</a>
+</div>
+
+<div class="clear"></div>
+
+<div class="table-list" style="min-height:300px;">
+    <div class="admin_table_border">
+        {yun:}if empty($smarty.get.id){/yun}
+
+		<form action="index.php" name="myform" method="get" target="supportiframe" id='myform'>
+			<input name="m" value="admin_evaluate" type="hidden"/>
+			<input name="c" value="delgroup" type="hidden"/>
+            
+<table width="100%" style="text-align: center;">
+<thead>
+	<tr class="admin_table_top">
+		<th>编号</th>
+		<th align="left" width="200">类别名称<span class="clickup">(点击修改)</span></th>
+        <th>记录数</th>
+        <th>排序<span class="clickup">(点击修改)</span></th>
+		<th class="admin_table_th_bg">操作</th>
+	</tr>
+</thead>
+<tbody>
+	    
+	{yun:}foreach item=v key=key from=$evaluate_group{/yun}
+    {yun:}if $v.keyid==0{/yun}
+	<tr align="center"{yun:}if ($key+1)%2=='0'{/yun}class="admin_com_td_bg"{yun:}/if{/yun}>
+		<td><span>{yun:}$v.id{/yun}</span></td>
+		<td class="ud" align="left"><span onClick="checkname('{yun:}$v.id{/yun}');" id="name{yun:}$v.id{/yun}" style="cursor:pointer;">{yun:}$v.name{/yun}</span>
+        	<input class="input-text hidden" type="text" id="inputname{yun:}$v.id{/yun}" value="{yun:}$v.name{/yun}" onBlur="subname('{yun:}$v.id{/yun}','index.php?m=admin_evaluate&c=ajax');" />
+			<img class="" style="padding-left:5px;cursor:pointer;" title="" src="images/xg.png" onClick="checkname('{yun:}$v.id{/yun}');"/>
+			</td>
+		<td class="od">
+		 共有试卷 <font color="#0033FF">
+         {yun:}if $v.count!=0{/yun}
+         	{yun:}$v.count{/yun}
+         {yun:}else{/yun}
+         	0
+         {yun:}/if{/yun}</font> 篇</td>
+        <td><span onClick="checksort('{yun:}$v.id{/yun}');" id="sort{yun:}$v.id{/yun}" style="cursor:pointer;">{yun:}$v.sort{/yun}</span>
+        	<input class="input-text hidden" type="text" id="input{yun:}$v.id{/yun}" size="10" value="{yun:}$v.sort{/yun}" onBlur="subsort('{yun:}$v.id{/yun}');" />
+			<img class="" style="padding-left:5px;cursor:pointer;" title="" src="images/xg.png" onClick="checksort('{yun:}$v.id{/yun}');"/>
+			</td>
+		<td><a href="javascript:void(0)" class="admin_cz_sc" onClick="layer_del('删除该分组，将删除该分组下的所有的试卷，确定要删除吗？', 'index.php?m=admin_evaluate&c=delgroup&id={yun:}$v.id{/yun}');">删除</a></td>
+	</tr>
+    {yun:}/if{/yun}
+	{yun:}/foreach{/yun}
+    <tr>
+    	<td colspan="8" class="digg">{yun:}$pagenav{/yun}</td>
+    </tr>
+</table> 
+
+		</form>
+{yun:}/if{/yun}
+
+
+</div>
+
+</div> 
+</body>
+</html>

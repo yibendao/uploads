@@ -1,0 +1,258 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link href="images/reset.css" rel="stylesheet" type="text/css" />
+<link href="images/system.css" rel="stylesheet" type="text/css" />
+<link href="images/table_form.css" rel="stylesheet" type="text/css" />
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script>
+<script src="js/admin_public.js" language="javascript"></script>
+<script language="javascript">
+var weburl="{yun:}$config.sy_weburl{/yun}";
+function checkform(myform){
+	if (myform.title.value==""){
+		parent.layer.msg('请填写域名备注！', 2, 8);
+      	myform.title.focus();
+     	return (false);
+  	}
+    if (myform.province.value=="" && myform.hy.value==""){
+	  parent.layer.msg('城市和行业最少选择一项！', 2, 8);
+      myform.cityid.focus();
+      return (false);
+  	}
+	if (myform.domain.value=="") {
+	  parent.layer.msg('请填写需绑定的域名！', 2, 8);
+	  myform.domain.focus();
+	  return (false);
+	}
+}
+function ajaxcity(keyid){
+	if(keyid!=""){
+		$.get("index.php?m=admin_domain&c=AjaxCity&keyid="+keyid,function(data){
+			if(data!=""){
+				var html="<option value=''>请选择</option>";
+				$("#cityid").html(html+data);
+				$("#three_cityid").html("<option value=''>请选择</option>");
+			}
+		});
+	}else{
+		$("#cityid").html("<option value=''>请选择</option>");
+	}
+}
+function ajaxcity2(keyid){
+	$.get("index.php?m=admin_domain&c=AjaxCity&keyid="+keyid,function(data){
+		if(data!=""){
+			var html="<option value=''>请选择</option>";
+			$("#three_cityid").html(html+data);
+		}else{
+			$("#three_cityid").html("<option value=''>请选择</option>");
+		}
+	});
+}
+$(function(){
+	$("#fz_type").change(function(){
+		var fz_type=$("#fz_type").val();
+		if(fz_type=='1'){
+			$("#fz_type_1").show();
+			$("#fz_type_2").hide();
+		}else{
+			$("#fz_type_2").show();
+			$("#fz_type_1").hide();
+		}
+	});
+});
+</script>
+<title>后台管理</title>
+</head>
+<body class="body_ifm">
+<div class="infoboxp">
+<div class="infoboxp_top_bg"></div>
+  <div class="infoboxp_top" style="z-index:600;position:relative;">	
+	<div class="report_uaer_list"><span class="infoboxp_top_span">分站管理</span>
+	 <a href="index.php?m=admin_domain">分站设置</a>
+     <a href="index.php?m=admin_domain&c=alllist">分站记录</a>
+     <a href="index.php?m=admin_domain&c=AddDomain" class="report_uaer_list_on">添加分站</a> 
+	  </div> 
+  </div> 
+<div class="admin_Prompt">
+<div class="admin_Prompt_span">
+ <b>提示：</b>同一域名不得绑定多个城市，多个域名可以绑定同一城市，但是前台选择城市域名跳转会以最后添加域名为基准，外部访问则不作限制！<br>域名绑定不支持2级目录 如 http://localhost/phpyun 本地环境测试请解析域名<br>
+   <b>教程：</b><b><a href='http://www.phpyun.com/bbs/thread-4218-1-1.html' target="_blank">点击查看</a></b>
+</div>
+<div class="admin_Prompt_close"></div>
+</div>
+
+<div class="infoboxp_top">
+<span class="admin_title_span">添加分站</span>
+<a href="index.php?m=admin_domain&c=alllist" class="admin_infoboxp_tj">分站列表</a>
+</div>
+<div class="admin_table_border">
+<iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe>
+<form target="supportiframe" name="myform" action="index.php?m=admin_domain&c=save" method="post" encType="multipart/form-data"  onSubmit="return checkform(this);">
+	<table width="100%" class="table_form" style="background:#fff;">
+    	<tr >
+			<th>域名备注：</th>
+			<td><input class="input-text" type="text" name="title" size="40" value="{yun:}$site.title{/yun}"/><span class="admin_web_tip">如：北京站</span></td>
+		</tr>
+		<tr class="admin_table_trbg" >
+			<th>绑定域名：</th>
+			<td><input class="input-text" type="text" name="domain" size="40" value="{yun:}$site.domain{/yun}"/><span class="admin_web_tip">如：beijing.hr135.com(不带http://)</span></td>
+		</tr>
+			<tr>
+			<th>分站类型：</th>
+			<td>
+                 <div class="yun_admin_select_box z_index17">   
+            
+            
+          {yun:}if $site.fz_type{/yun} 
+                 
+          {yun:}if $site.fz_type==1{/yun}
+          <input type="button" value="地区分站" class="yun_admin_select_box_text" id="fz_type_name" onClick="select_click('fz_type');">
+          <input name="fz_type" type="hidden" id="fz_type_val" value="1">
+
+          {yun:}/if{/yun}
+          {yun:}if $site.fz_type==2{/yun}
+          <input type="button" value="行业分站" class="yun_admin_select_box_text" id="fz_type_name" onClick="select_click('fz_type');">
+          <input name="fz_type" type="hidden" id="fz_type_val" value="2" >
+
+          {yun:}/if{/yun}        
+          
+          {yun:}else{/yun}
+        <input type="button" value="请选择" class="yun_admin_select_box_text" id="fz_type_name" onClick="select_click('fz_type');">
+          <input name="fz_type" type="hidden" id="fz_type_val" value="">
+          
+          {yun:}/if{/yun}  
+                     
+          <div class="yun_admin_select_box_list_box dn" id="fz_type_select"> 
+            <div class="yun_admin_select_box_list"> <a href="javascript:;" onClick="select_new('fz_type','1','地区分站')">地区分站</a> </div>
+            <div class="yun_admin_select_box_list"> <a href="javascript:;" onClick="select_new('fz_type','2','行业分站')">行业分站</a> </div>            
+            </div>
+           </div>         
+                
+                
+                
+                
+                
+                
+                
+            </td>
+		</tr>
+		<tr id='fz_type_1' {yun:}if '2'==$site.fz_type{/yun}style="display:none;"{yun:}/if{/yun}  class="admin_table_trbg">
+			<th>地区分站：</th>
+			<td>
+           
+            <div class="yun_admin_select_box yun_admin_select_boxw130 z_index11">
+            <input type="button" id="province" onclick="search_show('job_province');" value="{yun:}if $city_name[$site.province]{/yun}{yun:}$city_name[$site.province]{/yun}{yun:}else{/yun}请选择{yun:}/if{/yun}" class="yun_admin_select_box_text">
+            <input type="hidden" id="provinceid" name="province" value="{yun:}$site.province{/yun}" />
+            <div class="yun_admin_select_box_list_box yun_admin_select_box_list_boxw130 dn" style="display:none" id="job_province"> {yun:}foreach from=$city_index key=j item=v{/yun}
+              <div class="yun_admin_select_box_list"><a href="javascript:;" onclick="select_city('{yun:}$v{/yun}','province','{yun:}$city_name[$v]{/yun}','cityid','city');"> {yun:}$city_name[$v]{/yun}</a></div>
+              {yun:}/foreach{/yun} </div>
+          </div>
+          <div class="yun_admin_select_box yun_admin_select_boxw130 z_index11">
+            <input type="button" id="cityid" onclick="search_show('job_cityid');" value="{yun:}if $site.cityid{/yun}{yun:}$city_name[$site.cityid]{/yun}{yun:}else{/yun}请选择{yun:}/if{/yun}" class="yun_admin_select_box_text">
+            <input type="hidden" id="cityidid" name="cityid" value="{yun:}$site.cityid{/yun}"/>
+            <div class="yun_admin_select_box_list_box yun_admin_select_box_list_boxw130 dn" style="display:none" id="job_cityid">
+              <div class="yun_admin_select_box_list">{yun:}foreach from=$city_type[$site.province] key=j item=v{/yun} <a href="javascript:;" onclick="select_city('{yun:}$v{/yun}','cityid','{yun:}$city_name[$v]{/yun}','three_city','city');"> {yun:}$city_name[$v]{/yun}</a> {yun:}/foreach{/yun}</div>
+            </div>
+          </div>
+          <div class="yun_admin_select_box yun_admin_select_boxw130 z_index11 {yun:}if $site.three_cityid<1{/yun}dn{yun:}/if{/yun}" id="cityshowth">
+            <input type="button" id="three_city" onclick="three_city_show('job_three_city');" value="{yun:}if $site.three_cityid{/yun}{yun:}$city_name[$site.three_cityid]{/yun}{yun:}else{/yun}请选择{yun:}/if{/yun}" class="yun_admin_select_box_text">
+            <input type="hidden" id="three_cityid" name="three_cityid" value="{yun:}$site.three_cityid{/yun}" />
+            <div class="yun_admin_select_box_list_box yun_admin_select_box_list_boxw130 dn" style="display:none" id="job_three_city">
+              <div class="yun_admin_select_box_list"> {yun:}foreach from=$city_type[$site.cityid] key=j item=v{/yun} <a href="javascript:;" onclick="selects('{yun:}$v{/yun}','three_city','{yun:}$city_name[$v]{/yun}');"> {yun:}$city_name[$v]{/yun}</a> {yun:}/foreach{/yun} </div>
+            </div>
+          </div>
+            
+            
+            </td>
+		</tr>
+		 <tr id='fz_type_2' {yun:}if $site.fz_type!='2'{/yun}style="display:none;"{yun:}/if{/yun}  class="admin_table_trbg">
+			<th>行业分站：</th>
+			<td>
+           
+                <div class="yun_admin_select_box z_index7"> {yun:}if $site.hy{/yun}
+                  {yun:}foreach from=$industry_index key=j item=v{/yun}
+                  {yun:}if $site.hy==$v{/yun}
+                  <input type="button" value="{yun:}$industry_name[$v]{/yun}" class="yun_admin_select_box_text" id="job_hy_name" onClick="select_click('job_hy');">
+                  <input name="hy" type="hidden" id="job_hy_val" value="{yun:}$v{/yun}">
+                 
+                  {yun:}/if{/yun}
+                  {yun:}/foreach{/yun}
+                  {yun:}else{/yun}
+                  <input type="button" value="请选择" class="yun_admin_select_box_text" id="job_hy_name" onClick="select_click('job_hy');">
+                  <input name="hy" type="hidden" id="job_hy_val" value="">
+                
+                  {yun:}/if{/yun}
+                  <div class="yun_admin_select_box_list_box dn" id="job_hy_select"> {yun:}foreach from=$industry_index key=j item=v{/yun}
+                    <div class="yun_admin_select_box_list"> <a href="javascript:;" onClick="select_new('job_hy','{yun:}$v{/yun}','{yun:}$industry_name[$v]{/yun}')">{yun:}$industry_name[$v]{/yun}</a> </div>
+                    {yun:}/foreach{/yun} </div>
+                </div>
+                
+                
+                
+                
+            </td>
+		</tr>
+       	<tr>
+			<th>风格分站：</th>
+			<td>
+            
+            <select name="style">
+            {yun:}foreach item=row from=$list{/yun}
+            <option value="{yun:}$row.dir{/yun}" {yun:}if $site.style == $row.dir{/yun}selected{yun:}/if{/yun}>{yun:}$row.dir{/yun}</option>
+            {yun:}/foreach{/yun}
+            </select>
+          
+          
+            <span class="admin_web_tip">选择您需要绑定的模板风格目录，绑定成功后通过该域名访问人才网会自动进入到该风格下</span>
+            </td>
+		</tr>
+        <tr class="admin_table_trbg">
+			<th>首页模板：</th>
+			<td><input class="input-text" type="text" name="tpl" size="40" value="{yun:}$site.tpl{/yun}"/><span class="admin_web_tip">如：index.htm(后缀是.htm 不填则是默认index.htm模板)</span></td>
+		</tr>
+         <tr >
+			<th>是否启用该域名：</th>
+			<td><input type="radio" name="type" checked value="1">启用  <input type="radio" name="type" value="2" {yun:}if $site.type == "2"{/yun}checked{yun:}/if{/yun}>停用  <span class="admin_web_tip">提示：停用该域名则不在前台选择城市处显示并且外部访问不对该域名进行解析</span></td>
+		</tr>
+      <tr class="admin_table_trbg">
+		<th width="160">分站首页标题：</th>
+		<td class="y-bg"><textarea name="webtitle" id="webtitle" rows="3" cols="50" class="text tips_class">{yun:}$site.webtitle{/yun}</textarea></td>
+	</tr>
+
+    <tr>
+		<th width="160">分站首页关键词：</th>
+		<td class="y-bg"><textarea name="webkeyword" id="webkeyword" rows="3" cols="50" class="text tips_class">{yun:}$site.webkeyword{/yun}</textarea></td>
+	</tr>
+	<tr class="admin_table_trbg">
+		<th width="160">分站首页描述：</th>
+		<td><textarea name="webmeta" id="webmeta" rows="3" cols="50" class="text">{yun:}$site.webmeta{/yun}</textarea></td>
+	</tr>
+    <tr> <th width="160">分站LOGO：</th>
+		 <td>
+        	<input  type="file" size="40" name="weblogo" class="input-text">
+            {yun:}if $site.weblogo!=""{/yun}
+            <img src="{yun:}$site.sy_weburl{/yun}/{yun:}$site.weblogo{/yun}" style="max-width:300px;_width:300px">
+            {yun:}else{/yun}
+            <span class="admin_web_tip">提示：默认为空则调用网站LOGO</span>
+            {yun:}/if{/yun}
+          </td>
+		</tr>
+		<tr class="admin_table_trbg" >
+			<td align="center" colspan="2">
+            <input type="hidden" name="pytoken" id='pytoken'value="{yun:}$pytoken{/yun}">
+			{yun:}if is_array($site){/yun}
+        	<input type="hidden" name="id" size="40" value="{yun:}$site.id{/yun}"/>
+        	<input class="admin_submit4" type="submit" name="update" value="&nbsp;更 新&nbsp;"  />
+        	{yun:}else{/yun}
+    		<input class="admin_submit4" type="submit" name="add" value="&nbsp;添 加&nbsp;"  />
+     		{yun:}/if{/yun}
+     		<input class="admin_submit4" type="reset" name="reset" value="&nbsp;重 置 &nbsp;" />
+			</td>
+		</tr>
+	</table>
+</form>
+</div>
+</body>
+</html>

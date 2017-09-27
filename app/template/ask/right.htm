@@ -1,0 +1,16 @@
+<div class="right right_rem"> 	
+	<div class="recom_expert" style="margin-top:0px;">
+     <div class="ask_tit"><span class="ask_tit_icon_s"><i class="ask_tit_icon"></i>最新问题</span></div>
+		<ul class="ask_relate_list">
+			{yun:}qlist item=list limit=8{/yun}
+			<li>
+				<div class="ask_relate_top"><a class="ask_relate_con" href="{yun:}$list.url{/yun}" target="_blank">{yun:}$list.title{/yun}</a></div>
+              <span class="ask_relate_twr"> 提问人:</span> <a class="ask_relate_name" href="{yun:}$list.userurl{/yun}" target="_blank">{yun:}$list.nickname|mb_substr:0:8:'gbk'{/yun}</a>
+              <div class="ask_tw_time">{yun:}$list.add_time|date_format:"%Y-%m-%d"{/yun}</div>
+				
+			</li>
+			{yun:}/qlist{/yun} 
+		</ul>
+	</div> 
+</div>
+<div class="clear"></div>

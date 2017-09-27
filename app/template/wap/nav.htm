@@ -1,0 +1,15 @@
+<div class="askfriend_nav">
+  <ul>
+  
+   {yun:}if $uid && ($smarty.get.uid=='' || $smarty.get.uid==$uid){/yun} 
+    <li {yun:}if $smarty.get.a=='myquestion'{/yun}class="askfriend_cur"{yun:}/if{/yun}><a href="{yun:}if $uid{/yun}{yun:}url m=wap c=ask a=myquestion uid=$uid{/yun}{yun:}else{/yun}{yun:}url m=wap c=login{/yun}{yun:}/if{/yun}"><span>我的提问</span></a></li>
+    <li {yun:}if $smarty.get.a=='myanswer'{/yun}class="askfriend_cur"{yun:}/if{/yun}><a href="{yun:}if $uid{/yun}{yun:}url m=wap c=ask a=myanswer  uid=$uid{/yun}{yun:}else{/yun}{yun:}url m=wap c=login{/yun}{yun:}/if{/yun}"><span>我的回答</span></a></li>
+    <li {yun:}if $smarty.get.a=='attenquestion'{/yun}class="askfriend_cur"{yun:}/if{/yun}><a href="{yun:}if $uid{/yun}{yun:}url m=wap c=ask a=attenquestion  uid=$uid{/yun}{yun:}else{/yun}{yun:}url m=wap c=login{/yun}{yun:}/if{/yun}"><span>我的关注</span></a></li>
+    {yun:}elseif $smarty.get.uid{/yun}
+     <li {yun:}if $smarty.get.a=='myquestion'{/yun}class="askfriend_cur"{yun:}/if{/yun}><a href="{yun:}if $uid{/yun}{yun:}url m=wap c=ask a=myquestion uid=$smarty.get.uid{/yun}{yun:}else{/yun}{yun:}url m=wap c=login{/yun}{yun:}/if{/yun}"><span>他的提问</span></a></li>
+    <li {yun:}if $smarty.get.a=='myanswer'{/yun}class="askfriend_cur"{yun:}/if{/yun}><a href="{yun:}if $uid{/yun}{yun:}url m=wap c=ask a=myanswer  uid=$smarty.get.uid{/yun}{yun:}else{/yun}{yun:}url m=wap c=login{/yun}{yun:}/if{/yun}"><span>他的回答</span></a></li>
+    <li {yun:}if $smarty.get.a=='attenquestion'{/yun}class="askfriend_cur"{yun:}/if{/yun}><a href="{yun:}if $uid{/yun}{yun:}url m=wap c=ask a=attenquestion  uid=$smarty.get.uid{/yun}{yun:}else{/yun}{yun:}url m=wap c=login{/yun}{yun:}/if{/yun}"><span>他的关注</span></a></li>
+    {yun:}/if{/yun}
+  </ul>
+</div>
+

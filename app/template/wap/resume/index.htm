@@ -1,0 +1,276 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>{yun:}$headertitle{/yun}</title>
+<link rel="stylesheet" href="{yun:}$resume_style{/yun}/css/jquery.fullPage.css">
+<link rel="stylesheet" href="{yun:}$resume_style{/yun}/css/font-awesome.min.css" type="text/css">
+<link type="text/css" href="{yun:}$resume_style{/yun}/css/rusume.css" rel="stylesheet">
+</head>
+<body>
+<div id="dowebok">
+<section class="section">
+    <div class="rusume_info_cont">
+      <div class="rusume_info_Start">
+        <div class="rusume_info_Start_k1"></div>
+        <div class="rusume_info_h1"><span class="rusume_info_Start_span">个人简历</span></div>
+      </div>
+      <div class="rusume_info_Start_k"></div>
+    </div>
+    <div class="section_nav">
+      <div class="section_nav_line"></div>
+      <div class="section_nav_line_r"></div>
+      <div class="section_nav_p">{yun:}$Info.username_n{/yun}</div>
+      <div class="section_nav_icon"><i class="fa fa-angle-double-up"></i></div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="rusume_info_cont">
+		
+	  <div class="rusume_info_line"></div>
+	  
+      <div class="rusume_info_Frame_one">
+        <div class="rusume_info_Frame_line"></div>
+      </div>
+	  
+      <div class="rusume_info_Frame_img"> <img src="{yun:}$Info.resume_photo{/yun}"  onerror="showImgDelay(this,'{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_member_icon{/yun}',2);"/ class="" width="275" height="350"></div>
+      <div class="rusume_info_name_top_line"></div>
+      <div class="rusume_info_name_bottom_line"></div>
+      <div class="rusume_info_name">{yun:}$Info.username_n{/yun}</div>
+      <div class="rusume_info_p">{yun:}$Info.sex{/yun},
+	  {yun:}if $user.age==0{/yun}保密{yun:}else{/yun}{yun:}$user.age{/yun}岁{yun:}/if{/yun},
+	  {yun:}$Info.useredu{/yun},
+    {yun:}if $Info.user_exp=='无经验'{/yun}无经验{yun:}else{/yun}
+	  {yun:}$Info.user_exp{/yun}经验{yun:}/if{/yun}
+	  </div>
+	  <div class="rusume_info_p2">{yun:}$Info.living{/yun}</div>
+      <div class="rusume_info_qz">{yun:}$Info.jobstatus{/yun} </div>
+    </div>
+    <div class="section_nav">
+      <div class="section_nav_line"></div>
+      <div class="section_nav_line_r"></div>
+      <div class="section_nav_p">基本信息</div>
+      <div class="section_nav_icon"><i class="fa fa-angle-double-up"></i></div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="section_Work_title"> <span class="section_Work_span">求职意向</span> <em class="section_Work_em">Work experience</em> </div>
+    <div class="job_Intention_line_l"></div>
+    <div class="job_Intention_line_r"></div>
+    <div class="job_Intention_cont">
+    {yun:}if $Info.jobname{/yun}
+      <div class="section_yx_by_p">期望职位：{yun:}$Info.jobname{/yun}</div>
+      {yun:}/if{/yun}
+      <div class="section_yx_by_p">期望薪资：<span class="section_yx_by_span">{yun:}if $Info.minsalary&&$Info.maxsalary{/yun}￥{yun:}$Info.minsalary{/yun}-{yun:}$Info.maxsalary{/yun}{yun:}else if $Info.minsalary{/yun}￥{yun:}$Info.minsalary{/yun}以上{yun:}else{/yun}面议{yun:}/if{/yun}</span></div>
+
+      {yun:}if $Info.type{/yun}
+      <div class="section_yx_by_p">工作性质：{yun:}$Info.type{/yun}</div>{yun:}/if{/yun}
+      {yun:}if $Info.report{/yun}
+      <div class="section_yx_by_p">到岗时间：{yun:}$Info.report{/yun}</div>{yun:}/if{/yun}
+      {yun:}if $Info.city_one{/yun}
+      <div class="section_yx_by_p">工作地点：{yun:}$Info.city_one{/yun} {yun:}$Info.city_two{/yun} {yun:}$Info.city_three{/yun} </div>{yun:}/if{/yun}
+      {yun:}if $Info.hy{/yun}
+      <div class="section_yx_by_p">从事行业：{yun:}$Info.hy{/yun}</div>{yun:}/if{/yun}
+    </div>
+    <div class="section_nav">
+      <div class="section_nav_line"></div>
+      <div class="section_nav_line_r"></div>
+      <div class="section_nav_p">求职意向</div>
+      <div class="section_nav_icon"><i class="fa fa-angle-double-up"></i></div>
+    </div>
+  </section>
+  {yun:}if $Info.user_work{/yun}
+  <section class="section"  id="jl">
+    <div class="section_h2"> <span class="section_h2_span">工作经历</span> <em class="section_h2_em">Work experience</em> </div>
+    {yun:}foreach from=$Info.user_work item=worklist{/yun}
+    <div class="slide">
+      <div class="section_Additional_con">
+        <div class="section_Experience_list">
+          <div class="section_Experience_date"><span class="section_Experience_t">{yun:}$worklist.sdate|date_format:"%Y-%m"{/yun} 至 {yun:}if $worklist.edate{/yun}{yun:}$worklist.edate|date_format:"%Y-%m"{/yun}{yun:}else{/yun}至今{yun:}/if{/yun} </span></div>
+          <div class="section_Experience_box">
+            <div class="section_Experience_name">{yun:}$worklist.name{/yun} </div>
+            <div>职位：{yun:}$worklist.title{/yun}</div>
+            <div class="section_Experience_text">工作职责：{yun:}$worklist.content{/yun} </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {yun:}/foreach{/yun}
+    <div class="section_nav">
+      <div class="section_nav_line"></div>
+      <div class="section_nav_line_r"></div>
+      <div class="section_nav_p">工作经历</div>
+      <div class="section_nav_icon"><i class="fa fa-angle-double-up"></i></div>
+    </div>
+  </section>
+  {yun:}/if{/yun}
+  {yun:}if $Info.user_edu{/yun}
+  <section class="section" id="jl">
+    <div class="section_h2"> <span class="section_h2_span">教育经历</span> <em class="section_h2_em">Educational experience</em> </div>
+    {yun:}foreach from=$Info.user_edu item=edulist{/yun}
+    <div class="slide">
+      <div class="section_Additional_con">
+        <div class="section_Education_list">
+          <div class="section_Education_date"><span class="section_Education_t">{yun:}$edulist.sdate|date_format:"%Y-%m"{/yun} 至 {yun:}if $edulist.edate{/yun}{yun:}$edulist.edate|date_format:"%Y-%m"{/yun}{yun:}else{/yun}至今{yun:}/if{/yun}</span></div>
+          <div class="section_Education_box">
+            <aside class="section_Education_name"><span class="section_Education_t">名称：</span><em class="section_Education_n">{yun:}$edulist.name{/yun}</em> </aside>
+            <aside><span class="section_Education_t">最高学历：</span>{yun:}$edulist.education_n{/yun}</aside>
+            <aside><span class="section_Education_t">担任：</span>{yun:}$edulist.title{/yun}</aside>           
+          </div>
+        </div>
+      </div>
+    </div>
+    {yun:}/foreach{/yun}
+    <div class="section_nav">
+      <div class="section_nav_line"></div>
+      <div class="section_nav_line_r"></div>
+      <div class="section_nav_p">教育经历</div>
+      <div class="section_nav_icon"><i class="fa fa-angle-double-up"></i></div>
+    </div>
+  </section>
+  {yun:}/if{/yun}
+  
+{yun:}if $Info.user_tra{/yun}
+  <section class="section" id="jl">
+    <div class="section_h2"> <span class="section_h2_span">培训经历</span> <em class="section_h2_em">Training experience</em> </div>
+    
+   {yun:}foreach from=$Info.user_tra item=traininglist{/yun}
+    <div class="slide">
+      <div class="section_Additional_con">
+        <div class="section_Education_list">
+          <div class="section_Education_date"><span class="section_Education_t"> {yun:}$traininglist.sdate|date_format:"%Y-%m"{/yun} 至 {yun:}if $traininglist.edate{/yun}{yun:}$traininglist.edate|date_format:"%Y-%m"{/yun}{yun:}else{/yun}至今{yun:}/if{/yun}</span></div>
+          <div class="section_Education_box">
+            <aside class="section_Education_name"><span class="section_Education_t">名称：</span><em class="section_Education_n bold">{yun:}$traininglist.name{/yun}</em> </aside>
+            <aside><span class="section_Education_t">方向：</span>{yun:}$traininglist.title{/yun}</aside>
+            <aside><span class="section_Education_t">描述：</span>{yun:}$traininglist.content{/yun}</aside>
+          </div>
+        </div>
+      </div>
+    </div>
+   
+      {yun:}/foreach{/yun}
+    <div class="section_nav">
+      <div class="section_nav_line"></div>
+      <div class="section_nav_line_r"></div>
+      <div class="section_nav_p">培训经历</div>
+      <div class="section_nav_icon"><i class="fa fa-angle-double-up"></i></div>
+    </div>
+  </section>
+    {yun:}/if{/yun}
+
+     {yun:}if $Info.user_skill{/yun}
+  <section class="section" id="jl">
+    <div class="section_h2"> <span class="section_h2_span">职业技能</span> <em class="section_h2_em">Professional skills</em> </div>
+    
+   {yun:}foreach from=$Info.user_skill item=skilllist{/yun}
+    <div class="slide" style="width:100%">
+      <div class="section_Skill_cont">
+        <div class="section_Skill_list">
+          <div class="section_Skill_time_icon"><i class="section_Skill_time_icon_fa fa fa-check-circle-o"></i></div>
+          <div class="section_Skill_p"> <span class="section_Skill_con_t">专业名称</span><em class="section_Skill_con_em">{yun:}$skilllist.name{/yun}</em> </div>
+          <div class="section_Skill_p"> <span class="section_Skill_con_t">掌握时间</span><em class="section_Skill_con_em ">掌握{yun:}$skilllist.longtime{/yun}年</em></div>
+          {yun:}if $skilllist.pic{/yun}
+          <div class="section_Skill_p"> <span  class="section_Skill_con_t">证书图片</span><img src="{yun:}$config.sy_weburl{/yun}/{yun:}$skilllist.pic{/yun}" width="95" height="70" style="vertical-align:middle"/></div>
+          {yun:}/if{/yun}
+        </div>
+      </div>
+    </div>
+   
+     {yun:}/foreach{/yun} 
+    <div class="section_nav">
+      <div class="section_nav_line"></div>
+      <div class="section_nav_line_r"></div>
+      <div class="section_nav_p">专业技能</div>
+      <div class="section_nav_icon"><i class="fa fa-angle-double-up"></i></div>
+    </div>
+  </section>
+  
+     {yun:}/if{/yun}
+   {yun:}if $Info.user_xm{/yun}
+     <section class="section" id="jl">
+    <div class="section_h2"> <span class="section_h2_span">项目经验</span> <em class="section_h2_em">Project experience</em> </div>
+    
+    {yun:}foreach from=$Info.user_xm item=projectlist{/yun}
+    <div class="slide">
+      <div class="section_Additional_con">
+        <div class="section_Project_list"> <i class="section_Project_yuan"></i> <i class="section_Project_yuan3"></i>
+          <div class="section_Project_a1"><em class="section_Project_em section_Project_em_n">{yun:}$projectlist.name{/yun}</em> </div>
+          <div class="section_Project_box">
+            <div class="section_Project_a2"><span class="section_Project_s">时间：</span><em class="section_Project_em">{yun:}$projectlist.sdate|date_format:"%Y-%m"{/yun} 至 {yun:}if $projectlist.edate{/yun}{yun:}$projectlist.edate|date_format:"%Y-%m"{/yun}{yun:}else{/yun}至今{yun:}/if{/yun}</em> </div>
+            
+            <div class="section_Project_a2"><span class="section_Project_s">职位：</span><em class="section_Project_em">{yun:}$projectlist.title{/yun}</em> </div>
+            <div class="section_Project_a2 section_Project_a2_text"><span class="section_Project_s">描述：</span><em class="section_Project_em">{yun:}$projectlist.content{/yun}</em> </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {yun:}/foreach{/yun}
+    <div class="section_nav">
+      <div class="section_nav_line"></div>
+      <div class="section_nav_line_r"></div>
+      <div class="section_nav_p">项目经验</div>
+      <div class="section_nav_icon"><i class="fa fa-angle-double-up"></i></div>
+    </div>
+  </section>
+    {yun:}/if{/yun}
+          {yun:}if $Info.user_other{/yun}
+  <section class="section " id="jl">
+    <div class="section_h2"> <span class="section_h2_span">附加信息</span> <em class="section_h2_em">Additional information</em> </div>
+    
+    {yun:}foreach from=$Info.user_other item=otherlist{/yun}
+    <div class="slide">
+      <div class="section_Additional_con">
+        <div class="rusume_Additional_p"><span class="rusume_Additional_span">标题：</span>{yun:}$otherlist.name{/yun}</div>
+        <div class="rusume_Additional_p  rusume_Additional_text"><span class="rusume_Additional_span">描述：</span>{yun:}$otherlist.content{/yun}</div>
+      </div>
+    </div>
+    {yun:}/foreach{/yun}
+   
+    <div class="section_nav">
+      <div class="section_nav_line"></div>
+      <div class="section_nav_line_r"></div>
+      <div class="section_nav_p">附加信息</div>
+      <div class="section_nav_icon"><i class="fa fa-angle-double-up"></i></div>
+    </div>
+  </section>
+    {yun:}/if{/yun}
+            
+  <section class="section ">
+    <div class="section_h2"> <span class="section_h2_span">自我评价</span> <em class="section_h2_em">Self evaluation</em> </div>
+    <div class="section_re_body"> <i class="section_re_pj_line1"></i> <i class="section_re_pj_line2"></i> <i class="section_re_pj_line3"></i>
+      <p class="section_re_pj"> <i class="section_re_pj_fa fa fa-scissors"></i>  {yun:}$Info.description{/yun} </p>
+    </div>
+    <div class="section_nav">
+      <div class="section_nav_line"></div>
+      <div class="section_nav_line_r"></div>
+      <div class="section_nav_p">自我评价</div>
+      <div class="section_nav_icon"><i class="fa fa-angle-double-up"></i></div>
+    </div>
+  </section>
+  <section class="section ">
+    <div class="section_h2"> <span class="section_h2_span">联系方式</span> <em class="section_h2_em">Contact information</em> </div>
+    <ul class="section_touch_ul">
+		<li class="seek_contact"><a href="{yun:}url m=wap c=resume a=show id=$Info.id{/yun}#tel">查看联系方式</a></li>
+		
+		<li class="enter_station"><a href="{yun:}$config.sy_weburl{/yun}/wap">查看{yun:}$config.sy_webname{/yun}</a></li>
+	</ul> 
+    <div class="section_nav">
+      <div class="section_nav_line"></div>
+      <div class="section_nav_line_r"></div>
+      <div class="section_nav_p">谢谢观看</div>
+    </div>
+  </section>
+</div>
+
+<div style='margin:0 auto;width:0px;height:0px;overflow:hidden;'><img src="{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_wx_sharelogo{/yun}"></div>
+<script src="{yun:}$resume_style{/yun}/js/jquery-1.8.3.min.js"></script>
+<script src="{yun:}$resume_style{/yun}/js/jquery.fullPage.min.js"></script>
+<script>
+$(function(){
+	$('#dowebok').fullpage({
+		normalScrollElements: '.myDiv'
+	}); 
+});
+</script>
+</body>
+</html>

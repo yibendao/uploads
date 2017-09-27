@@ -1,0 +1,169 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>{yun:}$title{/yun}</title>
+<meta name="keywords" content="{yun:}$keywords{/yun}"/>
+<meta name="description" content="{yun:}$description{/yun}"/>
+<link rel="stylesheet" href="{yun:}$style{/yun}/style/css.css" type="text/css"/>
+<link rel="stylesheet" href="{yun:}$style{/yun}/style/news.css" type="text/css"/>
+</head>
+<body>
+{yun:}include file="$tplstyle/header.htm"{/yun}
+<div class="yun_content">
+<div class="current_Location  png"> 您当前的位置：<a href="{yun:}$config.sy_weburl{/yun}" target="_blank">首页</a> > <a href="{yun:}url m=article{/yun}" target="_blank">职场资讯</a> > {yun:}if $classname{/yun}{yun:}$classname{/yun}{yun:}else{/yun}搜索{yun:}/if{/yun}</div>
+
+<div class="zx_cont_inner">
+  <div class="wrap">
+    <div class="zx_inner_left fl">
+    <div class="zx_art_tit"><i class="Company_h1_line yun_bg_color"></i>{yun:}if $classname{/yun}{yun:}$classname{/yun}{yun:}else{/yun}搜索{yun:}/if{/yun} 
+    <div class="yun_news_top_search yun_news_top_search_list">
+    <form method="get" action="index.php">
+  
+    <input name='c' value="search" type="hidden">
+    <input type="text" id="keyword" name="keyword" value="{yun:}$smarty.get.keyword{/yun}" placeholder="搜索文章" class="yun_news_top_search_text"><input type="submit" id="submit" value="" class="yun_news_top_search_bth">
+    </form></div></div>
+      <div class="zx_left_part">
+        <div class="zx_part_lists" id="fontshow"> 
+            {yun:}foreach from=$rows item=item{/yun}
+          <dl>
+          
+            <dd>
+              <div class="zx_part_bt"> <a href="index.php?c=show&id={yun:}$item.id{/yun}" target="_blank" class="fl">{yun:}$item.title{/yun}</a>
+                <div class="clear"></div>
+              </div>
+              <div class="zx_part_nr">{yun:}$item.description|mb_substr:0:100:'gbk'{/yun}</div>
+              <div class="zx_part_nr-date"> {yun:}$item.datetime|date_format:"%Y-%m-%d"{/yun}<span class="zx_part_nr-date_s">{yun:}$item.author{/yun}</span></div>
+            </dd>
+          </dl>
+          {yun:}/foreach{/yun}
+          <div class="clear"></div>
+          <div class="pages">{yun:}$pagenav{/yun}</div>
+        </div>
+        <div class="clear"></div>
+      </div>
+    </div>
+    <div class="zx_inner_right fr">
+      <div class="zx_rig_rom">
+        <div class="zx_article">
+          <div class="zx_art_tit"><i class="Company_h1_line"></i>分类浏览</div>
+          <div class="zx_fl_cont">
+           {yun:}foreach item=v from=$one_class{/yun}
+            <div class="zx_fl_list ">
+            <a href="index.php?c=search&kid={yun:}$v.id{/yun}" class="zx_fl_list_a"><span {yun:}if $smarty.get.kid==$v.id{/yun}style="color:red;"{yun:}/if{/yun}>{yun:}$v.name{/yun}</span></a>
+              </div>
+            {yun:}/foreach{/yun}
+            <div class="clear"></div>
+            <div class="zx_fl_cont {yun:}if !$two_class[$smarty.get.kid]{/yun}none{yun:}/if{/yun}">
+            {yun:}foreach from=$two_class[$smarty.get.kid] item=v key=j{/yun}
+            <div class="zx_fl_list ">
+            <a href="{yun:}url c=search kid='`$v.keyid`' nid='`$v.id`'{/yun}" class="news_Category_a"><span {yun:}if $smarty.get.nid==$v.id{/yun}style="color:red;"{yun:}/if{/yun}>{yun:}$v.name{/yun}</span> </a>
+            </div>
+            {yun:}/foreach{/yun}
+            </div>
+            <div class="clear"></div>
+          </div>
+          
+        </div>
+        <div class="zx_article">
+          <div class="zx_art_tit"><i class="Company_h1_line yun_bg_color"></i>推荐文章</div>
+          <div class="zx_art_hot">
+           {yun:}article limit=1 type=tj pic=1 t_len=7 urlstatic=1 item=news_jian{/yun}
+            <dl>
+              <dt><a href="{yun:}$news_jian.url{/yun}" target="_blank"><img src="{yun:}$config.sy_weburl{/yun}/{yun:}$news_jian.newsphoto{/yun}" width="84" height="63"/></a></dt>
+              <dd>
+                <div class="art_fanfu"><a href="{yun:}$news_jian.url{/yun}" target="_blank">{yun:}$news_jian.title{/yun}</a></div>
+                <div class="art_xq">{yun:}$news_jian.description|mb_substr:0:22:'gbk'{/yun}</div>
+              </dd>
+            </dl>
+            {yun:}/article{/yun}
+            <div class="clear"></div>
+          </div>
+          <div class="zx_art_list">
+            <ul>
+              {yun:}article limit=6 type=tj t_len=17 urlstatic=1 item=news_hits{/yun}
+              <li><a href="{yun:}$news_hits.url{/yun}" target="_blank">{yun:}$news_hits.title{/yun}</a></li>
+              {yun:}/article{/yun}
+            </ul>
+          </div>
+          <div class="clear"></div>
+        </div>
+        <div class="zx_article">
+          <div class="zx_art_tit"><i class="Company_h1_line yun_bg_color"></i>最新文章</div>
+          {yun:}article rec=1 limit=1 pic=1 t_len=7 d_len=24 urlstatic=1   item=indexnews1 key=key name=indexnews1{/yun}
+              {yun:}if $smarty.foreach.indexnews1.index==0{/yun}
+            <div class="zx_art_hot">
+              <dl>
+                <dt><a href="{yun:}$indexnews1.pic.0.url{/yun}" target="_blank"><img src="{yun:}$config.sy_weburl{/yun}/{yun:}$indexnews1.pic.0.newsphoto{/yun}" width="84" height="63" /></a></dt>
+                <dd>
+                  <div class="art_fanfu"><a href="{yun:}$indexnews1.pic.0.url{/yun}" target="_blank">{yun:}$indexnews1.pic.0.title{/yun}</a></div>
+                  <div class="art_xq">{yun:}$indexnews1.pic.0.description{/yun}..</div>
+                </dd>
+              </dl>
+              <div class="clear"></div>
+            </div>
+              {yun:}/if{/yun}
+              {yun:}/article{/yun}
+            <div class="zx_art_list">
+              <ul>
+                  {yun:}article limit=6 t_len=16 d_len=24 urlstatic=1 item=indexnews2{/yun}
+                <li><a href="{yun:}$indexnews2.url{/yun}" target="_blank">{yun:}$indexnews2.title{/yun}</a></li>
+                  {yun:}/article{/yun}
+              </ul>
+            </div>
+            <div class="clear"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="clear"></div>
+</div>
+</div>
+
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/lazyload.min.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/public.js" language="javascript"></script>
+<!--[if IE 6]>
+<script src="{yun:}$config.sy_weburl{/yun}/js/png.js"></script>
+<script>
+DD_belatedPNG.fix('.png');
+</script>
+<![endif]-->
+<script type="text/javascript"> 
+$(function() {
+	var $keyword = $("#keyword").val()
+	setHeightKeyWord('fontshow', $keyword, 'Red', true)
+});
+function setHeightKeyWord(id, keyword, color, bold) {
+	if (keyword == "")
+		return;
+	var tempHTML = $("#" + id).html();
+	var htmlReg = new RegExp("\<.*?\>", "i");
+	var arrA = new Array();
+	for (var i = 0; true; i++) {
+		var m = htmlReg.exec(tempHTML);
+		if (m) {
+			arrA[i] = m;
+		} else {
+			break;
+		}
+		tempHTML = tempHTML.replace(m, "[[[[" + i + "]]]]");
+	}
+	var replaceText
+	if (bold)
+		replaceText = "<b style='color:" + color + ";'>$1</b>";
+	else
+		replaceText = "<font style='color:" + color + ";'>$1</font>";
+	var arrayWord = keyword.split(',');
+	for (var w = 0; w < arrayWord.length; w++) {
+		var r = new RegExp("("+ arrayWord[w].replace(/[(){}.+*?^$|\\\[\]]/g, "\\$&")+ ")", "ig");
+		tempHTML = tempHTML.replace(r, replaceText);
+	}
+	for (var i = 0; i < arrA.length; i++) {
+		tempHTML = tempHTML.replace("[[[[" + i + "]]]]", arrA[i]);
+	}
+	$("#" + id).html(tempHTML);
+}
+</script>
+{yun:}include file="$tplstyle/footer.htm"{/yun}

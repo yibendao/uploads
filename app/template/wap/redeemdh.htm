@@ -1,0 +1,114 @@
+{yun:}include file="$wapstyle/header_cont.htm"{/yun}
+<style>.layermend{display:none}</style>
+<div id="redeemdh">
+<div class="dh_store_dz fl">
+	<a href="javascript:void(0);" onclick="placeshow()" class="dh_store_dz_xz">
+     <div class="dh_store_dz_a fl" >添加收货地址</div>
+     <div class="dh_store_dz_b fr"></div>
+     </a>
+        
+        <div class="dh_store_ps fl" id="dhplaced"style="display:none;">
+             <div style="width:100%;float:left">姓名：<em id="dhlinkman"></em></div>
+             <div style="width:100%;float:left">电话：<em id="dhlinktel"></em></div>
+             <div style="width:100%;float:left">地址：<em id="dhbody"></em></div>
+             <div style="width:100%;float:left">备注：<em id="dhother"></em></div>
+        </div>
+</div>
+<div class="dh_store fl">
+     <div class="dh_store_ct">
+          <div class="dh_store_tit fl"><img class="dh_store_tit_pc" style="width:60px; height:60px;" src="{yun:}$config.sy_weburl{/yun}/{yun:}$row.pic{/yun}" /></div>
+          <div class="dh_store_wr fl">
+               <div class="dh_store_wr_b">{yun:}$row.name{/yun}</div>
+               <div class="dh_store_wr_fen"><em>{yun:}$row.integral{/yun}</em> {yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}</div>
+          </div>
+     </div>
+</div>
+<div class="dh_store_sh fl">
+     <div class="dh_store_sh_a fl">数量</div>
+     <div class="dh_store_sh_x fr">×{yun:}$smarty.get.num{/yun}</div>
+</div>
+ <input id='id' value='{yun:}$row.id{/yun}' type='hidden'>
+  <input id='num' value='{yun:}$smarty.get.num{/yun}' type='hidden'>
+<div class="dh_store_bt">
+     <div class="dh_store_bt_s fl"><i>实付款：</i><em>{yun:}$integral{/yun}</em>{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}</div>
+     <div class="dh_store_bt_u fr">
+         <a class="bt_but" href="javascript:void(0)" onclick="redeem_dh()">立即支付</a>
+        
+         <div class="dh_store_zf" id="passshow"style="display:none;">
+         	<input name="password" type="password" id="password" class="dh_store_bt_text"  >
+         	
+         </div>
+     
+     </div>
+</div>
+</div>
+
+<div class="dh_store_ps_msg" id="dhplaces" style="display:none;margin-bottom:10px;">
+	 <div class="msg_nm">
+		  <div class="msg_nm_ft"><span>收货人</span></div>
+		  <div class="msg_nm_rt">
+			   <input class="rt_bx" type="text"id="linkman" value=""placeholder="请输入收货人姓名"/>
+		  </div>
+	 </div>
+	 <div class="msg_nm">
+		  <div class="msg_nm_ft"><span>手机号码</span></div>
+		  <div class="msg_nm_rt">
+			   <input class="rt_bx" type="text" id="linktel" value="" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')"placeholder="请输入手机号码"/>
+		  </div>
+	 </div>
+	 <div class="msg_nm_dz">
+		  <div class="msg_nm_ft" style="top:0px;"><span>配送地址</span></div>
+		  <div class="msg_nm_rt_dz">
+			 <div class="mLeft12 relative">
+	<div class="selectOption" style="width:30%;border:1px solid #f2f2f2;">
+	  <select  id="provinceid" onchange="checkcity(this.value,'1');">
+		<option value="">请选择</option>
+		{yun:}foreach from=$city_index item=v{/yun}
+		<option value="{yun:}$v{/yun}">{yun:}$city_name[$v]{/yun}</option>
+		{yun:}/foreach{/yun}
+	  </select>
+	</div>
+	<div class="selectOption" style="width:30%;border:1px solid #f2f2f2;">
+	  <select id="cityid"  onchange="checkcity(this.value,'2');">
+		<option value="">请选择</option>
+		{yun:}foreach from=$city_type[$row.provinceid] item=v{/yun}
+		<option value="{yun:}$v{/yun}" >{yun:}$city_name[$v]{/yun}</option>
+		{yun:}/foreach{/yun}
+	  </select>
+	</div>
+	<div class="selectOption" style="display:none;width:30%;border:1px solid #f2f2f2;" id='cityshowth'>
+	  <select id="three_cityid">
+		<option value="">请选择</option>
+		{yun:}foreach from=$city_type[$row.cityid] item=v{/yun}
+		<option value="{yun:}$v{/yun}" >{yun:}$city_name[$v]{/yun}</option>
+		{yun:}/foreach{/yun}
+	  </select>
+	</div>
+  </div>
+	</div>
+	
+	 </div>
+     <div class="msg_nm">
+		  <div class="msg_nm_ft"><span>详细地址</span></div>
+		  <div class="msg_nm_rt">
+		   <input class="rt_bx" type="text" id="address" value="" placeholder="请输入收货人地址"/>
+		  </div>
+	 </div>
+  <div class="msg_nm">
+		  <div class="msg_nm_ft"><span>备注</span></div>
+		  <div class="msg_nm_rt">
+			   <input class="rt_bx" type="text" id="other" placeholder="请填写备注"/>
+	   </div>
+    </div>
+
+	 <div class="msg_nm_wc">
+		  <input class="wc_bx" type="button" onclick="dhplace()"value="完成"/>
+	 </div>
+</div> 
+<script src="{yun:}$wap_style{/yun}/js/prefixfree.min.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/layer/layer.m.js" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/public.js" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/jobadd.js" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/redeem.js" language="javascript"></script>
+{yun:}include file="$wapstyle/footer.htm"{/yun} 

@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link href="images/reset.css" rel="stylesheet" type="text/css" />
+<link href="images/system.css" rel="stylesheet" type="text/css" /> 
+<link href="images/table_form.css" rel="stylesheet" type="text/css" /> 
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script>
+<script src="js/admin_public.js" language="javascript"></script>
+<link href="images/blue.css" rel="stylesheet">
+<script src="js/icheck.js"></script>
+<script src="js/icheck.js"></script>
+  <script>
+	$(document).ready(function(){
+	  $('input').iCheck({
+		checkboxClass: 'icheckbox_flat-blue',
+		radioClass: 'iradio_flat-blue'
+	  });
+	});
+</script>
+<title>后台管理</title>
+</head>
+<body class="body_ifm">
+<div class="infoboxp">
+<div class="infoboxp_top_bg"></div>
+<div class="admin_Prompt">
+<div class="admin_Prompt_span">
+    <b>提示：</b>如果整合失败导致后台无法进入或者出现前台用户混乱，请将根目录下/data/plus/config.php 打开找到 sy_uc_type  将ucenter置空,再登录后台关闭UC。相关教程 【<a href='http://www.phpyun.com/bbs/thread-4209-1-1.html' target="_blank">点击查看</a>】
+
+</div><div class="admin_Prompt_close"></div></div>
+
+<div class="infoboxp_top">
+ <span class="admin_title_span">整合UCenter</span>
+<a href="index.php?m=admin_uc&c=pw" class="admin_infoboxp_tj">整合PHPWIND</a>
+</div>
+<script>
+function checkucform(){
+	if(myform.UC_CONNECT.value=='' || myform.UC_DBHOST.value=='' || myform.UC_DBUSER.value==''|| myform.UC_DBNAME.value==''|| myform.UC_DBCHARSET.value==''|| myform.UC_DBTABLEPRE.value==''|| myform.UC_KEY.value==''|| myform.UC_API.value==''|| myform.UC_APPID.value==''|| myform.UC_APP.value=='')
+	{
+		layer.msg('请确认信息填写完善！', 2, 8);
+		return false;
+	}
+}
+</script>
+<iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe> 
+<div class="admin_table_border">
+<form method="post" action="index.php?m=admin_uc&c=save" name="myform" target="supportiframe" onsubmit="return checkucform();">
+	<table width="100%" class="table_form">
+         <tr>
+            <th width="220">开启：</th>
+            <td  >
+            <div class="iradio_flat_height">
+              <input type="radio" name="sy_uc_type" value="uc_center" id="RadioGroup1_12" {yun:}if $config.sy_uc_type=="uc_center"{/yun}checked{yun:}/if{/yun}>
+              <span class="iradio_flat_left"><label for="RadioGroup1_12">开启</label>&nbsp;</span>
+              <input type="radio" name="sy_uc_type" value="" id="RadioGroup1_13" {yun:}if $config.sy_uc_type!="uc_center"{/yun}checked{yun:}/if{/yun}>
+              <span class="iradio_flat_left"><label for="RadioGroup1_13">关闭</label></span>
+              </div>
+            </td>
+        </tr>
+            <tr>
+            <th width="220">数据库地址 UC_DBHOST：</th>
+            <td style="background:#fff;"><input type="text" name="UC_DBHOST" class="input-text" size="40" value="{yun:}$ucinfo.UC_DBHOST{/yun}"> 
+            <span class="admin_web_tip">如：localhost</span></td>
+            </tr>
+            <tr>
+            <th>数据库用户名 UC_DBUSER：</th>
+             <td style=" background:#fff;"><input type="text"  name="UC_DBUSER" class="input-text" size="40" value="{yun:}$ucinfo.UC_DBUSER{/yun}"> <span class="admin_web_tip">ucenter数据库用户名</span></td>
+            </tr>
+            <tr>
+           <th>数据库密码 UC_DBPW：</th>
+            <td style=" background:#fff;"><input type="text" name="UC_DBPW" class="input-text" size="40" value="{yun:}$ucinfo.UC_DBPW{/yun}"> 
+            <span class="admin_web_tip">ucenter数据库密码</span></td>
+            </tr>
+            <tr>
+           <th>数据库名称 UC_DBNAME：</th>
+             <td style=" background:#fff;"><input type="text" name="UC_DBNAME" class="input-text" size="40" value="{yun:}$ucinfo.UC_DBNAME{/yun}"> 
+             <span class="admin_web_tip">如：ucenter</span></td>
+            </tr>
+            <tr>
+         <th>数据表前缀 UC_DBTABLEPRE：</th>
+            <td style=" background:#fff;"><input type="text" name="UC_DBTABLEPRE_NEW" class="input-text" size="40" value="{yun:}$ucinfo.UC_DBTABLEPRE_NEW{/yun}"> <span class="admin_web_tip">如：pre_ucenter_</span></td>
+            </tr>
+            <tr>
+           <th>通信密钥 UC_KEY：</th>
+             <td style=" background:#fff;"><input type="text" name="UC_KEY" class="input-text" size="40" value="{yun:}$ucinfo.UC_KEY{/yun}"> <span class="admin_web_tip">如：phpyun123456</span></td>
+            </tr>
+            <tr>
+           <th>Ucenter地址 UC_API：</th>
+            <td style=" background:#fff;"><input type="text" name="UC_API" class="input-text" size="60" value="{yun:}$ucinfo.UC_API{/yun}"> <span class="admin_web_tip">如：http://localhost/ucenter</span></td>
+            </tr>
+            <tr>
+         <th>Ucenter编码：</th>
+             <td style="background:#fff;">
+            <div class="iradio_flat_height">
+              <input type="radio" name="UC_CHARSET" value="utf8" id="UC_CHARSET_1" {yun:}if $ucinfo.UC_CHARSET=="utf8"{/yun}checked{yun:}/if{/yun}>
+              <span class="iradio_flat_left"><label for="UC_CHARSET_1">utf8</label>&nbsp;</span>
+              <input type="radio" name="UC_CHARSET" value="gbk" id="UC_CHARSET_2" {yun:}if $ucinfo.UC_CHARSET=="gbk"{/yun}checked{yun:}/if{/yun}>
+              <span class="iradio_flat_left"><label for="UC_CHARSET_2">gbk</label></span>
+              </div>
+            </td>
+        </tr>
+            <tr>
+            <th>应用ID UC_APPID：</th>
+             <td style=" background:#fff;"><input type="text" name="UC_APPID" class="input-text" value="{yun:}$ucinfo.UC_APPID{/yun}"> <span class="admin_web_tip">如：7</span></td>
+            </tr>
+            <tr>
+          <th>UC APP UC_APP：</th>
+             <td style=" background:#fff;"><input type="text" name="UC_APP" class="input-text" value="{yun:}$ucinfo.UC_APP{/yun}"> <span class="admin_web_tip">如：20</span></td>
+            </tr>
+            <tr>
+                <td align="center" colspan="2" style=" background:#fff;">
+                 <input class="admin_submit4" type="submit" name="submit" value="&nbsp;保存&nbsp;"  />  
+                </td>
+            </tr>
+	</table> 
+	<input type="hidden" name="pytoken" id='pytoken' value="{yun:}$pytoken{/yun}">
+</form>
+</div> 
+</div> 
+</body>
+</html>

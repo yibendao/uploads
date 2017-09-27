@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>{yun:}$title{/yun}</title>
+<meta name="keywords" content="{yun:}$keywords{/yun}"/>
+<meta name="description" content="{yun:}$description{/yun}"/>
+<link rel="stylesheet" href="{yun:}$style{/yun}/style/css.css" type="text/css"/>
+<link rel="stylesheet" href="{yun:}$style{/yun}/style/yun_job_fairs.css" type="text/css"/>
+</head>
+<body class="Integral_body">
+	{yun:}include file="$tplstyle/header.htm"{/yun}
+	<div class="yun_Integral">
+	  <div class="yun_Integral_list_content">
+		<div class="yun_Integral_search"><span class="yun_Integral_search_name">商品分类：</span>
+		  <div class="yun_Integral_search_right"> 
+		  <a href="{yun:}url m=redeem c=list{/yun}" class="{yun:}if $smarty.get.id==''{/yun}yun_Integral_cur{yun:}/if{/yun}">全部</a>      
+          {yun:}foreach from=$redeem_index item=v{/yun}
+          <a href="{yun:}searchurl m=redeem c=list id=$v untype='id'{/yun}" {yun:}if $smarty.get.id==$v{/yun}class="yun_Integral_cur"{yun:}/if{/yun}>{yun:}$redeem_name[$v]{/yun}</a>
+          {yun:}/foreach{/yun}
+      </div>
+    </div>
+    <div class="yun_Integral_search"><span class="yun_Integral_search_name">{yun:}$config.integral_pricename{/yun}范围：</span>
+      <div class="yun_Integral_search_right">
+      <a href="{yun:}url m=redeem c=list{/yun}" {yun:}if $smarty.get.intinfo==''{/yun}class="yun_Integral_cur"{yun:}/if{/yun}>全部</a>
+      {yun:}foreach from=$integlist item=v key=key{/yun}
+      <a href="{yun:}url m=redeem c=list intinfo=$key{/yun}" {yun:}if $smarty.get.intinfo==$key{/yun}class="yun_Integral_cur"{yun:}/if{/yun}>{yun:}$v{/yun}</a>
+      {yun:}/foreach{/yun} </div>
+    </div>
+  </div>
+  <!--全部商品-->
+  <div class="yun_Integral_box">
+    <div class="yun_Integral_box_h1"><span class="yun_Integral_box_h1_name">全部商品</span></div>
+    <div class="yun_Integral_cont">
+      <div class="yun_Integral_cont_w"> {yun:}foreach item=val key=jj from=$rows{/yun}
+        <div class="yun_Integral_cont_list"> 
+        <div class="yun_Integral_cont_list_a">
+       
+          <dl class="yun_Integral_list_dl">
+            <dt> <a href="{yun:}url m=redeem c=show id='`$val.id`'{/yun}"><img src="{yun:}$config.sy_weburl{/yun}/{yun:}$val.pic{/yun}" width="189" height="167"/></a></dt>
+            <dd class="yun_Integral_list_dl_name"> <a href="{yun:}url m=redeem c=show id='`$val.id`'{/yun}">{yun:}$val.name{/yun}</a></dd>
+            <dd class="yun_Integral_list_dl_n">所需{yun:}$config.integral_pricename{/yun}: {yun:}$val.integral{/yun}</dd>
+          </dl>
+          </a> </div>
+          </div>
+        {yun:}foreachelse{/yun}
+       <!--没搜索到-->
+        <div class="seachno">
+          <div class="seachno_left"><img src="{yun:}$style{/yun}/images/search-no.gif" width="144" height="102"></div>
+          <div class="listno-content"> <strong>很抱歉，没有找到满足条件的商品</strong><br>
+            <span> 建议您：<br>
+            1、适当减少已选择的条件<br>
+            2、适当删减或更改搜索关键字<br>
+            </span> 
+            </div>
+        </div>
+        </div>
+        {yun:}/foreach{/yun} 
+        <div class="clear"></div>
+        <div class="pages">{yun:}$pagenav{/yun}</div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/lazyload.min.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/public.js" language="javascript"></script>
+<!--[if IE 6]>
+<script src="{yun:}$config.sy_weburl{/yun}/js/png.js"></script>
+<script>
+DD_belatedPNG.fix('.png');
+</script>
+<![endif]-->
+{yun:}include file="$tplstyle/footer.htm"{/yun}

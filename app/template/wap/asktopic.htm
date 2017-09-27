@@ -1,0 +1,65 @@
+{yun:}include file="$wapstyle/header_cont.htm"{/yun}
+ {yun:}if $smarty.get.pid{/yun}
+
+{yun:}qcache classid='auto.pid' limit=1 item=cache name=cache_one{/yun}
+<div class="asktoppic_tt">
+     <div class="asktopic_tt_img"><img style="width:50px;height:50px;" src="{yun:}$config.sy_weburl{/yun}/{yun:}$cache.pic{/yun}"></div>
+     <div class="asktopic_tt_wr"># {yun:}$cache.name{/yun} #</div>
+     <div class="asktopic_tt_ct">{yun:}$cache.intro{/yun}</div>
+</div>
+{yun:}/qcache{/yun}
+  {yun:}else{/yun}
+
+  <div class="ask_msg" style="margin-top:10px;">
+    <ul class="ask_msg_up fl">
+      {yun:}qcache limit=6 son=1 item=qindex{/yun}
+      <li> <a href="{yun:}url m=wap c=ask a=topic pid='`$qindex.id`'{/yun}">
+        <h3>{yun:}$qindex.name{/yun}</h3>
+        <img src="{yun:}$config.sy_weburl{/yun}/{yun:}$qindex.pic{/yun}" /> </a> </li>
+      {yun:}/qcache{/yun}
+    </ul>
+  </div>
+  {yun:}/if{/yun}
+  
+  <div class="ask_topic_ct fl">
+    <div class="ask_ct_top fl">
+      <div class="ask_ct_top_icon fl"></div>
+      <div class="ask_ct_top_ft fl">热点话题</div>
+    </div>
+    {yun:}qclass classid='auto.pid' order=atn item=qlist name=qlist_one{/yun}
+    <div class="ask_topic_list fl">
+    <div class="ask_toppic_bt">
+    <div class="ask_toppic_left_photo"><img style="width:50px;height:50px;" src="{yun:}$config.sy_weburl{/yun}/{yun:}$qlist.pic{/yun}"/></div>
+         <div class="ask_toppic_right_cot_name"> 
+     <div class="ask_toppic_right_cot_name_p">
+     <a href="{yun:}url m=wap c=ask a=list cid='`$qlist.id`'{/yun}" class="ask_toppic_right_cot_name_p_a">{yun:}$qlist.name{/yun}</a></div>
+     
+      <div class="ask_top_gz">
+      {yun:}if $qlist.isatn=='1'{/yun} 
+      <a href="javascript:void(0)" onclick="attention('{yun:}$qlist.id{/yun}','2','{yun:}url m=wap c=ask a=attention {/yun}');" class="watch_qxgz" title="取消关注">取消关注</a> 
+      {yun:}else{/yun}
+            {yun:}if $uid{/yun} 
+            <a href="javascript:void(0)" class="watch_gz" onclick="attention('{yun:}$qlist.id{/yun}','2','{yun:}url m=wap c=ask a=attention {/yun}');">+  关注</a> {yun:}else{/yun} <a href="javascript:void(0)"  onclick="showlogins('1');" class='watch_gz'>+  关注</a> {yun:}/if{/yun}
+            {yun:}/if{/yun}</div>
+            </div>
+            </div>
+     <div class="ask_toppic_right_cot">
+
+             {yun:}if $qlist.list{/yun}
+             
+             
+        {yun:}foreach from=$qlist.list item=qlist_son{/yun}
+        <div class="ask_topic_list_l">
+          <div class="ask_topic_list_ft"><a href="{yun:}url m=wap c=ask a=content id='`$qlist_son.id`'{/yun}">{yun:}$qlist_son.title{/yun}</a></div>
+          <div class="ask_topic_list_rt">{yun:}$qlist_son.add_time|date_format:"%Y-%m-%d %H:%M"{/yun}</div>
+        </div>
+        {yun:}/foreach{/yun}
+        {yun:}/if{/yun}
+     </div>
+    </div>
+    {yun:}/qclass{/yun} </div>
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/layer/layer.m.js" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/public.js" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/prefixfree.min.js" language="javascript"></script>
+{yun:}include file="$wapstyle/footer.htm"{/yun}

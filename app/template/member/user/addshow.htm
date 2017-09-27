@@ -1,0 +1,72 @@
+{yun:}include file="$userstyle/header.htm"{/yun}
+<link href="{yun:}$user_style{/yun}/images/uploadify.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="{yun:}$config.sy_weburl{/yun}/js/jquery.uploadify-3.1.min.js"></script>
+<script>
+    $(document).ready(function(e) {
+        $("#buttonbtn").live("click",function(){
+            layer.confirm("确定需要重新上传？",function(){
+                var names = document.getElementsByName("id[]");
+                var i=0;
+                var ids='';
+                for(i;i<names.length;i++){
+                    if(ids==""){ids=names[i].value;}else{ids=ids+","+names[i].value;}
+                }
+                $.post("index.php?c=show&act=delshow",{ids:ids},function(msg){
+                    window.location.href='index.php?c=show';window.event.returnValue = false;return false;
+                });
+            });
+        })
+    }); 
+    var img_id_upload=new Array();
+    var i=0;
+    var eid="{yun:}$smarty.get.eid{/yun}"
+    $(function() {
+        $('#file_upload').uploadify({
+            'auto':false,
+            'removeTimeout':0,
+            'swf':'{yun:}$config.sy_weburl{/yun}/js/uploadify.swf?var='+(new Date()).getTime(),
+            'uploader':'{yun:}$config.sy_weburl{/yun}/index.php?c=saveuserpic&eid='+eid,
+            'method':'post',
+            'buttonText':'选择图片',
+            'multi': true,
+            'uploadLimit': 10,
+            'fileTypeDesc':'Image Files',
+			'fileTypeExts':'*.gif; *.jpg; *.png; *.jpeg',
+            'fileSizeLimit':'20000KB',
+            'onUploadSuccess':function(file,data,response){
+                if(data!='2'){
+                    var type=data.split("||");
+                    var html="<li style=\"clear:both;\"><div class=\"edit_photo_box\"><div class=\"edit_photo_pic\"><a href=\"javascript:void(0)\"><img id=\""+type[2]+"\" class=\"photo-slt\" width=\"120\" height=\"90\" alt=\""+type[0]+"\" src=\"."+type[1]+"\" imgangle=\"0\"></a></div></div><div class=\"edit_photo_value\"><p><label for=\"photo-title\"> 标题：</label><input id=\"title_"+type[2]+"\" class=\"form-input\" type=\"text\" value=\""+type[0]+"\" name=\"title_"+type[2]+"\" maxlength=\"50\"><span id=\"span_title_title_"+type[2]+"\" style=\"display: none;\"></span></p><input name='id[]' type='hidden' value='"+type[2]+"'/></div></li>";
+                    $("#albums_pic_list").append(html);
+                }
+            },
+            'onQueueComplete' : function(queueData) {
+                $(".admin_note").hide();
+                $("#albums_pic_list").wrap("<form action='index.php?c=show&act=saveshow' target=\"supportiframe\" method='post' id=\"myform\"></form>");
+                $("#myform").append("<div class=\"sub_btn\" style='text-align:center;width:100%;'><input type='hidden' name='eid' value='"+eid+"'><input class=\"btn_01\" type=\"submit\" value=\"保存文件\" name=\"submitbtn\">&nbsp;&nbsp;<input class=\"btn_01\" type=\"button\" value=\"重新上传\" id=\"buttonbtn\"></div>"); 
+            }
+        });
+    });
+</script>
+<div class="yun_user_member_w1100">
+    {yun:}include file="$userstyle/left.htm"{/yun}
+    <div class="mian_right fltR mt12 re">
+ <div class="member_right_index_h1 fltL"> <span class="member_right_h1_span fltL">上传我的作品</span> <i class="member_right_h1_icon user_bg"></i></div>
+        <div class='right_box'>
+            <div class='admincont_box'>
+                <div class="admin_note">
+                    <div class="index_photo_new fltL mt10">
+                        <input type="file" name="file_upload" id="file_upload" />
+                        <div class="file_button"> 
+                            <a href="javascript:void(0)" onclick="$('#file_upload').uploadify('settings', 'formData',{'typeCode':'1215154',uid:{yun:}$uid{/yun}});$('#file_upload').uploadify('upload','*')" class="show-pic_sc">立即上传</a> <a href="javascript:$('#file_upload').uploadify('cancel','*')" class="show-pic_sc">重置上传队列</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="clear"></div>
+                <div class='photos-every-edit'><ul id='albums_pic_list'></ul></div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+</div>
+{yun:}include file="$userstyle/footer.htm"{/yun}

@@ -1,0 +1,150 @@
+<div class="fiem_seach_chlose">
+<div class="firm_search_box">
+	<form method="get" name="myform" onsubmit="return search_keyword(this,'请输入关键字');" action="{yun:}if !$config.sy_companydir{/yun}index.php{yun:}else{/yun}{yun:}url m=company{/yun}{yun:}/if{/yun}"> 
+		<span class="firm_search_text_city">  
+		<input class="firm_search_text_city_but" type="button" id="city" placeholder='请选择城市' value="{yun:}if $smarty.get.cityid{/yun}{yun:}$city_name[$smarty.get.cityid]{/yun}{yun:}else{/yun}请选择城市{yun:}/if{/yun}" onclick="index_city(1, '#city', '#cityid', null, null, null, 3);" /></span>
+		{yun:}if !$config.sy_companydir{/yun}
+       		<input type="hidden" value="company" name="m" />
+		{yun:}/if{/yun}
+		{yun:}if $smarty.get.rec=='1'{/yun}
+			<input type="hidden" value="1" name="rec" />
+		{yun:}/if{/yun}
+		<input class="firm_search_text" id="ipt" type="text" placeholder='请输入关键字' value="{yun:}if $getinfo.keyword!=" ="{/yun}{yun:}$getinfo.keyword{/yun}{yun:}else{/yun}请输入关键字{yun:}/if{/yun}" name="keyword" onclick="if(this.value=='请输入关键字'){this.value=''}" onblur="if(this.value==''){this.value='请输入关键字'}" />
+		<input type="hidden" name="cityid" id="cityid" />
+		<input class="firm_search_submit yun_bg_color" type="submit" value="搜索 " />
+	</form>
+</div>
+<div class="fiem_seach_chlose_list"><div class="fiem_seach_chlosename">行业：</div>
+	<div class="fiem_seach_chlose_list_r">
+		<a href="{yun:}listurl m=company type=hy v=0{/yun}" class="fiem_seach_chlose_list_a {yun:}if $smarty.get.hy==''{/yun}fiem_seach_chlose_list_cur{yun:}/if{/yun}">全部</a>
+		{yun:}foreach from=$industry_index key=j item=v{/yun}
+			<a href="{yun:}listurl m=company type=hy v=$v{/yun}" class="fiem_seach_chlose_list_a {yun:}if $smarty.get.hy==$v{/yun}fiem_seach_chlose_list_cur{yun:}/if{/yun}">{yun:}$industry_name[$v]{/yun}</a>
+		{yun:}/foreach{/yun}
+	</div>
+</div>
+<div class="fiem_seach_chlose_list"><div class="fiem_seach_chlosename">性质：</div>
+	<div class="fiem_seach_chlose_list_r">
+		<a href="{yun:}listurl m=company type=pr v=0{/yun}" class="fiem_seach_chlose_list_a {yun:}if $smarty.get.pr==''{/yun}fiem_seach_chlose_list_cur{yun:}/if{/yun}">全部</a>
+		{yun:}foreach from=$comdata.job_pr key=j item=v{/yun}
+		<a href="{yun:}listurl m=company type=pr v=$v{/yun}" class="fiem_seach_chlose_list_a {yun:}if $smarty.get.pr==$v{/yun}fiem_seach_chlose_list_cur{yun:}/if{/yun}">{yun:}$comclass_name[$v]{/yun}</a>
+		{yun:}/foreach{/yun}
+	</div>
+</div>
+<div class="fiem_seach_chlose_list"><div class="fiem_seach_chlosename">规模：</div>
+	<div class="fiem_seach_chlose_list_r">
+		<a href="{yun:}listurl m=company type=mun v=0{/yun}" class="fiem_seach_chlose_list_a {yun:}if $smarty.get.mun==''{/yun}fiem_seach_chlose_list_cur{yun:}/if{/yun}">全部</a>
+		{yun:}foreach from=$comdata.job_mun key=j item=v{/yun}
+		<a href="{yun:}listurl m=company type=mun v=$v{/yun}" class="fiem_seach_chlose_list_a {yun:}if $smarty.get.mun==$v{/yun}fiem_seach_chlose_list_cur{yun:}/if{/yun}">{yun:}$comclass_name[$v]{/yun}</a>
+		{yun:}/foreach{/yun}
+	</div>
+</div>
+{yun:}if $smarty.get.provinceid||$smarty.get.cityid||$smarty.get.three_cityid||$smarty.get.hy||$smarty.get.pr||$smarty.get.mun||$smarty.get.keyword{/yun}
+<div class="Search_close_box">
+	<div>
+		<div class="Search_clear"> <a href="{yun:}url m=company{/yun}"> 清除所选</a></div>
+		<span class="Search_close_box_s">已选条件：</span>
+	</div>
+	{yun:}if $config.cityid=='' &&  $config.three_cityid==''{/yun} 
+	{yun:}if $smarty.get.provinceid{/yun}<a href="{yun:}listurl m=company untype='provinceid'{/yun}'{/yun}" class="Search_jobs_c_a disc_fac">工作地点：{yun:}$city_name[$smarty.get.provinceid]{/yun}</a> {yun:}/if{/yun} 
+	{yun:}if $smarty.get.cityid{/yun} <a href="{yun:}listurl m=company untype='cityid'{/yun}" class="Search_jobs_c_a disc_fac">{yun:}$city_name[$smarty.get.cityid]{/yun}</a> {yun:}/if{/yun} 
+	{yun:}/if{/yun}
+	{yun:}if $smarty.get.three_cityid{/yun} <a href="{yun:}listurl m=company untype='three_cityid'{/yun}" class="Search_jobs_c_a disc_fac">{yun:}$city_name[$smarty.get.three_cityid]{/yun}</a> {yun:}/if{/yun}
+	{yun:}if $industry_name[$smarty.get.hy]{/yun} <a href="{yun:}listurl m=company untype='hy'{/yun}" class="Search_jobs_c_a disc_fac">行业：{yun:}$industry_name[$smarty.get.hy]{/yun}</a> {yun:}/if{/yun}
+	{yun:}if $smarty.get.pr{/yun} <a href="{yun:}listurl m=company untype='pr'{/yun}" class="Search_jobs_c_a disc_fac">性质：{yun:}$comclass_name[$smarty.get.pr]{/yun}</a> {yun:}/if{/yun}
+	{yun:}if $smarty.get.mun{/yun} <a href="{yun:}listurl m=company untype='mun'{/yun}" class="Search_jobs_c_a disc_fac">规模：{yun:}$comclass_name[$smarty.get.mun]{/yun}</a> {yun:}/if{/yun}
+	{yun:}if $smarty.get.keyword{/yun} <a href="{yun:}listurl m=company untype='keyword'{/yun}" class="Search_jobs_c_a disc_fac">{yun:}$smarty.get.keyword{/yun}</a> {yun:}/if{/yun}
+	
+</div>
+{yun:}/if{/yun}
+</div>
+
+
+
+
+
+
+
+
+
+<!--职位类别start-->
+<!--<div class="sPopupDiv none" id="jobdiv" style="float:left;"></div>-->
+<!--职位类别end-->
+<!--工作地点start-->
+<!--<div class="sPopupDiv none" id="citydiv"></div>
+--><!--工作地点end-->
+<!--行业类别start-->
+<!--<div class="sPopupDiv none" id="industrydiv"></div>-->
+<!--行业类别end--> 
+<!--<div class="content_firm">
+    <div class="firm_left">
+        <div class="firm_left_close">            
+            {yun:}if $smarty.get.hy || $smarty.get.pr || $smarty.get.mun || $smarty.get.keyword||$smarty.get.cityid{/yun}
+            <div class="firm_left_close_con">
+                <div class="firm_left_h1"><span>已选择</span> <a href="{yun:}url m=company{/yun}">清空条件</a></div>
+                <div class="clear"></div>
+				{yun:}if $smarty.get.cityid{/yun}
+                <span class="firm_left_close_span yun_bg_color"><i>所在城市：{yun:}$city_name[$smarty.get.cityid]{/yun}</i><a href="{yun:}searchurl m=company untype='cityid'{/yun}"><em></em></a></span>
+                {yun:}/if{/yun}
+                {yun:}if $smarty.get.hy{/yun}
+                <span class="firm_left_close_span yun_bg_color"><i>从事行业：{yun:}$industry_name[$smarty.get.hy]{/yun}</i><a href="{yun:}searchurl m=company untype='hy,page'{/yun}"><em></em></a></span>
+                {yun:}/if{/yun}
+                {yun:}if $smarty.get.pr{/yun}
+                <span class="firm_left_close_span yun_bg_color"><i>企业性质：{yun:}$comclass_name[$smarty.get.pr]{/yun}</i><a href="{yun:}searchurl m=company untype='pr,page'{/yun}"><em></em></a></span>
+                {yun:}/if{/yun}
+                {yun:}if $smarty.get.mun{/yun}
+                <span class="firm_left_close_span yun_bg_color"><i>企业规模：{yun:}$comclass_name[$smarty.get.mun]{/yun}</i><a href="{yun:}searchurl m=company untype='mun,page'{/yun}"><em></em></a></span>
+                {yun:}/if{/yun}
+                {yun:}if $smarty.get.keyword{/yun}
+                <span class="firm_left_close_span yun_bg_color"><i>关键字：{yun:}$smarty.get.keyword{/yun}</i><a href="{yun:}searchurl m=company untype='keyword,page'{/yun}"><em></em></a></span>
+                {yun:}/if{/yun}
+            </div>
+            {yun:}/if{/yun}
+        </div>
+        <div class="firm_left_cont">
+            <div class="firm_seach_top_list">
+                <div class="{yun:}if $smarty.get.hy{/yun}firm_seach_top_s{yun:}else{/yun}firm_seach_top_l{yun:}/if{/yun}" id="job_hys_click" onclick="check_type('job_hys');">从事行业</div>
+                <div class="firm_seach_top_r {yun:}if $smarty.get.hy{/yun}none{yun:}/if{/yun}" id="job_hys">
+                {yun:}foreach from=$industry_index key=j item=v{/yun}
+                <a href="{yun:}listurl m=company type=hy v=$v{/yun}" {yun:}if $smarty.get.hy==$v{/yun} class="firm_a_atc" {yun:}/if{/yun}>{yun:}$industry_name[$v]{/yun}</a>
+                {yun:}/foreach{/yun}
+            </div>
+        </div>
+        <div class="firm_seach_top_list">
+            <div class="{yun:}if $smarty.get.pr{/yun}firm_seach_top_s{yun:}else{/yun}firm_seach_top_l{yun:}/if{/yun}" id="job_prs_click" onclick="check_type('job_prs');">企业性质</div>
+            <div class="firm_seach_top_r {yun:}if $smarty.get.pr{/yun}none{yun:}/if{/yun}" id="job_prs">
+            {yun:}foreach from=$comdata.job_pr key=j item=v{/yun}
+            <a href="{yun:}listurl m=company type=pr v=$v{/yun}" {yun:}if $smarty.get.pr==$v{/yun} class="firm_a_atc" {yun:}/if{/yun}>{yun:}$comclass_name[$v]{/yun}</a>
+            {yun:}/foreach{/yun}
+        </div>
+    </div>
+    <div class="firm_seach_top_list">
+        <div class="{yun:}if $smarty.get.mun{/yun}firm_seach_top_s{yun:}else{/yun}firm_seach_top_l{yun:}/if{/yun}" id="job_muns_click" onclick="check_type('job_muns');">企业规模</div>
+        <div class="firm_seach_top_r {yun:}if $smarty.get.mun{/yun}none{yun:}/if{/yun}" id="job_muns">
+        {yun:}foreach from=$comdata.job_mun key=j item=v{/yun}
+        <a href="{yun:}listurl m=company type=mun v=$v{/yun}" {yun:}if $smarty.get.mun==$v{/yun} class="firm_a_atc" {yun:}/if{/yun}>{yun:}$comclass_name[$v]{/yun}</a>
+        {yun:}/foreach{/yun}
+    </div>
+</div>
+  </div>
+</div>-->
+<script>
+function check_type(id){
+	var display =$("#"+id).css('display');
+	if(display=='none'){
+		$("#"+id).show();
+		$("#"+id+"_click").attr("class","firm_seach_top_l");
+	}else{
+		$("#"+id).hide();
+		$("#"+id+"_click").attr("class","firm_seach_top_s");
+	}
+	
+	/*
+	$("#"+id).toggle();  
+	var style=$("#"+id+"_click").attr("class");
+	if(style=="firm_seach_top_l"){
+		$("#"+id+"_click").attr("class","firm_seach_top_s");
+	}else{
+		$("#"+id+"_click").attr("class","firm_seach_top_l");
+	}*/
+}
+</script>

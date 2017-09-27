@@ -1,0 +1,218 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<link href="images/reset.css" rel="stylesheet" type="text/css" />
+<link href="images/system.css" rel="stylesheet" type="text/css" />
+<link href="images/table_form.css" rel="stylesheet" type="text/css" />
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script>
+<script src="js/admin_public.js" language="javascript"></script>
+<link href="images/blue.css" rel="stylesheet">
+<script src="js/icheck.js"></script>
+  <script>
+	$(document).ready(function(){
+	  $('input').iCheck({
+		checkboxClass: 'icheckbox_flat-blue',
+		radioClass: 'iradio_flat-blue'
+	  });
+	});
+</script>
+<title>后台管理</title>
+</head>
+<body class="body_ifm">
+<div class="infoboxp"><div class="infoboxp_top_bg"></div>
+<div id="subboxdiv" style="width:100%;height:100%;display:none;position:absolute;"></div>
+<div class="infoboxp_top">
+	<span class="admin_title_span">微信公众号设置</span>
+        <a href="index.php?m=wx&c=wxnav" class="admin_infoboxp_nav admin_infoboxp_gl">自定义菜单</a>
+        <em class="admin-tit_line"></em>
+		
+        <a href="index.php?m=wx&c=binduser" class="admin_infoboxp_nav admin_infoboxp_lb">用户绑定列表</a>
+        <em class="admin-tit_line"></em>
+        <a href="index.php?m=wx&c=keyword" class="admin_infoboxp_nav admin_infoboxp_tag">搜索关键字</a>
+        <em class="admin-tit_line"></em>
+        <a href="index.php?m=wx&c=zdkeyword" class="admin_infoboxp_nav admin_infoboxp_tag">关键字自动回复</a>
+</div>
+<div class="main_tag">
+<div class="admin_table_border">
+    <div>
+	<iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe>
+	<form name="myform" target="supportiframe" action="index.php?m=wx&c=save" method="post" enctype="multipart/form-data">
+         <table width="100%" class="table_form">
+            <tr class="admin_table_trbg">
+        	<th colspan="2" bgcolor="#f0f6fb"><span class="admin_bold">微信公众号设置</span></th>
+            </tr>
+			 <tr>
+                <th width="160">公众号：</th>
+                <td><input class="input-text" type="text" name="wx_name" id="wx_name" size="30" value="{yun:}$config.wx_name{/yun}" maxlength="255" ><font color="gray" style="display:none"></font></td>
+            </tr>
+             <tr>
+                <th width="160">URL：</th>
+                <td>{yun:}$config.sy_weburl{/yun}/weixin/index.php<font color="gray" style="display:none"></font></td>
+            </tr>
+          <tr>
+                <th width="160">Token</th>
+                <td><input class="input-text" type="text" name="wx_token" id="wx_token" size="30" value="{yun:}$config.wx_token{/yun}" maxlength="255" ><font color="gray" style="display:none"></font></td>
+            </tr>
+              <tr class="admin_table_trbg">
+                <td colspan="2" align="center">
+                <input type="hidden" name="pytoken" id='pytoken' value="{yun:}$pytoken{/yun}"/>	
+                <input class="admin_submit4" id="wxconfig" type="submit" name="msgconfig" value="提交" />&nbsp;&nbsp;<input class="admin_submit4" type="reset" value="重置" /></td>
+            </tr>
+        </table>
+		</form>
+             
+             <form name="myform" target="supportiframe" action="index.php?m=wx&c=save" method="post" enctype="multipart/form-data">
+             <table width="100%" class="table_form">
+            <tr >
+                <th colspan="2" bgcolor="#f0f6fb"><span class="admin_bold">开发者凭据</span></th>
+            </tr>
+          <tr>
+                <th width="160">AppId：</th>
+                <td><input class="input-text" type="text" name="wx_appid" id="wx_appid" value="{yun:}$config.wx_appid{/yun}" size="30" maxlength="255"/><span class="admin_web_tip">如：1002478xx</span></td>
+            </tr>
+            <tr>
+                <th width="160">AppSecret：</th>
+                <td><input class="input-text" type="text" name="wx_appsecret" id="wx_appsecret" value="{yun:}$config.wx_appsecret{/yun}" size="30" maxlength="255"/><span class="admin_web_tip">如：4dd1c30d472676914f2fbfbnjt33</span></td>
+            </tr>
+            
+          <tr class="admin_table_trbg">
+                <td colspan="2" align="center">
+                <input type="hidden" name="pytoken" id='pytoken' value="{yun:}$pytoken{/yun}"/>	
+                <input class="admin_submit4" id="wxconfig" type="submit" name="msgconfig" value="提交" />&nbsp;&nbsp;<input class="admin_submit4" type="reset" value="重置" /></td>
+            </tr>
+        </table>
+		</form>
+             
+             <form name="myform" target="supportiframe" action="index.php?m=wx&c=save" method="post" enctype="multipart/form-data">
+             <table width="100%" class="table_form">
+			
+		<tr>
+                <th colspan="2" bgcolor="#f0f6fb"><span class="admin_bold">体验设置</span></th>
+            </tr>
+
+			 <tr>
+                <th width="160">关注欢迎语：</th>
+                <td><textarea  name="wx_welcom"  rows="10" cols='40' maxlength="255" class="wx_search_textarea">{yun:}$config.wx_welcom{/yun}</textarea></td>
+            </tr>
+			<tr>
+                <th width="160">搜索提示：</th>
+                <td><textarea  name="wx_search"  rows="10" cols='40'  maxlength="255" class="wx_search_textarea">{yun:}$config.wx_search{/yun}</textarea></td>
+            </tr>
+			<tr>	
+			<th width="160">公众号二维码：</th>
+			<td><input  type="file" size="45" name="sy_wx_qcode" class="input-text input_text_bg">
+				{yun:}if $config.sy_wx_qcode{/yun}
+			<img src="{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_wx_qcode{/yun}" style="max-width:200px">
+			{yun:}/if{/yun}
+			  </td>
+			</tr>
+			 <tr>	
+			<th width="160">微信封面：<br>(360px X 100px)</th>
+			<td><input  type="file" size="45" name="sy_wx_logo" class="input-text input_text_bg">
+				{yun:}if $config.sy_wx_logo{/yun}
+			<img src="{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_wx_logo{/yun}" style="max-width:150px">
+			{yun:}/if{/yun}
+			  </td>
+			</tr>
+			<tr>       
+                        <th width="160">微信分享图片：<br>(300px X 300px)</th>
+                        <td><input  type="file" size="45" name="sy_wx_sharelogo" class="input-text input_text_bg">
+                                {yun:}if $config.sy_wx_sharelogo{/yun}
+                        <img src="{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_wx_sharelogo{/yun}" style="max-width:100px">
+                        {yun:}/if{/yun}
+                          </td>
+                        </tr>
+			<tr>
+                <th width="160">微信手机登录：</th>
+                <td>
+                <div class="iradio_flat_height">
+                <input type="radio" name="wx_rz" checked value='0' id="wx_rz_11">
+                <span class="iradio_flat_left"><label for="wx_rz_11">否 </label>&nbsp;</span>
+                <input type="radio" {yun:}if $config.wx_rz=='1'{/yun}checked{yun:}/if{/yun} name="wx_rz" value='1' id="wx_rz_12">
+                <span class="iradio_flat_left"><label for="wx_rz_12">是</label>&nbsp;</span>
+				&nbsp;&nbsp;&nbsp;&nbsp;<span class="admin_web_tip">说明：必须为已认证的订阅号或服务号</span>
+                </div>
+                </td>
+            </tr>
+			<tr>
+                <th width="160">微信PC扫码登录：</th>
+                <td>
+                <div class="iradio_flat_height">
+                <input type="radio" name="wx_author" {yun:}if $config.wx_author!='1'{/yun}checked{yun:}/if{/yun} value='0' id="RadioGroup1_11">
+                <span class="iradio_flat_left"><label for="RadioGroup1_11">否</label>&nbsp;</span>
+                <input type="radio" {yun:}if $config.wx_author=='1'{/yun}checked{yun:}/if{/yun} name="wx_author" value='1' id="RadioGroup1_12">
+                <span class="iradio_flat_left"><label for="RadioGroup1_12">是</label>&nbsp;</span>
+				&nbsp;&nbsp;&nbsp;&nbsp;<span class="admin_web_tip">说明：必须为已认证的订阅号或服务号</span>
+                </div>
+				</td>
+            </tr>
+            
+            <tr class="admin_table_trbg">
+                <td colspan="2" align="center">
+                <input type="hidden" name="pytoken" id='pytoken' value="{yun:}$pytoken{/yun}"/>	
+                <input class="admin_submit4" id="wxconfig" type="submit" name="msgconfig" value="提交" />&nbsp;&nbsp;<input class="admin_submit4" type="reset" value="重置" /></td>
+            </tr>
+        </table>
+		</form>
+             
+             <form name="myform" target="supportiframe" action="index.php?m=wx&c=save" method="post" enctype="multipart/form-data">
+             <table width="100%" class="table_form">
+			
+		<tr>
+                <th colspan="2" bgcolor="#f0f6fb"><span class="admin_bold">消息设置</span></th>
+            </tr>
+			<tr>
+                <th width="160">微信消息通知：</th>
+                <td>
+                <div class="iradio_flat_height">
+                <input type="radio" name="wx_xxtz" {yun:}if $config.wx_xxtz!='1'{/yun}checked{yun:}/if{/yun} value='0' id="wx_xxtz_11">
+                <span class="iradio_flat_left"><label for="wx_xxtz_11">不通知</label>&nbsp;</span>
+                 <input type="radio" {yun:}if $config.wx_xxtz=='1'{/yun}checked{yun:}/if{/yun} name="wx_xxtz" value='1' id="wx_xxtz_12">
+                 <span class="iradio_flat_left"><label for="wx_xxtz_12">通知</label>&nbsp;</span>
+				<span class="admin_web_tip"><a href="http://www.phpyun.com/bbs/thread-10851-1-1.html" target="_blank">微信消息通知设置教程</a></span>
+                </div>
+				</td>
+				
+            </tr>
+
+			
+			 <tr  class="admin_table_trbg">
+                <th width="160">职位申请模板：</th>
+                <td><input class="input-text" type="text" name="wx_mbsqzw" id="wx_mbsqzw" size="90" value="{yun:}$config.wx_mbsqzw{/yun}" maxlength="255" ><font color="gray" style="display:none"></font></td>
+            </tr>
+			<tr  class="admin_table_trbg">
+                <th width="160">职位审核模板：</th>
+                <td><input class="input-text" type="text" name="wx_mbzwsh" id="wx_mbzwsh" size="90" value="{yun:}$config.wx_mbzwsh{/yun}" maxlength="255" ><font color="gray" style="display:none"></font></td>
+            </tr>
+			<tr  class="admin_table_trbg">
+                <th width="160">邀请面试模板：</th>
+                <td><input class="input-text" type="text" name="wx_mbyqms" id="wx_mbyqms" size="90" value="{yun:}$config.wx_mbyqms{/yun}" maxlength="255" ><font color="gray" style="display:none"></font></td>
+            </tr>
+			<tr  class="admin_table_trbg">
+                <th width="160">兼职报名模板：</th>
+                <td><input class="input-text" type="text" name="wx_mbjzbm" id="wx_mbjzbm" size="90" value="{yun:}$config.wx_mbjzbm{/yun}" maxlength="255" ><font color="gray" style="display:none"></font></td>
+            </tr>
+			<tr  class="admin_table_trbg">
+                <th width="160">兼职审核模板：</th>
+                <td><input class="input-text" type="text" name="wx_mbjzsh" id="wx_mbjzsh" size="90" value="{yun:}$config.wx_mbjzsh{/yun}" maxlength="255" ><font color="gray" style="display:none"></font></td>
+            </tr>
+			<tr  class="admin_table_trbg">
+                <th width="160">充值提醒模板：</th>
+                <td><input class="input-text" type="text" name="wx_mbcztx" id="wx_mbcztx" size="90" value="{yun:}$config.wx_mbcztx{/yun}" maxlength="255" ><font color="gray" style="display:none"></font></td>
+            </tr>
+            <tr class="admin_table_trbg">
+                <td colspan="2" align="center">
+                <input type="hidden" name="pytoken" id='pytoken' value="{yun:}$pytoken{/yun}"/>	
+                <input class="admin_submit4" id="wxconfig" type="submit" name="msgconfig" value="提交" />&nbsp;&nbsp;<input class="admin_submit4" type="reset" value="重置" /></td>
+            </tr>
+        </table>
+		</form>
+		
+    </div>
+</div>
+</div>
+</div>
+</body>
+</html>

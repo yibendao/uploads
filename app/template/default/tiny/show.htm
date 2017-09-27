@@ -1,0 +1,202 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>{yun:}$title{/yun}</title>
+<meta name="keywords" content="{yun:}$keywords{/yun}"/>
+<meta name="description" content="{yun:}$description{/yun}"/>
+<link rel="stylesheet" href="{yun:}$style{/yun}/style/css.css" type="text/css"/>
+<link href="{yun:}$style{/yun}/style/microresume.css" rel="stylesheet" type="text/css" /> 
+</head>
+<body>
+{yun:}include file="$tplstyle/header.htm"{/yun}
+{yun:}include file="$tplstyle/public_search/index_search.htm"{/yun}
+<div class="yun_content">
+<div class="current_Location png"> 您当前的位置：<a href="{yun:}$config.sy_weburl{/yun}">首页</a> > <a href="{yun:}url m=tiny{/yun}">普工简历</a> > {yun:}$t_info.job{/yun}</div>
+<div class="fast_show_left">
+<div class="fast_show_post">
+<div class="fast_show_top">
+<h1 class="fast_show_top_h1">{yun:}$t_info.job{/yun}</h1>
+<div class="fast_show_top_xz">{yun:}$t_info.username{/yun} / {yun:}$t_info.sex{/yun} / {yun:}$userclass_name[$t_info.exp]{/yun} </div>
+
+<div class="fast_show_top_date">浏览：{yun:}$t_info.hits{/yun} 次 | 更新日期：{yun:}$t_info.lastupdate|date_format:"%Y-%m-%d"{/yun} </div>
+ <div class="wx_share_fx">
+        <div class="wx_share_fx_img"><img src="{yun:}url m=ajax c=pubqrcode toc=tiny toa=show toid=$t_info.id{/yun}" width="120" height="120"/></div>
+        <div class="wx_share_fx_p">分享到朋友圈</div>
+ </div>
+</div>
+{yun:}if $config.user_wjl_link=="1" && $uid<=0{/yun}
+<div class="once_no_show">很抱歉,<a href="javascript:void(0);" onclick="showlogin('');">【登录】</a>后才可以查看联系方式</div>
+ {yun:}else{/yun}
+<div class="fast_show_list"><i class="fast_icon fast_icon_touch"></i>联&nbsp;系&nbsp;人：{yun:}$t_info.username{/yun}</div>
+<div class="fast_show_list"><i class="fast_icon fast_icon_pho"></i>联系电话：<font color="#FF0000"><strong>{yun:}$t_info.mobile{/yun}</strong></font></div>
+
+{yun:}/if{/yun}
+
+<div class="fast_show_com_name">自我介绍</div>
+<div class="fast_show_com_name_p">{yun:}$t_info.production{/yun}</div>
+<div class="recruit_alter">
+	<a href="javascript:;" onclick="showdd('1', '{yun:}$t_info.id{/yun}','vcode_imgs');" class="yun_bg_color recruit_alter_sx">刷新</a>
+    <a href="javascript:;" onclick="showdd('2', '{yun:}$t_info.id{/yun}','vcode_imgs')" class="yun_bg_color">修改</a>
+    <a href="javascript:;" onclick="showdd('3', '{yun:}$t_info.id{/yun}','vcode_imgs');" class="yun_bg_color">删除</a>
+</div>
+<div class="clear"></div>
+
+<div class="wxts_p wxts_p_h1">操作说明：</div>
+<div class="wxts_p">刷新，修改，删除只有信息发布者可以操作，每刷新一次求职信息就会自动排在最前面</div>
+
+ <div class="fast_post_tit"><i class="fast_h1_line yun_bg_color"></i><i class="fast_h1_line_bor"></i><span class="fast_co">最新简历</span></div>
+ <div class="tiny_show_resume">
+{yun:}tiny limit=6 delid='auto.id' item=list{/yun}
+<div class="dec_det" style="width:393px;">
+            <div class="dec_det_con">    
+              <div class="mini_tit"> <span class="mini_tit_h1"> <a href="{yun:}url m=tiny c=show id='`$list.id`'{/yun}"> {yun:}$list.job{/yun}</a></span> <span class="mini_tit_time"> 更新于{yun:}if $list.redtime==1 || $list.lastupdate=='昨天'{/yun} <span style="color:red;">{yun:}$list.lastupdate{/yun}</span> {yun:}else{/yun}
+                {yun:}$list.lastupdate{/yun}
+                {yun:}/if{/yun}</span> </div>
+              <div class="mini_det"> {yun:}$list.username{/yun} <i>|</i>{yun:}$list.sex{/yun}<i>|</i> {yun:}$list.exp_name{/yun} <i>|</i> {yun:}if $config.user_wjl_link==1 && $uid<=0{/yun} <span>登录查看更多信息<a href="javascript:void(0);" onclick="showlogin('');" class="tiny_login">登录</a></span> {yun:}else{/yun}
+                <span class="tiny_tel">{yun:}$list.mobile{/yun}</span>
+                {yun:}/if{/yun}</div>
+              <div class="mini_con">{yun:}$list.production|mb_substr:0:100:gbk{/yun}</div>
+            </div>
+        
+          
+        </div>
+     {yun:}/tiny{/yun}    
+         </div>       
+
+</div>
+</div>
+<div class="fast_show_right">
+<div class="fast_show_right_tips">
+<div class="fast_show_right_tips_h1">温馨提示：</div>
+在简短的字里介绍自己、展示自己，如此精炼的文字比正规的简历还要考究功力；微博发简历虽然便捷而且紧跟流行，但毕竟每条微信息量有限，因此求职者还是要对正式简历多加打磨，或做一个关于自己详细简历请注册     <a href='javascript:;' {yun:}if $num>0 ||$config.sy_tiny==0{/yun}onclick="showfabu1()"{yun:}else{/yun}onclick="layer.msg('每天最多可发布{yun:}$config.sy_tiny{/yun}份普工简历！',2,8)"{yun:}/if{/yun} class="recruit_user_public" style="width:240px; margin-top:10px;">发布普工简历</a>
+</div>
+</div>
+ </div>
+
+<div class="none"  id="fabufast1">
+  <div >
+      
+    <form  method="post" action="{yun:}url m=tiny{/yun}" onSubmit="return check_resume_tiny()" target="supportiframe">
+      <ul class="micro_resume_release_list">
+        <li><span class="once_fb_list_span"><font color="#FF3300">*</font> 姓名：</span>
+          <input  type="text" value="" name="username" id="username" class="micro_resume_release_text"/>
+        </li>
+        <li><span class="once_fb_list_span"><font color="#FF3300">*</font>性别：</span> 
+
+          
+         
+          
+          <input type="hidden" id="sex" name="sex" value="" />
+          {yun:}foreach from=$arr_data.sex key=j item=v{/yun}
+             <span class="yun_info_sex " id="sex{yun:}$j{/yun}" onclick="checksex('{yun:}$j{/yun}')"><i class="usericon_sex usericon_sex{yun:}$j{/yun}"></i>{yun:}$v{/yun}</span> 
+              
+          {yun:}/foreach{/yun}   
+          
+          
+          
+        </li>
+        <li><span  class="once_fb_list_span"><font color="#FF3300">*</font> 联系电话：</span>
+          <input type="text" name="mobile" id="mobile" value="" class="once_input_simple once_input_simple_w240" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')"/>
+        </li>
+        <li><span class="once_fb_list_span"><font color="#FF3300">*</font> 工作年限：</span>
+          <div class="tiny_exp_text">
+        <input type="button" id="exp" value="请选择" class="tiny_exp_but" onclick="check_exp('job_exp');">
+        <input type="hidden" id="expid" name="exp" value="" />
+      <ul class="tiny_exp_list" id="job_exp">
+       {yun:}foreach from=$userdata.user_word key=j item=v{/yun}
+             <li><a href="javascript:;" onclick="selectexp('{yun:}$v{/yun}','exp','{yun:}$userclass_name[$v]{/yun}');">{yun:}$userclass_name[$v]{/yun}</a></li>
+            {yun:}/foreach{/yun}
+            </ul>
+        </div>
+        </li>
+        <li><span class="once_fb_list_span"><font color="#FF3300">*</font> 想找什么工作？：</span>
+          <input type="text" id="job" name="job" value="" class="once_input_simple once_input_simple_w240"/>
+          <span class="once_fb_list_tip"> 如：服装厂操作工</span> </li>
+        <li><span class="once_fb_list_span">自我介绍：</span>
+          <textarea id="production" name="production" class="once_simplew_textarea"placeholder="请输入你擅长的技能，例如：电机熟练工，能吃苦耐劳"></textarea>
+        </li>
+        <li><span class="once_fb_list_span"><font color="#FF3300">*</font>验证密码：</span>
+          <input type="password" name="password" id="password" value="" class="micro_resume_release_text" style='width:100px' onkeyup="this.value=this.value.replace(/^ +| +$/g,'')"/> </li>
+		   {yun:}if strpos($config.code_web,"店铺招聘")!==false{/yun}
+			
+
+			{yun:}if $config.code_kind==3{/yun}	
+			<!---geetest----->
+             <li class="add"><span class="once_fb_list_span"><font color="#FF3300">*</font> 验证：</span>
+            <div class="tiny_verification">
+			<div id="popup-captcha" data-id='botton' data-type='click'></div>
+			<input type='hidden' id="popup-submit">
+            </div>
+            </li>
+			{yun:}else{/yun}
+			
+			<li><span class="once_fb_list_span"><font color="#FF3300">*</font> 验证码：</span>
+			  <input type="text" id="authcode" name="authcode" class="micro_resume_release_text micro_resume_release_text2" maxlength="4"/>          
+			  <a><img id="vcodeimgs" onclick="checkCode('vcodeimgs');" src="{yun:}$config.sy_weburl{/yun}/app/include/authcode.inc.php"/></a> 
+			</li>
+		
+			  {yun:}/if{/yun}
+			 
+		 {yun:}else{/yun}
+			<input id="authcode" type="hidden" value="12345" maxlength="4" name="authcode"/>
+        {yun:}/if{/yun}
+        
+        <li><span class="once_fb_list_span">&nbsp; </span>
+          <input type="hidden" name="id" id="id" value=""/>
+          <input class="uesr_submit once_fast_submit" type="submit" value="发布" id="botton" name="submit" />
+        </li>
+      </ul>
+    </form>
+  </div>
+</div>
+<div class="none" id="postpw">
+  <div>
+    <ul class="micro_resume_release_list micro_resume_release_list_xg">
+      <li><span class="micro_resume_release_s fl"><font color="#FF3300">*</font> 密码：</span>
+        <input id="pw" type="password" value="" class="micro_resume_release_text" style='width:100px'/>
+        <em style="line-height:28px; display:inline-block; margin-left:5px;">请输入添加时的密码。</em> </li>
+      <li><span class="micro_resume_release_s fl"><font color="#FF3300">*</font> 验证码：</span>
+        <input type="text" id="code" class="micro_resume_release_text micro_resume_release_text2" style='width:100px' maxlength="4"/>
+        <a><img id="vcode_imgs" onclick="checkCode('vcode_imgs');" src="{yun:}$config.sy_weburl{/yun}/app/include/authcode.inc.php"/></a> 
+      </li>
+      <li><span class="micro_resume_release_s fl">&nbsp; </span>
+        <input type="hidden" id="tid"/>
+        <input type="hidden" id="type"/>
+        <input class="fast_submit" type="button" value="提交" onclick="post_password('{yun:}url m=tiny c=ajax{/yun}','vcode_imgs');"/>
+      </li>
+    </ul>
+  </div>
+</div>
+{yun:}include file="$tplstyle/public_search/login.htm"{/yun}
+<input type="hidden" id="gourl" value="{yun:}url m=tiny{/yun}" />
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js" language="javascript"></script> 
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/public.js" language="javascript"></script>
+<script src="{yun:}$style{/yun}/js/fast.js" language="javascript"></script>
+<script src="{yun:}$style{/yun}/js/index.js" type="text/javascript"></script>
+<script src="http://static.geetest.com/static/tools/gt.js"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/geetest/pc.js" type="text/javascript"></script>
+<!--[if IE 6]>
+<script src="{yun:}$config.sy_weburl{/yun}/js/png.js"></script>
+<script>
+DD_belatedPNG.fix('.png');
+</script>
+<![endif]-->  
+ <script type="text/javascript">
+function checksex(id){
+	$(".yun_info_sex").removeClass('yun_info_sex_cur');
+	$("#sex"+id).addClass('yun_info_sex_cur');
+	$("#sex").val(id); 
+}
+function check_exp(id){
+	$("#"+id).show();
+}
+function selectexp(id,type,name){
+	$("#"+type).val(name);
+	$("#"+type+"id").val(id);
+	$("#job_"+type).hide();
+}
+</script>
+<iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" class="none"></iframe>
+{yun:}include file="$tplstyle/footer.htm"{/yun}

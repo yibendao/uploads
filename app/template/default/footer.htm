@@ -1,0 +1,92 @@
+{yun:}desc assign_name=desc{/yun}
+<div class="hp_foot fl">
+<div class="w1000">
+     <div class="hp_foot_wt fl">
+          <div class="hp_foot_pho fl">
+          <dl>
+              <dt></dt>
+              <dd>客服服务热线</dd>
+              <dd class="hp_foot_pho_nmb">{yun:}$config.sy_freewebtel{/yun}</dd>
+              <dd>工作日 9:00-19:00</dd>
+          </dl>
+     </div>
+     <div class="hp_foot_wh fl">
+          {yun:}foreach item=desclist from=$desc{/yun}
+          <dl>
+              <dt>{yun:}$desclist.name{/yun}</dt>
+              <dd>
+                  <ul>
+                      {yun:}foreach item=lit from=$desclist.list{/yun}
+                      <li><a href="{yun:}$lit.url{/yun}">{yun:}$lit.name{/yun}</a></li>
+                      {yun:}/foreach{/yun}
+                  </ul>
+              </dd>
+          </dl>
+          {yun:}/foreach{/yun}
+     </div>
+     </div>
+
+     <div class="hp_foot_wx fr">
+          <dl>
+              <dt><img src="{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_wx_qcode{/yun}"  width="110" height="110"></dt>
+              <dd>官方微信</dd>
+          </dl>
+     </div>
+</div>
+<div class="clear"></div>
+     <div class="hp_foot_bt">
+          <p>{yun:}$config.sy_webcopyright{/yun} <i class="hp_foot_bt_cr">{yun:}$config.sy_webrecord{/yun}</i></p>
+          <p>地址:{yun:}$config.sy_webadd{/yun} 电话(Tel):{yun:}$config.sy_freewebtel{/yun} EMAIL:{yun:}$config.sy_webemail{/yun}{yun:}$config.sy_webtongji{/yun}</p>
+		  <p>Powered By <a target="_blank" href="http://www.phpyun.com">PHPYun.</a></p>
+      
+     </div>
+</div>
+<div class="go-top dn" id="go-top">
+    <a href="javascript:;" class="uc-2vm"></a>
+	<div class="uc-2vm-pop dn">
+		<h2 class="title-2wm">用微信扫一扫</h2>
+		<div class="logo-2wm-box">
+			<img  src="{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_wx_qcode{/yun}"   width="120" height="120">
+		</div>
+	</div>
+    <a href="{yun:}url m=advice{/yun}" target="_blank" class="feedback"></a>
+    <a href="javascript:;" class="go"></a>
+</div>
+<div class="clear"></div>
+<div id="uclogin"></div>
+<script>
+$(function(){
+
+	$(window).on('scroll',function(){
+		var st = $(document).scrollTop();
+		if( st>0 ){
+			if( $('#main-container').length != 0  ){
+				var w = $(window).width(),mw = $('#main-container').width();
+				if( (w-mw)/2 > 70 )
+					$('#go-top').css({'left':(w-mw)/2+mw+20});
+				else{
+					$('#go-top').css({'left':'auto'});
+				}
+			}
+			$('#go-top').fadeIn(function(){
+				$(this).removeClass('dn');
+			});
+		}else{
+			$('#go-top').fadeOut(function(){
+				$(this).addClass('dn');
+			});
+		}	
+	});
+	$('#go-top .go').on('click',function(){
+		$('html,body').animate({'scrollTop':0},500);
+	});
+
+	$('#go-top .uc-2vm').hover(function(){
+		$('#go-top .uc-2vm-pop').removeClass('dn');
+	},function(){
+		$('#go-top .uc-2vm-pop').addClass('dn');
+	});
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+{yun:}include file="$userstyle/header.htm"{/yun}
+<div class="yun_user_member_w1100">
+    {yun:}include file="$userstyle/left.htm"{/yun}
+    <div class="mian_right fltR mt12">
+        <div class="member_right_index_h1 fltL"> <span class="member_right_h1_span fltL">相似职位</span> <i class="member_right_h1_icon user_bg"></i></div>
+        <div class="remindbox01 mt10">
+            <div id="gms_showclew"></div>
+            <div class="resumelistbox01 mt10">
+                <div id="" class="resume_box_list">
+                    
+                    <table border="0" cellspacing="1" cellpadding="0" class="resume" style="width:870px;">
+                        <tr>
+                            <th>职位名称</th>
+                            <th>学历</th>
+                            <th>性别</th>
+                            <th>到岗时间</th>
+                            <th>工作经验</th>
+                            <th>月薪</th>
+                            <th>匹配度</th>
+                        </tr>
+                        {yun:}foreach item=v from=$job{/yun}
+                        <tr>
+                            <td style="width:180px;"><a href="{yun:}url m=job c=comapply id=$v.id{/yun}" target="_blank">{yun:}$v.name{/yun}</a></td>
+                            <td>{yun:}$comclass_name[$v.edu]{/yun}</td>
+                            <td>{yun:}$v.sex{/yun}</td>
+                            <td>{yun:}$comclass_name[$v.report]{/yun}</td>
+                            <td>{yun:}$comclass_name[$v.exp]{/yun}</td>
+                            <td>{yun:}if $v.maxsalary&&$v.minsalary{/yun}￥{yun:}$v.minsalary{/yun}-{yun:}$v.maxsalary{/yun}{yun:}else if $v.minsalary{/yun}￥{yun:}$v.minsalary{/yun}以上{yun:}else{/yun}面议{yun:}/if{/yun}</td>
+                            <td>{yun:}$v.pre{/yun}%</td>
+                        </tr>
+                        {yun:}foreachelse{/yun}
+                        <tr style="height:30px">
+                            <td colspan="7">没有相似职位。</td>
+                        </tr>
+                        {yun:}/foreach{/yun}
+                    </table>
+                </div>
+            </div>
+            <div class="diggg">{yun:}$pagenav{/yun}</div>
+        </div>
+    </div>
+</div>
+{yun:}include file="$userstyle/footer.htm"{/yun}

@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<link href="./images/reset.css" rel="stylesheet" type="text/css" />
+<link href="./images/system.css" rel="stylesheet" type="text/css" />
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js"></script> 
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script>
+<script src="js/admin_public.js" language="javascript"></script> 
+<link href="./images/table_form.css" rel="stylesheet" type="text/css" />
+<title></title>
+</head>
+<body class="body_ifm">
+    <div class="infoboxp">
+    <div class="infoboxp_top_bg"></div>
+    <div class="infoboxp_top">
+    <span class="infoboxp_top_span" style="float:left">我的帐户详情</span>
+    </div>
+<div class="common-form">
+<div class="admin_table_border">
+<table width="100%" class="table_form contentWrap" style="background:#fff;">
+    <tr>
+        <th width="150">用户名：</th>
+        <td>   <div class="admin_td_h">{yun:}$adminuser.username{/yun} 
+        <a href="javascript:void(0)" onclick="layer_logout('index.php?m=index&c=logout');" class="admin_logout_bth">退出登录</a>
+        <a href="index.php?m=admin_user&c=pass" class="admin_logout_bth">修改密码</a>
+        </div></td>
+    </tr>
+    <tr class="admin_table_trbg">
+        <th >真实姓名：</th>
+        <td> <div class="admin_td_h">{yun:}$adminuser.name{/yun}</div></td>
+    </tr>
+   	<tr >
+        <th>权限：</th>
+        <td> <div class="admin_td_h">{yun:}$user_group.group_name{/yun}</div></td>
+    </tr>
+    <tr class="admin_table_trbg">
+        <th >上一次登录时间：</th>
+        <td> <div class="admin_td_h">{yun:}$adminuser.lasttime|date_format:'%Y-%m-%d %H:%M:%S'{/yun}</div></td>
+    </tr>
+ </table>
+</div>
+</div></div>
+</body>
+</html>

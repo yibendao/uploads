@@ -1,0 +1,42 @@
+{yun:}include file="$userstyle/header.htm"{/yun}
+{yun:}include file="$tplstyle/public_search/index_search.htm"{/yun}
+<script src="{yun:}$config.sy_weburl{/yun}/data/plus/job.cache.js" type="text/javascript"></script>
+<link rel="stylesheet" href="{yun:}$style{/yun}/style/class.public.css" type="text/css">
+<script src="{yun:}$config.sy_weburl{/yun}/js/class.public.js" type="text/javascript"></script> 
+<form action="{yun:}$config.sy_weburl{/yun}/member/?c=expect&act=add" method="post" target="supportiframe">
+ 
+ <div class="news_expect">
+<div class="news_expect_cont">
+
+<div class="news_expect_last_msg"><span class="news_expect_last_msg_s">恭喜您，简历创建成功</span></div>
+
+
+<div class="news_expect_content">
+<div class="news_expect_last_content">
+<div class="news_expect_last_wzd">
+<span class="news_expect_last_wzd_span">简历完整度：</span>
+<div class="member_index_resume_t_wzd"> <span class="member_index_resume_t_wz_b"> <em class="ember_index_resume_t_wz_c" style="width:55%"></em> </span> <span class="member_index_resume_t_wz_n">55%</span> </div><a href="{yun:}url m=resume c=show id='`$id`'{/yun}" target="_blank" class="member_index_resume_yl">简历预览 </a></div>
+<div class="news_expect_last_p">企业看重这些信息，建议您进行补充</div>
+<div class="news_expect_last_sub">
+<a href="index.php?c=expect&e={yun:}$id{/yun}#work_upbox" class="news_expect_last_sub_a">工作经历   </a>
+<a href="index.php?c=expect&e={yun:}$id{/yun}#edu_upbox" class="news_expect_last_sub_a">教育经历  </a>
+<a href="index.php?c=expect&e={yun:}$id{/yun}#training_upbox" class="news_expect_last_sub_a">培训经历  </a>
+<a href="index.php?c=expect&e={yun:}$id{/yun}#skill_upbox" class="news_expect_last_sub_a">职业技能 </a>
+<a href="index.php?c=expect&e={yun:}$id{/yun}#project_upbox" class="news_expect_last_sub_a">项目经验 </a>
+<a href="index.php?c=expect&e={yun:}$id{/yun}#other_upbox" class="news_expect_last_sub_a">其他信息  </a>
+<a href="index.php?c=expect&e={yun:}$id{/yun}#description_upbox" class="news_expect_last_sub_a">自我评价  </a>
+{yun:}if $info.photo==""{/yun}
+<a href="index.php?c=uppic" class="news_expect_last_sub_a">上传头像  </a>
+{yun:}/if{/yun}
+</div>
+
+<div class="news_expect_last_search">您也可以直接去搜索合适的职位了<a href="{yun:}url m=job{/yun}" target="_blank" class="news_expect_last_subjob">职位搜索</a><a href="index.php" class="news_expect_last_a">返回我的求职首页>></a></div>
+
+
+
+</div>
+</div>
+</div>
+</div>
+</form>
+{yun:}include file="$userstyle/footer.htm"{/yun}

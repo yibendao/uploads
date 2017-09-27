@@ -1,0 +1,284 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<xml>
+<w:WordDocument>
+<w:View>
+Print
+</w:View>
+</xml>
+<title>简历</title>
+</head><body style="background:#dfdfdf;width:720px; margin:0 auto">
+<style>
+table{border-collapse:collapse; background:#ffffff; margin:0 auto; font-family:微软雅黑; font-size:12px;}
+table td{ white-space:normal;word-break:break-all;  font-size:12px;}
+table tr{ background:#ffffff}
+.resume_table_blod{ font-weight:bold; font-size:12px; background:#ededed}
+.image_gall{ margin-right:10px;}
+.resume_table_td_p{ line-height:25px;}
+</style>
+<table width="600" border="0" cellspacing="0" cellpadding="0" class="resume_tmpl4" bgcolor="#fff" style="font-size:12px; margin:0 auto">
+<tbody>
+<tr>
+  <td>
+   <table width="600" cellspacing="5" cellpadding="0" class="resume_table_bg" >
+              <tbody>
+              <tr>
+              <td colspan="5" height="38" align="center" ><b style="font-size:16px;">个人简历</b></td>
+              </tr>	
+                <tr>
+                  <td width="70" height="38"   align="center" class="resume_table_blod">姓&nbsp;&nbsp;名</td>
+                  <td align="center">{yun:}$Info.username_n{/yun}
+                    {yun:}if $UserMember.source==6 && $UserMember.claim==0 && $UserMember.email!=""{/yun} <a class="resume_rz " href="javascript:void(0);" onClick="claim('{yun:}url m=ajax c=claim uid=$Info.uid{/yun}')">认领</a> {yun:}/if{/yun}</td>
+                  <td width="70" height="38" align="center" class="resume_table_blod">性&nbsp;&nbsp;别</td>
+                  <td align="center" >{yun:}$Info.sex{/yun}</td>
+                  <td width="100" height="140"  align="center" rowspan="3"><img src="{yun:}$Info.resume_photo{/yun}" onerror="showImgDelay(this,'{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_member_icon{/yun}',2);" width="70" height="100"/></td>
+                </tr>
+                <tr>
+                  <td width="70" height="38"  align="center" class="resume_table_blod">年&nbsp;&nbsp;龄</td>
+                  <td h align="center" >{yun:}$Info.age{/yun}</td>
+                  <td width="70"height="38"  align="center"  class="resume_table_blod">所在城市</td>
+                  <td class="tmpl_mod_hoverBg " align="center" >{yun:}$Info.living{/yun}</td>
+                </tr>
+                <tr>
+                  <td width="70" height="38"  align="center" class="resume_table_blod" >最高学历</td>
+                  <td class="tmpl_mod_hoverBg "  align="center"  height="22">{yun:}$Info.useredu{/yun} </td>
+                  <td width="70" align="center"height="38"   class="resume_table_blod">工作年限</td>
+                  <td class="tmpl_mod_hoverBg " height="38" align="center" >{yun:}$Info.user_exp{/yun} </td>
+                </tr>
+              </tbody>
+            </table>
+      {yun:}if $Info.basic_info=='1'{/yun}
+	  {yun:}if $Info.user_marriage || $Info.domicile||$Info.weight||$Info.height||$Info.nationality{/yun}
+      <table width="600" border="0" cellspacing="0" cellpadding="5" class="resume_table_bg resume_table_bg_nt" >
+        <tbody>
+          <tr>
+		   <td width="70"  height="38"  align="center" class="resume_table_blod">基本情况</td>
+            <td><div class="one_vita_Basic_info_c"> 
+				{yun:}if $Info.user_marriage{/yun}<span class="one_vita_Identity">{yun:}$Info.user_marriage{/yun}</span> <span class="yun_resume_info_line">|</span>{yun:}/if{/yun}
+                {yun:}if $Info.domicile{/yun}<span class="one_vita_Identity">户籍：{yun:}$Info.domicile{/yun} </span> <span class="yun_resume_info_line">|</span>{yun:}/if{/yun}
+                {yun:}if $Info.weight||$Info.height{/yun}<span class="one_vita_Identity">{yun:}if $Info.height{/yun}{yun:}$Info.height{/yun}CM/{yun:}/if{/yun}{yun:}if $Info.weight{/yun} {yun:}$Info.weight{/yun}KG{yun:}/if{/yun} </span> <span class="yun_resume_info_line">|</span>{yun:}/if{/yun}    
+                {yun:}if $Info.nationality{/yun}<span class="one_vita_Identity">{yun:}$Info.nationality{/yun}</span>{yun:}/if{/yun} </div>
+			</td>
+			</tr>
+        </tbody>
+      </table>
+	   {yun:}/if{/yun}
+      {yun:}/if{/yun}
+     <table width="600" border="0" cellspacing="0" cellpadding="5" class="resume_table_bg resume_table_bg_nt" >
+            <tbody>
+              <tr>
+                <td width="70"  class="resume_table_blod">求职意向</td>
+                <td class="resume_table_td_p">
+                  <div>从事行业：{yun:}$Info.hy{/yun}</div>
+                  <div>工作地点：{yun:}$Info.city_one{/yun} {yun:}$Info.city_two{/yun} {yun:}$Info.city_three{/yun}
+                  <div>期望薪资：{yun:}if $Info.maxsalary&&$Info.minsalary{/yun}￥{yun:}$Info.minsalary{/yun}-{yun:}$Info.maxsalary{/yun}{yun:}else if $Info.minsalary{/yun}￥{yun:}$Info.minsalary{/yun}以上{yun:}else{/yun}面议{yun:}/if{/yun}</div>
+                  <div>到岗时间：{yun:}$Info.report{/yun}</div>
+                  <div>求职状态：{yun:}$Info.jobstatus{/yun}</div>
+                  <div>期望工作性质：{yun:}$Info.type{/yun}</div>
+                  <div class="yun_resume_job_intention_list_end">期望从事职位：{yun:}$Info.jobname{/yun}</div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          {yun:}if is_array($Info.user_work) && !empty($Info.user_work){/yun} 
+          
+          
+          <table width="600" border="0" cellspacing="0" cellpadding="5" class="resume_table_bg resume_table_bg_nt" >
+            <tbody>
+              <tr>
+                <td width="70"   align="center" class="resume_table_blod" >工作经历</td>
+                <td class="resume_table_td_p"><div class="yun_resume_tabulation"> {yun:}foreach item=one from=$Info.user_work{/yun}
+                    <div class="yun_resume_exp_list ">
+                      <div class="yun_resume_exp_timt">{yun:}$one.sdate|date_format:"%Y.%m"{/yun}-{yun:}if $one.edate{/yun}{yun:}$one.edate|date_format:"%Y.%m"{/yun}{yun:}else{/yun}至今{yun:}/if{/yun}&nbsp;&nbsp;<b>{yun:}$one.name{/yun}</b>&nbsp;&nbsp;<span class="yun_resume_exp_name_job"><b>{yun:}$one.title{/yun}</b></span> </div>
+                      <div class="yun_resume_exp_p">描述：{yun:}$one.content{/yun}</div>
+                    </div>
+                    {yun:}/foreach{/yun} </div>
+              </tr>
+            </tbody>
+          </table>
+          {yun:}/if{/yun}
+          {yun:}if is_array($Info.user_edu) && !empty($Info.user_edu){/yun} 
+          
+          
+          <table width="600" border="0" cellspacing="0" cellpadding="5" class="resume_table_bg resume_table_bg_nt" >
+            <tbody>
+              <tr>
+                <td width="70"   align="center" class="resume_table_blod" >教育经历</td>
+                <td  class="resume_table_td_p"><div class=""> {yun:}foreach item=one from=$Info.user_edu{/yun}
+                    <div class="yun_resume_exp_list ">
+                      <div class="yun_resume_exp_timt">{yun:}$one.sdate|date_format:"%Y.%m"{/yun}-{yun:}$one.edate|date_format:"%Y.%m"{/yun}&nbsp;&nbsp;<b>{yun:}$one.name{/yun}</b>&nbsp;&nbsp;<span class="yun_resume_exp_name_job"><b>{yun:}$one.specialty{/yun}</b></span>&nbsp;&nbsp;{yun:}$one.education_n{/yun}学历</div>
+                    </div>
+                    {yun:}/foreach{/yun} </div></td>
+              </tr>
+            </tbody>
+          </table>
+          {yun:}/if{/yun}
+          {yun:}if is_array($Info.user_tra) && !empty($Info.user_tra){/yun} 
+          
+          
+          <table width="600" border="0" cellspacing="0" cellpadding="5" class="resume_table_bg resume_table_bg_nt" >
+            <tbody>
+              <tr>
+                <td width="70"   align="center" class="resume_table_blod" >培训经历</td>
+                <td  class="resume_table_td_p" ><div class=""> {yun:}foreach item=one from=$Info.user_tra{/yun}
+                    <div class="yun_resume_exp_list  ">
+                      <div class="yun_resume_exp_timt">{yun:}$one.sdate|date_format:"%Y.%m"{/yun} - {yun:}$one.edate|date_format:"%Y.%m"{/yun}&nbsp;&nbsp;<b>{yun:}$one.name{/yun}</b>&nbsp;&nbsp;<span class="yun_resume_exp_name_job"><b>{yun:}$one.title{/yun}</b></span></div>
+                      <div class="yun_resume_exp_p"> 描述：{yun:}$one.content{/yun} </div>
+                    </div>
+                    {yun:}/foreach{/yun} </div></td>
+              </tr>
+            </tbody>
+          </table>
+          {yun:}/if{/yun}
+          {yun:}if is_array($Info.user_skill) && !empty($Info.user_skill){/yun} 
+          
+          
+          <table width="600" border="0" cellspacing="0" cellpadding="5" class="resume_table_bg resume_table_bg_nt" >
+            <tbody>
+              <tr>
+                <td width="70"   align="center" class="resume_table_blod" >职业技能</td>
+                <td  class="resume_table_td_p"><div class="resume_skill resume_skill_table"> {yun:}foreach item=one from=$Info.user_skill{/yun}
+                    <div class=""> <i class="resume_skill_icon"></i>
+                      <div  class=" "> 技能名称：<b>{yun:}$one.name{/yun}</b> <span class="yun_resume_exp_name_job">&nbsp;&nbsp;掌握时间：{yun:}$one.longtime{/yun}年</span></div>
+                     {yun:}if $one.pic{/yun} <div class=" ">技能证书：<img src="{yun:}$config.sy_weburl{/yun}/{yun:}$one.pic{/yun}"  width="95" height="70"  style="vertical-align:middle"></div>{yun:}/if{/yun}
+                    </div>
+                    {yun:}/foreach{/yun} </div></td>
+              </tr>
+            </tbody>
+          </table>
+          {yun:}/if{/yun}
+          {yun:}if is_array($Info.user_xm) && !empty($Info.user_xm){/yun} 
+         
+          
+          <table width="600" border="0" cellspacing="0" cellpadding="5" class="resume_table_bg resume_table_bg_nt" >
+            <tbody>
+              <tr>
+                <td width="70"   align="center" class="resume_table_blod" >项目经验</td>
+                <td class="resume_table_td_p" ><div class=""> {yun:}foreach item=one from=$Info.user_xm{/yun}
+                    <div class="yun_resume_exp_list ">
+                      <div class="yun_resume_exp_timt">{yun:}$one.sdate|date_format:"%Y.%m"{/yun} - {yun:}$one.edate|date_format:"%Y.%m"{/yun}&nbsp;&nbsp;<b>{yun:}$one.name{/yun}</b>&nbsp;&nbsp;<span class="yun_resume_exp_name_job"><b>{yun:}$one.title{/yun}</b></span></div>
+                      <div class="yun_resume_exp_p"> {yun:}$one.content{/yun} </div>
+                    </div>
+                    {yun:}/foreach{/yun} </div></td>
+              </tr>
+            </tbody>
+          </table>
+          {yun:}/if{/yun}
+          
+          {yun:}if is_array($Info.user_other) && !empty($Info.user_other){/yun} 
+         
+          
+          <table width="600" border="0" cellspacing="0" cellpadding="5" class="resume_table_bg resume_table_bg_nt" >
+            <tbody>
+              <tr>
+                <td width="70"   align="center" class="resume_table_blod" >其他信息</td>
+                <td class="resume_table_td_p"><div class="resume_skill resume_skill_table"> {yun:}foreach item=one from=$Info.user_other{/yun}
+                    <div class=""> <i class="resume_skill_icon"></i>标题：<b>{yun:}$one.name{/yun}</b>
+                      <div class="yun_resume_exp_p">内容：{yun:}$one.content{/yun}</div>
+                    </div>
+                    {yun:}/foreach{/yun} </div></td>
+              </tr>
+            </tbody>
+          </table>
+          {yun:}/if{/yun} 
+          
+          {yun:}if is_array($Info.user_show) && !empty($Info.user_show){/yun}
+          <table width="600" border="0" cellspacing="0" cellpadding="5"  class="resume_table_bg resume_table_bg_nt" >
+            <tbody>
+              <tr>
+                <td width="70"   align="center" class="resume_table_blod" >我的作品</td>
+                <td  class="resume_table_td_p" ><div class="fairs_introduction_p" >
+                    <div class="fairs_introduction_img"> {yun:}foreach item=v from=$Info.user_show{/yun} <img src="{yun:}$config.sy_weburl{/yun}/{yun:}$v.picurl{/yun}" width="180" height="130" style="margin-right:5px;" />&nbsp;
+                      {yun:}/foreach{/yun} </div>
+                  </div>
+                  </div></td>
+              </tr>
+            </tbody>
+          </table>
+          {yun:}/if{/yun} 
+          
+          {yun:}if !empty($Info.description){/yun} 
+          
+          
+          <table width="600" border="0"cellspacing="0" cellpadding="5" class="resume_table_bg resume_table_bg_nt" >
+            <tbody>
+              <tr>
+                <td width="70"   align="center" class="resume_table_blod" >自我评价</td>
+                <td  class="resume_table_td_p"><div class="resume_skill resume_skill_table">
+                    <div class=""><i class="resume_skill_icon"></i>
+                      <div class="yun_resume_exp_p">{yun:}$Info.description{/yun}</div>
+                    </div>
+                  </div>
+                  
+                  {yun:}if $Info.arrayTag{/yun}
+                 <div class="yun_resume_exp_p">
+		
+		   {yun:}foreach from=$Info.arrayTag item=v{/yun}
+		  <span class="resume_user_bq">{yun:}$v{/yun}</span>
+		  {yun:}/foreach{/yun}
+		  
+		  </div>{yun:}/if{/yun}
+                  </td>
+              </tr>
+            </tbody>
+          </table>
+          {yun:}/if{/yun} 
+          
+          
+          
+          <table width="600" border="0" cellspacing="0" cellpadding="5"  class="resume_table_bg resume_table_bg_nt" >
+            <tbody>
+              <tr>
+                <td width="70"   align="center" class="resume_table_blod" >联系方式</td>
+                <td  class="resume_table_td_p"> 
+                  
+                  {yun:}if $Info.telphone{/yun}
+                  <div class="one_vita_Intention one_vita_Intention_w420"><i class="one_vita_Intention_i one_vita_red"></i>手机：{yun:}$Info.telphone{/yun}</div>
+                  {yun:}/if{/yun}
+                  
+                  {yun:}if $Info.telhome{/yun}
+                  <div class="one_vita_Intention"><i class="one_vita_Intention_i one_vita_red"></i>座机：{yun:}$Info.telhome{/yun} </div>
+                  {yun:}/if{/yun}
+                  
+                  {yun:}if $Info.email{/yun}
+                  <div class="one_vita_Intention one_vita_Intention_w420"><i class="one_vita_Intention_i one_vita_red"></i>电子邮箱：{yun:}$Info.email{/yun} </div>
+                  {yun:}/if{/yun}
+                  
+                  {yun:}if $Info.wxewm{/yun}
+                  <div class="one_vita_Intention"><i class="one_vita_Intention_i one_vita_red"></i>个人二维码： 
+                  <img src="{yun:}$config.sy_weburl{/yun}/{yun:}$Info.wxewm{/yun}"  width="58" height="38" />
+                  </div>
+                  {yun:}/if{/yun}
+                  
+                  {yun:}if $Info.homepage{/yun}
+                  <div class="one_vita_Intention"><i class="one_vita_Intention_i one_vita_red"></i>个人主页：{yun:}$Info.homepage{/yun}</div>
+                  {yun:}/if{/yun}
+                  {yun:}if $Info.qq{/yun}
+				  <div class="one_vita_Intention"><i class="one_vita_Intention_i one_vita_red"></i>联系Q Q：{yun:}$Info.qq{/yun}</div>
+  				  {yun:}/if{/yun}
+                  {yun:}if $Info.address{/yun}
+                  <div class="one_vita_Intention one_vita_Intention_w420"><i class="one_vita_Intention_i one_vita_red"></i>详细地址：{yun:}$Info.address{/yun}</div>
+                  {yun:}/if{/yun}
+                  
+                  
+                  {yun:}if $Info.idcard{/yun}
+                  <div class="one_vita_Intention one_vita_Intention_w420"><i class="one_vita_Intention_i one_vita_red"></i><span>身份证号</span>
+                   <span class="one_vita_Identity"> {yun:}$Info.idcard{/yun}
+                     </span> </div>
+                  {yun:}/if{/yun} 
+                 </div>
+                  </td>
+              </tr>
+            </tbody>
+          </table>
+          
+          
+          </td>
+      </tr>
+        </tbody>
+      
+    </table>
+</body>
+</html>

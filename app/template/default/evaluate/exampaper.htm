@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>{yun:}$title{/yun}</title>
+<meta name="keywords" content="{yun:}$keywords{/yun}"/>
+<meta name="description" content="{yun:}$description{/yun}"/>
+<link rel="stylesheet" href="{yun:}$style{/yun}/style/css.css" type="text/css"/>
+<link rel="stylesheet" type="text/css" href="{yun:}$style{/yun}/style/evaluate.css"/>
+</head>
+<body>
+{yun:}include file="$tplstyle/header.htm"{/yun}
+<div class="clear"></div>
+<div class="cp_content">
+<div class="wrap">
+<div class="current_Location  png">您当前的位置：<a href="{yun:}$config.sy_weburl{/yun}">首页</a>  >  <span>测评</span></div>
+<div class="cp_timu_left fl">
+<div class="cp_timu_inner">
+	<div class="cp_timu_full">
+    <div class="cp_full_tup fl"><img src="{yun:}$info.pic{/yun}" width="126" height="70" onerror="showImgDelay(this,'{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_logo{/yun}',2);"/></div>
+    <div class="cp_full_yb fl">
+    	<div class="cp_yb_hld f14">{yun:}$info.name{/yun}</div>
+        <div class="cp_yb_cs c6">{yun:}$info.visits{/yun}人访问<span>|</span>{yun:}$info.comnum{/yun}条评论</div>
+        <div class="cp_yb_ds c9"><span class="fl">共<em>{yun:}$questions|@count{/yun}</em>题</span><span class="fr">{yun:}$info.ctime|date_format:"%Y-%m-%d %H:%M"{/yun}</span></div>
+    </div>
+    </div>
+    <div class="clear"></div>
+
+    <form  name="gradeform" id="gradeform" action="{yun:}url m=evaluate c=exampaper a=grade{/yun}" method="post">
+    <div class="cp_timu_topic01">
+        {yun:}foreach from=$questions item=item key=lkey{/yun}
+        <div class="cp_timu_topic eva{yun:}$item.id{/yun}" tid='{yun:}$item.id{/yun}'>
+        	
+            <div class="cp_topic_bt f16">{yun:}$lkey+1{/yun}.{yun:}$item.question{/yun} </div>
+            
+            <div class="cp_topic_ti">
+                {yun:}foreach from=$item.option item=option key=k{/yun}
+                <div class="cp_ti_canj radio_{yun:}$item.id{/yun}_{yun:}$k{/yun}"><input type="radio" did='{yun:}$item.id{/yun}' name="q{yun:}$item.id{/yun}" value="{yun:}$k{/yun}" class="none"/><em>{yun:}$item.letters[$k]{/yun}.</em>{yun:}$option{/yun}</div>
+                {yun:}/foreach{/yun}
+            </div>
+        </div>  
+        {yun:}/foreach{/yun}  
+        <div class="cp_tijiao"><input id="submitexam" type="button" class="cp_tj_button" name="submitexam" value="提交答案" ></div>
+        <input type="hidden" name="examid" value="{yun:}$info.id{/yun}" />
+    </div> 
+    </form>
+</div>
+</div>
+
+
+
+<div class="cp_content_right fr">
+<div class="cp_right_bao">
+	<div class="cp_bao_recom">
+        <div class="cp_recom_tit">测评推荐</div>
+        <div class="cp_recom_list">
+            <ul>
+              {yun:}foreach from=$recome item=item key=key{/yun}
+              <li><a href="{yun:}url m=evaluate c=exampaper titleid='`$item.id`' gid='`$item.keyid`'{/yun}">{yun:}$item.name{/yun}</a><span class="cp_recom_list_s">{yun:}$item.visits{/yun}</span></li>
+              {yun:}/foreach{/yun}
+            </ul>
+        </div>
+    </div>
+    
+    <div class="cp_bao_join">
+        <div class="cp_recom_tit">他们也参加了测评</div>
+        <div class="cp_join_list">
+			<ul>
+            {yun:}foreach from=$examinee item=elist{/yun}
+            <li><a href="{yun:}url m=ask c=friend a=myquestion uid=$elist.uid{/yun}" target="_blank"><img src="{yun:}$elist.pic{/yun}" width="48" height="60" onerror="showImgDelay(this,'{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_friend_icon{/yun}',2);"/></a><div style="width:48px; height:20px; overflow:hidden; text-overflow:clip; white-space:nowrap;">{yun:}$elist.nickname{/yun}</div></li>
+            {yun:}foreachelse{/yun}
+           <div style=" padding-bottom:20px;; text-align:center;width:100%; font-size:14px;"> 暂时无人参加测评</div>
+			{yun:}/foreach{/yun} 
+			</ul>
+        </div>
+    </div>
+
+
+</div>
+</div>
+
+</div>
+<div class="clear"></div>
+</div>
+
+<div class="clear"></div>
+
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js"	language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js"	language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/lazyload.min.js"	language="javascript"></script>  
+<script src="{yun:}$config.sy_weburl{/yun}/js/public.js" language="javascript"></script> 
+<script src="{yun:}$style{/yun}/js/evaluate.js" language="javascript"></script>
+<!--[if IE 6]>
+<script src="{yun:}$config.sy_weburl{/yun}/js/png.js"></script>
+<script>
+DD_belatedPNG.fix('.png,.cp_ti_canj');
+</script>
+<![endif]-->
+ <script>
+ var arr='{yun:}$arr{/yun}';
+ $(document).ready(function () {	
+	 $.each(arr,function(n,v) { 
+		var val=$("input:radio[name='q"+v+"']:checked").val();
+		if(!isNaN(val)){ 
+			$(".radio_"+v+"_"+val).addClass("cp_ti_canj01");
+		} 
+	});
+});
+ </script>
+{yun:}include file="$tplstyle/footer.htm"{/yun}

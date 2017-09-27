@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>{yun:}$title{/yun}</title>
+<meta name=keywords content="{yun:}$keywords{/yun}"/>
+<meta name=description content="{yun:}$description{/yun}"/>
+<link rel="stylesheet" type="text/css" href="{yun:}$style{/yun}/style/css.css"/>
+</head>
+<body>
+{yun:}include file="$tplstyle/header.htm"{/yun}
+<div class="clear"></div>
+<div class="wh_body" style="width:100%;">
+<div class="invitereg_cont">
+ <div class="current_Location com_current_Location png">
+      <div>您当前的位置：<a href="{yun:}$config.sy_weburl{/yun}">首页</a> > <span>邀请好友注册</span> </div>
+    </div>
+  <div class="invitereg_cont_box">
+    <div class="invitereg_img"> <img src="{yun:}$style{/yun}/images/y_br.jpg" width="1200"/></div>
+    <div class="invitereg_cont_box_c">
+      <div class="invitereg_p1">方法一：这是您的专属链接,请通过QQ发送给好友：</div>
+      <div class="invitereg_p2">
+        <textarea class="invitereg_info">#推荐得{yun:}$config.integral_pricename{/yun}，好礼尽情拿#只要成功推荐1位朋友注册，就可以兑换到礼品了！只要推荐{yun:}$config.integral_pricename{/yun}够给力，更有新iPad、iPod、音响、耳机、背包、笔记本等数万件礼品可尽情兑换！给我点力吧！注册成功你也可以获得礼品兑换{yun:}$config.integral_pricename{/yun}哦，赶快来参加吧！链接地址：{yun:}url m=register uid=$uid usertype=$usertype type=1{/yun}</textarea>
+      </div>
+      <div class="invitereg_p2">
+	  <div class="clear"></div>
+	   <div class="complay_h1_share" style="width:300px;float:left"> <span class="Company_post_s_fl" style="float:left; line-height:28px;">分享到：</span> <span  style="float:left; line-height:20px;">
+      <div class="bdsharebuttonbox">
+	  <a title="分享到QQ空间" href="#" class="bds_qzone" data-cmd="qzone"></a>
+	  <a title="分享到新浪微博" href="#" class="bds_tsina" data-cmd="tsina"></a>
+	  <a title="分享到腾讯微博" href="#" class="bds_tqq" data-cmd="tqq"></a>
+	  <a title="分享到人人网" href="#" class="bds_renren" data-cmd="renren"></a>
+	  <a title="分享到微信" href="#" class="bds_weixin" data-cmd="weixin"></a>
+	  <a href="#" class="bds_more" data-cmd="more"></a> </div>
+      </span> </div>
+	  
+      </div>
+      	  <div class="clear"></div>
+      <div class="invitereg_p1">方法二：发送邮件给朋友</div>
+      <div class="invitereg_p2">邀请朋友加入，可以在下面输入朋友的邮箱地址和想说的话</div>
+    <form name="myform" target="supportiframe" action="{yun:}url m=invitereg{/yun}" method="post" onsubmit="return checkpost();">
+      <div class="invitereg_list"><span class="invitereg_list_span">邮箱地址：</span>
+        <input type="text" name="email" placeholder="这里输入邮箱" class="invitereg_text"/>
+      </div>
+      <div class="invitereg_list"><span class="invitereg_list_span">想说的话：</span>
+        <textarea class="invitereg_info_yx" name="content" id="content">我一直在用{yun:}$config.sy_webname{/yun}找工作；真的很不错；忍不住的想推荐给你，快去注册吧！免费哦！链接地址：{yun:}url m=register uid=$uid usertype=$usertype type=1{/yun}</textarea>
+      </div>
+      
+      <div class="invitereg_list"><span class="invitereg_list_span">验证码：</span>
+        <input type="text" name="authcode" id="authcode"  placeholder="这里输入验证码" class="invitereg_texts" maxlength="4"/>
+        <a href="javascript:void(0);" onclick="checkCode('vcode_imgs');"><img id="vcode_imgs" src="{yun:}$config.sy_weburl{/yun}/app/include/authcode.inc.php"/></a> 
+      </div>
+      
+      <div class="invitereg_list"><span class="invitereg_list_span">&nbsp;</span>
+        <input type="submit" name="submit" value="发送邮件" class="invitereg_bth"/>
+      </div>
+     </form>
+    </div>
+  </div>
+</div>
+</div>
+<input type="hidden" id="url" value="{yun:}url m=register uid=$uid usertype=$usertype type=1{/yun}"/>
+<textarea id="fe_text" cols="50" rows="3" class="none">{yun:}url m=register uid=$uid usertype=$usertype type=1{/yun}</textarea>
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script>
+<script src="{yun:}$style{/yun}/js/subscribe.js"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/public.js"></script>
+<iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" class="dn"></iframe> 
+<script type="text/javascript" src="{yun:}$style{/yun}/js/ZeroClipboard.min.js"></script>
+<script language="javascript">
+function checkpost(){
+	var email=$("input[name=email]").val();
+    if(email==""){
+		layer.msg('邮箱不能为空！', 2, 8);return false;  
+	}
+    var myreg = /^([a-zA-Z0-9\-]+[_|\_|\.]?)*[a-zA-Z0-9\-]+@([a-zA-Z0-9\-]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+    if(!myreg.test(email)){
+		layer.msg('邮箱格式不正确！', 2, 8);return false;  
+	}
+	var content=$("#content").val();
+    if(content==""){
+		layer.msg('内容不能为空！', 2, 8);return false;  
+	}
+	layer.load('执行中，请稍候...',0);
+} 
+	var clip = new ZeroClipboard( document.getElementById("d_clip_button"), {
+	  moviePath: "{yun:}$style{/yun}/js/ZeroClipboard.swf"
+	} );
+	// 复制内容到剪贴板成功后的操作
+	clip.on( 'complete', function(client, args) {
+	   layer.msg('复制成功！', 2, 9);return false;  
+	} );
+	window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdDesc":"#推荐得{yun:}$config.integral_pricename{/yun}，好礼尽情拿#只要成功推荐1位朋友注册，就可以兑换到礼品了！只要推荐{yun:}$config.integral_pricename{/yun}够给力，更有新iPad、iPod、音响、耳机、背包、笔记本等数万件礼品可尽情兑换！给我点力吧！注册成功你也可以获得礼品兑换{yun:}$config.integral_pricename{/yun}哦，赶快来参加吧！","bdUrl":"{yun:}url m=register uid=$uid usertype=$usertype type=1{/yun}","bdComment":"{yun:}$description{/yun}","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+{yun:}include file="$tplstyle/footer.htm"{/yun} 

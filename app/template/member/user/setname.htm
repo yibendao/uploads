@@ -1,0 +1,30 @@
+{yun:}include file="$userstyle/header.htm"{/yun}
+<div class="yun_user_member_w1100"> 
+{yun:}include file="$userstyle/left.htm"{/yun}
+
+   <div class="mian_right fltR mt20">
+            <div class="member_right_index_h1 fltL"> <span class="member_right_h1_span fltL">修改账户</span> <i class="member_right_h1_icon user_bg"></i></div>
+    
+    
+  <div class="clear"></div>
+  <div>
+      <div class="passwd_list mt10">
+        <ul>
+          <li>新用户名：
+            <input type="text" id="username" name="username" value="" class="pass_text"/>
+            &nbsp;&nbsp;<em id="msg_oldpassword">填写您的新用户名！</em></li>
+          <li>　新密码：
+            <input type="password" id="password" name="password" class="pass_text"/>
+            &nbsp;&nbsp;<em id="msg_password">新密码格式为 6-20个字符！</em></li>
+          <li>确认密码：
+            <input type="password" id="repassword" name="repassword" class="pass_text"/>
+            &nbsp;&nbsp;<em id="msg_repassword">请再次确认您的新密码！</em></li>
+          <li>
+            <input type="button" name="submit" class="passwd_btn" value=" 修 改 " onclick="Savenamepost();">
+          </li>
+        </ul>
+      </div>
+  </div>
+</div>
+</div>
+{yun:}include file="$userstyle/footer.htm"{/yun}

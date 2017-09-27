@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>{yun:}$title{/yun}</title>
+<meta name="keywords" content="{yun:}$keywords{/yun}"/>
+<meta name="description" content="{yun:}$description{/yun}"/>
+<link rel="stylesheet" href="{yun:}$style{/yun}/style/css.css" type="text/css"/>
+<link rel="stylesheet" type="text/css" href="{yun:}$style{/yun}/special/css/css.css"/>
+</head>
+<body class="newhot_body">
+{yun:}include file="$tplstyle/header.htm"{/yun}
+
+<div class="special_bg" style="width:100%; ;background:url({yun:}$config.sy_weburl{/yun}{yun:}$info.background{/yun}) no-repeat center top">
+  <div class="special_banner"></div>
+<div class="special_cont">
+  <div class="newhot_introduces"> <i class="newhot_introduces_icon"></i>
+    <div class="newhot_introduces_left"> {yun:}$info.intro{/yun}</div>
+    {yun:}if !$isapply{/yun}<div class="newhot_introduces_right"> 
+      <div class="newhot_introduces_p">我是企业，我要</div>
+      <input type='button' value="参加报名" onclick="comapply('{yun:}$info.id{/yun}','{yun:}$info.integral{/yun}','{yun:}url m=special c=apply{/yun}')" class="newhot_special_bth"/>
+       </div>{yun:}/if{/yun}
+  
+  </div>
+   <div class="newhot_ht_tit"><div class="newhot_ht"><span class="newhot_ht_span">名企招聘</span> <em class="newhot_ht_em">Name recruitment</em></div></div>
+  <div class="newhot_special_cont">
+ 
+   
+    {yun:}specialcom sid='auto.id' namelen=10 jobnamelen=6 item=clist{/yun}
+	{yun:}if $clist.jobs{/yun}
+    <div class="newhot_special_job_list">
+    <div class="newhot_special_job_list_cont">
+          <div  class="newhot_special_hy_name"><a href="{yun:}url m=job hy=$clist.hy{/yun}" target="_blank">{yun:}$clist.hyname{/yun}</a></div>
+          <div class="newhot_special_pic"> <a href="{yun:}$clist.comurl{/yun}" target="_blank"><img src="{yun:}$clist.logo{/yun}" width="185" height="75"/></a></div>
+          <div class="newhot_special_job_name">
+		  {yun:}foreach from=$clist.jobs key=key item=jlist{/yun}
+			<a href="{yun:}$jlist.joburl{/yun}" target="_blank" class="newhot_special_job_n">{yun:}$jlist.name_n{/yun}</a> 
+            {yun:}/foreach{/yun}  
+            </div>
+           <div class="newhot_special_job_look"><a href="{yun:}url m=company c=show id='`$clist.uid`'{/yun}#job" target="_blank">查看更多职位>></a> </div>
+     </div>
+    </div>
+	{yun:}/if{/yun}
+    {yun:}/specialcom{/yun}
+   </div>
+</div>
+</div>
+<style>
+.foot{ margin-top:0px;}
+</style>
+<!--[if IE 6]>
+<script src="{yun:}$config.sy_weburl{/yun}/js/png.js"></script>
+<script>
+DD_belatedPNG.fix('.png');
+</script>
+<![endif]-->
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/lazyload.min.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/public.js" language="javascript"></script>
+<script src="{yun:}$style{/yun}/js/special.js" language="javascript"></script>
+<script language="javascript">
+var pricename='{yun:}$config.integral_pricename{/yun}'; 
+</script>
+{yun:}include file="$tplstyle/footer.htm"{/yun} 

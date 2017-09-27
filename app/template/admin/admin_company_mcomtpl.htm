@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link href="images/reset.css" rel="stylesheet" type="text/css" />
+<link href="images/system.css" rel="stylesheet" type="text/css" />  
+<link href="images/table_form.css" rel="stylesheet" type="text/css" />
+<title>后台管理</title>
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script>
+<script src="js/admin_public.js" language="javascript"></script> 
+<link href="images/blue.css" rel="stylesheet">
+<script> 
+function checktpl(id){
+    var pytoken=$("#pytoken").val();
+	var comid=$("#comid").val();
+	var msg="确定使用该模板？";
+	layer.confirm(msg,function(){ 
+		var i=layer.load('请稍候...',0);
+		$.get("index.php?m=admin_company&c=msettpl",{id:id,comid:comid,pytoken:pytoken},function(data){
+			layer.close(i);
+			var data=eval('('+data+')');
+				if(data.url=='1'){
+					layer.msg(data.msg, Number(data.tm), Number(data.st),function(){location.reload();});return false;
+				}else{
+					layer.msg(data.msg, Number(data.tm), Number(data.st),function(){location.href=data.url;});return false;
+				}
+			});
+	}); 
+}
+
+</script>
+</head>
+<body class="body_ifm">
+<div class="infoboxp">
+<div class="infoboxp_top_bg"></div>
+    <div class="admin_Filter"> 
+		<span class="complay_top_span fl">企业模板</span>
+    </div>
+    <div class="admin_table_border ">
+    <div class="table-list">
+    <table width="100%">
+     <tr><td style="border-bottom:none;">
+	{yun:}foreach from=$list item=style{/yun}
+   
+     <div class="admin_company_plbox">
+	<div class="admin_companypl_left"> <img width="300" height="160" alt="{yun:}$style.name{/yun}" src="../{yun:}$style.pic{/yun}"> </div>
+	<div class="admin_companypl_right">
+			<div class="admin_companypl_name">模板名称：{yun:}$style.name{/yun} <a href="{yun:}url m=company c=show id=$comid style=$style.url{/yun}" target="_blank">[预览]</a></div>
+			{yun:}if $statis.comtpl==$style.url {/yun}
+			<div class="admin_companypl_syz">使用中</div>
+			{yun:}else{/yun}
+			<a href="javascript:void(0);" onclick="checktpl('{yun:}$style.id{/yun}');" class="admin_companypl_sy">使用</a>
+			{yun:}/if{/yun}
+				
+		</div>
+</div>
+	
+	{yun:}/foreach{/yun}
+ </td>   </tr>
+    </table>
+    </div>
+	<input type="hidden" id="comid" value="{yun:}$smarty.get.comid{/yun}">
+	<input type="hidden" id="pytoken" value="{yun:}$pytoken{/yun}">
+</div></div>
+<style>
+.table-list tr:hover,.table-list table tbody tr:hover{ background:none}
+</style>
+</body>
+</html>

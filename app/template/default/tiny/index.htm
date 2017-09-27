@@ -1,0 +1,216 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>{yun:}$title{/yun}</title>
+<meta name="keywords" content="{yun:}$keywords{/yun}"/>
+<meta name="description" content="{yun:}$description{/yun}"/>
+<link rel="stylesheet" href="{yun:}$style{/yun}/style/css.css" type="text/css"/>
+<link href="{yun:}$style{/yun}/style/microresume.css" rel="stylesheet" type="text/css" />
+</head>
+<body class="once_bg">
+{yun:}include file="$tplstyle/header.htm"{/yun}
+{yun:}include file="$tplstyle/public_search/index_search.htm"{/yun}
+<div class="clear"></div>
+<div class="tiny_banner">
+<div class="once_banner_cont">
+ <div class="once_banner_cont_cur">您当前的位置：<a href="{yun:}$config.sy_weburl{/yun}">首页</a> > <a href="{yun:}url m=tiny{/yun}">普工专区</a></div>
+  <div class="once_banner_cont_b"><img src="{yun:}$style{/yun}/images/resume_banner.jpg" width="1200" height="213px"/> </div>
+        <div class="resume_con">
+          <div class="resume_con_tit yun_text_color"><b>普工简历</b>求职<b>新风尚</b>，让我们一起躁动起来</div>
+          <div class="resume_con_fb"> <a href='javascript:void(0);' {yun:}if $num>0 || $config.sy_tiny==0{/yun}onclick="showfabu1()"{yun:}else{/yun}onclick="layer.msg('每个IP每天最多可发布{yun:}$config.sy_tiny{/yun}份普工简历！',2,8)"{yun:}/if{/yun} title="发布普工简历" class="res_con_fb" style="margin-left:80px;">发布普工简历</a> 
+           </div>
+        </div>
+
+        
+  </div>
+ </div>
+ 
+<div class="micro_resume_bg">
+  <div class="micro_resume">
+    <div class="micro_resume_cont">
+   
+
+      <div class="res_search">
+       <div class="tiny_s_box">
+          <form action="{yun:}if !$config.sy_tinydir{/yun}index.php{yun:}else{/yun}{yun:}url m=tiny{/yun}{yun:}/if{/yun}"   method="get" onsubmit="return search_keyword(this,'请输入普工简历的关键字');">
+            <div class="res_time ">
+              <div class="res_time_con"> <span id="add_times">{yun:}if $smarty.get.add_time{/yun}{yun:}$add_time[$smarty.get.add_time]{/yun}{yun:}else{/yun}不限{yun:}/if{/yun}</span> <i></i> </div>
+              {yun:}if  !$config.sy_tinydir{/yun}
+              <input type="hidden" value="tiny" name="m" />
+              {yun:}/if{/yun}
+              <input type="hidden" name="add_time" id="add_time" value="{yun:}$getinfo.val{/yun}" />
+              <ul class="none" id="res_menu">
+                {yun:}foreach item=v key=key from=$add_time{/yun}
+                <li onclick="selecttiny('{yun:}$key{/yun}','{yun:}$v{/yun}');"><a href="javascript:;"> {yun:}$v{/yun}</a></li>
+                {yun:}/foreach{/yun}
+              </ul>
+            </div>
+            <div class="res_key">
+              <input id="key_word" class="res_key_txt" type="text" value="{yun:}if $smarty.get.keyword{/yun}{yun:}$smarty.get.keyword{/yun}{yun:}else{/yun}请输入普工简历的关键字{yun:}/if{/yun}"  name="keyword" onclick="if(this.value=='请输入普工简历的关键字'){this.value=''}" placeholder="请输入普工简历的关键字" onblur="if(this.value==''){this.value='请输入普工简历的关键字'}"/>
+              <input type="submit"  value="搜索" id="search_button" class="res_key_btn yun_bg_color"/>
+            </div>
+          </form> 
+          <div class="res_hot" > 热门搜索：
+            {yun:}key limit=8 type=13 item=keylist{/yun} <a href="{yun:}$keylist.url{/yun}"> {yun:}$keylist.key_name{/yun}</a> {yun:}/key{/yun} </div> 
+        
+           </div>            </div>
+
+      <div class="decline">
+       {yun:}tiny add_time='auto.add_time' item=wres ispage=1 limit=21 keyword='auto.keyword' {/yun}
+       
+          <div class="dec_det">
+            <div class="dec_det_con">    
+              <div class="mini_tit"> <span class="mini_tit_h1"> <a href="{yun:}url m=tiny c=show id=$wres.id{/yun}" > {yun:}$wres.job|mb_substr:0:30:'gbk'{/yun}</a></span> <span class="mini_tit_time"> 更新于{yun:}if $wres.redtime==1 || $wres.lastupdate=='昨天'{/yun} <span style="color:red;">{yun:}$wres.lastupdate{/yun}</span> {yun:}else{/yun}
+                {yun:}$wres.lastupdate{/yun}
+                {yun:}/if{/yun}</span> </div>
+              <div class="mini_det"> {yun:}$wres.username{/yun} <i>|</i>{yun:}$wres.sex{/yun}<i>|</i> {yun:}$wres.exp_name{/yun} <i>|</i> {yun:}if $config.user_wjl_link==1 && $uid<=0{/yun} <span>登录查看更多信息<a href="javascript:void(0);" onclick="showlogin('');" class="tiny_login">登录</a></span> {yun:}else{/yun}
+                <span class="tiny_tel">{yun:}$wres.mobile{/yun}</span>
+                {yun:}/if{/yun} </div>
+              <div class="mini_con">{yun:}$wres.production|mb_substr:0:100:gbk{/yun}</div>
+            </div>
+        
+          </a>
+        </div>
+        {yun:}/tiny{/yun} </div>
+      <div class="clear"></div>
+      {yun:}if $total!=0{/yun}
+      <div class="pages"> {yun:}$pagenav{/yun}</div>
+      {yun:}/if{/yun}
+      {yun:}if $total==0{/yun}
+      <div class="onceseachno">
+            <div class="onceseachno_left"> <img src="{yun:}$style{/yun}/images/search-no.gif"/></div>
+            <div class="onceseachno_content">  <strong>很抱歉，没有找到满足条件的简历</strong><br/>
+          <span> 建议您：<br/>
+          1、适当减少已选择的条件<br/>
+          2、适当删减或更改搜索关键字<br/>
+          </span> </div>
+      </div>
+      {yun:}/if{/yun} </div>
+  </div>
+</div>
+<div class="none" id="fabufast1">
+  <div >
+    
+    <form  method="post" action="{yun:}url m=tiny{/yun}" onSubmit="return check_resume_tiny()" target="supportiframe">
+      <ul class="micro_resume_release_list">
+        <li><span class="once_fb_list_span"><font color="#FF3300">*</font> 姓名：</span>
+          <input  type="text" value="" name="username" id="username" class="micro_resume_release_text"/>
+        </li>
+        <li><span class="once_fb_list_span"><font color="#FF3300">*</font>性别：</span> 
+          <!--      yun_info_sex_cur 控制他的状态-->
+           <input type="hidden" id="sex" name="sex" value="" />
+          {yun:}foreach from=$arr_data.sex key=j item=v{/yun}
+             <span class="yun_info_sex" id="sex{yun:}$j{/yun}" onclick="checksex('{yun:}$j{/yun}')"><i class="usericon_sex usericon_sex{yun:}$j{/yun}"></i>{yun:}$v{/yun}</span> 
+          {yun:}/foreach{/yun}   
+        </li>
+        <li><span  class="once_fb_list_span"><font color="#FF3300">*</font> 联系手机：</span>
+          <input type="text" name="mobile" id="mobile" value="" class="once_input_simple once_input_simple_w240" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')"/>
+        </li>
+        <li><span class="once_fb_list_span"><font color="#FF3300">*</font> 工作年限：</span>
+        <div class="tiny_exp_text">
+        <input type="button" id="exp" value="请选择" class="tiny_exp_but" onclick="check_exp('job_exp');">
+        <input type="hidden" id="expid" name="exp" value="" />
+      <ul class="tiny_exp_list" id="job_exp">
+       {yun:}foreach from=$userdata.user_word key=j item=v{/yun}
+             <li><a href="javascript:;" onclick="selectexp('{yun:}$v{/yun}','exp','{yun:}$userclass_name[$v]{/yun}');">{yun:}$userclass_name[$v]{/yun}</a></li>
+            {yun:}/foreach{/yun}
+            </ul>
+        </div>
+       
+        </li>
+        <li><span class="once_fb_list_span"><font color="#FF3300">*</font> 想找什么工作？：</span>
+          <input type="text" id="job" name="job" value="" class="once_input_simple once_input_simple_w240"/>
+          <span class="once_fb_list_tip"> 如：服装厂操作工</span> </li>
+        <li><span class="once_fb_list_span">自我介绍：</span>
+          <textarea id="production" name="production" class="once_simplew_textarea"placeholder="请输入你擅长的技能，例如：电机熟练工，能吃苦耐劳"></textarea>
+        </li>
+        <li class="add"><span class="once_fb_list_span"><font color="#FF3300">*</font>设置密码：</span>
+          <input type="password" name="password" id="password" value="" class="micro_resume_release_text" style='width:100px' onkeyup="this.value=this.value.replace(/^ +| +$/g,'')"/>
+          <em style="line-height:35px; display:inline-block; margin-left:5px;">密码可用于刷新/修改/删除信息！</em> </li>
+        {yun:}if strpos($config.code_web,"店铺招聘")!==false{/yun}
+			
+
+			{yun:}if $config.code_kind==3{/yun}	
+		
+            <li class="add"><span class="once_fb_list_span"><font color="#FF3300">*</font> 验证：</span>
+            <div class="tiny_verification">
+			<div id="popup-captcha" data-id='botton' data-type='click'></div>
+			<input type='hidden' id="popup-submit">
+           
+            </div>
+            </li>
+			{yun:}else{/yun}
+			
+			<li class="add"><span class="once_fb_list_span"><font color="#FF3300">*</font> 验证码：</span>
+			  <input type="text" id="authcode" name="authcode" class="micro_resume_release_text micro_resume_release_text2" maxlength="4"/>
+			  <a><img id="vcodeimgs" onclick="checkCode('vcodeimgs');" src="{yun:}$config.sy_weburl{/yun}/app/include/authcode.inc.php"/></a> 
+			</li>
+		
+			  {yun:}/if{/yun}
+			 
+		 {yun:}else{/yun}
+			<input id="authcode" type="hidden" value="12345" maxlength="4" name="authcode"/>
+        {yun:}/if{/yun}
+		
+        <li><span class="once_fb_list_span">&nbsp; </span>
+          <input type="hidden" name="id" id="id" value=""/>
+          <input class="uesr_submit once_fast_submit" type="submit" value="发布" id="botton" name="submit" />
+        </li>
+      </ul>
+    </form>
+  </div>
+</div>
+{yun:}include file="$tplstyle/public_search/login.htm"{/yun}
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/lazyload.min.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/public.js" language="javascript"></script>
+<script src="{yun:}$style{/yun}/js/fast.js" language="javascript"></script>
+<script src="{yun:}$style{/yun}/js/index.js" type="text/javascript"></script>
+<script src="http://static.geetest.com/static/tools/gt.js"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/geetest/pc.js" type="text/javascript"></script>
+<!--[if IE 6]>
+<script src="{yun:}$config.sy_weburl{/yun}/js/png.js"></script>
+<script>
+DD_belatedPNG.fix('.png');
+</script>
+<![endif]-->
+<script type="text/javascript">
+function checksex(id){
+	$('.yun_info_sex_cur').removeClass('yun_info_sex_cur');
+	$("#sex"+id).addClass('yun_info_sex_cur');
+	$("#sex").val(id);	
+}
+$(function(){
+	$(".res_time").hover(function(){
+		$(this).addClass("res_time_det");
+		$(this).find("#res_menu").show();
+		
+	},function(){
+		$(this).removeClass("res_time_det");
+		$(this).find("#res_menu").hide();		
+	});
+});
+function selecttiny(val,name){
+	$("#add_time").val(val);	
+	$('#add_times').html(name)
+	$("#res_menu").hide();
+}
+function selects(id,type,name){
+	$("#job_"+type).hide();
+	$("#"+type).val(name);
+	$("#"+type+"id").val(id);
+} 
+function check_exp(id){
+	$("#"+id).show();
+}
+function selectexp(id,type,name){
+	$("#"+type).val(name);
+	$("#"+type+"id").val(id);
+	$("#job_"+type).hide();
+}
+</script>
+<iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" class="none"></iframe>
+<div class="clear"></div>
+{yun:}include file="$tplstyle/footer.htm"{/yun}

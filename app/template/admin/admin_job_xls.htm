@@ -1,0 +1,66 @@
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>PHP output Excel Example</title>
+</head>
+<table width="100%" border="1">
+    <tr>
+		{yun:}if in_array("id",$type){/yun}<th>职位ID</th>{yun:}/if{/yun}
+		{yun:}if in_array("uid",$type){/yun}<th>企业UID</th>{yun:}/if{/yun}
+		{yun:}if in_array("name",$type){/yun}<th>职位名称</th>{yun:}/if{/yun}
+		{yun:}if in_array("hy",$type){/yun}<th>行业</th>{yun:}/if{/yun}
+		{yun:}if in_array("job1",$type){/yun}<th>一级类别</th>{yun:}/if{/yun}
+		{yun:}if in_array("job1_son",$type){/yun}<th>二级类别</th>{yun:}/if{/yun}
+		{yun:}if in_array("job_post",$type){/yun}<th>三级类别</th>{yun:}/if{/yun}
+		{yun:}if in_array("provinceid",$type){/yun}<th>省</th>{yun:}/if{/yun}
+		{yun:}if in_array("cityid",$type){/yun}<th>市</th>{yun:}/if{/yun}
+		{yun:}if in_array("three_cityid",$type){/yun}<th>县</th>{yun:}/if{/yun}
+		{yun:}if in_array("minsalary,maxsalary",$type){/yun}<th>薪水</th>{yun:}/if{/yun}
+		{yun:}if in_array("type",$type){/yun}<th>工作性质</th>{yun:}/if{/yun}
+		{yun:}if in_array("number",$type){/yun}<th>招聘人数</th>{yun:}/if{/yun}
+		{yun:}if in_array("exp",$type){/yun}<th>工作经验</th>{yun:}/if{/yun}
+		{yun:}if in_array("report",$type){/yun}<th>到岗时间</th>{yun:}/if{/yun}
+		{yun:}if in_array("sex",$type){/yun}<th>性别要求</th>{yun:}/if{/yun}
+		{yun:}if in_array("edu",$type){/yun}<th>教育程度</th>{yun:}/if{/yun}
+		{yun:}if in_array("marriage",$type){/yun}<th>婚姻状况</th>{yun:}/if{/yun}
+		{yun:}if in_array("sdate",$type){/yun}<th>开始日期</th>{yun:}/if{/yun}
+		{yun:}if in_array("edate",$type){/yun}<th>结束日期</th>{yun:}/if{/yun}
+		{yun:}if in_array("lastupdate",$type){/yun}<th>更新时间</th>{yun:}/if{/yun}
+		{yun:}if in_array("age",$type){/yun}<th>年龄要求</th>{yun:}/if{/yun}
+		{yun:}if in_array("lang",$type){/yun}<th>语言要求</th>{yun:}/if{/yun}
+		{yun:}if in_array("welfare",$type){/yun}<th>福利待遇</th>{yun:}/if{/yun}
+		{yun:}if in_array("com_name",$type){/yun}<th>公司名称</th>{yun:}/if{/yun}
+		{yun:}if in_array("pr",$type){/yun}<th>公司性质</th>{yun:}/if{/yun}
+		{yun:}if in_array("mun",$type){/yun}<th>企业规模</th>{yun:}/if{/yun}
+    </tr>
+    {yun:}foreach item=v key=key from=$list{/yun}
+    <tr>
+		{yun:}if in_array("id",$type){/yun}<td>{yun:}$v.id{/yun}</td>{yun:}/if{/yun}
+		{yun:}if in_array("uid",$type){/yun}<td>{yun:}$v.uid{/yun}</td>{yun:}/if{/yun}
+		{yun:}if in_array("name",$type){/yun}<td>{yun:}$v.name{/yun}</td>{yun:}/if{/yun}
+		{yun:}if in_array("hy",$type){/yun}<td>{yun:}$industry_name[$v.hy]{/yun}</td>{yun:}/if{/yun}
+		{yun:}if in_array("job1",$type){/yun}<td>{yun:}$job_name[$v.job1]{/yun}</td>{yun:}/if{/yun}
+		{yun:}if in_array("job1_son",$type){/yun}<td>{yun:}$job_name[$v.job1_son]{/yun}</td>{yun:}/if{/yun}
+		{yun:}if in_array("job_post",$type){/yun}<td>{yun:}$job_name[$v.job_post]{/yun}</td>{yun:}/if{/yun}
+		{yun:}if in_array("provinceid",$type){/yun}<td>{yun:}$city_name[$v.provinceid]{/yun}</td>{yun:}/if{/yun}
+		{yun:}if in_array("cityid",$type){/yun}<td>{yun:}$city_name[$v.cityid]{/yun}</td>{yun:}/if{/yun}
+		{yun:}if in_array("three_cityid",$type){/yun}<td>{yun:}$city_name[$v.three_cityid]{/yun}</td>{yun:}/if{/yun}
+		{yun:}if in_array("minsalary,maxsalary",$type){/yun}<td>{yun:}if $v.minsalary && $v.maxsalary{/yun}￥{yun:}$v.minsalary{/yun} -{yun:}$v.maxsalary{/yun}{yun:}else if $v.minsalary{/yun}￥{yun:}$v.minsalary{/yun}以上{yun:}else{/yun}面议{yun:}/if{/yun}</td>{yun:}/if{/yun}
+		{yun:}if in_array("type",$type){/yun}<td>{yun:}$comclass_name[$v.type]{/yun}</td>{yun:}/if{/yun}
+		{yun:}if in_array("number",$type){/yun}<td>{yun:}$comclass_name[$v.number]{/yun}</td>{yun:}/if{/yun}
+		{yun:}if in_array("exp",$type){/yun}<td>{yun:}$comclass_name[$v.exp]{/yun}</td>{yun:}/if{/yun}
+		{yun:}if in_array("report",$type){/yun}<td>{yun:}$comclass_name[$v.report]{/yun}</td>{yun:}/if{/yun}
+		{yun:}if in_array("sex",$type){/yun}<td>{yun:}$v.sex{/yun}</td>{yun:}/if{/yun}
+		{yun:}if in_array("edu",$type){/yun}<td>{yun:}$comclass_name[$v.edu]{/yun}</td>{yun:}/if{/yun}
+		{yun:}if in_array("marriage",$type){/yun}<td>{yun:}$comclass_name[$v.marriage]{/yun}</td>{yun:}/if{/yun}
+		{yun:}if in_array("sdate",$type){/yun}<td>{yun:}$v.sdate|date_format:"%Y-%m-%d"{/yun}</td>{yun:}/if{/yun}
+		{yun:}if in_array("edate",$type){/yun}<td>{yun:}$v.edate|date_format:"%Y-%m-%d"{/yun}</td>{yun:}/if{/yun}
+		{yun:}if in_array("lastupdate",$type){/yun}<td>{yun:}$v.lastupdate|date_format:"%Y-%m-%d"{/yun}</td>{yun:}/if{/yun}
+		{yun:}if in_array("age",$type){/yun}<td>{yun:}$comclass_name[$v.age]{/yun}</td>{yun:}/if{/yun}
+		{yun:}if in_array("lang",$type){/yun}<td>{yun:}$v.lang{/yun}</td>{yun:}/if{/yun}
+		{yun:}if in_array("welfare",$type){/yun}<td>{yun:}$v.welfare{/yun}</td>{yun:}/if{/yun}
+		{yun:}if in_array("com_name",$type){/yun}<td>{yun:}$v.com_name{/yun}</td>{yun:}/if{/yun}
+		{yun:}if in_array("pr",$type){/yun}<td>{yun:}$comclass_name[$v.pr]{/yun}</td>{yun:}/if{/yun}
+		{yun:}if in_array("mun",$type){/yun}<td>{yun:}$comclass_name[$v.mun]{/yun}</td>{yun:}/if{/yun}
+    </tr>
+    {yun:}/foreach{/yun}
+</table>

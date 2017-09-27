@@ -1,0 +1,157 @@
+{yun:}include file="$comstyle/header.htm"{/yun}
+<div class="w1000">
+<div class="admin_mainbody"> {yun:}include file="$comstyle/left.htm"{/yun}
+  <link href="{yun:}$comstyle{/yun}/images/index_style.css" type=text/css rel=stylesheet>
+  <div class=right_box>
+    <div class=admincont_box>
+    <div class="job_list_tit">
+         <ul class="">
+         <li {yun:}if $smarty.get.c=="hr"{/yun} class="job_list_tit_cur"{yun:}/if{/yun}><a href="index.php?c=hr">应聘简历</a></li>
+         <li {yun:}if $smarty.get.c=="down"{/yun} class="job_list_tit_cur"{yun:}/if{/yun}><a href="index.php?c=down">已下载简历</a></li>
+         <li {yun:}if $smarty.get.c=="talent_pool"{/yun} class="job_list_tit_cur"{yun:}/if{/yun}><a href="index.php?c=talent_pool">收藏简历</a></li>
+         <li {yun:}if $smarty.get.c=="look_resume"{/yun} class="job_list_tit_cur"{yun:}/if{/yun}><a href="index.php?c=look_resume">浏览简历</a></li>
+         <li {yun:}if $smarty.get.c=="record"{/yun} class="job_list_tit_cur"{yun:}/if{/yun}><a href="index.php?c=record" title="网站为您推荐的简历">网站推荐简历</a></li>
+         </ul>
+         </div>
+    <div class="clear"></div>
+            <form action="index.php" method="get">
+        <div class="news_search">
+          <input name="c" type="hidden" value="down">
+          <input name="keyword" type="text" class="news_text" placeholder="请输入简历关键字" value="{yun:}$smarty.get.keyword{/yun}">
+          <input name="" type="submit" class="news_bth" value="搜索">
+        </div>
+        </form>
+    
+      <div class="com_body">
+        <div class=admin_textbox_04>
+          <iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe>
+          <form action="{yun:}$now_url{/yun}&act=del" target="supportiframe" method="post" id='myform'>
+            <div class="" style="margin-top:10px;">
+              <div id="job_checkbokid">
+              {yun:}if !empty($rows){/yun}
+                <div class="job_news_list job_news_list_h1"> 
+                <span class="job_news_list_span job_w30">&nbsp;</span> 
+                 <span class="job_news_list_span job_w80" style="text-align:left">姓名</span> 
+                 <span class="job_news_list_span job_w270">求职意向</span> 
+                 <span class="job_news_list_span job_w100">工作经验</span> 
+                <span class="job_news_list_span job_w100">期望薪资</span> 
+                <span class="job_news_list_span job_w120">下载时间</span> 
+                <span class="job_news_list_span job_w150" style="text-align:center">操作</span> 
+                </div>
+                {yun:}foreach  from=$rows  item=v{/yun}
+                <div class="job_news_list"> <span class="job_news_list_span job_w30" style="padding-right:6px;">
+                  <input type="checkbox" name="delid[]" value="{yun:}$v.id{/yun}"  class="com_Release_job_qx_check" style="margin-top:2px;">
+                  </span>
+                  <span class="job_news_list_span job_w80" style="text-align:left"><a href="{yun:}url m=resume c=show id='`$v.eid`'{/yun}"  target=_blank class="com_Release_name" >{yun:}$v.name{/yun}&nbsp;</a>
+				  {yun:}if $v.height_status==2{/yun}<img src="{yun:}$com_style{/yun}/images/yun_gj.png" title="高级简历">{yun:}/if{/yun}</span>
+                  <span class="job_news_list_span job_w270"><span class="yxjob_name">{yun:}$v.jobname{/yun}</span>&nbsp;</span>  
+                   <span class="job_news_list_span job_w100">{yun:}$v.exp{/yun}&nbsp;</span> 
+                   <span class="job_news_list_span job_w100">{yun:}if $v.minsalary&&$v.maxsalary{/yun}￥{yun:}$v.minsalary{/yun}-{yun:}$v.maxsalary{/yun}{yun:}else if $v.minsalary{/yun}￥{yun:}$v.minsalary{/yun}以上{yun:}else{/yun}面议{yun:}/if{/yun}&nbsp;</span> 
+                   <span class="job_news_list_span job_w120">{yun:}$v.downtime|date_format:'%Y-%m-%d'{/yun}&nbsp;</span> 
+                
+                   <span class="job_news_list_span job_w150" style="text-align:center"> {yun:}if $v.userid_msg==1{/yun} <font color="#aaa">已经邀请</font> {yun:}else{/yun} <a href="javascript:;" uid="{yun:}$v.uid{/yun}" username="{yun:}$v.name{/yun}" id="b" class="sq_resume uesr_name_a" style="position:relative; "> 邀请面试</a> {yun:}/if{/yun} 
+                  {yun:}if $report==1{/yun} 
+                  <span class="com_m_line">|</span> <a href="javascript:;" r_uid="{yun:}$v.uid{/yun}" eid="{yun:}$v.eid{/yun}" r_name="{yun:}$v.name{/yun}" id="r"  class="status uesr_name_a" >举报</a>{yun:}/if{/yun} <span class="com_m_line">|</span> <a href="javascript:void(0)" onclick="layer_del('确定要删除？','{yun:}$now_url{/yun}&act=del&id={yun:}$v.id{/yun}')" class="uesr_name_a">删除</a> </span>
+                   </div>
+                {yun:}/foreach{/yun}
+                <div>
+                  <div class="com_Release_job_bot"> <span class="com_Release_job_qx">
+                    <input id='checkAll'  type="checkbox" onclick='m_checkAll(this.form)' class="com_Release_job_qx_check">
+                    全选</span>
+                    <INPUT class="c_btn_02"  type="button" name="subdel" value="批量删除" onclick="return Delete('delid[]');">
+                    <INPUT class="c_btn_02"  type="button" name="subdel" value="批量导出" onclick="check_xls('delid[]');">
+                  </div>
+                  <div class="diggg">{yun:}$pagenav{/yun}</div>
+                </div>
+                {yun:}elseif $smarty.get.keyword!="" {/yun}
+                 <div class="msg_no"><p>没有搜索到下载简历！</p>
+                 <a href="{yun:}url m=resume{/yun}" class="com_msg_no_bth com_submit">我要主动找人才</a></div>
+                {yun:}else{/yun}
+                 <div class="msg_no"><p>亲爱的用户，目前您还没有下载简历。</p>
+                 <a href="{yun:}url m=resume{/yun}" class="com_msg_no_bth com_submit">我要主动找人才</a></div>
+                {yun:}/if{/yun} </div>
+              {yun:}if !empty($rows){/yun}
+              <div class="wxts_box wxts_box_mt30">
+			  <div class="wxts">温馨提示：</div>
+			 您已下载（<span class="f60">{yun:}$total{/yun}</span>）份简历,  <a href="{yun:}url m=resume{/yun}" class="fb_Com_xz"  target="_blank" style="text-align:center; line-height:25px;">找人才</a><br>       
+			</div>
+              {yun:}/if{/yun}
+			  </div>
+              <div  class="clear"></div>
+    
+          </form>
+          <div class="clear"></div>
+          <div class="infoboxp22" id="infobox" style="display:none; ">
+            <div>
+              <form action="index.php?c=down&act=report" method="post" id="formstatus" target="supportiframe">
+                <input name="r_uid" value="0" type="hidden">
+                <input name="eid" value="0" type="hidden">
+                <input name="r_name" value="0" type="hidden">
+                <div class="jb_infobox" style="width: 100%;">
+                  <textarea id="alertcontent" style="width:310px;margin:5px" name="r_reason" cols="30" rows="9" class="hr_textarea"></textarea>
+                </div>
+                <div class="jb_infobox" style="width: 100%;">
+                  <button type="submit"   name='submit' value='1' class="submit_btn" style="margin-left:80px;">确认</button>
+                  &nbsp;&nbsp;
+                  <button type="button" id='zxxCancelBtn'  class="cancel_btn">取消</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<script>
+function Delete(name){
+	var chk_value =[];    
+	$('input[name="'+name+'"]:checked').each(function(){    
+		chk_value.push($(this).val());   
+	});   
+	if(chk_value.length==0){
+		layer.msg("请选择要删除的数据！",2,8);return false;
+	}else{
+		layer.confirm("确定删除吗？",function(){
+			$("#myform").attr("action","index.php?c=down&act=del");
+			setTimeout(function(){$('#myform').submit()},0); 
+		});
+	} 
+} 
+function check_xls(name){
+	var chk_value =[];    
+	$('input[name="'+name+'"]:checked').each(function(){    
+		chk_value.push($(this).val());   
+	});
+	if(chk_value.length==0){
+		layer.msg("请选择您要导出的数据！",2,8);return false;
+	}else{
+		layer.confirm("确定导出吗？",function(){
+			$("#myform").attr("action","index.php?c=down&act=xls");
+			setTimeout(function(){$('#myform').submit()},0); 
+			layer.closeAll();
+		});
+	} 
+}	
+$(document).ready(function(){ 
+	$('#zxxCancelBtn').click(function(){
+		layer.closeAll();
+	});
+	$(".status").click(function(){
+		$("input[name=eid]").val($(this).attr("eid"));
+		$("input[name=r_uid]").val($(this).attr("r_uid"));
+		$("input[name=r_name]").val($(this).attr("r_name")); 
+		$.layer({
+			type : 1,
+			title :'举报', 
+			closeBtn : [0 , true],
+			border : [10 , 0.3 , '#000', true],
+			area : ['320px','160px'],
+			page : {dom :"#infobox"}
+		});
+	}); 
+}); 
+</script>
+{yun:}include file="$comstyle/yqms.htm"{/yun}
+{yun:}include file="$comstyle/footer.htm"{/yun}

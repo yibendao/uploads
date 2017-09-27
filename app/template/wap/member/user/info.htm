@@ -1,0 +1,154 @@
+{yun:}include file="$wapstyle/member/header.htm"{/yun} 
+<script src="{yun:}$wap_style{/yun}/js/resume.js" language="javascript"></script> 
+
+<script src="{yun:}$wap_style{/yun}/js/mobiscroll/mobiscroll_002.js"></script>
+<script src="{yun:}$wap_style{/yun}/js/mobiscroll/mobiscroll.js"></script>
+<script src="{yun:}$wap_style{/yun}/js/mobiscroll/mobiscroll_003.js"></script>
+<link rel="stylesheet" href="{yun:}$wap_style{/yun}/js/mobiscroll/css/animate.min.css" type="text/css">
+<link rel="stylesheet" href="{yun:}$wap_style{/yun}/js/mobiscroll/css/mobiscroll.css" type="text/css"> 
+<script>
+$(function () {
+	var currYear = (new Date()).getFullYear();
+	var opt = {
+		preset: 'date', 
+		theme: 'android-ics light', 
+		display: 'modal', 
+		mode: 'scroller', 
+		dateFormat: 'yy-mm-dd', 
+		setText: '确定', 
+		cancelText: '取消',
+		dateOrder: 'yyyymmdd', 
+		dayText: '日', monthText: '月', yearText: '年',
+		startYear: currYear - 100, 
+		endYear: currYear-18 
+	};
+	$("#birthday").mobiscroll('setDate', $("#birthday").val(), true).date(opt); 
+});
+</script> 
+
+ 
+
+<form id="resumeInfo" action="index.php?c=info" method="post" onsubmit="return checkinfo(this);" enctype="multipart/form-data" >
+  <div class="main_member_cot_box">
+    <div class="wap_member_comp_h1"><span>基本信息</span></div>
+    <div class="yun_wap_addresume_box">
+      <div class="yun_wap_addresume_box_group">
+        <div class="yun_wap_addresume_box_label"> 姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名 <span class="resume-cont_wate_bj">*</span> </div>
+        <div class="yun_wap_addresume_box_control">
+          <input type="text" name="name" value="{yun:}$resume.name{/yun}" placeholder="请填写真实姓名" class="yun_wap_addresume_text" style="width:100px">
+			 <span class="info_bh"> 
+             <em class="info_bh_box">
+             <select name='nametype' class="info_selectname" >
+				<option value='1' {yun:}if $resume.nametype==1{/yun}selected{yun:}/if{/yun}>完全公开</option>
+				<option value='2' {yun:}if $resume.nametype==2{/yun}selected{yun:}/if{/yun}>显示编号</option>
+				<option value='3' {yun:}if $resume.nametype==3{/yun}selected{yun:}/if{/yun}>隐藏名字</option>
+			  </select>
+              </em>
+              </span>
+        </div>
+      </div>
+      <div class="yun_wap_addresume_box_group">
+        <div class="yun_wap_addresume_box_label"> 性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别 <span class="resume-cont_wate_bj">*</span> </div>
+        <div class="yun_wap_addresume_box_control">
+          <div class="select"><span class="txt sex">
+          
+          
+          {yun:}if $resume.sex==1{/yun}{yun:}$arr_data1{/yun}{yun:}else if $resume.sex==2{/yun}{yun:}$arr_data1{/yun}{yun:}else{/yun}请选择性别{yun:}/if{/yun}</span>
+        <select id="sex" name="sex" class="textval" onchange="ckresume('sex')">    
+        <option value="">请选择</option>      
+            {yun:}foreach from=$arr_data.sex key=j item=v{/yun}    
+          <option value="{yun:}$j{/yun}" {yun:}if $resume.sex==$j{/yun}selected="selected"{yun:}/if{/yun}>{yun:}$v{/yun}</option>
+            {yun:}/foreach{/yun}         
+           
+        </select>
+          </div>
+        </div>
+      </div>
+      <div class="yun_wap_addresume_box_group">
+        <div class="yun_wap_addresume_box_label"> 出生年月 <span class="resume-cont_wate_bj">*</span> </div>
+        <div class="yun_wap_addresume_box_control"> 
+			<input id="birthday" class="yun_wap_addresume_text"onfocus="this.blur();"  type="text" value="{yun:}$resume.birthday{/yun}" name="birthday"placeholder="请选择出生日期" >  
+        </div>
+      </div>
+      <div class="yun_wap_addresume_box_group">
+        <div class="yun_wap_addresume_box_label"> 最高学历 <span class="resume-cont_wate_bj">*</span> </div>
+        <div class="yun_wap_addresume_box_control">
+          <div class="select"><span class="txt edu">
+          {yun:}if $resume.edu{/yun}{yun:}$userclass_name[$resume.edu]{/yun}{yun:}else{/yun}请选择最高学历{yun:}/if{/yun}</span>
+            <select id="edu" name="edu" class="textval" onchange="ckresume('edu')">  
+            <option value="">请选择</option>           
+            {yun:}foreach from=$userdata.user_edu item=v{/yun}          
+            <option value="{yun:}$v{/yun}" {yun:}if $resume.edu==$v{/yun}selected="selected"{yun:}/if{/yun}>{yun:}$userclass_name[$v]{/yun}</option>              
+            {yun:}/foreach{/yun}
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="yun_wap_addresume_box_group">
+        <div class="yun_wap_addresume_box_label"> 工作经验 <span class="resume-cont_wate_bj">*</span> </div>
+        <div class="yun_wap_addresume_box_control">
+          <div class="select"> <span class="txt exp">{yun:}if $resume.exp{/yun}{yun:}$userclass_name[$resume.exp]{/yun}{yun:}else{/yun}请选择工作经验{yun:}/if{/yun}</span>
+            <select id="exp" name="exp"class="textval" onchange="ckresume('exp')"> 
+            <option value="">请选择</option>            
+              {yun:}foreach from=$userdata.user_word item=v{/yun}          
+              <option value="{yun:}$v{/yun}" {yun:}if $resume.exp==$v{/yun}selected="selected"{yun:}/if{/yun}>{yun:}$userclass_name[$v]{/yun}</option>              
+              {yun:}/foreach{/yun}        
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="yun_wap_addresume_box_group">
+        <div class="yun_wap_addresume_box_label"> 手机号码 <span class="resume-cont_wate_bj">*</span> </div>
+        <div class="yun_wap_addresume_box_control"> {yun:}if $resume.moblie_status==1{/yun}
+          {yun:}$resume.telphone{/yun} <a href="index.php?c=binding" style="color:red;">重新认证</a>
+          <input type="text" id="telphone" value="{yun:}$resume.telphone{/yun}" style="display:none;">
+          {yun:}else{/yun}
+          <input type="text" name="telphone" id="telphone" value="{yun:}$resume.telphone{/yun}" onkeyup="this.value=this.value.replace(/[^0-9.]/g,'')" class="yun_wap_addresume_text"placeholder="请填写手机号码" >
+          {yun:}/if{/yun} </div>
+      </div>
+      <div class="yun_wap_addresume_box_group">
+        <div class="yun_wap_addresume_box_label"> 联系邮箱 </div>
+        <div class="yun_wap_addresume_box_control"> {yun:}if $resume.email_status==1{/yun}
+          {yun:}$resume.email{/yun}<a href="index.php?c=binding" style="color:red;">重新认证</a>
+          <input type="text" id="email" value="{yun:}$resume.email{/yun}" style="display:none;" class="yun_wap_addresume_text">
+          {yun:}else{/yun}
+          <input type="text" name="email" id="email" value="{yun:}$resume.email{/yun}"   class="yun_wap_addresume_text"placeholder="请填写联系邮箱" >
+          {yun:}/if{/yun} </div>
+      </div>
+      <div class="yun_wap_addresume_box_group">
+        <div class="yun_wap_addresume_box_label"> 现居住地 <span class="resume-cont_wate_bj">*</span> </div>
+        <div class="yun_wap_addresume_box_control">
+          <input type="text" name="living" id="living" value="{yun:}$resume.living{/yun}"  placeholder="比如：苏州-沧浪区" class="yun_wap_addresume_text">
+        </div>
+      </div>
+      <div class="yun_wap_addresume_box_group">
+        <div class="yun_wap_addresume_box_label"> QQ </div>
+        <div class="yun_wap_addresume_box_control">
+          <input type="text" name="qq" id="qq" value="{yun:}$resume.qq{/yun}"  placeholder="输入你的QQ号码" class="yun_wap_addresume_text">
+        </div>
+      </div>
+      <div class="yun_wap_addresume_box_group">
+        <div class="yun_wap_addresume_box_label">个人二维码</div>
+        <div class="yun_wap_addresume_box_control">
+                <div class="yun_wap_addresume_box_ewm">
+         <i class="user_ewm_photo_img"></i>
+          <span class="user_ewm_photo_b"> 个人二维码</span>
+          <input type="file" name="wxewm" id="wxewm"  class="user_ewm_photo_b_file">
+          </div>
+        </div>
+		  <div class="yun_wap_addresume_box_label"></div>
+        <div class="yun_wap_addresume_box_control">
+          {yun:}if $resume.wxewm{/yun}
+              <img src="{yun:}$config.sy_weburl{/yun}{yun:}$resume.wxewm{/yun}"  width="100" height="100" />
+              {yun:}/if{/yun}
+        </div>
+      </div>
+     
+      <div class="yun_wap_addresume_box_group" style="background: transparent; border: none;">
+        <input type="submit" name="submit" value="保存" class="reinputText2">
+      </div>
+    </div>
+  </div>
+</form>
+
+{yun:}include file="$wapstyle/footer.htm"{/yun} 

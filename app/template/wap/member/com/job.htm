@@ -1,0 +1,131 @@
+{yun:}include file="$wapstyle/member/cheader.htm"{/yun} 
+<section class="wap_member">
+<div class="wap_member_comp_h1" style="position:relative"><span>职位管理</span></div>
+{yun:}if !empty($rows){/yun}
+	<div class="wap_member_job_show">
+	{yun:}foreach item=v from=$rows{/yun}
+	<div class="wap_member_msg ">
+	<div class="wap_member_date">
+	<span class="yun_m_job_date_n">&nbsp;<a href="{yun:}url m=wap c=job a=view id=$v.id{/yun}" class="job_list_jobname com_member_hr_cblue">{yun:}$v.name{/yun}</a></span>
+	<div class="wap_member_date_r">
+	{yun:}if $v.edate < time(){/yun}
+	<span class="wap_member_ygq">已过期<span>
+	{yun:}elseif $v.state==1{/yun}
+	已审核
+	{yun:}elseif $v.state==3{/yun}
+	<span class="wap_member_wtg" onclick="layermsg('{yun:}$v.statusbody{/yun}');return false;">未通过</span>
+	{yun:}elseif $v.state==0{/yun}
+	<em>未审核</em>
+	{yun:}/if{/yun}
+	</div>
+	</div>
+
+
+	<div class="yun_m_job_list_zt">应聘简历：{yun:}$v.snum{/yun}  <span class="wap_member_msg_job_s">浏览量：{yun:}$v.jobhits{/yun} </span></div>
+	<div class="yun_m_job_list_zt">更新时间：{yun:}$v.lastupdate|date_format:"%Y-%m-%d"{/yun}</div>
+	<div class="yun_m_job_list_tg"><a href="javascript:void(0)" onclick="showserver('{yun:}$v.id{/yun}')">我要推广</a></div>
+    <div class="yun_m_job_list_zt">
+    {yun:}if $v.xsdate>time(){/yun}
+    <span class="yun_m_job_list_fw">已置顶</span>
+    {yun:}/if{/yun}
+    {yun:}if $v.rec_time>time() && $v.rec==1{/yun}
+    <span class="yun_m_job_list_fw">已推荐</span>
+     {yun:}/if{/yun}
+    {yun:}if $v.urgent_time>time() && $v.urgent==1{/yun}
+    <span class="yun_m_job_list_fw">已紧急</span>
+    {yun:}/if{/yun}
+    {yun:}if $v.autotime>time(){/yun}
+    <span class="yun_m_job_list_fw">自动刷新</span>
+    {yun:}/if{/yun}
+    
+    
+    </div>
+	<div class="yun_member_bth">
+
+	<a href="javascript:layer_del('确定要删除？','index.php?c=jobdel&id={yun:}$v.id{/yun}');"class="yun_member_sub  yun_member_bth1">删除</a>
+	 {yun:}if $statis.vip_etime>time() || $statis.vip_etime=="0"{/yun}
+			{yun:}if $statis.rating_type==1{/yun}
+				{yun:}if $statis.breakjob_num>0{/yun} 
+					<a class="yun_member_sub  yun_member_bth1"  href="javascript:void(0)" onclick="layer_del('刷新职位数还剩余{yun:}$statis.breakjob_num{/yun}个！确认刷新？', 'index.php?c=refreshjob&up={yun:}$v.id{/yun}');">刷新</a>
+				{yun:}else{/yun}
+					{yun:}if $config.com_integral_online==1{/yun}
+						{yun:}if $config.integral_jobefresh>0{/yun}
+						<a class="yun_member_sub  yun_member_bth1"  href="javascript:void(0)" onclick="layer_del('本次刷新需扣除{yun:}$config.integral_jobefresh{/yun}{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}！确认刷新？', 'index.php?c=refreshjob&up={yun:}$v.id{/yun}');">刷新</a> 
+						{yun:}else{/yun}
+						<a class="yun_member_sub  yun_member_bth1"  href="javascript:void(0)" onclick="layer_del('确定刷新该职位么？', 'index.php?c=refreshjob&up={yun:}$v.id{/yun}');">刷新</a> 
+						{yun:}/if{/yun} 
+					{yun:}else{/yun}
+					<a class="yun_member_sub  yun_member_bth1" href="javascript:void(0)" onclick="layermsg('刷新次数已用完');return false;">刷新</a> 
+					{yun:}/if{/yun}
+				{yun:}/if{/yun}
+			{yun:}else{/yun}
+				<a class="yun_member_sub  yun_member_bth1" href="javascript:void(0)" onclick="layer_del('确定刷新该职位么？', 'index.php?c=refreshjob&up={yun:}$v.id{/yun}');">刷新</a>
+			{yun:}/if{/yun}
+		{yun:}else{/yun}
+			{yun:}if $config.com_integral_online==1{/yun} 
+				<a class="yun_member_sub  yun_member_bth1" href="javascript:void(0)" onclick="layer_del('本次刷新需扣除{yun:}$config.integral_jobefresh{/yun}{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}！确认刷新？', 'index.php?c=refreshjob&up={yun:}$v.id{/yun}');">刷新</a> 
+			{yun:}else{/yun} 
+				<a  href="javascript:void(0)" class="yun_member_sub  yun_member_bth1" onclick="layermsg('刷新次数已用完');return false;">刷新</a> 
+			{yun:}/if{/yun}
+		{yun:}/if{/yun}  
+		
+    <a href="index.php?c=jobadd&id={yun:}$v.id{/yun}" class="yun_member_sub yun_member_bth2">修改</a>
+  
+	{yun:}if $v.status==1{/yun}
+	<a href="javascript:void(0)" onclick="layer_del('','index.php?c=jobset&status=2&id={yun:}$v.id{/yun}')"class="yun_member_sub yun_member_bth3" ><span class="yun_member_yzt">已下架</span>上架招聘</a>
+	{yun:}else{/yun}
+	<a href="javascript:void(0)" onclick="layer_del('','index.php?c=jobset&status=1&id={yun:}$v.id{/yun}')"class="yun_member_sub yun_member_bth3">下架</a>
+	{yun:}/if{/yun}
+
+	</div>
+
+	</div>
+	{yun:}foreachelse{/yun}
+	<div class="wap_member_no">您暂时还没有职位</div>
+	{yun:}/foreach{/yun}
+	<em class="wap_memberjob_fabu "><a href="javascript:void(0)" onclick="jobadd_url('{yun:}$statis.addjobnum{/yun}','{yun:}$config.integral_job{/yun}','{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}','job','{yun:}$statis.integral{/yun}');" style="width:100%;height:43px; line-height:43px; font-size:16px; margin-top:10px; background:#F90;color:#fff; display:inline-block; text-align:center">发布职位</a></em>
+
+	<div class="pages" style="margin-top:10px;"> {yun:}$pagenav{/yun}</div>
+	</div>
+{yun:}else{/yun}
+  <div class="wap_member_no">您还没有发布职位。</div>
+  <em class="wap_memberjob_fabu "><a href="javascript:void(0)" onclick="jobadd_url('{yun:}$statis.addjobnum{/yun}','{yun:}$config.integral_job{/yun}','{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}','job','{yun:}$statis.integral{/yun}');" style="width:100%;height:43px; line-height:43px; font-size:16px; margin-top:10px; background:#F90;color:#fff; display:inline-block; text-align:center">发布职位</a></em>
+{yun:}/if{/yun}
+
+</section>
+
+<div style="width:100%;height:100%; background:rgba(51,51,51,0.5); position:fixed;left:0px;top:0px;z-index:1000000;display:none" id="jobserver">
+	<div style="width:100%; position:absolute;left:0px;top:40px;">
+		<div style=" padding:20px;">  
+			<div class="job_extension_tck" style="display:block">
+				<div class="job_extension_tck_tit">职位推广<span onclick="$('#jobserver').hide();" style="float:right">关闭</span></div>
+				<ul class="serverul">
+					<li onclick="ckserver('1');" class="server1 job_extension_tck_yse"><a href="javascript:void(0)"><i class="job_extension_tck_icon "></i>自动刷新</a></li>
+					<li onclick="ckserver('2');" class="server2"><a href="javascript:void(0)"><i class="job_extension_tck_icon "></i>职位置顶</a></li>
+					<li onclick="ckserver('3');" class="server3"><a href="javascript:void(0)"><i class="job_extension_tck_icon "></i>推荐职位</a></li>
+					<li onclick="ckserver('4');" class="server4"><a href="javascript:void(0)"><i class="job_extension_tck_icon "></i>紧急招聘</a></li>
+				</ul>
+				<input id="server" value='1' type="hidden" />
+				<input id="jobid" value='' type="hidden" />
+				<div class="job_extension_tck_bth"><a href="javascript:void(0)" onclick="forserver()" class="job_extension_tck_sub">确定</a></div>
+			</div> 
+		</div> 
+	</div>
+</div> 
+<script> 
+function showserver(id){
+	$('#jobid').val(id);
+	$('#jobserver').show();
+}
+function ckserver(type){
+	$("#server").val(type);
+	$(".serverul li").removeClass("job_extension_tck_yse");
+	$(".server"+type).addClass("job_extension_tck_yse");
+}
+function forserver(){
+	var server=$("#server").val();
+	var jobid=$("#jobid").val();
+	window.location.href="index.php?c=getserver&id="+jobid+"&server="+server;
+}
+</script>
+{yun:}include file="$wapstyle/footer.htm"{/yun} 

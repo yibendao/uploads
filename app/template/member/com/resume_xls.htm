@@ -1,0 +1,84 @@
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>PHP output Excel Example</title>
+    </head>
+        <table width="100%" border="1">
+    <tr>
+        <th>简历ID</th>
+        <th>简历名称</th>
+        <th>用户UID</th>
+        <th>姓名</th>
+        <th>性别</th>
+        <th>生日</th>
+        <th>婚姻</th>
+        <th>身高</th>
+        <th>民族</th>
+        <th>体重</th>
+        <th>身份证</th>
+        <th>手机</th>
+        <th>座机</th>
+        <th>邮件</th>
+        <th>教育程度</th>
+        <th>个人主页</th>
+        <th>详细地址</th>
+        <th>工作经验</th>
+        <th>户籍所在地</th>
+        <th>现居住地</th>  
+        <th>自我评价</th>
+        <th>意向行业</th>
+        <th>意向职位</th>
+        <th>省</th>
+        <th>市</th>
+        <th>县</th>
+        <th>薪水</th>
+        <th>工作性质</th>
+        <th>到岗时间</th>
+        <th>更新时间</th>
+        <th>教育经历</th>
+        <th>培训经历</th>
+        <th>职业技能</th>
+        <th>工作经历</th>
+        <th>项目经验</th>
+        <th>其他</th>
+    </tr>
+    {yun:}foreach item=v key=key from=$list{/yun}
+    <tr>
+        <td>{yun:}$v.id{/yun}</td>
+        <td>{yun:}$v.name{/yun}</td>
+        <td>{yun:}$v.resume.uid{/yun}</td>
+        <td>{yun:}$v.resume.name{/yun}</td>
+        <td>{yun:}$v.sex{/yun}</td>
+        <td>{yun:}$v.resume.birthday{/yun}</td>
+        <td>{yun:}$userclass_name[$v.resume.marriage]{/yun}</td>
+        <td>{yun:}if $v.resume.height{/yun}{yun:}$v.resume.height{/yun}CM{yun:}/if{/yun}</td>
+        <td>{yun:}$v.resume.nationality{/yun}</td>
+        <td>{yun:}if $v.resume.weight{/yun}{yun:}$v.resume.weight{/yun}KG{yun:}/if{/yun}</td>
+        <td>{yun:}$v.resume.idcard{/yun}</td>
+        <td>{yun:}$v.resume.telphone{/yun}</td>
+        <td>{yun:}$v.resume.telhome{/yun}</td>
+        <td>{yun:}$v.resume.email{/yun}</td>
+        <td>{yun:}$userclass_name[$v.resume.edu]{/yun}</td>
+        <td>{yun:}$v.resume.homepage{/yun}</td>
+        <td>{yun:}$v.resume.address{/yun}</td>
+        <td>{yun:}$userclass_name[$v.resume.exp]{/yun}</td>
+        <td>{yun:}$v.resume.domicile{/yun}</td>
+        <td>{yun:}$v.resume.living{/yun}</td>
+        <td>{yun:}$v.resume.description{/yun}</td>
+        <td>{yun:}$industry_name[$v.hy]{/yun}</td>
+        <td>{yun:}$v.job_classid{/yun}</td>
+        <td>{yun:}$city_name[$v.provinceid]{/yun}</td>
+        <td>{yun:}$city_name[$v.cityid]{/yun}</td>
+        <td>{yun:}$city_name[$v.three_cityid]{/yun}</td>
+        <td>{yun:}$v.msalary{/yun}</td>
+        <td>{yun:}$userclass_name[$v.type]{/yun}</td>
+        <td>{yun:}$userclass_name[$v.report]{/yun}</td>
+        <td>{yun:}$v.lastupdate|date_format:"%Y-%m-%d"{/yun}</td>
+        <td>{yun:}$v.user_edu{/yun}</td>
+        <td>{yun:}$v.user_training{/yun}</td>
+        <td>{yun:}$v.user_skill{/yun}</td>
+        <td>{yun:}$v.user_work{/yun}</td>
+        <td>{yun:}$v.user_project{/yun}</td>
+        <td>{yun:}$v.user_other{/yun}</td>
+    </tr>
+    {yun:}/foreach{/yun}
+    </table>

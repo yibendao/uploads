@@ -1,0 +1,203 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>{yun:}$title{/yun}</title>
+<meta name="keywords" content="{yun:}$keywords{/yun}" />
+<meta name="description" content="{yun:}$description{/yun}" />
+<link rel="stylesheet" href="{yun:}$style{/yun}/style/css.css" type="text/css" />
+<link rel="stylesheet" href="{yun:}$style{/yun}/style/yun_seach.css" type="text/css" />
+<link href="{yun:}$style{/yun}/style/style.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="{yun:}$style{/yun}/style/class.public.css" type="text/css" />
+</head>
+<body class="body_bg">
+{yun:}include file="$tplstyle/header.htm"{/yun}
+{yun:}include file="$tplstyle/public_search/index_search.htm"{/yun}
+<div class="clear"></div>
+<div class="yun_content">
+<div class="current_Location  png"> 您当前的位置：<a href="{yun:}$config.sy_weburl{/yun}">首页</a> > <a href="{yun:}url m=company{/yun}">找企业</a> </div>
+<div class="clear"></div>
+	{yun:}include file="$tplstyle/public_search/firm_search.htm"{/yun}
+    <div class="firmsearch_h1_box_title">
+		<ul class="firmsearch_h1_box_list">
+			<li {yun:}if !$smarty.get.rec{/yun}class="firmsearch_h1_box_cur"{yun:}/if{/yun}>
+				<a href="{yun:}url m=company{/yun}">企业列表</a>
+				<i class="firmsearch_h1_box_list_icon"></i>
+			</li>            		
+			<li {yun:}if $smarty.get.rec=='1'{/yun}class="firmsearch_h1_box_cur"{yun:}/if{/yun}>
+				<a href="{yun:}listurl m=company type=rec v=1{/yun}">名企招聘</a>     
+				<i class="firmsearch_h1_box_list_icon firmsearch_h1_box_list_icon_jj png"></i>
+			</li>
+		</ul> 
+		{yun:}if $comkeyword{/yun}
+			<div class="firm_hot_tags">
+		    	热门搜索：{yun:}key limit=12 type=4 recom=1 item=keylist{/yun} 
+		                <a href="{yun:}listurl m=company type=keyword v=$keylist.key_title{/yun}">{yun:}$keylist.key_name{/yun}</a> 
+		                {yun:}/key{/yun}
+		    </div>
+		{yun:}else{/yun}
+			<div class="firm_hot-tags">&nbsp;</div>
+		{yun:}/if{/yun}
+		<div class="firmsearch_h1_box_line yun_bg_color"></div> 
+ 	</div>
+	<div class="firm_right">
+	<div class="firm_right_box">
+	<div class="firm_list_content">
+	<div class="firm_list_content_box">
+	{yun:}comlist ispage=1 isjob=1 firm=1  hy='auto.hy' pr='auto.pr' mun='auto.mun' provinceid='auto.provinceid' cityid='auto.cityid' three_cityid='auto.three_cityid' keyword='auto.keyword' rec='auto.rec' order=lastupdate limit=20 item=lists key=key{/yun}
+	<div class="firm_list {yun:}if $key%2==0{/yun}firm_list_02{yun:}/if{/yun}" id="company{yun:}$lists.uid{/yun}" aid="{yun:}$lists.uid{/yun}">
+	<div class="firm_det">
+		<div class="firm_list_leftsidebar">
+			<div class="firm_list_logo">
+			<a href='{yun:}$lists.com_url{/yun}'>
+			<img src="{yun:}$lists.logo{/yun}" width="148" height="60" alt="{yun:}$lists.name{/yun}" onerror="showImgDelay(this,'{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_unit_icon{/yun}',2);" />
+			</a>
+			</div>
+	    </div> 
+		<div class="firm_list_rightsidebar">
+			<div class="firm_name">
+				<span>
+					<a href='{yun:}$lists.com_url{/yun}' target="_blank" class="firm_name_a">{yun:}$lists.name|mb_substr:0:25:'gbk'{/yun}</a>
+					{yun:}if $lists.rec{/yun}<img src="{yun:}$style{/yun}/images/firm_icon.png"/>{yun:}/if{/yun}
+					{yun:}if $lists.ratlogo!=""{/yun}<img src="{yun:}$config.sy_weburl{/yun}/{yun:}$lists.ratlogo{/yun}" title="{yun:}$lists.ratname{/yun}" alt="{yun:}$lists.ratname{/yun}"  />{yun:}/if{/yun}
+					{yun:}if $lists.yyzz_status=='1'{/yun}<img src="{yun:}$style{/yun}/images/disc_icon10.png" title="营业执照已审核" class="png"/> {yun:}/if{/yun}
+				</span>
+			</div>   
+			<div class="firm_qy_list"> 
+				{yun:}if $lists.job_city_one{/yun}
+					<span class="firm_qy_list_s">
+						<i class="firm_show_cominfo_icon  firm_show_cominfo_icon_city"></i>
+						{yun:}$lists.job_city_one{/yun}-{yun:}$lists.job_city_two{/yun}
+					</span> 
+				{yun:}/if{/yun}
+				{yun:}if $lists.job_hy{/yun}
+					<span class="firm_qy_list_s">
+						<i class="firm_show_cominfo_icon  firm_show_cominfo_icon_hy"></i>
+						{yun:}$lists.job_hy|mb_substr:0:12:'gbk'{/yun}
+					</span>
+				{yun:}/if{/yun}
+				{yun:}if $lists.job_pr{/yun}
+					<span class="firm_qy_list_s">
+						<i class="firm_show_cominfo_icon  firm_show_cominfo_icon_xz"></i>
+						{yun:}$lists.job_pr{/yun}
+					</span> 
+				{yun:}/if{/yun}
+				{yun:}if $lists.job_mun{/yun}
+					<span class="firm_qy_list_s">
+						<i class="firm_show_cominfo_icon  firm_show_cominfo_icon_rs"></i>
+						{yun:}$lists.job_mun{/yun}
+					</span>
+				{yun:}/if{/yun}
+			</div>
+		                                 
+			<div class="firm_qy_job_list">
+				<div class="firm_qy_job_list_name">招聘职位：</div>
+				<div class="firm_qy_job_list_r">
+					{yun:}if $lists.jobnum>0{/yun}
+					    {yun:}foreach item=job from=$lists.joblist key=v{/yun}
+						    {yun:}if $v<10{/yun}
+								<a href="{yun:}url m=job c=comapply id=$job.id{/yun}" target="_blank" class="firm_qy_job_tag">{yun:}$job.name{/yun}</a>
+							{yun:}/if{/yun}
+						{yun:}/foreach{/yun} 
+					
+					{yun:}else{/yun}
+						<div class="firm_qy_job_no">暂无招聘职位</div>
+					{yun:}/if{/yun}
+				</div>
+			</div>                        
+		</div> 
+		<div class="firm_gz_right">
+			{yun:}if $usertype==1{/yun}
+				<a href="javascript:void(0);" id="atn_{yun:}$lists.uid{/yun}" onclick="atn('{yun:}$lists.uid{/yun}','{yun:}url m=ajax c=atn_company{/yun}');" {yun:}if $lists.atn=="关注"{/yun} class="crop-add-yb"{yun:}else{/yun} class="crop-add-yb company_att"{yun:}/if{/yun}>
+				{yun:}$lists.atn{/yun}</a> 
+			{yun:}else{/yun}
+		    	{yun:}if $uid{/yun}
+		        	<a href="javascript:void(0);" onclick="layer.msg('只有个人用户才能关注', 2, 8)" class="crop-add-yb">+ 关注</a> 
+		    	{yun:}else{/yun}
+		        	<a href="javascript:void(0);"  onclick="showlogin('1');" class="crop-add-yb">+ 关注</a> 
+		    	{yun:}/if{/yun}
+		 	{yun:}/if{/yun}   
+			<span class="crop-add-yb_span">
+				<label><i id="antnum{yun:}$lists.uid{/yun}"  class="crop-add-yb_i">{yun:}$lists.ant_num{/yun}</i>人已关注 </label>
+			</span>
+		</div>
+	</div>
+	</div>
+	{yun:}/comlist{/yun}
+	<div class="clear"></div>
+	<div class="pages"> {yun:}$pagenav{/yun}</div>
+	{yun:}if !$lists{/yun}
+
+	<div class="seachno" style="background:#FFF; width:588px; margin-top:15px;border:none;">
+	<div class="seachno_left"><img src="{yun:}$style{/yun}/images/search-no.gif" /></div>
+	<div class="listno-content">
+	<strong>很抱歉，没有找到满足条件的企业</strong><br />
+	<span>
+	 建议您：<br />
+		1、适当减少已选择的条件<br />
+		2、适当删减或更改搜索关键字<br />
+	</span> 
+	<span>
+                                热门关键字：<br />
+                                {yun:}key limit=6 recom=1 type=4 item=top_key{/yun} <a href="{yun:}listurl m=company type=keyword v=$top_key.key_title{/yun}">{yun:}$top_key.key_name{/yun}</a> {yun:}/key{/yun}
+                            </span>
+                        </div>
+                    </div>
+                    {yun:}/if{/yun}
+                </div>  </div>
+            </div>
+         
+        </div>   
+        
+        <div class="firm_rightm">
+            <div class="firm_rightm_box">
+            <div class="firm_rightm_box_tit"><i class="firm_rightm_box_tit_icon yun_bg_color"></i><span class="firm_rightm_box_tit_s">推荐企业</span></div>
+            
+             <ul class="firm_rightm_tjlist">
+                        {yun:}comlist limit=6 rec=1 item=com{/yun}
+                        <li>
+                            <a href="{yun:}$com.com_url{/yun}" target="_blank">
+                                <img src="{yun:}$com.logo{/yun}" onerror="showImgDelay(this,'{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_unit_icon{/yun}',2);" width="185" height="75" />
+                                <div class="firm_rightm_tjlistname">{yun:}$com.name|mb_substr:0:13:'gbk'{/yun}</div>
+                            </a>
+                        </li>
+                        {yun:}/comlist{/yun}
+                    </ul>
+            </div>
+        
+        
+        </div>
+
+        <div class="clear"></div>
+
+		</div>
+        </div>
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/lazyload.min.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/data/plus/city.cache.js" type="text/javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/class.public.js" type="text/javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/public.js" language="javascript"></script>
+<script src="{yun:}$style{/yun}/js/index.js" type="text/javascript"></script>
+<!--[if IE 6]>
+<script src="{yun:}$config.sy_weburl{/yun}/js/png.js"></script>
+<script>
+DD_belatedPNG.fix('.png');
+</script>
+<![endif]-->
+<script>
+	$(document).ready(function(){
+		$(".company_class").delegate('.firm_list','mouseover',function () {
+			var aid = $(this).attr("aid");
+			$("#com" + aid).show();
+			$("#company" + aid).addClass('firm_list_cur');
+		});
+		$(".company_class").delegate('.firm_list', 'mouseout', function () {
+			var aid = $(this).attr("aid");
+			$("#com" + aid).hide();
+			$("#company" + aid).removeClass('firm_list_cur');
+		});
+	})
+</script>
+{yun:}include file="$tplstyle/public_search/login.htm"{/yun} 
+{yun:}include file="$tplstyle/footer.htm"{/yun} 

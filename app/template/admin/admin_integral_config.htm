@@ -1,0 +1,420 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<link href="images/reset.css" rel="stylesheet" type="text/css" />
+<link href="images/system.css" rel="stylesheet" type="text/css" />
+<link href="images/table_form.css" rel="stylesheet" type="text/css" />
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script>
+<script src="js/admin_public.js" language="javascript"></script>
+<title>后台管理</title>
+</head>
+<body class="body_ifm">
+<div class="infoboxp">
+<div class="infoboxp_top_bg"></div>
+<div id="subboxdiv" style="width:100%;height:100%;display:none;position:absolute;"></div>
+<div class="admin_h1_bg infoboxp_topIjf">
+    <span class="infoboxp_top_span">{yun:}$config.integral_pricename{/yun}设置</span>
+	<span class="infoboxp_top_span_sz infoboxp_top_span_sz_in "><a href="index.php?m=integral">{yun:}$config.integral_pricename{/yun}设置</a></span>
+    <span class="infoboxp_top_span_sz"><a href="index.php?m=integral&c=user">个人{yun:}$config.integral_pricename{/yun}</a></span>
+	<span class="infoboxp_top_span_sz"><a href="index.php?m=integral&c=com">企业{yun:}$config.integral_pricename{/yun}</a></span>
+</div>
+<div class="main_tag">
+<div class="tag_box">
+<div>
+<table width="100%" class="table_form">
+  <tr class="admin_table_trbg">
+         <th width="220" bgcolor="#f0f6fb"><span class="admin_bold">参数说明</span></th>
+          <td bgcolor="#f0f6fb"><span class="admin_bold">参数值</span></td>
+    </tr>
+	<tr class="admin_table_trbg">
+		<th width="220">{yun:}$config.integral_pricename{/yun}代替词：</th>
+		<td><input class="input-text tips_class" type="text" name="integral_pricename" id="integral_pricename" value="{yun:}$config.integral_pricename{/yun}" size="20" maxlength="255"/> <span class="admin_web_tip">默认为{yun:}$config.integral_pricename{/yun}，例：金币</span></td>
+	</tr>
+	    <tr>
+		<th width="220">{yun:}$config.integral_pricename{/yun}最低充值限制：</th>
+		<td><input class="input-text tips_class" type="text" name="integral_min_recharge" id="integral_min_recharge" value="{yun:}$config.integral_min_recharge{/yun}" size="20" maxlength="255"/> <span class="admin_web_tip">0 表示不限</span></td>
+	</tr>
+    <tr class="admin_table_trbg">
+		<th width="220">{yun:}$config.integral_pricename{/yun}单位：</th>
+		<td><input class="input-text tips_class" type="text" name="integral_priceunit" id="integral_priceunit" value="{yun:}$config.integral_priceunit{/yun}" size="20" maxlength="255"/> <span class="admin_web_tip">默认为点，例：个，位</span></td>
+	</tr>
+    <tr>
+		<th width="220">{yun:}$config.integral_pricename{/yun}兑换比例：</th>
+		<td><input class="input-text tips_class" type="text" name="integral_proportion" id="integral_proportion" value="{yun:}$config.integral_proportion{/yun}" size="20" maxlength="255"/> 点 <span class="admin_web_tip">例：1元=30点{yun:}$config.integral_pricename{/yun}</span></td>
+	</tr>
+	<tr>
+		<th width="220">每日签到送{yun:}$config.integral_pricename{/yun}：</th>
+		<td><input class="input-text tips_class" type="text" name="integral_signin" id="integral_signin" value="{yun:}$config.integral_signin{/yun}" size="20" maxlength="255"  onKeyUp="this.value=this.value.replace(/[^0-9]/g,'')"/>{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}  <font color="gray">第六日起，获得{yun:}$config.integral_pricename{/yun}将翻倍。</font></td>
+	</tr>
+    <tr class="admin_com_td_bg">
+	<th width="220">会员注册：</th>
+		<td>
+       
+      <div class="yun_admin_select_box  yun_admin_select_boxw70  z_index13">  
+      {yun:}if $config.integral_reg_type{/yun} 
+      {yun:}if $config.integral_reg_type==1{/yun}
+      <input type="button" value="加" class="yun_admin_select_box_text" id="integral_reg_type_name" onClick="select_click('integral_reg_type');">
+      <input name="integral_reg_type" type="hidden" id="integral_reg_type_val" value="1">
+       
+      {yun:}/if{/yun}     
+      {yun:}else{/yun}
+     <input type="button" value="请选择" class="yun_admin_select_box_text" id="integral_reg_type_name" onClick="select_click('integral_reg_type');">
+      <input name="integral_reg_type" type="hidden" id="integral_reg_type_val" value="" >
+         
+      {yun:}/if{/yun}                                                                          
+      <div class="yun_admin_select_box_list_box yun_admin_select_box_list_boxw70 dn" id="integral_reg_type_select"> 
+      <div class="yun_admin_select_box_list"> <a href="javascript:;" onClick="select_new('integral_reg_type','1','加')">加</a> </div>            
+      </div>
+      </div>     
+         <input class="input-text" type="text" name="integral_reg" id="integral_reg" value="{yun:}$config.integral_reg{/yun}" size="13" maxlength="255" onKeyUp="this.value=this.value.replace(/[^0-9.]/g,'')"/> {yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun} </td>
+	</tr>
+    <tr>
+	<th width="220">每天第一次登录：</th>
+		<td>
+        
+        <div class="yun_admin_select_box  yun_admin_select_boxw70  z_index12">   
+        
+          {yun:}if $config.integral_login_type{/yun} 
+          {yun:}if $config.integral_login_type==1{/yun}
+          <input type="button" value="加" class="yun_admin_select_box_text" id="integral_login_type_name" onClick="select_click('integral_login_type');">
+          <input name="integral_login_type" type="hidden" id="integral_login_type_val" value="1">
+           
+          {yun:}/if{/yun}     
+         
+          {yun:}if $config.integral_login_type==2{/yun}
+          <input type="button" value="减" class="yun_admin_select_box_text" id="integral_login_type_name" onClick="select_click('integral_login_type');">
+          <input name="integral_login_type" type="hidden" id="integral_login_type_val" value="2">
+           
+          {yun:}/if{/yun}
+          
+          {yun:}else{/yun}
+          <input type="button" value="请选择" class="yun_admin_select_box_text" id="integral_login_type_name" onClick="select_click('integral_login_type');">
+          <input name="integral_login_type" type="hidden" id="integral_login_type_val" value="" >
+                            
+          {yun:}/if{/yun}                                          
+          <div class="yun_admin_select_box_list_box yun_admin_select_box_list_boxw70 dn" id="integral_login_type_select"> 
+            <div class="yun_admin_select_box_list"> <a href="javascript:;" onClick="select_new('integral_login_type','1','加')">加</a> </div>
+            <div class="yun_admin_select_box_list"> <a href="javascript:;" onClick="select_new('integral_login_type','2','减')">减</a> </div>
+            </div>
+           </div> 
+         <input class="input-text" type="text" name="integral_login" id="integral_login" value="{yun:}$config.integral_login{/yun}" size="13" maxlength="255" onKeyUp="this.value=this.value.replace(/[^0-9.]/g,'')"/> {yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun} </td>
+	</tr>
+    <tr class="admin_com_td_bg">
+	<th width="220">完善基本资料：</th>
+		<td>
+       
+        <div class="yun_admin_select_box  yun_admin_select_boxw70  z_index11">          
+        
+        {yun:}if $config.integral_userinfo_type{/yun} 
+          {yun:}if $config.integral_userinfo_type==1{/yun}
+          <input type="button" value="加" class="yun_admin_select_box_text" id="integral_userinfo_type_name" onClick="select_click('integral_userinfo_type');">
+          <input name="integral_userinfo_type" type="hidden" id="integral_userinfo_type_val" value="1">
+           
+          {yun:}/if{/yun}     
+         
+          {yun:}if $config.integral_login_type==2{/yun}
+          <input type="button" value="减" class="yun_admin_select_box_text" id="integral_userinfo_type_name" onClick="select_click('integral_userinfo_type');">
+          <input name="integral_userinfo_type" type="hidden" id="integral_userinfo_type_val" value="2">
+           
+          {yun:}/if{/yun}
+          
+          {yun:}else{/yun}
+          <input type="button" value="请选择" class="yun_admin_select_box_text" id="integral_userinfo_type_name" onClick="select_click('integral_userinfo_type');">
+          <input name="integral_userinfo_type" type="hidden" id="integral_userinfo_type_val" value="" >
+                           
+          {yun:}/if{/yun}     
+                                                 
+          <div class="yun_admin_select_box_list_box yun_admin_select_box_list_boxw70 dn" id="integral_userinfo_type_select"> 
+            <div class="yun_admin_select_box_list"> <a href="javascript:;" onClick="select_new('integral_userinfo_type','1','加')">加</a> </div>
+            <div class="yun_admin_select_box_list"> <a href="javascript:;" onClick="select_new('integral_userinfo_type','2','减')">减</a> </div>
+            </div>
+           </div> 
+        
+         <input class="input-text" type="text" name="integral_userinfo" id="integral_userinfo" value="{yun:}$config.integral_userinfo{/yun}" size="13" maxlength="255" onKeyUp="this.value=this.value.replace(/[^0-9.]/g,'')"/> {yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun} </td>
+	</tr>  
+    <tr>
+	<th width="220">邮箱认证：</th>
+		<td>
+       
+        <div class="yun_admin_select_box  yun_admin_select_boxw70  z_index10"> 
+        
+          {yun:}if $config.integral_emailcert_type{/yun} 
+          {yun:}if $config.integral_emailcert_type==1{/yun}
+          <input type="button" value="加" class="yun_admin_select_box_text" id="integral_emailcert_type_name" onClick="select_click('integral_emailcert_type');">
+          <input name="integral_emailcert_type" type="hidden" id="integral_userinfo_type_val" value="1">
+           
+          {yun:}/if{/yun}     
+         
+          {yun:}if $config.integral_emailcert_type==2{/yun}
+          <input type="button" value="减" class="yun_admin_select_box_text" id="integral_emailcert_type_name" onClick="select_click('integral_emailcert_type');">
+          <input name="integral_emailcert_type" type="hidden" id="integral_emailcert_type_val" value="2">
+           
+          {yun:}/if{/yun}
+          
+          {yun:}else{/yun}
+           <input type="button" value="请选择" class="yun_admin_select_box_text" id="integral_emailcert_type_name" onClick="select_click('integral_emailcert_type');">
+          <input name="integral_emailcert_type" type="hidden" id="integral_emailcert_type_val" value="" >
+                             
+          {yun:}/if{/yun}                                                     
+          <div class="yun_admin_select_box_list_box yun_admin_select_box_list_boxw70 dn" id="integral_emailcert_type_select"> 
+            <div class="yun_admin_select_box_list"> <a href="javascript:;" onClick="select_new('integral_emailcert_type','1','加')">加</a> </div>
+            <div class="yun_admin_select_box_list"> <a href="javascript:;" onClick="select_new('integral_emailcert_type','2','减')">减</a> </div>
+            </div>
+           </div> 
+         <input class="input-text" type="text" name="integral_emailcert" id="integral_emailcert" value="{yun:}$config.integral_emailcert{/yun}" size="13" maxlength="255" onKeyUp="this.value=this.value.replace(/[^0-9.]/g,'')"/> {yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun} </td>
+	</tr>
+    <tr class="admin_com_td_bg">
+	<th width="220">手机认证：</th>
+		<td>
+       
+          <div class="yun_admin_select_box  yun_admin_select_boxw70  z_index9">    
+
+           {yun:}if $config.integral_mobliecert_type{/yun} 
+          {yun:}if $config.integral_mobliecert_type==1{/yun}
+          <input type="button" value="加" class="yun_admin_select_box_text" id="integral_mobliecert_type_name" onClick="select_click('integral_mobliecert_type');">
+          <input name="integral_mobliecert_type" type="hidden" id="integral_userinfo_type_val" value="1">
+           
+          {yun:}/if{/yun}     
+         
+          {yun:}if $config.integral_mobliecert_type==2{/yun}
+          <input type="button" value="减" class="yun_admin_select_box_text" id="integral_mobliecert_type_name" onClick="select_click('integral_mobliecert_type');">
+          <input name="integral_mobliecert_type" type="hidden" id="integral_mobliecert_type_val" value="2">
+           
+          {yun:}/if{/yun}
+          
+          {yun:}else{/yun}
+          <input type="button" value="请选择" class="yun_admin_select_box_text" id="integral_mobliecert_type_name" onClick="select_click('integral_mobliecert_type');">
+          <input name="integral_mobliecert_type" type="hidden" id="integral_mobliecert_type_val" value="" >
+                          
+          {yun:}/if{/yun}  
+                                                  
+          <div class="yun_admin_select_box_list_box yun_admin_select_box_list_boxw70 dn" id="integral_mobliecert_type_select"> 
+            <div class="yun_admin_select_box_list"> <a href="javascript:;" onClick="select_new('integral_mobliecert_type','1','加')">加</a> </div>
+            <div class="yun_admin_select_box_list"> <a href="javascript:;" onClick="select_new('integral_mobliecert_type','2','减')">减</a> </div>
+            </div>
+           </div> 
+         <input class="input-text" type="text" name="integral_mobliecert" id="integral_mobliecert" value="{yun:}$config.integral_mobliecert{/yun}" size="13" maxlength="255" onKeyUp="this.value=this.value.replace(/[^0-9.]/g,'')"/> {yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun} </td>
+	</tr>
+    <tr>
+	<th width="220">上传头像：</th>
+		<td>
+       
+        <div class="yun_admin_select_box  yun_admin_select_boxw70  z_index8">              
+           {yun:}if $config.integral_avatar_type{/yun} 
+          {yun:}if $config.integral_avatar_type==1{/yun}
+          <input type="button" value="加" class="yun_admin_select_box_text" id="integral_avatar_type_name" onClick="select_click('integral_avatar_type');">
+          <input name="integral_avatar_type" type="hidden" id="integral_avatar_type_val" value="1">
+           
+          {yun:}/if{/yun}     
+         
+          {yun:}if $config.integral_avatar_type==2{/yun}
+          <input type="button" value="减" class="yun_admin_select_box_text" id="integral_avatar_type_name" onClick="select_click('integral_avatar_type');">
+          <input name="integral_avatar_type" type="hidden" id="integral_avatar_type_val" value="2">
+           
+          {yun:}/if{/yun}
+          
+          {yun:}else{/yun}
+          <input type="button" value="请选择" class="yun_admin_select_box_text" id="integral_avatar_type_name" onClick="select_click('integral_avatar_type');">
+          <input name="integral_avatar_type" type="hidden" id="integral_avatar_type_val" value="" >
+                          
+          {yun:}/if{/yun}  
+                                                  
+          <div class="yun_admin_select_box_list_box yun_admin_select_box_list_boxw70 dn" id="integral_avatar_type_select"> 
+            <div class="yun_admin_select_box_list"> <a href="javascript:;" onClick="select_new('integral_avatar_type','1','加')">加</a> </div>
+            <div class="yun_admin_select_box_list"> <a href="javascript:;" onClick="select_new('integral_avatar_type','2','减')">减</a> </div>
+            </div>
+           </div> 
+         <input class="input-text" type="text" name="integral_avatar" id="integral_avatar" value="{yun:}$config.integral_avatar{/yun}" size="13" maxlength="255" onKeyUp="this.value=this.value.replace(/[^0-9.]/g,'')"/> {yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun} </td>
+	</tr>
+    <tr class="admin_com_td_bg">
+	<th width="220">发布问题：</th>
+		<td>
+        
+        <div class="yun_admin_select_box  yun_admin_select_boxw70  z_index7">              
+           {yun:}if $config.integral_question_type{/yun} 
+          {yun:}if $config.integral_question_type==1{/yun}
+          <input type="button" value="加" class="yun_admin_select_box_text" id="integral_question_type_name" onClick="select_click('integral_question_type');">
+          <input name="integral_question_type" type="hidden" id="integral_question_type_val" value="1">
+           
+          {yun:}/if{/yun}     
+         
+          {yun:}if $config.integral_question_type==2{/yun}
+          <input type="button" value="减" class="yun_admin_select_box_text" id="integral_question_type_name" onClick="select_click('integral_question_type');">
+          <input name="integral_question_type" type="hidden" id="integral_question_type_val" value="2">
+           
+          {yun:}/if{/yun}
+          
+          {yun:}else{/yun}
+          <input type="button" value="请选择" class="yun_admin_select_box_text" id="integral_question_type_name" onClick="select_click('integral_question_type');">
+          <input name="integral_question_type" type="hidden" id="integral_question_type_val" value="" >
+                          
+          {yun:}/if{/yun}  
+                                                  
+          <div class="yun_admin_select_box_list_box yun_admin_select_box_list_boxw70 dn" id="integral_question_type_select"> 
+            <div class="yun_admin_select_box_list"> <a href="javascript:;" onClick="select_new('integral_question_type','1','加')">加</a> </div>
+            <div class="yun_admin_select_box_list"> <a href="javascript:;" onClick="select_new('integral_question_type','2','减')">减</a> </div>
+            </div>
+           </div> 
+        
+        
+        
+         <input class="input-text" type="text" name="integral_question" id="integral_question" value="{yun:}$config.integral_question{/yun}" size="13" maxlength="255" onKeyUp="this.value=this.value.replace(/[^0-9.]/g,'')"/> {yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun} </td>
+	</tr>
+    <tr>
+	<th width="220">回答问题：</th>
+		<td>
+       
+        <div class="yun_admin_select_box  yun_admin_select_boxw70  z_index6">              
+           {yun:}if $config.integral_answer_type{/yun} 
+          {yun:}if $config.integral_answer_type==1{/yun}
+          <input type="button" value="加" class="yun_admin_select_box_text" id="integral_answer_type_name" onClick="select_click('integral_answer_type');">
+          <input name="integral_answer_type" type="hidden" id="integral_answer_type_val" value="1">
+           
+          {yun:}/if{/yun}     
+         
+          {yun:}if $config.integral_answer_type==2{/yun}
+          <input type="button" value="减" class="yun_admin_select_box_text" id="integral_answer_type_name" onClick="select_click('integral_answer_type');">
+          <input name="integral_answer_type" type="hidden" id="integral_answer_type_val" value="2">
+           
+          {yun:}/if{/yun}
+          
+          {yun:}else{/yun}
+          <input type="button" value="请选择" class="yun_admin_select_box_text" id="integral_answer_type_name" onClick="select_click('integral_answer_type');">
+          <input name="integral_answer_type" type="hidden" id="integral_answer_type_val" value="" >
+                          
+          {yun:}/if{/yun}  
+                                                  
+          <div class="yun_admin_select_box_list_box yun_admin_select_box_list_boxw70 dn" id="integral_answer_type_select"> 
+            <div class="yun_admin_select_box_list"> <a href="javascript:;" onClick="select_new('integral_answer_type','1','加')">加</a> </div>
+            <div class="yun_admin_select_box_list"> <a href="javascript:;" onClick="select_new('integral_answer_type','2','减')">减</a> </div>
+            </div>
+           </div> 
+        
+        
+        
+        
+         <input class="input-text" type="text" name="integral_answer" id="integral_answer" value="{yun:}$config.integral_answer{/yun}" size="13" maxlength="255" onKeyUp="this.value=this.value.replace(/[^0-9.]/g,'')"/> {yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun} </td>
+	</tr>
+    <tr class="admin_com_td_bg">
+	<th width="220">评论回答：</th>
+		<td>
+       
+        <div class="yun_admin_select_box  yun_admin_select_boxw70  z_index5">              
+           {yun:}if $config.integral_answerpl_type{/yun} 
+          {yun:}if $config.integral_answerpl_type==1{/yun}
+          <input type="button" value="加" class="yun_admin_select_box_text" id="integral_answerpl_type_name" onClick="select_click('integral_answerpl_type');">
+          <input name="integral_answerpl_type" type="hidden" id="integral_answerpl_type_val" value="1">
+           
+          {yun:}/if{/yun}     
+         
+          {yun:}if $config.integral_answerpl_type==2{/yun}
+          <input type="button" value="减" class="yun_admin_select_box_text" id="integral_answerpl_type_name" onClick="select_click('integral_answerpl_type');">
+          <input name="integral_answerpl_type" type="hidden" id="integral_answerpl_type_val" value="2">
+           
+          {yun:}/if{/yun}
+          
+          {yun:}else{/yun}
+          <input type="button" value="请选择" class="yun_admin_select_box_text" id="integral_answerpl_type_name" onClick="select_click('integral_answerpl_type');">
+          <input name="integral_answerpl_type" type="hidden" id="integral_answerpl_type_val" value="" >
+                          
+          {yun:}/if{/yun}  
+                                                  
+          <div class="yun_admin_select_box_list_box yun_admin_select_box_list_boxw70 dn" id="integral_answerpl_type_select"> 
+            <div class="yun_admin_select_box_list"> <a href="javascript:;" onClick="select_new('integral_answerpl_type','1','加')">加</a> </div>
+            <div class="yun_admin_select_box_list"> <a href="javascript:;" onClick="select_new('integral_answerpl_type','2','减')">减</a> </div>
+            </div>
+           </div> 
+        
+        
+        
+         <input class="input-text" type="text" name="integral_answerpl" id="integral_answerpl" value="{yun:}$config.integral_answerpl{/yun}" size="13" maxlength="255" onKeyUp="this.value=this.value.replace(/[^0-9.]/g,'')"/> {yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun} </td>
+	</tr>
+    <tr>
+	<th width="220">邀请注册：</th>
+		<td>
+        
+        <div class="yun_admin_select_box  yun_admin_select_boxw70  z_index2">              
+           {yun:}if $config.integral_invite_reg_type{/yun} 
+          {yun:}if $config.integral_invite_reg_type==1{/yun}
+          <input type="button" value="加" class="yun_admin_select_box_text" id="integral_invite_reg_type_name" onClick="select_click('integral_invite_reg_type');">
+          <input name="integral_invite_reg_type" type="hidden" id="integral_invite_reg_type_val" value="1">
+           
+          {yun:}/if{/yun}     
+         
+          {yun:}if $config.integral_invite_reg_type==2{/yun}
+          <input type="button" value="减" class="yun_admin_select_box_text" id="integral_invite_reg_type_name" onClick="select_click('integral_invite_reg_type');">
+          <input name="integral_invite_reg_type" type="hidden" id="integral_invite_reg_type_val" value="2">
+           
+          {yun:}/if{/yun}
+          
+          {yun:}else{/yun}
+          <input type="button" value="请选择" class="yun_admin_select_box_text" id="integral_invite_reg_type_name" onClick="select_click('integral_invite_reg_type');">
+          <input name="integral_invite_reg_type" type="hidden" id="integral_invite_reg_type_val" value="" >
+                          
+          {yun:}/if{/yun}  
+                                                  
+          <div class="yun_admin_select_box_list_box yun_admin_select_box_list_boxw70 dn" id="integral_invite_reg_type_select"> 
+            <div class="yun_admin_select_box_list"> <a href="javascript:;" onClick="select_new('integral_invite_reg_type','1','加')">加</a> </div>
+            <div class="yun_admin_select_box_list"> <a href="javascript:;" onClick="select_new('integral_invite_reg_type','2','减')">减</a> </div>
+            </div>
+           </div> 
+        
+        
+        
+        
+        
+         <input class="input-text" type="text" name="integral_invite_reg" id="integral_invite_reg" value="{yun:}$config.integral_invite_reg{/yun}" size="13" maxlength="255" onKeyUp="this.value=this.value.replace(/[^0-9.]/g,'')"/> {yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun} </td>
+	</tr>
+    <tr class="admin_table_trbg">
+		<td colspan="2" align="center">
+        <input class="admin_submit4" id="integral" type="button" name="config" value="提交" />&nbsp;&nbsp;
+        <input class="admin_submit4" type="reset" value="重置" /></td>
+	</tr>
+</table>
+</div>
+
+</div>
+</div>
+</div>
+<input type="hidden" name="pytoken" id='pytoken' value="{yun:}$pytoken{/yun}">
+<script>
+$(function(){
+	$("#integral").click(function(){
+		$.post("index.php?m=integral&c=save",{
+			config : $("#integral").val(),
+			integral_pricename : $("#integral_pricename").val(),
+			integral_priceunit : $("#integral_priceunit").val(),
+			integral_min_recharge : $("#integral_min_recharge").val(),
+			integral_proportion : $("#integral_proportion").val(),
+			integral_signin : $("#integral_signin").val(),
+			integral_reg_type : $("#integral_reg_type_val").val(),
+			integral_reg : $("#integral_reg").val(),
+			integral_login_type : $("#integral_login_type_val").val(),
+			integral_login : $("#integral_login").val(),
+			integral_userinfo_type : $("#integral_userinfo_type_val").val(),
+			integral_userinfo : $("#integral_userinfo").val(),
+			integral_emailcert_type : $("#integral_emailcert_type_val").val(),
+			integral_emailcert : $("#integral_emailcert").val(),
+			integral_mobliecert_type : $("#integral_mobliecert_type_val").val(),
+			integral_mobliecert : $("#integral_mobliecert").val(),
+			integral_avatar_type : $("#integral_avatar_type_val").val(),
+			integral_avatar : $("#integral_avatar").val(),
+			integral_question_type : $("#integral_question_type_val").val(),
+			integral_question : $("#integral_question").val(),
+			integral_answer_type : $("#integral_answer_type_val").val(),
+			integral_answer : $("#integral_answer").val(),
+			integral_answerpl_type : $("#integral_answerpl_type_val").val(),
+			integral_answerpl : $("#integral_answerpl").val(),
+			integral_invite_reg_type : $("#integral_invite_reg_type_val").val(),
+			integral_invite_reg : $("#integral_invite_reg").val(),
+			pytoken : $("#pytoken").val()
+		},function(data,textStatus){
+			config_msg(data);
+		});
+	});
+})
+</script>
+</body>
+</html>

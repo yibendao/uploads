@@ -1,0 +1,327 @@
+{yun:}include file="$wapstyle/member/cheader.htm"{/yun} 
+
+<div class="main_member_body">
+<section class="wap_member">
+  <div class="wap_member_comp_h1" style="position:relative"> <span>会员充值</span> </div>
+  <div class="wap_member_Receive" > 
+    <script>
+			var weburl='{yun:}$config_wapdomain{/yun}';
+			function CheckForm(){
+				return true;
+			}
+			function pay_form(type){
+
+				var com_vip_price = $('#com_vip_price').val();
+				if(!com_vip_price){
+					if(type=='price'){
+
+						layermsg('请选择购买类型！', 2);return false; 
+
+					}else if(type=='int'){
+					
+						layermsg('请正确输入充值数量！', 2);return false; 
+					}else if(type=='service'){
+						
+						layermsg('请正确选择套餐！', 2);return false;
+					}
+
+					return false;
+				}
+				var paytype=$('input:radio[name="paytype"]:checked').val();
+				if(paytype==null){
+					layermsg('请选择一种支付方式！', 2);return false; 
+				}else if(paytype=='alipay'){
+					$("#paymentform").attr("action","{yun:}$config.sy_weburl{/yun}/api/wapalipay/alipayto.php?dingdan={yun:}$order.order_id{/yun}&dingdanname={yun:}$order.order_id{/yun}&alimoney={yun:}$order.order_price{/yun}");
+				}
+				return true;
+			}
+			
+			function check_rating_coupon(id){
+				var value=$("#comvip option:selected").attr("price");
+				if(value!=""){
+					$("#com_vip_price").val(value);
+					$("#span_com_vip_price").html(value);
+				}else{
+					$("#com_vip_price").val('0');
+					$("#span_com_vip_price").html('0');
+				}
+			
+			}
+        </script> 
+    {yun:}if $smarty.get.id{/yun}
+  <form action="" method="post" onsubmit="return pay_form('payment');" id="paymentform">
+    <div class="yun_wap_addresume_box_group">
+        <div class="yun_wap_addresume_box_label"> 订单号  </div>
+        <div class="yun_wap_addresume_box_control">{yun:}$order.order_id{/yun}
+        <input type="hidden" name="order_id" size="10" value="{yun:}$order.order_id{/yun}">
+        </div>
+      </div>
+          <div class="yun_wap_addresume_box_group">
+        <div class="yun_wap_addresume_box_label"> 支付金额  </div>
+        <div class="yun_wap_addresume_box_control">
+      <span id="span_com_vip_price" class="pay_com_lsit_je">￥{yun:}$order.order_price{/yun}</span> 元
+          <input type="hidden" name="price" size="10" value="{yun:}$order.order_price{/yun}" id="com_vip_price">
+      
+        </div>
+      </div>
+		
+         {yun:}if $paytype.alipay{/yun}
+         <div class="pay_f_list">
+          <label><i class="pay_f_list_zfb"></i><span class="pay_f_list_box">支付宝支付 </span>
+            <input type='radio' name='paytype' value='alipay' class="pay_f_list_radio">
+          </label>
+        </div>
+            {yun:}/if{/yun}  
+		{yun:}if $paytype.wxpay||$paytype.alipay{/yun}	
+      <div class="pay_com_list">
+        <div class="pay_com_lsit_right">
+          <input type="submit" value="确认支付" name=nextstep  class="pay_choose_btn_01">
+        </div>
+      </div>
+	  {yun:}else{/yun} 
+	  <div class="pay_com_list">
+        <div class="pay_com_lsit_right">
+          <span>网站已关闭支付功能，请联系管理员！</span>
+        </div>
+      </div>
+	  {yun:}/if{/yun} 
+    </div>
+  </form>
+  {yun:}else{/yun}
+    {yun:}if $smarty.post.usertype==""{/yun}
+    <form name='alipayment' onSubmit="return CheckForm(this);" action="index.php?c=pay" method="post">
+      <div class="pay_choose"><span>选择购买类型</span></div>
+      <ul class="pay_choose_list">
+        <li>
+          <input type="radio" name="usertype" value="price" id="vip" checked="checked" class="pay_choose_list_c"/>
+          <label for="vip" class="pay_choose_list_lable" style="top:10px;">购买会员</label>
+        </li>
+        <li>
+          <input type="radio" name="usertype" value="int" id="int" class="pay_choose_list_c"/>
+          <label for="int" class="pay_choose_list_lable" style="top:10px;">购买{yun:}$config.integral_pricename{/yun}</label>
+        </li>
+      </ul>
+      <div class='admin_tit_right'>
+        <input type='submit' value='下一步' name='nextstep' class="pay_choose_btn_01" >
+      </div>
+      <div class="com_wxt">
+        <div class="wxts">温馨提示：</div>
+        购买会员：请确保您已完全了解您将要购买的会员类型以及所对应的套餐价值！<br>
+        购买{yun:}$config.integral_pricename{/yun}：{yun:}$config.integral_pricename{/yun}可用于职位推荐、置顶、设置自动刷新、购买企业模板等增值功能<br>
+      </div>
+    </form>
+    {yun:}elseif $smarty.post.usertype=="price"{/yun}
+    {yun:}if $smarty.post.id {/yun}
+    <div class="pay_com_cont">
+      <form action="index.php?c=dingdan" method="post" onsubmit="return pay_form('price');">
+        <div class="yun_wap_addresume_box_group">
+          <div class="yun_wap_addresume_box_label"> 会员类型 <span class="resume-cont_wate_bj">*</span> </div>
+          <div class="yun_wap_addresume_box_control">
+            <div class="com_select">
+              <select class="textval"  name="comvip" id="comvip"  onchange="check_rating_coupon(this.value);">
+                <option value="{yun:}$rows.id{/yun}" price="{yun:}if $rows.time_start < time()&& $rows.time_end > time(){/yun}{yun:}$rows.yh_price{/yun}{yun:}else{/yun}{yun:}$rows.service_price{/yun}{yun:}/if{/yun}"> {yun:}$rows.name{/yun} </option> 
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="yun_wap_addresume_box_group">
+          <div class="yun_wap_addresume_box_label"> 充值金额 </div>
+          <div class="yun_wap_addresume_box_control"> <span id="span_com_vip_price" class="pay_com_lsit_je">{yun:}if $rows.time_start < time()&& $rows.time_end > time(){/yun}{yun:}$rows.yh_price{/yun}{yun:}else{/yun}{yun:}$rows.service_price{/yun}{yun:}/if{/yun}</span> 元
+            <input type="hidden" name="price" size="10"  id="com_vip_price" value="{yun:}if $rows.time_start < time()&& $rows.time_end > time(){/yun}{yun:}$rows.yh_price{/yun}{yun:}else{/yun}{yun:}$rows.service_price{/yun}{yun:}/if{/yun}">
+          </div>
+         
+        </div>
+        <div class="yun_wap_addresume_box_group">
+          <div class="yun_wap_addresume_box_label"> 充值备注 </div>
+          <div class="yun_wap_addresume_box_control">
+           <div class="yun_wap_addresume_box_control_box"> <textarea name="remark" id='remark'  wrap="physical" class="com_textarea_pay" placeholder="请备注你的姓名及其联系方式"></textarea></div>
+          </div>
+        </div>
+        <div class="clear"></div>
+         <div class="pay_f_list">
+		  <label><i class="pay_f_list_wx"></i><span class="pay_f_list_box">微信支付</span>
+			<input type='radio' name='paytype' value='wxpay' class="pay_f_list_radio">
+		  </label>
+		</div>
+         <div class="pay_f_list">
+          <label><i class="pay_f_list_zfb"></i><span class="pay_f_list_box">支付宝支付 </span>
+            <input type='radio' name='paytype' value='alipay' class="pay_f_list_radio">
+          </label>
+        </div>
+        <div class="pay_com_list">
+          <input type='submit' value='确认订单' name='nextstep'class="pay_choose_btn_01" >
+        </div>
+      </form>
+    </div>
+  </div>
+    {yun:}else{/yun}
+    <div class="pay_com_cont">
+      <form action="index.php?c=dingdan" method="post" onsubmit="return pay_form('price');">
+        <div class="yun_wap_addresume_box_group">
+          <div class="yun_wap_addresume_box_label"> 会员类型 <span class="resume-cont_wate_bj">*</span> </div>
+          <div class="yun_wap_addresume_box_control">
+            <div class="com_select">
+              <select class="textval"  name="comvip" id="comvip"  onchange="check_rating_coupon(this.value);">
+                <option value="" price=""> 请选择会员类型 </option> 
+				{yun:}foreach  from=$rows item=pay{/yun} 
+				<option value="{yun:}$pay.id{/yun}" price="{yun:}if $pay.time_start < time()&& $pay.time_end > time(){/yun}{yun:}$pay.yh_price{/yun}{yun:}else{/yun}{yun:}$pay.service_price{/yun}{yun:}/if{/yun}"> {yun:}$pay.name{/yun} </option> 
+				{yun:}/foreach{/yun} 
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="yun_wap_addresume_box_group">
+          <div class="yun_wap_addresume_box_label"> 充值金额  </div>
+          <div class="yun_wap_addresume_box_control"> <span id="span_com_vip_price" class="pay_com_lsit_je">0</span> 元
+            <input type="hidden" name="price" size="10"  id="com_vip_price">
+          </div>
+          <span id="coupon" style="display:none;" class="pay_zs_l"></span> </div>
+        <div class="yun_wap_addresume_box_group">
+          <div class="yun_wap_addresume_box_label"> 充值备注  </div>
+          <div class="yun_wap_addresume_box_control">
+           <div class="yun_wap_addresume_box_control_box"> <textarea name="remark" id='remark'  wrap="physical" class="com_textarea_pay" placeholder="请备注你的姓名及其联系方式"></textarea></div>
+          </div>
+        </div>
+        <div class="clear"></div>
+         <div class="pay_f_list">
+		  <label><i class="pay_f_list_wx"></i><span class="pay_f_list_box">微信支付</span>
+			<input type='radio' name='paytype' value='wxpay' class="pay_f_list_radio">
+		  </label>
+		</div>
+         <div class="pay_f_list">
+          <label><i class="pay_f_list_zfb"></i><span class="pay_f_list_box">支付宝支付 </span>
+            <input type='radio' name='paytype' value='alipay' class="pay_f_list_radio">
+          </label>
+        </div>
+        <div class="pay_com_list">
+          <input type='submit' value='确认订单' name='nextstep'class="pay_choose_btn_01" >
+        </div>
+      </form>
+    </div>
+  </div>
+  {yun:}/if{/yun}
+  {yun:}elseif $smarty.post.usertype=="int"{/yun}
+  <form action="index.php?c=dingdan" method="post" onsubmit="return pay_form('int');">
+    <div class="yun_wap_addresume_box_group">
+        <div class="yun_wap_addresume_box_label"> 充值{yun:}$config.integral_pricename{/yun} <span class="resume-cont_wate_bj">*</span> </div>
+        <div class="yun_wap_addresume_box_control">
+        
+        <input type="hidden" name="pay_type" value="{yun:}$smarty.post.usertype{/yun}"  onkeyup="this.value=this.value.replace(/[^0-9]/g,'')"/>
+          <input type="text" name="price_int" id="price_int" size="20" value="0" int="{yun:}$config.integral_proportion{/yun}" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" class="yun_wap_pay_text">
+      
+        </div>
+      </div>
+      
+          <div class="yun_wap_addresume_box_group">
+        <div class="yun_wap_addresume_box_label"> 当前比例  </div>
+        <div class="yun_wap_addresume_box_control">
+        
+       1元 = {yun:}$config.integral_proportion{/yun}{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun} 
+      
+        </div>
+      </div>
+          <div class="yun_wap_addresume_box_group">
+        <div class="yun_wap_addresume_box_label"> 所需金额  </div>
+        <div class="yun_wap_addresume_box_control">
+      <span id="span_com_vip_price" class="pay_com_lsit_je">0</span> 元
+          <input type="hidden" name="price" size="10"  id="com_vip_price">
+        </div>
+      </div>
+       <div class="yun_wap_addresume_box_group">
+          <div class="yun_wap_addresume_box_label"> 充值备注 </div>
+          <div class="yun_wap_addresume_box_control">
+           <div class="yun_wap_addresume_box_control_box"> <textarea name="remark" id='remark'  wrap="physical" class="com_textarea_pay" placeholder="请备注你的姓名及其联系方式"></textarea></div>
+          </div>
+        </div>
+
+		{yun:}if $paytype.wxpay{/yun}
+		 <div class="pay_f_list">
+		  <label><i class="pay_f_list_wx"></i><span class="pay_f_list_box">微信支付</span>
+			<input type='radio' name='paytype' value='wxpay' class="pay_f_list_radio">
+		  </label>
+		</div>
+          {yun:}/if{/yun} 
+         {yun:}if $paytype.alipay{/yun}
+         <div class="pay_f_list">
+          <label><i class="pay_f_list_zfb"></i><span class="pay_f_list_box">支付宝支付 </span>
+            <input type='radio' name='paytype' value='alipay' class="pay_f_list_radio">
+          </label>
+        </div>
+            {yun:}/if{/yun}  
+		{yun:}if $paytype.wxpay||$paytype.alipay{/yun}	
+      <div class="pay_com_list">
+        <div class="pay_com_lsit_right">
+          <input type="submit" value="确认支付" name=nextstep  class="pay_choose_btn_01">
+        </div>
+      </div>
+	  {yun:}else{/yun} 
+	  <div class="pay_com_list">
+        <div class="pay_com_lsit_right">
+          <span>网站已关闭支付功能，请联系管理员！</span>
+        </div>
+      </div>
+	  {yun:}/if{/yun} 
+    </div>
+  </form>
+  
+  {yun:}elseif $smarty.post.usertype=="service"{/yun}
+  {yun:}if $smarty.post.id {/yun}
+  <form action="index.php?c=dingdan" method="post" onsubmit="return pay_form('service')">
+		<div class="yun_wap_addresume_box_group">
+	        <div class="yun_wap_addresume_box_label"> 买增值包 <span class="resume-cont_wate_bj">*</span> </div>
+	        <div class="yun_wap_addresume_box_control">
+	        	{yun:}$service.name{/yun} -- {yun:}$rows.service_price{/yun}元套餐
+	        	<input type="hidden" name="comservice" id="comservice" value="{yun:}$rows.id{/yun}">
+	        </div>
+      	</div>
+        <div class="yun_wap_addresume_box_group">
+	        <div class="yun_wap_addresume_box_label"> 所需金额 </div>
+	        <div class="yun_wap_addresume_box_control">
+		      <span id="span_com_vip_price" class="pay_com_lsit_je">{yun:}if $discount.service_discount{/yun}{yun:}$rows.service_price*$discount.service_discount*0.01{/yun}{yun:}else{/yun}{yun:}$rows.service_price{/yun}{yun:}/if{/yun}</span> 元
+		      <input type="hidden" name="price" size="10"  id="com_vip_price" value="{yun:}if $discount.service_discount{/yun}{yun:}$rows.service_price*$discount.service_discount*0.01{/yun}{yun:}else{/yun}{yun:}$rows.service_price{/yun}{yun:}/if{/yun}">
+	        </div>
+      	</div>
+       <div class="yun_wap_addresume_box_group">
+          <div class="yun_wap_addresume_box_label"> 充值备注  </div>
+          <div class="yun_wap_addresume_box_control">
+           <div class="yun_wap_addresume_box_control_box"> <textarea name="remark" id='remark'  wrap="physical" class="com_textarea_pay" placeholder="请备注你的姓名及其联系方式"></textarea></div>
+          </div>
+        </div>
+
+		{yun:}if $paytype.wxpay{/yun}
+		 <div class="pay_f_list">
+		  <label><i class="pay_f_list_wx"></i><span class="pay_f_list_box">微信支付</span>
+			<input type='radio' name='paytype' value='wxpay' class="pay_f_list_radio">
+		  </label>
+		</div>
+          {yun:}/if{/yun} 
+         {yun:}if $paytype.alipay{/yun}
+         <div class="pay_f_list">
+          <label><i class="pay_f_list_zfb"></i><span class="pay_f_list_box">支付宝支付 </span>
+            <input type='radio' name='paytype' value='alipay' class="pay_f_list_radio">
+          </label>
+        </div>
+            {yun:}/if{/yun}  
+		{yun:}if $paytype.wxpay||$paytype.alipay{/yun}	
+      <div class="pay_com_list">
+        <div class="pay_com_lsit_right">
+          <input type="submit" value="确认支付" name=nextstep  class="pay_choose_btn_01">
+        </div>
+      </div>
+	  {yun:}else{/yun} 
+	  <div class="pay_com_list">
+        <div class="pay_com_lsit_right">
+          <span>网站已关闭支付功能，请联系管理员！</span>
+        </div>
+      </div>
+	  {yun:}/if{/yun} 
+    </div>
+  </form>
+  {yun:}/if{/yun}
+  {yun:}/if{/yun}
+  {yun:}/if{/yun}
+  </div>
+</section>
+</div>
+
+{yun:}include file="$wapstyle/footer.htm"{/yun} 

@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>{yun:}$title{/yun}</title>
+<meta name="keywords" content="{yun:}$keywords{/yun}"/>
+<meta name="description" content="{yun:}$description{/yun}"/>
+<link rel="stylesheet" href="{yun:}$style{/yun}/style/css.css" type="text/css"/>
+<link rel="stylesheet" href="{yun:}$style{/yun}/style/login.css" type="text/css"/>
+<link rel="stylesheet" href="{yun:}$style{/yun}/style/message.css" type="text/css"/>
+</head>
+<body>
+<div class="top">
+  <div class="top_cot">
+    <div class="top_cot_content">
+      <div class="top_left fl">
+        <div class="yun_welcome fl">欢迎来到{yun:}$config.sy_webname{/yun}！</div>
+        <span class="fl"><a href="{yun:}$config.sy_weburl{/yun}/wap" class="wap_icon">手机版</a> | <a href="{yun:}url m=subscribe{/yun}">订阅</a></span> </div>
+      <div class="top_right_re fr">
+        <div class="top_right">
+          <div class="yun_topNav fr"> <a class="yun_navMore" href="javascript:;">网站导航</a>
+            <div class="yun_webMoredown none">
+              <div class="yun_top_nav_box"> {yun:}navmap key=key item=maplist{/yun}
+                
+                  <li><a href="{yun:}$maplist.url{/yun}" {yun:}if $maplist.eject{/yun} target="_blank"{yun:}/if{/yun}>{yun:}$maplist.name{/yun}</a></li>
+                  
+                {yun:}/navmap{/yun}  </div>
+            </div>
+          </div>
+          <SCRIPT LANGUAGE='JavaScript' src='{yun:}url m=ajax c=RedLoginHead{/yun}'></SCRIPT>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="register_header">
+  <div class="reg_w980">
+    <div class="reg_logo"><a href="{yun:}$config.sy_weburl{/yun}"><img src="{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_logo{/yun}" class="png"></a></div>
+    <div class="reg_msg">求职者注册</div>
+     <a href="{yun:}$config.sy_weburl{/yun}" class="reg_fh yun_text_color fr">返回网站首页>></a>
+  </div>
+</div>
+
+<div class="prompt_message">
+
+<div class="prompt_message_cont">
+<div class="prompt_message_cont_c">
+<div class="prompt_message_img"><img src="{yun:}$style{/yun}/images/sh_wtg1.gif"></div>
+<div class="prompt_message_right">
+<div class="prompt_message_right_h1">已关闭会员注册</div>
+<div class="prompt_message_right_p">很抱歉，已关闭会员注册功能，如果您有什么疑问,请联系管理员。</div>
+</div>
+</div>
+<div class="prompt_message_touch">欢迎拨打我们客服电话：<span class="prompt_message_touch_tel">400-880-5523</span></div>
+</div>
+</div>
+<div class="clear"></div>
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/public.js" language="javascript"></script>
+<script src="{yun:}$style{/yun}/js/reg_ajax.js" type="text/javascript"></script>
+<!--[if IE 6]>
+<script src="{yun:}$config.sy_weburl{/yun}/js/png.js"></script>
+<script>
+  DD_belatedPNG.fix('.png,.#bg');
+</script>
+<![endif]-->
+{yun:}include file="$tplstyle/footer.htm"{/yun}

@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<link href="./images/reset.css" rel="stylesheet" type="text/css" />
+<link href="./images/system.css" rel="stylesheet" type="text/css" />
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js"></script> 
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script>
+<script src="js/admin_public.js" language="javascript"></script>
+<link href="images/blue.css" rel="stylesheet">
+<script src="js/icheck.js"></script>
+  <script>
+	$(document).ready(function(){
+	  $('input').iCheck({
+		checkboxClass: 'icheckbox_flat-blue',
+		radioClass: 'iradio_flat-blue'
+	  });
+	});
+	function saveUseradd(){
+		var username = $.trim($("#username").val());
+		var password = $.trim($("#password").val());
+		var name = $.trim($("#name").val());
+		var m_id_val = $.trim($("#m_id_val").val());
+		var isdid = $('input[name="isdid"]:checked').val();
+		if(username==""){parent.layer.msg('请填写用户名！', 2, 8);return false;}
+		if(password==""){parent.layer.msg('请填写密码！', 2, 8);return false;}
+		if(name==""){parent.layer.msg('请填写真实姓名！', 2, 8);return false;}
+		if(m_id_val==""){parent.layer.msg('请选择用户组类型！', 2, 8);return false;}
+		if(!isdid){parent.layer.msg('请选择是否登录分站！', 2, 8);return false;}
+	}
+</script>
+<link href="./images/table_form.css" rel="stylesheet" type="text/css" />
+<title></title>
+</head>
+<body class="body_ifm">
+    <div class="infoboxp"><div class="infoboxp_top_bg"></div>
+    <div class="infoboxp_top">
+    <span class="infoboxp_top_span" style="float:left">添加管理员</span>
+    <a href=" javascript:history.back(-1);" class="admin_infoboxp_tj">管理员列表</a> 
+    </div>
+<div class="common-form">
+<div class="admin_table_border">
+<iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe> 
+<form name="myform" action="index.php?m=admin_user&c=save"   target="supportiframe" method="post" id="myform" onsubmit="return saveUseradd();">
+<input type="hidden" value="{yun:}$adminuser.uid{/yun}" name="uid" />
+<table width="100%" class="table_form contentWrap" style="background:#fff;">
+    <tr>
+        <th width="160">用户名：</th>
+        <td>
+        <input type="text" name="username" id="username" class="input-text" size="30" value="{yun:}$adminuser.username{/yun}">
+        </td>
+    </tr>
+      	<tr class="admin_table_trbg" >
+        <th>密码：</th>
+        <td><input type="password" name="password" id="password" class="input-text" size="30" value="">{yun:}if is_array($adminuser){/yun}<span class="admin_web_tip">如果密码留空则不修改密码！</span>{yun:}/if{/yun}
+        </td>
+    </tr>
+<tr>
+    <th>真实姓名：</th>
+<td><input type="text" name="name" id="name" class="input-text" size="30" value="{yun:}$adminuser.name{/yun}">
+</td>
+</tr>
+<tr class="admin_table_trbg" >
+    <th>用户组：</th>
+<td>
+
+
+<div class="yun_admin_select_box zindex100">
+            {yun:}if $adminuser.m_id{/yun}
+{yun:}foreach item=v from=$user_group{/yun}
+                    {yun:}if $v.id eq $adminuser.m_id{/yun}
+                    <input type="button" value="{yun:}$v.group_name{/yun}" class="yun_admin_select_box_text" id="m_id_name" onClick="select_click('m_id');">
+                    <input name="m_id" type="hidden" id="m_id_val" value="{yun:}$v.id{/yun}">
+                    {yun:}/if{/yun}
+                {yun:}/foreach{/yun}
+            {yun:}else{/yun}
+                <input type="button" value="请选择" class="yun_admin_select_box_text" id="m_id_name" onClick="select_click('m_id');">
+                <input name="m_id" type="hidden" id="m_id_val" value="">
+            {yun:}/if{/yun}
+            
+            <div class="yun_admin_select_box_list_box dn" id="m_id_select">     
+{yun:}foreach item=v from=$user_group{/yun}
+                <div class="yun_admin_select_box_list">
+                    <a href="javascript:;" onClick="select_new('m_id','{yun:}$v.id{/yun}','{yun:}$v.group_name{/yun}')">{yun:}$v.group_name{/yun}</a>
+                </div>                    
+                {yun:}/foreach{/yun}
+            </div>
+        </div>
+</td>
+</tr>
+<tr >
+    <th>是否可以登录分站：</th>
+<td>
+ <div class="iradio_flat_height">
+<input type="radio" name="isdid" id="group_type1"  value="1" {yun:}if $adminuser.isdid=='1'{/yun}checked{yun:}/if{/yun}>
+<span class="iradio_flat_left"><label for='group_type1'>是</label>&nbsp;&nbsp;</span>
+<input type="radio" name="isdid" id="group_type2"  value="2" {yun:}if $adminuser.isdid=='2'{/yun}checked{yun:}/if{/yun}>
+<span class="iradio_flat_left"><label for='group_type2'>否</label> </span>
+</div>
+</td>
+</tr>
+<tr>
+<td colspan="2" align="center">
+	<input class="admin_submit4" name="useradd" type="submit"  value="提交" id="dosubmit">
+</td>
+ </table>
+ <input type="hidden" name="pytoken" id='pytoken' value="{yun:}$pytoken{/yun}">
+ </form>
+</div>
+</div></div>
+</body>
+</html>

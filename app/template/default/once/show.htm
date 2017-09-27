@@ -1,0 +1,248 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>{yun:}$title{/yun}</title>
+<meta name="keywords" content="{yun:}$keywords{/yun}" />
+<meta name="description" content="{yun:}$description{/yun}" />
+<link rel="stylesheet" href="{yun:}$style{/yun}/style/css.css" type="text/css" />
+<link href="{yun:}$style{/yun}/style/microresume.css" rel="stylesheet" type="text/css" />
+<style>
+* {
+	margin: 0;
+	padding: 0;
+}
+body, div {
+	margin: 0;
+	padding: 0;
+}
+.content_firm {
+	float: left;
+	width: 100%;
+	margin: 0 auto;
+	position: relative;
+}
+</style>
+</head>
+<body>
+{yun:}include file="$tplstyle/header.htm"{/yun}
+<div class="yun_content">
+  <div class="current_Location png"> 您当前的位置：<a href="{yun:}$config.sy_weburl{/yun}">首页</a> > <a href="{yun:}url m=once{/yun}">店铺招聘</a> > {yun:}$o_info.title{/yun}</div>
+  <div class="fast_show_left">
+    <div class="fast_show_post">
+      <div class="fast_show_top">
+        <div class="fast_show_top_h1">{yun:}$o_info.title{/yun}</div>
+        <div class="fast_show_com_name" style="padding-top:0px;">{yun:}$o_info.companyname{/yun}</div>
+        <div class="fast_show_top_xz">截止日期：{yun:}$o_info.edate|date_format:"%Y-%m-%d"{/yun}</div>
+        <div class="fast_show_top_date">浏览：{yun:}$o_info.hits{/yun} 次 | 更新日期：{yun:}$o_info.ctime|date_format:"%Y-%m-%d"{/yun}</div>
+        <div class="wx_share_fx">
+        <div class="wx_share_fx_img"><img src="{yun:}url m=ajax c=pubqrcode toc=once toa=show toid=$o_info.id{/yun}" width="120" height="120"/></div>
+        <div class="wx_share_fx_p">分享到朋友圈</div>
+        </div>
+      </div>
+      {yun:}if $config.user_wzp_link=="1" && $uid<=0{/yun}
+      <div class="once_no_show">很抱歉,<a href="javascript:void(0);" onclick="showlogin('');">【登录】</a>后才可以查看联系方式</div>
+      {yun:}else{/yun}
+      <div class="fast_show_list"><i class="fast_icon fast_icon_touch"></i>联&nbsp;系&nbsp;人：{yun:}$o_info.linkman{/yun}</div>
+      <div class="fast_show_list"> <i class="fast_icon fast_icon_pho"></i> {yun:}if $o_info.phone {/yun}
+        联系电话：<font color="#FF0000"><strong>{yun:}$o_info.phone{/yun}</strong></font> {yun:}/if{/yun}
+        {yun:}if $o_info.email {/yun}
+        &nbsp;&nbsp;
+        邮箱：{yun:}$o_info.email{/yun}
+        {yun:}/if{/yun}
+        {yun:}if $o_info.qq {/yun}
+        &nbsp;&nbsp;
+        QQ：{yun:}$o_info.qq{/yun}
+        {yun:}/if{/yun} </div>
+      {yun:}/if{/yun}
+	  {yun:}if $o_info.address!=''{/yun}
+	  <div class="fast_show_list"><i class="fast_icon fast_information_icon_d"></i>公&nbsp;司&nbsp;地&nbsp;址：{yun:}$o_info.address{/yun}</div>
+	  {yun:}/if{/yun}
+      <div class="fast_show_com_name">具体要求</div>
+      <div class="clear"></div>
+      <div class="fast_show_com_name_p">{yun:}$o_info.require{/yun}</div>
+      {yun:}if $o_info.pic{/yun}
+      <div class="fast_show_com_name">店铺形象</div>
+      <div class="fast_show_com_name_p"><img src="{yun:}$config.sy_weburl{/yun}/{yun:}$o_info.pic{/yun}" style="max-width:600px;max-height:600px"/></div>
+      {yun:}/if{/yun}
+      <div class="recruit_alter"> 
+      <a href="javascript:;" onclick="showdd('1', '{yun:}$o_info.id{/yun}','vcode_imgs');" class="recruit_alter_sx">刷新</a> 
+      <a href="javascript:;" onclick="showdd('2', '{yun:}$o_info.id{/yun}','vcode_imgs')">修改</a> 
+      <a href="javascript:;" onclick="showdd('3', '{yun:}$o_info.id{/yun}','vcode_imgs');">删除</a> </div>
+      <div class="clear"></div>
+      <div class="wxts_p wxts_p_h1">操作说明：</div>
+      <div class="wxts_p">刷新，修改，删除只有信息发布者可以操作，每刷新一次招聘信息就会自动排在最前面</div>
+
+    <div class="fast_post_tit"><i class="fast_h1_line yun_bg_color"></i><i class="fast_h1_line_bor"></i><span class="fast_co">最新招聘</span></div>
+<div class="fast_poatlist_box">
+      <ul>
+     
+       {yun:}fast limit=6 delid='auto.id' item=list{/yun}
+        <li>
+              <div class="recruit_list_title">  <a href="{yun:}url m=once c=show id='`$list.id`'{/yun}">{yun:}$list.title{/yun}</a></div>
+              <div class="recruit_list_detail">
+			  	{yun:}$list.companyname{/yun}</div>
+               <div class="recruit_list_city"></div>
+              <div class="recruit_list_link"> 
+                                           
+                                           
+                                                 {yun:}if $config.user_wzp_link==1 && $uid<=0{/yun}
+                <div class="once_tel_p_login fl"><a href="javascript:void(0);" onclick="showlogin('');" style="color:#f60;">[登录]</a> 后才可以查看联系方式</div>
+             {yun:}else{/yun}
+                {yun:}if $list.phone{/yun}
+                <div class="once_tel_p">联系电话：{yun:}$list.phone{/yun}（{yun:}$list.linkman{/yun}）</div>
+                {yun:}/if{/yun}
+                {yun:}/if{/yun}           
+                 <div class="once_fb_time">更新于 
+                {yun:}if $list.redtime==1 || $list.ctime<60{/yun} <span style="color:red;">{yun:}$list.ctime{/yun}</span> 
+                {yun:}else{/yun}
+                {yun:}$list.ctime{/yun}
+                {yun:}/if{/yun}</div>
+                <span class="recruit_list_detail_city">{yun:}$city_name[$list.provinceid]{/yun}{yun:}if $city_name[$list.cityid]{/yun}-{yun:}$city_name[$list.cityid]{/yun}{yun:}/if{/yun}{yun:}if $city_name[$list.three_cityid]{/yun}-{yun:}$city_name[$list.three_cityid]{/yun}{yun:}/if{/yun}</span>
+              </div>
+            </li>     {yun:}/fast{/yun}
+            </ul>
+      </div>
+      
+      
+    </div>
+  </div>
+  <div class="fast_show_right">
+    <div class="fast_show_right_tips">
+      <div class="fast_show_right_tips_h1">温馨提示：</div>
+      为方便一些普工类企业(如饭店,店面,个体户等)发布招聘信息,特设定了无需注册,即可发布简短招聘的功能,在给大家提供了更多的信息的同时也存在的问题是,我们无法对这些发布者做核实.
+      ★以下信息由企业或个体工商户自行提供，该企业或个体工商户负责信息内容的真实性、准确性和合法性。网站对此不承担任何保证或连带责任. 
+      <a href='javascript:;' {yun:}if $num{/yun}onclick="showfabu()"{yun:}else{/yun}onclick="layer.msg('每天最多可发布{yun:}$config.sy_once{/yun}份店铺招聘！',2,8)"{yun:}/if{/yun} class="recruit_user_public" style="width:240px; margin-top:10px;">发布店铺招聘</a> </div>
+  </div>
+</div>
+
+<div class="none" id="postpw">
+  <div>
+    <ul class="micro_resume_release_list">
+      <li> <span class="micro_resume_release_s fl"><font color="#FF3300">*</font> 密码：</span>
+        <input id="pw" type='password' class="micro_resume_release_text" style='width:100px' />
+        <em style="line-height:28px; display:inline-block; margin-left:5px;">请输入添加时的密码。</em> </li>
+      <li> <span class="micro_resume_release_s fl"><font color="#FF3300">*</font> 验证码：</span>
+        <input type="text" id="code" class="micro_resume_release_text micro_resume_release_text2" style='width:100px' maxlength="4"/>
+        <a><img id="vcode_imgs" onclick="checkCode('vcode_imgs');" src="{yun:}$config.sy_weburl{/yun}/app/include/authcode.inc.php" /></a> 
+      </li>
+      <li> <span class="micro_resume_release_s fl">&nbsp; </span>
+        <input type="hidden" id="tid" />
+        <input type="hidden" id="type" />
+        <input class="fast_submit" type="button" value="提交" onclick="post_pass('vcode_imgs');" />
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="fast_issuance none" style="_position:absolute;" id="fabufast">
+  <div class="fast_once_cont fl">
+    <div class="fast-onxt_box">
+      
+      <form action="{yun:}url m=once{/yun}" target="supportiframe" method="post" onsubmit="return check_once_job()" enctype="multipart/form-data">
+        <div class="once_fb_list" style="margin-top:10px;"><span class="once_fb_list_span"><font color="red">* </font>我想招聘：</span>
+          <input  class="once_input_simple once_input_simple_w290" type="text" id="title" maxlength="15" name="title"/>
+        </div>
+        <div class="once_fb_list" style="margin-top:10px;"> <span class="once_fb_list_span"><font color="red">* </font>(店面)名称：</span>
+          <input class="once_input_simple once_input_simple_w290" type="text" id="companyname" maxlength="15" name="companyname" />
+        </div>
+        <div class="once_fb_list" style="margin-top:10px;"><span class="once_fb_list_span"><font color="red">* </font>联系人：</span>
+          <input class="once_input_simple once_input_simple_w240" type="text" id="linkman" maxlength="15" name="linkman"/>
+        </div>
+        <div class="once_fb_list" style="margin-top:10px;"><span class="once_fb_list_span"><font color="red">* </font> 联系电话：</span>
+          <input class="once_input_simple once_input_simple_w240" type="text" id="phone" onkeyup="this.value=this.value.replace(/[^0-9-]/g,'')" maxlength="13" name="phone"/>
+        </div>
+        <div class="once_fb_list" style="margin-top:10px;"><span class="once_fb_list_span"><font color="red">* </font>招聘要求：</span>
+          <textarea rows='6' class="once_simplew_textarea" id="require" onfocus="if(this.value=='请填写招聘的具体要求，如：性别，学历，年龄，工作经验，工资待遇等相关信息') this.value=''" onblur="this.value=this.value==''?'请填写招聘的具体要求，如：性别，学历，年龄，工作经验，工资待遇等相关信息':this.value" name="require">请填写招聘的具体要求，如：性别，学历，年龄，工作经验，工资待遇等相关信息</textarea>
+        </div>        
+        <div class="once_fb_list" style="margin-top:10px;"><span class="once_fb_list_span"><font color="red">* </font>工作地点：</span>
+          <div class="yun_reg_BasicInfo_l_r  z-index70 news_expect_text_w100">
+             <i class="yun_reg_BasicInfo_list_icon"></i>
+            <input type="button" value="请选择" class="yun_reg_BasicInfo_butw100" id="province" onclick="search_once_show('job_province');"/>
+            <input type="hidden" id="provinceid" name="provinceid" />               
+            <div class="yun_reg_BasicInfo_l_box yun_reg_BasicInfo_l_box_w90 none" id="job_province">
+              <ul class="yun_reg_BasicInfo_text_list">
+                {yun:}foreach from=$city_index key=j item=v{/yun}
+                <li><a href="javascript:void(0);" onclick="select_once_city('{yun:}$v{/yun}','province','{yun:}$city_name[$v]{/yun}','citys','city');" rel="nofollow">{yun:}$city_name[$v]{/yun}</a></li>
+                {yun:}/foreach{/yun}
+              </ul>
+            </div>
+          </div>
+          <div class="yun_reg_BasicInfo_l_r z-index70  news_expect_text_w100" style="margin-left:10px; margin-right:10px;">
+              <i class="yun_reg_BasicInfo_list_icon"></i>
+            <input type="button" value="请选择" class="yun_reg_BasicInfo_butw100" id="citys" onclick="search_once_show('job_citys');"/>
+            <input type="hidden" id="citysid" name="cityid"/>              
+            <div class="yun_reg_BasicInfo_l_box yun_reg_BasicInfo_l_box_w90 none" id="job_citys">
+              <ul class="yun_reg_BasicInfo_text_list">
+                {yun:}foreach from=$city_type[$o_info.provinceid] key=j item=v{/yun}
+                <li><a href="javascript:void(0);" onclick="select_once_city('{yun:}$v{/yun}','citys','{yun:}$city_name[$v]{/yun}','three_city','city');" rel="nofollow">{yun:}$city_name[$v]{/yun}</a></li>
+                {yun:}/foreach{/yun}
+              </ul>
+            </div>
+          </div>
+          <div class="yun_reg_BasicInfo_l_r  z-index70 news_expect_text_w100 {yun:}if $o_info.three_cityid<1{/yun}none{yun:}/if{/yun}"   id="cityshowth">
+            <input type="button" value="请选择" class="yun_reg_BasicInfo_butw100" id="three_city" onclick="search_once_show('job_three_city');"/>
+            <input type="hidden" id="three_cityid" name="three_cityid" />
+                  <i class="yun_reg_BasicInfo_list_icon"></i>
+            <div class="yun_reg_BasicInfo_l_box yun_reg_BasicInfo_l_box_w90 none" id="job_three_city">
+              <ul class="yun_reg_BasicInfo_text_list">
+                {yun:}foreach from=$city_type[$o_info.cityid] key=j item=v{/yun}
+                <li><a href="javascript:void(0);" onclick="selects_once('{yun:}$v{/yun}','three_city','{yun:}$city_name[$v]{/yun}');" rel="nofollow">{yun:}$city_name[$v]{/yun}</a></li>
+                {yun:}/foreach{/yun}
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="once_fb_list" style="margin-top:10px;"><span class="once_fb_list_span">店面形象：</span>
+          <div class="once_fb_list_photo">
+            <input type="file" id="pic" name="pic" class="input-text"/>
+          </div>
+          </div>
+        <div class="once_fb_list" style="margin-top:10px;"> <span class="once_fb_list_span"><font color="red">* </font>招聘有效期(天)：</span>
+          <input class="once_input_simple once_input_simple_w80" type="text" id="edate"  onkeyup="this.value=this.value.replace(/[^0-9]/g,'')"  maxlength="3" name="edate"/>
+        
+        {yun:}if strpos($config.code_web,"店铺招聘")!==false{/yun}
+	 <div class="once_fb_list" style="margin-top:10px;"> 
+		{yun:}if $config.code_kind==3{/yun}	
+			
+            	<span class="once_fb_list_span" ><font color="red">* </font>验证：</span>
+                   <div class="once_verification">
+			<div id="popup-captcha" data-id='botton' data-type='click'></div>
+			<input type='hidden' id="popup-submit">
+</div>
+		{yun:}else{/yun}
+		
+		  <span class="once_fb_list_span" ><font color="red">* </font>验证码：</span>
+		  <input id="authcode" class="once_input_simple once_input_simple_w80" type="text" maxlength="4" name="authcode"/>
+		  <a class="fl"><img id="vcodeimgs" onclick="checkCode('vcodeimgs');" src="{yun:}$config.sy_weburl{/yun}/app/include/authcode.inc.php" style="margin-left:10px;"/></a>
+		 
+		  {yun:}/if{/yun}
+		 </div>	
+        {yun:}/if{/yun}</div>
+        <div class="once_fb_list" style="margin-top:10px;"> <span class="once_fb_list_span"><font color="red">* </font>验证密码：</span>
+          <input class="once_input_simple once_input_simple_w140" type="password"  id="password" name="password" onkeyup="this.value=this.value.replace(/^ +| +$/g,'')"/>  </div>
+        <div class="once_fb_list" style="margin-top:10px;"> <span class="once_fb_list_span">&nbsp;</span>
+          <input type="hidden" id="id" name="id"/>
+          <input id="botton" class="uesr_submit once_fast_submit" type="submit" value="发布" name="submit"/>
+        </div>
+      </form>
+    </div>
+  </div>
+</div><input id="sqjobresume" value='1' type="hidden"/>
+<input type="hidden" id="gourl" value="{yun:}url m=once{/yun}" />
+{yun:}include file="$tplstyle/public_search/login.htm"{/yun} 
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/public.js" language="javascript"></script>
+<script src="{yun:}$style{/yun}/js/fast.js" language="javascript"></script>
+<script src="http://static.geetest.com/static/tools/gt.js"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/geetest/pc.js" type="text/javascript"></script>
+<!--[if IE 6]>
+    <script src="{yun:}$config.sy_weburl{/yun}/js/png.js"></script>
+    <script>
+    DD_belatedPNG.fix('.png');
+    </script>
+    <![endif]-->
+
+<iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" class="none"></iframe>
+{yun:}include file="$tplstyle/footer.htm"{/yun}

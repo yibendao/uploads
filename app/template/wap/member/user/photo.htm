@@ -1,0 +1,170 @@
+{yun:}include file="$wapstyle/member/header.htm"{/yun} 
+<link rel="stylesheet" type="text/css" href="{yun:}$wap_style{/yun}/js/webapppic/css/cropper.min.css"/> 
+<link rel="stylesheet" type="text/css" href="{yun:}$wap_style{/yun}/js/webapppic/css/mui.min.css"/> 
+<script src="{yun:}$wap_style{/yun}/js/webapppic/js/lrz6.mobile.min.js" language="javascript"></script>  
+<script src="{yun:}$wap_style{/yun}/js/webapppic/dist/lrz.all.bundle.js" language="javascript"></script>  
+<script src="{yun:}$wap_style{/yun}/js/webapppic/js/cropper.min.js" language="javascript"></script>  
+<script>
+ $(function() {
+        function toFixed2(num) {
+            return parseFloat(+num.toFixed(2));
+        }
+		
+        $('#cancleBtn').on('click', function() {
+            $("#showEdit").fadeOut();
+            $('#showResult').fadeIn();
+        });
+
+        $('#confirmBtn').on('click', function() {
+            $("#showEdit").fadeOut();
+
+            var $image = $('#report > img');
+            var dataURL = $image.cropper("getCroppedCanvas");
+            var imgurl = dataURL.toDataURL("image/jpeg", 0.5);
+            $("#changeAvatar > img").attr("src", imgurl);
+            $("#uimage").val(imgurl);
+            $('#showResult').fadeIn();
+
+        });
+
+        function cutImg() {
+            $('#showResult').fadeOut();
+            $("#showEdit").fadeIn();
+            var $image = $('#report > img');
+            $image.cropper({
+                aspectRatio: {yun:}$config.user_imgwidth{/yun} / {yun:}$config.user_imgheight{/yun},
+                autoCropArea: 0.7,
+                strict: true,
+                guides: false,
+                center: true,
+                highlight: false,
+                dragCrop: false,
+                cropBoxMovable: false,
+                cropBoxResizable: false,
+                zoom: -0.2,
+                checkImageOrigin: true,
+                background: false,
+                minContainerHeight: 400,
+                minContainerWidth: 300
+            });
+        }
+
+        function doFinish(startTimestamp, sSize, rst) {
+            var finishTimestamp = (new Date()).valueOf();
+            var elapsedTime = (finishTimestamp - startTimestamp); 
+
+            var sourceSize = toFixed2(sSize / 1024),
+                resultSize = toFixed2(rst.base64Len / 1024),
+                scale = parseInt(100 - (resultSize / sourceSize * 100));
+            $("#report").html('<img src="' + rst.base64 + '" style="width: 100%;height:100%">');
+            cutImg();
+        }
+
+        $('#image').on('change', function() {
+            var startTimestamp = (new Date()).valueOf();
+            var that = this;
+            lrz(this.files[0], {
+                    width: 800,
+                    height: 800,
+                    quality: 0.7
+                })
+                .then(function(rst) { 
+                    doFinish(startTimestamp, that.files[0].size, rst);
+                    return rst;
+                })
+                .then(function(rst) { 
+                    
+                    return rst;
+                })
+                .then(function(rst) {
+                   
+                })
+                .catch(function(err) {
+                   
+
+                    alert(err);
+                })
+                .always(function() {
+                   
+                });
+        });
+
+    });
+	
+function photo(){ 
+	var uimage=$("#uimage").val(); 
+	if(uimage==''){
+	    layermsg('头像未改变，无需修改');return false;
+	}
+	var regS = new RegExp("\\+","gi"); 
+	uimage=uimage.replace(regS,"#");
+	$.ajax({ 
+		type: 'POST', 
+		url: "index.php?c=photo" ,
+		cache:false,
+		dataType:'json', 
+		data: {uimage:uimage,submit:1} , 
+		success: function(msg){
+			if(msg=='1'){
+				var date='操作成功！';
+			}else{
+				var date='操作失败！';
+			}
+			layermsg(date,2,function(){window.location.href ="index.php";});return false;
+		}
+	});
+}	
+
+function phototype(){
+	var phototype=1;
+	if($("#phototype").attr("checked")!='checked'){
+		phototype=0;
+	}
+	$.post("index.php?c=phototype",{phototype:phototype},function(data){
+		if(data==1){
+			$("#phototype").attr("checked","checked");
+			layermsg("头像不公开操作成功！",2);return false;
+		}else{
+			$("#phototype").remove("checked");
+			layermsg("头像公开操作成功！",2);return false;
+		}
+	})
+}
+</script>
+
+<section class="resume_mangage"> 
+    <div class="clear"></div>
+    <div class="verify">
+		<div class="photo_i_box_v" style="background:#fff">
+			<div id="showResult">
+				<div id="changeAvatar" class="photo_i_box" style="text-align:center">
+					<img src="{yun:}$user.resume_photo{/yun}" width="80" height="100" style="margin-top:25px;">
+				</div> 
+				<div class="clear"></div>
+				<div class="photo_i_box_in" style="width:130px; margin:0 auto; overflow:hidden"> 
+                 <div class="yun_wap_addresume_box_ewm">
+         <i class="user_ewm_photo_img"></i>
+          <span class="user_ewm_photo_b"> 设置个人头像</span>
+          
+           				<input id="image" type="file" accept="image/*" class="user_ewm_photo_b_file">
+          </div>     
+          
+	
+				</div>  
+			</div>
+			<div id="showEdit" style="display: none;width:100%;height: 100%;position: absolute;top:0;left: 0;z-index: 9;">
+				<div style="width:100%;position: absolute;top:10px;left:0px;">
+					<button class="mui-btn" data-mui-style="fab" id='cancleBtn' style="margin-left: 10px;">取消</button>
+					<button class="mui-btn" data-mui-style="fab" data-mui-color="primary" id='confirmBtn' style="float:right;margin-right: 10px;">确定</button>
+				</div>
+				<div id="report"></div>			
+			</div>
+			<div style="width:98%; margin:40px auto 0;">
+			<input type='hidden' name="txt" id="uimage" value="">
+			<input name="submit"  type="button" onclick="photo()" value="保存/修改" class="photo_i_box_subbc"/>
+			</div>
+		</div> 
+	</div> 	</div> 
+</section>
+<div class="clear"></div>
+{yun:}include file="$wapstyle/footer.htm"{/yun} 

@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<link href="./images/reset.css" rel="stylesheet" type="text/css" />
+<link href="./images/system.css" rel="stylesheet" type="text/css" />
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js"></script> 
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script>
+<script src="js/admin_public.js" language="javascript"></script> 
+<link href="./images/table_form.css" rel="stylesheet" type="text/css" />
+<title></title>
+{yun:}if $nogroup{/yun}
+<script>
+$(document).ready(function(){
+	parent.layer.alert('暂未设置分站管理组，请先设置！', 0, '提示');return false;
+})
+</script>
+{yun:}/if{/yun}
+</head>
+<body class="body_ifm">
+    <div class="infoboxp"><div class="infoboxp_top_bg"></div>
+    <div class="infoboxp_top">
+    <span class="infoboxp_top_span" style="float:left">添加分站管理员</span>
+    <a href="index.php?m=admin_user&type=d" class="admin_infoboxp_tj">分站管理员列表</a> 
+    </div>
+<div class="common-form">
+<div class="admin_table_border">
+<iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe> 
+<form name="myform" action="index.php?m=admin_siteadmin&c=save"   target="supportiframe" method="post" id="myform">
+<input type="hidden" value="{yun:}$adminuser.uid{/yun}" name="uid" />
+<table width="100%" class="table_form contentWrap" style="background:#fff;">
+    <tr>
+        <th width="150">用户名：</th>
+        <td>
+        <input type="text" name="username" id="realname" class="input-text" size="30" value="{yun:}$adminuser.username{/yun}">
+        </td>
+    </tr>
+      	<tr class="admin_table_trbg" >
+        <th>密码：</td>
+        <td><input type="password" name="password" id="realname" class="input-text" size="30" value="">{yun:}if is_array($adminuser){/yun}<span class="admin_web_tip">如果密码留空则不修改密码！</span>{yun:}/if{/yun}
+        </td>
+    </tr>
+<tr>
+    <th>真实姓名：</td>
+<td><input type="text" name="name" id="realname" class="input-text" size="30" value="{yun:}$adminuser.name{/yun}">
+</td>
+</tr>
+   	<tr class="admin_table_trbg" >
+    <th>分站：</td>
+<td>
+		<div class="yun_admin_select_box zindex100">
+            {yun:}if $adminuser.did{/yun}
+				{yun:}foreach item=v from=$domain{/yun}
+                    {yun:}if $v.id==$adminuser.did{/yun}
+                    <input type="button" value="{yun:}$v.title{/yun}" class="yun_admin_select_box_text" id="did_name" onClick="select_click('did');">
+                    <input name="did" type="hidden" id="did_val" value="{yun:}$v.id{/yun}">
+                    {yun:}/if{/yun}
+                {yun:}/foreach{/yun}
+            {yun:}else{/yun}
+                <input type="button" value="请选择" class="yun_admin_select_box_text" id="did_name" onClick="select_click('did');">
+                <input name="did" type="hidden" id="did_val" value="0">
+            {yun:}/if{/yun}
+            <div class="yun_admin_select_box_list_box dn" id="did_select">     
+				{yun:}foreach item=v from=$domain{/yun}
+                <div class="yun_admin_select_box_list">
+                    <a href="javascript:;" onClick="select_new('did','{yun:}$v.id{/yun}','{yun:}$v.title{/yun}')">{yun:}$v.title{/yun}</a>
+                </div>                    
+                {yun:}/foreach{/yun}
+            </div>
+        </div>
+</td>
+</tr>
+<tr>
+<td colspan="2" align="center">
+	<input class="admin_submit4" name="useradd" type="submit" value="提交" id="dosubmit">
+</td>
+ </table>
+ <input type="hidden" name="pytoken" id='pytoken' value="{yun:}$pytoken{/yun}">
+ </form>
+</div>
+</div></div>
+</body>
+</html>

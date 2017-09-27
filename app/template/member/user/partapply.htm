@@ -1,0 +1,49 @@
+{yun:}include file="$userstyle/header.htm"{/yun}
+
+
+<div class="yun_user_member_w1100"> {yun:}include file="$userstyle/left.htm"{/yun}
+   <div class="mian_right fltR mt20">
+       <div class="member_right_index_h1 fltL"> <span class="member_right_h1_span fltL">我的兼职</span> <i class="member_right_h1_icon user_bg"></i></div>
+  
+    <div class="resume_box_list"> <div class="job_list_tit">
+         <ul class="">
+         <li {yun:}if $smarty.get.c=='partapply'{/yun}class="job_list_tit_cur"{yun:}/if{/yun}> <a href="index.php?c=partapply">兼职报名</a></li>
+        <li {yun:}if $smarty.get.c=='partcollect'{/yun}class="job_list_tit_cur"{yun:}/if{/yun}><a href="index.php?c=partcollect">兼职收藏</a></li>
+         </ul>
+         </div>
+         <div class="clear"></div>
+      <div class="resume_Prompt">您已申请 <span style="color:red;">{yun:}$total{/yun}</span> 条职位,请耐心等待企业回复！</div>
+      <div class="clear"></div>
+      <div id="gms_showclew"></div>
+      {yun:}if !empty($rows){/yun}
+      <div class="List_Ope List_Title"> 
+      <span class="List_Title_span List_Title_w330 pd15">兼职名称</span> 
+      <span class="List_Title_span List_Title_w170">当前状态</span> 
+      <span class="List_Title_span List_Title_w140">薪资待遇</span>
+       <span class="List_Title_span List_Title_w120">申请时间</span> 
+       <span class="List_Title_span List_Title_w80">操作</span> </div>
+      {yun:}/if{/yun}
+      {yun:}foreach item=job from=$rows{/yun}
+      <div class="List_Ope List_Ope_bor">
+        <span class="List_Title_span List_Title_w330 pd15">
+            <a href="{yun:}url m=part c=show id='`$job.jobid`'{/yun}" target="_blank" class="List_Title_span_com">{yun:}$job.jobname{/yun}</a>
+            <div><a href="{yun:}url m=company c=show id='`$job.comid`'{/yun}" target="_blank" title="{yun:}$job.com_name{/yun}">{yun:}$job.com_name{/yun}</a></div>
+        </span>
+        <span class="List_Title_span List_Title_w170 mt10" >
+        <span class=" is_browse{yun:}$job.is_browse{/yun} {yun:}if $job.status>1{/yun}statuscolor{yun:}/if{/yun} ">{yun:}$StateList[$job.status]{/yun}</span> 
+        </span> 
+        <span class="List_Title_span List_Title_w140 mt10">{yun:}$job.salary{/yun}</span> 
+        <span class="List_Title_span List_Title_w120 mt10">{yun:}$job.ctime|date_format:'%Y-%m-%d'{/yun}</span> 
+        <span class="List_Title_span List_Title_w80 mt10">
+        <a href="javascript:void(0)" onclick="layer_del('确定要删除？','index.php?c=partapply&act=del&id={yun:}$job.id{/yun}');" class="List_dete cblue" >删除</a></span> </div>
+      <div class="clear"></div>
+      {yun:}foreachelse{/yun}
+       <div class="msg_no">
+              <p>亲爱的用户，您还没有报名兼职哦，想要获得更多工作机会</p>
+              <p>立即搜索您感兴趣的兼职职位并报名吧！</p>
+              <a href="{yun:}url m=part{/yun}" target="_blank"class="msg_no_sq uesr_submit">立即搜索我感兴趣的兼职职位>></a> </div>
+      {yun:}/foreach{/yun} </div>
+    <div class="diggg" style="margin-top:10px; float:right">{yun:}$pagenav{/yun}</div>
+  </div>
+</div>
+{yun:}include file="$userstyle/footer.htm"{/yun}

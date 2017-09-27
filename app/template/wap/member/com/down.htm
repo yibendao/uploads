@@ -1,0 +1,27 @@
+{yun:}include file="$wapstyle/member/cheader.htm"{/yun} 
+<div class="wap_member_comp_h1"><span>已下载的简历</span></div>
+{yun:}foreach  from=$rows  item=v{/yun}
+<div class="com_member_hr">
+    <div class="com_member_hr_name"> <a href="{yun:}url m=wap c=resume a=show id=$v.eid{/yun}" class="wap_member_com_name com_member_hr_cblue">{yun:}$v.name{/yun}</a>{yun:}if $v.height_status==2{/yun} <i class="hr_gj"></i>{yun:}/if{/yun} 
+    </div>
+    <div class="com_member_user_box">
+
+        <div class="com_member_hr_p1"> <span class="member_c9">性别：</span>{yun:}$v.sex{/yun} &nbsp;&nbsp;&nbsp; <span class="member_c9">经验：</span>{yun:}$v.exp{/yun}   &nbsp;&nbsp;&nbsp; <span class="member_c9">学历：</span>{yun:}$v.edu{/yun}
+          <div class="com_member_hr_p1">  <span class="member_c9">期望薪资：</span>{yun:}if $v.minsalary&&$v.maxsalary{/yun}￥{yun:}$v.minsalary{/yun}-{yun:}$v.maxsalary{/yun}{yun:}else if $v.minsalary{/yun}￥{yun:}$v.minsalary{/yun}以上{yun:}else{/yun}面议{yun:}/if{/yun}</div>
+          <div class="com_member_hr_p1"> <span class="member_c9">意向职位：</span>{yun:}$v.jobname{/yun} </div>
+        </div>
+      </div>
+   
+    <div class="com_member_hr_cz"> <a href="javascript:void(0)" onclick="layer_del('确定要删除？','index.php?c=downdel&id={yun:}$v.id{/yun}')" class="yun_member_hr_bth">删除</a> 
+        {yun:}if $v.userid_msg==1{/yun}
+			<span class="yun_member_hr_bth yun_member_hr_bth_yq">已邀请</span>
+		{yun:}else{/yun}
+        <a href="index.php?c=yq&uid={yun:}$v.uid{/yun}" uid="{yun:}$v.uid{/yun}" username="{yun:}$v.name{/yun}" class="yun_member_hr_bth"> 邀请面试</a>
+		{yun:}/if{/yun} 
+   </div>
+  </div>
+{yun:}foreachelse{/yun} 
+<div class="wap_member_no">暂无相关信息<div><a class="wap_member_no_submit" href="{yun:}url m=wap c=resume{/yun}">去搜索人才</a></div></div>
+{yun:}/foreach{/yun}
+<div class="pages"> {yun:}$pagenav{/yun}</div></div>
+{yun:}include file="$wapstyle/footer.htm"{/yun} 

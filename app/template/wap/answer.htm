@@ -1,0 +1,32 @@
+{yun:}include file="$wapstyle/header_cont.htm"{/yun}
+{yun:}include file="$wapstyle/nav.htm"{/yun} 
+{yun:}foreach from=$rows item=alist{/yun}
+<div class="askfriend_ct">
+  <div class="answer_dp">
+    <div class="answer_dp_hd"><a href="{yun:}url m=wap c=ask a=content id='`$alist.qid`'{/yun}">{yun:}$alist.title{/yun}</a></div>
+  </div>
+  <div class="answer_qus">
+    <div class="answer_qus_ct">
+        <div>回答：{yun:}$alist.content{/yun}</div> 
+        <div style="font-size:12px;"><font color="#999">{yun:}$alist.add_time|date_format:"%Y-%m-%d"{/yun}</font></div>
+     {yun:}if $uid==$myuid{/yun}
+    <div class="question_de" style="top:180px;right:10px;"><a href="javascript:void(0)" onclick="layer_del('确定要删除该提问？','{yun:}url m=wap c=ask a=delask type=1 id=$alist.id{/yun}')">删除</a></div>
+    {yun:}/if{/yun}
+    </div>
+  </div>
+</div>
+{yun:}foreachelse{/yun}
+<div class="noresult png">
+{yun:}if $uid==$myuid{/yun}
+您还没有参与任何话题的回答！
+<a href="{yun:}url m=wap c=ask{/yun}#answer"  class="wap_mb_no_sr" style="color:#fff;">我要答题</a>
+{yun:}else{/yun}
+他还没有参与问题的回答！
+{yun:}/if{/yun}</div>
+{yun:}/foreach{/yun}
+<div class="pages">{yun:}$pagenav{/yun}</div> 
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/layer/layer.m.js" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/public.js" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/prefixfree.min.js" language="javascript"></script>
+{yun:}include file="$wapstyle/footer.htm"{/yun}

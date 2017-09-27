@@ -1,0 +1,251 @@
+@charset "gb2312";
+*{ margin:0; padding:0;}
+body{ font-size:12px;color:#555555; background:#f1f1f1;width:100%;height:100%;font-family:微软雅黑}
+em{ font-style:normal}
+a{ text-decoration:none;color:#666;}
+ul,li{ list-style:none}
+img{ vertical-align:middle}
+.one_vita_red{ background:#b93434}
+.fixed_left {float: left;left: 50px;position: fixed; _position:absolute;top: 200px;}
+.resume_template {}
+.container {margin: 0 auto;overflow: hidden;text-align: left;width: 835px;}
+.head {line-height: 50px;text-align: right;}
+.logo_1 {float: left;height: 53px;margin-top: 35px;width: 301px;}
+.none{display:none;}
+.yun_resume_content{width:802px; margin:0 auto}
+.yun_resume_new_content{width:720px; float:left; }
+.yun_resume_header{width:100%; float:left; padding:20px 0; position:relative; z-index:10000}
+.yun_resume_logo{width:; float:left}
+.yun_resume_logo_zt{ float:right; position:absolute;right:0px;bottom:10px;}
+.yun_resume_logo_zt_n{ color:#f60;}
+.yun_resume_logo_zt_list{ display:inline-block; padding:0px 20px;}
+.yun_resume_operation_p{width:100%; float:left; padding:10px 0;}
+.yun_resume_resumename{ float:left}
+.yun_resume_resumename_c{color:#06F; padding-left:10px}
+.yun_resume_resumename_name{ float:left}
+.yun_resume_resumename_qh{ float:left; padding-left:50px;}
+.clear{ clear:both}
+/*第一套简历样式模板---------------------------------------------*/
+.one_vita_body{width:835px; margin:0 auto}
+.one_vita_cur{width:100%;height:30px; position:relative; margin-top:20px;}
+.one_vita_cur_right{ position:absolute;right:0px;top:0px;}
+.one_vita_cur_right b{color:#f60;}
+.one_vita_content{width:100%; background:#fff; float:left}
+.one_vita_Basic{width:100%; float:left; padding:20px 0;color:#fff;}
+.one_vita_Basic_photo{float:left; position:relative; padding-left:70px; padding-right:20px;}
+.one_vita_Basic_photo_bg{width:80px;height:100px;background: url(../images/jil_img.png) no-repeat;left:70px;top:0px; position:absolute }
+.one_vita_Basic_info{width:520px; padding-left:20px; float:left}
+.one_vita_name{ font-size:22px; font-family:微软雅黑; float:left;}
+.resume_ans{background:url(../images/res_show_w.png) no-repeat; width:159px; padding-left:10px; height:20px; line-height:20px;font-size:12px; color:#999; margin-left:10px;display:inline-block; color:#f60;position:absolute;left:370px;bottom:-40px;}
+.resume_ans_top{bottom:-90px; z-index:1000000}
+.resume_rz{width:60px; height:22px; background:#fff; color:#f60;border-radius:2px;line-height:30px; text-align:center; font-size:14px; padding:0 10px; margin-left:10px;}
+.resume_three_rz{ background:#f60; color:#fff; margin-left:0;}
+.one_vita_line{width:100%;height:2px;filter:Alpha(opacity=10); opacity:0.1; background:#fff; margin-top:15px; overflow:hidden; float:left}
+.one_vita_Basic_info_t{width:100%; padding:10px 0; float:left}
+.one_vita_Basic_fh{width:100%; float:left; padding-top:5px;}
+.one_vita_Basic_icon{ display:inline-block; padding-left:18px; background:url(../images/two_r_icon.png) no-repeat 0 0; margin-right:10px;}
+.one_vita_Basic_Age{ background-position:0 -29px}
+.one_vita_Basic_Exp{background-position:0 -56px}
+.one_vita_Basic_Edu{background-position:0 -88px}
+.one_vita_Basic_add{background-position:0 -122px}
+.one_vita_Basic_info_c{width:100%; float:left; line-height:30px;}
+.one_vita_Basic_info_b{ line-height:30px;}
+.one_vita_Identity{ display:inline-block;;}
+.one_vita_line_jg{ font-size:12px; padding:0px 10px;}
+.one_vita_list_h1{width:100%; float:left; margin-top:20px;}
+.one_vita_list_h1_span{ display:inline-block;width:119px;height:33px; line-height:33px; text-indent:10px; float:left;color:#fff; font-size:14px; font-weight:bold;
+}
+.one_vita_list_h1_i{width:4px;height:33px; display:inline-block; margin-left:2px; float:left;}
+.bold{ font-weight:bold}
+.one_vita_list_cont{ padding-left:20px; float:left;width:780px;}
+.one_vita_Intention{width:375px;line-height:28px; float:left; position:relative; padding-left:13px; margin-top:10px;}
+.one_vita_Intention img{ vertical-align:middle}
+.one_vita_name_yrz{ font-size:12px; margin-left:10px;}
+.one_vita_Intention_w420{width:470px;}
+.one_vita_list{width:100%; float:left; font-size:14px;}
+.one_vita_Intention_i{width:6px;height:6px; display:inline-block; position:absolute;left:0px;top:11px; overflow:hidden;border-radius:3px}
+.one_vita_skill{width:100%; float:left; margin-top:10px;}
+.one_vita_skill_introduction{width:100%; float:left}
+.one_vita_introduction_a{ float:left;height:28px; line-height:28px;}
+.one_vita_date{ width:200px;overflow:hidden;white-space: nowrap;text-overflow:ellipsis;}
+.one_vita_dw_name{width:300px;overflow:hidden;white-space: nowrap;text-overflow:ellipsis;}
+.one_vita_dw_bm{width:170px;overflow:hidden;white-space: nowrap;text-overflow:ellipsis;}
+.one_vita_dw_zw{width:230px;overflow:hidden;white-space: nowrap;text-overflow:ellipsis;}
+.one_vita_jy_x{width:500px;overflow:hidden;white-space: nowrap;text-overflow:ellipsis;}
+.one_vita_dw_jydr{width:170px;overflow:hidden;white-space: nowrap;text-overflow:ellipsis;}
+.one_vita_skill_Intention{width:735px; padding-left:13px; position:relative; float:left;line-height:30px;}
+.one_vita_footer{width:100%; float:left; text-align:center; padding:10px 0;}
+.vita_skill_Intention_xmms{width:100%; float:left}
+.one_vita_ewm_box{width:100%; float:left;border-top:1px solid #ddd; padding:10px 0; text-align:center}
+.one_vita_ewm_box_p{width:100%; text-align:center; line-height:30px;}
+.yun_resume_jobtime{ margin-left:30px; line-height:26px;color:#f00; background:url(../images/resumetime.png) no-repeat left center; padding-left:22px; margin-top:5px; float:left}
+/*第二套简历样式模板---------------------------------------------*/
+.two_vita_red{ background:#1eaaff}
+.two_vita_body{width:835px; margin:0 auto; }
+.two_vita_cur{width:100%;height:30px; position:relative; margin-top:20px;}
+.two_vita_cur_right{ position:absolute;right:0px;top:0px;}
+.two_vita_cur_right b{color:#f60;}
+.two_vita_content_color{width:810px; float:left}
+.two_vita_content{width:100%; background:#fff; float:left}
+.two_vita_Basic{width:100%; float:left; padding:0px 0px 20px 0px;;color:#999999;}
+.two_vita_name_yrz{ font-size:12px; margin-left:10px;}
+.two_vita_Basi_top_bg{width:100%;height:55px; background:#fff; margin-top:1px;}
+.two_vita_Basi_top_bg_bot{width:100%;height:123px; background:#1eaaff; position:relative}
+.two_vita_Basic_photo_img{width:80px;height:100px; position:absolute;left:44px;top:-31px;}
+.two_vita_Basic_photo{width:80px;height:100px; background:url(../images/jinli2.png) no-repeat; position:absolute;left:44px;top:-31px;}
+.two_vita_Basic_photo_line{width:13px;height:178px; overflow:hidden; background:#fff; position:absolute;left:180px;top:-55px;}
+.two_vita_Basic_info{width:550px; float:left; padding-left:220px;color:#fff;}
+.two_vita_name{ font-size:22px; font-family:微软雅黑;color:#fff; padding-top:10px; padding-bottom:10px;}
+.two_vita_Basic_info_t{width:100%; padding:10px 0;}
+.two_vita_Basic_icon{ display:inline-block; padding-left:18px; background:url(../images/two_r_icon.png) no-repeat 0 0; margin-right:10px;color:#fff}
+.two_vita_Basic_Age{ background-position:0 -29px;}
+.two_vita_Basic_Exp{background-position:0 -56px}
+.two_vita_Basic_Edu{background-position:0 -88px}
+.two_vita_Basic_add{background-position:0 -122px}
+.two_vita_Basic_info_c{ line-height:30px;}
+.two_vita_Basic_info_b{ line-height:30px;}
+.two_vita_Identity{ display:inline-block;color:#fff;}
+.two_vita_Basic_line{ font-size:12px; padding:0px 10px;}
+.two_vita_list_h1{width:100%; float:left; padding-bottom:10px; }
+.two_vita_list_h1_span{ display:inline-block;width:110px; text-indent:15px; float:left; font-size:16px; font-weight:bold; position:relative}
+.two_vita_list_h1_icon{width:8px;height:8px; display:block;border-radius:8px; position:absolute; background:#fff;left:-3px;top:5px; z-index:10; overflow:hidden}
+.two_vita_list_h1_icon2{width:14px;height:14px; display:block;border-radius:8px;position:absolute;left:-6px;top:2px; z-index:5; overflow:hidden}
+.two_vita_list_h1_i{width:8px;height:26px; display:inline-block; margin-left:2px; float:left;}
+.two_vita_list_cont{ padding:0px 40px; float:left;width:735px;}
+.two_vita_Intention{width:300px;line-height:28px; float:left;  padding-left:20px;}
+.two_vita_Intention_w420{width:350px;}
+.two_vita_Intention img{ vertical-align:middle}
+.two_vita_list{width:100%; float:left; background:url(../images/r_line.png) repeat-y; padding-bottom:10px;}
+.two_vita_Intention_i{width:6px;height:6px; display:inline-block; position:absolute;left:0px;top:11px;}
+.two_vita_skill{width:100%; float:left; margin-top:5px;}
+.two_vita_skill_introduction{width:730px; padding-left:20px; float:left; position:relative}
+.two_vita_introduction_a{ float:left;height:28px; line-height:28px;}
+.two_vita_date{ width:200px;overflow:hidden;white-space: nowrap;text-overflow:ellipsis;}
+.two_vita_dw_name{width:300px;overflow:hidden;white-space: nowrap;text-overflow:ellipsis;}
+.two_vita_dw_bm{width:150px;overflow:hidden;white-space: nowrap;text-overflow:ellipsis;}
+.two_vita_dw_zw{width:230px;overflow:hidden;white-space: nowrap;text-overflow:ellipsis;}
+.two_vita_xy_name{width:500px;overflow:hidden;white-space: nowrap;text-overflow:ellipsis;}
+.two_vita_jn_p{ line-height:30px;}
+.two_vita_skill_Intention{width:730px; padding-left:20px;float:left;line-height:30px;}
+.two_vita_ewm_box{width:100%; float:left;padding:10px 0; text-align:center; margin-top:10px;}
+.two_vita_ewm_box_p{width:100%; text-align:center; line-height:30px;}
+.yun_resume_jobtime3{ margin-left:30px; line-height:26px;color:#f00; background:url(../images/resumetime.png) no-repeat left center; padding-left:22px; margin-top:5px; float:left}
+/*第三套简历样式模板---------------------------------------------*/
+.three_vita_body{width:800px; margin:0 auto; overflow:hidden;}
+.three_vita_cur{width:100%;height:30px; position:relative; margin-top:20px;}
+.three_vita_cur_right{ position:absolute;right:0px;top:0px;}
+.three_vita_cur_right b{color:#f60;}
+.three_vita_content{width:100%; background:#fff; float:left}
+.three_vita_Basic{width:760px; float:left; padding:20px 10px 0;color:#716c6c; position:relative}
+.three_vita_Basic_photo{width:80px;height:100px; background:#fff;border:1px solid #E4DFDF; padding:5px; position:absolute;right:30px;top:20px;}
+.three_vita_Basic_info{width:540px; padding-left:25px; float:left}
+.three_vita_name{ font-size:26px; font-family:微软雅黑;color:#000}
+.three_vita_name_nl{ font-size:16px;color:#4B4B4B; font-family:宋体}
+.sf_yz{ font-size:12px; font-family:宋体; margin-left:3px;color:#390}
+.three_resume_ans{background:url(../images/res_show.png) no-repeat; width:159px; padding-left:10px; height:20px; line-height:20px;font-size:12px; color:#fff;display:inline-block}
+.three_vita_line{width:100%;height:2px;filter:Alpha(opacity=10); opacity:0.1; background:#fff; margin-top:5px;}
+.three_vita_Basic_info_t{width:100%; padding:10px 0; font-size:14px;color:#383838}
+.three_vita_Basic_icon{ display:inline-block; padding-left:18px; background:url(../images/r_icon.png) no-repeat 0 0; margin-right:10px;}
+.three_vita_Basic_Age{ background-position:0 -29px}
+.three_vita_Basic_Exp{background-position:0 -56px}
+.three_vita_Basic_Edu{background-position:0 -88px}
+.three_vita_Basic_add{background-position:0 -122px}
+.three_vita_Basic_info_c{ line-height:30px;}
+.three_vita_Basic_info_b{ line-height:30px;}
+.three_vita_Identity{ display:inline-block; margin-right:10px;}
+.three_vita_list_h1{width:100%; float:left; margin-top:10px;eight:40px; line-height:40px;background:#F5F5F5 ; border-bottom:1px solid #e4dfdf;}
+.three_vita_list_h1_span{ display:inline-block;height:40px; line-height:40px; text-indent:10px; float:left;color:#4B4B4B; font-size:14px; font-weight:bold;
+}
+.three_vita_list_h1_i{width:4px;height:26px; display:inline-block; margin-left:2px; float:left;}
+.three_vita_list_cont{ float:left;width:730px; padding-left:25px;}
+.three_vita_Intention{width:330px;line-height:35px; float:left; position:relative;  margin-right:20px;_margin-right:10px; font-size:14px;}
+.three_vita_Intention img{ vertical-align:middle}
+.three_vita_Intention_em{color:#383838}
+.three_vita_Intention_w420{width:340px;}
+.three_vita_Intention_cor{color:#0064D3}
+.three_vita_list{width:100%; float:left;}
+.three_vita_Intention_i{width:6px;height:6px; display:inline-block; position:absolute;left:0px;top:11px;}
+.three_vita_skill{width:100%; float:left; padding-top:15px;font-size:14px;color:#282828}
+.three_vita_skill_introduction{width:100%; float:left}
+.three_vita_introduction_a{ float:left; line-height:28px;}
+.three_vita_date{ width:100%; padding-left:10px;}
+.three_vita_dw_name{width:220px; font-weight:bold; font-size:14px;color:#535559;padding-left:10px;}
+.three_vita_dw_bm{width:180px;}
+.three_vita_dw_zw{width:230px;}
+.three_vita_skill_Intention{width:735px; padding-left:10px; position:relative; float:left;line-height:28px; font-size:14px;}
+.three_vita_Opera{width:100%; padding-top:10px; padding-bottom:10px; text-align:center; float:left}
+.three_vita_footer{width:100%; float:left; text-align:center; padding:10px 0;}
+.three_vita_Opera_btn_1{ background:#C30;border:none;}
+.three_vita_Basic_top_line{width:100%;height:3px; float:left}.rem_chlose_left{width:180px;height:60px; line-height:60px; text-align:center; background:#f60; font-size:18px; font-family:microsoft yahei,宋体;color:#fff;}
+.resume_template{ width:140px;height:50px; line-height:50px;font-size:16px; color:#993; cursor:pointer; background:#e7e7e7 url(../images/jianli_jt.gif) no-repeat 150px center; margin-top:10px; padding-left:40px; font-family:microsoft yahei,宋体;}
+.resume_template a{ display:block;}
+.resume_template_bg{ background:#898887;color:#fff;}
+.resume_template_mor{ background:#898887 url(../images/jianli_jt2.gif) no-repeat 150px center;color:#fff;}
+.resume_template_mor a{color:#fff;}
+/*公共样式*/
+.vita_Opera_cz{width:100%; float:left; padding:10px 0; text-align:center}
+.vita_btn_1{}
+.re_touch{ width:100%; float:left; padding:20px 0; text-align:center; font-size:16px;}
+.re_touch a{color:#C33}
+/*邀请面试*/
+.city_1 {background: none repeat scroll 0 0 #FFFFFF;color: #666666;line-height: 24px;width: 100%;float: left;}
+.city_01 {display: block;float: left;line-height: 22px;width: 80px;text-align: right;font-size: 14px;}
+.city_1 .city_3 {float: left;margin-top: 10px;width: 360px;}
+.city_1 .city_3 dt {color: #000000;float: left;width: 360px;}
+.city_1 .city_3 input {display: block;float: left;}
+.city_1 .city_3 .resyme_text {width: 230px;float: left;border-color: #CCCCCC #DBDBDB #DBDBDB #CCCCCC;border-radius: 2px 2px 2px 2px;border-style: solid;
+border-width: 1px;font-size: 12px;height: 95px;line-height: 23px;padding: 2px;}
+.resume_sub_yq {width: 76px;height: 26px;line-height: 26px;text-align: center;cursor: pointer;color: #963;background: url(../images/yun_firm_sub1.jpg) no-repeat;border: none;}
+.fairs_introduction_img{width:100%}
+.fairs_introduction_img li{width:215px; float:left; margin-top:10px; margin-right:10px;}
+.fairs_introduction_img_l li{ margin-left:10px;}
+/*下载简历提示*/
+.Download_resume_tips{width:500px; background:#fff; padding:20px; font-size:14px;}
+.Download_resume_tips_h1{border-bottom:1px solid #ddd; padding-bottom:20px; font-size:16px; font-weight:bold}
+.Download_resume_tips_h1 .Download_resume_tips_h1_s{ font-size:18px;color:#f60; font-style:normal; font-weight:bold}
+.Download_resume_con_list{width:100%;}
+.Download_resume_tips_p{ line-height:30px; text-align:left; padding:10px 0;}
+.Download_resume_tips_p .Download_resume_tips_p_span{ display:inline-block; word-spacing:normal}
+.Download_resume_cont{width:500px;height:380px; overflow:auto}
+.Download_resume_tips_c{color:#093; font-style:normal; font-weight:bold}
+.Download_resume_tips_f{color:#f60; font-style:normal; font-weight:bold}
+.Download_resume_tips_cf{color:#999; font-style:normal; }
+.Download_resume_tips_rad{width:13px;height:13px; overflow:hidden; vertical-align:middle; margin-right:5px; margin-left:5px;}
+.Download_resume_tips_cur{background:#f8f8f8;}
+.Download_resume_tips_yhq{width:100%; padding:5px 0}
+.Download_resume_tips_yhq a{color:#f60;}
+.Download_resume_tips_jine{width:100%; padding:10px 0; font-size:14px; font-weight:bold; text-align:center}
+.Download_resume_tips_jine .Download_resume_tips_f{ font-size:20px;}
+.Download_resume_tips_bth{width:100%;padding:10px 0; text-align:center}
+.Download_resume_tips_sub{width:110px;height:40px; background:#f60;color:#fff;border:none; font-size:14px; font-weight:bold; cursor:pointer;font-family:microsoft yahei,宋体;}
+.Download_resume_cont_list{width:100%; float:left}
+.resume_jl_box_t2 img{float:left;}
+.resume_beizu_text{border:1px solid #ddd;width:340px;height:90px;}
+.resume_beizu_bth{width:80px;height:30px; background:#1369c0;border:none;color:#fff; cursor:pointer}
+
+.btn_1{width:85px;height:30px; line-height:30px;border:none; background:#456dab;color:#fff; cursor:pointer; font-family:微软雅黑; margin-right:10px; display:inline-block}
+
+
+.yun_resume_left_box{width:802px; float:left; }
+
+.yun_resume_foot{ line-height: 25px;color: #816e74;margin-top: 10px; width:100%; padding:10px 0;text-align:center}
+.expext_yl_box_bth{width:100%; position:fixed;bottom:0px;left:0px; background:rgba(0,0,0,0.5); text-align:center; padding:10px 0;}
+.expext_yl_box_bth .expext_yl_box_sub{width:176px;height:42px; line-height:42px; text-align:center; background:#f60;border-radius:3px; display:inline-block;color:#fff; font-size:16px;text-decoration:none; }
+.yun_resume_operation{ position:fixed;right:100px;top:200px; _position:absolute}
+.yun_resume_operation_box{width:140px;border:1px solid #ddd; background:#fff;}
+.yun_resume_operation_box_h1{width:100%; padding:10px 0; text-align:center;border-bottom:1px solid #ddd; background:#f8f8f8; font-size:16px; }
+.vita_Opera_cz_list{width:100%;height:40px; position:relative; overflow:hidden}
+.yun_resume_cz_sub{ background:#fff;border:none;width:100%; height:100%; line-height:40px;color:#000;font-size:15px; cursor:pointer; text-align:left; text-indent:50px; display:block}
+.yun_resume_cz_sub_cor{color:#f60}
+.yun_resume_cz_sub:hover{ background:#f8f8f8}
+.vita_Opera_cz_list_icon{width:28px;height:28px; display:block; position:absolute;left:10px;top:8px; }
+.vita_Opera_cz_list_icon_xz{background:url(../images/yun_resume_xz.png) no-repeat}
+.vita_Opera_cz_list_icon_sc{background:url(../images/yun_resume_sc.png) no-repeat}
+.vita_Opera_cz_list_icon_yq{background:url(../images/yun_resume_ms.png) no-repeat}
+.vita_Opera_cz_list_icon_dy{background:url(../images/yun_resume_dy.png) no-repeat}
+.vita_Opera_cz_list_icon_fx{background:url(../images/yun_resume_fx.png) no-repeat}
+.resume_job_tag{ background:#faf3eb; margin-right:5px; display:inline-block; padding:0px 18px 0px 5px; line-height:23px;border:1px solid #fbd7c3; position:relative; white-space:nowrap; font-size:12px;color:#f60}
+.resume_job_tag_icon{width:6px;height:6px;border:1px solid #fbd7c3;  overflow:hidden; border-radius:50%; background:#fff; display:inline-block; position:absolute;right:5px;top:8px;}.resume_user_bq{background:#FFC url(../images/yxz.png) no-repeat right bottom;padding:0px 11px;cursor:default;height:28px;line-height:28px;border:1px solid #FC9;  display:inline-block; margin-right:5px; margin-top:2px;}
+.yun_resume_jobtime2{ margin-left:10px; line-height:30px;color:#f00; background:url(../images/resumetime.png) no-repeat left center; padding-left:22px}
+
+.yun_resume_jobtime3{ margin-left:30px; line-height:40px;color:#f00; background:url(../images/resumetime.png) no-repeat left center; padding-left:22px}
