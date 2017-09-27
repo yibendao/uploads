@@ -1,12 +1,56 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2017-09-27 22:48:35
+         compiled from "D:\phpStudy\WWW\uploads\app\template\admin\admin_resume.htm" */ ?>
+<?php /*%%SmartyHeaderCode:544559cbb5892aa2f2-41245201%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_valid = $_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    '0e2228481f0926cc7f85b5b77ca9a266351b7eb4' => 
+    array (
+      0 => 'D:\\phpStudy\\WWW\\uploads\\app\\template\\admin\\admin_resume.htm',
+      1 => 1506523709,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '544559cbb5892aa2f2-41245201',
+  'function' => 
+  array (
+  ),
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_59cbb5894b9bb9_49967841',
+  'variables' => 
+  array (
+    'config' => 0,
+    'pytoken' => 0,
+    'where' => 0,
+    'get_type' => 0,
+    'rows' => 0,
+    'key' => 0,
+    'v' => 0,
+    'source' => 0,
+    'pagenav' => 0,
+  ),
+  'has_nocache_code' => false,
+),false); /*/%%SmartyHeaderCode%%*/?>
+<?php if ($_valid && !is_callable('content_59cbb5894b9bb9_49967841')) {function content_59cbb5894b9bb9_49967841($_smarty_tpl) {?><?php if (!is_callable('smarty_function_url')) include 'D:\\phpStudy\\WWW\\uploads\\app\\include\\libs\\plugins\\function.url.php';
+if (!is_callable('smarty_modifier_date_format')) include 'D:\\phpStudy\\WWW\\uploads\\app\\include\\libs\\plugins\\modifier.date_format.php';
+?><!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
 
-<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js"></script>
-<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script>
-<script src="js/admin_public.js" language="javascript"></script>
-<script>
+<?php echo '<script'; ?>
+ src="<?php echo $_smarty_tpl->tpl_vars['config']->value['sy_weburl'];?>
+/js/jquery-1.8.0.min.js"><?php echo '</script'; ?>
+>
+<?php echo '<script'; ?>
+ src="<?php echo $_smarty_tpl->tpl_vars['config']->value['sy_weburl'];?>
+/js/layer/layer.min.js" language="javascript"><?php echo '</script'; ?>
+>
+<?php echo '<script'; ?>
+ src="js/admin_public.js" language="javascript"><?php echo '</script'; ?>
+>
+<?php echo '<script'; ?>
+>
 function Refreshs(){
 	var codewebarr="";
 	$(".check_all:checked").each(function(){ 
@@ -88,7 +132,8 @@ function resumttop(id,topday,topdate){
 		add_class('简历置顶','290','250','#resumttop','');
 	}
 }
-</script>
+<?php echo '</script'; ?>
+>
 <link href="images/reset.css" rel="stylesheet" type="text/css" />
 <link href="images/system.css" rel="stylesheet" type="text/css" />
 <link href="images/table_form.css" rel="stylesheet" type="text/css" />
@@ -99,8 +144,10 @@ function resumttop(id,topday,topdate){
 	<div style=" margin-top:10px;">
     <div>
       <form action="index.php?m=admin_resume&c=xls" target="supportiframe" method="post" id="formstatus" class="myform">
-      <input type="hidden" name="pytoken" value="{yun:}$pytoken{/yun}">
-      <input type="hidden" name="where" value="{yun:}$where{/yun}">
+      <input type="hidden" name="pytoken" value="<?php echo $_smarty_tpl->tpl_vars['pytoken']->value;?>
+">
+      <input type="hidden" name="where" value="<?php echo $_smarty_tpl->tpl_vars['where']->value;?>
+">
       <input type="hidden" name="ids">
 		<div class="admin_resume_dc">
 			<label><span class="admin_resume_dc_s"><input type="checkbox" class="type" name="rtype[]" value="id"> 简历ID</span></label>
@@ -146,7 +193,8 @@ function resumttop(id,topday,topdate){
  <div id="resumttop"  style="display:none; "> 
  <div class="admin_com_t_box"> 
       <form action="index.php?m=admin_resume&c=recommend" target="supportiframe" method="post" id="formstatus"> 
-	  <input type="hidden" name="pytoken" value="{yun:}$pytoken{/yun}">
+	  <input type="hidden" name="pytoken" value="<?php echo $_smarty_tpl->tpl_vars['pytoken']->value;?>
+">
 		
         <div class=" admin_com_smbox_list_pd">
           <span class="admin_com_smbox_span">置顶天数：</span>
@@ -169,15 +217,18 @@ function resumttop(id,topday,topdate){
 	<form action="index.php" name="myform" method="get"> 
     <div class="admin_Filter"> 
 	<input name="m" value="admin_resume" type="hidden"/>
-	<input type="hidden" name="salary" value="{yun:}$smarty.get.salary{/yun}"/>
-	<input type="hidden" name="type" value="{yun:}$smarty.get.type{/yun}"/>
-	<input type="hidden" name="report" value="{yun:}$smarty.get.report{/yun}"/>
+	<input type="hidden" name="salary" value="<?php echo $_GET['salary'];?>
+"/>
+	<input type="hidden" name="type" value="<?php echo $_GET['type'];?>
+"/>
+	<input type="hidden" name="report" value="<?php echo $_GET['report'];?>
+"/>
 	
 		<span class="complay_top_span fl">简历管理</span>
 		<div class="admin_Filter_span">搜索类型：</div>
       <div class="admin_Filter_text formselect" did='dkeytype'>
-        <input type="button" {yun:}if $get_type.keytype==''||$get_type.keytype=='1'{/yun} value="简历名称"  {yun:}elseif $get_type.keytype=='2'{/yun} value="用户姓名"  {yun:}elseif $get_type.keytype=='3'{/yun} value="EMAIL" {yun:}elseif $get_type.keytype=='4'{/yun} value="手机号" {yun:}/if{/yun} class="admin_Filter_but" id="bkeytype">
-        <input type="hidden" name="keytype" id="keytype" {yun:}if $get_type.keytype==''||$get_type.keytype=='1'{/yun} value="1"  {yun:}elseif $get_type.keytype=='2'{/yun} value="2"  {yun:}/if{/yun}/>
+        <input type="button" <?php if ($_smarty_tpl->tpl_vars['get_type']->value['keytype']==''||$_smarty_tpl->tpl_vars['get_type']->value['keytype']=='1') {?> value="简历名称"  <?php } elseif ($_smarty_tpl->tpl_vars['get_type']->value['keytype']=='2') {?> value="用户姓名"  <?php } elseif ($_smarty_tpl->tpl_vars['get_type']->value['keytype']=='3') {?> value="EMAIL" <?php } elseif ($_smarty_tpl->tpl_vars['get_type']->value['keytype']=='4') {?> value="手机号" <?php }?> class="admin_Filter_but" id="bkeytype">
+        <input type="hidden" name="keytype" id="keytype" <?php if ($_smarty_tpl->tpl_vars['get_type']->value['keytype']==''||$_smarty_tpl->tpl_vars['get_type']->value['keytype']=='1') {?> value="1"  <?php } elseif ($_smarty_tpl->tpl_vars['get_type']->value['keytype']=='2') {?> value="2"  <?php }?>/>
         <div class="admin_Filter_text_box" style="display:none" id="dkeytype">
           <ul> 
             <li><a href="javascript:void(0)" onClick="formselect('1','keytype','简历名称')">简历名称</a></li>
@@ -186,7 +237,8 @@ function resumttop(id,topday,topdate){
         </div>
       </div>
       
-		  <input type="text" placeholder="输入你要搜索的关键字" value="{yun:}$smarty.get.keyword{/yun}" name="keyword" class="admin_Filter_search">
+		  <input type="text" placeholder="输入你要搜索的关键字" value="<?php echo $_GET['keyword'];?>
+" name="keyword" class="admin_Filter_search">
 		  <input type="submit" name="search" value="搜索" class="admin_Filter_bth"> 
 		  <span class='admin_search_div'>
 		  <div class="admin_adv_search"><div class="admin_adv_search_bth">高级搜索</div></div>  
@@ -194,7 +246,8 @@ function resumttop(id,topday,topdate){
 		  <a href="index.php?m=admin_resume&c=addresume" class="admin_infoboxp_tj" style="margin-right:5px;"> 添加简历</a>  
 	  </div> 
 	 </form>
-	{yun:}include file="admin/admin_search.htm"{/yun}  
+	<?php echo $_smarty_tpl->getSubTemplate ("admin/admin_search.htm", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
+  
 
 
   <div class="table-list">
@@ -210,7 +263,7 @@ function resumttop(id,topday,topdate){
               <th style="width:20px;">
               <label for="chkall"><input type="checkbox" id='chkAll'  onclick='CheckAll(this.form)'/></label>
               </th>
-              <th width="60"> {yun:}if $smarty.get.t=="id" && $smarty.get.order=="asc"{/yun} <a href="index.php?m=admin_resume&order=desc&t=id">简历ID<img src="images/sanj.jpg"/></a> {yun:}else{/yun} <a href="index.php?m=admin_resume&order=asc&t=id">简历ID<img src="images/sanj2.jpg"/></a> {yun:}/if{/yun} </th>
+              <th width="60"> <?php if ($_GET['t']=="id"&&$_GET['order']=="asc") {?> <a href="index.php?m=admin_resume&order=desc&t=id">简历ID<img src="images/sanj.jpg"/></a> <?php } else { ?> <a href="index.php?m=admin_resume&order=asc&t=id">简历ID<img src="images/sanj2.jpg"/></a> <?php }?> </th>
               <th width="100" align="left">简历名称</th>
 			  <th width="100" align="left">用户姓名</th>
               <th width="150" align="left">意向职位</th>
@@ -218,7 +271,7 @@ function resumttop(id,topday,topdate){
               <th align="left">待遇要求</th>
               <th align="left">工作性质</th>
               <th align="left">到岗时间</th>
-              <th> {yun:}if $smarty.get.t=="time" && $smarty.get.order=="asc"{/yun} <a href="index.php?m=admin_resume&order=desc&t=time">更新时间<img src="images/sanj.jpg"/></a> {yun:}else{/yun} <a href="index.php?m=admin_resume&order=asc&t=time">更新时间<img src="images/sanj2.jpg"/></a> {yun:}/if{/yun} </th>
+              <th> <?php if ($_GET['t']=="time"&&$_GET['order']=="asc") {?> <a href="index.php?m=admin_resume&order=desc&t=time">更新时间<img src="images/sanj.jpg"/></a> <?php } else { ?> <a href="index.php?m=admin_resume&order=asc&t=time">更新时间<img src="images/sanj2.jpg"/></a> <?php }?> </th>
               <th>来源</th>
               <th>推荐</th>
               <th>置顶</th>
@@ -227,32 +280,74 @@ function resumttop(id,topday,topdate){
           </thead>
           <tbody>
           
-          {yun:}foreach item=v key=key from=$rows{/yun}
-          <tr align="center"{yun:}if ($key+1)%2=='0'{/yun}class="admin_com_td_bg"{yun:}/if{/yun} id="list{yun:}$v.id{/yun}">
-            <td><input type="checkbox" value="{yun:}$v.id{/yun}" class="check_all"  name='del[]' onclick='unselectall()' rel="del_chk" /></td>
-            <td align="left" class="td1" style="text-align:center;"><span>{yun:}$v.id{/yun}</span></td>
-            <td class="ud" align="left" ><a href="{yun:}url m=resume c=show id='`$v.id`' look=admin{/yun}" target="_blank" class="admin_cz_sc">{yun:}$v.name{/yun}</a></td>
-			<td class="gd" align="left">{yun:}$v.uname{/yun}</td>
-            <td class="od" align="left">{yun:}if $v.job_post_n{/yun}{yun:}$v.job_post_n{/yun}(<a href="javascript:void(0)" class="job_name_all"  v="{yun:}$v.job_class_name{/yun}"><font color="red">共{yun:}$v.jobnum{/yun}个</font></a>){yun:}/if{/yun}</td>
-           <td class="gd" align="left">{yun:}$v.cityid_n{/yun}</td>
-            <td class="td" align="left">{yun:}if $v.minsalary&&$v.maxsalary{/yun}￥{yun:}$v.minsalary{/yun}-{yun:}$v.maxsalary{/yun}{yun:}else if $v.minsalary{/yun}￥{yun:}$v.minsalary{/yun}以上{yun:}else{/yun}面议{yun:}/if{/yun}</td>
-            <td align="left">{yun:}$v.type_n{/yun}</td>
-            <td align="left">{yun:}$v.report_n{/yun}</td>
-            <td>{yun:}$v.lastupdate|date_format:"%Y-%m-%d"{/yun}</td>
-            <td>{yun:}$source[$v.source]{/yun}</td>
-            <td id="rec_resume{yun:}$v.id{/yun}">{yun:}if $v.rec_resume=="1"{/yun}<a href="javascript:void(0);" onClick="rec_up('index.php?m=admin_resume&c=recommend','{yun:}$v.id{/yun}','0','rec_resume');"><img src="../config/ajax_img/doneico.gif"></a>{yun:}else{/yun}<a href="javascript:void(0);" onClick="rec_up('index.php?m=admin_resume&c=recommend','{yun:}$v.id{/yun}','1','rec_resume');"><img src="../config/ajax_img/errorico.gif"></a>{yun:}/if{/yun}</td>
-            <td id="top{yun:}$v.id{/yun}">
-            	{yun:}if $v.top=="1"&&$v.topdate>time(){/yun}
-            		<a href="javascript:void(0);" onClick="resumttop('{yun:}$v.id{/yun}','{yun:}$v.top_day{/yun}','{yun:}$v.topdate|date_format:"%Y-%m-%d"{/yun}')">
+          <?php  $_smarty_tpl->tpl_vars['v'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['v']->_loop = false;
+ $_smarty_tpl->tpl_vars['key'] = new Smarty_Variable;
+ $_from = $_smarty_tpl->tpl_vars['rows']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['v']->key => $_smarty_tpl->tpl_vars['v']->value) {
+$_smarty_tpl->tpl_vars['v']->_loop = true;
+ $_smarty_tpl->tpl_vars['key']->value = $_smarty_tpl->tpl_vars['v']->key;
+?>
+          <tr align="center"<?php if (($_smarty_tpl->tpl_vars['key']->value+1)%2=='0') {?>class="admin_com_td_bg"<?php }?> id="list<?php echo $_smarty_tpl->tpl_vars['v']->value['id'];?>
+">
+            <td><input type="checkbox" value="<?php echo $_smarty_tpl->tpl_vars['v']->value['id'];?>
+" class="check_all"  name='del[]' onclick='unselectall()' rel="del_chk" /></td>
+            <td align="left" class="td1" style="text-align:center;"><span><?php echo $_smarty_tpl->tpl_vars['v']->value['id'];?>
+</span></td>
+            <td class="ud" align="left" ><a href="<?php echo smarty_function_url(array('m'=>'resume','c'=>'show','id'=>'`$v.id`','look'=>'admin'),$_smarty_tpl);?>
+" target="_blank" class="admin_cz_sc"><?php echo $_smarty_tpl->tpl_vars['v']->value['name'];?>
+</a></td>
+			<td class="gd" align="left"><?php echo $_smarty_tpl->tpl_vars['v']->value['uname'];?>
+</td>
+            <td class="od" align="left"><?php if ($_smarty_tpl->tpl_vars['v']->value['job_post_n']) {
+echo $_smarty_tpl->tpl_vars['v']->value['job_post_n'];?>
+(<a href="javascript:void(0)" class="job_name_all"  v="<?php echo $_smarty_tpl->tpl_vars['v']->value['job_class_name'];?>
+"><font color="red">共<?php echo $_smarty_tpl->tpl_vars['v']->value['jobnum'];?>
+个</font></a>)<?php }?></td>
+           <td class="gd" align="left"><?php echo $_smarty_tpl->tpl_vars['v']->value['cityid_n'];?>
+</td>
+            <td class="td" align="left"><?php if ($_smarty_tpl->tpl_vars['v']->value['minsalary']&&$_smarty_tpl->tpl_vars['v']->value['maxsalary']) {?>￥<?php echo $_smarty_tpl->tpl_vars['v']->value['minsalary'];?>
+-<?php echo $_smarty_tpl->tpl_vars['v']->value['maxsalary'];
+} elseif ($_smarty_tpl->tpl_vars['v']->value['minsalary']) {?>￥<?php echo $_smarty_tpl->tpl_vars['v']->value['minsalary'];?>
+以上<?php } else { ?>面议<?php }?></td>
+            <td align="left"><?php echo $_smarty_tpl->tpl_vars['v']->value['type_n'];?>
+</td>
+            <td align="left"><?php echo $_smarty_tpl->tpl_vars['v']->value['report_n'];?>
+</td>
+            <td><?php echo smarty_modifier_date_format($_smarty_tpl->tpl_vars['v']->value['lastupdate'],"%Y-%m-%d");?>
+</td>
+            <td><?php echo $_smarty_tpl->tpl_vars['source']->value[$_smarty_tpl->tpl_vars['v']->value['source']];?>
+</td>
+            <td id="rec_resume<?php echo $_smarty_tpl->tpl_vars['v']->value['id'];?>
+"><?php if ($_smarty_tpl->tpl_vars['v']->value['rec_resume']=="1") {?><a href="javascript:void(0);" onClick="rec_up('index.php?m=admin_resume&c=recommend','<?php echo $_smarty_tpl->tpl_vars['v']->value['id'];?>
+','0','rec_resume');"><img src="../config/ajax_img/doneico.gif"></a><?php } else { ?><a href="javascript:void(0);" onClick="rec_up('index.php?m=admin_resume&c=recommend','<?php echo $_smarty_tpl->tpl_vars['v']->value['id'];?>
+','1','rec_resume');"><img src="../config/ajax_img/errorico.gif"></a><?php }?></td>
+            <td id="top<?php echo $_smarty_tpl->tpl_vars['v']->value['id'];?>
+">
+            	<?php if ($_smarty_tpl->tpl_vars['v']->value['top']=="1"&&$_smarty_tpl->tpl_vars['v']->value['topdate']>time()) {?>
+            		<a href="javascript:void(0);" onClick="resumttop('<?php echo $_smarty_tpl->tpl_vars['v']->value['id'];?>
+','<?php echo $_smarty_tpl->tpl_vars['v']->value['top_day'];?>
+','<?php echo smarty_modifier_date_format($_smarty_tpl->tpl_vars['v']->value['topdate'],"%Y-%m-%d");?>
+')">
             		<img src="../config/ajax_img/doneico.gif"></a>
-            	{yun:}else{/yun}
-            		<a href="javascript:void(0);" onClick="resumttop('{yun:}$v.id{/yun}','{yun:}$v.top_day{/yun}')">
+            	<?php } else { ?>
+            		<a href="javascript:void(0);" onClick="resumttop('<?php echo $_smarty_tpl->tpl_vars['v']->value['id'];?>
+','<?php echo $_smarty_tpl->tpl_vars['v']->value['top_day'];?>
+')">
             		<img src="../config/ajax_img/errorico.gif"></a>
-            	{yun:}/if{/yun}
+            	<?php }?>
             </td>
-            <td><a href="{yun:}url m=resume c=show id='`$v.id`' look=admin{/yun}" target="_blank" class="admin_cz_sc">预览</a> | <a href="javascript:void(0)" onClick="layer_del('确认刷新？', 'index.php?m=admin_resume&c=refresh&id={yun:}$v.id{/yun}');" title="刷新" class="admin_cz_sc">刷新</a> | <a href="{yun:}url m=resume_evalution c=evalution id='`$v.id`' by=admin{/yun}"  class="admin_cz_sc">评价</a><br/><a href="index.php?m=admin_resume&c=saveresume&uid={yun:}$v.uid{/yun}&e={yun:}$v.id{/yun}" class="admin_cz_sc">修改</a> | <a href="javascript:void(0)"  onclick="layer_del('确定要删除？', 'index.php?m=admin_resume&c=del&del={yun:}$v.id{/yun}-{yun:}$v.uid{/yun}');"class="admin_cz_sc">删除</a> | <a href="javascript:void(0)"  onclick="layer_del('确定要设置勿扰？', 'index.php?m=admin_resume_evalution&c=undisturb&id={yun:}$v.id{/yun}-{yun:}$v.uid{/yun}');"class="admin_cz_sc">勿扰</a></td>
+            <td><a href="<?php echo smarty_function_url(array('m'=>'resume','c'=>'show','id'=>'`$v.id`','look'=>'admin'),$_smarty_tpl);?>
+" target="_blank" class="admin_cz_sc">预览</a> | <a href="javascript:void(0)" onClick="layer_del('确认刷新？', 'index.php?m=admin_resume&c=refresh&id=<?php echo $_smarty_tpl->tpl_vars['v']->value['id'];?>
+');" title="刷新" class="admin_cz_sc">刷新</a> | <a href="<?php echo smarty_function_url(array('m'=>'resume_evalution','c'=>'evalution','id'=>'`$v.id`','by'=>'admin'),$_smarty_tpl);?>
+" target="_blank" class="admin_cz_sc">评价</a><br/><a href="index.php?m=admin_resume&c=saveresume&uid=<?php echo $_smarty_tpl->tpl_vars['v']->value['uid'];?>
+&e=<?php echo $_smarty_tpl->tpl_vars['v']->value['id'];?>
+" class="admin_cz_sc">修改</a> | <a href="javascript:void(0)"  onclick="layer_del('确定要删除？', 'index.php?m=admin_resume&c=del&del=<?php echo $_smarty_tpl->tpl_vars['v']->value['id'];?>
+-<?php echo $_smarty_tpl->tpl_vars['v']->value['uid'];?>
+');"class="admin_cz_sc">删除</a> | <a href="javascript:void(0)"  onclick="layer_del('确定要设置勿扰？', 'index.php?m=admin_resume_controller&c=undisturb&id=<?php echo $_smarty_tpl->tpl_vars['v']->value['id'];?>
+-<?php echo $_smarty_tpl->tpl_vars['v']->value['uid'];?>
+');"class="admin_cz_sc">勿扰</a></td>
           </tr>
-          {yun:}/foreach{/yun}
+          <?php } ?>
         <tr style="background:#f1f1f1;">
             <td align="center"><input type="checkbox" id='chkAll2' onclick='CheckAll2(this.form)' /></td>
             <td colspan="6" >
@@ -265,14 +360,16 @@ function resumttop(id,topday,topdate){
               <input class="admin_submit4" type="button" name="delsub" value="取消置顶" onClick="checkdel('top','0');"/>
               <input class="admin_submit2" type="button" name="delsub" value="导出" onClick="Export();" />
               </td>
-            <td colspan="7" class="digg">{yun:}$pagenav{/yun}</td>
+            <td colspan="7" class="digg"><?php echo $_smarty_tpl->tpl_vars['pagenav']->value;?>
+</td>
           </tr>
             </tbody>
         </table>
-        <input type="hidden" name="pytoken"  id='pytoken' value="{yun:}$pytoken{/yun}">
+        <input type="hidden" name="pytoken"  id='pytoken' value="<?php echo $_smarty_tpl->tpl_vars['pytoken']->value;?>
+">
       </form>
     </div>
   </div>
 </div> 
 </body>
-</html>
+</html><?php }} ?>

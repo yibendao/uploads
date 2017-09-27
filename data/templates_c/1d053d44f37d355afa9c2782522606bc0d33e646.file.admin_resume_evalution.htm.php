@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2017-09-27 00:09:11
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2017-09-27 22:36:07
          compiled from "D:\phpStudy\WWW\uploads\app\template\admin\admin_resume_evalution.htm" */ ?>
-<?php /*%%SmartyHeaderCode:3250159ca7ba72e35c3-36425798%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:2190559cbb757ac79b8-94564843%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '1d053d44f37d355afa9c2782522606bc0d33e646' => 
     array (
       0 => 'D:\\phpStudy\\WWW\\uploads\\app\\template\\admin\\admin_resume_evalution.htm',
-      1 => 1506441549,
+      1 => 1506478186,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '3250159ca7ba72e35c3-36425798',
+  'nocache_hash' => '2190559cbb757ac79b8-94564843',
   'function' => 
   array (
   ),
@@ -25,9 +25,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_59ca7ba73cf215_59689773',
+  'unifunc' => 'content_59cbb757ce8229_38631778',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_59ca7ba73cf215_59689773')) {function content_59ca7ba73cf215_59689773($_smarty_tpl) {?><?php if (!is_callable('smarty_modifier_date_format')) include 'D:\\phpStudy\\WWW\\uploads\\app\\include\\libs\\plugins\\modifier.date_format.php';
+<?php if ($_valid && !is_callable('content_59cbb757ce8229_38631778')) {function content_59cbb757ce8229_38631778($_smarty_tpl) {?><?php if (!is_callable('smarty_modifier_date_format')) include 'D:\\phpStudy\\WWW\\uploads\\app\\include\\libs\\plugins\\modifier.date_format.php';
 ?><!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -51,6 +51,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 >
 <title>后台管理</title>
 </head>
+<!-- 简历评价管理 -->
 <body class="body_ifm">
 <div class="infoboxp">
 <div class="infoboxp_top_bg"></div>

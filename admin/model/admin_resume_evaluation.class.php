@@ -6,6 +6,7 @@
  */
 class admin_resume_evaluation_controller extends common{
 
+	//设置搜索项
 	function set_search(){
 
 		$lo_time=array('1'=>'今天','3'=>'最近三天','7'=>'最近七天','15'=>'最近半月','30'=>'最近一个月');
@@ -14,6 +15,7 @@ class admin_resume_evaluation_controller extends common{
 		$search_list[]=array("param"=>"grade","name"=>'评价等级',"value"=>$f_time);
 		$this->yunset("search_list",$search_list);
 	}
+	//简历评价列表
 	function index_action()
 	{
 		$this->set_search();
@@ -25,7 +27,7 @@ class admin_resume_evaluation_controller extends common{
 		$from .= $this->def.'resume_expect c,';
 		$from .= $this->def.'member d ';
 
-		$where=' where a.uid=b.uid and a.by_uid=d.uid and c.id=a.resume_id ';
+		$where=' where a.uid=b.uid and a.by_uid=d.uid and c.id=a.resume_expect_id ';
 		if($_GET['time']){
 			if($_GET['time']=='1'){
 				$where.=" and a.`created_at` >= '".strtotime(date("Y-m-d 00:00:00"))."'";
@@ -60,7 +62,7 @@ class admin_resume_evaluation_controller extends common{
 		$this->yunset("get_type", $_GET);
 		$this->yuntpl(array('admin/admin_resume_evalution'));
 	}
-
+	//删除简历评价
 	function del_action(){
 		$this->check_token();
 	    if($_GET['del']){
@@ -82,9 +84,20 @@ class admin_resume_evaluation_controller extends common{
 	    	}
 	    }
 	}
+	//删除简历评价sql
 	function del_member($id)
 	{
 		return $this->obj->DB_delete_all("resume_evalution","`id`='".$id."'" );
+	}
+	//设置勿扰接受的参数：id 、uid;对应的表phpyun_admin_resume_expect
+	function undisturb_action()
+	{
+
+	}
+	//评价 接受的参数：id (phpyun_admin_resume_expect.id) 、by (admin);查询的表phpyun_admin_resume_evalution
+	function evalution_action()
+	{
+
 	}
 
 }
