@@ -476,7 +476,7 @@ class model{
 		$rows=$this->DB_select_all($table,$where.' limit '.$ststrsql.','.$limit,$field);
 		return array('total'=>$num,'pagenav'=>$pagenav,$rowsname=>$rows);
 	}
-	//20170926
+	//20170926新增
 	function get_page_by_sql($selectSql,$countSql,$pageurl='',$limit=20,$rowsname='rows'){
 		$rows=array();
 		$page=$_GET['page']<1?1:$_GET['page'];
