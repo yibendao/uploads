@@ -1,22 +1,22 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2017-09-27 22:48:35
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2017-09-29 00:30:37
          compiled from "D:\phpStudy\WWW\uploads\app\template\admin\admin_resume.htm" */ ?>
-<?php /*%%SmartyHeaderCode:544559cbb5892aa2f2-41245201%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:2649459cd1f569788a7-95279551%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '0e2228481f0926cc7f85b5b77ca9a266351b7eb4' => 
     array (
       0 => 'D:\\phpStudy\\WWW\\uploads\\app\\template\\admin\\admin_resume.htm',
-      1 => 1506523709,
+      1 => 1506616229,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '544559cbb5892aa2f2-41245201',
+  'nocache_hash' => '2649459cd1f569788a7-95279551',
   'function' => 
   array (
   ),
   'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_59cbb5894b9bb9_49967841',
+  'unifunc' => 'content_59cd1f56c84508_64133606',
   'variables' => 
   array (
     'config' => 0,
@@ -31,7 +31,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_59cbb5894b9bb9_49967841')) {function content_59cbb5894b9bb9_49967841($_smarty_tpl) {?><?php if (!is_callable('smarty_function_url')) include 'D:\\phpStudy\\WWW\\uploads\\app\\include\\libs\\plugins\\function.url.php';
+<?php if ($_valid && !is_callable('content_59cd1f56c84508_64133606')) {function content_59cd1f56c84508_64133606($_smarty_tpl) {?><?php if (!is_callable('smarty_function_url')) include 'D:\\phpStudy\\WWW\\uploads\\app\\include\\libs\\plugins\\function.url.php';
 if (!is_callable('smarty_modifier_date_format')) include 'D:\\phpStudy\\WWW\\uploads\\app\\include\\libs\\plugins\\modifier.date_format.php';
 ?><!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -338,12 +338,12 @@ echo $_smarty_tpl->tpl_vars['v']->value['job_post_n'];?>
             </td>
             <td><a href="<?php echo smarty_function_url(array('m'=>'resume','c'=>'show','id'=>'`$v.id`','look'=>'admin'),$_smarty_tpl);?>
 " target="_blank" class="admin_cz_sc">预览</a> | <a href="javascript:void(0)" onClick="layer_del('确认刷新？', 'index.php?m=admin_resume&c=refresh&id=<?php echo $_smarty_tpl->tpl_vars['v']->value['id'];?>
-');" title="刷新" class="admin_cz_sc">刷新</a> | <a href="<?php echo smarty_function_url(array('m'=>'resume_evalution','c'=>'evalution','id'=>'`$v.id`','by'=>'admin'),$_smarty_tpl);?>
-" target="_blank" class="admin_cz_sc">评价</a><br/><a href="index.php?m=admin_resume&c=saveresume&uid=<?php echo $_smarty_tpl->tpl_vars['v']->value['uid'];?>
+');" title="刷新" class="admin_cz_sc">刷新</a> | <a href="index.php?m=admin_resume_evaluation&c=evaluation&id=<?php echo $_smarty_tpl->tpl_vars['v']->value['id'];?>
+&by=admin"  class="admin_cz_sc">评价</a><br/><a href="index.php?m=admin_resume&c=saveresume&uid=<?php echo $_smarty_tpl->tpl_vars['v']->value['uid'];?>
 &e=<?php echo $_smarty_tpl->tpl_vars['v']->value['id'];?>
 " class="admin_cz_sc">修改</a> | <a href="javascript:void(0)"  onclick="layer_del('确定要删除？', 'index.php?m=admin_resume&c=del&del=<?php echo $_smarty_tpl->tpl_vars['v']->value['id'];?>
 -<?php echo $_smarty_tpl->tpl_vars['v']->value['uid'];?>
-');"class="admin_cz_sc">删除</a> | <a href="javascript:void(0)"  onclick="layer_del('确定要设置勿扰？', 'index.php?m=admin_resume_controller&c=undisturb&id=<?php echo $_smarty_tpl->tpl_vars['v']->value['id'];?>
+');"class="admin_cz_sc">删除</a> | <a href="javascript:void(0)"  onclick="layer_del('确认置为勿扰', 'index.php?m=admin_resume_evaluation&c=undisturb&id=<?php echo $_smarty_tpl->tpl_vars['v']->value['id'];?>
 -<?php echo $_smarty_tpl->tpl_vars['v']->value['uid'];?>
 ');"class="admin_cz_sc">勿扰</a></td>
           </tr>

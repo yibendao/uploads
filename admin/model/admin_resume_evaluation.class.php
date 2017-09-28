@@ -15,6 +15,17 @@ class admin_resume_evaluation_controller extends common{
 		$search_list[]=array("param"=>"grade","name"=>'评价等级',"value"=>$f_time);
 		$this->yunset("search_list",$search_list);
 	}
+	//评价 接受的参数：id (phpyun_admin_resume_expect.id) 、by (admin);查询的表phpyun_admin_resume_evalution
+	function evaluation_action()
+	{
+		if($_GET[id]){
+			$result = $this->get_evaluation_list($_GET[id]);
+			$this->yunset("id",$_GET[id]);
+			$this->yunset($result['rows']);
+			$this->yunset("get_type", $_GET);
+			$this->yuntpl(array('admin/admin_resume_evaluation'));
+		}
+	}
 	//简历评价列表
 	function index_action()
 	{
@@ -60,8 +71,13 @@ class admin_resume_evaluation_controller extends common{
 	
 		$this->yunset($mes_list);
 		$this->yunset("get_type", $_GET);
-		$this->yuntpl(array('admin/admin_resume_evalution'));
+		$this->yuntpl(array('admin/admin_resume_evaluation'));
 	}
+	//添加简历评价
+	function add_action() {
+		echo "string";die();
+	}
+	
 	//删除简历评价
 	function del_action(){
 		$this->check_token();
@@ -87,17 +103,47 @@ class admin_resume_evaluation_controller extends common{
 	//删除简历评价sql
 	function del_member($id)
 	{
-		return $this->obj->DB_delete_all("resume_evalution","`id`='".$id."'" );
+		return $this->obj->DB_delete_all("resume_evaluation","`id`='".$id."'" );
 	}
 	//设置勿扰接受的参数：id 、uid;对应的表phpyun_admin_resume_expect
 	function undisturb_action()
 	{
 
 	}
-	//评价 接受的参数：id (phpyun_admin_resume_expect.id) 、by (admin);查询的表phpyun_admin_resume_evalution
-	function evalution_action()
+
+
+	//获取评价列表内容
+	function get_evaluation_list($resume_expect_id=false)
 	{
 
+		$selectSql = 'select a.id,a.com_name,a.grade,a.score,a.created_at,a.content,b.username as uname,c.name as resume_name,d.username as by_username ';
+		$countSql = 'select count(a.id) as num';
+		$from = ' from '.$this->def.'resume_evaluation a,';
+		$from .= $this->def.'member b,';
+		$from .= $this->def.'resume_expect c,';
+		$from .= $this->def.'member d ';
+
+		$where=' where a.uid=b.uid and a.by_uid=d.uid and c.id=a.resume_expect_id ';
+		if($resume_expect_id) {
+			$where .= ' and a.resume_expect_id='. intval($resume_expect_id) . ' ';
+		}
+
+		$page_url['order']=$_GET['order'];
+		$page_url['page']="{{page}}";
+		$pageurl=Url($_GET['m'],$page_url,'admin');
+		if($_GET['order'])
+		{
+			$order=$_GET['order'];
+		}else{
+			$order="desc";
+		}
+
+		$selectSql .= $from .' '.$where . ' order by a.id '.$order; 
+		$countSql .= $from .' '.$where; 
+
+        $M=$this->MODEL();
+		$list = $M->get_page_by_sql($selectSql,$countSql,$pageurl);
+		return array('rows' => $list,'get_type'=>$_GET );
 	}
 
 }

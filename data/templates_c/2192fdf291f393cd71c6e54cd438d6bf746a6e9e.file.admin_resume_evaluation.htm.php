@@ -1,33 +1,34 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2017-09-27 22:36:07
-         compiled from "D:\phpStudy\WWW\uploads\app\template\admin\admin_resume_evalution.htm" */ ?>
-<?php /*%%SmartyHeaderCode:2190559cbb757ac79b8-94564843%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2017-09-29 01:05:54
+         compiled from "D:\phpStudy\WWW\uploads\app\template\admin\admin_resume_evaluation.htm" */ ?>
+<?php /*%%SmartyHeaderCode:99559cd22612b9d16-70422287%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
-    '1d053d44f37d355afa9c2782522606bc0d33e646' => 
+    '2192fdf291f393cd71c6e54cd438d6bf746a6e9e' => 
     array (
-      0 => 'D:\\phpStudy\\WWW\\uploads\\app\\template\\admin\\admin_resume_evalution.htm',
-      1 => 1506478186,
+      0 => 'D:\\phpStudy\\WWW\\uploads\\app\\template\\admin\\admin_resume_evaluation.htm',
+      1 => 1506618351,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '2190559cbb757ac79b8-94564843',
+  'nocache_hash' => '99559cd22612b9d16-70422287',
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_59cd2261479bf0_87195672',
   'variables' => 
   array (
     'config' => 0,
+    'info' => 0,
+    'pytoken' => 0,
     'rows' => 0,
     'v' => 0,
     'pagenav' => 0,
-    'pytoken' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_59cbb757ce8229_38631778',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_59cbb757ce8229_38631778')) {function content_59cbb757ce8229_38631778($_smarty_tpl) {?><?php if (!is_callable('smarty_modifier_date_format')) include 'D:\\phpStudy\\WWW\\uploads\\app\\include\\libs\\plugins\\modifier.date_format.php';
+<?php if ($_valid && !is_callable('content_59cd2261479bf0_87195672')) {function content_59cd2261479bf0_87195672($_smarty_tpl) {?><?php if (!is_callable('smarty_modifier_date_format')) include 'D:\\phpStudy\\WWW\\uploads\\app\\include\\libs\\plugins\\modifier.date_format.php';
 ?><!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -55,14 +56,66 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 <body class="body_ifm">
 <div class="infoboxp">
 <div class="infoboxp_top_bg"></div>
-  <form action="index.php" name="myform" method="get">
-    <input name="m" value="admin_resume_evalution" type="hidden"/> 
-      <div class="admin_Filter"> <span class="complay_top_span fl">简历评价管理</span>
-		</div> 
-  </form>
- <?php echo $_smarty_tpl->getSubTemplate ("admin/admin_search.htm", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
-  
-  <div class="table-list">
+  <div class="infoboxp_top">
+     <span class="admin_title_span">添加简历评论</span>
+  </div>
+  <div class="clear"></div>
+  <div class="admin_table_border">
+    <iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe>
+    <form name="myform" target="supportiframe" action="index.php?m=admin_resume_evaluation&c=add" method="post" onSubmit="return checkform(this);">
+      <table width="100%" class="table_form"  style="background:#fff;">
+
+        <tr>
+          <th>等　　级：</th>
+          <td>
+            <div class="yun_admin_select_box zindex100">
+              <input type="button" value="请选择" class="yun_admin_select_box_text" id="newsclass_name" onClick="select_click('newsclass');">
+              <input name="nid" type="hidden" id="newsclass_val" value="">
+                
+                
+                <div class="yun_admin_select_box_list_box dn" id="newsclass_select">     
+                    <div class="yun_admin_select_box_list">
+                        <a href="javascript:;" onClick="select_new('newsclass','1','初级')">初级</a>
+                    </div>
+                    <div class="yun_admin_select_box_list">
+                        <a href="javascript:;" onClick="select_new('newsclass','2','中级')">中级</a>
+                    </div>
+                    <div class="yun_admin_select_box_list">
+                        <a href="javascript:;" onClick="select_new('newsclass','3','高级')">高级</a>
+                    </div>
+                </div>
+            </div>
+          </td>
+        </tr> 
+        <tr >
+          <th>分　　数：</th>
+          <td><input name="sort" type="text"  size="10" class="input-text" value="" /></td>
+        </tr>
+      
+        <tr >
+          <th>内　　容：</th>
+          <td><textarea name="description" cols="55" rows="3" class="admin_comdit_textarea"></textarea></td>
+        </tr>
+        
+        
+        <tr class="admin_table_trbg" >
+          <td align="center" colspan="2"> 
+            <input type="hidden" name="id" size="40" value="<?php echo $_smarty_tpl->tpl_vars['info']->value['id'];?>
+"/>
+            <input class="admin_submit4" type="submit" name="newsadd" value="&nbsp;添 加&nbsp;"  />
+            <input class="admin_submit4" type="reset" name="reset" value="&nbsp;重 置 &nbsp;" /></td>
+        </tr>
+      </table>
+    <input type="hidden" name="pytoken" value="<?php echo $_smarty_tpl->tpl_vars['pytoken']->value;?>
+">
+    </form>
+  </div>
+  <!-- 评价列表 -->
+  <div class="infoboxp_top" style="margin-top: 20px;">
+     <span class="admin_title_span">简历评价列表</span>
+  </div>
+  <div class="clear"></div>
+  <div class="table-list" > 
     <div class="admin_table_border">
       <iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe>
       <form action="index.php" name="myform" id='myform' method="get" target="supportiframe">
@@ -86,7 +139,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
               <th align="left" style="width:70px;">评价等级</th>
               <th align="left" style="width:70px;">评价分数</th>
       			  <th align="left" style="width:100px;">评价时间</th>
-              <th align="center" class="admin_table_th_bg">操作</th>
+              <!-- <th align="center" class="admin_table_th_bg">操作</th> -->
             </tr>
           </thead>
           <tbody>
@@ -116,10 +169,10 @@ $_smarty_tpl->tpl_vars['v']->_loop = true;
 			      <td align="left"><?php echo smarty_modifier_date_format($_smarty_tpl->tpl_vars['v']->value['created_at'],"%Y-%m-%d");?>
 </td>
 			 
-            <td><span onClick="showdiv4('houtai_div','<?php echo $_smarty_tpl->tpl_vars['v']->value['content'];?>
+            <!-- <td><span onClick="showdiv4('houtai_div','<?php echo $_smarty_tpl->tpl_vars['v']->value['content'];?>
 ','<?php echo $_smarty_tpl->tpl_vars['v']->value['reply'];?>
-')" class="admin_cz_sc" style="cursor:pointer;"> 预览</span> | <a href="javascript:void(0)" onClick="layer_del('确定要删除？', 'index.php?m=admin_resume_evalution&c=del&id=<?php echo $_smarty_tpl->tpl_vars['v']->value['id'];?>
-');" class="admin_cz_sc">删除</a></td>
+')" class="admin_cz_sc" style="cursor:pointer;"> 查看</span> | <a href="javascript:void(0)" onClick="layer_del('确定要删除？', 'index.php?m=admin_resume_evalution&c=del&id=<?php echo $_smarty_tpl->tpl_vars['v']->value['id'];?>
+');" class="admin_cz_sc">删除</a></td> -->
         
           </tr>
          
@@ -134,7 +187,7 @@ $_smarty_tpl->tpl_vars['v']->_loop = true;
           </tr>
             </tbody>
         </table>
-		<input type="hidden" name="pytoken"  id='pytoken' value="<?php echo $_smarty_tpl->tpl_vars['pytoken']->value;?>
+		    <input type="hidden" name="pytoken"  id='pytoken' value="<?php echo $_smarty_tpl->tpl_vars['pytoken']->value;?>
 ">
       </form>
     </div>
