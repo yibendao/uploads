@@ -10,6 +10,7 @@
  */
 class show_controller extends resume_controller{
 	function index_action(){ 
+		$undisturb = false;//是否设置勿扰20170929
 	    include(CONFIG_PATH."db.data.php");
 		unset($arr_data['sex'][3]);
 		$this->yunset("arr_data",$arr_data);
@@ -59,7 +60,7 @@ class show_controller extends resume_controller{
 		} 
 		$resume_expect=$M->SelectExpectOne(array("id"=>$id));
 		if($resume_expect['id']){ 
-			
+			$undisturb = $resume_expect['undisturb']==1 ? true:false;
 			$UserinfoM=$this->MODEL('userinfo');
 			$UserMember=$UserinfoM->GetMemberOne(array("uid"=>$resume_expect['uid']),array("field"=>"`source`,`email`,`claim`"));
 			$this->yunset("UserMember",$UserMember);
@@ -150,10 +151,20 @@ class show_controller extends resume_controller{
 			} else{
 				$tmp=1;
 				$url=$this->MODEL('resume')->SelectResumeTpl(array('id'=>$statis['tpl']));
+				
 			}
 			if($url['url']==''){
 				unset($tmp);
 			}
+			//系统管理员查看
+			if($_GET['look'] == "admin" && !$this->uid) {
+				$undisturb = false;
+			}
+			//自己查看
+			if($this->uid == $resume_expect['uid']) {
+				$undisturb =false;
+			}
+			$this->yunset('undisturb',$undisturb);//20170929
 			if($tmp){
 				$this->yunset("tplurl",$url);
 				$this->yuntpl(array('resume/'.$url['url'].'/index'));

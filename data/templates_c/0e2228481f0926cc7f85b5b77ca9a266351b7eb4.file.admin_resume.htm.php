@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2017-09-29 00:30:37
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2017-10-06 13:16:42
          compiled from "D:\phpStudy\WWW\uploads\app\template\admin\admin_resume.htm" */ ?>
 <?php /*%%SmartyHeaderCode:2649459cd1f569788a7-95279551%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '0e2228481f0926cc7f85b5b77ca9a266351b7eb4' => 
     array (
       0 => 'D:\\phpStudy\\WWW\\uploads\\app\\template\\admin\\admin_resume.htm',
-      1 => 1506616229,
+      1 => 1507002293,
       2 => 'file',
     ),
   ),
@@ -132,6 +132,22 @@ function resumttop(id,topday,topdate){
 		add_class('简历置顶','290','250','#resumttop','');
 	}
 }
+
+$(function(){
+	$(".status").click(function(){
+		// $("input[name=pid]").val($(this).attr("pid"));
+		var id=$(this).attr("id");
+		var uid=$(this).attr("uid");
+		var status=$(this).attr("status");
+		$("#status"+status).attr("checked",true);
+		$("input[name=id]").val(id);
+		$("input[name=uid]").val(uid);
+		// $.get("index.php?m=admin_resume_evaluation&c=undisturb&id="+id+"&uid="+uid,function(msg){
+		// 	$("#alertcontent").val($.trim(msg));
+			status_div('勿扰用户','350','230');
+		// });
+	});
+});
 <?php echo '</script'; ?>
 >
 <link href="images/reset.css" rel="stylesheet" type="text/css" />
@@ -140,6 +156,32 @@ function resumttop(id,topday,topdate){
 <title>后台管理</title>
 </head>
 <body class="body_ifm">
+<div id="status_div"  style="display:none; width: 350px; ">
+  <div class="" style=" margin-top:10px; "  >
+    <form action="index.php?m=admin_resume_evaluation&c=undisturb" target="supportiframe" method="post" id="formstatus">
+      <table cellspacing='1' cellpadding='1' class="admin_examine_table">
+     <tr>
+    <th width="80">勿扰操作：</th>
+     <td align="left">
+         		<label for="status1"> <span class="admin_examine_table_s"><input type="radio" name="status" value="0" id="status0" >正常</span></label>
+            	<label for="status2"> <span class="admin_examine_table_s"><input type="radio" name="status" value="1" id="status1">勿扰</span></label>
+          </td>
+        </tr>
+        </tr>
+        <tr>
+           <td colspan='2' align="center"><input type="submit"  value='确认' class="admin_examine_bth">
+          
+            <input type="button" id="zxxCancelBtn" onClick="layer.closeAll();" class="admin_examine_bth_qx" value='取消'></td>
+        </tr>
+   
+      <input type="hidden" name="pytoken" value="<?php echo $_smarty_tpl->tpl_vars['pytoken']->value;?>
+">
+      <input name="id" value="0" type="hidden">
+      <input name="uid" value="0" type="hidden">
+         </table>
+    </form>
+  </div>
+</div>
 <div id="export" style="display:none;">
 	<div style=" margin-top:10px;">
     <div>
@@ -213,7 +255,7 @@ function resumttop(id,topday,topdate){
 </div>
 </div>
 <div class="infoboxp"> 
-<div class="infoboxp_top_bg"></div>
+  <div class="infoboxp_top_bg"></div>
 	<form action="index.php" name="myform" method="get"> 
     <div class="admin_Filter"> 
 	<input name="m" value="admin_resume" type="hidden"/>
@@ -232,7 +274,7 @@ function resumttop(id,topday,topdate){
         <div class="admin_Filter_text_box" style="display:none" id="dkeytype">
           <ul> 
             <li><a href="javascript:void(0)" onClick="formselect('1','keytype','简历名称')">简历名称</a></li>
-			<li><a href="javascript:void(0)" onClick="formselect('2','keytype','用户姓名')">用户姓名</a></li>
+			      <li><a href="javascript:void(0)" onClick="formselect('2','keytype','用户姓名')">用户姓名</a></li>
           </ul>
         </div>
       </div>
@@ -265,7 +307,7 @@ function resumttop(id,topday,topdate){
               </th>
               <th width="60"> <?php if ($_GET['t']=="id"&&$_GET['order']=="asc") {?> <a href="index.php?m=admin_resume&order=desc&t=id">简历ID<img src="images/sanj.jpg"/></a> <?php } else { ?> <a href="index.php?m=admin_resume&order=asc&t=id">简历ID<img src="images/sanj2.jpg"/></a> <?php }?> </th>
               <th width="100" align="left">简历名称</th>
-			  <th width="100" align="left">用户姓名</th>
+			        <th width="100" align="left">用户姓名</th>
               <th width="150" align="left">意向职位</th>
               <th align="left">工作地点</th>
               <th align="left">待遇要求</th>
@@ -295,15 +337,15 @@ $_smarty_tpl->tpl_vars['v']->_loop = true;
 </span></td>
             <td class="ud" align="left" ><a href="<?php echo smarty_function_url(array('m'=>'resume','c'=>'show','id'=>'`$v.id`','look'=>'admin'),$_smarty_tpl);?>
 " target="_blank" class="admin_cz_sc"><?php echo $_smarty_tpl->tpl_vars['v']->value['name'];?>
-</a></td>
-			<td class="gd" align="left"><?php echo $_smarty_tpl->tpl_vars['v']->value['uname'];?>
-</td>
+</a> <?php if ($_smarty_tpl->tpl_vars['v']->value['undisturb']==1) {?><img src="../config/ajax_img/suo.png" alt="已勿扰"><?php }?></td>
+			      <td class="gd" align="left"><?php echo $_smarty_tpl->tpl_vars['v']->value['uname'];?>
+ </td>
             <td class="od" align="left"><?php if ($_smarty_tpl->tpl_vars['v']->value['job_post_n']) {
 echo $_smarty_tpl->tpl_vars['v']->value['job_post_n'];?>
 (<a href="javascript:void(0)" class="job_name_all"  v="<?php echo $_smarty_tpl->tpl_vars['v']->value['job_class_name'];?>
 "><font color="red">共<?php echo $_smarty_tpl->tpl_vars['v']->value['jobnum'];?>
 个</font></a>)<?php }?></td>
-           <td class="gd" align="left"><?php echo $_smarty_tpl->tpl_vars['v']->value['cityid_n'];?>
+            <td class="gd" align="left"><?php echo $_smarty_tpl->tpl_vars['v']->value['cityid_n'];?>
 </td>
             <td class="td" align="left"><?php if ($_smarty_tpl->tpl_vars['v']->value['minsalary']&&$_smarty_tpl->tpl_vars['v']->value['maxsalary']) {?>￥<?php echo $_smarty_tpl->tpl_vars['v']->value['minsalary'];?>
 -<?php echo $_smarty_tpl->tpl_vars['v']->value['maxsalary'];
@@ -343,9 +385,10 @@ echo $_smarty_tpl->tpl_vars['v']->value['job_post_n'];?>
 &e=<?php echo $_smarty_tpl->tpl_vars['v']->value['id'];?>
 " class="admin_cz_sc">修改</a> | <a href="javascript:void(0)"  onclick="layer_del('确定要删除？', 'index.php?m=admin_resume&c=del&del=<?php echo $_smarty_tpl->tpl_vars['v']->value['id'];?>
 -<?php echo $_smarty_tpl->tpl_vars['v']->value['uid'];?>
-');"class="admin_cz_sc">删除</a> | <a href="javascript:void(0)"  onclick="layer_del('确认置为勿扰', 'index.php?m=admin_resume_evaluation&c=undisturb&id=<?php echo $_smarty_tpl->tpl_vars['v']->value['id'];?>
--<?php echo $_smarty_tpl->tpl_vars['v']->value['uid'];?>
-');"class="admin_cz_sc">勿扰</a></td>
+');"class="admin_cz_sc">删除</a> | <a href="javascript:;" class="admin_cz_sc status" id="<?php echo $_smarty_tpl->tpl_vars['v']->value['id'];?>
+" uid="<?php echo $_smarty_tpl->tpl_vars['v']->value['uid'];?>
+" status="<?php echo $_smarty_tpl->tpl_vars['v']->value['undisturb'];?>
+">勿扰</a></td>
           </tr>
           <?php } ?>
         <tr style="background:#f1f1f1;">

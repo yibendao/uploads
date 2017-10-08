@@ -1,0 +1,122 @@
+{yun:}include file="$comstyle/header.htm"{/yun}
+<link href="{yun:}$comstyle{/yun}/images/index_style.css" type=text/css rel=stylesheet>
+<div class="w1000">
+  <div class="admin_mainbody"> {yun:}include file="$comstyle/left.htm"{/yun}
+    <div class=right_box>
+      <div class=admincont_box>
+        <div class="job_list_tit">
+          <ul class="">
+            <li {yun:}if $smarty.get.c=="hr"{/yun} class="job_list_tit_cur"{yun:}/if{/yun}><a href="index.php?c=hr">应聘简历</a></li>
+            <li {yun:}if $smarty.get.c=="down"{/yun} class="job_list_tit_cur"{yun:}/if{/yun}><a href="index.php?c=down">已下载简历</a></li>
+            <li {yun:}if $smarty.get.c=="talent_pool"{/yun} class="job_list_tit_cur"{yun:}/if{/yun}><a href="index.php?c=talent_pool">收藏简历</a></li>
+            <li {yun:}if $smarty.get.c=="look_resume"{/yun} class="job_list_tit_cur"{yun:}/if{/yun}><a href="index.php?c=look_resume">浏览简历</a></li>
+            <li {yun:}if $smarty.get.c=="record"{/yun} class="job_list_tit_cur"{yun:}/if{/yun}><a href="index.php?c=record" title="网站为您推荐的简历">网站推荐简历</a></li>
+            <li {yun:}if $smarty.get.c=="my_create_resume"{/yun} class="job_list_tit_cur"{yun:}/if{/yun}><a href="index.php?c=my_create_resume" title="我创建的简历">我创建的简历</a></li>
+          </ul>
+        </div>
+        <div class="com_body">
+          <div class=admin_textbox_04>
+            <iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe>
+            <!--操作区  -->
+            <div class="hr_tip_box my_create_resume">
+              <div class="hr_subMetx"> 
+                <div class="left">
+                  <span class="hr_resumesearch_span fltL">搜索类型：</span>
+                  <div class="text_seclet text_seclet_cur2 re resume_type">
+                    <input id="qypr" class="SpFormLBut text_seclet_w250 resume_type" type="button" onclick="search_show('job_qypr');" {yun:}if $get_type.keytype==''||$get_type.keytype=='1'{/yun} value="简历名称"  {yun:}elseif $get_type.keytype=='2'{/yun} value="用户姓名"  {yun:}/if{/yun}>
+                    <div id="job_qypr" class="cus-sel-opt-panel resume_type" style="display: none;">
+                      <ul class="Search_Condition_box_list resume_type">
+                          <li><a href="javascript:void(0)" onClick="formselect('1','keytype','简历名称')">简历名称</a></li>
+                          <li><a href="javascript:void(0)" onClick="formselect('2','keytype','用户姓名')">用户姓名</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                  <form action="index.php" method="get" >
+                    <span class="hr_resumesearch_span fltL">关 键 字：</span>
+                    <div class="hr_subMetx_se">
+                      <input name="c" type="hidden" value="hr">
+                      <input name="resumetype" type="hidden" value="{yun:}$smarty.get.resumetype{/yun}">
+                      <input name="jobid" type="hidden" value="{yun:}$smarty.get.jobid{/yun}">
+                        <input name="state" type="hidden" value="{yun:}$smarty.get.state{/yun}">
+                      <input name="keyword" type="text" class="hr_resumesearch_text" placeholder="请输入姓名查找" value="{yun:}$smarty.get.keyword{/yun}">
+                      <input type="submit"  class="hr_resumesearch_bth" value="搜索">
+                    </div>
+                  </form>
+                </div>
+                <div class="right">
+                  <div>
+                    <a href="index.php?c=my_create_resume&act=addresume" class="admin_infoboxp_tj" style="margin-right:5px;"> 添加简历</a>
+                  </div>
+                </div>
+              </div>
+              <!-- <div class="hr_subMetx"> <span class="hr_resumesearch_span fltL">简历状态：</span> <a href="index.php?c=hr&jobid={yun:}$smarty.get.jobid{/yun}&resumetype={yun:}$smarty.get.resumetype{/yun}&keyword={yun:}$smarty.get.keyword{/yun}" class="hr_subMetx_a {yun:}if $smarty.get.state==''{/yun}hr_subMetx_cur{yun:}/if{/yun}">不限</a> {yun:}foreach from=$StateList item=one{/yun} <a {yun:}if $smarty.get.state==$one.id{/yun}class="hr_subMetx_cur"{yun:}/if{/yun} href="index.php?c=hr&jobid={yun:}$smarty.get.jobid{/yun}&state={yun:}$one.id{/yun}&resumetype={yun:}$smarty.get.resumetype{/yun}&keyword={yun:}$smarty.get.keyword{/yun}">{yun:}$one.name{/yun}</a> {yun:}/foreach{/yun} </div> -->
+            </div>
+            <!--end操作区  -->
+            <div class="clear"></div>
+
+            <form action="index.php?c=my_create_resume&act=del" method="post" target="supportiframe" id='myform'>
+              <div class=table>
+                <div id="job_checkbokid">
+                  {yun:}if $rows{/yun}
+                  <div class="job_news_list job_news_list_h1"> 
+                    <span class="job_news_list_span job_w30" style="padding-right:5px;">&nbsp;</span>
+                    <span class="job_news_list_span job_w100">简历名称</span>
+                    <span class="job_news_list_span job_w80">用户姓名</span>
+                    <span class="job_news_list_span job_w80">意向职位</span>
+                    <span class="job_news_list_span job_w80">工作地点</span>
+                    <span class="job_news_list_span job_w80">待遇要求</span>
+                    <span class="job_news_list_span job_w80">工作性质</span>
+                    <span class="job_news_list_span job_w80">到岗时间</span>
+                    <span class="job_news_list_span job_w80">{yun:}if $smarty.get.t=="time" && $smarty.get.order=="asc"{/yun} <a href="index.php?m=my_create_resume&order=desc&t=time">更新时间<img src="images/sanj.jpg"/></a> {yun:}else{/yun} <a href="index.php?m=my_create_resume&order=asc&t=time">更新时间<img src="images/sanj2.jpg"/></a> {yun:}/if{/yun}</span>
+                    <span class="job_news_list_span job_w120">操作</span>
+                  </div>
+                  {yun:}/if{/yun}
+                  {yun:}foreach item=v from=$rows{/yun}
+                  <div class="job_news_list" style="font-size: 12px;"> 
+                    <span class="job_news_list_span job_w30" style="padding-right:5px;">
+                      <input type='checkbox' name="del[]" value="{yun:}$v.id{/yun}"  class="com_Release_job_qx_check" style="margin-top:2px;">
+                    </span>
+                    <span class="job_news_list_span job_w100">{yun:}$v.name{/yun}</span>  	
+                    <span class="job_news_list_span job_w80">{yun:}$v.uname{/yun}</span>  	
+                    <span class="job_news_list_span job_w80">{yun:}if $v.job_post_n{/yun}{yun:}$v.job_post_n{/yun}(<a href="javascript:void(0)" class="job_name_all"  v="{yun:}$v.job_class_name{/yun}"><font color="red">共{yun:}$v.jobnum{/yun}个</font></a>){yun:}/if{/yun}</span>  	
+                    <span class="job_news_list_span job_w80">{yun:}$v.cityid_n{/yun}</span>  	
+                    <span class="job_news_list_span job_w80">{yun:}if $v.minsalary&&$v.maxsalary{/yun}￥{yun:}$v.minsalary{/yun}-{yun:}$v.maxsalary{/yun}{yun:}else if $v.minsalary{/yun}￥{yun:}$v.minsalary{/yun}以上{yun:}else{/yun}面议{yun:}/if{/yun}</span>  	
+                    <span class="job_news_list_span job_w80">{yun:}$v.type_n{/yun}</span>  	
+                    <span class="job_news_list_span job_w80">{yun:}$v.report_n{/yun}</span>  	
+                    <span class="job_news_list_span job_w80">{yun:}$v.lastupdate|date_format:"%Y-%m-%d"{/yun}</span> 
+                    <span class="job_news_list_span job_w120"  >
+                      <a style="color:blue;" href="{yun:}url m=resume c=show id='`$v.id`'{/yun}" target="_blank" class="admin_cz_sc" >预览</a> | 
+                      <a style="color:blue;" href="javascript:void(0)" onClick="layer_del('确认刷新？', 'index.php?c=my_create_resume&act=refresh&id={yun:}$v.id{/yun}');" title="刷新" class="admin_cz_sc">刷新</a><br/>
+                      <a style="color:blue;" href="index.php?c=my_create_resume&act=evaluation&id={yun:}$v.id{/yun}&by=qiye"  class="admin_cz_sc">评价</a> | 
+                      <a style="color:blue;" href="index.php?c=my_create_resume&act=saveresume&uid={yun:}$v.uid{/yun}&e={yun:}$v.id{/yun}" class="admin_cz_sc">修改</a>
+                    </span>
+                  {yun:}foreachelse{/yun}
+                  <div class="msg_no">
+                    <p>亲爱的用户，目前您还没有创建过简历！</p>
+                    <a href="{yun:}url m=resume{/yun}" class="com_msg_no_bth com_submit">我要创建简历</a>
+                  </div>
+                  {yun:}/foreach{/yun} 
+                </div>
+              </div>
+              {yun:}if $rows{/yun}
+              <div class="com_Release_job_bot"> 
+                <span class="com_Release_job_qx">
+                  <input id='checkAll'  type="checkbox" onclick='m_checkAll(this.form)' class="com_Release_job_qx_check">全选
+                </span>
+                <input  class="c_btn_02" type="button" name="subdel" value="批量删除" onclick="return really('del[]');">
+                <!-- <input class="admin_submit4" type="button" name="delsub" value="删除所选" onClick="return really('del[]')" /> -->
+                <input class="admin_submit4" type="button" name="delsub" value="批量刷新" onClick="Refreshs();"/>
+                <input type="hidden" name="pytoken"  id='pytoken' value="{yun:}$pytoken{/yun}">
+              </div>
+              <div class="clear"></div>
+              <div class="diggg">{yun:}$pagenav{/yun}</div>
+              {yun:}/if{/yun}
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{yun:}include file="$comstyle/yqms.htm"{/yun}
+{yun:}include file="$comstyle/footer.htm"{/yun} 

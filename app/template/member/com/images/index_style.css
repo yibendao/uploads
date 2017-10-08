@@ -1,3 +1,4 @@
+@charset "utf-8";
 body {
 	width:100%;
 	height:100%;
@@ -374,7 +375,7 @@ body {
 	width: 300px;
 	color: #333;
 	line-height: 20px;
-	font-family: "ËÎÌå", arial;
+	font-family: "ï¿½ï¿½ï¿½ï¿½", arial;
 	height: 20px;
 	text-align: right
 }

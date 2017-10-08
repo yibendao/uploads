@@ -1,12 +1,12 @@
 <?php
 /*
-* $Author 鎷㈡綖PHPYUN椹撮檵璺瀯鑴ヨ劀闇茶劔
+* $Author ：PHPYUN开发团队
 *
-* 楣胯劦鑴ラ叾: http://www.phpyun.com
+* 官网: http://www.phpyun.com
 *
-* 鎺冲繖鑴犵瘬鑴ｉ湁鑴劏 2009-2017 鑴ｈ劶鑴熺瘬鏋氳劍椴佸崵鑴ㄨ劀鑴у瀯褰曞綍鑴㈢帿鑴劏鑴ц劶楣胯姦鑴ｆ埉鎷㈠崲铏忓瀯鍗ゆ嫝鑴曚箞鑴ｉ湁鑴劏鑴犵瘬鑴屾病闅嗘嫝
+* 版权所有 2009-2017 宿迁鑫潮信息技术有限公司，并保留所有权利。
 *
-* 鑴犻搯褰曢晛鑴￠湁鑴欐鎷㈡綖鑴﹂簱鎴鑴㈣劮鑴犵瘬鑴熸幊鑴よ癌鑴ц剹鎷㈠崲铏忕纰岃剻鑴剻鑴劮鑴¤劋鑴鑴劊鑴檵闅嗗瀯闇查晛楹撹劍椹撮檵璺瀯鑴劖褰曟幊鑴犺劍娼炶劍鑴ㄨ劍鑴㈤檰纰岃剾鑴劦楹撹劍璺瀯铏忓綍闅嗘嫝
+* 软件声明：未经授权前提下，不得用于商业运营、二次开发以及任何形式的再次发布。
  */
 class model{
     const MODEL_INSERT          =   1;      
@@ -169,7 +169,7 @@ class model{
 		$memcache =new memcache();
 
 		if(!@class_exists($memcache)){return;}
-		$memcache->connect($memcachehost,$memcacheport) or die ("Memcache鑴曞崲闄嗚劔鑴㈡悅鎺宠労绂勮矊鑴涚叅纰岃剾璺晛鑴﹀附鑴濇铏忕鑴版悅椴佽劙Memcache,鑴熸瘺鑴劮娼炶锤鑴ょ瘬楣胯劥鍗よ劗鎷㈤殕");
+		$memcache->connect($memcachehost,$memcacheport) or die ("Memcache连接失败或您的服务器不支持Memcache,请在后台关闭！");
 		$val=$memcache->get($name);
 		if(!is_array($val)){
 			$val=$value;
@@ -476,7 +476,8 @@ class model{
 		$rows=$this->DB_select_all($table,$where.' limit '.$ststrsql.','.$limit,$field);
 		return array('total'=>$num,'pagenav'=>$pagenav,$rowsname=>$rows);
 	}
-	//20170926鏂板
+	
+	//20170926
 	function get_page_by_sql($selectSql,$countSql,$pageurl='',$limit=20,$rowsname='rows'){
 		$rows=array();
 		$page=$_GET['page']<1?1:$_GET['page'];

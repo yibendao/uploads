@@ -26,7 +26,6 @@ if($_GET['yunurl']){
 if($_GET['m'] && !preg_match('/^[0-9a-zA-Z\_]*$/',$_GET['c'])){
 	$_GET['m'] = 'index';
 }
-
 $ModuleName = $_GET['m'];
 if($ModuleName=='')	$ModuleName='index';
 

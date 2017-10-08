@@ -43,7 +43,7 @@ if (substr(PHP_VERSION, 0, 1) == '7') {
 
 include_once(LIB_PATH.'libs/Smarty.class.php');
 $phpyun = new Smarty;
-$phpyun->debugging      = true;
+$phpyun->debugging      = false;
 $phpyun->caching        = false;
 $phpyun->force_cache    = false;
 $phpyun->template_dir   = TPL_PATH;

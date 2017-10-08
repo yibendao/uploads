@@ -1,217 +1,93 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
-<script>var weburl = '{yun:}$config.sy_weburl{/yun}';</script>
-<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js"></script>
-<script charset="utf-8" src="../js/kindeditor/kindeditor-min.js"></script>
-<script charset="utf-8" src="../js/kindeditor/lang/zh_CN.js"></script>
-<link rel="stylesheet" href="../js/kindeditor/themes/default/default.css" />
-<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script>
-<script src="js/admin_public.js" language="javascript"></script>
-<script language="javascript">
-KindEditor.ready(function(K) {
-	var editor = K.editor({
-		allowFileManager : false
-	}); 
-	K.create('#content', {
-		themeType : 'default'
-		
-	});
-	K('#insertfile').click(function() {
-		editor.loadPlugin('images', function() {
-			editor.plugin.imageDialog({
-				imageUrl : K('#pic_url').val(),
-				clickFn : function(url, title, width, height, border, align) {
-					K('#pic_url').val(url);
-					K('#news_pic').html(url);
-					editor.hideDialog();
-				}
-			});
-		});
-	});
-	var colorpicker;
-	K('#colorpicker').bind('click', function(e) {
-		e.stopPropagation();
-		if (colorpicker) {
-			colorpicker.remove();
-			colorpicker = null;
-			return;
-		}
-		var colorpickerPos = K('#colorpicker').pos();
-		colorpicker = K.colorpicker({
-			x : colorpickerPos.x,
-			y : colorpickerPos.y + K('#colorpicker').height(),
-			z : 19811214,
-			selectedColor : 'default',
-			noColor : '无颜色',
-			click : function(color) {
-				K('#color').val(color);
-				$('#color + font').css('color', color);
-				colorpicker.remove();
-				colorpicker = null;
-			}
-		});
-	});
-	K(document).click(function() {
-		if (colorpicker) {
-			colorpicker.remove();
-			colorpicker = null;
-		}
-	});
-});
-function news_preview(url){
-	$(".job_box_div").html("<img src='"+url+"' style='max-width:500px' />");
- 	$.layer({
-		type : 1,
-		title : '查看图片',
-		closeBtn : [0 , true],
-		offset : ['20%' , '30%'],
-		border : [10 , 0.3 , '#000', true],
-		area : ['560px','auto'],
-		page : {dom : '#news_preview'}
-	}); 
-}
-function checkform(myform){
-	if (myform.nid.value=="") {
-		parent.layer.msg('请选择新闻类别！', 2,8,function(){myform.title.focus();});return false;
-	}
-	if (myform.title.value=="") {
-		parent.layer.msg('请填写新闻标题！', 2,8,function(){myform.title.focus();});return false;
-	}
-	var content = editor.text();
-	if (content=="") {
-		parent.layer.msg('请填写新闻内容！', 2,8,function(){myform.title.focus();});return false;
-	}
-}
-</script>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk">
 <link href="images/reset.css" rel="stylesheet" type="text/css" />
 <link href="images/system.css" rel="stylesheet" type="text/css" />
 <link href="images/table_form.css" rel="stylesheet" type="text/css" />
-
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layer/layer.min.js" language="javascript"></script>
+<script src="js/admin_public.js" language="javascript"></script>
+<script src="js/show_pub.js"></script>
 <title>后台管理</title>
 </head>
+<!-- 简历评价管理 -->
 <body class="body_ifm">
 <div class="infoboxp">
 <div class="infoboxp_top_bg"></div>
-  <div class="infoboxp_top">
-     <span class="admin_title_span">添加新闻</span>
-        <a href="index.php?m=admin_news" class="admin_infoboxp_nav admin_infoboxp_gl">新闻列表</a>
-          <em class="admin-tit_line"></em>
-        <a href="index.php?m=admin_news&c=group" class="admin_infoboxp_nav admin_infoboxp_lb">类别管理</a>
+  <form action="index.php" name="myform" method="get">
+    <input name="m" value="admin_resume_evalution" type="hidden"/> 
+      <div class="admin_Filter"> <span class="complay_top_span fl">简历评价管理</span>
+		</div> 
+  </form>
+ {yun:}include file="admin/admin_search.htm"{/yun}  
+  <div class="table-list">
+    <div class="admin_table_border">
+      <iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe>
+      <form action="index.php" name="myform" id='myform' method="get" target="supportiframe">
+        <input name="m" value="admin_resume_evalution" type="hidden"/>
+        <input name="c" value="del" type="hidden"/>
+        <table width="100%">
+          <thead>
+            <tr class="admin_table_top">
+              <th style="width:20px;"><label for="chkall"><input type="checkbox" id='chkAll'  onclick='CheckAll(this.form)'/></label></th>
+              <th>
+      			  {yun:}if $smarty.get.order=="asc"{/yun}
+        			  <a href="index.php?m=admin_resume_evalution&order=desc">编号<img src="images/sanj.jpg"/></a>
+                {yun:}else{/yun}
+                <a href="index.php?m=admin_resume_evalution&order=asc">编号<img src="images/sanj2.jpg"/></a>
+               {yun:}/if{/yun}
+      			  </th>
+              <th align="left" style="width:200px;">简历名称</th>
+              <th align="left" style="width:100px;">用户姓名</th>
+              <th align="left">所属公司名称</th>
+              <!-- <th align="left" style="width:100px;">评价人姓名</th> -->
+               <!-- <th align="left" style="width:70px;">评价等级</th> -->
+              <!-- <th align="left" style="width:70px;">评价分数</th>  -->
+      			  <th align="left" style="width:150px;">最近评价时间</th>
+              <th align="center" class="admin_table_th_bg">操作</th>
+            </tr>
+          </thead>
+          <tbody>
+          {yun:}foreach item=v from=$rows{/yun}
+          <tr align="center" id="list{yun:}$v.id{/yun}">
+            <td><input type="checkbox" value="{yun:}$v.id{/yun}"  name='del[]' onclick='unselectall()' rel="del_chk" /></td>
+            <td align="left" class="td1" style="text-align:center;"><span>{yun:}$v.id{/yun}</span></td> 
+            <td align="left">{yun:}$v.resume_name|mb_substr:0:20:gbk{/yun}</td>  
+            <td align="left">{yun:}$v.uname{/yun}</td>
+            <td align="left">{yun:}$v.com_name|mb_substr:0:20:gbk{/yun}</td>
+            <!-- <td align="left">{yun:}$v.by_username{/yun}</td> -->
+            <!-- <td align="left">{yun:}if $v.grade==1{/yun}初级{yun:}elseif  $v.grade==2{/yun}中级{yun:}elseif  $v.grade==3{/yun}高级 {yun:}else{/yun}{yun:}/if{/yun}</td> -->
+            <!-- <td align="left">{yun:}$v.score{/yun}</td> -->
+			      <td align="left">{yun:}$v.created_at{/yun}</td>
+			 
+            <td><span onClick="showdiv4('houtai_div','{yun:}$v.content{/yun}','{yun:}$v.reply{/yun}')" class="admin_cz_sc" style="cursor:pointer;"> 查看</span> </td>
+        
+          </tr>
+         
+          {yun:}/foreach{/yun}
+          <tr style="background:#f1f1f1;">
+            <td align="center"><input type="checkbox" id='chkAll2' onclick='CheckAll2(this.form)' /></td>
+            <td colspan="2" >
+            <label for="chkAll2">全选</label>&nbsp;
+            <input  class="admin_submit4" type="button" name="delsub" value="删除所选" onClick="return really('del[]')" /></td>
+            <td colspan="7" class="digg">{yun:}$pagenav{/yun}</td>
+          </tr>
+            </tbody>
+        </table>
+		<input type="hidden" name="pytoken"  id='pytoken' value="{yun:}$pytoken{/yun}">
+      </form>
+    </div>
   </div>
-  <div class="clear"></div>
-  <div class="admin_table_border">
-    <iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe>
-    <form name="myform" target="supportiframe" action="index.php?m=admin_news&c=addnews" method="post" onSubmit="return checkform(this);">
-      <table width="100%" class="table_form"  style="background:#fff;">
-        <tr >
-          <th width="120">新闻类别：</th>
-          <td>
-          
-          <div class="yun_admin_select_box zindex100">
-            {yun:}if $info.nid{/yun}
-	 		  {yun:}foreach item=v from=$one_class{/yun}
-                    {yun:}if $v.id eq $info.nid{/yun}
-                    <input type="button" value="{yun:}$v.name{/yun}" class="yun_admin_select_box_text" id="newsclass_name" onClick="select_click('newsclass');">
-                    <input name="nid" type="hidden" id="newsclass_val" value="{yun:}$v.id{/yun}">
-                    {yun:}/if{/yun}
-                    
-                    {yun:}foreach item=val from=$two_class[$v.id]{/yun}
-                        {yun:}if $val.id eq $info.nid{/yun}
-                        <input type="button" value="{yun:}$val.name{/yun}" class="yun_admin_select_box_text" id="newsclass_name" onClick="select_click('newsclass');">
-                        <input name="nid" type="hidden" id="newsclass_val" value="{yun:}$val.id{/yun}">
-                        {yun:}/if{/yun}
-                    {yun:}/foreach{/yun}
-                {yun:}/foreach{/yun}
-            {yun:}else{/yun}
-                <input type="button" value="请选择" class="yun_admin_select_box_text" id="newsclass_name" onClick="select_click('newsclass');">
-                <input name="nid" type="hidden" id="newsclass_val" value="">
-            {yun:}/if{/yun}
-            
-            
-            <div class="yun_admin_select_box_list_box dn" id="newsclass_select">     
-	 		 {yun:}foreach item=v from=$one_class{/yun}
-                <div class="yun_admin_select_box_list">
-                    <a href="javascript:;" onClick="select_new('newsclass','{yun:}$v.id{/yun}','{yun:}$v.name{/yun}')">{yun:}$v.name{/yun}</a>
-                </div>
-                	  {yun:}foreach item=val from=$two_class[$v.id]{/yun}
-                      <div class="yun_admin_select_box_list">
-                                <a href="javascript:;" onClick="select_new('newsclass','{yun:}$val.id{/yun}','{yun:}$val.name{/yun}')"> 　┗{yun:}$val.name{/yun}</a>
-                            </div>
-                      {yun:}/foreach{/yun}                    
-                {yun:}/foreach{/yun}
-            </div>
-        </div>
-            
-         <a href="index.php?m=admin_news&c=group" class="on" style="background:#498CD0; color:#FFF; padding:5px 10px 5px 10px; float:left; margin-left:10px; margin-top:5px;">添加分类</a></td>
-        </tr>
-        <tr class="admin_table_trbg" >
-          <th>新闻标题：</th>
-          <td><input class="input-text" type="text" name="title" size="40" value="{yun:}$info.title{/yun}" style="width:330px;"><input type="hidden" name='color' id="color" value="{yun:}$info.color{/yun}" /> <font color="{yun:}$info.color{/yun}">字体颜色</font><input type="button" id="colorpicker" value="打开取色器" class="admin_submit6" style="background:#F60; margin-left:5px;"/></td>
-        </tr>
-     	<tr>
-        <th>使用范围：</th>
-        <td><input type="button" value="{yun:}if $info.did{/yun}{yun:}$Dname[$info.did]{/yun}{yun:}else{/yun}总站{yun:}/if{/yun}" class="city_news_but" onClick="add_site('{yun:}$info.did{/yun}','{yun:}$Dname[$info.did]{/yun}');">
-        <input type="hidden" id="did" value="{yun:}$info.did{/yun}" name="did"></td>
-      </tr> 
-        <tr class="admin_table_trbg" >
-          <th>作　　者：</th>
-          <td><input class="input-text" type="text" name="author" size="20" value="{yun:}$info.author{/yun}"/></td>
-        </tr>
-        <tr >
-          <th>来　　源：</th>
-          <td><input class="input-text" type="text" name="source" size="50" value="{yun:}$info.source{/yun}"/></td>
-        </tr>
-        <tr class="admin_table_trbg" >
-          <th>关 键 词：</th>
-          <td><input class="input-text" type="text" name="keyword" size="50" value="{yun:}$info.keyword{/yun}"/>
-            <span class="admin_web_tip">多个关键字，请用,隔开</span> </td>
-        </tr>
-        <tr >
-          <th>描　　述：</th>
-          <td><textarea name="description" cols="55" rows="3" class="admin_comdit_textarea">{yun:}$info.description{/yun}</textarea></td>
-        </tr>
-        <tr class="admin_table_trbg" >
-          <th>新闻内容： </th>
-          <td><textarea  id="content" name="content" cols="100" rows="8" style="width:800px;height:300px;">{yun:}$info.content{/yun}</textarea></td>
-        </tr>
-        <tr >
-          <th>缩 略 图：</th>
-          <td><span id='news_pic'>{yun:}$info.s_thumb{/yun}</span><input type="hidden"  class="input-text" name="uplocadpic"  value="{yun:}$info.s_thumb{/yun}"   id='pic_url' />{yun:}if $info.s_thumb{/yun}<a href="javascript:void(0)" onClick="news_preview('../{yun:}$info.newsphoto{/yun}')"class="admin_chlose_img_look">查看图片</a>{yun:}/if{/yun}<input   type="button" id="insertfile" value=" " class="admin_chlose_img" /></td>
-        </tr>
-        <tr class="admin_table_trbg" >
-          <th>类　　型：</th>
-          <td>
-            {yun:}foreach item=property_row from=$property{/yun}
-             <label><span class="admin_radio_box" style="margin-right:10px;"> <input type="checkbox"  class="admin_radio_box_r" name="describe[]" value="{yun:}$property_row.value{/yun}"{yun:}if in_array($property_row.value,$describe){/yun} checked="checked" {yun:}/if{/yun}/>{yun:}$property_row.name{/yun} </span></label>
-            {yun:}/foreach{/yun}</td>
-        </tr>
-        <tr >
-          <th>排　　序：</th>
-          <td><input name="sort" type="text"  size="10" class="input-text" value="{yun:}$info.sort{/yun}" /></td>
-        </tr>
-        <tr class="admin_table_trbg" >
-          <td align="center" colspan="2"> 
-            {yun:}if $info.id{/yun}
-            <input type="hidden" name="id" size="40" value="{yun:}$info.id{/yun}"/>
-            <input type="hidden" name="lasturl" value="{yun:}$lasturl{/yun}">
-            <input class="admin_submit4" type="submit" name="updatenews" value="&nbsp;更 新&nbsp;"  />
-            {yun:}else{/yun}
-            <input class="admin_submit4" type="submit" name="newsadd" value="&nbsp;添 加&nbsp;"  />
-            {yun:}/if{/yun}
-            <input class="admin_submit4" type="reset" name="reset" value="&nbsp;重 置 &nbsp;" /></td>
-        </tr>
-      </table>
+</div>
+<!-- <div id="houtai_div" style=" display:none;height:180px; ">
+	<form id="formstatus" method="post" target="supportiframe" action="index.php?m=admin_company_job&c=status">
+	  <table class="table_form "  id="infobox"> 
+			<tr><td>评论内容：</td><td><textarea name="beizhu"  style="width:300px;height:80px;border:1px solid #ddd;"id="beizhu"  class="text" readonly></textarea ></td></tr>
+			<tr><td>回复内容：</td><td><textarea name="reply" id="reply" style="width:300px;height:80px;border:1px solid #ddd;"  class="text" readonly></textarea></td></tr> 
+	  </table>
 	  <input type="hidden" name="pytoken" value="{yun:}$pytoken{/yun}">
-    </form>
-  </div>
-</div>
-<div id="news_preview"  style="display:none;width:560px ">
-	<div style="height:300px; overflow:auto;width:560px;" >
-		<div class="job_box_div" style="text-align:center;margin-top:10px;"></div>
-	</div>
-</div>
-{yun:}include file="$adminstyle/checkdomain.htm"{/yun}
+	 </form>
+</div>  --> 
 </body>
 </html>

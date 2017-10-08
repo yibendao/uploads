@@ -88,6 +88,22 @@ function resumttop(id,topday,topdate){
 		add_class('简历置顶','290','250','#resumttop','');
 	}
 }
+
+$(function(){
+	$(".status").click(function(){
+		// $("input[name=pid]").val($(this).attr("pid"));
+		var id=$(this).attr("id");
+		var uid=$(this).attr("uid");
+		var status=$(this).attr("status");
+		$("#status"+status).attr("checked",true);
+		$("input[name=id]").val(id);
+		$("input[name=uid]").val(uid);
+		// $.get("index.php?m=admin_resume_evaluation&c=undisturb&id="+id+"&uid="+uid,function(msg){
+		// 	$("#alertcontent").val($.trim(msg));
+			status_div('勿扰用户','350','230');
+		// });
+	});
+});
 </script>
 <link href="images/reset.css" rel="stylesheet" type="text/css" />
 <link href="images/system.css" rel="stylesheet" type="text/css" />
@@ -95,6 +111,31 @@ function resumttop(id,topday,topdate){
 <title>后台管理</title>
 </head>
 <body class="body_ifm">
+<div id="status_div"  style="display:none; width: 350px; ">
+  <div class="" style=" margin-top:10px; "  >
+    <form action="index.php?m=admin_resume_evaluation&c=undisturb" target="supportiframe" method="post" id="formstatus">
+      <table cellspacing='1' cellpadding='1' class="admin_examine_table">
+     <tr>
+    <th width="80">勿扰操作：</th>
+     <td align="left">
+         		<label for="status1"> <span class="admin_examine_table_s"><input type="radio" name="status" value="0" id="status0" >正常</span></label>
+            	<label for="status2"> <span class="admin_examine_table_s"><input type="radio" name="status" value="1" id="status1">勿扰</span></label>
+          </td>
+        </tr>
+        </tr>
+        <tr>
+           <td colspan='2' align="center"><input type="submit"  value='确认' class="admin_examine_bth">
+          
+            <input type="button" id="zxxCancelBtn" onClick="layer.closeAll();" class="admin_examine_bth_qx" value='取消'></td>
+        </tr>
+   
+      <input type="hidden" name="pytoken" value="{yun:}$pytoken{/yun}">
+      <input name="id" value="0" type="hidden">
+      <input name="uid" value="0" type="hidden">
+         </table>
+    </form>
+  </div>
+</div>
 <div id="export" style="display:none;">
 	<div style=" margin-top:10px;">
     <div>
@@ -165,7 +206,7 @@ function resumttop(id,topday,topdate){
 </div>
 </div>
 <div class="infoboxp"> 
-<div class="infoboxp_top_bg"></div>
+  <div class="infoboxp_top_bg"></div>
 	<form action="index.php" name="myform" method="get"> 
     <div class="admin_Filter"> 
 	<input name="m" value="admin_resume" type="hidden"/>
@@ -181,7 +222,7 @@ function resumttop(id,topday,topdate){
         <div class="admin_Filter_text_box" style="display:none" id="dkeytype">
           <ul> 
             <li><a href="javascript:void(0)" onClick="formselect('1','keytype','简历名称')">简历名称</a></li>
-			<li><a href="javascript:void(0)" onClick="formselect('2','keytype','用户姓名')">用户姓名</a></li>
+			      <li><a href="javascript:void(0)" onClick="formselect('2','keytype','用户姓名')">用户姓名</a></li>
           </ul>
         </div>
       </div>
@@ -212,7 +253,7 @@ function resumttop(id,topday,topdate){
               </th>
               <th width="60"> {yun:}if $smarty.get.t=="id" && $smarty.get.order=="asc"{/yun} <a href="index.php?m=admin_resume&order=desc&t=id">简历ID<img src="images/sanj.jpg"/></a> {yun:}else{/yun} <a href="index.php?m=admin_resume&order=asc&t=id">简历ID<img src="images/sanj2.jpg"/></a> {yun:}/if{/yun} </th>
               <th width="100" align="left">简历名称</th>
-			  <th width="100" align="left">用户姓名</th>
+			        <th width="100" align="left">用户姓名</th>
               <th width="150" align="left">意向职位</th>
               <th align="left">工作地点</th>
               <th align="left">待遇要求</th>
@@ -231,10 +272,10 @@ function resumttop(id,topday,topdate){
           <tr align="center"{yun:}if ($key+1)%2=='0'{/yun}class="admin_com_td_bg"{yun:}/if{/yun} id="list{yun:}$v.id{/yun}">
             <td><input type="checkbox" value="{yun:}$v.id{/yun}" class="check_all"  name='del[]' onclick='unselectall()' rel="del_chk" /></td>
             <td align="left" class="td1" style="text-align:center;"><span>{yun:}$v.id{/yun}</span></td>
-            <td class="ud" align="left" ><a href="{yun:}url m=resume c=show id='`$v.id`' look=admin{/yun}" target="_blank" class="admin_cz_sc">{yun:}$v.name{/yun}</a></td>
-			<td class="gd" align="left">{yun:}$v.uname{/yun}</td>
+            <td class="ud" align="left" ><a href="{yun:}url m=resume c=show id='`$v.id`' look=admin{/yun}" target="_blank" class="admin_cz_sc">{yun:}$v.name{/yun}</a> {yun:}if $v.undisturb==1{/yun}<img src="../config/ajax_img/suo.png" alt="已勿扰">{yun:}/if{/yun}</td>
+			      <td class="gd" align="left">{yun:}$v.uname{/yun} </td>
             <td class="od" align="left">{yun:}if $v.job_post_n{/yun}{yun:}$v.job_post_n{/yun}(<a href="javascript:void(0)" class="job_name_all"  v="{yun:}$v.job_class_name{/yun}"><font color="red">共{yun:}$v.jobnum{/yun}个</font></a>){yun:}/if{/yun}</td>
-           <td class="gd" align="left">{yun:}$v.cityid_n{/yun}</td>
+            <td class="gd" align="left">{yun:}$v.cityid_n{/yun}</td>
             <td class="td" align="left">{yun:}if $v.minsalary&&$v.maxsalary{/yun}￥{yun:}$v.minsalary{/yun}-{yun:}$v.maxsalary{/yun}{yun:}else if $v.minsalary{/yun}￥{yun:}$v.minsalary{/yun}以上{yun:}else{/yun}面议{yun:}/if{/yun}</td>
             <td align="left">{yun:}$v.type_n{/yun}</td>
             <td align="left">{yun:}$v.report_n{/yun}</td>
@@ -250,14 +291,14 @@ function resumttop(id,topday,topdate){
             		<img src="../config/ajax_img/errorico.gif"></a>
             	{yun:}/if{/yun}
             </td>
-            <td><a href="{yun:}url m=resume c=show id='`$v.id`' look=admin{/yun}" target="_blank" class="admin_cz_sc">预览</a> | <a href="javascript:void(0)" onClick="layer_del('确认刷新？', 'index.php?m=admin_resume&c=refresh&id={yun:}$v.id{/yun}');" title="刷新" class="admin_cz_sc">刷新</a> | <a href="index.php?m=admin_resume_evaluation&c=evaluation&id={yun:}$v.id{/yun}&by=admin"  class="admin_cz_sc">评价</a><br/><a href="index.php?m=admin_resume&c=saveresume&uid={yun:}$v.uid{/yun}&e={yun:}$v.id{/yun}" class="admin_cz_sc">修改</a> | <a href="javascript:void(0)"  onclick="layer_del('确定要删除？', 'index.php?m=admin_resume&c=del&del={yun:}$v.id{/yun}-{yun:}$v.uid{/yun}');"class="admin_cz_sc">删除</a> | <a href="javascript:void(0)"  onclick="layer_del('确认置为勿扰', 'index.php?m=admin_resume_evaluation&c=undisturb&id={yun:}$v.id{/yun}-{yun:}$v.uid{/yun}');"class="admin_cz_sc">勿扰</a></td>
+            <td><a href="{yun:}url m=resume c=show id='`$v.id`' look=admin{/yun}" target="_blank" class="admin_cz_sc">预览</a> | <a href="javascript:void(0)" onClick="layer_del('确认刷新？', 'index.php?m=admin_resume&c=refresh&id={yun:}$v.id{/yun}');" title="刷新" class="admin_cz_sc">刷新</a> | <a href="index.php?m=admin_resume_evaluation&c=evaluation&id={yun:}$v.id{/yun}&by=admin"  class="admin_cz_sc">评价</a><br/><a href="index.php?m=admin_resume&c=saveresume&uid={yun:}$v.uid{/yun}&e={yun:}$v.id{/yun}" class="admin_cz_sc">修改</a> | <a href="javascript:void(0)"  onclick="layer_del('确定要删除？', 'index.php?m=admin_resume&c=del&del={yun:}$v.id{/yun}-{yun:}$v.uid{/yun}');"class="admin_cz_sc">删除</a> | <a href="javascript:;" class="admin_cz_sc status" id="{yun:}$v.id{/yun}" uid="{yun:}$v.uid{/yun}" status="{yun:}$v.undisturb{/yun}">勿扰</a></td>
           </tr>
           {yun:}/foreach{/yun}
         <tr style="background:#f1f1f1;">
             <td align="center"><input type="checkbox" id='chkAll2' onclick='CheckAll2(this.form)' /></td>
             <td colspan="6" >
             <label for="chkAll2">全选</label>&nbsp;
-            <input class="admin_submit4" type="button" name="delsub" value="删除所选" onClick="return really('del[]')" />
+              <input class="admin_submit4" type="button" name="delsub" value="删除所选" onClick="return really('del[]')" />
               <input class="admin_submit4" type="button" name="delsub" value="批量刷新" onClick="Refreshs();"/>
               <input class="admin_submit2" type="button" name="delsub" value="推荐" onClick="checkdel('rec_resume','1');"/>
               <input class="admin_submit4" type="button" name="delsub" value="取消推荐" onClick="checkdel('rec_resume','0');"/>

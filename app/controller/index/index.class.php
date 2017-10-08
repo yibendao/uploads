@@ -10,6 +10,7 @@
  */
 class index_controller extends common{
 	function index_action(){
+		
 		if(!$this->config['did'] && $this->config['sy_gotocity']=='1' && !$_COOKIE['gotocity']){
 			include(PLUS_PATH."domain_cache.php");
 			go_to_city($site_domain);

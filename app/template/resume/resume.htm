@@ -21,11 +21,13 @@
   <div class="yun_resume_box"> 
     
     <div class="yun_resume_info">
-      <div class="yun_resume_name">{yun:}if $Info.m_status=="1"{/yun}{yun:}$Info.name{/yun}{yun:}else{/yun}{yun:}$Info.username_n{/yun}{yun:}/if{/yun}  
-	  {yun:}if $UserMember.source==6 && $UserMember.claim==0 && $UserMember.email!=""{/yun}
-	  <a class="myresume_rl " href="javascript:void(0);" onClick="claim('{yun:}url m=ajax c=claim uid=$Info.uid{/yun}')">认领</a>
-	  {yun:}/if{/yun}
- </div>
+      <!--20170928  -->
+      <div class="yun_resume_name">{yun:}if $undisturb{/yun}***{yun:}else{/yun}{yun:}if $Info.m_status=="1"{/yun}{yun:}$Info.name{/yun}{yun:}else{/yun}{yun:}$Info.username_n{/yun}{yun:}/if{/yun}{yun:}/if{/yun}  
+          {yun:}if $UserMember.source==6 && $UserMember.claim==0 && $UserMember.email!=""{/yun}
+          <a class="myresume_rl " href="javascript:void(0);" onClick="claim('{yun:}url m=ajax c=claim uid=$Info.uid{/yun}')">认领</a>
+          {yun:}/if{/yun}
+      </div>
+      <!--end20170928  -->
       <div class="yun_resume_p">{yun:}$Info.sex{/yun}<span class="yun_resume_info_line">|</span>{yun:}if $Info.age{/yun}{yun:}$Info.age{/yun}岁<span class="yun_resume_info_line">|</span>{yun:}/if{/yun}{yun:}if $Info.living{/yun}{yun:}$Info.living{/yun} <span class="yun_resume_info_line">|</span>{yun:}/if{/yun}{yun:}if $Info.useredu{/yun}{yun:}$Info.useredu{/yun}学历<span class="yun_resume_info_line">|</span>{yun:}/if{/yun}{yun:}if $Info.exp{/yun}{yun:}$Info.user_exp{/yun}经验{yun:}/if{/yun}</div>
  <div class="yun_resume_tel">
  {yun:}if $Info.basic_info=='1'{/yun}
@@ -217,30 +219,32 @@
        
     <div class="yun_resume_joblist yun_resume_joblist_mt20">
       <div class="yun_resume_h1"><span class="yun_resume_h1_s"><i class="yun_resume_h1_icon yun_resume_h1_iconlx"></i>联系方式</span></div>
+  <!--20170928  -->
+  {yun:}if !$undisturb {/yun}
       {yun:}if $Info.m_status=="1"{/yun}
 
-	{yun:}if $Info.telphone{/yun}
-    <div class="resume_Intention"><i class="one_vita_Intention_i one_vita_red"></i>联系手机：{yun:}image number=$Info.telphone uid=$Info.uid action=telphone width=200{/yun}</div>
-	{yun:}/if{/yun}
-	
-	{yun:}if $Info.telhome{/yun}
-    <div class="resume_Intention"><i class="one_vita_Intention_i one_vita_red"></i>联系座机：{yun:}image number=$Info.telhome  uid=$Info.uid action=telhome width=200{/yun} </div>        
-	{yun:}/if{/yun}
+    {yun:}if $Info.telphone{/yun}
+      <div class="resume_Intention"><i class="one_vita_Intention_i one_vita_red"></i>联系手机：{yun:}image number=$Info.telphone uid=$Info.uid action=telphone width=200{/yun}</div>
+    {yun:}/if{/yun}
+    
+    {yun:}if $Info.telhome{/yun}
+      <div class="resume_Intention"><i class="one_vita_Intention_i one_vita_red"></i>联系座机：{yun:}image number=$Info.telhome  uid=$Info.uid action=telhome width=200{/yun} </div>        
+    {yun:}/if{/yun}
 
-	{yun:}if $Info.email{/yun}
-    <div class="resume_Intention "><i class="one_vita_Intention_i one_vita_red"></i>电子邮箱：{yun:}$Info.email{/yun} </div>
-	{yun:}/if{/yun}
+    {yun:}if $Info.email{/yun}
+      <div class="resume_Intention "><i class="one_vita_Intention_i one_vita_red"></i>电子邮箱：{yun:}$Info.email{/yun} </div>
+    {yun:}/if{/yun}
 
-	{yun:}if $Info.homepage{/yun}
+    {yun:}if $Info.homepage{/yun}
 
-    <div class="resume_Intention"><i class="one_vita_Intention_i one_vita_red"></i>个人主页：{yun:}$Info.homepage{/yun}</div>
-	{yun:}/if{/yun}
-    {yun:}if $Info.qq{/yun}
-	<div class="resume_Intention"><i class="one_vita_Intention_i one_vita_red"></i>联系Q Q：{yun:}$Info.qq{/yun}</div>
-   {yun:}/if{/yun}
-	{yun:}if $Info.address{/yun}
-    <div class="resume_Intention "><i class="one_vita_Intention_i one_vita_red"></i>详细地址：{yun:}$Info.address|mb_substr:0:16:'gbk'{/yun}</div>
-	{yun:}/if{/yun}
+      <div class="resume_Intention"><i class="one_vita_Intention_i one_vita_red"></i>个人主页：{yun:}$Info.homepage{/yun}</div>
+    {yun:}/if{/yun}
+      {yun:}if $Info.qq{/yun}
+    <div class="resume_Intention"><i class="one_vita_Intention_i one_vita_red"></i>联系Q Q：{yun:}$Info.qq{/yun}</div>
+    {yun:}/if{/yun}
+    {yun:}if $Info.address{/yun}
+      <div class="resume_Intention "><i class="one_vita_Intention_i one_vita_red"></i>详细地址：{yun:}$Info.address|mb_substr:0:16:'gbk'{/yun}</div>
+    {yun:}/if{/yun}
     
 
     {yun:}if $Info.idcard{/yun}<div class="one_vita_Intention "><i class="one_vita_Intention_i one_vita_red"></i><span>身份证号：</span>
@@ -255,6 +259,10 @@
    {yun:}else{/yun}
    <div class="re_touch">{yun:}$Info.link_msg{/yun}</div>
    {yun:}/if{/yun}
+  {yun:}else{/yun}
+    <div class="re_touch">该用户目前在职状态，请勿打扰或者联系他的专属顾问！</div>
+  {yun:}/if{/yun}
+  <!--end20170928  -->
     </div>
 
 	 
@@ -270,6 +278,8 @@
 </div>
  
 {yun:}if $smarty.get.see!=member && $smarty.get.see!=used{/yun}
+<!--20170928  -->
+{yun:}if !$undisturb {/yun}
 <div class="yun_resume_operation" id="operation_box">
   <div class="yun_resume_operation_box"> 
   <div class="yun_resume_operation_box_h1">操作区</div>
@@ -346,7 +356,8 @@
   </div>
   
 </div>
-
+<!--end20170928  -->
+{yun:}/if{/yun}
 <div id='for_link'  class="none"  style="float:left;width:350px">
 	<div class="city_1" style="padding-top:5px;"></div>
 	<div class="btn" style="float: left; padding-bottom: 20px; padding-top: 10px; width: 100%; text-align: center;">  
